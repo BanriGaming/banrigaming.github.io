@@ -1,0 +1,98 @@
+<html>
+<head>
+<body>
+    <h2>One Star Quests <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/309/star_2b50.png" width="20" height="20"> 1</h2>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/Learning+the+Clutch" style="color:#00BCDB;">Learning the Clutch Claw</a>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/Butting+Heads+with+Nature" style="color:#00BCDB;">Butting Heads with Nature</a>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/A+Thicket+of+Thugs" style="color:#00BCDB;">A Thicket of Thugs</a>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="" style="color:#FFCC02;">Fungal Flexin' in the Ancient Forest (!)</a>
+        </label>
+      </div>
+      <h2>Two Star Quests <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/309/star_2b50.png" width="20" height="20"> 2</h2>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/The+Great+Glutton" style="color:#00BCDB;">The Great Glutton</a>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/Camp+Crasher" style="color:#00BCDB;">Camp Crasher</a>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/Snatch+the+Snatcher" style="color:#FFCC02;">Snatch the Snatcher (!)</a>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/The+Pain+from+Gains" style="color:#FFCC02;">The Pain from Gains (!)</a>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+        <label class="form-check-label" for="flexCheckChecked">
+            <a href="https://monsterhunterworld.wiki.fextralife.com/Exterminator+of+the+Waste" style="color:#FFCC02;">Exterminator of the Waste (!)</a>
+        </label>
+      </div>
+      </div>
+      </div>
+      <script>
+        $(function(){
+            var test = localStorage.input === 'true'? true: false;
+            $('input').prop('checked', test || false);
+        });
+        
+        $('input').on('change', function() {
+            localStorage.input = $(this).is(':checked');
+            console.log($(this).is(':checked'));
+        });
+        </script>
+</body>
+</head>
+</html>
+<!--
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+    <label class="form-check-label" for="flexCheckChecked">
+        <a href=""></a>
+    </label>
+  </div>
+
+  339966
+
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div>-->
