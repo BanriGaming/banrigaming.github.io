@@ -10,8 +10,8 @@ body{
   background-color:#232323;
   color: white;
   margin-left: 5%;
-margin-right: 5%;
-margin-top: 2%;
+  margin-right: 5%;
+  margin-top: 2%;
 }
 /*Link styles*/
 a:hover, a:focus, .nav-link:focus, .nav-link:hover{
@@ -129,6 +129,9 @@ a:hover, a:focus, .nav-link:focus, .nav-link:hover{
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+nav{
+  font-size: 1.3rem;
+}
 /*Banner for homepage*/
 .banner{
   background-image: url("../img/bg.jpg");
