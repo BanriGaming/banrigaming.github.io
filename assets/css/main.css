@@ -160,4 +160,16 @@ a:hover, a:focus, .nav-link:focus, .nav-link:hover{
 }
 @media all and (max-width: 500px) {
 .vid-info .acronym { display: none; }
+.img:hover{
+    color: #424242; 
+  -webkit-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -ms-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  transition: all .3s ease-in;
+  opacity: 1;
+  transform: scale(1.15);
+  -ms-transform: scale(1.15); /* IE 9 */
+  -webkit-transform: scale(1.15); /* Safari and Chrome */
+
 }
