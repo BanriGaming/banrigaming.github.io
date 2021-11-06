@@ -158,3 +158,11 @@ iframe{
   width: 100%;
   height: 500px;
 }
+
+/*Quest Checklist Color Codes*/
+.vill{color:#FFCC02;}
+.arena{color:#339966;}
+.norm{color:#00BCDB;}
+.encounter{color:#ff6600;}
+.mastered{color:#ff0000;}
+.assignment{color:#3366ff;}
