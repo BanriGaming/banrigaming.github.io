@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link  rel="stylesheet" href="../../assets/css/main.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+    <script src="../../assets/js/nav.js"></script>
+</head>
+<body>
+    <div w3-include-html="../../nav.html"></div> <hr>
+    <h2>MHW Backup Setup</h2>
+    <h3>What you need</h3>
+    <p>I recommend the following programs to make things easier.
+    <ui>
+        <li>7-zip or WinRaR - You will absolutely need as it is required to make this work.</li>
+        <li>Notepad++ - Makes it easier to see the code. But Notepad does work aswell.</li>
+    </ui>
+        <a href="https://notepad-plus-plus.org/downloads/">Notepad++</a><br>
+        <a href="https://www.7-zip.org/download.html">7 Zip</a><br>
+        <a href="https://www.rarlab.com/download.htm">WinRaR</a>
+    </p>
+    <h2>Instructions</h2>
+    In order to make this run smoothly, please follow the steps carefully.
+    <h4>Step One</h4>
+    <p>To begin, let's make a new folder for where you want to save your backups for MHW. In this example, I will create a new folder for that in my external drive. 
+        You can put it in your documents or wherever you like, but for my example, i will choose my external drive. I will call this new folder..."Monster Hunter World Save Backups"</p>
+    <h4>Step Two</h4>
+    <p>Now open up Notepad++. If you have WinRaR, open that. But as for my example, i will be using 7zip.</p>
+    <p>Now click on FILE and then click SAVE AS. Navigate to your desktop or wherever you want to put this .exe file. Name it as "MonsterHunterBackup.bat" and in the FILE TYPE dropdown, make sure its set to "All Types (*.*)" Then click save.</p>
+    <h4>Step Three</h4>
+    <p>Now you will need your steam ID, to find that...navigate to the following path:</p>
+    <pre>
+        <code>C:\Program Files (x86)\Steam\userdata</code>
+    </pre>
+    <p>The folder in this path with a bunch of numbers is your Steam ID. Keep this folder open for the next step.</p>
+    <h4>Step Four</h4>
+    <p>Copy the Code below and paste it into your newly saved file on Notepad++.<br>
+    <a href="https://pastebin.com/gz93V0C2">Monster Hunter Backup Code</a><br>
+    Find the PATH=C:\Program Files (x86)\Steam\userdata\XXXXXXXXXX\582010<br>
+    In the code and replace the XXXXXX's with your steam ID from that folder in previous step.</p>
+    <h4>Step Five</h4>
+    <p>Now find the BACKUPPATH= and put your path for the savefolder you created in step one. For my example. My path will be: D:\Monster Hunter World Save Backups</p>
+    <h4>Step Six</h4>
+    <p>Save the MonsterHunterBackup file you created in notepad++ and then close the Notepad++ program.<br>
+    Double click on the new file you created and it should run its course. It should not take more than a few seconds.<br>
+    After that, check your backup folder to see if it has a new backup in it.</p>
+    <p>If there is a save in there as a 7zip compressed file and two log files, then you did it correctly! Now you have a way to backup with ease.</p>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

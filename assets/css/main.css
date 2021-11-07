@@ -169,3 +169,28 @@ iframe{
 
 /*Checklist Intro*/
 .villager{color:#FFCC02;}
+
+/*Hunyrtpir image*/
+.hunterpie_img{
+    background-image:url("https://camo.githubusercontent.com/3d0fb99bb14cca342adbf82c7f181e37bace9d0a784b3fd6ac84e5d172d74d3f/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6174746163686d656e74732f3430323535373338343230393230333230302f3733353639353936353436313135313839342f68756e7465727069655f70617472656f6e5f62616e6e65722e706e67");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 400px;
+}
+
+/* Style buttons */
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 1px 30px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: RoyalBlue;
+  }
