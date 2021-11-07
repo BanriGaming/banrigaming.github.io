@@ -144,6 +144,9 @@ nav{
   
 }
 
+.jumbotron{
+    background-color:#153C4E;
+}
 .hero-text {
   text-align: center;
   position: absolute;
@@ -193,4 +196,12 @@ iframe{
   /* Darker background on mouse-over */
   .btn:hover {
     background-color: RoyalBlue;
+  }
+
+  pre{
+      border: 1px solid white;
+  }
+
+  .card{
+      color:black;
   }
