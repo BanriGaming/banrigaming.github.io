@@ -132,7 +132,6 @@ a:hover, a:focus, .nav-link:focus, .nav-link:hover{
 
 nav{
   font-size: 1.3rem;
-  position: sticky;
 }
 /*Banner for homepage*/
 .banner{
@@ -145,8 +144,17 @@ nav{
   
 }
 
+/*Jumbotron*/
 .jumbotron{
     background-color:#153C4E;
+}
+.display-4{
+  margin-left: 1%;
+  padding-top: 1%;
+}
+.lead{
+  margin-left: 1%;
+  padding-bottom: 1%;
 }
 .hero-text {
   text-align: center;
@@ -188,18 +196,19 @@ iframe{
 }
 
 /* Style buttons */
-.btn {
-    background-color: DodgerBlue;
-    border: none;
-    color: white;
-    padding: 1px 30px;
-    cursor: pointer;
-    font-size: 12px;
-  }
+
   
-  /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: RoyalBlue;
+ .btn{
+    background-color: #153C4E;
+    cursor: pointer;
+    border-color: #153C4E;
+  }
+
+  .btn:hover{
+    background-color: white;
+    color: #153C4E;
+    border-color: #153C4E;
+    font-weight: 600;
   }
 
   pre{
@@ -210,7 +219,7 @@ iframe{
       border: 2px solid #153C4E;
   }
 
-  .nav-link{
+  .nav-link, a{
       color:white
   }
   
@@ -225,3 +234,6 @@ iframe{
     position: relative;
   }
   
+  .breadcrumb-item{
+    font-size: 1rem;
+  }
