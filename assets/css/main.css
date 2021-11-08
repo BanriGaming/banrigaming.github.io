@@ -16,8 +16,8 @@ body{
 }
 /*Link styles*/
 a:hover, a:focus, .nav-link:focus, .nav-link:hover{
-    border: 1px dashed #226DBD;
-    color: white;
+    border: 1px dashed #153C4E;
+    color: #74BBDC;
 }
 /*Main Navigation*/	
 .dropdown-submenu {
@@ -132,6 +132,7 @@ a:hover, a:focus, .nav-link:focus, .nav-link:hover{
 
 nav{
   font-size: 1.3rem;
+  position: sticky;
 }
 /*Banner for homepage*/
 .banner{
@@ -208,3 +209,19 @@ iframe{
   .card{
       border: 2px solid #153C4E;
   }
+
+  .nav-link{
+      color:white
+  }
+  
+  /*Sidebar navigation*/
+  #sidebar{
+    border-left: 2px solid #153C4E;
+    display: block;
+    position: sticky;
+  }
+
+  #content {
+    position: relative;
+  }
+  

@@ -11,6 +11,11 @@
     <script src="./././assets/js/nav.js"></script>
     <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+    span {
+        color: white !important;
+        }
+    </style>
 </head>
 <body class="gradient-border">
     <div w3-include-html="nav.html"></div> 
@@ -23,15 +28,15 @@
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-6">
         <h2>Current & Latest Stream</h2>
-    <div id="SamplePlayerDivID"></div>
+    <div id="twitch-embed"></div>
     <script type="text/javascript">
       var options = {
-        width: 500,
-        height: 480,
         channel: "banrigaming",
+        layout: "video",
+        autoplay: false,
         parent: ["banrigaming.github.io"]
       };
-      var player = new Twitch.Player("SamplePlayerDivID", options);
+      var player = new Twitch.Player("twitch-embed", options);
       player.setVolume(0.5);
     </script>
     </div>
