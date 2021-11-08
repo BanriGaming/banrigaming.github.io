@@ -195,9 +195,13 @@ iframe{
     height: 400px;
 }
 
+/* Style vertical tabs */
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #153C4E;
+      cursor: pointer;
+      border-color: #153C4E;
+  }
 /* Style buttons */
-
-  
  .btn{
     background-color: #153C4E;
     cursor: pointer;
