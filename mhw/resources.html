@@ -10,6 +10,7 @@
     <link  rel="stylesheet" href="../assets/css/main.css"></link>
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
     <script src="../assets/js/nav.js"></script>
+    <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 </head>
 <body>
     <div w3-include-html="../../nav.html"></div> <hr>
@@ -48,8 +49,39 @@
                 <iframe src="https://discord.com/widget?id=765819077930909736&theme=dark"  allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" &username=""></iframe>
             </div>
         </div>
-
     </div>
+
+<!-- Add a placeholder for the Twitch embed 
+<div id="twitch-embed"></div>
+
+<!- Load the Twitch embed script
+<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+
+<!- Create a Twitch.Player object. This will render within the placeholder div 
+<script type="text/javascript">
+  new Twitch.Player("twitch-embed", {
+    height: 1500,
+    width: 650,
+    channel: "banrigaming",
+  });
+</script>-->
+
+
+<!--
+<div id="SamplePlayerDivID"></div>
+<script type="text/javascript">
+  var options = {
+    width: 854,
+    height: 480,
+    channel: "banrigaming",
+  };
+  var player = new Twitch.Player("SamplePlayerDivID", options);
+  player.setVolume(0.5);
+</script>-->
+
+<div style="padding-bottom: 56.25%; position: relative;"><iframe width="100%" height="100%" src="https://player.twitch.tv/?autoplay=false&channel=banrigaming&parent=banrigaming.github.io" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"  style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"><small>Twitch embedding powered by <a href="https://embed.tube">embed.tube</a></small></iframe></div>
+
+
     <script>includeHTML();</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
