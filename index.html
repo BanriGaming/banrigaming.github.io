@@ -42,7 +42,7 @@
     </div>
     <div class="col-sm-12 col-md-6 col-lg-6">
         <h2>Latest YouTube Video</h2>
-        <iframe class="latestVideoEmbed" vnum='0' cid="UCjvlUOoPLVplygreKqj4LYA?&autoplay=0" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+        <iframe class="latestVideoEmbed" vnum='0' cid="UCjvlUOoPLVplygreKqj4LYA" width="600" height="340" frameborder="0" allowfullscreen></iframe>
     </div>
 <!--    <div>
         <div class="row">
@@ -68,7 +68,7 @@
             console.log(videoNumber);
             var link = data.items[videoNumber].link;
             id = link.substr(link.indexOf("=") + 1);
-            iframe.setAttribute("src", "https://youtube.com/embed/" + id + "?controls=0&autoplay=1");
+            iframe.setAttribute("src", "https://youtube.com/embed/" + id + "?controls=0&autoplay=0");
             }
         );
         }
