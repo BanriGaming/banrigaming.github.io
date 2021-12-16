@@ -1,0 +1,795 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link  rel="stylesheet" href="../../assets/css/main.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+    <script src="../../assets/js/nav.js"></script>
+</head>
+<body>
+    <div w3-include-html="../../nav.html"></div> <hr>
+    <!--<div class="hunterpie_img">  153C4E  -->
+    <div class="jumbotron jumbotron-fluid">   
+        <h1 class="display-4">Patch 6.0x Macros</h1>
+        <p class="lead">Useful crafting macros for leveling and beyond for Endwalker 6.0x</p>
+    </div> 
+    </div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+        <li class="breadcrumb-item">Final Fantasy XIV</li>
+        <li class="breadcrumb-item">Progression</a></li>
+        <li class="breadcrumb-item active" aria-current="page">6.0x Macros</li>
+      </ol>
+    </nav>
+    <hr>
+    <!--Tabs-->
+    <div class="d-flex align-items-start">
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link active" id="lvl81macro-tab" data-bs-toggle="pill" data-bs-target="#lvl81macro" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">LVL 81 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl82macro-tab" data-bs-toggle="pill" data-bs-target="#lvl82macro" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">LVL 82 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl83macro-tab" data-bs-toggle="pill" data-bs-target="#lvl83macro" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">LVL 83 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl84macro-tab" data-bs-toggle="pill" data-bs-target="#lvl84macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 84 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl85macro-tab" data-bs-toggle="pill" data-bs-target="#lvl85macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 85 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl86macro-tab" data-bs-toggle="pill" data-bs-target="#lvl86macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 86 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl87macro-tab" data-bs-toggle="pill" data-bs-target="#lvl87macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 87 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl88macro-tab" data-bs-toggle="pill" data-bs-target="#lvl88macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 88 • 80 & 40 Dur</button>
+            <button class="nav-link" id="lvl89macro-tab" data-bs-toggle="pill" data-bs-target="#lvl89macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 89 • 80 Dur</button>
+            <button class="nav-link" id="lvl90macro-tab" data-bs-toggle="pill" data-bs-target="#lvl90macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 90 • 80 Dur</button>
+            <button class="nav-link" id="lvl8990macro-tab" data-bs-toggle="pill" data-bs-target="#lvl8990macro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">LVL 90 • 80 Dur BiS 1</button>
+            <button class="nav-link" id="lvl90bismacro-tab" data-bs-toggle="pill" data-bs-target="#lvl90bismacro" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Lvl 90 • 80 Dur BiS 2</button>
+            <button class="nav-link" id="studiumdelivery-tab" data-bs-toggle="pill" data-bs-target="#studiumdelivery" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Studium Deliveries</button>
+        </div>
+        <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="lvl81macro" role="tabpanel" aria-labelledby="lvl81macro-tab">
+            <h2>LVL 81 • 80 & 40 Durability 2000 & 1000 Difficulty</h2>
+            <div class="container">
+                <p>Level: 81<br>
+                    Durability: 80<br>
+                    Difficulty: 2000<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 412<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 81+</p>
+                <p>
+                    Macro<br>
+                    <code>
+                        /ac "Reflect" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /e Craft Complete <se.9>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 81<br>
+                    Durability: 40<br>
+                    Difficulty: 1000<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 398<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 81+</p>
+                <p>
+                    Macro<br>
+                    <code>
+                        /ac "Reflect" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /e Craft Complete <se.9>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl82macro" role="tabpanel" aria-labelledby="lvl82macro-tab">
+            <h2>LVL 82 • 80 & 40 Durability 2300 & 1150 Difficulty</h2>
+            <div class="container">
+                <p>Level: 82<br>
+                    Durability: 80<br>
+                    Difficulty: 2300<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 449<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 82+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Reflect" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Groundwork" &ltwait.3&gt<br>
+                        /e Craft Complete <se.9>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 82<br>
+                    Durability: 40<br>
+                    Difficulty: 1150<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 399<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 82+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Reflect" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /e Craft Complete <se.9>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl83macro" role="tabpanel" aria-labelledby="lvl83macro-tab">
+            <h2>LVL 83 • 80 & 40 Durability 2600 & 1300 Difficulty</h2>
+            <div class="container">
+                <p>Level: 83<br>
+                    Durability: 80<br>
+                    Difficulty: 2600<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 419<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 83+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" <wait.2> <br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" <wait.2> <br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Careful Synthesis" <wait.3>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 83<br>
+                    Durability: 40<br>
+                    Difficulty: 1300<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 394<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 83+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" <wait.2>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Great Strides" &ltwait.3&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Basic Synthesis" &ltwait.3&gt<br>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl84macro" role="tabpanel" aria-labelledby="lvl84macro-tab">
+            <h2>LVL 84 • 80 & 40 Durability 2900 & 1450 Difficulty</h2>
+            <div class="container">
+                <p>Level: 84<br>
+                    Durability: 80<br>
+                    Difficulty: 2900<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 448<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 84+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 84<br>
+                    Durability: 40<br>
+                    Difficulty: 1450<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 412<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 84+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl85macro" role="tabpanel" aria-labelledby="lvl85macro-tab">
+            <h2>LVL 85 • 80 & 40 Durability 3000 & 1500 Difficulty</h2>
+            <div class="container">
+                <p>Level: 85<br>
+                    Durability: 80<br>
+                    Difficulty: 3000<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 448<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 85+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 85<br>
+                    Durability: 40<br>
+                    Difficulty: 1500<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 412<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 85+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl86macro" role="tabpanel" aria-labelledby="lvl86macro-tab">
+            <h2>LVL 86 • 80 & 40 Durability 3100 & 1550 Difficulty</h2>
+            <div class="container">
+                <p>Level: 86<br>
+                    Durability: 80<br>
+                    Difficulty: 3100<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 470<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 86+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 86<br>
+                    Durability: 40<br>
+                    Difficulty: 1550<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 412<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 86+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl87macro" role="tabpanel" aria-labelledby="lvl87macro-tab">
+            <h2>LVL 87 • 80 & 40 Durability 3200 & 1600 Difficulty</h2>
+            <div class="container">
+                <p>Level: 87<br>
+                    Durability: 80<br>
+                    Difficulty: 3200<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 474<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 87+</p>
+                    <p>
+                        Macro 1<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac Manipulation &ltwait.2&gt<br>
+                        /ac Veneration &ltwait.2&gt<br>
+                        /ac "Waste Not" &ltwait.2&gt<br>
+                        /ac Groundwork &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Final Appraisal" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac Innovation &ltwait.2&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Basic Touch" &ltwait.3&gt<br>
+                        /ac "Standard Touch" &ltwait.3&gt<br>
+                        /ac "Advanced Touch" &ltwait.3&gt<br>
+                        /echo Macro #1 finished &ltse.1&gt<br><br>
+                    </code><br>
+                    Macro 2<br>
+                    <code>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Careful Synthesis" &ltwait.3&gt<br>
+                        /echo Craft finished <se.2>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 87<br>
+                    Durability: 40<br>
+                    Difficulty: 1600<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 412<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 87+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl88macro" role="tabpanel" aria-labelledby="lvl88macro-tab">
+            <h2>LVL 88 • 80 & 40 Durability 3300 & 1650 Difficulty</h2>
+            <div class="container">
+                <p>Level: 88<br>
+                    Durability: 80<br>
+                    Difficulty: 3300<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 474<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 88+</p>
+                    <p>
+                        Macro 1<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac Manipulation &ltwait.2&gt<br>
+                        /ac Veneration &ltwait.2&gt<br>
+                        /ac "Waste Not" &ltwait.2&gt<br>
+                        /ac Groundwork &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Final Appraisal" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac Innovation &ltwait.2&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Basic Touch" &ltwait.3&gt<br>
+                        /ac "Standard Touch" &ltwait.3&gt<br>
+                        /ac "Advanced Touch" &ltwait.3&gt<br>
+                        /echo Macro #1 finished &ltse.1&gt<br><br>
+                    </code><br>
+                    Macro 2<br>
+                    <code>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Careful Synthesis" &ltwait.3&gt<br>
+                        /echo Craft finished <se.2>
+                    </code>
+               </p>
+            </div>
+            <div class="container">
+                <p>Level: 88<br>
+                    Durability: 40<br>
+                    Difficulty: 1650<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 412<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 88+</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Groundwork" <wait.3>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl89macro" role="tabpanel" aria-labelledby="lvl89macro-tab">
+            <h2>LVL 89 • 80 Durability 3400 Difficulty</h2>
+            <div class="container">
+                <p>Level: 89<br>
+                    Durability: 80<br>
+                    Difficulty: 3400<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 474<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. It's meant for when you are under recipe level yourself, may need to replace Delicate or two with Basic Touches at 88+</p>
+                    <p>
+                        Macro 1<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac Manipulation &ltwait.2&gt<br>
+                        /ac Veneration &ltwait.2&gt<br>
+                        /ac "Waste Not" &ltwait.2&gt<br>
+                        /ac Groundwork &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Final Appraisal" &ltwait.2&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac Innovation &ltwait.2&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Basic Touch" &ltwait.3&gt<br>
+                        /ac "Standard Touch" &ltwait.3&gt<br>
+                        /ac "Advanced Touch" &ltwait.3&gt<br>
+                        /echo Macro #1 finished &ltse.1&gt<br><br>
+                    </code><br>
+                    Macro 2<br>
+                    <code>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Careful Synthesis" &ltwait.3&gt<br>
+                        /echo Craft finished <se.2>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl90macro" role="tabpanel" aria-labelledby="lvl90macro-tab">
+            <h2>LVL 90 • 80 Durability 3500 Difficulty</h2>
+            <div class="container">
+                <p>Level: 90<br>
+                    Durability: 80<br>
+                    Difficulty: 3500<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 532<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well. Crafted as Level 89, Add Final Apprisal before the 2nd Groundwork if needed once you are Level 90.<br>
+                    Reminder: Always do a Trial Synthesis before doing main craft. Food is HQ Seafood Stew or close to that if White Scrip set otherwise no food is needed.</p>
+                    <p>
+                        Macro 1<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac "Manipulation" &ltwait.2&gt<br>
+                        /ac "Veneration" &ltwait.2&gt<br>
+                        /ac "Waste Not" &ltwait.2&gt<br>
+                        /ac "Groundwork" &ltwait.3&gt<br>
+                        /ac "Final Appraisal" &ltwait.2&gt<br>
+                        /ac "Groundwork" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br> 
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Basic Touch" &ltwait.3&gt<br>
+                        /ac "Standard Touch" &ltwait.3&gt<br>
+                        /ac "Advanced Touch" &ltwait.3&gt<br>
+                        /echo "Macro #1 Complete" &ltse.1&gt<br><br>
+                    </code><br>
+                    Macro 2<br>
+                    <code>
+                        /ac "Prudent Touch" &ltwait.3&gt<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Innovation" &ltwait.2&gt<br>
+                        /ac "Observe" &ltwait.3&gt<br>
+                        /ac "Focused Touch" &ltwait.3&gt<br>
+                        /ac "Great Strides" &ltwait.2&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac "Observe" &ltwait.3&gt<br>
+                        /ac "Focused Synthesis" &ltwait.3&gt<br>
+                        /e Craft Complete <se.9>
+                    </code>
+               </p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="lvl8990macro" role="tabpanel" aria-labelledby="lvl8990macro-tab">
+            <h2>LVL 89 & 90 • 80 Durability • 3400 & 3500 Difficulty</h2>
+            <div class="container">
+                <p>Level: 89 & 90<br>
+                    Durability: 80<br>
+                    Difficulty: 3400 & 3500<br>
+                    Craftsmanship: 2849 • Control: 2789 • CP: 541<br>
+                    Note: Always do a Trial Synthesis before doing main craft. Great for Scrip Farming. Non-Specialist and No Food or other crafting buffs are needed. This is for when you have the lvl 90 HQ Gearset + Tools</p>
+                    <p>
+                        Macro<br>
+                    <code>
+                        /ac "Muscle Memory" &ltwait.3&gt<br>
+                        /ac Manipulation &ltwait.2&gt<br>
+                        /ac "Waste Not II" &ltwait.2&gt<br>
+                        /ac Groundwork &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac Innovation &ltwait.2&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Preparatory Touch" &ltwait.3&gt<br>
+                        /ac "Great Strides" &ltwait.3&gt<br>
+                        /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                        /ac Groundwork &ltwait.3&gt<br>
+                        /ac "Careful Synthesis" &ltwait.3&gt<br>
+                    </code>
+               </p>
+            </div>
+            </div>
+                <div class="tab-pane fade" id="lvl90bismacro" role="tabpanel" aria-labelledby="lvl90bismacro-tab">
+                <h2>Lvl 90 • 80 Durability • 3400 & 3500 Difficulty (Less CP)</h2>
+                <div class="container">
+                    <p>Level: 90<br>
+                        Durability: 80<br>
+                        Difficulty: 3400<br>
+                        Craftsmanship: 2851 • Control: 2407 • CP: 467<br>
+                        Note: Always do a Trial Synthesis before doing main craft. Non-Specialist and No Food or other crafting buffs are needed. This is for when you have the lvl 90 HQ Gearset + Tools</p>
+                        <p>
+                            Macro<br>
+                        <code>
+                            /ac "Muscle Memory" &ltwait.3&gt<br>
+                            /ac Manipulation &ltwait.2&gt<br>
+                            /ac Veneration &ltwait.2&gt<br>
+                            /ac "Waste Not" &ltwait.2&gt<br>
+                            /ac Groundwork &ltwait.3&gt<br>
+                            /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                            /ac "Preparatory Touch" &ltwait.3&gt<br>
+                            /ac "Preparatory Touch" &ltwait.3&gt<br>
+                            /ac Innovation &ltwait.2&gt<br>
+                            /ac "Preparatory Touch" &ltwait.3&gt<br>
+                            /ac "Preparatory Touch" &ltwait.3&gt<br>
+                            /ac "Great Strides" &ltwait.2&gt<br>
+                            /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                            /ac "Careful Synthesis" &ltwait.3&gt<br>
+                            /echo Craft finished &ltse.1&gt
+                        </code>
+                   </p>
+                </div>
+                <div class="container">
+                    <p>Level: 90<br>
+                        Durability: 80<br>
+                        Difficulty: 3500<br>
+                        Craftsmanship: 3080 • Control: 2789 • CP: 499<br>
+                        Note: Always do a Trial Synthesis before doing main craft. Non-Specialist and No Food or other crafting buffs are needed. This is for when you have the lvl 90 HQ Gearset + Tools</p>
+                        <p>
+                            Macro<br>
+                        <code>
+                            /ac "Muscle Memory" &ltwait.3&gt<br>
+                                /ac Manipulation &ltwait.2&gt<br>
+                                /ac Veneration &ltwait.2&gt<br>
+                                /ac "Waste Not" &ltwait.2&gt<br>
+                                /ac Groundwork &ltwait.3&gt<br>
+                                /ac "Delicate Synthesis" &ltwait.3&gt<br>
+                                /ac "Preparatory Touch" &ltwait.3&gt<br>
+                                /ac "Preparatory Touch" &ltwait.3&gt<br>
+                                /ac Innovation &ltwait.2&gt<br>
+                                /ac "Preparatory Touch" &ltwait.3&gt
+                                /ac "Preparatory Touch" &ltwait.3&gt<br>
+                                /ac "Great Strides" &ltwait.2&gt<br>
+                                /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                                /ac "Careful Synthesis" &ltwait.3&gt<br>
+                                /echo Craft finished &ltse.1&gt
+                        </code>
+                </p>
+                </div>
+                </div>
+                <div class="tab-pane fade" id="studiumdelivery" role="tabpanel" aria-labelledby="studiumdelivery-tab">
+                    <h2>Studium Deliveries</h2>
+                    <div class="container">
+                            Craftsmanship: 2279 • Control: 2341 • CP: 417<br>
+                            Note: Always do a Trial Synthesis before doing main craft. Non-Specialist, Works with the i500 White Scrip Set as well.</p>
+                            <p>
+                                Macro<br>
+                            <code>
+                                /ac "Muscle Memory" &ltwait.3&gt<br>
+                                /ac "Final Appraisal" &ltwait.2&gt<br>
+                                /ac Manipulation &ltwait.2&gt<br>
+                                /ac "Waste Not II" &ltwait.2&gt<br>
+                                /ac Groundwork &ltwait.3&gt<br>
+                                /ac Innovation &ltwait.2&gt<br>
+                                /ac "Preparatory Touch" &ltwait.3&gt<br>
+                                /ac "Preparatory Touch" &ltwait.3&gt<br>
+                                /ac "Preparatory Touch" &ltwait.3&gt<br>
+                                /ac "Basic Touch" &ltwait.3&gt<br>
+                                /ac "Byregot's Blessing" &ltwait.3&gt<br>
+                                /ac Groundwork &ltwait.3&gt<br>
+                                /echo Craft finished &ltse.1&gt<br>
+                            </code>
+                       </p>
+                    </div>
+            </div>
+      </div>
+      <!--
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Fatalis Legend</h5>
+          <p class="card-text"> You can swap out the Rimeguard Arms Y with Stygian Arms for lvl 2 Partbreaker if you do not want the Lvl 3 Recovery Up. The Lvl 3 Ice Attack does get wasted but I am utilizing the rank 4 and rank 3 decoration slots. After killing enough Alatreon, you can swap out the Arms to the Alatreon Arms for the +3 Attack Boost.</p>
+          <a class="btn btn-primary" href="https://steamuserimages-a.akamaihd.net/ugc/1639864316524492704/C17833701041547E6842F5625208E0C65010F192/" class="card-link">View Build</a>
+        </div>
+      </div>
+      -->
+    <script>includeHTML();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+<!--
+        <button class="nav-link active" id="CODETAB" data-bs-toggle="pill" data-bs-target="#dominator-fire" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">CODE</button>
+        <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">CODE</button>
+        <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">CODE</button>
+        <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+        <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+        <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+        <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+
+            <div class="tab-pane fade" id="CODE" role="tabpanel" aria-labelledby="CODE-tab">
+              <h2></h2>
+              <ui>
+                <li>CODE</li>
+                <li>CODE</li>
+              </ui><br>
+              <a href="URL" target="_blank"><button type="button" class="btn btn-secondary">View Build on HoneyHunter</button></a><br><br>
+              <a href="../../assets/img/build-imgs/"><img class="img-fluid" src="../../assets/img/build-imgs/"></a>
+            </div>
+
+
+
+
+
+
+            <div class="tab-pane fade" id="lvl90macro" role="tabpanel" aria-labelledby="lvl90macro-tab">
+            <h2></h2>
+            <div class="container">
+                <p>Level: LVLNUM<br>
+                    Durability: DURNUM<br>
+                    Difficulty: DIFFNUM<br>
+                    Craftsmanship: 2606 • Control: 2457 • CP: 419<br>
+                    Note: Non-Specialist, Works with the i500 White Scrip Set as well.</p>
+                    <p>
+                        Macro<br>
+                    <code>
+              
+                    </code>
+               </p>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
