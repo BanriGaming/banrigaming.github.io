@@ -24,6 +24,10 @@ a:hover, a:focus, .nav-link:focus, .nav-link:hover{
     position: relative;
 }
 
+.resources{
+font-size: 1.2rem;
+}
+
 .dropdown-submenu>.dropdown-menu {
     top: 0;
     left: 100%;
