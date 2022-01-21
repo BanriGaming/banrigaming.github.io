@@ -272,3 +272,25 @@ code{
         margin-bottom: 10px; /* Added */
         text-align: center;
   }
+
+.switchskills{
+  font-size:1.2rem;
+  color:#00BCDB;
+}
+
+.originskill{
+  color: red;
+}
+
+.switchset{
+  color:orangered;
+}
+
+.weaponicon{
+  height:30px;
+  width:30px
+}
+
+.tableft{
+  justify-content:left;
+}

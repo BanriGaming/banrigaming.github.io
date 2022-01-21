@@ -1,0 +1,299 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link  rel="stylesheet" href="../../assets/css/main.css"></link>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+  <script src="../../assets/js/nav.js"></script>
+</head>
+<body>
+    <div w3-include-html="../../nav.html"></div> <hr>
+    <div class="jumbotron jumbotron-fluid">   
+        <h1 class="display-4">Optimal Switch Skills</h1>
+        <p class="lead">The following is a layout of what Banri believes to be the better Switch Skills per weapon after his own testing.</p>
+    </div> 
+    </div>
+    <hr>
+<!--Tabs-->
+<p>Switch Skills are unlocked as you progress in the game. The very first one is obtained after finishing the ★3 Village Urgent Quest, Feathered Frenzy.<br>
+    <ui>
+    <li><span class="switchset">First Set:</span> <i>Reach Village Quest ★3 or Hub Quest ★2 then talk to Master Utsushi.</i></li>
+    <li><span class="switchset">Second Set:</span> <i>Create or upgrade a total of 8 unique weapons of the same weapon type.</i></li>
+    <li><span class="switchset">Third Set:</span> <i>Set of quests unlocked from Hub ★4 and higher.</i></li>
+    </ui><hr>
+<div class="d-flex align-items-start">
+    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <button class="nav-link active" id="gs-tab" data-bs-toggle="pill" data-bs-target="#gs" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><img src="../../assets/img/gsicon.png" class="weaponicon">Great Sword</button>
+    <button class="nav-link" id="ls-tab" data-bs-toggle="pill" data-bs-target="#ls" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><img src="../../assets/img/lsicon.png" class="weaponicon">Long Sword</button>
+    <button class="nav-link" id="sns-tab" data-bs-toggle="pill" data-bs-target="#sns" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"><img src="../../assets/img/snsicon.png" class="weaponicon">Sword & Shield</button>
+    <button class="nav-link" id="db-tab" data-bs-toggle="pill" data-bs-target="#db" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/dbsicon.png" class="weaponicon">Dual Blades</button>
+    <button class="nav-link" id="ham-tab" data-bs-toggle="pill" data-bs-target="#ham" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/hammericon.png" class="weaponicon">Hammer</button>
+    <button class="nav-link" id="hh-tab" data-bs-toggle="pill" data-bs-target="#hh" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/huntinghornicon.png" class="weaponicon">Hunting Horn</button>
+    <button class="nav-link" id="lnc-tab" data-bs-toggle="pill" data-bs-target="#lnc" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/lanceicon.png" class="weaponicon">Lance</button>
+    <button class="nav-link" id="gl-tab" data-bs-toggle="pill" data-bs-target="#gl" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/gunlanceicon.png" class="weaponicon">Gun Lance</button>
+    <button class="nav-link" id="sa-tab" data-bs-toggle="pill" data-bs-target="#sa" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/switchaxeicon.png" class="weaponicon">Switch Axe</button>
+    <button class="nav-link" id="cb-tab" data-bs-toggle="pill" data-bs-target="#cb" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/chargebladeicon.png" class="weaponicon">Charge Blade</button>
+    <button class="nav-link" id="ig-tab" data-bs-toggle="pill" data-bs-target="#ig" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/insectglaiveicon.png" class="weaponicon">Insect Glaive</button>
+    <button class="nav-link" id="lbg-tab" data-bs-toggle="pill" data-bs-target="#lbg" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/lightbowgunicon.png" class="weaponicon">Light Bowgun</button>
+    <button class="nav-link" id="hbg-tab" data-bs-toggle="pill" data-bs-target="#hbg" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/heavybowgunicon.png" class="weaponicon">Heavy Bowgun</button>
+    <button class="nav-link" id="bow-tab" data-bs-toggle="pill" data-bs-target="#bow" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><img src="../../assets/img/bowicon.png" class="weaponicon">Bow</button>
+    </div>
+    <div class="tab-content" id="v-pills-tabContent">   
+            <div class="tab-pane fade show active" id="gs" role="tabpanel" aria-labelledby="gs-tab">
+            <h2>Great Sword Switch Skills</h2>
+                <p class="switchskills">Guard Tackle</p>
+                <img class="img-fluid" src="https://img.game8.co/3406019/3205e4e7d701b5e3aa2b5e8fcdf37023.gif/show"><br><br>
+            <ui>
+                <li class="originskill"><i>Original Skill: Tackle</i></li>
+                <li>A shoulder thrust move that allows you to withstand more powerful attacks than the usual tackle.</li>
+                <li>This allows you to charge more properly while tanking attacks that are bound to throw you off.</li>
+                <li>The downside with this one is the longer tackle time so you have to recalibrate your timings.</li>
+            </ui><br>
+                <p class="switchskills">Rage Slash</p>
+                <img class="img-fluid" src="https://img.game8.co/3406020/6756bfe21cacd2af754920ff30817067.gif/show"><br><br>
+            <ui>
+                <li class="originskill"><i>Original Skill: True Charge Slash</i></li>
+                <li>Rage Slash is an improvement for the True Charged Slash so we recommend slotting it in when you get it.</li>
+                <li>It absorbs some damage and uses them to strengthen the charge attack which is always good for the Great Sword.</li>
+            </ui><br>
+                <p class="switchskills">Adamant Charged Slash</p>
+                <img class="img-fluid" src="https://img.game8.co/3406016/28ea6e7acb0ec29db1cf6b0943597fe4.gif/show"><br><br>
+            <ui>
+                <li class="originskill"><i>Original Skill: Hunting Edge</i></li>
+                <li>Uses a Wirebug to dash forward to deliver a Strong Charged Slash.</li>
+                <li>This move has knockback protection while dashing but <u>will not negate all damage</u>. Only use this for attacks you know you can survive from.</li>
+            </ui>
+            <br>
+            </div>
+            <div class="tab-pane fade" id="ls" role="tabpanel" aria-labelledby="ls-tab">
+                <h2>Long Sword Switch Skills</h2>
+                <p class="switchskills">Drawn Double Slash</p>
+                <img class="img-fluid" src="https://img.game8.co/3406026/abbe4c251804ed7eed98595723ca0ac5.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Step Slash</li>
+                <li>This replaces the draw attack of the Long Sword into a double slash attack. This deals damage twice as well as negates an attack at the start of the draw.</li>
+                <li>This can also be comboed into a Spirit Slash II but not a Fade Slash.</li>
+            </ui><br>
+            <p class="switchskills">Spirit Reckoning Combo</p>
+                <img class="img-fluid" src="https://img.game8.co/3349185/2ab4c8731bb51cb03d2cbaed116d05b9.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Spirit Roundslash</li>
+                <li>Replaces the Spirit Roundslash ending of your Spirit combo.</li>
+                <li>This also has a move that allows you to input a direction and rush towards that direction before executing the Reckoning combo.</li>
+                <li>This increases your Spirit Gauge by one, like the Roundslash.</li>
+            </ui><br>
+            <p class="switchskills">Silkbind Sakura Slash</p>
+                <img class="img-fluid" src="https://img.game8.co/3406029/6a126d13fa337ea4ff059115d86dd256.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Soaring Kick</li>
+                <li>Dashes forward while swinging your sword twice in a circle. This silkbind attack Switch Skill instantly increases your Spirit Gauge level by 1.</li>
+                <li>The point where the blades hit will receive lingering damage. This is great for status and elemental builds.</li>
+                <li>Note: Though this Switch Skill is viable for some, <span class="originskill">I don't recommend switching it out for Soaring Kick</span>. Soaring Kick is the <u>only way</u> to execute the Spirit Helmbreaker which is too strong to pass on.</li>
+            </ui><br>
+            </div>
+            <div class="tab-pane fade" id="sns" role="tabpanel" aria-labelledby="sns-tab">
+                <h2>Sword & Shield Switch Skills</h2>
+                <p>Work in Progress</p>
+            </div> 
+            <div class="tab-pane fade" id="db" role="tabpanel" aria-labelledby="db-tab">
+                <h2>Dual Blade Switch Skills</h2>
+                <p>Work in Progress</p>
+            </div>
+            <div class="tab-pane fade" id="ham" role="tabpanel" aria-labelledby="ham-tab">
+                <h2>Hammer Switch Skills</h2>
+                <p>Work in Progress</p>
+            </div>
+            <div class="tab-pane fade" id="hh" role="tabpanel" aria-labelledby="hh-tab">
+                <h2>Hunting Horn Switch Skills</h2>
+                <p>Work in Progress</p>
+            </div>
+            <div class="tab-pane fade" id="lnc" role="tabpanel" aria-labelledby="lnc-tab">
+                <h2>Lance Switch Skills</h2>
+                <p>Work in Progress</p>
+            </div>
+            <div class="tab-pane fade" id="gl" role="tabpanel" aria-labelledby="gl-tab">
+                <h2>Gun Lance Switch Skills</h2>
+                <p>Work in Progress</p>
+            </div>
+            <div class="tab-pane fade" id="sa" role="tabpanel" aria-labelledby="sa-tab">
+                <h2>Switch Axe Switch Skills</h2>
+                <p class="switchskills">Forward Overhead Slash</p>
+                <img class="img-fluid" src="https://img.game8.co/3405986/5eacfabf54b75d7a715af0cf06d5e643.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Forward Slash</li>
+                <li>This changes your first Axe attack into an Overhead Slash which can hit monster parts high on the ground.</li>
+                <li>The subsequent sword morph attack will also change to a Double Slash so there is no reason not to switch to this Skill when acquired.</li>
+            </ui><br>
+            <p class="switchskills">Soaring Wyvern Blade</p>
+                <img class="img-fluid" src="https://img.game8.co/3405988/2ecb801ef72dc08e35f8f0768d4f1d05.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Invincible Gambit</li>
+                <li>Using this one over Invincible Gambit is entirely by choice.</li>
+                <li>Invincible Gambit has an innate Rocksteady effect that prevents knockback while dashing while Soaring Wyvern Blade deals immense damage.</li>
+            </ui><br>
+            <p class="switchskills">Compressed Finishing Discharge</p>
+                <img class="img-fluid" src="https://img.game8.co/3405990/5f4fb47b3fdb21139be3ff102499a479.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Finishing Discharge</li>
+                <li>If you like integrating elemental explosions in your Switch Axe combos, use this Switch Skill. This also has a rocksteady effect so you won't have to worry about getting knocked back.</li>
+            </ui><br>
+            </div>
+            <div class="tab-pane fade" id="cb" role="tabpanel" aria-labelledby="cb-tab">
+                <h2>Charge Blade Switch Skills</h2>
+                <p class="switchskills">Condensed Spinning Slash</p>
+                <img class="img-fluid" src="https://img.game8.co/3405991/ecd6efb25e396ea414035a9d23e93446.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Condensed Element Slash</li>
+                <li>This Switch Skill should be used immediately after acquiring. This allows you to charge your phials while in Axe mode.</li>
+                <li>It greatly helps in maintaining phial charges while also dealing high damage in Axe mode.</li>
+            </ui><br>
+            <p class="switchskills">Counter Morph Slash</p>
+                <img class="img-fluid" src="https://img.game8.co/3405992/6ad009a36fcd31b20da485563a9da5c6.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Morph Slash</li>
+                <li>This Switch Skill lengthens the Morphing Guard Point for the Charge Blade.</li>
+                <li>If you're used to utilizing that specific guard point,<br>
+                    I recommend getting this Switch Skill. If not, stick to Morph Slash because Counter Morph Slash can hinder the fast and fluid morphing combos of the Charge Blade.</li>
+            </ui><br>
+            <p class="switchskills">Axe Hopper</p>
+                <img class="img-fluid" src="https://img.game8.co/3406018/db2ef26defe90feed5d32d37d3c972b4.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Counter Peak Performance</li>
+                <li>This move is instant access to Super Amped Elemental Discharge (SAED).</li>
+                <li>Though this is a very easy way to execute SAED,<br>
+                    I personally recommend using this because the capability of Counter Peak Performance to charge your phials after blocking an attack is too good.</li>
+                <li>If your not having issues charging the phials, or in situational hunts, then switching to this ability may be the better option.</li>
+            </ui><br>
+            </div>
+            <div class="tab-pane fade" id="ig" role="tabpanel" aria-labelledby="ig-tab">
+                <h2>Insect Glaive Switch Skills</h2>
+                <p>Work in Progress</p>
+            </div>
+            <div class="tab-pane fade" id="lbg" role="tabpanel" aria-labelledby="lbg-tab">
+                <h2>Light Bowgun Switch Skills</h2>
+                <p class="switchskills">Elemental Reload</p>
+                <img class="img-fluid" src="https://img.game8.co/3405996/4a27eaeea227fa1ecffec4f6f2ded9c7.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Reload</li>
+                <li>Elemental Relaod is good and all but the boost in elemental ammo is not worth it with how much time your going to lose while reloading.</li>
+                <li>Unless you're running a full elemental LBG build, don't use this.</li>
+            </ui><br>
+            <p class="switchskills">Quickstep Evade</p>
+                <img class="img-fluid" src="https://img.game8.co/3405997/5e5426ab35839eaffe364347afcff786.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Forward Dodge</li>
+                <li>This converts the usual roll dodge into a dash dodge. The distance covered is not that big but the recovery time between dodges are smaller so you can dodge all day.</li>
+                <li>The Attack power is also boosted after evading which is a big bonus.</li>
+            </ui><br>
+            <p class="switchskills">Fanning Maneuver</p>
+                <img class="img-fluid" src="https://img.game8.co/3405998/7eff4323fa4241db00d34ab911b0084d.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Fanning Vault</li>
+                <li>This is a silkbind move that strafes you left or right depending on the direction. You can shoot while sliding and maintain distance from the monster.</li>
+                <li>It's a great mobility asset for the Light Bowgun, however if you want to shoot Wyvernblast while in the air, then Fanning Vault would be the better choice.</li>
+            </ui><br>
+            </div>
+            <div class="tab-pane fade" id="hbg" role="tabpanel" aria-labelledby="hbg-tab">
+                <h2>Heavy Bowgun Switch Skills</h2>
+                <p class="switchskills">Tackle</p>
+                <img class="img-fluid" src="https://img.game8.co/3406000/fe3ddde41cc0d8a64957598e45e3762c.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Orignal Skill: Melee Attack</li>
+                <li>I recommend using this more than Melee Attack.<br>
+                    As a Heavy Bowgunner, you don't need the Melee Attack because you are always far from the monster but having a Tackle ready for when a monster suddenly pounces on you is a great thing to have.</li>
+            </ui><br>
+            <p class="switchskills">Counter Charge</p>
+                <img class="img-fluid" src="https://img.game8.co/3406001/3cdea60bf56a7b63f5e37bb3a0655233.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Counter Shot</li>
+                <li>Though this sounds awesome, I still recommend using Counter Shot than Counter Charger.</li>
+                <li>Unless your build revolves around the Charged Shots of the HBG, there is no reason to sacrifice the quick counter-attack capability of Counter Shot.</li>
+            </ui><br>
+            <p class="switchskills">Healing Mech-Wyvernsnipe</p>
+                <img class="img-fluid" src="https://img.game8.co/3406002/b5ce3fea1412a80e7476d9e45f6853da.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Mech-Wyvernsnipe</li>
+                <li>Heavy Bowgun is a DPS-heavy weapon, So it's with great heart that I say sacrificing damage for healing yourself is a poor use of this amazing weapon.</li>
+                <li>Wyvernsnipe and Wyvernheart Ammos are way to precious DPS specials for you to opt for decreasing its damage.<br>
+                    If you find yourself using this, please for your own sanity, switch back to Mech-Wyvernsnipe.</li>
+            </ui><br>
+            </div>
+            <div class="tab-pane fade" id="bow" role="tabpanel" aria-labelledby="bow-tab">
+                <h2>Bow Switch Skills</h2>
+                <p class="switchskills">Absolute Power Shot</p>
+                <img class="img-fluid" src="https://img.game8.co/3355712/f015f99ca15b499ca48b149150fb1401.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Power Shot</li>
+                <li>Though the stunning monsters are a good addition to the bow, the stun values added by Absolute Power Shot are too small to be worth the extra stamina cost.</li>
+                <li>You can only stun at most once or twice per hunt which is a bad trade-off in my opinion. Sticking to the normal Power Shots to manage your stamina more efficiently is optimally better.</li>
+            </ui><br>
+            <p class="switchskills">Dodgebolt</p>
+                <img class="img-fluid" src="https://img.game8.co/3406003/75c779d00b5f359495cd8a2542679afb.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Charging Sidestep</li>
+                <li>This has no bad tradeoffs besides a short dodge distance and not being able to charge while sidestepping so get this one especially if you like using Close-Range Coating.</li>
+                <li>Put a Lv. 1 Evade Extender in your builds to mitigate the short dodge distance of Dodgebolt.</li>
+            </ui><br>
+            <p class="switchskills">Aerial Aim</p>
+                <img class="img-fluid" src="https://img.game8.co/3406004/66c373026293001b791a0ee52c7ebbd3.gif/show"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: Focus Shot</li>
+                <li>When you get this, slot it in immediately.<br>
+                    The main difference between this and Focus Shot is the stamina recovery of Focus Shot while Aerial Aim sacrifices the stamina recovery to propel you up considerably allowing you to aim from above.</li>
+                <li>It's a good trade-off considering you can use Dash Juices to mitigate the stamina problems of the bow.</li>
+            </ui><br>
+            </div>
+        </div>
+    </div>
+  <!--
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Fatalis Legend</h5>
+      <p class="card-text"> You can swap out the Rimeguard Arms Y with Stygian Arms for lvl 2 Partbreaker if you do not want the Lvl 3 Recovery Up. The Lvl 3 Ice Attack does get wasted but I am utilizing the rank 4 and rank 3 decoration slots. After killing enough Alatreon, you can swap out the Arms to the Alatreon Arms for the +3 Attack Boost.</p>
+      <a class="btn btn-primary" href="https://steamuserimages-a.akamaihd.net/ugc/1639864316524492704/C17833701041547E6842F5625208E0C65010F192/" class="card-link">View Build</a>
+    </div>
+  </div>
+  -->
+<script>includeHTML();</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+        $(document).bind("contextmenu",function(e) {
+           return false;
+        });
+    }); 
+</script>
+</body>
+</html>
+
+<!--
+    <button class="nav-link active" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">CODE</button>
+    <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">CODE</button>
+    <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">CODE</button>
+    <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+    <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+    <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+    <button class="nav-link" id="CODETAB" data-bs-toggle="pill" data-bs-target="#CODE" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">CODE</button>
+
+        <div class="tab-pane fade" id="CODE" role="tabpanel" aria-labelledby="CODE-tab">
+          <h2></h2>
+            <a href="../../assets/img/build-imgs-rise/"><img class="img-fluid" src="../../assets/img/build-imgs-rise/"></a><br><br>
+          <ui>
+            <li>CODE</li>
+            <li>CODE</li>
+          </ui><br>
+        </div>
+
+                <p class="switchskills">SWITCHSKILL</p>
+                <img class="img-fluid" src="URLCODE"></a><br><br>
+            <ui>
+                <li class="originskill">Original Skill: </li>
+                <li>LINE</li>
+            </ui><br>
+
+    -->
