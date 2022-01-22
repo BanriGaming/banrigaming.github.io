@@ -295,21 +295,15 @@ code{
   justify-content:left;
 }
 
-.carousel{
-  height:500px;
-  width:800px;
+.nav-slick{
+  height:100px;
+  width:150px;
 }
-
-.carousel-control-prev{
-  height: 500px;
-}
-
-.carousel-control-next{
-  height: 500px;
+.slider-nav{
+  height:100px;
 }
 
 .cover{
-  height:500px;
-  width:800px;
-  object-fit: cover;
+  height:700px;
+  width:1250px;
 }
