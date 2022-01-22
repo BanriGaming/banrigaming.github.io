@@ -294,3 +294,22 @@ code{
 .tableft{
   justify-content:left;
 }
+
+.carousel{
+  height:500px;
+  width:800px;
+}
+
+.carousel-control-prev{
+  height: 500px;
+}
+
+.carousel-control-next{
+  height: 500px;
+}
+
+.cover{
+  height:500px;
+  width:800px;
+  object-fit: cover;
+}
