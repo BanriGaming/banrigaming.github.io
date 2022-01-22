@@ -4,7 +4,9 @@ $(document).ready(function(){
         slidesToScroll: 1,
         arrows: false,
         fade: true,
-        asNavFor: '.slider-nav'
+        asNavFor: '.slider-nav',
+        autoplay:true,
+        autoplaySpeed: 300
       });
       $('.slider-nav').slick({
         slidesToShow: 10,

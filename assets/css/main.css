@@ -296,14 +296,16 @@ code{
 }
 
 .nav-slick{
-  height:100px;
-  width:150px;
+  max-height:100px;
+  max-width:150px;
 }
 .slider-nav{
   height:100px;
 }
 
 .cover{
-  height:700px;
-  width:1250px;
+  height:auto;
+  width:100%;
+  max-width: 1250px;
+  max-height: 700px;
 }
