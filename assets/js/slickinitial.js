@@ -6,7 +6,7 @@ $(document).ready(function(){
         fade: true,
         asNavFor: '.slider-nav',
         autoplay:true,
-        autoplaySpeed: 300
+        autoplaySpeed: 3000
       });
       $('.slider-nav').slick({
         slidesToShow: 10,
