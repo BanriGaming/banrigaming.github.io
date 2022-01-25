@@ -15,6 +15,24 @@ body{
   margin-bottom: 2%;
   font-size: 1.05rem;
 }
+
+.accordion-item{
+  background-color:#232323;
+  color: white;
+  width: 80%;
+}
+
+.accordion-button{
+  background-color:#153C4E;
+  color: white;
+}
+
+.accordion-button:not(.collapsed){
+  background-color:white;
+  font-weight: 700;
+  color: #153C4E;
+}
+
 /*Link styles*/
 a:hover, a:focus, .nav-link:focus, .nav-link:hover{
     border: 1px dashed #153C4E;
@@ -308,4 +326,18 @@ code{
   width:100%;
   max-width: 1250px;
   max-height: 700px;
+}
+
+.pathimg{
+  height:auto;
+  width:100%;
+  max-width: 350px;
+  max-height: 435px;
+}
+
+.detpathimg{
+  height:auto;
+  width:100%;
+  max-width: 800px;
+  max-height: 450px;
 }
