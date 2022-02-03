@@ -19,6 +19,68 @@
         <p class="lead">A guide to acquire 400K Zenny & 35-50K in appoximately 10-15 minutes.</p>
     </div>
     <hr>
+    <!-- Start OffCanvas -->
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Dango Information</h5>
+        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <img src="../../assets/img/dangocalc.jpg" class="img-fluid" class="card-img-top" alt="...">
+        <p>Increases the number of Kamura Points you receive at the end of a quest by 20%.</p><br>
+        <img src="../../assets/img/dangowall.jpg" class="img-fluid" class="card-img-top" alt="...">
+        <p>Decreases stamina depletion while wall running.</p><br>
+        <img src="../../assets/img/dangoglutton.jpg" class="img-fluid" class="card-img-top" alt="...">
+        <p>Reduces stamina consumption for a certain period after eating.</p>
+      </div>
+    </div>
+    <!-- End OffCanvas -->
+    <h2>Dango Combinations</h2>
+    <div class="row g-4">
+        <div class="col-sm-2 col-md-2 col-lg-4">
+            <div class="card text-white bg-dark">
+              <img src="../../assets/img/dangocalc.jpg" class="img-fluid" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Dango Calculator
+                        </li>
+                        <li class="list-group-item">Dango Wall Runner
+                        </li>
+                        <li class="list-group-item">Dango Glutton
+                        </li>
+                      </ul><br>
+                      <div id="myModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img01">
+                        <div id="caption"></div>
+                      </div>
+                      <!--<img id="myImg" src="../../assets/img/build-imgs-rise/hrgeobotany.png" alt="Build" style="width:100%;max-width:300px">-->
+                      <a type="button" class="btn btn-primary" href="../../assets/img/build-imgs-rise/hrgeobotany.png">View Gathering Build</a>
+                      <button class="btn btn-primary" type="button" src="../../assets/img/build-imgs-rise/hrgeobotany.png" id="myImg" alt="Build">View Test</button>
+                      <button class="btn btn-primary button-dango" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">View Full Dango Info</button>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-sm-2 col-md-4 col-lg-3">
+            <div class="card text-white bg-dark">
+              <img src="" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">TITLE</h2>
+                    <a href="collections/TITLE" class="btn btn-primary">TITLE</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 col-md-4 col-lg-3">
+            <div class="card text-white bg-dark">
+              <img src="" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">Satisfactory</h2>
+                    <a href="#" class="btn btn-primary">TITLE</a>
+                </div>
+            </div>
+        </div>-->
+    </div> 
+    <hr>
     <h2>Zenny/Gathering Path</h2>
     <div class="accordion" id="miningAccordion">
         <div class="accordion-item">
@@ -93,6 +155,7 @@
                     <a href="../../assets/img/mhr-pathing/mining/11thminnode.jpg"><img class="img-fluid detpathimg" src="../../assets/img/mhr-pathing/mining/11thminnode.jpg"></a>
                  </li>
                  <li>Twelveth Mining Node:<br>
+                    Teleport to Sub-Camp 2 to continue.<br>
                     <a href="../../assets/img/mhr-pathing/mining/12thminnode.jpg"><img class="img-fluid detpathimg" src="../../assets/img/mhr-pathing/mining/12thminnode.jpg"></a><br>
                     Your going to be jumping the large gap over to the 13th Node. Take your time learning the jump as its quite a long jump.<br>
                     <a href="../../assets/img/mhr-pathing/mining/wheretojumpv2.jpg"><img class="img-fluid detpathimg" src="../../assets/img/mhr-pathing/mining/wheretojumpv2.jpg"></a>
@@ -210,6 +273,7 @@
       <a href="../../assets/img/mhr-pointpath1lc.png"><img class="img-fluid pathimg" src="../../assets/img/mhr-pointpath1lc.png"></a>
       <a href="../../assets/img/mhr-pointpath2lc.png"><img class="img-fluid pathimg" src="../../assets/img/mhr-pointpath2lc.png"></a>
       <a href="../../assets/img/mhr-pointpath3lc.png"><img class="img-fluid pathimg" src="../../assets/img/mhr-pointpath3lc.png"></a>
+      <script src="../../assets/js/modal.js"></script>
     <script>includeHTML();</script>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
