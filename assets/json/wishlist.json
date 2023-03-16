@@ -1,0 +1,1136 @@
+{
+    "version": "03",
+    "data": [
+        {
+            "gameid": [
+                "steam",
+                "app/1716740"
+            ],
+            "title": "Starfield",
+            "url": "https://store.steampowered.com/app/1716740/",
+            "type": "Game",
+            "release_date": "2023",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/2050420"
+            ],
+            "title": "ARK 2",
+            "url": "https://store.steampowered.com/app/2050420/",
+            "type": "Game",
+            "release_date": "2023",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1840080"
+            ],
+            "title": "Homeworld 3",
+            "url": "https://store.steampowered.com/app/1840080/",
+            "type": "Game",
+            "release_date": "First half of 2023",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1457320"
+            ],
+            "title": "Techtonica",
+            "url": "https://store.steampowered.com/app/1457320/",
+            "type": "Game",
+            "release_date": "Soon 🏭🏭🏭",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1402820"
+            ],
+            "title": "Hostile Mars",
+            "url": "https://store.steampowered.com/app/1402820/",
+            "type": "Game",
+            "release_date": "Coming soon",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1230530"
+            ],
+            "title": "Atlas Fallen",
+            "url": "https://store.steampowered.com/app/1230530/",
+            "type": "Game",
+            "release_date": "2023",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1880360"
+            ],
+            "title": "Monster Hunter Rise: Sunbreak",
+            "url": "https://store.steampowered.com/app/1880360/",
+            "type": "DLC",
+            "release_date": "Jun 29",
+            "note": null,
+            "price": 2999,
+            "discount": 25
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1462040"
+            ],
+            "title": "FINAL FANTASY VII REMAKE INTERGRADE",
+            "url": "https://store.steampowered.com/app/1462040/",
+            "type": "Game",
+            "release_date": "Jun 17",
+            "note": null,
+            "price": 4969,
+            "discount": 29
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1604030"
+            ],
+            "title": "V Rising",
+            "url": "https://store.steampowered.com/app/1604030/",
+            "type": "Game",
+            "release_date": "May 17",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1106840"
+            ],
+            "title": "Hydroneer",
+            "url": "https://store.steampowered.com/app/1106840/",
+            "type": "Game",
+            "release_date": "May 8, 2020",
+            "note": null,
+            "price": 999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1593500"
+            ],
+            "title": "God of War",
+            "url": "https://store.steampowered.com/app/1593500/",
+            "type": "Game",
+            "release_date": "Jan 14",
+            "note": null,
+            "price": 4999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1277400"
+            ],
+            "title": "Monster Hunter Stories 2: Wings of Ruin",
+            "url": "https://store.steampowered.com/app/1277400/",
+            "type": "Game",
+            "release_date": "Jul 8, 2021",
+            "note": null,
+            "price": 2999,
+            "discount": 50
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1605220"
+            ],
+            "title": "Dune: Spice Wars",
+            "url": "https://store.steampowered.com/app/1605220/",
+            "type": "Game",
+            "release_date": "Apr 26",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1063730"
+            ],
+            "title": "New World",
+            "url": "https://store.steampowered.com/app/1063730/",
+            "type": "Game",
+            "release_date": "Sep 28, 2021",
+            "note": null,
+            "price": 3999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1113120"
+            ],
+            "title": "IXION",
+            "url": "https://store.steampowered.com/app/1113120/",
+            "type": "Game",
+            "release_date": "November 16",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1363080"
+            ],
+            "title": "Manor Lords",
+            "url": "https://store.steampowered.com/app/1363080/",
+            "type": "Game",
+            "release_date": "TBA",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1240440"
+            ],
+            "title": "Halo Infinite",
+            "url": "https://store.steampowered.com/app/1240440/",
+            "type": "Game",
+            "release_date": "Nov 15, 2021",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/578650"
+            ],
+            "title": "The Outer Worlds",
+            "url": "https://store.steampowered.com/app/578650/",
+            "type": "Game",
+            "release_date": "Oct 23, 2020",
+            "note": null,
+            "price": 5999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/803330"
+            ],
+            "title": "Destroy All Humans!",
+            "url": "https://store.steampowered.com/app/803330/",
+            "type": "Game",
+            "release_date": "Jul 28, 2020",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/920210"
+            ],
+            "title": "LEGO® Star Wars™: The Skywalker Saga",
+            "url": "https://store.steampowered.com/app/920210/",
+            "type": "Game",
+            "release_date": "Apr 5",
+            "note": null,
+            "price": 4999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/632360"
+            ],
+            "title": "Risk of Rain 2",
+            "url": "https://store.steampowered.com/app/632360/",
+            "type": "Game",
+            "release_date": "即将推出",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/548430"
+            ],
+            "title": "Deep Rock Galactic",
+            "url": "https://store.steampowered.com/app/548430/",
+            "type": "Game",
+            "release_date": "May 13, 2020",
+            "note": null,
+            "price": 1499,
+            "discount": 50
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/298630"
+            ],
+            "title": "The Escapists",
+            "url": "https://store.steampowered.com/app/298630/",
+            "type": "Game",
+            "release_date": "Feb 13, 2015",
+            "note": null,
+            "price": 1799,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/254200"
+            ],
+            "title": "FortressCraft Evolved!",
+            "url": "https://store.steampowered.com/app/254200/",
+            "type": "Game",
+            "release_date": "Nov 9, 2015",
+            "note": null,
+            "price": 1299,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/361420"
+            ],
+            "title": "ASTRONEER",
+            "url": "https://store.steampowered.com/app/361420/",
+            "type": "Game",
+            "release_date": "Feb 5, 2019",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/403190"
+            ],
+            "title": "Planetbase",
+            "url": "https://store.steampowered.com/app/403190/",
+            "type": "Game",
+            "release_date": "Oct 15, 2015",
+            "note": null,
+            "price": 1499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/235800"
+            ],
+            "title": "Audiosurf 2",
+            "url": "https://store.steampowered.com/app/235800/",
+            "type": "Game",
+            "release_date": "May 26, 2015",
+            "note": null,
+            "price": 1499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/587620"
+            ],
+            "title": "Okami HD",
+            "url": "https://store.steampowered.com/app/587620/",
+            "type": "Game",
+            "release_date": "Dec 12, 2017",
+            "note": null,
+            "price": 999,
+            "discount": 50
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/219990"
+            ],
+            "title": "Grim Dawn",
+            "url": "https://store.steampowered.com/app/219990/",
+            "type": "Game",
+            "release_date": "Feb 25, 2016",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/242760"
+            ],
+            "title": "The Forest",
+            "url": "https://store.steampowered.com/app/242760/",
+            "type": "Game",
+            "release_date": "Apr 30, 2018",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/618740"
+            ],
+            "title": "Beat Hazard 2",
+            "url": "https://store.steampowered.com/app/618740/",
+            "type": "Game",
+            "release_date": "Oct 16, 2019",
+            "note": null,
+            "price": 1899,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/474960"
+            ],
+            "title": "Quantum Break",
+            "url": "https://store.steampowered.com/app/474960/",
+            "type": "Game",
+            "release_date": "Sep 29, 2016",
+            "note": null,
+            "price": 1999,
+            "discount": 50
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/809140"
+            ],
+            "title": "Cliff Empire",
+            "url": "https://store.steampowered.com/app/809140/",
+            "type": "Game",
+            "release_date": "Aug 6, 2019",
+            "note": null,
+            "price": 1499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/620980"
+            ],
+            "title": "Beat Saber",
+            "url": "https://store.steampowered.com/app/620980/",
+            "type": "Game",
+            "release_date": "May 21, 2019",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/954850"
+            ],
+            "title": "Kerbal Space Program 2",
+            "url": "https://store.steampowered.com/app/954850/",
+            "type": "Game",
+            "release_date": "2023",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/512790"
+            ],
+            "title": "Quern - Undying Thoughts",
+            "url": "https://store.steampowered.com/app/512790/",
+            "type": "Game",
+            "release_date": "Nov 28, 2016",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/826630"
+            ],
+            "title": "Iron Harvest",
+            "url": "https://store.steampowered.com/app/826630/",
+            "type": "Game",
+            "release_date": "Aug 31, 2020",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1129580"
+            ],
+            "title": "Medieval Dynasty",
+            "url": "https://store.steampowered.com/app/1129580/",
+            "type": "Game",
+            "release_date": "Sep 23, 2021",
+            "note": null,
+            "price": 3499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1328660"
+            ],
+            "title": "Need for Speed™ Hot Pursuit Remastered",
+            "url": "https://store.steampowered.com/app/1328660/",
+            "type": "Game",
+            "release_date": "Nov 6, 2020",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/552700"
+            ],
+            "title": "WORLD OF FINAL FANTASY®",
+            "url": "https://store.steampowered.com/app/552700/",
+            "type": "Game",
+            "release_date": "Nov 21, 2017",
+            "note": null,
+            "price": 999,
+            "discount": 60
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/979110"
+            ],
+            "title": "Space Haven",
+            "url": "https://store.steampowered.com/app/979110/",
+            "type": "Game",
+            "release_date": "May 21, 2020",
+            "note": null,
+            "price": 2299,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/310790"
+            ],
+            "title": "Geometry Wars™ 3: Dimensions Evolved",
+            "url": "https://store.steampowered.com/app/310790/",
+            "type": "Game",
+            "release_date": "Nov 25, 2014",
+            "note": null,
+            "price": 1499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/402710"
+            ],
+            "title": "Osiris: New Dawn",
+            "url": "https://store.steampowered.com/app/402710/",
+            "type": "Game",
+            "release_date": "Sep 28, 2016",
+            "note": null,
+            "price": 3499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/266840"
+            ],
+            "title": "Age of Mythology: Extended Edition",
+            "url": "https://store.steampowered.com/app/266840/",
+            "type": "Game",
+            "release_date": "May 8, 2014",
+            "note": null,
+            "price": 749,
+            "discount": 75
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/333420"
+            ],
+            "title": "Cossacks 3",
+            "url": "https://store.steampowered.com/app/333420/",
+            "type": "Game",
+            "release_date": "Sep 20, 2016",
+            "note": null,
+            "price": 799,
+            "discount": 60
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/637650"
+            ],
+            "title": "FINAL FANTASY XV WINDOWS EDITION",
+            "url": "https://store.steampowered.com/app/637650/",
+            "type": "Game",
+            "release_date": "Mar 6, 2018",
+            "note": null,
+            "price": 1749,
+            "discount": 50
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/510500"
+            ],
+            "title": "Executive Assault 2",
+            "url": "https://store.steampowered.com/app/510500/",
+            "type": "Game",
+            "release_date": "Oct 18, 2018",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/728880"
+            ],
+            "title": "Overcooked! 2",
+            "url": "https://store.steampowered.com/app/728880/",
+            "type": "Game",
+            "release_date": "Aug 7, 2018",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1030300"
+            ],
+            "title": "Hollow Knight: Silksong",
+            "url": "https://store.steampowered.com/app/1030300/",
+            "type": "Game",
+            "release_date": "TBA",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1222690"
+            ],
+            "title": "Dragon Age™ Inquisition",
+            "url": "https://store.steampowered.com/app/1222690/",
+            "type": "Game",
+            "release_date": "Jun 4, 2020",
+            "note": null,
+            "price": 3999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1265780"
+            ],
+            "title": "The Lord of the Rings: Gollum™",
+            "url": "https://store.steampowered.com/app/1265780/",
+            "type": "Game",
+            "release_date": "Lurking until the time is right...",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1366540"
+            ],
+            "title": "Dyson Sphere Program",
+            "url": "https://store.steampowered.com/app/1366540/",
+            "type": "Game",
+            "release_date": "Jan 21, 2021",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/17480"
+            ],
+            "title": "Command &amp; Conquer: Red Alert 3",
+            "url": "https://store.steampowered.com/app/17480/",
+            "type": "Game",
+            "release_date": "Jan 8, 2009",
+            "note": null,
+            "price": 499,
+            "discount": 75
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/397540"
+            ],
+            "title": "Borderlands 3",
+            "url": "https://store.steampowered.com/app/397540/",
+            "type": "Game",
+            "release_date": "Mar 13, 2020",
+            "note": null,
+            "price": 5999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/738520"
+            ],
+            "title": "Breathedge",
+            "url": "https://store.steampowered.com/app/738520/",
+            "type": "Game",
+            "release_date": "Feb 25, 2021",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1194010"
+            ],
+            "title": "Outward - The Soroboreans",
+            "url": "https://store.steampowered.com/app/1194010/",
+            "type": "DLC",
+            "release_date": "Jun 16, 2020",
+            "note": null,
+            "price": 1499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1437000"
+            ],
+            "title": "Outward: The Three Brothers",
+            "url": "https://store.steampowered.com/app/1437000/",
+            "type": "DLC",
+            "release_date": "Dec 15, 2020",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1575660"
+            ],
+            "title": "Cooking Simulator - Shelter",
+            "url": "https://store.steampowered.com/app/1575660/",
+            "type": "DLC",
+            "release_date": "Nov 18, 2021",
+            "note": null,
+            "price": 1199,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/570940"
+            ],
+            "title": "DARK SOULS™: REMASTERED",
+            "url": "https://store.steampowered.com/app/570940/",
+            "type": "Game",
+            "release_date": "May 23, 2018",
+            "note": null,
+            "price": 3999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/787860"
+            ],
+            "title": "Farming Simulator 19",
+            "url": "https://store.steampowered.com/app/787860/",
+            "type": "Game",
+            "release_date": "Nov 19, 2018",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/824000"
+            ],
+            "title": "Hokko Life",
+            "url": "https://store.steampowered.com/app/824000/",
+            "type": "Game",
+            "release_date": "Jun 2, 2021",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1594320"
+            ],
+            "title": "Captain of Industry",
+            "url": "https://store.steampowered.com/app/1594320/",
+            "type": "Game",
+            "release_date": "May 31",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/288470"
+            ],
+            "title": "Fable Anniversary",
+            "url": "https://store.steampowered.com/app/288470/",
+            "type": "Game",
+            "release_date": "Sep 12, 2014",
+            "note": null,
+            "price": 874,
+            "discount": 75
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/782330"
+            ],
+            "title": "DOOM Eternal",
+            "url": "https://store.steampowered.com/app/782330/",
+            "type": "Game",
+            "release_date": "Mar 19, 2020",
+            "note": null,
+            "price": 3999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1466860"
+            ],
+            "title": "Age of Empires IV",
+            "url": "https://store.steampowered.com/app/1466860/",
+            "type": "Game",
+            "release_date": "Oct 28, 2021",
+            "note": null,
+            "price": 5999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1271700"
+            ],
+            "title": "HOT WHEELS UNLEASHED™",
+            "url": "https://store.steampowered.com/app/1271700/",
+            "type": "Game",
+            "release_date": "Sep 30, 2021",
+            "note": null,
+            "price": 4999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1244460"
+            ],
+            "title": "Jurassic World Evolution 2",
+            "url": "https://store.steampowered.com/app/1244460/",
+            "type": "Game",
+            "release_date": "Nov 9, 2021",
+            "note": null,
+            "price": 5999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1307550"
+            ],
+            "title": "Craftopia",
+            "url": "https://store.steampowered.com/app/1307550/",
+            "type": "Game",
+            "release_date": "Sep 4, 2020",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1238000"
+            ],
+            "title": "Mass Effect™: Andromeda Deluxe Edition",
+            "url": "https://store.steampowered.com/app/1238000/",
+            "type": "Game",
+            "release_date": "Jun 11, 2020",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/382310"
+            ],
+            "title": "Eco",
+            "url": "https://store.steampowered.com/app/382310/",
+            "type": "Game",
+            "release_date": "Feb 6, 2018",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/431240"
+            ],
+            "title": "Golf With Your Friends",
+            "url": "https://store.steampowered.com/app/431240/",
+            "type": "Game",
+            "release_date": "May 19, 2020",
+            "note": null,
+            "price": 1499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1496790"
+            ],
+            "title": "Gotham Knights",
+            "url": "https://store.steampowered.com/app/1496790/",
+            "type": "Game",
+            "release_date": "October 21",
+            "note": null,
+            "price": 5999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1149620"
+            ],
+            "title": "Gas Station Simulator",
+            "url": "https://store.steampowered.com/app/1149620/",
+            "type": "Game",
+            "release_date": "Sep 15, 2021",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1680880"
+            ],
+            "title": "Forspoken",
+            "url": "https://store.steampowered.com/app/1680880/",
+            "type": "Game",
+            "release_date": "January 24, 2023",
+            "note": null,
+            "price": 6999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/392160"
+            ],
+            "title": "X4: Foundations",
+            "url": "https://store.steampowered.com/app/392160/",
+            "type": "Game",
+            "release_date": "Nov 30, 2018",
+            "note": null,
+            "price": 4999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1127400"
+            ],
+            "title": "Mindustry",
+            "url": "https://store.steampowered.com/app/1127400/",
+            "type": "Game",
+            "release_date": "Sep 26, 2019",
+            "note": null,
+            "price": 999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1480560"
+            ],
+            "title": "Lawn Mowing Simulator",
+            "url": "https://store.steampowered.com/app/1480560/",
+            "type": "Game",
+            "release_date": "Aug 10, 2021",
+            "note": null,
+            "price": 1999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/322330"
+            ],
+            "title": "Don't Starve Together",
+            "url": "https://store.steampowered.com/app/322330/",
+            "type": "Game",
+            "release_date": "Apr 21, 2016",
+            "note": null,
+            "price": 1499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/780310"
+            ],
+            "title": "The Riftbreaker",
+            "url": "https://store.steampowered.com/app/780310/",
+            "type": "Game",
+            "release_date": "Oct 14, 2021",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1003590"
+            ],
+            "title": "Tetris® Effect: Connected",
+            "url": "https://store.steampowered.com/app/1003590/",
+            "type": "Game",
+            "release_date": "Aug 17, 2021",
+            "note": null,
+            "price": 3999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1161580"
+            ],
+            "title": "Hardspace: Shipbreaker",
+            "url": "https://store.steampowered.com/app/1161580/",
+            "type": "Game",
+            "release_date": "May 24",
+            "note": null,
+            "price": 3499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1621690"
+            ],
+            "title": "Core Keeper",
+            "url": "https://store.steampowered.com/app/1621690/",
+            "type": "Game",
+            "release_date": "Mar 8",
+            "note": null,
+            "price": 1299,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1928870"
+            ],
+            "title": "Minecraft Legends",
+            "url": "https://store.steampowered.com/app/1928870/",
+            "type": "Game",
+            "release_date": "Coming 2023",
+            "note": null,
+            "price": null,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/583010"
+            ],
+            "title": "VoiceAttack",
+            "url": "https://store.steampowered.com/app/583010/",
+            "type": "Application",
+            "release_date": "Mar 18, 2017",
+            "note": null,
+            "price": 1199,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/990080"
+            ],
+            "title": "Hogwarts Legacy",
+            "url": "https://store.steampowered.com/app/990080/",
+            "type": "Game",
+            "release_date": "February 10, 2023",
+            "note": null,
+            "price": 5999,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1062090"
+            ],
+            "title": "Timberborn",
+            "url": "https://store.steampowered.com/app/1062090/",
+            "type": "Game",
+            "release_date": "Sep 15, 2021",
+            "note": null,
+            "price": 2499,
+            "discount": 0
+        },
+        {
+            "gameid": [
+                "steam",
+                "app/1202130"
+            ],
+            "title": "Starship Troopers: Terran Command",
+            "url": "https://store.steampowered.com/app/1202130/",
+            "type": "Game",
+            "release_date": "Jun 16",
+            "note": null,
+            "price": 2999,
+            "discount": 0
+        }
+    ]
+}

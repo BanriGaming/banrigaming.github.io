@@ -258,7 +258,9 @@ iframe{
   }
 
   pre{
-      border: 1px solid white;
+      /*border: 1px solid white;*/
+      max-height: 30em;
+      overflow: auto;
   }
 
   .card{
@@ -299,8 +301,12 @@ iframe{
   margin-right: auto
 }
 
-code{
+/*code{
   color:#00BCDB;
+  }*/
+
+  :not(pre)>code[class*=language-], pre[class*=language-] {
+    background: black;
   }
 
   .featured{
