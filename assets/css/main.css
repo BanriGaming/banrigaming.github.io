@@ -450,3 +450,7 @@ iframe{
     width: 100%;
   }
 }
+/*Rune Calculator*/
+#showdata{
+  display: none;
+}
