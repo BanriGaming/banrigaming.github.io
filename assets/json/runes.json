@@ -84,7 +84,7 @@
             "chaos":"1",
             "water":"2"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "mist":"2",
@@ -101,7 +101,7 @@
             "chaos":"1",
             "earth":"3"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "dust":"2",
@@ -118,7 +118,7 @@
             "chaos":"1",
             "fire":"4"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "smoke":"3",
@@ -134,7 +134,7 @@
             "air":"6",
             "death":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Water Blast",
@@ -146,7 +146,7 @@
             "death":"1",
             "water":"4"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "mist":"3",
@@ -163,7 +163,7 @@
             "death":"1",
             "earth":"4"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "dust":"3",
@@ -180,7 +180,7 @@
             "death":"1",
             "fire":"5"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "smoke":"4",
@@ -196,7 +196,7 @@
             "air":"10",
             "blood":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Water Wave",
@@ -208,7 +208,7 @@
             "blood":"1",
             "water":"7"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "mist":"5",
@@ -225,7 +225,7 @@
             "blood":"1",
             "earth":"7"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "dust":"5",
@@ -242,7 +242,7 @@
             "blood":"1",
             "fire":"7"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "smoke":"5",
@@ -258,7 +258,7 @@
             "air":"10",
             "ancient":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Water Surge",
@@ -270,7 +270,7 @@
             "ancient":"1",
             "water":"10"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "mist":"7",
@@ -287,7 +287,7 @@
             "ancient":"1",
             "earth":"10"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "dust":"7",
@@ -304,7 +304,7 @@
             "ancient":"1",
             "fire":"10"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "smoke":"7",
@@ -323,7 +323,7 @@
             "fire":"2",
             "nature":"2"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "steam":"2",
@@ -343,7 +343,7 @@
             "fire":"4",
             "nature":"4"
         },
-        "option":true,
+        "options":true,
         "combination":
         {
             "steam":"4",
@@ -360,7 +360,7 @@
             "mind":"2",
             "body":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Soul Split I",
@@ -372,7 +372,7 @@
             "body":"1",
             "chaos":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Weakening I",
@@ -383,7 +383,7 @@
             "mind":"3",
             "body":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Anquish I",
@@ -394,7 +394,7 @@
             "body":"2",
             "death":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Blinding II",
@@ -405,7 +405,7 @@
             "mind":"3",
             "body":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Soul Split II",
@@ -417,7 +417,7 @@
             "body":"2",
             "chaos":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Weakening II",
@@ -428,7 +428,7 @@
             "mind":"3",
             "chaos":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Confusion",
@@ -440,7 +440,7 @@
             "body":"2",
             "chaos":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Anguish II",
@@ -451,7 +451,7 @@
             "body":"3",
             "death":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Blinding III",
@@ -463,7 +463,7 @@
             "body":"2",
             "havoc":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Soul Split III",
@@ -476,7 +476,7 @@
             "chaos":"2",
             "havoc":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Weakening III",
@@ -488,7 +488,7 @@
             "body":"1",
             "havoc":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Anguish III",
@@ -500,7 +500,7 @@
             "death":"3",
             "havoc":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Decay",
@@ -512,7 +512,7 @@
             "death":"1",
             "blood":"3"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Surge I",
@@ -523,7 +523,7 @@
             "air":"3",
             "light":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Fury I",
@@ -534,7 +534,7 @@
             "water":"3",
             "light":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Fervor I",
@@ -545,7 +545,7 @@
             "earth":"3",
             "light":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Surge II",
@@ -556,7 +556,7 @@
             "air":"4",
             "light":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Charged I",
@@ -568,7 +568,7 @@
             "death":"2",
             "light":"1"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Fury II",
@@ -579,7 +579,7 @@
             "water":"4",
             "light":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Fervor II",
@@ -590,7 +590,7 @@
             "earth":"4",
             "light":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Surge III",
@@ -601,7 +601,7 @@
             "air":"5",
             "light":"3"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Charged II",
@@ -613,7 +613,7 @@
             "death":"3",
             "light":"2"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Fury III",
@@ -624,7 +624,7 @@
             "water":"5",
             "light":"3"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Fervor III",
@@ -635,7 +635,7 @@
             "earth":"5",
             "light":"3"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Charged III",
@@ -647,7 +647,7 @@
             "death":"4",
             "light":"3"
         },
-        "option":false
+        "options":false
     },
     {
         "title":"Slicing Winds",
@@ -659,7 +659,7 @@
             "ancient":"5"
         },
         "requirement":"100 Volcanic Cave Clears",
-        "option":false
+        "options":false
     },
     {
         "title":"Icicle Volley",
@@ -671,7 +671,7 @@
             "ancient":"5"
         },
         "requirement":"100 Volcanic Cave Clears",
-        "option":false
+        "options":false
     },
     {
         "title":"Ignite",
@@ -683,7 +683,7 @@
             "ancient":"5"
         },
         "requirement":"100 Volcanic Cave Clears",
-        "option":false
+        "options":false
     },
     {
         "title":"Gust",
@@ -696,7 +696,7 @@
             "havoc":"5"
         },
         "requirement":"100 Air God Dungeon Clears",
-        "option":false
+        "options":false
     },
     {
         "title":"Frostbite",
@@ -709,7 +709,7 @@
             "havoc":"6"
         },
         "requirement":"100 Water God Dungeon Clears",
-        "option":false
+        "options":false
     },
     {
         "title":"Quake",
@@ -722,7 +722,7 @@
             "havoc":"7"
         },
         "requirement":"100 Earth God Dungeon Clears",
-        "option":false
+        "options":false
     },
     {
         "title":"Incinerate",
@@ -735,7 +735,7 @@
             "havoc":"10"
         },
         "requirement":"100 Volcanic Cave Clears",
-        "option":false
+        "options":false
     }
 
     ]
