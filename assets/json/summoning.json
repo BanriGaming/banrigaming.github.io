@@ -4,6 +4,7 @@
     [
     {
         "title":"The Goblin Thief",
+        "level":1,
         "product":25,
         "tier":1,
         "recipes":
@@ -52,6 +53,7 @@
     },
     {
         "title":"The Ent",
+        "level":1,
         "product":25,
         "tier":1,
         "recipes":
@@ -105,6 +107,7 @@
     },
     {
         "title":"The Occultist",
+        "level":5,
         "product":25,
         "tier":1,
         "recipes":
@@ -118,6 +121,7 @@
     },
     {
         "title":"The Octopus",
+        "level":15,
         "product":25,
         "tier":1,
         "recipes":
@@ -221,6 +225,7 @@
     },
     {
         "title":"The Mole",
+        "level":5,
         "product":25,
         "tier":1,
         "recipes":
@@ -279,6 +284,7 @@
     },
     {
         "title":"The Wolf",
+        "level":15,
         "product":25,
         "tier":1,
         "recipes":
@@ -367,6 +373,7 @@
     },
     {
         "title":"The Minotaur",
+        "level":25,
         "product":25,
         "tier":2,
         "recipes":
@@ -423,6 +430,7 @@
     },
     {
         "title":"The Pig",
+        "level":25,
         "product":25,
         "tier":2,
         "recipes":
@@ -527,6 +535,7 @@
     },
     {
         "title":"The Centaur",
+        "level":35,
         "product":25,
         "tier":2,
         "recipes":
@@ -619,6 +628,7 @@
     },
     {
         "title":"The Crow",
+        "level":35,
         "product":25,
         "tier":2,
         "recipes":
@@ -663,6 +673,7 @@
     },
     {
         "title":"The Witch",
+        "level":45,
         "product":25,
         "tier":2,
         "recipes":
@@ -755,6 +766,7 @@
     },
     {
         "title":"The Leprechaun",
+        "level":45,
         "product":25,
         "tier":2,
         "recipes":
@@ -769,6 +781,7 @@
     },
     {
         "title":"The Cyclops",
+        "level":55,
         "product":25,
         "tier":3,
         "recipes":
@@ -784,6 +797,7 @@
     },
     {
         "title":"The Monkey",
+        "level":55,
         "product":25,
         "tier":3,
         "recipes":
@@ -932,6 +946,7 @@
     },
     {
         "title":"The Yak",
+        "level":65,
         "product":25,
         "tier":3,
         "recipes":
@@ -996,6 +1011,7 @@
     },
     {
         "title":"The Salamander",
+        "level":65,
         "product":25,
         "tier":3,
         "recipes":
@@ -1067,6 +1083,7 @@
     },
     {
         "title":"The Unicorn",
+        "level":80,
         "product":25,
         "tier":3,
         "recipes":
@@ -1082,6 +1099,7 @@
     },
     {
         "title":"The Bear",
+        "level":80,
         "product":25,
         "tier":3,
         "recipes":
@@ -1146,6 +1164,7 @@
     },
     {
         "title":"The Dragon",
+        "level":90,
         "product":25,
         "tier":3,
         "recipes":
@@ -1161,6 +1180,7 @@
     },
     {
         "title":"The Devil",
+        "level":90,
         "product":25,
         "tier":3,
         "recipes":

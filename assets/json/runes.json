@@ -5,17 +5,23 @@
         "title":"Wind Strike",
         "type":"Standard",
         "level":"1",
-        "air":"2",
-        "mind":"1",
+        "standard":
+        {  
+            "air":"2",
+            "mind":"1"
+        },
         "options":false
     },
     {
         "title":"Water Strike",
         "type":"Standard",
         "level":"3",
-        "air":"1",
-        "mind":"1",
-        "water":"1",
+        "standard":
+        {
+            "air":"1",
+            "mind":"1",
+            "water":"1"
+        },
         "options":true,
         "combination":
         {
@@ -27,9 +33,12 @@
         "title":"Earth Strike",
         "type":"Standard",
         "level":"6",
-        "air":"1",
-        "mind":"1",
-        "earth":"1",
+        "standard":
+        {
+            "air":"1",
+            "mind":"1",
+            "earth":"1"
+        },
         "options":true,
         "combination":
         {
@@ -41,9 +50,12 @@
         "title":"Fire Strike",
         "type":"Standard",
         "level":"10",
-        "air":"1",
-        "mind":"1",
-        "fire":"1",
+        "standard":
+        {
+            "air":"1",
+            "mind":"1",
+            "fire":"1"
+        },
         "options":true,
         "combination":
         {
@@ -55,17 +67,23 @@
         "title":"Wind Bolt",
         "type":"Standard",
         "level":"14",
-        "air":"4",
-        "chaos":"1",
+        "standard":
+        {
+            "air":"4",
+            "chaos":"1"
+        },
         "options":false
     },
     {
         "title":"Water Bolt",
         "type":"Standard",
         "level":"16",
-        "air":"2",
-        "chaos":"1",
-        "water":"2",
+        "standard":
+        {
+            "air":"2",
+            "chaos":"1",
+            "water":"2"
+        },
         "option":true,
         "combination":
         {
@@ -77,9 +95,12 @@
         "title":"Earth Bolt",
         "type":"Standard",
         "level":"19",
-        "air":"2",
-        "chaos":"1",
-        "earth":"3",
+        "standard":
+        {
+            "air":"2",
+            "chaos":"1",
+            "earth":"3"
+        },
         "option":true,
         "combination":
         {
@@ -91,9 +112,12 @@
         "title":"Fire Bolt",
         "type":"Standard",
         "level":"23",
-        "air":"3",
-        "chaos":"1",
-        "fire":"4",
+        "standard":
+        {
+            "air":"3",
+            "chaos":"1",
+            "fire":"4"
+        },
         "option":true,
         "combination":
         {
@@ -105,17 +129,23 @@
         "title":"Wind Blast",
         "type":"Standard",
         "level":"28",
-        "air":"6",
-        "death":"1",
+        "standard":
+        {
+            "air":"6",
+            "death":"1"
+        },
         "option":false
     },
     {
         "title":"Water Blast",
         "type":"Standard",
         "level":"30",
-        "air":"3",
-        "death":"1",
-        "water":"4",
+        "standard":
+        {
+            "air":"3",
+            "death":"1",
+            "water":"4"
+        },
         "option":true,
         "combination":
         {
@@ -127,9 +157,12 @@
         "title":"Earth Blast",
         "type":"Standard",
         "level":"33",
-        "air":"3",
-        "death":"1",
-        "earth":"4",
+        "standard":
+        {
+            "air":"3",
+            "death":"1",
+            "earth":"4"
+        },
         "option":true,
         "combination":
         {
@@ -141,9 +174,12 @@
         "title":"Fire Blast",
         "type":"Standard",
         "level":"37",
-        "air":"4",
-        "death":"1",
-        "fire":"5",
+        "standard":
+        {
+            "air":"4",
+            "death":"1",
+            "fire":"5"
+        },
         "option":true,
         "combination":
         {
@@ -155,17 +191,23 @@
         "title":"Wind Wave",
         "type":"Standard",
         "level":"43",
-        "air":"10",
-        "blood":"1",
+        "standard":
+        {
+            "air":"10",
+            "blood":"1"
+        },
         "option":false
     },
     {
         "title":"Water Wave",
         "type":"Standard",
         "level":"45",
-        "air":"5",
-        "blood":"1",
-        "water":"7",
+        "standard":
+        {
+            "air":"5",
+            "blood":"1",
+            "water":"7"
+        },
         "option":true,
         "combination":
         {
@@ -177,9 +219,12 @@
         "title":"Earth Wave",
         "type":"Standard",
         "level":"48",
-        "air":"5",
-        "blood":"1",
-        "earth":"7",
+        "standard":
+        {
+            "air":"5",
+            "blood":"1",
+            "earth":"7"
+        },
         "option":true,
         "combination":
         {
@@ -191,9 +236,12 @@
         "title":"Fire Wave",
         "type":"Standard",
         "level":"52",
-        "air":"5",
-        "blood":"1",
-        "fire":"7",
+        "standard":
+        {
+            "air":"5",
+            "blood":"1",
+            "fire":"7"
+        },
         "option":true,
         "combination":
         {
@@ -205,17 +253,23 @@
         "title":"Wind Surge",
         "type":"Standard",
         "level":"57",
-        "air":"10",
-        "ancient":"1",
+        "standard":
+        {
+            "air":"10",
+            "ancient":"1"
+        },
         "option":false
     },
     {
         "title":"Water Surge",
         "type":"Standard",
         "level":"61",
-        "air":"7",
-        "ancient":"1",
-        "water":"10",
+        "standard":
+        {
+            "air":"7",
+            "ancient":"1",
+            "water":"10"
+        },
         "option":true,
         "combination":
         {
@@ -227,9 +281,12 @@
         "title":"Earth Surge",
         "type":"Standard",
         "level":"64",
-        "air":"7",
-        "ancient":"1",
-        "earth":"10",
+        "standard":
+        {
+            "air":"7",
+            "ancient":"1",
+            "earth":"10"
+        },
         "option":true,
         "combination":
         {
@@ -241,9 +298,12 @@
         "title":"Fire Surge",
         "type":"Standard",
         "level":"68",
-        "air":"7",
-        "ancient":"1",
-        "fire":"10",
+        "standard":
+        {
+            "air":"7",
+            "ancient":"1",
+            "fire":"10"
+        },
         "option":true,
         "combination":
         {
@@ -255,11 +315,14 @@
         "title":"Nature's Call",
         "type":"Standard",
         "level":"40",
-        "air":"2",
-        "water":"2",
-        "earth":"2",
-        "fire":"2",
-        "nature":"2",
+        "standard":
+        {
+            "air":"2",
+            "water":"2",
+            "earth":"2",
+            "fire":"2",
+            "nature":"2"
+        },
         "option":true,
         "combination":
         {
@@ -272,11 +335,14 @@
         "title":"Nature's Wrath",
         "type":"Standard",
         "level":"65",
-        "air":"4",
-        "water":"4",
-        "earth":"4",
-        "fire":"4",
-        "nature":"4",
+        "standard":
+        {
+            "air":"4",
+            "water":"4",
+            "earth":"4",
+            "fire":"4",
+            "nature":"4"
+        },
         "option":true,
         "combination":
         {
@@ -289,228 +355,309 @@
         "title":"Blinding I",
         "type":"Curses",
         "level":"10",
-        "mind":"2",
-        "body":"1",
+        "standard":
+        {
+            "mind":"2",
+            "body":"1"
+        },
         "option":false
     },
     {
         "title":"Soul Split I",
         "type":"Curses",
         "level":"15",
-        "mind":"1",
-        "body":"1",
-        "chaos":"1",
+        "standard":
+        {
+            "mind":"1",
+            "body":"1",
+            "chaos":"1"
+        },
         "option":false
     },
     {
         "title":"Weakening I",
         "type":"Curses",
         "level":"20",
-        "mind":"3",
-        "body":"1",
+        "standard":
+        {
+            "mind":"3",
+            "body":"1"
+        },
         "option":false
     },
     {
         "title":"Anquish I",
         "type":"Curses",
         "level":"30",
-        "body":"2",
-        "death":"1",
+        "standard":
+        {
+            "body":"2",
+            "death":"1"
+        },
         "option":false
     },
     {
         "title":"Blinding II",
         "type":"Curses",
         "level":"30",
-        "mind":"3",
-        "body":"1",
+        "standard":
+        {
+            "mind":"3",
+            "body":"1"
+        },
         "option":false
     },
     {
         "title":"Soul Split II",
         "type":"Curses",
         "level":"35",
-        "mind":"2",
-        "body":"2",
-        "chaos":"1",
+        "standard":
+        {
+            "mind":"2",
+            "body":"2",
+            "chaos":"1"
+        },
         "option":false
     },
     {
         "title":"Weakening II",
         "type":"Curses",
         "level":"40",
-        "mind":"3",
-        "chaos":"1",
+        "standard":
+        {
+            "mind":"3",
+            "chaos":"1"
+        },
         "option":false
     },
     {
         "title":"Confusion",
         "type":"Curses",
         "level":"45",
-        "mind":"3",
-        "body":"2",
-        "chaos":"1",
+        "standard":
+        {
+            "mind":"3",
+            "body":"2",
+            "chaos":"1"
+        },
         "option":false
     },
     {
         "title":"Anguish II",
         "type":"Curses",
         "level":"50",
-        "body":"3",
-        "death":"2",
+        "standard":
+        {
+            "body":"3",
+            "death":"2"
+        },
         "option":false
     },
     {
         "title":"Blinding III",
         "type":"Curses",
         "level":"50",
-        "mind":"4",
-        "body":"2",
-        "havoc":"2",
+        "standard":
+        {
+            "mind":"4",
+            "body":"2",
+            "havoc":"2"
+        },
         "option":false
     },
     {
         "title":"Soul Split III",
         "type":"Curses",
         "level":"55",
-        "mind":"3",
-        "body":"3",
-        "chaos":"2",
-        "havoc":"1",
+        "standard":
+        {
+            "mind":"3",
+            "body":"3",
+            "chaos":"2",
+            "havoc":"1"
+        },
         "option":false
     },
     {
         "title":"Weakening III",
         "type":"Curses",
         "level":"60",
-        "mind":"3",
-        "body":"1",
-        "havoc":"2",
+        "standard":
+        {
+            "mind":"3",
+            "body":"1",
+            "havoc":"2"
+        },
         "option":false
     },
     {
         "title":"Anguish III",
         "type":"Curses",
         "level":"70",
-        "body":"4",
-        "death":"3",
-        "havoc":"2",
+        "standard":
+        {
+            "body":"4",
+            "death":"3",
+            "havoc":"2"
+        },
         "option":false
     },
     {
         "title":"Decay",
         "type":"Curses",
         "level":"80",
-        "havoc":"2",
-        "death":"1",
-        "blood":"3",
+        "standard":
+        {
+            "havoc":"2",
+            "death":"1",
+            "blood":"3"
+        },
         "option":false
     },
     {
         "title":"Surge I",
         "type":"Auroras",
         "level":"15",
-        "air":"3",
-        "light":"1",
+        "standard":
+        {
+            "air":"3",
+            "light":"1"
+        },
         "option":false
     },
     {
         "title":"Fury I",
         "type":"Auroras",
         "level":"25",
-        "water":"3",
-        "light":"1",
+        "standard":
+        {
+            "water":"3",
+            "light":"1"
+        },
         "option":false
     },
     {
         "title":"Fervor I",
         "type":"Auroras",
         "level":"35",
-        "earth":"3",
-        "light":"1",
+        "standard":
+        {
+            "earth":"3",
+            "light":"1"
+        },
         "option":false
     },
     {
         "title":"Surge II",
         "type":"Auroras",
         "level":"40",
-        "air":"4",
-        "light":"2",
+        "standard":
+        {
+            "air":"4",
+            "light":"2"
+        },
         "option":false
     },
     {
         "title":"Charged I",
         "type":"Auroras",
         "level":"45",
-        "chaos":"2",
-        "death":"2",
-        "light":"1",
+        "standard":
+        {
+            "chaos":"2",
+            "death":"2",
+            "light":"1"
+        },
         "option":false
     },
     {
         "title":"Fury II",
         "type":"Auroras",
         "level":"50",
-        "water":"4",
-        "light":"2",
+        "standard":
+        {
+            "water":"4",
+            "light":"2"
+        },
         "option":false
     },
     {
         "title":"Fervor II",
         "type":"Auroras",
         "level":"60",
-        "earth":"4",
-        "light":"2",
+        "standard":
+        {
+            "earth":"4",
+            "light":"2"
+        },
         "option":false
     },
     {
         "title":"Surge III",
         "type":"Auroras",
         "level":"65",
-        "air":"5",
-        "light":"3",
+        "standard":
+        {
+            "air":"5",
+            "light":"3"
+        },
         "option":false
     },
     {
         "title":"Charged II",
         "type":"Auroras",
         "level":"70",
-        "chaos":"3",
-        "death":"3",
-        "light":"2",
+        "standard":
+        {
+            "chaos":"3",
+            "death":"3",
+            "light":"2"
+        },
         "option":false
     },
     {
         "title":"Fury III",
         "type":"Auroras",
         "level":"75",
-        "water":"5",
-        "light":"3",
+        "standard":
+        {
+            "water":"5",
+            "light":"3"
+        },
         "option":false
     },
     {
         "title":"Fervor III",
         "type":"Auroras",
         "level":"85",
-        "earth":"5",
-        "light":"3",
+        "standard":
+        {
+            "earth":"5",
+            "light":"3"
+        },
         "option":false
     },
     {
         "title":"Charged III",
         "type":"Auroras",
         "level":"95",
-        "chaos":"4",
-        "death":"4",
-        "light":"3",
+        "standard":
+        {
+            "chaos":"4",
+            "death":"4",
+            "light":"3"
+        },
         "option":false
     },
     {
         "title":"Slicing Winds",
         "type":"Ancient Magic",
         "level":"70",
-        "air":"20",
-        "ancient":"5",
+        "standard":
+        {
+            "air":"20",
+            "ancient":"5"
+        },
         "requirement":"100 Volcanic Cave Clears",
         "option":false
     },
@@ -518,8 +665,11 @@
         "title":"Icicle Volley",
         "type":"Ancient Magic",
         "level":"74",
-        "water":"20",
-        "ancient":"5",
+        "standard":
+        {
+            "water":"20",
+            "ancient":"5"
+        },
         "requirement":"100 Volcanic Cave Clears",
         "option":false
     },
@@ -527,8 +677,11 @@
         "title":"Ignite",
         "type":"Ancient Magic",
         "level":"82",
-        "fire":"20",
-        "ancient":"5",
+        "standard":
+        {
+            "fire":"20",
+            "ancient":"5"
+        },
         "requirement":"100 Volcanic Cave Clears",
         "option":false
     },
@@ -536,9 +689,12 @@
         "title":"Gust",
         "type":"Ancient Magic",
         "level":"86",
-        "air":"25",
-        "ancient":"5",
-        "havoc":"5",
+        "standard":
+        {
+            "air":"25",
+            "ancient":"5",
+            "havoc":"5"
+        },
         "requirement":"100 Air God Dungeon Clears",
         "option":false
     },
@@ -546,9 +702,12 @@
         "title":"Frostbite",
         "type":"Ancient Magic",
         "level":"90",
-        "water":"25",
-        "ancient":"6",
-        "havoc":"6",
+        "standard":
+        {
+            "water":"25",
+            "ancient":"6",
+            "havoc":"6"
+        },
         "requirement":"100 Water God Dungeon Clears",
         "option":false
     },
@@ -556,9 +715,12 @@
         "title":"Quake",
         "type":"Ancient Magic",
         "level":"94",
-        "earth":"25",
-        "ancient":"7",
-        "havoc":"7",
+        "standard":
+        {
+            "earth":"25",
+            "ancient":"7",
+            "havoc":"7"
+        },
         "requirement":"100 Earth God Dungeon Clears",
         "option":false
     },
@@ -566,9 +728,12 @@
         "title":"Incinerate",
         "type":"Ancient Magic",
         "level":"98",
-        "fire":"30",
-        "ancient":"10",
-        "havoc":"10",
+        "standard":
+        {
+            "fire":"30",
+            "ancient":"10",
+            "havoc":"10"
+        },
         "requirement":"100 Volcanic Cave Clears",
         "option":false
     }
