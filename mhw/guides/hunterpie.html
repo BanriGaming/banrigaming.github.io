@@ -1,77 +1,57 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link  rel="stylesheet" href="../../assets/css/main.css"></link>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    </link>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap"
+        rel="stylesheet">
     <script src="../../assets/js/nav.js"></script>
 </head>
+
 <body>
-    <div w3-include-html="../../nav.html"></div> <hr>
+    <div w3-include-html="../../nav.html"></div>
+    <hr>
     <!--<div class="hunterpie_img">  153C4E  -->
-    <div class="jumbotron jumbotron-fluid">    
+    <div class="jumbotron jumbotron-fluid">
         <h1 class="display-4">HunterPie Overlay & Rich Presence</h1>
-        <p class="lead">HunterPie is a modern and simple to use overlay with support for Discord Rich Presence for Monster Hunter: World.</p>
+        <p class="lead">HunterPie is a modern and simple to use overlay with support for Discord Rich Presence for
+            Monster Hunter: World & Rise.</p>
     </div>
     <hr>
     <div>
         <p>The things you can do with HunterPie include the following:
-            <ol>
-                <li>Get a brand new player info bar with more details</li>
-                <li>Damage & DPS Parsing</li>
-                <li>Detailed Class Helpers</li>
-                <li>Plugins/Add-Ons that give extra features</li>
-                <li>Upload Current Loadout In-game to HoneyHunter</li>
-                <li>Discord Rich Presence, which allows one to see HR/MR, Weapon Currently Equipped, What Locale your in, What your hunting with health % remaining and quest time. All this can be seen when clicking on a player in discord.</li>
-            </ol>
+        <ol>
+            <li>Get a brand new player info bar with more details</li>
+            <li>Damage & DPS Parsing</li>
+            <li>Detailed Class Helpers</li>
+            <li>Plugins/Add-Ons that give extra features</li>
+            <li>Discord Rich Presence, which allows one to see HR/MR, Weapon Currently Equipped, What Locale your in,
+                What your hunting; with health % remaining and quest time. All this can be seen when clicking on a
+                player in discord.</li>
+        </ol>
         </p>
-        <p>You can download HunterPie below:<p>
-            <a href="/assets/files/HunterPie.zip" download="HunterPie">
+        <p>You can download HunterPie below:
+        <p>
+            <a href="/assets/files/HunterPie 2.7.0.80.zip" download="HunterPie">
                 <button class="btn-primary btn btn-lg"><i class="download"></i> Download</button>
             </a>
-        <h3>Plugin Setup</h3>
-        <h4>♦ Discord Webhook Plugin</h4>
-        <ol>
-            <li>First Launch the Game after installing the plugins.</li>
-            <li>Then go to HunterPie -> Plugins -> Click on <b>DiscordWebhook</b> and on the right panel, look for <b><i>Plugin Directory</i></b>.</li>
-            <li>Open the folder and look for <b><i>Config.json</i></b>. Open the file in <b><i>Notepad</i></b> or <b><i>Notepad++</i></b></li>
-            <li>Now go to Legacy Nation Discord. Look for the MHW Channel in the Channel list and click on the ⚙️ Icon.</li>
-            <li>Look for <b><i>Webhooks</i></b> in <b><i>Integrations</i></b> and create a new one and <u>name it after your character name in MHW</u>.</li>
-            <li>Click the Copy URL Button and then go to the <b>Config.json</b> file you opened and paste in your Discord Webhook Link and save the file.</li>
-        </ol>
-        <pre>
-            <code>
-                shift+ctrl+p | Sends DPS data from latest combat to Discord channel.
-                shift+ctrl+g | Sends your current build to Discord channel, the link is to Honey Hunters World, but it's shortened using Tinyurl.
-            </code>
-        </pre>
-        <h4>♦ Discord Helper Plugin</h4>
-        <ol>
-            <li>First Launch the Game after installing the plugins.</li>
-            <li>Then go to HunterPie -> Plugins -> Click on <b>Discord Helper</b> and on the right panel, look for <b><i>Plugin Directory</i></b>.</li>
-            <li>Open the folder and look for <b><i>Config.json</i></b>. Open the file in <b><i>Notepad</i></b> or <b><i>Notepad++</i></b></li>
-            <li>Copy the Unique ID in the " " and run the command in the MHW Channel: $add PASTEYOURID - to add it to the bot so you can use the commands.</li>
-            <li>Remove 1 "S" from the URL address in the config and save the file.</li>
-            <li>It should look like this:</li>
-        </ol>
-        <pre>
-            <code>"uri": "ws://server-mhwdiscordhelper.herokuapp.com/"</code></pre>
-        <h3>Banri's Preferred Selection</h3>
-        <ui>
-            <li>Amadare's Sync Plugin</li>
-            <li>Combo Meter</li>
-            <li>Discord Helper</li>
-            <li>Discord Webhook</li>
-            <li>ItemBoxTracker</li>
-        </ui>
-
+        <h4>Setup for World</h4>
+        <p>
+           Under Construction.
+        </p>
     </div>
     <script>includeHTML();</script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
