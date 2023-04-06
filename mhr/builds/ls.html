@@ -7,15 +7,15 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link  rel="stylesheet" href="../../assets/css/main.css"></link>
+    <link  rel="stylesheet" href="https://banrigaming.github.io/assets/css/main.css"></link>
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
-    <script src="../../assets/js/nav.js"></script>
+    <script src="https://banrigaming.github.io/assets/js/nav.js"></script>
 </head>
 <body>
     <div w3-include-html="../../nav.html"></div> <hr>
     <!--<div class="hunterpie_img">  153C4E  -->
     <div class="jumbotron jumbotron-fluid">    
-        <h1 class="display-4"><img src="../../assets/img/lsicon.png">Long Sword Builds & Loadouts</h1>
+        <h1 class="display-4"><img src="https://banrigaming.github.io/assets/img/lsicon.png">Long Sword Builds & Loadouts</h1>
         <p class="lead">The following builds & loadouts have been created by Banri. Otherwise will be noted in the build itself if created by another.</p>
     </div>
     </div>
@@ -40,14 +40,48 @@
             <button class="nav-link" id="sixstar-hub-tab" data-bs-toggle="pill" data-bs-target="#sixstar-hub" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">6★ Hub Quests</button>
             <button class="nav-link" id="sevenstar-hub-tab" data-bs-toggle="pill" data-bs-target="#sevenstar-hub" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">7★ Hub Quests</button>
             </div>
-        <div class="tab-content" id="v-pills-tabContent">   
+        <!--Tab content for Pills-->
+        <div class="tab-content container mx-0" id="v-pills-tabContent">   
             <div class="tab-pane fade show active" id="twostar-vill" role="tabpanel" aria-labelledby="twostar-vill-tab">
-                <h2>2★ Village Quests</h2>
-                  <a href="../../assets/img/build-imgs-rise/ls-prog-2star.png"><img class="img-fluid" src="../../assets/img/build-imgs-rise/ls-prog-2star.png"></a><br><br>
-                <ui>
-                  <li>Starter Loadout to get rolling into the story and village quests</li>
-                  <li>Perfect for Easier monsters in 1★ Hub Quests</li>
-                </ui><br>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="two-equipment-l" data-bs-toggle="tab" data-bs-target="#two-equipment" type="button" role="tab" aria-controls="two-equipment" aria-selected="true">Equipment</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="two-decor-l" data-bs-toggle="tab" data-bs-target="#two-decor" type="button" role="tab" aria-controls="two-decor" aria-selected="false">Decorations</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="two-skills-l" data-bs-toggle="tab" data-bs-target="#two-skills" type="button" role="tab" aria-controls="two-skills" aria-selected="false">Skills</button>
+                    </li>
+                </ul>
+                <!-- Tab content for Tabs-->
+                <div class="tab-content mt-3">
+                    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="two-equipment-l" id="two-equipment">
+                        <ui>
+                            <li>Starter Loadout to get rolling into the story and village quests</li>
+                            <li>Perfect for Easier monsters in 1★ Hub Quests</li>
+                        </ui>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" aria-labelledby="two-decor-l" id="two-decor">
+                        <p>Decorations placeholder</p>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" aria-labelledby="two-skills-l" id="two-skills">
+                        <p>Attack Boost Lv.4<br>
+                          Critical Eye Lv.4<br>
+                          Critical Boost <span class="skillmax">Lv.3</span><br>
+                          Weakness Exploit <span class="skillmax">Lv.3</span><br>
+                          Focus <span class="skillmax">Lv.3</span><br>
+                          Offensive Guard <span class="skillmax">Lv.3</span><br>
+                          Stun Resistance <span class="skillmax">Lv.3</span><br>
+                          Speed Sharpening <span class="skillmax">Lv.3</span><br>
+                          Flinch Free <span class="skillmax">Lv.3</span><br>
+                          Latent Power Lv.1<br>
+                          Maximum Might Lv.1<br>
+                          Razor Sharp Lv.1<br>
+                          Quick Sheath Lv.1<br>
+                          Wirebug Whisperer Lv.1</p>
+                    </div>
+                </div>
               </div>
             <div class="tab-pane fade" id="threestar-vill" role="tabpanel" aria-labelledby="threestar-vill-tab">
                 <h2>3★ Village Quests</h2>

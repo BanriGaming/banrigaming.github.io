@@ -35,371 +35,387 @@
     <!-- PAGE START -->
     <p>Tip: To find the item you want, press <code>Control + F</code> and type in the name of the item to find where to
         get it.</p>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs"  id="nav-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#ore">Ore Locations</a>
+            <button class="nav-link active" id="nav-ore-l-tab" data-bs-toggle="tab" data-bs-target="#ore" type="button" role="tab" aria-controls="ore" aria-selected="true">Ore Locations</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#bones">Bone Locations</a>
+            <button class="nav-link" id="nav-bone-l-tab" data-bs-toggle="tab" data-bs-target="#bones" type="button" role="tab" aria-controls="bones" aria-selected="false">Bone Locations</button>
         </li>
         <li>
-            <a class="nav-link" href="#orepath">Ore Gathering Path</a>
+            <button class="nav-link" id="nav-ore-g-tab" data-bs-toggle="tab" data-bs-target="#orepath" type="button" role="tab" aria-controls="orepath" aria-selected="false">Ore Gathering Path</button>
         </li>
         <li>
-            <a class="nav-link" href="#bonepath">Bone Gathering Path</a>
+            <button class="nav-link" id="nav-bone-g-tab" data-bs-toggle="tab" data-bs-target="#bonepath" type="button" role="tab" aria-controls="bonepath" aria-selected="false">Bone Gathering Path</button>
         </li>
     </ul>
-    <!-- ORE -->
-    <div class="row g-4" id="ore">
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Shrine Ruins</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Awegite <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/white.png"></li>
-                        <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Earth Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Iron Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Frosted Islands</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Frocium <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Gracium <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Gracium <img class="img-fluid" src="../../assets/img/white.png"></li>
-                        <li>Icium <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Machalite Ore <img class="img-fluid" src="../../assets/img/white.png"></li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Earth Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Icium <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Iron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Flooded Forest</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Meldspar Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Novacrystal <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Purecrystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Fucium Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Lightcrystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Machalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Novacrystal <img class="img-fluid" src="../../assets/img/white.png"></li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Earth Crystal <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Iron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Lightcrystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Machalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Sandy Plains</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Fucium Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Goldlite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Fucium Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Machalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Earth Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Iron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Machalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Lava Caverns</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Allfire Stone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Firecell Stone <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Meldspar Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Firecell Stone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Firestone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Fucium Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Machalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Earth Crystal <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Firestone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Iron Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Machalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Jungle</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Sapphiron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Citadel</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Centuria Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Fucium Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
-                        <li>Meldspar Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                        <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <h1>Bone Locations</h1>
-    <div class="row g-4" id="bones">
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Shrine Ruins</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Massive Monster Bone</li>
-                        <li>Twisted Stiffbone</li>
-                        <li>Dragonbone Artifact</li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Twisted Rockbone</li>
-                        <li>Quality Bone</li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Twisted Remains</li>
-                        <li>Monster Bone S</li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Frosted Islands</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Frozen Stiffbone</li>
-                        <li>Massive Monster Bone</li>
-                        <li>Dragonbone Artifact</li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Quality Bone</li>
-                        <li>Dragonbone Relic</li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Monster Bone S</li>
-                        <li>Dragonhusk Shard</li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Flooded Forest</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Caked Stiffbone</li>
-                        <li>Giant Monster Bone</li>
-                        <li>Massive Monster Bone</li>
-                        <li>Dragonbone Artifact</li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Quality Bone</li>
-                        <li>Dragonbone Relic</li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Monster Bone S</li>
-                        <li>Dragonhusk Shard</li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Sandy Plains</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Eroded Elder Skeleton</li>
-                        <li>Massive Monster Bone</li>
-                        <li>Dragonbone Artifact</li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Quality Bone</li>
-                        <li>Eroded Husk</li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Monster Bone S</li>
-                        <li>Eroded Skeleton</li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Lava Caverns</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Blackened Stiffbone</li>
-                        <li>Giant Monster Bone</li>
-                        <li>Massive Monster Bone</li>
-                        <li>Dragonbone Artifact</li>
-                    </ul>
-                    <h5>High Rank</h5>
-                    <ul>
-                        <li>Quality Bone</li>
-                        <li>Dragonbone Relic</li>
-                    </ul>
-                    <h5>Low Rank</h5>
-                    <ul>
-                        <li>Sturdy Bone</li>
-                        <li>Monster Bone S</li>
-                        <li>Dragonhusk Shard</li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Jungle</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Overgrown Stiffbone</li>
-                        <li>Dragonbone Artifact</li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Citadel</h2>
-                    <p class="card-text">
-                    <h5>Master Rank</h5>
-                    <ul>
-                        <li>Chipped Oldbone</li>
-                        <li>Giant Monster Bone</li>
-                        <li>Massive Monster Bone</li>
-                        <li>Dragonbone Artifact</li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 
+    <div class="tab-content">
+        <!-- ORE -->
+        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-ore-l-tab" id="ore">
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Shrine Ruins</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Awegite <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/white.png"></li>
+                                <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Earth Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Iron Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Frosted Islands</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Frocium <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Gracium <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Gracium <img class="img-fluid" src="../../assets/img/white.png"></li>
+                                <li>Icium <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Machalite Ore <img class="img-fluid" src="../../assets/img/white.png"></li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Earth Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Icium <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Iron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Flooded Forest</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Meldspar Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Novacrystal <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Purecrystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Fucium Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Lightcrystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Machalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Novacrystal <img class="img-fluid" src="../../assets/img/white.png"></li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Earth Crystal <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Iron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Lightcrystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Machalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Sandy Plains</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Fucium Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Goldlite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Fucium Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Machalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Earth Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Iron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Machalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Lava Caverns</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Allfire Stone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Firecell Stone <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Meldspar Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Firecell Stone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Firestone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Fucium Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Machalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Dragonite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Earth Crystal <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Firestone <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Iron Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Machalite Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Jungle</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Carbalite Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Sapphiron Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Citadel</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Centuria Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Eltaltie Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Fucium Ore <img class="img-fluid" src="../../assets/img/blue.png"></li>
+                                <li>Meldspar Ore <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                                <li>Ultimas Crystal <img class="img-fluid" src="../../assets/img/bluewhite.png"></li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bone -->
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="nav-bone-l-tab" id="bones">
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Shrine Ruins</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Massive Monster Bone</li>
+                                <li>Twisted Stiffbone</li>
+                                <li>Dragonbone Artifact</li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Twisted Rockbone</li>
+                                <li>Quality Bone</li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Twisted Remains</li>
+                                <li>Monster Bone S</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Frosted Islands</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Frozen Stiffbone</li>
+                                <li>Massive Monster Bone</li>
+                                <li>Dragonbone Artifact</li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Quality Bone</li>
+                                <li>Dragonbone Relic</li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Monster Bone S</li>
+                                <li>Dragonhusk Shard</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Flooded Forest</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Caked Stiffbone</li>
+                                <li>Giant Monster Bone</li>
+                                <li>Massive Monster Bone</li>
+                                <li>Dragonbone Artifact</li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Quality Bone</li>
+                                <li>Dragonbone Relic</li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Monster Bone S</li>
+                                <li>Dragonhusk Shard</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Sandy Plains</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Eroded Elder Skeleton</li>
+                                <li>Massive Monster Bone</li>
+                                <li>Dragonbone Artifact</li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Quality Bone</li>
+                                <li>Eroded Husk</li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Monster Bone S</li>
+                                <li>Eroded Skeleton</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Lava Caverns</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Blackened Stiffbone</li>
+                                <li>Giant Monster Bone</li>
+                                <li>Massive Monster Bone</li>
+                                <li>Dragonbone Artifact</li>
+                            </ul>
+                            <h5>High Rank</h5>
+                            <ul>
+                                <li>Quality Bone</li>
+                                <li>Dragonbone Relic</li>
+                            </ul>
+                            <h5>Low Rank</h5>
+                            <ul>
+                                <li>Sturdy Bone</li>
+                                <li>Monster Bone S</li>
+                                <li>Dragonhusk Shard</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Jungle</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Overgrown Stiffbone</li>
+                                <li>Dragonbone Artifact</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Citadel</h2>
+                            <p class="card-text">
+                            <h5>Master Rank</h5>
+                            <ul>
+                                <li>Chipped Oldbone</li>
+                                <li>Giant Monster Bone</li>
+                                <li>Massive Monster Bone</li>
+                                <li>Dragonbone Artifact</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ore Gathering Path -->
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="nav-ore-g-tab" id="orepath">
+            <p>Under Construction</p>
+        </div>
+        
+        <!-- Bone Gathering Path -->
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="nav-bone-g-tab" id="bonepath">
+           <p>Under Construction</p>
+        </div>
+
+    </div> <!-- End of Tab Content-->
     <!-- PAGE END -->
     <script>includeHTML();</script>
 
