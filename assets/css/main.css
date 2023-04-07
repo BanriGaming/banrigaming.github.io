@@ -170,6 +170,16 @@ font-size: 1.3rem;
     background-position: 0% 50%;
   }
 }
+
+a.dropdown-item {
+  border: 1px solid transparent;
+}
+
+a.dropdown-item:hover,a.dropdown-item:focus {
+  color: #153C4E;
+  background: white;
+}
+
 .navbar , .dropdown , .dropdown-submenu , .dropdown-menu ,.dropdown-item:focus, .dropdown-item:hover{
     background-color:#232323;
 }
@@ -183,6 +193,10 @@ font-size: 1.3rem;
 #navbarNavDropdown .nav-item { /*Main nav links*/
   font-family: 'Roboto Condensed', sans-serif;
   padding: 0 2rem;
+}
+
+hr:first-of-type {
+  color: transparent;
 }
 
 nav{
@@ -200,9 +214,13 @@ nav{
 }
 
 /*Jumbotron*/
-.jumbotron{
-    background-color:#153C4E;
+.jumbotron {
+  background-color: #3a3a3a;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
+
 .display-4{
   margin-left: 1%;
   padding-top: 1%;

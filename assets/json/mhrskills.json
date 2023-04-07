@@ -31,9 +31,9 @@
     {
       "title": "Artillery",
       "desc": "Strengthens explosive attacks like shells, Wyvern's Fire, charge blade phial attacks, and Sticky Ammo",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Increases power of each attack by 10% and reduces Wyvern's Fire cooldown by 15%",
+      "Level2": "Increases power of each attack by 20% and reduces Wyvern's Fire cooldown by 30%",
+      "Level3": "Increases power of each attack by 30% and reduces Wyvern's Fire cooldown by 50%"
     },
     {
       "title": "Attack Boost",
@@ -49,162 +49,158 @@
     {
       "title": "Ballistics",
       "desc": "Shortens the distance before ammo and arrows reach maximum power",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Slightly extends range",
+      "Level2": "Extends range",
+      "Level3": "Greatly extends range"
     },
     {
       "title": "Berserk",
       "desc": "Switch to the Blue Swap Scroll and all vitality will change to red gauge and start decreasing. As long as you have red you cannot faint",
-      "Level1": "TEXT",
-      "Level2": "TEXT"
+      "Level1": "Activate Effect",
+      "Level2": "Slows the speed at which your red gauge depletes when using the Blue Swap Scroll"
     },
     {
       "title": "Bladescale Hone",
       "desc": "Dodge rolling to evade an attack with your weapon drawn will recover sharpness, refill bowgun ammo, or give Close-range Coatings a temporary boost",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Activates 50% of the time",
+      "Level2": "Activates 75% of the time",
+      "Level3": "Activates 100% of the time"
     },
     {
       "title": "Blast Attack",
       "desc": "Increases blast element attack power",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Blast buildup +5% Bonus: +1",
+      "Level2": "Blast buildup +10% Bonus: +2",
+      "Level3": "Blast buildup +20% Bonus: +5"
     },
     {
       "title": "Blast Resistance",
       "desc": "Grants protection against blastblight",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Delays blastblight and reduces blast damage",
+      "Level2": "Greatly delays blastblight and greatly reduces blast damage",
+      "Level3": "Prevents blastblight"
     },
     {
       "title": "Blight Resistance",
       "desc": "Grants protection against all elemental blights",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Reduces the duration of all elemental blights by 50%",
+      "Level2": "Reduces the duration of all elemental blights by 75%",
+      "Level3": "Nullifies all elemental blights"
     },
     {
       "title": "Blood Rite",
       "desc": "A proportion of damage dealt is converted to health when striking a broken monster part",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Activate effect",
+      "Level2": "Increase the amount of health you recover",
+      "Level3": "Further increases the amount of health you recover"
     },
     {
       "title": "Bloodlust",
       "desc": "The effects of the Frenzy virus change. Health is gradually reduced, but you gain a variety of effects. Frenzy virus occurs regularly when in combat",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "While infected, attack & evasion increase & stamina use reduced",
+      "Level2": "While infected, further boost to effects received. Upon recovery, further increase to affinity",
+      "Level3": "While infected, further boost to effects received. Upon recovery, further increases duration of increased affinity"
     },
     {
       "title": "Bludgeoner",
       "desc": "Increases attack power when your weapon sharpness is low",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "+5% attack power when your weapon sharpness gauge is yellow or lower",
+      "Level2": "+10% attack power when your sharpness gauge is yellow or lower",
+      "Level3": "+10% attack power when your sharpness gauge is green or lower"
     },
     {
       "title": "Bombardier",
       "desc": "Increases the damage of explosive items",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Explosive power +10%",
+      "Level2": "Explosive power +20%",
+      "Level3": "Explosive power +30%"
     },
     {
       "title": "Botanist",
       "desc": "Increases the quantity of herbs and other consumable items you gather",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT"
+      "Level1": "One extra consumable herb item per gather",
+      "Level2": "One extra consumable herb, fruit, nut, or seed item per gather",
+      "Level3": "One extra consumable herb, fruit, nut, seed, or insect item per gather",
+      "Level4": "One extra consumable herb, fruit, nut, seed, insect, or mushroom item per gather"
     },
     {
       "title": "Bow Charge Plus",
       "desc": "Increases max bow charge level by one",
-      "Level1": "TEXT"
+      "Level1": "Activates skill effect"
     },
     {
-      "title": "Reduces bubbleblight and grants increased evasion when afflicted",
-      "desc": "TEXT",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "title": "Bubbly Dance",
+      "desc": "Reduces bubbleblight and grants increased evasion when afflicted",
+      "Level1": "Reduces the effects of major bubbleblight",
+      "Level2": "Reduces major bubbleblight to minor bubbleblight and increases evasiveness while afflicted",
+      "Level3": "Also inflicts bubbleblight when performing consecutive evasive movement"
     },
     {
       "title": "Buildup Boost",
       "desc": "Increases attack power when you land attacks that build poison, paralysis, sleep, blast, or exhaust. (Exhaust - ammo/phials/coatings only)",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "While active, increases attack power by 10%",
+      "Level2": "While active, increases attack power by 15%",
+      "Level3": "While active, increases attack power by 20%"
     },
     {
       "title": "Burst",
       "desc": "Continuously landing hits gradually increases attack and elemental attack. (The amount of increase depends on the weapon.)",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Upon attack hit, temp attack +5, element +5; hit 5 successive times for an extra stat boost",
+      "Level2": "Upon attack hit, temp attack +5, element +5; hit 5 successive times for an even bigger stat boost",
+      "Level3": "Upon attack hit, temp attack +5, element +5; hit 5 successive times for a huge stat boost"
     },
     {
       "title": "Capture Master",
       "desc": "High chance of increased capture rewards. (No effect when joining mid-quest.)",
-      "Level1": "TEXT"
+      "Level1": "Activates skill effect"
     },
     {
       "title": "Carving Master",
       "desc": "Lets you carve one additional time. (No effect when joining mid-quest)",
-      "Level1": "TEXT"
+      "Level1": "Activates skill effect"
     },
     {
       "title": "Carving Pro",
       "desc": "Prevents knockback from attacks while carving.",
-      "Level1": "TEXT"
+      "Level1": "Activates skill effect"
     },
     {
       "title": "Chameleos Blessing",
       "desc": "Gain the power of the elder dragon Chameleos",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT"
+      "Level1": "Sometimes increases the effects of Spiribirds",
+      "Level2": "Also negates minor and major wind pressure",
+      "Level3": "Also extends the duration of your poison's effect on monsters",
+      "Level4": "Also negates all wind pressure"
     },
     {
       "title": "Charge Master",
       "desc": "When a charged attack hits a monster, the element and status buildup of the charged attack increases",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "When active, grants a slight increase to elemental damage and status buildup",
+      "Level2": "When active, grants an increase to elemental damage and status buildup",
+      "Level3": "When active, grants a large increase to elemental damage and status buildup"
     },
     {
       "title": "Coalescence",
       "desc": "Temporarily enhances attacks after recovering from blights or abnormal status",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "While active, attack +12, element attack power +2, and status buildup +5%",
+      "Level2": "While active, attack +15, element attack power +3, and status buildup +10%",
+      "Level3": "While active, attack +18, element attack power +4, and status buildup +20%"
     },
     {
       "title": "Constitution",
       "desc": "Reduces stamina depletion when evading, blocking, or doing certain other actions",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT"
+      "Level1": "Reduces fixed stamina depletion by 10%",
+      "Level2": "Reduces fixed stamina depletion by 20%",
+      "Level3": "Reduces fixed stamina depletion by 30%",
+      "Level4": "Reduces fixed stamina depletion by 40%",
+      "Level5": "Reduces fixed stamina depletion by 50%"
     },
     {
       "title": "Counterstrike",
       "desc": "Temporarily increases attack power after being thrown off",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT"
+      "Level1": "Attack +10 after activation",
+      "Level2": "Attack +15 after activation",
+      "Level3": "Attack +25 after activation"
     },
     {
       "title": "Critical Boost",
@@ -216,132 +212,98 @@
     {
       "title": "Critical Draw",
       "desc": "Increases affinity for a short time after performing a draw attack. (Does not include Silkbind attacks.)",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Affinity +15%",
+      "Level2": "Affinity +30%",
+      "Level3": "Affinity +60%"
     },
     {
       "title": "Critical Element",
       "desc": "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Grants elemental damage +5% while active",
+      "Level2": "Grants elemental damage +10% while active",
+      "Level3": "Grants elemental damage +15% while active"
     },
     {
       "title": "Critical Eye",
       "desc": "Increases affinity",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Affinity +5%",
+      "Level2": "Affinity +10%",
+      "Level3": "Affinity +15%",
+      "Level4": "Affinity +20%",
+      "Level5": "Affinity +25%",
+      "Level6": "Affinity +30%",
+      "Level7": "Affinity +40%"
     },
     {
       "title": "Defense Boost",
       "desc": "Increases defense. Resistances will also improve as the level increases",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Defense +5",
+      "Level2": "Defense +10",
+      "Level3": "Defense +5 and Bonus +10",
+      "Level4": "Defense +5%, Bonus +20, All elemental resistances +3",
+      "Level5": "Defense +8%, Bonus +20, All elemental resistances +3",
+      "Level6": "Defense +8%, Bonus +35, All elemental resistances + 5",
+      "Level7": "Defense +10%, Bonus +35, All elemental resistances +5"
     },
     {
       "title": "Defiance",
       "desc": "Increases defense when large monsters become enraged",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "While active, nullifles weak roars, wind pressure, and tremors.",
+      "Level2": "While active, nullifles weak roars, wind pressure, and tremors. Reduces all strong ones, def +5",
+      "Level3": "While active, nullifles weak and strong roars, wind pressure, and tremors, def +10",
+      "Level4": "While active, nullifles weak and strong roars, wind, and tremors, reduces powerful roars & d.wind, def +20",
+      "Level5": "While active, nullifles weak, strong and powerful  roars, wind & dragon wind, and tremors, del +30"
     },
     {
       "title": "Dereliction",
       "desc": "Qurio will drain health, but also bolster your attacks. Multiple Qurio further bolster attacks and let you recover health when performing a Switch Skill Swap",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Using Red Scroll: Increased elemental and status values. Using Blue Scroll: Increased attack and stun potency",
+      "Level2": "Bolsters your attacks depending on which Swap Scroll is used",
+      "Level3": "Further bolsters your attacks depending on which Swap Scroll is used."
     },
     {
       "title": "Diversion",
       "desc": "Increases the attention drawn when attacking a monster",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Activates skill effect"
     },
     {
       "title": "Divine Blessing",
       "desc": "Has a predetermined chance of reducing the damage you take",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "While active, reduces damage taken by 15%",
+      "Level2": "While active, reduces damage taken by 30%",
+      "Level3": "While active, reduces damage taken by 50%"
     },
     {
       "title": "Dragon Attack",
       "desc": "Increases dragon element attack power. (Elemental attack power has a maximum limit.)",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Dragon attack +2",
+      "Level2": "Dragon attack +3",
+      "Level3": "Dragon attack +5% and Bonus: +4",
+      "Level4": "Dragon attack +10% and Bonus: +4",
+      "Level5": "Dragon attack +20% and Bonus: +4"
     },
     {
       "title": "Dragon Conversion",
       "desc": "When using the Red Swap Scroll, all elemental resistance is set to 0 and converted into elemental attack. The Blue Swap Scroll raises elemental resistance.",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Activate effect. All elemental resistances +3",
+      "Level2": "All elemental resistances +5. When using the Blue Swap Scroll, resistance buildup increases when continuously attacking",
+      "Level3": "All elemental resistances + 10. When using the Red Swap Scroll, the conversion rate for elemental attacks increases"
     },
     {
       "title": "Dragon Resistance",
       "desc": "Increases dragon resistance. Also improves defense at higher levels",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT",
-      "Level6": "TEXT",
-      "Level7": "TEXT"
+      "Level1": "Dragon resistance +6",
+      "Level2": "Dragon resistance +12",
+      "Level3": "Dragon resistance +20 and Defense +10"
     },
     {
       "title": "Dragonheart",
       "desc": "Draconic energy fills you after losing a certain amount of health. Weapons lose all non-dragon effects",
-      "Level1": "TEXT",
-      "Level2": "TEXT",
-      "Level3": "TEXT",
-      "Level4": "TEXT",
-      "Level5": "TEXT"
+      "Level1": "When your health is at 50% or less, you contract dragonblight, and all elemental resistances are set to 30",
+      "Level2": "When your health is at 50% or less, you contract dragonblight, and all elemental resistances are set to 50",
+      "Level3": "When your health is at 70% or less, you contract dragonblight, and all elemental resistances are set to 50",
+      "Level4": "Contract dragonblight when at 70% health or less. Sets elemental resistances to 50 and gain 5% attack power",
+      "Level5": "Contract dragonblight when at 80% health or less. Sets elemental resistances to 50 and gain 10% attack power"
     },
     {
       "title": "Earplugs",
