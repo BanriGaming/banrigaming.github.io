@@ -1,7 +1,21 @@
 {
     "skills":
+    [
     {
-        "weakness_exploit":
+        "attackBoost":
+        {
+            "desc":"Increases attack power",
+            "level1":"Attack +3",
+            "level2":"Attack +6",
+            "level3":"Attack +9",
+            "level4":"Attack +5% Bonus +7",
+            "level5":"Attack + 6% Bonus +8",
+            "level6":"Attack + 8% Bonus  +9",
+            "level7":"Attack + 10% Bonus +10"
+        }
+    },
+    {
+        "weaknessExploit":
         {
             "desc":"Increases the affinity of attacks that exploit a monster's weak spot.",
             "Level1":"Attacks that hit weak spots have 15% increased affinity.",
@@ -9,4 +23,5 @@
             "level3":"Attacks that hit weak spots have 50% increased affinity."
         }
     }
+    ]
 }
