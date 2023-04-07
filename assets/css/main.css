@@ -1,4 +1,13 @@
 /*Body*/
+
+a {
+  border: 1px dashed transparent;
+}
+
+.nav-pills .nav-link {
+  border: 1px solid transparent;
+}
+
 p{
     font-family: 'Roboto Condensed', sans-serif;
 }
@@ -168,8 +177,10 @@ font-size: 1.3rem;
 .navbar a , .dropdown-item:focus, .dropdown-item:hover{
     color: white;
 }
-.nav-item{ /*Main nav links*/
-    font-family: 'Roboto Condensed', sans-serif;
+
+.nav-item { /*Main nav links*/
+  font-family: 'Roboto Condensed', sans-serif;
+  padding: 0 2rem;
 }
 
 nav{

@@ -1,26 +1,1056 @@
 {
-    "skills":
-    [
+  "skills": [
     {
-        
-            "title": "Attack Boost",
-            "desc":"Increases attack power",
-            "level1":"Attack +3",
-            "level2":"Attack +6",
-            "level3":"Attack +9",
-            "level4":"Attack +5% Bonus +7",
-            "level5":"Attack + 6% Bonus +8",
-            "level6":"Attack + 8% Bonus  +9",
-            "level7":"Attack + 10% Bonus +10"
-        
+      "title": "Adrenaline Rush",
+      "desc": "Perform a perfectly-timed evade just as a monster attacks for a temporary attack boost",
+      "Level1": "While active, temporary attack power +10",
+      "Level2": "While active, temporary attack power +15",
+      "Level3": "While active, temporary attack power +30"
     },
     {
-            "title": "Weakness Exploit",
-            "desc":"Increases the affinity of attacks that exploit a monster's weak spot",
-            "Level1":"Attacks that hit weak spots have 15% increased affinity",
-            "level2":"Attacks that hit weak spots have 30% increased affinity",
-            "level3":"Attacks that hit weak spots have 50% increased affinity"
-        
+      "title": "Affinity Sliding",
+      "desc": "Sliding increases your affinity for a short time",
+      "Level1": "Enables skill use"
+    },
+    {
+      "title": "Agitator",
+      "desc": "Increases attack power and affinity when large monsters become enraged",
+      "Level1": "Attack +4 and Affinity +3% while active",
+      "Level2": "Attack +8 and Affinity +5% while active",
+      "Level3": "Attack +12 and Affinity +7% while active",
+      "Level4": "Attack +16 and Affinity +10% while active",
+      "Level5": "Attack +20 and Affinity +15% while active"
+    },
+    {
+      "title": "Ammo Up",
+      "desc": "Increases bowgun loading capacity. (There is a cap to loading capacity.)",
+      "Level1": "Expands clip size for some ammo types",
+      "Level2": "Expands clip size for many ammo types",
+      "Level3": "Expands clip size for most ammo types"
+    },
+    {
+      "title": "Artillery",
+      "desc": "Strengthens explosive attacks like shells, Wyvern's Fire, charge blade phial attacks, and Sticky Ammo",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Attack Boost",
+      "desc": "Increases attack power",
+      "level1": "Attack +3",
+      "level2": "Attack +6",
+      "level3": "Attack +9",
+      "level4": "Attack +5% Bonus +7",
+      "level5": "Attack + 6% Bonus +8",
+      "level6": "Attack + 8% Bonus  +9",
+      "level7": "Attack + 10% Bonus +10"
+    },
+    {
+      "title": "Ballistics",
+      "desc": "Shortens the distance before ammo and arrows reach maximum power",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Berserk",
+      "desc": "Switch to the Blue Swap Scroll and all vitality will change to red gauge and start decreasing. As long as you have red you cannot faint",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Bladescale Hone",
+      "desc": "Dodge rolling to evade an attack with your weapon drawn will recover sharpness, refill bowgun ammo, or give Close-range Coatings a temporary boost",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Blast Attack",
+      "desc": "Increases blast element attack power",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Blast Resistance",
+      "desc": "Grants protection against blastblight",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Blight Resistance",
+      "desc": "Grants protection against all elemental blights",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Blood Rite",
+      "desc": "A proportion of damage dealt is converted to health when striking a broken monster part",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Bloodlust",
+      "desc": "The effects of the Frenzy virus change. Health is gradually reduced, but you gain a variety of effects. Frenzy virus occurs regularly when in combat",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Bludgeoner",
+      "desc": "Increases attack power when your weapon sharpness is low",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Bombardier",
+      "desc": "Increases the damage of explosive items",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Botanist",
+      "desc": "Increases the quantity of herbs and other consumable items you gather",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT"
+    },
+    {
+      "title": "Bow Charge Plus",
+      "desc": "Increases max bow charge level by one",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Reduces bubbleblight and grants increased evasion when afflicted",
+      "desc": "TEXT",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Buildup Boost",
+      "desc": "Increases attack power when you land attacks that build poison, paralysis, sleep, blast, or exhaust. (Exhaust - ammo/phials/coatings only)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Burst",
+      "desc": "Continuously landing hits gradually increases attack and elemental attack. (The amount of increase depends on the weapon.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Capture Master",
+      "desc": "High chance of increased capture rewards. (No effect when joining mid-quest.)",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Carving Master",
+      "desc": "Lets you carve one additional time. (No effect when joining mid-quest)",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Carving Pro",
+      "desc": "Prevents knockback from attacks while carving.",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Chameleos Blessing",
+      "desc": "Gain the power of the elder dragon Chameleos",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT"
+    },
+    {
+      "title": "Charge Master",
+      "desc": "When a charged attack hits a monster, the element and status buildup of the charged attack increases",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Coalescence",
+      "desc": "Temporarily enhances attacks after recovering from blights or abnormal status",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Constitution",
+      "desc": "Reduces stamina depletion when evading, blocking, or doing certain other actions",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Counterstrike",
+      "desc": "Temporarily increases attack power after being thrown off",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Critical Boost",
+      "desc": "Increases the damage of critical hits",
+      "Level1": "Increases damage dealt by critical hits to 30%",
+      "Level2": "Increases damage dealt by critical hits to 35%",
+      "Level3": "Increases damage dealt by critical hits to 40%"
+    },
+    {
+      "title": "Critical Draw",
+      "desc": "Increases affinity for a short time after performing a draw attack. (Does not include Silkbind attacks.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Critical Element",
+      "desc": "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Critical Eye",
+      "desc": "Increases affinity",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Defense Boost",
+      "desc": "Increases defense. Resistances will also improve as the level increases",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Defiance",
+      "desc": "Increases defense when large monsters become enraged",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Dereliction",
+      "desc": "Qurio will drain health, but also bolster your attacks. Multiple Qurio further bolster attacks and let you recover health when performing a Switch Skill Swap",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Diversion",
+      "desc": "Increases the attention drawn when attacking a monster",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Divine Blessing",
+      "desc": "Has a predetermined chance of reducing the damage you take",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Dragon Attack",
+      "desc": "Increases dragon element attack power. (Elemental attack power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Dragon Conversion",
+      "desc": "When using the Red Swap Scroll, all elemental resistance is set to 0 and converted into elemental attack. The Blue Swap Scroll raises elemental resistance.",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Dragon Resistance",
+      "desc": "Increases dragon resistance. Also improves defense at higher levels",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT",
+      "Level6": "TEXT",
+      "Level7": "TEXT"
+    },
+    {
+      "title": "Dragonheart",
+      "desc": "Draconic energy fills you after losing a certain amount of health. Weapons lose all non-dragon effects",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Earplugs",
+      "desc": "Grants protection from large monsters' roars.",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Element Exploit",
+      "desc": "Increase elemental damage when attacking body parts upon which the element is highly effective",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Embolden",
+      "desc": "When targeted by a monster, that monster becomes more likely to become enraged but your own defense is increased",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Evade Extender",
+      "desc": "Increases evade distance",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Evade Window",
+      "desc": "Extends the invulnerability period when evading",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Fire Attack",
+      "desc": "Increases fire element attack power. (Elemental attack power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Fire Resistance",
+      "desc": "Increases fire resistance. Also improves defense at higher levels",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Flinch Free",
+      "desc": "Prevents knockbacks and other reactions to small damage",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Focus",
+      "desc": "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Foray",
+      "desc": "Increases attack power and affinity when attacking a large monster affected by poison, paralysis or an elemental blight",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Fortify",
+      "desc": "Increases tour attack and defense when you fall in battle. (Disabled for some quests. Can stack twice.)",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Free Meal",
+      "desc": "Gives you  a predetermined chance of consuming food or drink item for free",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Frostcraft",
+      "desc": "An aura of frost builds when your weapon is sheathed, raising attack. The effect decreases with each melee hit or shot/arrow fired",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Furious",
+      "desc": "Increases affinity if stamina is kept full for a period of time",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Geologist",
+      "desc": "Increases the number of times you can use a gathering point",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Good Luck",
+      "desc": "Good chance of increased quest rewards. (No effect when joining mid-quest)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Grinder (S)",
+      "desc": "When recovering sharpness, grants a boost to sharpness properties based on the number of levels recovered",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Guard",
+      "desc": "Reduces knockbacks and stamina depletion when guarding",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Guard Up",
+      "desc": "Allows you to guard against ordinarily unblockable attacks",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Guts",
+      "desc": "Prevents fainting one time only when damage taken exceeds a certain amount of your remaining health",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Handicraft",
+      "desc": "Extends the weapon sharpness gauge. However, it will not increase the gauge past its maximum",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Hellfire Cloak",
+      "desc": "Grants hellfire resistance and confers explosive hellfire power to your attacks",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT"
+    },
+    {
+      "title": "Heroics",
+      "desc": "Increases attack power and defense when health drops to 35% or lower",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Horn Maestro",
+      "desc": "Increases overall performance speed and shockwave damage",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Hunger Resistance",
+      "desc": "Reduces maximum stamina depletion over time",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Ice Attack",
+      "desc": "Increases ice element attack power. (Elemental attack power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Ice Resistance",
+      "desc": "Increases ice resistance. Also improves defense at higher levels",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Intrepid Heart",
+      "desc": "After filling the gauge by continuously landing attacks, negates damage reactions and reduces damage taken from a single attack that would knock you back",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Item Prolonger",
+      "desc": "Extends the duration of some item effects",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Jump Master",
+      "desc": "Prevents attacks from knocking you back during a jump",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Kushala Blessing",
+      "desc": "Gain the power of the elder dragon Kushala Daora",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT"
+    },
+    {
+      "title": "Latent Power",
+      "desc": "Temporarily increases affinity and reduces stamina depletion when certain conditions are met",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Leap of Faith",
+      "desc": "Allows you to do a dive-evade when facing towards large monsters, and extends the dive-evade distance",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Load Shells",
+      "desc": "Improves reloading, and increases the gunlance's shell capacity and charge blade's phial capacity",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Mail of Hellfire",
+      "desc": "Decreases defense but increases attack. Exact changes to stats depends on Switch Skill Swap Scroll that is being used",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Marathon Runner",
+      "desc": "Slows down stamina depletion for actions which continuously drain stamina (such as dashing).",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Master Mounter",
+      "desc": "Improves your Wyvern Riding skills",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Master's Touch",
+      "desc": "Prevents your weapon from losing sharpness during critical hits",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Maximum Might",
+      "desc": "Increases affinity if stamina is kept full for a period of time",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Mind's Eye",
+      "desc": "Your attacks are deflected less and deal more damage to hard targets",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Muck Resistance",
+      "desc": "Reduces impairments to mobility while stuck in monster muck or deep snow",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Mushroomancer",
+      "desc": "Lets you digest mushrooms that would otherwise be inedible and gain their advantageous effects",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Normal/Rapid Up",
+      "desc": "Increases the attack power of Normal Ammo and Rapid-type arrows",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Offensive Guard",
+      "desc": "Temporarily increases attack power after executing a perfectly-timed guard",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Paralysis Attack",
+      "desc": "Increases paralysis element attack power. (Elemental attack power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Paralysis Resistance",
+      "desc": "Reduces the duration of paralysis",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Partbreaker",
+      "desc": "Makes it easier to break or sever parts of large monsters",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Peak Performance",
+      "desc": "Increases attack when your health is full",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Pierce Up",
+      "desc": "Increases the attack power of Piercing Ammo and Piercing-type arrows",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Poison Attack",
+      "desc": "Increases poison element attack power. (Elemental attack power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Poison Resistance",
+      "desc": "Reduces damage while poisoned.",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Powder Mantle",
+      "desc": "Continuously attacking a large monster will cause powder to form around you. The color and effects of the powder will change over time",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Power Prolonger",
+      "desc": "Long swords, dual blades, insect glaives, switch axes, and charge blades stay powered up longer",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Protective Polish",
+      "desc": "Weapon sharpness does not decrease for a set time after sharpening",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Punishing Draw",
+      "desc": "Adds a stun effect to draw attacks and slightly increases attack power. (Does not include Silkbind attacks.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Quick Breath",
+      "desc": "You can remove some statuses or slow their effects by performing a Switch Skill Swap. Health recovers when a status is removed",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Quick Sheath",
+      "desc": "Speeds up weapon sheathing",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Rapid Fire Up",
+      "desc": "Improves light bowgun rapid fire",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Rapid Morph",
+      "desc": "Increases switch speed and power for switch axes and charge blades",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Razor Sharp",
+      "desc": "Prevents your weapon from losing sharpness",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Recoil Down",
+      "desc": "Reduces recoil while firing bowgun ammo",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Recovery Speed",
+      "desc": "Speeds healing of recoverable damage (the red portion of the health gauge)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Recovery Up",
+      "desc": "Increases the amount recovered when restoring health",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Redirection",
+      "desc": "Perform a perfectly-timed Switch Skill Swap just as a monster attacks to reduce the damage and negate damage reactions",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Reload Speed",
+      "desc": "Increases bowgun reloading and bow coating loading speed",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Resentment",
+      "desc": "Increases attack when you have recoverable damage (the red portion of your health gauge)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Resuscitate",
+      "desc": "Increases attack power when you are suffering from an abnormal status",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Sleep Attack",
+      "desc": "Increases sleep element attack power. (Elemental power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Sleep Resistance",
+      "desc": "Reduces the duration of sleep",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Slugger",
+      "desc": "Makes it easier to stun monsters",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Sneak Attack",
+      "desc": "Increases damage to large monsters when attacks hit them from behind",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Spare Shot",
+      "desc": "Bow and bowgun shots have a chance not to expend coatings or ammo",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Special Ammo Boost",
+      "desc": "Increases the power of bowgun special ammo and Dragon Piercer",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Speed Eating",
+      "desc": "Increases meat-eating and item-consumption speed",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Speed Sharpening",
+      "desc": "Speeds up weapon sharpening when using a whetstone",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Spiribird's Call",
+      "desc": "Receive the effects of a random Spiribird at fixed intervals. (Certain quests only)",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Spread Up",
+      "desc": "Increases the attack power of Spread Ammo and Spread-type arrows",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Stamina Surge",
+      "desc": "Speeds up Stamina recovery",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Stamina Thief",
+      "desc": "Increases certain attacks' ability to exhaust monsters",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Status Trigger",
+      "desc": "Perform a perfectly-timed evade just as a monster attacks to trigger abnormal status buildup on hit",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Steadiness",
+      "desc": "Suppresses the deviation of bowgun shots",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Stormsoul",
+      "desc": "Strengthens thunder and dragon power and improves skills of the same elements",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT"
+    },
+    {
+      "title": "Strife",
+      "desc": "Increases elemental attack and affinity in proportion to the length of your red health gauge",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Stun Resistance",
+      "desc": "Reduces stun duration",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Teostra Blessing",
+      "desc": "Gain the power of the elder dragon Teostra",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT"
+    },
+    {
+      "title": "Thunder Alignment",
+      "desc": "Gain the power of the elder dragon Thunder Serpent Narwa",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Thunder Attack",
+      "desc": "Increases thunder elemental attack power. (Elemental attack power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {  
+        "title": "Thunder Resistance",
+      "desc": "Increases thunder resistance. Also improves defense at higher levels",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Tremor Resistance",
+      "desc": "Grants protection against ground tremors",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Tune-Up",
+      "desc": "Increases the stats of custom mods attached to bowguns",
+      "Level1": "TEXT",
+      "Level2": "TEXT"
+    },
+    {
+      "title": "Wall Runner",
+      "desc": "Reduces stamina consumption when running on walls",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Wall-Runner (Boost)",
+      "desc": "Wirebug Gauge recovers faster while wall running",
+      "Level1": "TEXT"
+    },
+    {
+      "title": "Water Attack",
+      "desc": "Increases water element attack power. (Elemental attack power has a maximum limit.)",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Water Resistance",
+      "desc": "Increases water resistance. Also improves defense at higher levels",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Weakness Exploit",
+      "desc": "Increases the affinity of attacks that exploit a monster's weak spot",
+      "Level1": "Attacks that hit weak spots have 15% increased affinity",
+      "level2": "Attacks that hit weak spots have 30% increased affinity",
+      "level3": "Attacks that hit weak spots have 50% increased affinity"
+    },
+    {
+      "title": "Wide-Range",
+      "desc": "Allows the effects of certain items to also affect nearby allies",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Wind Alignment",
+      "desc": "Gain the power of the elder dragon Wind Serpent Ibushi",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT",
+      "Level4": "TEXT",
+      "Level5": "TEXT"
+    },
+    {
+      "title": "Wind Mantle",
+      "desc": "Using Silkbind attacks boosts Wirebug Gauge recovery. Landing continuous attacks increases the effect. Wears off when you sheathe your weapon",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Windproof",
+      "desc": "Grants protection against wind pressure",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
+    },
+    {
+      "title": "Wirebug Whisperer",
+      "desc": "Improves your handling of Wirebugs",
+      "Level1": "TEXT",
+      "Level2": "TEXT",
+      "Level3": "TEXT"
     }
-    ]
+  ]
 }
