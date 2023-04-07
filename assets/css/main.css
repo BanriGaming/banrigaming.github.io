@@ -120,8 +120,10 @@ font-size: 1.3rem;
 }
 
 .navbar-nav li:hover > ul.dropdown-menu {
-    display: block;
+  display: block;
+  border: 1px solid gray;
 }
+
 .dropdown-submenu {
     position:relative;
 }
@@ -178,7 +180,7 @@ font-size: 1.3rem;
     color: white;
 }
 
-.nav-item { /*Main nav links*/
+#navbarNavDropdown .nav-item { /*Main nav links*/
   font-family: 'Roboto Condensed', sans-serif;
   padding: 0 2rem;
 }
