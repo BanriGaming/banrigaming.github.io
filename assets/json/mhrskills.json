@@ -16,10 +16,10 @@
     },
     {
             "title": "Weakness Exploit",
-            "desc":"Increases the affinity of attacks that exploit a monster's weak spot.",
-            "Level1":"Attacks that hit weak spots have 15% increased affinity.",
-            "level2":"Attacks that hit weak spots have 30% increased affinity.",
-            "level3":"Attacks that hit weak spots have 50% increased affinity."
+            "desc":"Increases the affinity of attacks that exploit a monster's weak spot",
+            "Level1":"Attacks that hit weak spots have 15% increased affinity",
+            "level2":"Attacks that hit weak spots have 30% increased affinity",
+            "level3":"Attacks that hit weak spots have 50% increased affinity"
         
     }
     ]
