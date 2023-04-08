@@ -39,9 +39,9 @@
   <!--Tabs-->
   <div class="d-flex align-items-start">
     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <button class="nav-link active" id="twostar-vill-tab" data-bs-toggle="pill" data-bs-target="#twostar-vill"
-        type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">MR 3-6★</button>
-      <button class="nav-link" id="threestar-vill-tab" data-bs-toggle="pill" data-bs-target="#threestar-vill"
+      <button class="nav-link active" id="twostar-vill-tab" data-bs-toggle="pill" data-bs-target="#twostar-vill" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">MR 3-6★</button>
+      <button class="nav-link" id="threestar-vill-tab" data-bs-toggle="pill" data-bs-target="#threestar-vill" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">MR 3-6★</button>
+      <!--<button class="nav-link" id="threestar-vill-tab" data-bs-toggle="pill" data-bs-target="#threestar-vill"
         type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">3★ Village Quests</button>
       <button class="nav-link" id="fourstar-vill-tab" data-bs-toggle="pill" data-bs-target="#fourstar-vill"
         type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">4★ Village Quests</button>
@@ -54,7 +54,7 @@
       <button class="nav-link" id="sixstar-hub-tab" data-bs-toggle="pill" data-bs-target="#sixstar-hub" type="button"
         role="tab" aria-controls="v-pills-settings" aria-selected="false">6★ Hub Quests</button>
       <button class="nav-link" id="sevenstar-hub-tab" data-bs-toggle="pill" data-bs-target="#sevenstar-hub"
-        type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">7★ Hub Quests</button>
+        type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">7★ Hub Quests</button>-->
     </div>
     <!--Tab content for Pills-->
     <div class="tab-content container mx-0" id="v-pills-tabContent">
@@ -96,8 +96,8 @@
           </div>
           <div class="tab-pane fade" role="tabpanel" aria-labelledby="two-skills-l" id="two-skills">
             <p>
-              <!-- <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">SKILL</a></span> <span class="skillmax">Lv.3</span><br> -->
-              <!-- <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">SKILL</span></a> Lv.4<br> -->
+              <!-- <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">SKILL</a></span> <span class="skillmax">Lv.NUMBER</span><br> -->
+              <!-- <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">SKILL</span></a> Lv.NUMBER<br> -->
               <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Attack Boost</span></a> Lv.4<br>
               <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Critical Eye</span></a> Lv.4<br>
               <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Critical Boost</span></a> <span class="skillmax">Lv.3</span><br>
@@ -114,8 +114,68 @@
               <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Wirebug Whisperer</span></a> Lv.1<br></p>
           </div>
         </div>
+        <!-- Pill 2 -->
+
+        <!--Tab content for Pills-->
+        
+        <div class="tab-pane fade" id="threestar-vill" role="tabpanel" aria-labelledby="threestar-vill-tab">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active" id="three-equipment-l" data-bs-toggle="tab" data-bs-target="#three-equipment"
+                type="button" role="tab" aria-controls="three-equipment" aria-selected="true">Equipment</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" id="three-decor-l" data-bs-toggle="tab" data-bs-target="#three-decor" type="button"
+                role="tab" aria-controls="three-decor" aria-selected="false">Decorations</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" id="three-skills-l" data-bs-toggle="tab" data-bs-target="#three-skills" type="button"
+                role="tab" aria-controls="three-skills" aria-selected="false">Skills</button>
+            </li>
+          </ul>
+        <!-- Tab content for Tabs-->
+        <div class="tab-content mt-3">
+          <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="three-equipment-l" id="three-equipment">
+            <p>
+              <img class="img-fluid" src="../../assets/img/attack.png"> Phantom Mirage+<br>
+              <img class="img-fluid" src="../../assets/img/helm.png"> Lunagaron Helm<br>
+              <img class="img-fluid" src="../../assets/img/torso.png"> Pyre-Kadaki Mail<br>
+              <img class="img-fluid" src="../../assets/img/arms.png"> Regios Vambraces<br>
+              <img class="img-fluid" src="../../assets/img/waist.png"> Rathalos Coil X<br>
+              <img class="img-fluid" src="../../assets/img/boots.png"> Ingot Greaves X
+            </p>
+          </div>
+          <div class="tab-pane fade" role="tabpanel" aria-labelledby="three-decor-l" id="three-decor">
+            <ul>
+              <li>Tenderizer Jewel 2 <code>x3</code></li>
+              <li>Expert Jewel 2 <code>x2</code></li>
+              <li>Critical Jewel 2<code>x1</i></code>
+              <li>Sheath Jewel 2 <code>x1</code></li>
+              <li>Grinder Jewel 1 <code>x3</code></li>
+              <li>Brace Jewel 1 <code>x1</code></li>
+            </ul>
+          </div>
+          <div class="tab-pane fade" role="tabpanel" aria-labelledby="three-skills-l" id="three-skills">
+            <p>
+              <!-- <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">SKILL</a></span> <span class="skillmax">Lv.NUMBER</span><br> -->
+              <!-- <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">SKILL</span></a> Lv.NUMBER<br> -->
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Wirebug Whisperer</span></a> <span class="skillmax">Lv.3</span><br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Critical Boost</span></a> <span class="skillmax">Lv.3</span><br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Weakness Exploit</a></span> <span class="skillmax">Lv.3</span><br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Quick Sheath</a></span> <span class="skillmax">Lv.3</span><br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Speed Sharpening</a></span> <span class="skillmax">Lv.3</span><br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Critical Eye</span></a> Lv.6<br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Attack Boost</span></a> Lv.4<br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Handicraft</span></a> Lv.3<br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Windproof</span></a> Lv.3<br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Flinch Free</span></a> Lv.1<br>
+              <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Maximum Might</span></a> Lv.1<br>
+          </div>
+        </div>
+
+
       </div>
-      <div class="tab-pane fade" id="threestar-vill" role="tabpanel" aria-labelledby="threestar-vill-tab">
+      <!--<div class="tab-pane fade" id="threestar-vill" role="tabpanel" aria-labelledby="threestar-vill-tab">
         <h2>3★ Village Quests</h2>
         <a href="../../assets/img/build-imgs-rise/ls-prog-3star.png"><img class="img-fluid"
             src="../../assets/img/build-imgs-rise/ls-prog-3star.png"></a><br><br>
@@ -176,7 +236,7 @@
         <ui>
           <li>Can also use 6★ Hub Build instead</li>
         </ui><br>
-      </div>
+      </div>-->
     </div>
   </div>
   <script>includeHTML();</script>
