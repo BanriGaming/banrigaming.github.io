@@ -39,8 +39,8 @@
   <!--Tabs-->
   <div class="d-flex align-items-start">
     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <button class="nav-link active" id="twostar-vill-tab" data-bs-toggle="pill" data-bs-target="#twostar-vill" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">MR 3-6★</button>
-      <button class="nav-link" id="threestar-vill-tab" data-bs-toggle="pill" data-bs-target="#threestar-vill" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">MR 3-6★</button>
+      <button class="nav-link active" id="twostar-vill-tab" data-bs-toggle="pill" data-bs-target="#twostar-vill" type="button" role="tab" aria-controls="twostar-vill" aria-selected="true">MR 3-6★</button>
+      <button class="nav-link" id="threestar-vill-tab" data-bs-toggle="pill" data-bs-target="#threestar-vill" type="button" role="tab" aria-controls="threestar-vill" aria-selected="false">MR 3-6★</button>
       <!--<button class="nav-link" id="threestar-vill-tab" data-bs-toggle="pill" data-bs-target="#threestar-vill"
         type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">3★ Village Quests</button>
       <button class="nav-link" id="fourstar-vill-tab" data-bs-toggle="pill" data-bs-target="#fourstar-vill"
@@ -56,8 +56,9 @@
       <button class="nav-link" id="sevenstar-hub-tab" data-bs-toggle="pill" data-bs-target="#sevenstar-hub"
         type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">7★ Hub Quests</button>-->
     </div>
-    <!--Tab content for Pills-->
+    <!--Tab content for all Pills-->
     <div class="tab-content container mx-0" id="v-pills-tabContent">
+      <!-- Pill 1 -->
       <div class="tab-pane fade show active" id="twostar-vill" role="tabpanel" aria-labelledby="twostar-vill-tab">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
@@ -114,11 +115,12 @@
               <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Wirebug Whisperer</span></a> Lv.1<br></p>
           </div>
         </div>
-        <!-- Pill 2 -->
-
-        <!--Tab content for Pills-->
-        
+      </div>
+      <!-- End Pill 1 -->
+      <!-- Pill 2 -->
+        <!-- Tab content for Pills -->
         <div class="tab-pane fade" id="threestar-vill" role="tabpanel" aria-labelledby="threestar-vill-tab">
+          <h2>MR 3-6★ Longsword Loadout</h2>
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
               <button class="nav-link active" id="three-equipment-l" data-bs-toggle="tab" data-bs-target="#three-equipment"
@@ -133,7 +135,7 @@
                 role="tab" aria-controls="three-skills" aria-selected="false">Skills</button>
             </li>
           </ul>
-        <!-- Tab content for Tabs-->
+        <!-- Tab content for Tabs -->
         <div class="tab-content mt-3">
           <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="three-equipment-l" id="three-equipment">
             <p>
@@ -172,9 +174,11 @@
               <a tabindex="0" class="popover-dismiss" data-bs-trigger="focus"  data-bs-container="body"  data-bs-toggle="popover" data-bs-html="true" ><span class="c_tooltip">Maximum Might</span></a> Lv.1<br>
           </div>
         </div>
-
-
       </div>
+      <!-- End Pill 2 -->
+
+
+      
       <!--<div class="tab-pane fade" id="threestar-vill" role="tabpanel" aria-labelledby="threestar-vill-tab">
         <h2>3★ Village Quests</h2>
         <a href="../../assets/img/build-imgs-rise/ls-prog-3star.png"><img class="img-fluid"
