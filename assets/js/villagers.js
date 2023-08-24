@@ -6,17 +6,12 @@ const lovesList = document.getElementById('lovesList');
 fetch('villagers.json')
     .then(response => response.json())
     .then(villagers => {
-        console.log('Villagers loaded:', villagers);
-        
         for (const villager in villagers) {
             const option = document.createElement('option');
             option.value = villager;
             option.textContent = villager.charAt(0).toUpperCase() + villager.slice(1);
             villagerSelect.appendChild(option);
         }
-    })
-    .catch(error => {
-        console.error('Error fetching villagers:', error);
     });
 
 villagerSelect.addEventListener('change', () => {
