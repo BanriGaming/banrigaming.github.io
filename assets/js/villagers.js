@@ -3,7 +3,7 @@ const likesList = document.getElementById('likesList');
 const lovesList = document.getElementById('lovesList');
 
 // Load villagers from JSON
-fetch('villagers.json')
+fetch('../assets/json/villager.json')
     .then(response => response.json())
     .then(villagers => {
         console.log('Villagers loaded:', villagers);
