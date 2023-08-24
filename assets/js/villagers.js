@@ -1,11 +1,13 @@
 const villagerSelect = document.getElementById('villagerSelect');
 const likesList = document.getElementById('likesList');
 const lovesList = document.getElementById('lovesList');
+let villagers = {};
 
 // Load villagers from JSON
 fetch('../assets/json/villagers.json')
     .then(response => response.json())
-    .then(villagers => {
+    .then(data => {
+        villagers = data;
         for (const villager in villagers) {
             const option = document.createElement('option');
             option.value = villager;
