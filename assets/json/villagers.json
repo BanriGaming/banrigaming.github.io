@@ -1,0 +1,91 @@
+{
+    "ashura": {
+      "likes": ["Sundrop Lily", "Meaty Stir Fry", "Striped Sturgeon", "Grilled Fish", "Fish Stew", "Channel Catfish", "Chappa Meat", "Sernuk Meat"],
+      "loves": ["Fish Stew", "Blueberry Pie"]
+    },
+    "auni": {
+      "likes": ["Silk Thread", "Garden Leafhopper", "Common Blue Butterfly", "Common Field Cricket"],
+      "loves": ["Firebreathing Dragonfly", "Apple Pie"]
+    },
+    "badruu": {
+      "likes": ["Grilled Oyster", "Potato", "Wheat Seed", "QualityUp Fertilizer", "Onion Seed", "Pearl"],
+      "loves": ["Apple Tree Seed", "Azure Stonehopper"]
+    },
+    "caleri": {
+      "likes": ["Grilled Mushroom", "Sweetleaf", "Pickled Potato", "Glass Bulb", "Sernuk Hide", "Chappa Fur", "Spotted Chappa Tail", "Silk", "Fabric", "Leather", "Coral"],
+      "loves": ["Bahari Glowbug"]
+    },
+    "chayne": {
+      "likes": ["Onion", "Glass Pane", "Silk", "Onion Seed", "Wild Garlic", "Unopened Oyster", "Crystal Lake Lotus", "Emerald Carpet Moss"],
+      "loves": ["Dragons Beard Peat"]
+    },
+    "dalila": {
+      "likes": ["QualityUp Fertilizer", "Tomato", "Spice Sprout", "Chappa Meat", "Sernuk Meat"],
+      "loves": ["Vampire Crab"]
+    },
+    "einar": {
+      "likes": ["All Fish"],
+      "loves": ["Pebbles", "Mottled Gobi Fish"]
+    },
+    "elouisa": {
+      "likes": ["Duskray", "Crystal Lake Lotus", "Dragons Beard Peat", "Cantankerous Koi", "Sernuk Antler"],
+      "loves": ["Pearls"]
+    },
+    "eshe": {
+      "likes": ["Pearl", "Green Pearl", "Silk", "Silk Thread", "Leather", "Bluefin Tuna", "Grilled Oyster"],
+      "loves": []
+    },
+    "hassian": {
+      "likes": ["Flint", "Fisherman's Brew", "Standard Arrows", "Fine Arrows", "Brightshroom", "Silk Thread", "Sernuk Hide", "Sernuk Antler", "Spotted Chappa Tail"],
+      "loves": ["Proudhorn Sernuk Antler"]
+    },
+    "hekla": {
+      "likes": ["Cotton Seed", "Silk Thread", "Copper Ore", "Silver Ore", "Acorn"],
+      "loves": []
+    },
+    "hodari": {
+      "likes": ["Flow-Infused Wood", "Fisherman's Brew", "Grilled Meat", "Sernuk Antlers", "Chappa Fur", "Copper Ore", "Copper Bar", "Iron Ore", "Silver Ore", "Silk Thread", "Leather"],
+      "loves": []
+    },
+    "jel": {
+      "likes": ["Sundrop Lily", "Barracuda", "Bat Ray", "Crystal Lake Lotus", "Pearl", "Fabric", "Leather", "Sernuk Antler", "Kilima Catfish"],
+      "loves": ["Willow Lamprey", "Pearl"]
+    },
+    "jina": {
+      "likes": ["Flint", "Mushrooms (All kinds)", "Pearl", "Heat Root"],
+      "loves": ["Mutated Angler", "Dari Cloves"]
+    },
+    "kenyatta": {
+      "likes": ["Briar Daisy", "Pearl", "Creamy Carrot Soup", "Sernuk Antler", "Standard Arrow", "Chappa Fur", "Sernuk Hide", "Silk Thread", "Brushtail Dragonfly"],
+      "loves": ["Proudhorn Sernuk Antler", "Meaty Stir Fry"]
+    },
+    "nai'o": {
+      "likes": ["Rice Seed", "Sernuk Antler", "Chappa Fur", "Sernuk Hide", "Wild Garlic", "Chappa Meat", "Stone Brick"],
+      "loves": ["Iron Bar"]
+    },
+    "najuma": {
+      "likes": ["Tomato", "Copper Ore", "Bat Ray", "Sardine", "Sweetleaf", "Coral", "Iron Ore", "Copper Bar"],
+      "loves": []
+    },
+    "reth": {
+      "likes": ["Potato", "Onion", "Sweetleaf", "Loaded Potato Soup", "Hearty Vegetable Soup", "Sernuk Noodle Stew", "Ramen", "Creamy Carrot Soup", "Grilled Meat"],
+      "loves": ["Apple Jam"]
+    },
+    "sifuu": {
+      "likes": ["Copper Ore", "Grilled Mushroom", "Oily Anchovy", "Fine Arrow", "Sernuk Meat", "Chappa Meat", "Sardine"],
+      "loves": ["Silver Ore"]
+    },
+    "tamala": {
+      "likes": ["Copper Ore", "Iron Ore", "Silk Thread", "Lunar Fairy Moth", "Emerald Carpet Moss", "Pearl", "Chappa Fur", "Sernuk Hide", "Sernuk Antler"],
+      "loves": ["Elder Sernuk Antler", "Gold Ore"]
+    },
+    "tish": {
+      "likes": ["Clay", "Dawnray", "Sundrop Lily", "Pearl", "Green Pearl", "Sernuk Antler", "Elder Sernuk Antler"],
+      "loves": ["Silk Thread"]
+    },
+    "zeki": {
+      "likes": ["Silver Ore", "Pearl", "Silvery Minnow", "Sashimi", "Fish Stew"],
+      "loves": ["Silk Thread"]
+    }
+  }
+  
