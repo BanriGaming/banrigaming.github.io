@@ -372,6 +372,11 @@ iframe{
   justify-content:left;
 }
 
+.table-white-text
+{
+  color:white;
+}
+
 .nav-slick{
   max-height:100px;
   max-width:150px;
