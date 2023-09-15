@@ -21,6 +21,7 @@ function generateChecklist(spacesuitSets) {
 
         // Function to toggle completion status of all pieces in the set
         function toggleSetCompletion(event) {
+            console.log('Title clicked!'); // Add this line for debugging
             const setPieces = document.querySelectorAll(`#${set.name.replace(/\s+/g, '').toLowerCase()}Piece1,
                                                          #${set.name.replace(/\s+/g, '').toLowerCase()}Piece2,
                                                          #${set.name.replace(/\s+/g, '').toLowerCase()}Piece3`);
