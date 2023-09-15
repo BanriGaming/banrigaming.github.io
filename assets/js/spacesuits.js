@@ -1,5 +1,5 @@
 // Load the spacesuit set data from the JSON file
-fetch('../assets/json/spacesuits.json')
+fetch('assets/json/spacesuits.json')
     .then(response => response.json())
     .then(data => {
         // Once data is loaded, generate the checklist
@@ -110,7 +110,7 @@ function generateChecklist(spacesuitSets) {
 
 // Generate the checklist when the page loads
 window.addEventListener('load', () => {
-    fetch('../assets/json/spacesuits.json')
+    fetch('assets/json/spacesuits.json')
         .then(response => response.json())
         .then(data => {
             // Once data is loaded, generate the checklist
