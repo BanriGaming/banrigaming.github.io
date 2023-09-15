@@ -28,6 +28,11 @@ function generateChecklist(spacesuitSets) {
         
             setPieces.forEach(piece => {
                 const checkbox = piece.previousElementSibling;
+                if (!checkbox) {
+                    console.log(`No checkbox found for piece: ${piece.id}`); // Add this line for debugging
+                    return; // Skip this piece and continue with the next one
+                }
+                
                 const label = piece.nextElementSibling;
                 if (!checkbox.checked) {
                     checkbox.checked = true;
@@ -36,6 +41,7 @@ function generateChecklist(spacesuitSets) {
                 }
             });
         }
+        
 
         // Add click event listener to the set title
         setTitle.addEventListener('click', toggleSetCompletion);
