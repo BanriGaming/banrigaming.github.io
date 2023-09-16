@@ -13,6 +13,11 @@ fetch('../assets/json/spacesuits.json')
 function generateChecklist(spacesuitSets) {
     const columns = document.querySelectorAll('.column');
 
+    // Clear existing checklist
+    columns.forEach(column => {
+        column.innerHTML = ''; // Clear the content of each column
+    });
+
     spacesuitSets.forEach((set, index) => {
         const setHeader = document.createElement('h2');
         const setTitle = document.createElement('span'); // Create a clickable span for the set title
@@ -22,26 +27,22 @@ function generateChecklist(spacesuitSets) {
         // Function to toggle completion status of all pieces in the set
         function toggleSetCompletion(event) {
             console.log('Title clicked!'); // Add this line for debugging
-            const setPieces = document.querySelectorAll(`#${set.name.replace(/\s+/g, '').toLowerCase()}Piece1,
-                                                         #${set.name.replace(/\s+/g, '').toLowerCase()}Piece2,
-                                                         #${set.name.replace(/\s+/g, '').toLowerCase()}Piece3`);
-        
-            setPieces.forEach(piece => {
-                const checkbox = piece.previousElementSibling;
+            set.pieces.forEach(piece => {
+                const pieceId = set.name.replace(/\s+/g, '').toLowerCase() + piece.replace(/\s+/g, '').toLowerCase();
+                const checkbox = document.getElementById(pieceId);
                 if (!checkbox) {
-                    console.log(`No checkbox found for piece: ${piece.id}`); // Add this line for debugging
+                    console.log(`No checkbox found for piece: ${pieceId}`); // Add this line for debugging
                     return; // Skip this piece and continue with the next one
                 }
-                
-                const label = piece.nextElementSibling;
+
+                const label = checkbox.nextElementSibling;
                 if (!checkbox.checked) {
                     checkbox.checked = true;
                     label.className = 'completed';
-                    localStorage.setItem(piece.id, 'true'); // Save completion status
+                    localStorage.setItem(pieceId, 'true'); // Save completion status
                 }
             });
         }
-        
 
         // Add click event listener to the set title
         setTitle.addEventListener('click', toggleSetCompletion);
@@ -52,7 +53,7 @@ function generateChecklist(spacesuitSets) {
 
         const setList = document.createElement('ul');
         set.pieces.forEach((piece, pieceIndex) => {
-            const pieceId = set.name.replace(/\s+/g, '').toLowerCase() + `Piece${pieceIndex + 1}`;
+            const pieceId = set.name.replace(/\s+/g, '').toLowerCase() + piece.replace(/\s+/g, '').toLowerCase();
             const pieceLabel = piece;
 
             const listItem = document.createElement('li');
