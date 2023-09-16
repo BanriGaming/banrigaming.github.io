@@ -1,5 +1,5 @@
 // Load the spacesuit set data from the JSON file
-fetch('../assets/json/spacesuits.json')
+fetch('https://banrigaming.github.io/assets/json/spacesuits.json')
     .then(response => response.json())
     .then(data => {
         // Once data is loaded, generate the checklist
@@ -40,6 +40,10 @@ function generateChecklist(spacesuitSets) {
                     checkbox.checked = true;
                     label.className = 'completed';
                     localStorage.setItem(pieceId, 'true'); // Save completion status
+                }else{
+                    checkbox.checked = false; // Uncheck the checkbox
+                    label.className = 'uncompleted';
+                    localStorage.setItem(piece.id, 'false'); // Save completion status
                 }
             });
         }
@@ -91,7 +95,7 @@ function generateChecklist(spacesuitSets) {
 
 // Generate the checklist when the page loads
 window.addEventListener('load', () => {
-    fetch('../assets/json/spacesuits.json')
+    fetch('https://banrigaming.github.io/assets/json/spacesuits.json')
         .then(response => response.json())
         .then(data => {
             // Once data is loaded, generate the checklist
