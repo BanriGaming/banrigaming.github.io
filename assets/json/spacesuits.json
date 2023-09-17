@@ -2,176 +2,176 @@
     {
         "name": "Bounty Hunter",
         "pieces": ["Bounty Hunter Space Helmet", "Bounty Hunter Spacesuit", "Bounty Hunter Pack"],
-        "image": "https://img.game8.co/3763349/980de6f26fbb594ac622ab613f8ffb10.png/original"
+        "image": "https://starfield.wiki.fextralife.com/file/Starfield/bounty_hunter_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Constellation",
         "pieces": ["Constellation Space Helmet", "Constellation Spacesuit", "Constellation Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/constellation_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Deep Mining",
         "pieces": ["Deep Mining Space Helmet", "Deep Mining Spacesuit", "Deep Mining Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/deep_mining_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Deep Recon",
         "pieces": ["Deep Recon Space Helmet", "Deep Recon Spacesuit", "Deep Recon Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_deep_reconspacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Deepcore",
         "pieces": ["Deepcore Space Helmet", "Deepcore Spacesuit", "Deepcore Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/advanced_deepcorespacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Deepseeker",
         "pieces": ["Deepseeker Space Helmet", "Deepseeker Spacesuit", "Deepseeker Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/bolstering_calibrateddeepseeker_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Deimos",
         "pieces": ["Deimos Space Helmet", "Deimos Spacesuit", "Deimos Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/deimos_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Ecliptic",
         "pieces": ["Ecliptic Space Helmet", "Ecliptic Spacesuit", "Ecliptic Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/ecliptic_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Experimental Nishina",
         "pieces": ["Experimental Nishina Space Helmet", "Experimental Nishina Spacesuit", "Experimental Nishina Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/incendiary_experimentalnishina_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Explorer",
         "pieces": ["Explorer Space Helmet", "Explorer Spacesuit", "Explorer Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/explorer_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Gran-Gran's",
         "pieces": ["Gran-Gran's Space Helmet", "Gran-Gran's Spacesuit", "Gran-Gran's Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/gran-grans_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Ground Crew",
         "pieces": ["Ground Crew Space Helmet", "Ground Crew Spacesuit", "Ground Crew Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/ground_crew_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Mantis",
         "pieces": ["Mantis Space Helmet", "Mantis Spacesuit", "Mantis Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mantis_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Mark 1",
         "pieces": ["Mark 1 Space Helmet", "Mark 1 Spacesuit", "Mark 1 Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mark_i_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Mercenary",
         "pieces": ["Mercenary Space Helmet", "Mercenary Spacesuit", "Mercenary Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mercenary_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Mercury",
         "pieces": ["Mercury Space Helmet", "Mercury Spacesuit", "Mercury Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mercury_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Navigator",
         "pieces": ["Navigator Space Helmet", "Navigator Spacesuit", "Navigator Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/navigator_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Old Earth",
         "pieces": ["Old Earth Space Helmet", "Old Earth Spacesuit", "Old Earth Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/old_earth_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Peacemaker",
         "pieces": ["Peacemaker Space Helmet", "Peacemaker Spacesuit", "Peacemaker Pack"],
-        "image" : ""
+        "image" : "https://img.game8.co/3756281/ebbed59c6051e93513a20b3c6afd8934.png/original"
     },
     {
         "name": "Pirate Assault",
         "pieces": ["Pirate Assault Space Helmet", "Pirate Assault Spacesuit", "Pirate Assault Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_assault_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
-        "name": "Pirate Charge",
-        "pieces": ["Pirate Charge Space Helmet", "Pirate Charge Spacesuit", "Pirate Charge Pack"],
-        "image" : ""
+        "name": "Pirate Charger",
+        "pieces": ["Pirate Charger Space Helmet", "Pirate Charger Spacesuit", "Pirate Charger Pack"],
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_charger_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Pirate Corsair",
         "pieces": ["Pirate Corsair Space Helmet", "Pirate Corsair Spacesuit", "Pirate Corsair Pack"],
-        "image" : ""
+        "image" : "https://img.game8.co/3756366/74d4f4c9fb1c6c4555c19c71dad2027c.png/original"
     },
     {
         "name": "Pirate Sniper",
         "pieces": ["Pirate Sniper Space Helmet", "Pirate Sniper Spacesuit", "Pirate Sniper Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_sniper_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Ranger",
         "pieces": ["Ranger Space Helmet", "Ranger Spacesuit", "Ranger Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/ranger_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Shocktrooper",
         "pieces": ["Shocktrooper Space Helmet", "Shocktrooper Spacesuit", "Shocktrooper Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/shocktroop_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Space Trucker",
         "pieces": ["Space Trucker Space Helmet", "Space Trucker Spacesuit", "Space Trucker Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/space_trucker_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Star Roamer",
         "pieces": ["Star Roamer Space Helmet", "Star Roamer Spacesuit", "Star Roamer Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/star_roamer_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "SY-920 Pilot",
         "pieces": ["SY-920 Pilot Space Helmet", "SY-920 Pilot Spacesuit", "SY-920 Pilot Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sy-920_pilot_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Sysdef Ace",
         "pieces": ["Sysdef Ace Space Helmet", "Sysdef Ace Spacesuit", "Sysdef Ace Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_ace_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Sysdef Assault",
         "pieces": ["Sysdef Assault Space Helmet", "Sysdef Assault Spacesuit", "Sysdef Assault Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_assault_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Sysdef Combat",
         "pieces": ["Sysdef Combat Space Helmet", "Sysdef Combat Spacesuit", "Sysdef Combat Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_combat_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Sysdef Recon",
         "pieces": ["Sysdef Recon Space Helmet", "Sysdef Recon Spacesuit", "Sysdef Recon Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_recon_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Sysdef",
         "pieces": ["Sysdef Space Helmet", "Sysdef Spacesuit", "Sysdef Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "Trackers Alliance",
         "pieces": ["Trackers Alliance Space Helmet", "Trackers Alliance Spacesuit", "Trackers Alliance Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/trackers_alliancespacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
         "name": "UC Ace",
         "pieces": ["UC Ace Space Helmet", "UC Ace Spacesuit", "UC Ace Pack"],
-        "image" : ""
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/uc_ace_spacesuit_starfield_wiki_guide_200px.png"
     }
 ]

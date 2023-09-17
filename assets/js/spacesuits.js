@@ -23,16 +23,12 @@ function generateChecklist(spacesuitSets) {
         const setTitle = document.createElement('span'); // Create a clickable span for the set title
         setHeader.appendChild(setTitle);
         setHeader.style.cursor = 'pointer'; // Set the cursor style for the header
-        
+
         // Inside the generateChecklist function
         const setImage = document.createElement('img'); // Create an image element
         setImage.src = set.image; // Set the image source based on the data in JSON 
         
         setImage.className = 'set-image'; // Add a CSS class for styling
-        
-
-        // Append the image to the setHeader
-        setHeader.appendChild(setImage);
 
         // Function to toggle completion status of all pieces in the set
         function toggleSetCompletion(event) {
@@ -99,6 +95,7 @@ function generateChecklist(spacesuitSets) {
         // Distribute sets across columns
         const column = columns[index % columns.length];
         column.appendChild(setHeader);
+        column.appendChild(setImage);
         column.appendChild(setList);
     });
 }

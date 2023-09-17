@@ -25,6 +25,15 @@ body{
   font-size: 1.05rem;
 }
 
+/*Starfield setImage Styling*/
+.set-image {
+  width: 215px;
+  height: auto;
+  max-width: 215px;
+  pointer-events: none;
+  cursor: none;
+}
+
 /*Accordions*/
 .accordion-item{
   background-color:#232323;
