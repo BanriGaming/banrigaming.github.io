@@ -5,6 +5,11 @@
         "image": "https://starfield.wiki.fextralife.com/file/Starfield/bounty_hunter_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
+        "name": "Cydonia Spacesuit",
+        "pieces": ["Cydonia Space Helmet", "Cydonia Spacesuit", "Cydonia Pack"],
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/refined_cydonia_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+    },
+    {
         "name": "Constellation",
         "pieces": ["Constellation Space Helmet", "Constellation Spacesuit", "Constellation Pack"],
         "image" : "https://starfield.wiki.fextralife.com/file/Starfield/constellation_spacesuit_starfield_wiki_guide_200px.png"
@@ -90,11 +95,6 @@
         "image" : "https://starfield.wiki.fextralife.com/file/Starfield/old_earth_spacesuit_starfield_wiki_guide_200px.png"
     },
     {
-        "name": "Peacemaker",
-        "pieces": ["Peacemaker Space Helmet", "Peacemaker Spacesuit", "Peacemaker Pack"],
-        "image" : "https://img.game8.co/3756281/ebbed59c6051e93513a20b3c6afd8934.png/original"
-    },
-    {
         "name": "Pirate Assault",
         "pieces": ["Pirate Assault Space Helmet", "Pirate Assault Spacesuit", "Pirate Assault Pack"],
         "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_assault_spacesuit_starfield_wiki_guide_200px.png"
@@ -103,11 +103,6 @@
         "name": "Pirate Charger",
         "pieces": ["Pirate Charger Space Helmet", "Pirate Charger Spacesuit", "Pirate Charger Pack"],
         "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_charger_spacesuit_starfield_wiki_guide_200px.png"
-    },
-    {
-        "name": "Pirate Corsair",
-        "pieces": ["Pirate Corsair Space Helmet", "Pirate Corsair Spacesuit", "Pirate Corsair Pack"],
-        "image" : "https://img.game8.co/3756366/74d4f4c9fb1c6c4555c19c71dad2027c.png/original"
     },
     {
         "name": "Pirate Sniper",
@@ -173,5 +168,10 @@
         "name": "UC Ace",
         "pieces": ["UC Ace Space Helmet", "UC Ace Spacesuit", "UC Ace Pack"],
         "image" : "https://starfield.wiki.fextralife.com/file/Starfield/uc_ace_spacesuit_starfield_wiki_guide_200px.png"
+    },
+    {
+        "name": "UC Vanguard",
+        "pieces": ["VC Vanguard Space Helmet", "VC Vanguard Spacesuit", "VC Vanguard Pack"],
+        "image" : "https://starfield.wiki.fextralife.com/file/Starfield/uc_vanguard_spacesuit_starfield_wiki_guide_200px.png"
     }
 ]
