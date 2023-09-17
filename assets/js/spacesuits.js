@@ -24,6 +24,20 @@ function generateChecklist(spacesuitSets) {
         setHeader.appendChild(setTitle);
         setHeader.style.cursor = 'pointer'; // Set the cursor style for the header
 
+        // Create a tooltip element for the set title
+        const tooltip = document.createElement('div');
+        tooltip.className = 'set-tooltip'; // Add a CSS class for styling
+        tooltip.textContent = 'Find this set from ${set.name} enemies.'; // Initial tooltip text
+
+        // Function to toggle the tooltip visibility
+        function toggleTooltip() {
+            tooltip.classList.toggle('show-tooltip'); // Toggle the visibility
+        }
+
+        // Add event listeners to show/hide tooltip
+        setTitle.addEventListener('mouseenter', toggleTooltip); // Show tooltip on hover
+        setTitle.addEventListener('mouseleave', toggleTooltip); // Hide tooltip on mouseout
+
         // Inside the generateChecklist function
         const setImage = document.createElement('img'); // Create an image element
         setImage.src = set.image; // Set the image source based on the data in JSON 
@@ -91,6 +105,9 @@ function generateChecklist(spacesuitSets) {
             listItem.appendChild(label);
             setList.appendChild(listItem);
         });
+
+        // Initialize Bootstrap tooltips
+        $('[data-toggle="tooltip"]').tooltip();
 
         // Distribute sets across columns
         const column = columns[index % columns.length];

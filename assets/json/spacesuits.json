@@ -2,7 +2,8 @@
     {
         "name": "Bounty Hunter",
         "pieces": ["Bounty Hunter Space Helmet", "Bounty Hunter Spacesuit", "Bounty Hunter Pack"],
-        "image": "https://starfield.wiki.fextralife.com/file/Starfield/bounty_hunter_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+        "image": "https://starfield.wiki.fextralife.com/file/Starfield/bounty_hunter_spacesuit_spacesuit_starfield_wiki_guide_200px.png",
+        "location" : "Rarity Drops can be found from Space Scum enemies."
     },
     {
         "name": "Cydonia Spacesuit",

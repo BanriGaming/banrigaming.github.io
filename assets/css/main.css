@@ -34,6 +34,23 @@ body{
   cursor: none;
 }
 
+/* Style for the tooltip container */
+.set-tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: none; /* Initially hidden */
+}
+
+/* Style to show the tooltip */
+.show-tooltip {
+  display: block;
+  z-index: 1; /* Ensure it's on top of other elements */
+}
+
 /*Accordions*/
 .accordion-item{
   background-color:#232323;
