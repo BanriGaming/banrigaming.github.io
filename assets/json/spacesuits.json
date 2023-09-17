@@ -1,142 +1,177 @@
 [
     {
         "name": "Bounty Hunter",
-        "pieces": ["Bounty Hunter Space Helmet", "Bounty Hunter Spacesuit", "Bounty Hunter Pack"]
+        "pieces": ["Bounty Hunter Space Helmet", "Bounty Hunter Spacesuit", "Bounty Hunter Pack"],
+        "image": "https://img.game8.co/3763349/980de6f26fbb594ac622ab613f8ffb10.png/original"
     },
     {
         "name": "Constellation",
-        "pieces": ["Constellation Space Helmet", "Constellation Spacesuit", "Constellation Pack"]
+        "pieces": ["Constellation Space Helmet", "Constellation Spacesuit", "Constellation Pack"],
+        "image" : ""
     },
     {
         "name": "Deep Mining",
-        "pieces": ["Deep Mining Space Helmet", "Deep Mining Spacesuit", "Deep Mining Pack"]
+        "pieces": ["Deep Mining Space Helmet", "Deep Mining Spacesuit", "Deep Mining Pack"],
+        "image" : ""
     },
     {
         "name": "Deep Recon",
-        "pieces": ["Deep Recon Space Helmet", "Deep Recon Spacesuit", "Deep Recon Pack"]
+        "pieces": ["Deep Recon Space Helmet", "Deep Recon Spacesuit", "Deep Recon Pack"],
+        "image" : ""
     },
     {
         "name": "Deepcore",
-        "pieces": ["Deepcore Space Helmet", "Deepcore Spacesuit", "Deepcore Pack"]
+        "pieces": ["Deepcore Space Helmet", "Deepcore Spacesuit", "Deepcore Pack"],
+        "image" : ""
     },
     {
         "name": "Deepseeker",
-        "pieces": ["Deepseeker Space Helmet", "Deepseeker Spacesuit", "Deepseeker Pack"]
+        "pieces": ["Deepseeker Space Helmet", "Deepseeker Spacesuit", "Deepseeker Pack"],
+        "image" : ""
     },
     {
         "name": "Deimos",
-        "pieces": ["Deimos Space Helmet", "Deimos Spacesuit", "Deimos Pack"]
+        "pieces": ["Deimos Space Helmet", "Deimos Spacesuit", "Deimos Pack"],
+        "image" : ""
     },
     {
         "name": "Ecliptic",
-        "pieces": ["Ecliptic Space Helmet", "Ecliptic Spacesuit", "Ecliptic Pack"]
+        "pieces": ["Ecliptic Space Helmet", "Ecliptic Spacesuit", "Ecliptic Pack"],
+        "image" : ""
     },
     {
         "name": "Experimental Nishina",
-        "pieces": ["Experimental Nishina Space Helmet", "Experimental Nishina Spacesuit", "Experimental Nishina Pack"]
+        "pieces": ["Experimental Nishina Space Helmet", "Experimental Nishina Spacesuit", "Experimental Nishina Pack"],
+        "image" : ""
     },
     {
         "name": "Explorer",
-        "pieces": ["Explorer Space Helmet", "Explorer Spacesuit", "Explorer Pack"]
+        "pieces": ["Explorer Space Helmet", "Explorer Spacesuit", "Explorer Pack"],
+        "image" : ""
     },
     {
         "name": "Gran-Gran's",
-        "pieces": ["Gran-Gran's Space Helmet", "Gran-Gran's Spacesuit", "Gran-Gran's Pack"]
+        "pieces": ["Gran-Gran's Space Helmet", "Gran-Gran's Spacesuit", "Gran-Gran's Pack"],
+        "image" : ""
     },
     {
         "name": "Ground Crew",
-        "pieces": ["Ground Crew Space Helmet", "Ground Crew Spacesuit", "Ground Crew Pack"]
+        "pieces": ["Ground Crew Space Helmet", "Ground Crew Spacesuit", "Ground Crew Pack"],
+        "image" : ""
     },
     {
         "name": "Mantis",
-        "pieces": ["Mantis Space Helmet", "Mantis Spacesuit", "Mantis Pack"]
+        "pieces": ["Mantis Space Helmet", "Mantis Spacesuit", "Mantis Pack"],
+        "image" : ""
     },
     {
         "name": "Mark 1",
-        "pieces": ["Mark 1 Space Helmet", "Mark 1 Spacesuit", "Mark 1 Pack"]
+        "pieces": ["Mark 1 Space Helmet", "Mark 1 Spacesuit", "Mark 1 Pack"],
+        "image" : ""
     },
     {
         "name": "Mercenary",
-        "pieces": ["Mercenary Space Helmet", "Mercenary Spacesuit", "Mercenary Pack"]
+        "pieces": ["Mercenary Space Helmet", "Mercenary Spacesuit", "Mercenary Pack"],
+        "image" : ""
     },
     {
         "name": "Mercury",
-        "pieces": ["Mercury Space Helmet", "Mercury Spacesuit", "Mercury Pack"]
+        "pieces": ["Mercury Space Helmet", "Mercury Spacesuit", "Mercury Pack"],
+        "image" : ""
     },
     {
         "name": "Navigator",
-        "pieces": ["Navigator Space Helmet", "Navigator Spacesuit", "Navigator Pack"]
+        "pieces": ["Navigator Space Helmet", "Navigator Spacesuit", "Navigator Pack"],
+        "image" : ""
     },
     {
         "name": "Old Earth",
-        "pieces": ["Old Earth Space Helmet", "Old Earth Spacesuit", "Old Earth Pack"]
+        "pieces": ["Old Earth Space Helmet", "Old Earth Spacesuit", "Old Earth Pack"],
+        "image" : ""
     },
     {
         "name": "Peacemaker",
-        "pieces": ["Peacemaker Space Helmet", "Peacemaker Spacesuit", "Peacemaker Pack"]
+        "pieces": ["Peacemaker Space Helmet", "Peacemaker Spacesuit", "Peacemaker Pack"],
+        "image" : ""
     },
     {
         "name": "Pirate Assault",
-        "pieces": ["Pirate Assault Space Helmet", "Pirate Assault Spacesuit", "Pirate Assault Pack"]
+        "pieces": ["Pirate Assault Space Helmet", "Pirate Assault Spacesuit", "Pirate Assault Pack"],
+        "image" : ""
     },
     {
         "name": "Pirate Charge",
-        "pieces": ["Pirate Charge Space Helmet", "Pirate Charge Spacesuit", "Pirate Charge Pack"]
+        "pieces": ["Pirate Charge Space Helmet", "Pirate Charge Spacesuit", "Pirate Charge Pack"],
+        "image" : ""
     },
     {
         "name": "Pirate Corsair",
-        "pieces": ["Pirate Corsair Space Helmet", "Pirate Corsair Spacesuit", "Pirate Corsair Pack"]
+        "pieces": ["Pirate Corsair Space Helmet", "Pirate Corsair Spacesuit", "Pirate Corsair Pack"],
+        "image" : ""
     },
     {
         "name": "Pirate Sniper",
-        "pieces": ["Pirate Sniper Space Helmet", "Pirate Sniper Spacesuit", "Pirate Sniper Pack"]
+        "pieces": ["Pirate Sniper Space Helmet", "Pirate Sniper Spacesuit", "Pirate Sniper Pack"],
+        "image" : ""
     },
     {
         "name": "Ranger",
-        "pieces": ["Ranger Space Helmet", "Ranger Spacesuit", "Ranger Pack"]
+        "pieces": ["Ranger Space Helmet", "Ranger Spacesuit", "Ranger Pack"],
+        "image" : ""
     },
     {
         "name": "Shocktrooper",
-        "pieces": ["Shocktrooper Space Helmet", "Shocktrooper Spacesuit", "Shocktrooper Pack"]
+        "pieces": ["Shocktrooper Space Helmet", "Shocktrooper Spacesuit", "Shocktrooper Pack"],
+        "image" : ""
     },
     {
         "name": "Space Trucker",
-        "pieces": ["Space Trucker Space Helmet", "Space Trucker Spacesuit", "Space Trucker Pack"]
+        "pieces": ["Space Trucker Space Helmet", "Space Trucker Spacesuit", "Space Trucker Pack"],
+        "image" : ""
     },
     {
         "name": "Star Roamer",
-        "pieces": ["Star Roamer Space Helmet", "Star Roamer Spacesuit", "Star Roamer Pack"]
+        "pieces": ["Star Roamer Space Helmet", "Star Roamer Spacesuit", "Star Roamer Pack"],
+        "image" : ""
     },
     {
         "name": "SY-920 Pilot",
-        "pieces": ["SY-920 Pilot Space Helmet", "SY-920 Pilot Spacesuit", "SY-920 Pilot Pack"]
+        "pieces": ["SY-920 Pilot Space Helmet", "SY-920 Pilot Spacesuit", "SY-920 Pilot Pack"],
+        "image" : ""
     },
     {
         "name": "Sysdef Ace",
-        "pieces": ["Sysdef Ace Space Helmet", "Sysdef Ace Spacesuit", "Sysdef Ace Pack"]
+        "pieces": ["Sysdef Ace Space Helmet", "Sysdef Ace Spacesuit", "Sysdef Ace Pack"],
+        "image" : ""
     },
     {
         "name": "Sysdef Assault",
-        "pieces": ["Sysdef Assault Space Helmet", "Sysdef Assault Spacesuit", "Sysdef Assault Pack"]
+        "pieces": ["Sysdef Assault Space Helmet", "Sysdef Assault Spacesuit", "Sysdef Assault Pack"],
+        "image" : ""
     },
     {
         "name": "Sysdef Combat",
-        "pieces": ["Sysdef Combat Space Helmet", "Sysdef Combat Spacesuit", "Sysdef Combat Pack"]
+        "pieces": ["Sysdef Combat Space Helmet", "Sysdef Combat Spacesuit", "Sysdef Combat Pack"],
+        "image" : ""
     },
     {
         "name": "Sysdef Recon",
-        "pieces": ["Sysdef Recon Space Helmet", "Sysdef Recon Spacesuit", "Sysdef Recon Pack"]
+        "pieces": ["Sysdef Recon Space Helmet", "Sysdef Recon Spacesuit", "Sysdef Recon Pack"],
+        "image" : ""
     },
     {
         "name": "Sysdef",
-        "pieces": ["Sysdef Space Helmet", "Sysdef Spacesuit", "Sysdef Pack"]
+        "pieces": ["Sysdef Space Helmet", "Sysdef Spacesuit", "Sysdef Pack"],
+        "image" : ""
     },
     {
         "name": "Trackers Alliance",
-        "pieces": ["Trackers Alliance Space Helmet", "Trackers Alliance Spacesuit", "Trackers Alliance Pack"]
+        "pieces": ["Trackers Alliance Space Helmet", "Trackers Alliance Spacesuit", "Trackers Alliance Pack"],
+        "image" : ""
     },
     {
         "name": "UC Ace",
-        "pieces": ["UC Ace Space Helmet", "UC Ace Spacesuit", "UC Ace Pack"]
+        "pieces": ["UC Ace Space Helmet", "UC Ace Spacesuit", "UC Ace Pack"],
+        "image" : ""
     }
 ]
