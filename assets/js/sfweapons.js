@@ -49,6 +49,13 @@ function generateChecklist(weaponData) {
                         weaponTitle.innerHTML = `<u>${weapon.name}</u>`;
                         weaponItem.appendChild(weaponTitle);
 
+                        // Check if the weapon has an ammo property
+                        if (weapon.ammo) {
+                            const weaponAmmo = document.createElement('h6');
+                            weaponAmmo.innerHTML = `<em>Ammo: ${weapon.ammo}</em>`;
+                            weaponItem.appendChild(weaponAmmo);
+                        }
+
                         const weaponImage = document.createElement('img');
                         weaponImage.src = weapon.image;
                         weaponImage.alt = weapon.name;
@@ -80,6 +87,12 @@ function generateChecklist(weaponData) {
                         weaponTitle.innerHTML = `<u>${weapon.name}</u>`;
                         weaponItem.appendChild(weaponTitle);
 
+                        // Check if the weapon has an ammo property
+                        if (weapon.ammo) {
+                            const weaponAmmo = document.createElement('h6');
+                            weaponAmmo.innerHTML = `<em>Ammo: ${weapon.ammo}</em>`;
+                            weaponItem.appendChild(weaponAmmo);
+                        }
                         const weaponImage = document.createElement('img');
                         weaponImage.src = weapon.image;
                         weaponImage.alt = weapon.name;
