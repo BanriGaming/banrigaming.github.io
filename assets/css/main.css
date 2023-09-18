@@ -34,6 +34,28 @@ body{
   cursor: none;
 }
 
+/* Style for the search input */
+.search-bar {
+  width: 25%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar-container {
+  text-align: center;
+  margin: 20px auto; /* Adjust margin as needed for spacing */
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #007bff; /* Change the border color when focused */
+}
+
+
 /* Add this CSS to your stylesheet */
 .weapon-item img {
   max-width: 100%;
@@ -41,7 +63,7 @@ body{
 }
 
 .weapon-item img.checked {
-  opacity: 0.5; /* Reduce opacity for checked weapons */
+  opacity: 0.1; /* Reduce opacity for checked weapons */
 }
 
 /* Add this CSS to style the filter buttons */

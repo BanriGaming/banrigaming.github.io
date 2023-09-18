@@ -4,6 +4,38 @@ function fetchWeaponData() {
         .then(response => response.json());
 }
 
+// Function to filter weapons based on search input
+function filterWeaponsBySearch(weaponData, searchString) {
+    const filteredData = [];
+
+    weaponData.forEach(categoryWeapons => {
+        const filteredWeapons = categoryWeapons.weapons.filter(weapon =>
+            weapon.name.toLowerCase().includes(searchString.toLowerCase())
+        );
+
+        if (filteredWeapons.length > 0) {
+            const categoryCopy = { ...categoryWeapons };
+            categoryCopy.weapons = filteredWeapons;
+            filteredData.push(categoryCopy);
+        }
+    });
+
+    return filteredData;
+}
+
+// Function to handle the search input
+function handleSearchInput(weaponData) {
+    const searchInput = document.getElementById('search-input');
+
+    searchInput.addEventListener('input', () => {
+        const searchString = searchInput.value.trim();
+        const currentCategory = document.querySelector('.filter-buttons .active').id.toLowerCase();
+        const filteredData = filterWeaponsBySearch(weaponData, searchString);
+
+        generateChecklist(filteredData, currentCategory);
+    });
+}
+
 // Function to toggle the checked state of a weapon
 function toggleWeaponState(weaponName, weaponImage) {
     const currentOpacity = window.getComputedStyle(weaponImage).getPropertyValue('opacity');
@@ -18,11 +50,13 @@ function toggleWeaponState(weaponName, weaponImage) {
 }
 
 // Function to generate the weapon checklist dynamically
-function generateChecklist(weaponData) {
+function generateChecklist(weaponData, defaultCategory) {
     const weaponList = document.getElementById('weapon-list');
     const categoryButtons = document.querySelectorAll('.filter-buttons button');
 
-    categoryButtons.forEach(button => {
+    categoryButtons.forEach(button => { // Set the default category based on local storage or the provided defaultCategory
+    const defaultButton = document.getElementById(defaultCategory || 'all');
+    defaultButton.click();
         button.addEventListener('click', () => {
             // Remove active class from all buttons
             categoryButtons.forEach(btn => btn.classList.remove('active'));
@@ -111,14 +145,24 @@ function generateChecklist(weaponData) {
             }
         });
     });
+
+     // Set the default category based on local storage or the provided defaultCategory
+     const defaultButton = document.getElementById(defaultCategory || 'all');
+     defaultButton.click();
 }
 
-// Generate the checklist for the default category on page load
+// Get the default category from local storage, or use "All" if not set
+const storedDefaultCategory = localStorage.getItem('defaultCategory');
+const defaultCategory = storedDefaultCategory || 'all';
+
+// Generate the checklist with the default category on page load
 window.addEventListener('load', () => {
     fetchWeaponData()
         .then(data => {
-            // Once data is loaded, generate the checklist
-            generateChecklist(data);
+            // Once data is loaded, generate the checklist with the default category
+            generateChecklist(data, defaultCategory);
+            // Add the search input functionality
+            handleSearchInput(data);
         })
         .catch(error => {
             console.error('Error loading weapon data:', error);
