@@ -45,138 +45,168 @@
         "weapons": [
             {
                 "name": "Eon",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_eon_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_eon_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.77mm"
             },
             {
                 "name": "Kraken",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/advanced_kraken_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/advanced_kraken_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "6.5mm"
             },
             {
                 "name": "Magshot",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_magshot_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_magshot_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".43 MI"
             },
             {
                 "name": "Old Earth Pistol",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_old_earth_pistol_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_old_earth_pistol_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".45 Caliber"
             },
             {
                 "name": "Rattler",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_rattler_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_rattler_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".27 Caliber"
             },
             {
                 "name": "Regulator",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_regulator_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_regulator_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".43 Ultramag"
             },
             {
                 "name": "Razorback",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_razorback_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_razorback_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.5mm"
             },
             {
                 "name": "Sidestar",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_sidestar_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_sidestar_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".27 Caliber"
             },
             {
                 "name": "Urban Eagle",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_urban_eagle_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_urban_eagle_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".43 Ultramag"
             },
             {
                 "name": "XM-2311",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_xm-2311_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_xm-2311_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".45 Caliber"
             }
         ]
-    },
+    },    
     {
         "category": "Rifles",
         "weapons": [
             {
                 "name": "AA-99",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/marksmans_aa-99_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/marksmans_aa-99_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "11mm"
             },
             {
                 "name": "Beowulf",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_beowulf_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_beowulf_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.77mm"
             },
             {
                 "name": "Drum Beat",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/drum_beat_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/drum_beat_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "11mm"
             },
             {
                 "name": "Grendel",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/grendel_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/grendel_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.77mm"
             },
             {
                 "name": "Hard Target",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/hard_target_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/hard_target_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".50 Caliber"
             },
             {
                 "name": "Kodama",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/kodama_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/kodama_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.77mm"
             },
             {
                 "name": "Lawgiver",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_lawgiver_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_lawgiver_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".50 Caliber"
             },
             {
                 "name": "Maelstrom",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/berserker_maelstrom_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/berserker_maelstrom_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "6.5mm"
             },
             {
                 "name": "Magpulse",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magpulse_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magpulse_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "6.5mm MI"
             },
             {
                 "name": "Magshear",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magshear_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magshear_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".50 MI"
             },
             {
                 "name": "Old Earth Assault Rifle",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_old_earthassault_rifle_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_old_earthassault_rifle_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.62mm"
             },
             {
                 "name": "Old Earth Hunting Rifle",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/bashing_calibrated_oldearth_hunting_rifle_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/bashing_calibrated_oldearth_hunting_rifle_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "9x39mm"
             },
             {
                 "name": "Tombstone",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_tombstone_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_tombstone_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "11mm"
             },
             {
                 "name": "Magsniper",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magsniper_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magsniper_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "6.5mm MI"
             }
         ]
-    },
+    },    
     {
         "category": "Shotguns",
         "weapons": [
             {
                 "name": "Breach",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_breach_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_breach_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Sx25 CLL Shell"
             },
             {
                 "name": "Coachman",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_coachman_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_coachman_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Caseless Shell"
             },
             {
                 "name": "Old Earth Shotgun",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_old_earthshotgun_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_old_earthshotgun_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "12G Shell"
             },
             {
                 "name": "Pacifier",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_pacifier_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_pacifier_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "1Sx25 CLL Shell"
             },
             {
                 "name": "Shotty",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_shotty_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_shotty_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Caseless Shell"
             }
         ]
-    },
+    },    
     {
         "category": "Laser Pistols",
         "weapons": [
             {
                 "name": "Solstice",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/advanced_solstice_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/advanced_solstice_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "1.5KV LZR"
             }
         ]
     },
@@ -185,11 +215,13 @@
         "weapons": [
             {
                 "name": "Equinox",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_equinox_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_equinox_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "3KU LZR"
             },
             {
                 "name": "Orion",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_orion_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_orion_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "3KU LZR"
             }
         ]
     },
@@ -198,23 +230,28 @@
         "weapons": [
             {
                 "name": "Arc Welder",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/arc_welder_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/arc_welder_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "3KV LZR"
             },
             {
                 "name": "Auto-Rivet",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/auto-rivet_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/auto-rivet_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Rivet"
             },
             {
                 "name": "Bridger",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_bridger_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_bridger_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "40mm XPL"
             },
             {
                 "name": "Microgun",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/microgun_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/microgun_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.77mm"
             },
             {
                 "name": "Magstorm",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magstorm_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magstorm_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".50 MI"
             }
         ]
     },
@@ -223,7 +260,8 @@
         "weapons": [
             {
                 "name": "Va'ruun Starshard",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/va_ruun_starshard_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/va_ruun_starshard_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Light Fuse"
             }
         ]
     },
@@ -232,7 +270,8 @@
         "weapons": [
             {
                 "name": "Va'Ruun Inflictor",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/varuun_inflictor_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/varuun_inflictor_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Heavy Fuse"
             }
         ]
     },
@@ -241,7 +280,8 @@
         "weapons": [
             {
                 "name": "Big Bang",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/big_bang_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/big_bang_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Heavy Fuse"
             }
         ]
     },
@@ -250,7 +290,8 @@
         "weapons": [
             {
                 "name": "Novalight",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_novalight_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_novalight_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Light Fuse"
             }
         ]
     },
@@ -259,7 +300,8 @@
         "weapons": [
             {
                 "name": "Novablast Disruptor",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/novablast_disruptor_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/novablast_disruptor_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Heavy Fuse"
             }
         ]
     },
@@ -268,48 +310,60 @@
         "weapons": [
             {
                 "name": "Deadeye",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deadeye_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deadeye_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".27 Caliber"
             },
             {
                 "name": "Elegance",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/elegance_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/elegance_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".43 Ultramag"
             },
             {
                 "name": "The Prime",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_prime_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_prime_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.5mm"
             },
             {
                 "name": "The Zapper",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_zapper_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_zapper_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".27 Caliber"
             },
             {
                 "name": "Despondent Assassin",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/despondent_assassin_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/despondent_assassin_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "9x39mm"
             },
             {
                 "name": "Head Ranger",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/head_ranger_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/head_ranger_weapon_starfield_wiki_guide_250px.png",
+                "ammo": ".50 Caliber"
             },
             {
                 "name": "Speechless Fire",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/speechless_fire_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/speechless_fire_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "9x39mm"
             },
             {
                 "name": "The Buzzcut",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_buzzcut_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_buzzcut_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.77mm"
             },
             {
                 "name": "Boom Boom",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/boom_boom_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/boom_boom_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "Caseless Shell"
             },
             {
                 "name": "Short Circuit",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/short_circuit_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/short_circuit_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "1.5KV LZR"
             },
             {
                 "name": "N67 Smartgun",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/n67_smartgun_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/n67_smartgun_weapon_starfield_wiki_guide_250px.png",
+                "ammo": "7.77mm"
             }
         ]
     }
+    
 ]
