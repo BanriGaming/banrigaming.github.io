@@ -34,22 +34,40 @@ body{
   cursor: none;
 }
 
-/* Style for the tooltip container */
-.set-tooltip {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 14px;
-  display: none; /* Initially hidden */
+/* Add CSS styling for the grid */
+.category-buttons {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* Style to show the tooltip */
-.show-tooltip {
-  display: block;
-  z-index: 1; /* Ensure it's on top of other elements */
+.category-buttons button {
+  margin: 5px;
 }
+
+.weapon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 20px;
+}
+
+.weapon-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.weapon-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Add CSS styling for active button */
+.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
 
 /*Accordions*/
 .accordion-item{

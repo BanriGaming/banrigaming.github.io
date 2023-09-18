@@ -44,8 +44,8 @@
         "category": "Pistols",
         "weapons": [
             {
-                "name": "https://starfield.wiki.fextralife.com/file/Starfield/refined_eon_weapon_starfield_wiki_guide_250px.png",
-                "image": "LINK"
+                "name": "Eon",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_eon_weapon_starfield_wiki_guide_250px.png"
             },
             {
                 "name": "Kraken",
