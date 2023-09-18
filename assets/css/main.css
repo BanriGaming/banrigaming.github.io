@@ -34,6 +34,41 @@ body{
   cursor: none;
 }
 
+/* Add this CSS to your stylesheet */
+.weapon-item img {
+  max-width: 100%;
+  transition: opacity 0.3s ease-in-out; /* Add a CSS transition for opacity */
+}
+
+.weapon-item img.checked {
+  opacity: 0.5; /* Reduce opacity for checked weapons */
+}
+
+/* Add this CSS to style the filter buttons */
+.filter-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.filter-buttons button {
+  background-color: #3A3A3A; /* gray background color */
+  color: #fff; /* White text color */
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold; /* Add this line to make the text bold */
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.filter-buttons button:hover {
+  background-color: #ffffff; /* Darker blue on hover */
+  color: #3A3A3A;
+}
+
+
 /* Add CSS styling for the grid */
 .category-buttons {
   text-align: center;

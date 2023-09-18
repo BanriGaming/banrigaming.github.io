@@ -1,18 +1,26 @@
 // Load the weapon data from the JSON file
 function fetchWeaponData() {
-    return fetch('https://banrigaming.github.io/assets/json/sfweapons.json') // Replace with the correct path to your JSON file
+    return fetch('https://banrigaming.github.io/assets/json/sfweapons.json')
         .then(response => response.json());
+}
+
+// Function to toggle the checked state of a weapon
+function toggleWeaponState(weaponName, weaponImage) {
+    const currentOpacity = window.getComputedStyle(weaponImage).getPropertyValue('opacity');
+
+    if (currentOpacity === '1') {
+        weaponImage.style.opacity = '0.5';
+    } else {
+        weaponImage.style.opacity = '1';
+    }
+
+    localStorage.setItem(weaponName, weaponImage.style.opacity);
 }
 
 // Function to generate the weapon checklist dynamically
 function generateChecklist(weaponData) {
     const weaponList = document.getElementById('weapon-list');
     const categoryButtons = document.querySelectorAll('.filter-buttons button');
-
-    // Function to clear the existing checklist
-    function clearChecklist() {
-        weaponList.innerHTML = '';
-    }
 
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -22,7 +30,7 @@ function generateChecklist(weaponData) {
             button.classList.add('active');
 
             // Clear the existing checklist
-            clearChecklist();
+            weaponList.innerHTML = '';
 
             // Filter weapons based on the clicked category
             const category = button.id.toLowerCase();
@@ -37,17 +45,20 @@ function generateChecklist(weaponData) {
                         const weaponItem = document.createElement('div');
                         weaponItem.className = 'col-md-3'; // Use Bootstrap's grid classes to create 4 columns
 
-                        // Create an <h2> element for the weapon title with underlining
                         const weaponTitle = document.createElement('h2');
-                        weaponTitle.innerHTML = `<u>${weapon.name}</u>`; // Display the weapon name with underlining
+                        weaponTitle.innerHTML = `<u>${weapon.name}</u>`;
                         weaponItem.appendChild(weaponTitle);
 
-                        // Create an image element and set its source
                         const weaponImage = document.createElement('img');
-                        weaponImage.src = weapon.image; // Assuming your JSON data has the image URL
-                        weaponImage.alt = weapon.name; // Set alt text for accessibility
-                        weaponItem.appendChild(weaponImage);
+                        weaponImage.src = weapon.image;
+                        weaponImage.alt = weapon.name;
+                        weaponImage.style.opacity = localStorage.getItem(weapon.name) === '0.5' ? '0.5' : '1';
 
+                        weaponImage.addEventListener('click', () => {
+                            toggleWeaponState(weapon.name, weaponImage);
+                        });
+
+                        weaponItem.appendChild(weaponImage);
                         weaponRow.appendChild(weaponItem);
                     });
 
@@ -65,17 +76,20 @@ function generateChecklist(weaponData) {
                         const weaponItem = document.createElement('div');
                         weaponItem.className = 'col-md-3'; // Use Bootstrap's grid classes to create 4 columns
 
-                        // Create an <h2> element for the weapon title with underlining
                         const weaponTitle = document.createElement('h2');
-                        weaponTitle.innerHTML = `<u>${weapon.name}</u>`; // Display the weapon name with underlining
+                        weaponTitle.innerHTML = `<u>${weapon.name}</u>`;
                         weaponItem.appendChild(weaponTitle);
 
-                        // Create an image element and set its source
                         const weaponImage = document.createElement('img');
-                        weaponImage.src = weapon.image; // Assuming your JSON data has the image URL
-                        weaponImage.alt = weapon.name; // Set alt text for accessibility
-                        weaponItem.appendChild(weaponImage);
+                        weaponImage.src = weapon.image;
+                        weaponImage.alt = weapon.name;
+                        weaponImage.style.opacity = localStorage.getItem(weapon.name) === '0.5' ? '0.5' : '1';
 
+                        weaponImage.addEventListener('click', () => {
+                            toggleWeaponState(weapon.name, weaponImage);
+                        });
+
+                        weaponItem.appendChild(weaponImage);
                         weaponRow.appendChild(weaponItem);
                     });
 
