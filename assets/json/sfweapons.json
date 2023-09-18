@@ -53,7 +53,7 @@
             },
             {
                 "name": "Magshot",
-                "image": "https://starfield.wiki.fextralife.com/file/Starfield/magshear_weapon_starfield_wiki_guide_250px.png"
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_magshot_weapon_starfield_wiki_guide_250px.png"
             },
             {
                 "name": "Old Earth Pistol",
@@ -228,6 +228,15 @@
         ]
     },
     {
+        "category": "Particle Beam Rifles",
+        "weapons": [
+            {
+                "name": "Va'Ruun Inflictor",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/varuun_inflictor_weapon_starfield_wiki_guide_250px.png"
+            }
+        ]
+    },
+    {
         "category": "Particle Beam Shotguns",
         "weapons": [
             {
@@ -251,6 +260,55 @@
             {
                 "name": "Novablast Disruptor",
                 "image": "https://starfield.wiki.fextralife.com/file/Starfield/novablast_disruptor_weapon_starfield_wiki_guide_250px.png"
+            }
+        ]
+    },
+    {
+        "category": "Uniques",
+        "weapons": [
+            {
+                "name": "Deadeye",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deadeye_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Elegance",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/elegance_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "The Prime",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_prime_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "The Zapper",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_zapper_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Despondent Assassin",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/despondent_assassin_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Head Ranger",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/head_ranger_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Speechless Fire",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/speechless_fire_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "The Buzzcut",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/the_buzzcut_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Boom Boom",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/boom_boom_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Short Circuit",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/short_circuit_weapon_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "N67 Smartgun",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/n67_smartgun_weapon_starfield_wiki_guide_250px.png"
             }
         ]
     }
