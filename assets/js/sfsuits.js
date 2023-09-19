@@ -1,6 +1,6 @@
 // Load the spacesuit data from the JSON file
 function fetchSpacesuitData() {
-    return fetch('https://banrigaming.github.io/assets/json/sfspacesuits.json')
+    return fetch('https://banrigaming.github.io/assets/json/sfsuits.json')
         .then(response => response.json());
 }
 
