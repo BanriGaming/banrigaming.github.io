@@ -25,12 +25,6 @@ body{
   font-size: 1.05rem;
 }
 
-/* Starfield Magazine: CSS rule to limit the magazine images to a maximum of 250px */
-.magazine-image {
-  max-width: 200px;
-  height: auto; /* Maintain the aspect ratio */
-}
-
 /*Starfield setImage Styling*/
 .set-image {
   width: 215px;
@@ -127,6 +121,7 @@ body{
 
 /* Add CSS styling for active button */
 .active {
+  background-color: #007bff;
   color: #fff;
 }
 

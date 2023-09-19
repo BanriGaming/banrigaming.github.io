@@ -79,7 +79,7 @@ function generateChecklist(magazineData, defaultCategory) {
                         const magazineItem = document.createElement('div');
                         magazineItem.className = 'col-md-3'; // Use Bootstrap's grid classes to create 4 columns
 
-                        const magazineTitle = document.createElement('h2');
+                        const magazineTitle = document.createElement('h4');
                         magazineTitle.innerHTML = `<u>${magazine.name}</u>`;
                         magazineItem.appendChild(magazineTitle);
 
@@ -93,6 +93,7 @@ function generateChecklist(magazineData, defaultCategory) {
                         const magazineImage = document.createElement('img');
                         magazineImage.src = magazine.image;
                         magazineImage.alt = magazine.name;
+                        magazineImage.className = 'magazine-image'; // Add this line to set the class
                         magazineImage.style.opacity = localStorage.getItem(magazine.name) === '0.5' ? '0.5' : '1';
 
                         magazineImage.addEventListener('click', () => {
@@ -117,7 +118,7 @@ function generateChecklist(magazineData, defaultCategory) {
                         const magazineItem = document.createElement('div');
                         magazineItem.className = 'col-md-3'; // Use Bootstrap's grid classes to create 4 columns
 
-                        const magazineTitle = document.createElement('h2');
+                        const magazineTitle = document.createElement('h4');
                         magazineTitle.innerHTML = `<u>${magazine.name}</u>`;
                         magazineItem.appendChild(magazineTitle);
 
@@ -130,6 +131,7 @@ function generateChecklist(magazineData, defaultCategory) {
                         const magazineImage = document.createElement('img');
                         magazineImage.src = magazine.image;
                         magazineImage.alt = magazine.name;
+                        magazineImage.className = 'magazine-image'; // Add this line to set the class
                         magazineImage.style.opacity = localStorage.getItem(magazine.name) === '0.5' ? '0.5' : '1';
 
                         magazineImage.addEventListener('click', () => {

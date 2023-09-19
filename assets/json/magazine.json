@@ -13,6 +13,14 @@
             {
                 "name": "CombaTech Catalog 03",
                 "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/show"
+            },
+            {
+                "name": "CombaTech Catalog 04",
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/show"
+            },
+            {
+                "name": "CombaTech Catalog 05",
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/show"
             }
         ]
     },
@@ -20,11 +28,23 @@
         "category": "Constellation",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Constellation Guide 01",
                 "image": "https://img.game8.co/3755949/1d636f465915759c34386ddaf39ae4cd.png/show"
             },
             {
-                "name": "NAME",
+                "name": "Constellation Guide 02",
+                "image": "https://img.game8.co/3755949/1d636f465915759c34386ddaf39ae4cd.png/show"
+            },
+            {
+                "name": "Constellation Guide 03",
+                "image": "https://img.game8.co/3755949/1d636f465915759c34386ddaf39ae4cd.png/show"
+            },
+            {
+                "name": "Constellation Guide 04",
+                "image": "https://img.game8.co/3755949/1d636f465915759c34386ddaf39ae4cd.png/show"
+            },
+            {
+                "name": "Constellation Guide 05",
                 "image": "https://img.game8.co/3755949/1d636f465915759c34386ddaf39ae4cd.png/show"
             }
         ]
@@ -33,12 +53,24 @@
         "category": "Cyberrunners",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Cyber Runner's Cipher 01",
                 "image": "https://img.game8.co/3756972/7199b0436eaf6d5142d09f8373466eea.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Cyber Runner's Cipher 02",
+                "image": "https://img.game8.co/3756972/7199b0436eaf6d5142d09f8373466eea.png/show"
+            },
+            {
+                "name": "Cyber Runner's Cipher 03",
+                "image": "https://img.game8.co/3756972/7199b0436eaf6d5142d09f8373466eea.png/show"
+            },
+            {
+                "name": "Cyber Runner's Cipher 04",
+                "image": "https://img.game8.co/3756972/7199b0436eaf6d5142d09f8373466eea.png/show"
+            },
+            {
+                "name": "Cyber Runner's Cipher 05",
+                "image": "https://img.game8.co/3756972/7199b0436eaf6d5142d09f8373466eea.png/show"
             }
         ]
     },
@@ -46,12 +78,24 @@
         "category": "Freestar",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Freestar Captain's Log 01",
                 "image": "https://img.game8.co/3756612/f5708d997ccd420b50b25eb1adb01a42.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Freestar Captain's Log 02",
+                "image": "https://img.game8.co/3756612/f5708d997ccd420b50b25eb1adb01a42.png/show"
+            },
+            {
+                "name": "Freestar Captain's Log 03",
+                "image": "https://img.game8.co/3756612/f5708d997ccd420b50b25eb1adb01a42.png/show"
+            },
+            {
+                "name": "Freestar Captain's Log 04",
+                "image": "https://img.game8.co/3756612/f5708d997ccd420b50b25eb1adb01a42.png/show"
+            },
+            {
+                "name": "Freestar Captain's Log 05",
+                "image": "https://img.game8.co/3756612/f5708d997ccd420b50b25eb1adb01a42.png/show"
             }
         ]
     },
@@ -59,12 +103,44 @@
         "category": "Grunt",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "GRUNT Issue 01",
                 "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "GRUNT Issue 02",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 03",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 04",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 05",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 06",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 07",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 08",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 09",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "GRUNT Issue 10",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
             }
         ]
     },
@@ -72,12 +148,24 @@
         "category": "Gunslingers",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Gunslinger's Guide 01",
                 "image": "https://img.game8.co/3756864/eee2840b3390a11e64aca70f6ddd888d.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Gunslinger's Guide 02",
+                "image": "https://img.game8.co/3756864/eee2840b3390a11e64aca70f6ddd888d.png/show"
+            },
+            {
+                "name": "Gunslinger's Guide 03",
+                "image": "https://img.game8.co/3756864/eee2840b3390a11e64aca70f6ddd888d.png/show"
+            },
+            {
+                "name": "Gunslinger's Guide 04",
+                "image": "https://img.game8.co/3756864/eee2840b3390a11e64aca70f6ddd888d.png/show"
+            },
+            {
+                "name": "Gunslinger's Guide 05",
+                "image": "https://img.game8.co/3756864/eee2840b3390a11e64aca70f6ddd888d.png/show"
             }
         ]
     },
@@ -85,12 +173,44 @@
         "category": "Mining",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Mining Monthly 01",
                 "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Mining Monthly 02",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 03",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 04",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 05",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 06",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 07",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 08",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 09",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "Mining Monthly 10",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
             }
         ]
     },
@@ -98,12 +218,24 @@
         "category": "Neon",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Neon Nights 01",
                 "image": "https://img.game8.co/3760367/a87f9359321e4763e49258764f0c1ba1.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Neon Nights 02",
+                "image": "https://img.game8.co/3760367/a87f9359321e4763e49258764f0c1ba1.png/show"
+            },
+            {
+                "name": "Neon Nights 03",
+                "image": "https://img.game8.co/3760367/a87f9359321e4763e49258764f0c1ba1.png/show"
+            },
+            {
+                "name": "Neon Nights 04",
+                "image": "https://img.game8.co/3760367/a87f9359321e4763e49258764f0c1ba1.png/show"
+            },
+            {
+                "name": "Neon Nights 05",
+                "image": "https://img.game8.co/3760367/a87f9359321e4763e49258764f0c1ba1.png/show"
             }
         ]
     },
@@ -111,12 +243,24 @@
         "category": "NewAtlantian",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "The New Atlantian 01",
                 "image": "https://img.game8.co/3756960/13657f430865133bce95b658e133c4b3.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "The New Atlantian 02",
+                "image": "https://img.game8.co/3756960/13657f430865133bce95b658e133c4b3.png/show"
+            },
+            {
+                "name": "The New Atlantian 03",
+                "image": "https://img.game8.co/3756960/13657f430865133bce95b658e133c4b3.png/show"
+            },
+            {
+                "name": "The New Atlantian 04",
+                "image": "https://img.game8.co/3756960/13657f430865133bce95b658e133c4b3.png/show"
+            },
+            {
+                "name": "The New Atlantian 05",
+                "image": "https://img.game8.co/3756960/13657f430865133bce95b658e133c4b3.png/show"
             }
         ]
     },
@@ -124,12 +268,44 @@
         "category": "Nova",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Nova Galactic Manual 01",
                 "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Nova Galactic Manual 02",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 03",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 04",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 05",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 06",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 07",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 08",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 09",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "Nova Galactic Manual 10",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
             }
         ]
     },
@@ -137,12 +313,24 @@
         "category": "PeakP",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Peak Performance 01",
                 "image": "https://img.game8.co/3756830/ec7b5ed05abe811e237514fd72bfbd06.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Peak Performance 02",
+                "image": "https://img.game8.co/3756830/ec7b5ed05abe811e237514fd72bfbd06.png/show"
+            },
+            {
+                "name": "Peak Performance 03",
+                "image": "https://img.game8.co/3756830/ec7b5ed05abe811e237514fd72bfbd06.png/show"
+            },
+            {
+                "name": "Peak Performance 04",
+                "image": "https://img.game8.co/3756830/ec7b5ed05abe811e237514fd72bfbd06.png/show"
+            },
+            {
+                "name": "Peak Performance 05",
+                "image": "https://img.game8.co/3756830/ec7b5ed05abe811e237514fd72bfbd06.png/show"
             }
         ]
     },
@@ -150,12 +338,24 @@
         "category": "Solomon",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Solomon's Adventures 01",
                 "image": "https://img.game8.co/3756936/1cdfe1abf541d062658f8fb3de02e973.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Solomon's Adventures 02",
+                "image": "https://img.game8.co/3756936/1cdfe1abf541d062658f8fb3de02e973.png/show"
+            },
+            {
+                "name": "Solomon's Adventures 03",
+                "image": "https://img.game8.co/3756936/1cdfe1abf541d062658f8fb3de02e973.png/show"
+            },
+            {
+                "name": "Solomon's Adventures 04",
+                "image": "https://img.game8.co/3756936/1cdfe1abf541d062658f8fb3de02e973.png/show"
+            },
+            {
+                "name": "Solomon's Adventures 05",
+                "image": "https://img.game8.co/3756936/1cdfe1abf541d062658f8fb3de02e973.png/show"
             }
         ]
     },
@@ -163,12 +363,24 @@
         "category": "Tracker",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Tracker's Primers 01",
                 "image": "https://img.game8.co/3756725/291cf7ba8c0f547c8e1ad005ddd88c76.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Tracker's Primers 02",
+                "image": "https://img.game8.co/3756725/291cf7ba8c0f547c8e1ad005ddd88c76.png/show"
+            },
+            {
+                "name": "Tracker's Primers 03",
+                "image": "https://img.game8.co/3756725/291cf7ba8c0f547c8e1ad005ddd88c76.png/show"
+            },
+            {
+                "name": "Tracker's Primers 04",
+                "image": "https://img.game8.co/3756725/291cf7ba8c0f547c8e1ad005ddd88c76.png/show"
+            },
+            {
+                "name": "Tracker's Primers 05",
+                "image": "https://img.game8.co/3756725/291cf7ba8c0f547c8e1ad005ddd88c76.png/show"
             }
         ]
     },
@@ -176,12 +388,24 @@
         "category": "UCDef",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "UC Defense Manual 01",
                 "image": "https://img.game8.co/3756278/fba76ab6709ebd4f5c6df73f9322ca22.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "UC Defense Manual 02",
+                "image": "https://img.game8.co/3756278/fba76ab6709ebd4f5c6df73f9322ca22.png/show"
+            },
+            {
+                "name": "UC Defense Manual 03",
+                "image": "https://img.game8.co/3756278/fba76ab6709ebd4f5c6df73f9322ca22.png/show"
+            },
+            {
+                "name": "UC Defense Manual 04",
+                "image": "https://img.game8.co/3756278/fba76ab6709ebd4f5c6df73f9322ca22.png/show"
+            },
+            {
+                "name": "UC Defense Manual 05",
+                "image": "https://img.game8.co/3756278/fba76ab6709ebd4f5c6df73f9322ca22.png/show"
             }
         ]
     },
@@ -189,12 +413,24 @@
         "category": "Vanguard",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Vanguard Space Tactics 01",
                 "image": "https://img.game8.co/3758757/fa3602544edf18ed0d8f286c55270186.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Vanguard Space Tactics 02",
+                "image": "https://img.game8.co/3758757/fa3602544edf18ed0d8f286c55270186.png/show"
+            },
+            {
+                "name": "Vanguard Space Tactics 03",
+                "image": "https://img.game8.co/3758757/fa3602544edf18ed0d8f286c55270186.png/show"
+            },
+            {
+                "name": "Vanguard Space Tactics 04",
+                "image": "https://img.game8.co/3758757/fa3602544edf18ed0d8f286c55270186.png/show"
+            },
+            {
+                "name": "Vanguard Space Tactics 05",
+                "image": "https://img.game8.co/3758757/fa3602544edf18ed0d8f286c55270186.png/show"
             }
         ]
     },
@@ -202,12 +438,44 @@
         "category": "VaRuun",
         "magazines": [
             {
-                "name": "NAME",
+                "name": "Va'ruun Scripture 01",
                 "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
             },
             {
-                "name": "NAME",
-                "image": "LINK"
+                "name": "Va'ruun Scripture 02",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 03",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 04",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 05",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 06",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 07",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 08",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 09",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
+            },
+            {
+                "name": "Va'ruun Scripture 10",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
             }
         ]
     }
