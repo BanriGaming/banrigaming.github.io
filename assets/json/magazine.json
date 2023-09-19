@@ -4,15 +4,15 @@
         "magazines": [
             {
                 "name": "CombaTech Catalog 01",
-                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/original"
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/show"
             },
             {
                 "name": "CombaTech Catalog 02",
-                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/original"
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/show"
             },
             {
                 "name": "CombaTech Catalog 03",
-                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/original"
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/show"
             }
         ]
     },
@@ -21,11 +21,11 @@
         "magazines": [
             {
                 "name": "NAME",
-                "image": "LINK"
+                "image": "https://img.game8.co/3755949/1d636f465915759c34386ddaf39ae4cd.png/show"
             },
             {
                 "name": "NAME",
-                "image": "LINK"
+                "image": "https://img.game8.co/3755949/1d636f465915759c34386ddaf39ae4cd.png/show"
             }
         ]
     },    
@@ -34,7 +34,176 @@
         "magazines": [
             {
                 "name": "NAME",
+                "image": "https://img.game8.co/3756972/7199b0436eaf6d5142d09f8373466eea.png/show"
+            },
+            {
+                "name": "NAME",
                 "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Freestar",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756612/f5708d997ccd420b50b25eb1adb01a42.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Grunt",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3757320/92c669932de85aebcfeb7f4b44f18ef9.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Gunslingers",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756864/eee2840b3390a11e64aca70f6ddd888d.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Mining",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756277/99923db52853f16b3ca20e2d32e5a637.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Neon",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3760367/a87f9359321e4763e49258764f0c1ba1.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "NewAtlantian",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756960/13657f430865133bce95b658e133c4b3.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Nova",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756067/2ed7aedc4a6eb8b70cceac5fb226507e.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "PeakP",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756830/ec7b5ed05abe811e237514fd72bfbd06.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Solomon",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756936/1cdfe1abf541d062658f8fb3de02e973.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Tracker",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756725/291cf7ba8c0f547c8e1ad005ddd88c76.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "UCDef",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3756278/fba76ab6709ebd4f5c6df73f9322ca22.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "Vanguard",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3758757/fa3602544edf18ed0d8f286c55270186.png/show"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },
+    {
+        "category": "VaRuun",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "https://img.game8.co/3760275/fd664b56bc9be4c17087a6706149b237.png/show"
             },
             {
                 "name": "NAME",
