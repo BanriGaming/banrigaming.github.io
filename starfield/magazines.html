@@ -1,0 +1,54 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link  rel="stylesheet" href="../assets/css/main.css"></link>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+  <script src="../assets/js/nav.js"></script>
+<body>
+    <div w3-include-html="../../nav.html"></div> <hr>
+    <div class="jumbotron jumbotron-fluid">   
+        <h1 class="display-4">Starfield Dynamic Magazine Tracker</h1>
+        <p class="lead">This Checklist allows a user to track their progress for acquiring all magazines.</p>
+    </div> 
+</head>
+<hr>
+<body>
+    <div class="container">
+        <div class="filter-buttons">
+            <button id="all">All</button>
+            <button id="CombaTech">CombaTech Catalogs</button>
+            <button id="Constellation">Constellation Guides</button>
+            <button id="Cyberrunners">Cyber Runner's Ciphers</button>
+            <button id="Freestar">Freestar Captain's Logs</button>
+            <button id="Grunt">GRUNT Issues</button>
+            <button id="Gunslingers">Gunslinger's Guides</button>
+            <button id="Mining">Mining Monthly Issues</button>
+            <button id="Neon">Neon Nights</button>
+            <button id="NewAtlantian">New Atlantian</button>
+            <button id="Nova">Nova Galactic Manuals</button>
+            <button id="PeakP">Peak Performance</button>
+            <button id="Solomon">Solomon's Adventures</button>
+            <button id="Tracker">Tracker's Primers</button>
+            <button id="UCDef">UC Defense Manuals</button>
+            <button id="Vanguard">Vanguard Space Tactics</button>
+            <button id="VaRuun">Va'Ruun Scriptures</button>
+        </div>
+        <div class="search-bar-container"><input type="text" id="search-input" class="search-bar" placeholder="Search for a magazine..."></div>
+        <div class="magazine-list" id="magazine-list">
+            <!-- Weapon checklist will be dynamically generated here -->
+        </div>
+    </div>
+    <script src="../assets/js/sfmagazine.js"></script> <!-- Include the JavaScript file -->
+</body>
+    <!-- Add Bootstrap JS scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>includeHTML();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+[
+    {
+        "category": "CombaTech",
+        "magazines": [
+            {
+                "name": "CombaTech Catalog 01",
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/original"
+            },
+            {
+                "name": "CombaTech Catalog 02",
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/original"
+            },
+            {
+                "name": "CombaTech Catalog 03",
+                "image": "https://img.game8.co/3757167/c7d86040c32e767b4792678c8c2beb42.png/original"
+            }
+        ]
+    },
+    {
+        "category": "Constellation",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "LINK"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    },    
+    {
+        "category": "Cyberrunners",
+        "magazines": [
+            {
+                "name": "NAME",
+                "image": "LINK"
+            },
+            {
+                "name": "NAME",
+                "image": "LINK"
+            }
+        ]
+    }
+]
