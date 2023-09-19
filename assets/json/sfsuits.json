@@ -1,0 +1,405 @@
+[
+    {
+        "category": "Helmets",
+        "spacesuits": [
+            {
+                "name": "Bounty Hunter",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/bounty_hunter_spacehelmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Cydonia Spacesuit",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/cydonia_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Constellation",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/constellation_spacehelmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deep Mining",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deep_mining_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deep Recon",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_deep_recon_spacehelmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deepcore",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deepcore_space_helmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deepseeker",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deepseeker_space_helmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deimos",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deimos_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Ecliptic",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/ecliptic_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Experimental Nishina",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/reactive_experimentalnishina_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Explorer",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/explorer_space_helmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Gran-Gran's",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/gran-grans_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Ground Crew",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/advanced_ground_crewspace_helmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mantis",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mantis_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mark 1",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mark_i_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mercenary",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mercenary_space_helmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mercury",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mercury_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Navigator",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/bolstering_navigatorspace_helmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Old Earth",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/old_earth_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Pirate Assault",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/pirate_assault_spacehelmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Pirate Charger",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/galvanized_refined_piratecharger_space_helmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Pirate Sniper",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/pirate_sniper_spacehelmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Ranger",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/ranger_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Shocktrooper",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_shocktroop_spacehelmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Space Trucker",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/space_trucker_spacehelmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Star Roamer",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_star_roamer_spacehelmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "SY-920 Pilot",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/sy-92_pilot_space_helme_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Sysdef Ace",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_ace_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Sysdef Combat",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_armored_spacehelmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Sysdef",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_space_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Trackers Alliance",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/trackers_alliance_spacehelmet_helmet_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "UC Ace",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/uc_ace_pilot_space_helme_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "UC Vanguard",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/uc_vanguard_space_helmet_starfield_wiki_guide_250px.png"
+            }
+        ]
+    },
+    {
+        "category": "Spacesuits",
+        "spacesuits": [
+            {
+                "name": "Bounty Hunter",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/bounty_hunter_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Cydonia Spacesuit",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/refined_cydonia_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Constellation",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/constellation_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Deep Mining",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/deep_mining_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Deep Recon",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_deep_reconspacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Deepcore",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/advanced_deepcorespacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Deepseeker",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/bolstering_calibrateddeepseeker_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Deimos",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/deimos_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Ecliptic",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/ecliptic_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Experimental Nishina",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/incendiary_experimentalnishina_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Explorer",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/explorer_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Gran-Gran's",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/gran-grans_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Ground Crew",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/ground_crew_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Mantis",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mantis_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Mark 1",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mark_i_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Mercenary",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mercenary_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Mercury",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/mercury_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Navigator",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/navigator_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Old Earth",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/old_earth_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Pirate Assault",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_assault_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Pirate Charger",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_charger_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Pirate Sniper",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/pirate_sniper_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Ranger",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/ranger_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Shocktrooper",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/shocktroop_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Space Trucker",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/space_trucker_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Star Roamer",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/star_roamer_spacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "SY-920 Pilot",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sy-920_pilot_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Sysdef Ace",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_ace_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Sysdef Assault",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_assault_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Sysdef Combat",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_combat_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Sysdef Recon",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_recon_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Sysdef",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "Trackers Alliance",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/trackers_alliancespacesuit_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "UC Ace",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/uc_ace_spacesuit_starfield_wiki_guide_200px.png"
+            },
+            {
+                "name": "UC Vanguard",
+                "image" : "https://starfield.wiki.fextralife.com/file/Starfield/uc_vanguard_spacesuit_starfield_wiki_guide_200px.png"
+            }
+        ]
+    },    
+    {
+        "category": "Packs",
+        "spacesuits": [
+            {
+                "name": "Bounty Hunter",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/bounty_hunter_seek_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Cydonia Spacesuit",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/cydonia_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Constellation",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/advanced_constellationpack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deep Mining",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deep_mining_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deep Recon",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/refined_deep_reconbalanced_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deepcore",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deepcore_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deepseeker",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/deepseeker_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Deimos",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_deimos_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Ecliptic",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/ecliptic_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Experimental Nishina",
+                "image": "LINK"
+            },
+            {
+                "name": "Explorer",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/explorer_skip_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Gran-Gran's",
+                "image": "LINK"
+            },
+            {
+                "name": "Ground Crew",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/ground_crew_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mantis",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mantis_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mark 1",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mark_i_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mercenary",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mercenary_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Mercury",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/mercury_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Navigator",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/incendiary_navigator_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Old Earth",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/old_earth_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Pirate Raiding",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/pirate_raiding_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Ranger",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/ranger_pack_packs_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Shocktrooper",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/shocktroop_power_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Space Trucker",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/calibrated_space_truckerbalanced_pack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Star Roamer",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/advanced_star_roamer_skippack_pack_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "SY-920 Pilot",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/sy-92_pilot_pack_packs_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Sysdef",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/sysdef_pack_packs_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "Trackers Alliance",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/trackers_alliance_pack_packs_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "UC Ace",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/uc_ace_pilot_pack_packs_starfield_wiki_guide_250px.png"
+            },
+            {
+                "name": "UC Vanguard",
+                "image": "https://starfield.wiki.fextralife.com/file/Starfield/uc_vanguard_pilot_pack_packs_starfield_wiki_guide_250px.png"
+            }
+        ]
+    }
+]
