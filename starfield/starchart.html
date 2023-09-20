@@ -1,0 +1,75 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link  rel="stylesheet" href="../assets/css/main.css"></link>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+  <script src="../assets/js/nav.js"></script>
+<body>
+    <div w3-include-html="../../nav.html"></div> <hr>
+    <div class="jumbotron jumbotron-fluid">   
+        <h1 class="display-4">Starfield Dynamic Resource Star Chart</h1>
+        <p class="lead">This is a dynamically generated star chart that displays and filters based on resource for planets and star systems.</p>
+    </div> 
+</head>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/index">Home</a></li>
+      <li class="breadcrumb-item"><a href="/starfield/guides">Guides</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Planetary Star Chart</li>
+    </ol>
+  </nav>
+<hr>
+<body>
+    <body>
+        <!-- Filter and Search Section -->
+        <section id="filter-section">
+            <!-- Resource Filters -->
+            <div id="resource-filters">
+                <label>Select Resources:</label>
+                <div id="resource-buttons">
+                    <!-- Add custom-styled buttons for each resource option -->
+                    <button class="resource-button" data-value="He-3">He-3</button>
+                    <!-- Add more buttons for other resources -->
+                </div>
+            </div>
+    
+            <!-- Search Bar -->
+            <div id="search-bar">
+                <label for="search-input">Search:</label>
+                <input type="text" id="search-input" placeholder="Search by planet name or star system">
+            </div>
+        </section>
+    
+        <!-- Table to Display Planet Data -->
+        <section id="planet-data">
+            <table>
+                <thead>
+                    <tr>
+                        <!-- Table column headers -->
+                        <th>System</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <!-- Add table headers for resources here -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populate this table with planet data dynamically using JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    
+        <!-- Include your JavaScript file here -->
+        <script src="your-script.js"></script>
+    </body>
+    <!-- Add Bootstrap JS scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>includeHTML();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

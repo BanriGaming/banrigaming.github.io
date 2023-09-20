@@ -130,6 +130,23 @@ body{
   color: #fff;
 }
 
+/* Style for checkbox-buttons */
+.checkbox-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px; /* Adjust spacing between buttons */
+}
+
+.checkbox-button:hover {
+  background-color: #0056b3; /* Hover background color */
+}
+
+
 
 /*Accordions*/
 .accordion-item{
