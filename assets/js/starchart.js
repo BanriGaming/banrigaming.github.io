@@ -137,6 +137,8 @@ function generateDataCards(data) {
                     s_tag.classList.add("block-helium");
                 }else if(resource == "Ionic Liquids"){
                     s_tag.classList.add("block-ionicliquids");
+                }else if(resource == "Iridium"){
+                    s_tag.classList.add("block-iridium");
                 }else if(resource == "Iron"){
                     s_tag.classList.add("block-iron");
                 }else if(resource == "Lead"){
@@ -173,6 +175,8 @@ function generateDataCards(data) {
                     s_tag.classList.add("block-vanadium");
                 }else if(resource == "Water"){
                     s_tag.classList.add("block-water");
+                }else if(resource == "Xenon"){
+                    s_tag.classList.add("block-xenon");
                 }else if(resource == "Ytterbium"){
                     s_tag.classList.add("block-ytterbium");
                 }else{
