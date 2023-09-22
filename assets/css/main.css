@@ -61,6 +61,26 @@ body{
   border-color: #007bff; /* Change the border color when focused */
 }
 
+/* Style for the search input in Star Map page*/
+.planet-bar {
+  width: 25%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  transition: border-color 0.3s ease;
+}
+
+.planet-bar-container {
+  text-align: left;
+}
+
+.planet-bar:focus {
+  outline: none;
+  border-color: #007bff; /* Change the border color when focused */
+}
+
 
 /* Add this CSS to your stylesheet */
 .weapon-item img {
@@ -146,6 +166,12 @@ body{
   background-color: #0056b3; /* Hover background color */
 }
 
+/* Add this CSS to your main.css file or in a <style> tag in your HTML */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust the column width as needed */
+  grid-gap: 20px; /* Adjust the gap between cards as needed */
+}
 
 
 /*Accordions*/
@@ -155,7 +181,18 @@ body{
   width: 80%;
 }
 
+.accordion-item2{
+  background-color:#232323;
+  color: white;
+  width: auto;
+}
+
 .accordion-button{
+  background-color:#153C4E;
+  color: white;
+}
+
+.accordion-button2{
   background-color:#153C4E;
   color: white;
 }
@@ -164,6 +201,10 @@ body{
   background-color:white;
   font-weight: 700;
   color: #153C4E;
+}
+
+.starmapacc{
+  width: 100%;
 }
 
 /*List-Group*/
@@ -616,3 +657,167 @@ iframe{
 #showdata{
   display: none;
 }
+
+/*Starchart*/
+.block-element {
+  width: 10px;
+  height: 10px;
+  margin-bottom: 1px;
+}
+.block-water {
+  background-color: #6DA49E;
+}
+
+.block-chlorine {
+  background-color: #424A57;
+}
+
+.block-lead {
+  background-color: #444F54;
+}
+
+.block-argon {
+  background-color: #224B66;
+}
+
+.block-chlorosilanes {
+  background-color: #4E5D93;
+}
+
+.block-helium {
+  background-color: #7AB26B;
+}
+
+.block-aluminum {
+  background-color: #344A49;
+}
+
+.block-nickel {
+  background-color: #5F4421;
+}
+
+.block-cobalt {
+  background-color: #33588C;
+}
+
+.block-tungsten {
+  background-color: #596C75;
+}
+
+.block-platinum {
+  background-color: #4971A8;
+}
+
+.block-xenon {
+  background-color: #8498FF;
+}
+
+.block-iron {
+  background-color: #75403A;
+}
+
+.block-copper {
+  background-color: #275549;
+}
+
+.block-uranium {
+  background-color: #4A490F;
+}
+
+.block-vanadium {
+  background-color: #8E8E33;
+}
+
+.block-dysprosium {
+  background-color: #74A3B8;
+}
+
+.block-benzene {
+  background-color: #2B5F80;
+}
+
+.block-beryllium {
+  background-color: #396764;
+}
+
+.block-silver {
+  background-color: #7E736D;
+}
+
+.block-fluorine {
+  background-color: #2F7869;
+}
+
+.block-ytterbium {
+  background-color: #D4826A;
+}
+
+.block-lithium {
+  background-color: #5A74CB;
+}
+
+.block-alkanes {
+  background-color: #A14B54;
+}
+
+.block-neodymium {
+  background-color: #6A9A97;
+}
+
+.block-tetraflourides {
+  background-color: #37A08B;
+}
+
+.block-ionicliquids {
+  background-color: #4CD7BB;
+}
+
+.block-europium {
+  background-color: #9FD0CD;
+}
+
+.block-caesium {
+  background-color: #8A84FF;
+}
+
+.block-plutonium {
+  background-color: #B8B840;
+}
+
+.block-iridium {
+  background-color: #706E29;
+}
+
+.block-neon {
+  background-color: #2AA1BE;
+}
+
+.block-carboxylicacid {
+  background-color: #3A7B9C;
+}
+
+.block-gold {
+  background-color: #C79E4E;
+}
+
+.block-palladium {
+  background-color: #D9A23C;
+}
+
+.block-mercury {
+  background-color: #AB9489;
+}
+
+.block-titanium {
+  background-color: #698794;
+}
+
+.block-antimony {
+  background-color: #DBBF5B;
+}
+
+.block-tantalum {
+  background-color: #BD5D5F;
+}
+
+
