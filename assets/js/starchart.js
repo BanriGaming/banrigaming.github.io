@@ -63,7 +63,13 @@ function getResourceName(abbreviation) {
         'Ti': 'Titanium',
         'Sb': 'Antimony',
         'Ta': 'Tantalum',
-        'Cu': 'Copper'
+        'Cu': 'Copper',
+        'Ad': 'Aldumite',
+        'Ie': 'Indicite',
+        'Rc': 'Rothicite',
+        'Tsn': 'Tasine',
+        'Vr' : 'Veryl',
+        'Vy': 'Vytinium' 
         // Add more resource mappings as needed
     };
 
@@ -179,6 +185,18 @@ function generateDataCards(data) {
                     s_tag.classList.add("block-xenon");
                 }else if(resource == "Ytterbium"){
                     s_tag.classList.add("block-ytterbium");
+                }else if(resource == "Aldumite"){
+                    s_tag.classList.add("block-aldumite");
+                }else if(resource == "Indicite"){
+                    s_tag.classList.add("block-indicite");
+                }else if(resource == "Rothicite"){
+                    s_tag.classList.add("block-rothicite");
+                }else if(resource == "Tasine"){
+                    s_tag.classList.add("block-tasine");
+                }else if(resource == "Veryl"){
+                    s_tag.classList.add("block-veryl");
+                }else if(resource == "Vytinium"){
+                    s_tag.classList.add("block-vytinium");
                 }else{
 
                 }

@@ -1,58 +1,223 @@
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link  rel="stylesheet" href="assets/css/main.css"></link>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  </link>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap"
+    rel="stylesheet">
   <script src="assets/js/nav.js"></script>
 </head>
-<body>
-    <div w3-include-html="../../nav.html"></div> <hr>
-    <div class="jumbotron jumbotron-fluid">   
-        <h1 class="display-4">About Me</h1>
-        <p class="lead"></p>
-    </div> 
-    </div>
-    <hr>
-    <p>
-    Where are you from?
-    I've lived in the US my whole life. I am <span id="age">29</span> Years Old.
 
-    What pets do you have?
-    I have a small black & tan yorkshire terrier 'Fia' with quite the personality.<br>
-    She is currently being trained by myself and my wife at a dog obedience club for the goal of getting her into Agility.<br>
-    We love her very much.
-    </p>
-    <script>includeHTML();</script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      // The date you were born
-      var birthDate = new Date(1993, 6, 27, 0, 0, 0, 0);
-      
-      // The current date
-      var currentDate = new Date();
-      
-      // The age in years
-      var age = currentDate.getFullYear() - birthDate.getFullYear();
-      
-      // Compare the months
-      var month = currentDate.getMonth() - birthDate.getMonth();
-      
-      // Compare the days
-      var day = currentDate.getDate() - birthDate.getDate();
-      
-      // If the date has already happened this year
-      if ( month < 0 || month == 0 && day < 0 )
-      {
-          age--;
-      }
-      
-      document.getElementById("age").innerHTML = age;
-      </script>
-  </body>
+<body>
+  <div w3-include-html="../../nav.html"></div>
+  <hr>
+  <div class="jumbotron jumbotron-fluid">
+    <h1 class="display-4">About Me</h1>
+    <p class="lead"></p>
+  </div>
+  </div>
+  <hr>
+  <h2>Introduction</h2>
+  <p>Hello, fellow gamers! I'm Banri, I am <span id="age">30</span> Years Old, and a friendly fellow gamer that ventures through the captivating realms of gaming. 
+    My journey into the gaming universe started basically when i was little when i sat in my brother's room watching him play Homeworld. It was the beginning of an adventure that would become an integral part of my life.</p>
+  <div class="accordion" id="aboutAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          aria-expanded="true" aria-controls="collapseOne">
+          My Gaming Journey
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+        data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+          I jumped headfirst into the world of gaming. NFS Hot Pursuit 2, Homeworld 1 & 2, Star Trek Online, and
+          countless other games rolled into my collection of games. Below is a list of all the games ive played currently;
+          <ul>
+            <li>Age of Empires II</li>
+            <li>Age of Empires III</li>
+            <li>American Truck Simulator</li>
+            <li>Among Us</li>
+            <li>ARK: Survival Evolved</li>
+            <li>Arma 2</li>
+            <li>Arma 3</li>
+            <li>Ashes of the Singularity: Escalation</li>
+            <li>Assassin's Creed</li>
+            <li>Assassin's Creed II</li>
+            <li>Assassin's Creed Brotherhood</li>
+            <li>Assassin's Creed Revelations</li>
+            <li>Assassin's Creed III</li>
+            <li>Assassin's Creed IV Black Flag</li>
+            <li>Assassin's Creed Syndicate</li>
+            <li>Assassin's Creed Odyssey</li>
+            <li>Assassin's Creed Valhalla</li>
+            <li>Batman: Arkham Knight</li>
+            <li>Biomutant</li>
+            <li>BioShock 1 and 2</li>
+            <li>Black Desert</li>
+            <li>Borderlands 2</li>
+            <li>CS:GO</li>
+            <li>Dragon Ball Xenoverse 1 & 2</li>
+            <li>Skyrim & Anniversary Edition</li>
+            <li>Elite Dangerous</li>
+            <li>Fable Anniversary</li>
+            <li>Fallout 4</li>
+            <li>Final Fantasy XIV</li>
+            <li>Grand Theft Auto 5</li>
+            <li>Halo: The Master Chief Collection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+          aria-expanded="false" aria-controls="collapseTwo">
+          Favorite Games
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+        data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+          While it's tough to pick just one, some games have left an indelible mark on my gaming heart. Skyrim's
+          expansive landscapes, the post-apocalyptic playstyle of Fallout 4, the universe of Starfield, and the
+          cooperative survival thrills of Valheim all hold a special place in my collection.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Friends and Family
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+        data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+          While it's tough to pick just one, some games have left an indelible mark on my gaming heart. Skyrim's
+          expansive landscapes, the post-apocalyptic playstyle of Fallout 4, the universe of Starfield, and the
+          cooperative survival thrills of Valheim all hold a special place in my collection.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFour">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Memorable Achievements
+        </button>
+      </h2>
+      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+        data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFive">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Favorite Genres
+        </button>
+      </h2>
+      <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+        data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSix">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+          aria-expanded="false" aria-controls="collapseSix">
+          Favorite Genres
+        </button>
+      </h2>
+      <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+        data-bs-parent="#aboutAccordion">
+        <div class="accordion-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<h2>Introduction</h2>
+    <p>Hello, fellow gamers! I'm Banri, I am <span id="age">30</span> Years Old, and a friendly fellow gamer that ventures through the captivating realms of gaming. My journey into the gaming universe started with wide-eyed wonder as I watched my big brother navigate the epic space of Homeworld. It was the beginning of an adventure that would become an integral part of my life.</p>
+    <h2>My Gaming Journey</h2>
+    <p>From those early days of watching, I jumped headfirst into the world of gaming. NFS Hot Pursuit 2, Homeworld 1 & 2, Star Trek Online, and countless others became my companions as I ventured into virtual worlds, seeking challenges, and discovering treasures.</p>
+    <h2>Favorite Games</h2>
+    <p>While it's tough to pick just one, some games have left an indelible mark on my gaming heart. Skyrim's expansive landscapes, the post-apocalyptic playstyle of Fallout 4, the universe of Starfield, and the cooperative survival thrills of Valheim all hold a special place in my collection.</p>
+    <h2>Friends and Family</h2>
+    <p>In this gaming journey, I'm fortunate to have two amazing buddies, Yong and Nantissia, who share my passion for gaming and adventures. Together, we've conquered virtual worlds and created countless memories. I am very blessed to have them as my two best buddies. I'm happily married to my beautiful wife, Bhumika, whom I met on Lord of the Rings Online. We've been joyfully married for 3 years and together, we share our home with our beloved 1-year-old Yorkie named Fia.</p>
+
+    <h2>Memorable Achievements</h2>
+    <p>As a completionist, I take pride in achieving 100% game completion. Every side quest, hidden collectible, and secret achievement adds to the thrill of my gaming adventures.</p>
+
+    <h2>Favorite Genres</h2>
+    <p>RPGs, FPS, RTS, and Open World Survival Craft—these genres define my gaming preferences. But it's the intricate strategies of real-time strategy games and the excitement of surviving the wilds in survival titles that truly captivate me.</p>
+
+    <h2>Gaming Goals</h2>
+    <p>My primary gaming goal? Fun! I play to enjoy every moment, exploring game mechanics, uncovering secrets, and even attempting to "break" games with friends along the way.</p>
+
+    <h2>Outside of Gaming</h2>
+    <p>When I step away from the screen, I embrace other interests. Music, specifically playing the guitar, is a cherished hobby. Disc golf, leisurely walks with my wife and our lively Yorkie companion, hosting board game nights, and celebrating holidays with family all add depth to my life.</p>
+
+    <h2>Motivation for My Website</h2>
+    <p>The idea behind my gaming website was simple: to create a space where I could craft tools, offer informative guides, and share my gaming journey with friends and fellow gamers. Here, you'll find resources ranging from game guides to useful gaming tools, along with a gallery capturing memorable gaming moments.</p>
+
+    <h2>Connect with Me</h2>
+    <p>Let's embark on gaming adventures together! Feel free to reach out to me on social media or in-game. Your presence is a welcome addition to our gaming community.</p>
+
+    <h2>Thank You!</h2>
+    <p>Thank you for visiting my gaming haven. I invite you to explore the wealth of gaming goodness this website has to offer.</p>-->
+  <form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="business" value="Q4Z3TWLZTZ9S4" />
+    <input type="hidden" name="no_recurring" value="0" />
+    <input type="hidden" name="item_name"
+      value="Hey hey! If you are here to donate/gift me. You can be sure that your generosity is greatly appreciated!" />
+    <input type="hidden" name="currency_code" value="USD" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit"
+      title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+  </form>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script>includeHTML();</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+    // The date you were born
+    var birthDate = new Date(1993, 6, 27, 0, 0, 0, 0);
+
+    // The current date
+    var currentDate = new Date();
+
+    // The age in years
+    var age = currentDate.getFullYear() - birthDate.getFullYear();
+
+    // Compare the months
+    var month = currentDate.getMonth() - birthDate.getMonth();
+
+    // Compare the days
+    var day = currentDate.getDate() - birthDate.getDate();
+
+    // If the date has already happened this year
+    if (month < 0 || month == 0 && day < 0) {
+      age--;
+    }
+
+    document.getElementById("age").innerHTML = age;
+  </script>
+</body>
+
 </html>
