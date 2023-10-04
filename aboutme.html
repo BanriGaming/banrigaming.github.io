@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -13,6 +12,7 @@
   </link>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap"
     rel="stylesheet">
+  <script src="https://kit.fontawesome.com/59dd67ee57.js" crossorigin="anonymous"></script>
   <script src="assets/js/nav.js"></script>
 </head>
 
@@ -24,23 +24,135 @@
     <p class="lead"></p>
   </div>
   </div>
-  <hr>
-  <h2>Introduction</h2>
-  <p>Hello, fellow gamers! I'm Banri, I am <span id="age">30</span> Years Old, and a friendly fellow gamer that ventures through the captivating realms of gaming. 
-    My journey into the gaming universe started basically when i was little when i sat in my brother's room watching him play Homeworld. It was the beginning of an adventure that would become an integral part of my life.</p>
-  <div class="accordion" id="aboutAccordion">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-          aria-expanded="true" aria-controls="collapseOne">
-          My Gaming Journey
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-        data-bs-parent="#aboutAccordion">
-        <div class="accordion-body">
-          I jumped headfirst into the world of gaming. NFS Hot Pursuit 2, Homeworld 1 & 2, Star Trek Online, and
-          countless other games rolled into my collection of games. Below is a list of all the games ive played currently;
+  <p>Hello, fellow gamers! I'm Banri, I am <span id="age">30</span> Years Old, and a friendly fellow gamer that ventures
+    through the captivating realms of gaming.
+    My journey into the gaming universe started basically when i was little when i sat in my brother's room watching him
+    play Homeworld. It was the beginning of an adventure that would become an integral part of my life.</p>
+  <h2>Motivation for My Website</h2>
+  <hr class="border-bottom border-light">
+  <p>The idea behind my gaming website was simple: to create a space where I could craft tools, offer informative
+    guides, and share my gaming journey with friends and fellow gamers. Here, you'll find resources ranging from game
+    guides to useful gaming tools, along with a gallery capturing memorable gaming moments.</p>
+  <p>Let's embark on gaming adventures together! Feel free to reach out to me on social media or in-game. Your presence
+    is a welcome addition to our gaming community. Thank you for visiting my gaming haven. I invite you to explore the
+    wealth of gaming goodness this website has to offer.</p>
+  <p>Your contribution helps us continue to provide valuable gaming resources, guides, tools and calculators for PC
+    gamers like you. Whether it's mastering a challenging game, optimizing your settings, or staying up-to-date with the
+    latest gaming hacks, your donation ensures that we can keep enhancing your gaming experience. Every dollar goes a
+    long way in sustaining and improving our platform. Thank you for being a part of our gaming community.</p>
+  <!-- Add Bootstrap styles to the button -->
+  <form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="business" value="Q4Z3TWLZTZ9S4" />
+    <input type="hidden" name="no_recurring" value="0" />
+    <input type="hidden" name="item_name"
+      value="Hey hey! If you are here to donate/gift me. You can be sure that your generosity is greatly appreciated!" />
+    <input type="hidden" name="currency_code" value="USD" />
+    <!-- Add Bootstrap styles to the button -->
+    <button class="btn btn-primary" type="submit" title="PayPal - The safer, easier way to pay online!">
+      Donate with PayPal
+    </button>
+    <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+  </form>
+
+
+  <p>Below are few fun facts about me.</p>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100 bg-dark">
+        <div class="about-img d-flex align-self-center p-5">
+          <span class="fa-solid fa-map-location-dot fa-2xl"></span>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Gaming Journey</h5>
+          <hr class="border-bottom border-light">
+          <p class="card-text">I jumped headfirst into the world of gaming. NFS Hot Pursuit 2, Homeworld 1 & 2, Star
+            Trek Online, and countless other games rolled into my collection of games. Below is a list of all the games ive played currently.</p>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gamesmodal">
+            Games List
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 bg-dark">
+        <div class="about-img d-flex align-self-center p-5">
+          <span class="fa-solid fa-gamepad fa-2xl"></span>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Favorite Games</h5>
+          <hr class="border-bottom border-light">
+          <p class="card-text">While it's tough to pick just one, some games have left an indelible mark on my gaming
+            heart. Skyrim's expansive landscapes, the post-apocalyptic playstyle of Fallout 4, the universe of
+            Starfield, and the cooperative survival thrills of Valheim all hold a special place in my collection.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 bg-dark">
+        <div class="about-img d-flex align-self-center p-5">
+          <span class="fa-solid fa-house-chimney-window fa-2xl"></span>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Friends and Family</h5>
+          <hr class="border-bottom border-light">
+          <p class="card-text">In this gaming journey, I'm fortunate to have two amazing buddies, Yong and Nantissia,
+            who share my passion for gaming and adventures. Together, we've conquered virtual worlds and created
+            countless memories. I am very blessed to have them as my two best buddies. I'm happily married to my
+            beautiful wife, Bhumika, whom I met on Lord of the Rings Online. We've been joyfully married for 3 years and
+            together, we share our home with our beloved 1-year-old Yorkie named Fia.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 bg-dark">
+        <div class="about-img d-flex align-self-center p-5">
+          <span class="fa-solid fa-trophy fa-2xl"></span>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Memorable Achievements</h5>
+          <hr class="border-bottom border-light">
+          <p class="card-text">As a completionist, I take pride in achieving 100% game completion. Every side quest,
+            hidden collectible, and secret achievement adds to the thrill of my gaming adventures.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 bg-dark">
+        <div class="about-img d-flex align-self-center p-5">
+          <span class="fa-solid fa-heart fa-2xl"></span>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Favorite Genres</h5>
+          <hr class="border-bottom border-light">
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 bg-dark">
+        <div class="about-img d-flex align-self-center p-5">
+          <span class="fa-solid fa-bullseye fa-2xl"></span>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">Gaming Goals</h5>
+          <hr class="border-bottom border-light">
+          <p class="card-text">RPGs, FPS, RTS, and Open World Survival Craft—these genres define my gaming preferences.
+            But it's the intricate strategies of real-time strategy games and the excitement of surviving the wilds in
+            survival titles that truly captivate me.a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal bg-dark-50 fade opacity-50" id="gamesmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title" id="exampleModalLabel">Games List</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body bg-dark">
           <ul>
             <li>Age of Empires II</li>
             <li>Age of Empires III</li>
@@ -75,126 +187,22 @@
             <li>Halo: The Master Chief Collection</li>
           </ul>
         </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-          aria-expanded="false" aria-controls="collapseTwo">
-          Favorite Games
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-        data-bs-parent="#aboutAccordion">
-        <div class="accordion-body">
-          While it's tough to pick just one, some games have left an indelible mark on my gaming heart. Skyrim's
-          expansive landscapes, the post-apocalyptic playstyle of Fallout 4, the universe of Starfield, and the
-          cooperative survival thrills of Valheim all hold a special place in my collection.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Friends and Family
-        </button>
-      </h2>
-      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-        data-bs-parent="#aboutAccordion">
-        <div class="accordion-body">
-          While it's tough to pick just one, some games have left an indelible mark on my gaming heart. Skyrim's
-          expansive landscapes, the post-apocalyptic playstyle of Fallout 4, the universe of Starfield, and the
-          cooperative survival thrills of Valheim all hold a special place in my collection.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingFour">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          Memorable Achievements
-        </button>
-      </h2>
-      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-        data-bs-parent="#aboutAccordion">
-        <div class="accordion-body">
-
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingFive">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          Favorite Genres
-        </button>
-      </h2>
-      <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-        data-bs-parent="#aboutAccordion">
-        <div class="accordion-body">
-
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingSix">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
-          aria-expanded="false" aria-controls="collapseSix">
-          Favorite Genres
-        </button>
-      </h2>
-      <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-        data-bs-parent="#aboutAccordion">
-        <div class="accordion-body">
-
+        <div class="modal-footer bg-dark">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-  <!--<h2>Introduction</h2>
-    <p>Hello, fellow gamers! I'm Banri, I am <span id="age">30</span> Years Old, and a friendly fellow gamer that ventures through the captivating realms of gaming. My journey into the gaming universe started with wide-eyed wonder as I watched my big brother navigate the epic space of Homeworld. It was the beginning of an adventure that would become an integral part of my life.</p>
-    <h2>My Gaming Journey</h2>
-    <p>From those early days of watching, I jumped headfirst into the world of gaming. NFS Hot Pursuit 2, Homeworld 1 & 2, Star Trek Online, and countless others became my companions as I ventured into virtual worlds, seeking challenges, and discovering treasures.</p>
-    <h2>Favorite Games</h2>
-    <p>While it's tough to pick just one, some games have left an indelible mark on my gaming heart. Skyrim's expansive landscapes, the post-apocalyptic playstyle of Fallout 4, the universe of Starfield, and the cooperative survival thrills of Valheim all hold a special place in my collection.</p>
-    <h2>Friends and Family</h2>
-    <p>In this gaming journey, I'm fortunate to have two amazing buddies, Yong and Nantissia, who share my passion for gaming and adventures. Together, we've conquered virtual worlds and created countless memories. I am very blessed to have them as my two best buddies. I'm happily married to my beautiful wife, Bhumika, whom I met on Lord of the Rings Online. We've been joyfully married for 3 years and together, we share our home with our beloved 1-year-old Yorkie named Fia.</p>
 
-    <h2>Memorable Achievements</h2>
-    <p>As a completionist, I take pride in achieving 100% game completion. Every side quest, hidden collectible, and secret achievement adds to the thrill of my gaming adventures.</p>
-
-    <h2>Favorite Genres</h2>
-    <p>RPGs, FPS, RTS, and Open World Survival Craft—these genres define my gaming preferences. But it's the intricate strategies of real-time strategy games and the excitement of surviving the wilds in survival titles that truly captivate me.</p>
-
-    <h2>Gaming Goals</h2>
-    <p>My primary gaming goal? Fun! I play to enjoy every moment, exploring game mechanics, uncovering secrets, and even attempting to "break" games with friends along the way.</p>
-
-    <h2>Outside of Gaming</h2>
-    <p>When I step away from the screen, I embrace other interests. Music, specifically playing the guitar, is a cherished hobby. Disc golf, leisurely walks with my wife and our lively Yorkie companion, hosting board game nights, and celebrating holidays with family all add depth to my life.</p>
-
-    <h2>Motivation for My Website</h2>
-    <p>The idea behind my gaming website was simple: to create a space where I could craft tools, offer informative guides, and share my gaming journey with friends and fellow gamers. Here, you'll find resources ranging from game guides to useful gaming tools, along with a gallery capturing memorable gaming moments.</p>
-
-    <h2>Connect with Me</h2>
-    <p>Let's embark on gaming adventures together! Feel free to reach out to me on social media or in-game. Your presence is a welcome addition to our gaming community.</p>
-
-    <h2>Thank You!</h2>
-    <p>Thank you for visiting my gaming haven. I invite you to explore the wealth of gaming goodness this website has to offer.</p>-->
-  <form action="https://www.paypal.com/donate" method="post" target="_top">
-    <input type="hidden" name="business" value="Q4Z3TWLZTZ9S4" />
-    <input type="hidden" name="no_recurring" value="0" />
-    <input type="hidden" name="item_name"
-      value="Hey hey! If you are here to donate/gift me. You can be sure that your generosity is greatly appreciated!" />
-    <input type="hidden" name="currency_code" value="USD" />
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit"
-      title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-  </form>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
   <script>includeHTML();</script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
     // The date you were born
     var birthDate = new Date(1993, 6, 27, 0, 0, 0, 0);
@@ -215,7 +223,6 @@
     if (month < 0 || month == 0 && day < 0) {
       age--;
     }
-
     document.getElementById("age").innerHTML = age;
   </script>
 </body>

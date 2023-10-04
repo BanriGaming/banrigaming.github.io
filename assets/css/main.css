@@ -584,7 +584,7 @@ iframe{
 #myImg:hover {opacity: 0.7;}
 
 /* The Modal (background) */
-.modal {
+#myModal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -599,7 +599,7 @@ iframe{
 }
 
 /* Modal Content (Image) */
-.modal-content {
+#myModal .modal-content {
   margin: auto;
   display: block;
   width: 80%;
@@ -838,4 +838,31 @@ iframe{
 
 .block-vytinium {
   background-color: #EDED56;
+}
+/*About page*/
+.about-img{
+  font-size:2.5rem;
+  background: linear-gradient(
+    55deg,
+    hsl(0deg 0% 100%) 0%,
+    hsl(0deg 0% 74%) 8%,
+    hsl(0deg 0% 48%) 17%,
+    hsl(0deg 0% 23%) 25%,
+    hsl(0deg 0% 48%) 33%,
+    hsl(0deg 0% 74%) 41%,
+    hsl(0deg 0% 100%) 49%,
+    hsl(199deg 58% 73%) 58%,
+    hsl(199deg 58% 46%) 66%,
+    hsl(199deg 58% 19%) 74%,
+    hsl(199deg 38% 18%) 83%,
+    hsl(196deg 19% 15%) 91%,
+    hsl(0deg 0% 14%) 100%
+  );
+-webkit-background-clip: text; /* for webkit-based browsers */
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* hide text color */
+    color: transparent; /* hide text color */
+}
+.card{
+  box-shadow: rgba(255, 255, 255, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.1) 0px 30px 60px -30px;
 }
