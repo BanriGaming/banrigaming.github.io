@@ -21,23 +21,23 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     function populateDropdown(data) {
-        for (const building in data) {
+        data.forEach(building => {
             const option = document.createElement('option');
-            option.value = building;
-            option.textContent = building;
+            option.value = building.name;
+            option.textContent = building.name;
             select.appendChild(option);
-        }
+        });
     }
 
     generateButton.addEventListener('click', function () {
         const selectedBuilding = select.value;
         const quantity = document.getElementById('quantity').valueAsNumber;
 
-        const buildingData = buildingsData[selectedBuilding];
+        const buildingData = buildingsData.find(building => building.name === selectedBuilding);
 
         if (buildingData) {
-            const basicMaterials = materialsData['basicMaterials'];
-            const totalMaterials = { ...materialsData['advancedMaterials'][selectedBuilding] };
+            const basicMaterials = materialsData.basicMaterials;
+            const totalMaterials = materialsData.advancedMaterials[selectedBuilding];
 
             for (const material in totalMaterials) {
                 totalMaterials[material] *= quantity;
@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
             powerUsage.textContent = `Total Power Usage: ${buildingData['PowerUsage'] * quantity}`;
             shoppingList.appendChild(powerUsage);
         }
-        if (buildingData['Production']) {
+        if (buildingData['PowerProduction']) {
             const production = document.createElement('p');
-            production.textContent = `Total Production: ${buildingData['Production'] * quantity}`;
+            production.textContent = `Total Production: ${buildingData['PowerProduction'] * quantity}`;
             shoppingList.appendChild(production);
         }
     }
