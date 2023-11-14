@@ -7,14 +7,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let materialsData;
 
     // Fetch data from JSON files
-    fetch('assets/json/pcbuildings.json')
+    fetch('https://banrigaming.github.io/assets/json/pcbuildings.json')
         .then(response => response.json())
         .then(data => {
             buildingsData = data;
             populateDropdown(data);
         });
 
-    fetch('assets/json/pcmaterials.json')
+    fetch('https://banrigaming.github.io/assets/json/pcmaterials.json')
         .then(response => response.json())
         .then(data => {
             materialsData = data;

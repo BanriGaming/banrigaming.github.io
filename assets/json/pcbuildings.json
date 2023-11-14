@@ -1,137 +1,156 @@
-{
-    "HeaterT1": {
-      "Iridium": 1,
-      "Iron": 1,
-      "Silicon": 1,
-      "Heat": "0.3 pK/s",
-      "PowerUsage": "1.0 kW/s"
+[
+    {
+        "name": "HeaterT1",
+        "Iridium": 1,
+        "Iron": 1,
+        "Silicon": 1,
+        "Heat": "0.3 pK/s",
+        "PowerUsage": "1.0 kW/s"
     },
-    "HeaterT2": {
-      "Iridium": 2,
-      "Silicon": 1,
-      "Titanium": 1,
-      "Iron": 1,
-      "Aluminum": 1,
-      "Heat": "4.5 pK/s",
-      "PowerUsage": "3.5 kW/s"
+    {
+        "name": "HeaterT2",
+        "Iridium": 2,
+        "Silicon": 1,
+        "Titanium": 1,
+        "Iron": 1,
+        "Aluminum": 1,
+        "Heat": "4.5 pK/s",
+        "PowerUsage": "3.5 kW/s"
     },
-    "HeaterT3": {
-      "Silicon": 1,
-      "Titanium": 1,
-      "Aluminum": 1,
-      "IridiumRods": 1,
-      "Heat": "28.5 pK/s",
-      "Pressure": "0.6 nPa/s",
-      "PowerUsage": "17.5 kW/s"
+    {
+        "name": "HeaterT3",
+        "Silicon": 1,
+        "Titanium": 1,
+        "Aluminum": 1,
+        "IridiumRods": 1,
+        "Heat": "28.5 pK/s",
+        "Pressure": "0.6 nPa/s",
+        "PowerUsage": "17.5 kW/s"
     },
-    "HeaterT4": {
-      "SuperAlloy": 3,
-      "IridiumRods": 2,
-      "ExplosivePowder": 1,
-      "Heat": "538 pK/s",
-      "Pressure": "35.5 nPa/s",
-      "PowerUsage": "51.5 kW/s"
+    {
+        "name": "HeaterT4",
+        "SuperAlloy": 3,
+        "IridiumRods": 2,
+        "ExplosivePowder": 1,
+        "Heat": "538 pK/s",
+        "Pressure": "35.5 nPa/s",
+        "PowerUsage": "51.5 kW/s"
     },
-    "HeaterT5": {
-      "IridiumRods": 3,
-      "ExplosivePowder": 3,
-      "SuperAlloyRods": 3,
-      "Heat": "4530 pK/s",  
-      "Pressure": "280 nPa/s",
-      "PowerUsage": "360.5 kW/s"
+    {
+        "name": "HeaterT5",
+        "IridiumRods": 3,
+        "ExplosivePowder": 3,
+        "SuperAlloyRods": 3,
+        "Heat": "4530 pK/s",
+        "Pressure": "280 nPa/s",
+        "PowerUsage": "360.5 kW/s"
     },
-    "DrillT1": {
+    {
+        "name": "DrillT1",
         "Iron": 1,
         "Titanium": 1,
         "Pressure": "0.2 nPa/s",
         "PowerUsage": "0.5 kW/s"
-      },
-      "DrillT2": {
+    },
+    {
+        "name": "DrillT2",
         "Iron": 1,
         "Titanium": 2,
         "Pressure": "1.5 nPa/s",
         "Heat": "0.10 pK/s",
         "PowerUsage": "5.00 kW/s"
-      },
-      "DrillT3": {
+    },
+    {
+        "name": "DrillT3",
         "Iron": 2,
         "Titanium": 2,
         "Aluminum": 2,
         "Pressure": "17.00 nPa/s",
         "Heat": "0.25 pK/s",
         "PowerUsage": "8.50 kW/s"
-      },
-      "DrillT4": {
+    },
+    {
+        "name": "DrillT4",
         "SuperAlloy": 6,
         "Osmium": 3,
         "Pressure": "459.00 nPa/s",
         "Heat": "25.00 pK/s",
         "PowerUsage": "45.50 kW/s"
-      },
-      "DrillT5": {
+    },
+    {
+        "name": "DrillT5",
         "SuperAlloyRods": 2,
         "OsmiumRod": 1,
         "Pressure": "3950 nPa/s",
         "Heat": "295 pK/s",
         "PowerUsage": "375.5 kW/s"
-      },
-      "VegetubeT1": {
-        "Iron": 1,
-        "Ice": 1,
-        "Magnesium": 1,
-        "Oxygen": "0.15 ppq/s",
-        "PowerUsage": "0.35 kW/s"
-      },
-      "VegetubeT2": {
-        "Iron": 1,
-        "Ice": 2,
-        "Magnesium": 1,
-        "Silicon": 1,
-        "Oxygen": "1.20 ppq/s",
-        "PowerUsage": "1.25 kW/s"
-      },
-      "VegetubeT3": {
-        "WaterBottle": 1,
-        "Silicon": 2,
-        "Magnesium": 1,
-        "Aluminum": 1,
-        "Oxygen": "13 ppq/s",
-        "PowerUsage": "7.25 kW/s"
-      },
-      "WindTurbine": {
+    },
+    {
+        "name": "WindTurbine",
         "Iron": 1,
         "PowerProduction": "1.20 kW/s"
-      },
-      "SolarPanelT1": {
+    },
+    {
+        "name": "SolarPanelT1",
         "Iron": 1,
         "Cobalt": 2,
         "Silicon": 1,
         "PowerProduction": "6.50 kW/s"
-      },
-      "SolarPanelT2": {
+    },
+    {
+        "name": "SolarPanelT2",
         "Iron": 1,
         "Cobalt": 2,
         "Silicon": 1,
         "Magnesium": 1,
         "Aluminum": 1,
         "PowerProduction": "19.50 kW/s"
-      },
-      "NuclearReactorT1": {
+    },
+    {
+        "name": "NuclearReactorT1",
         "SuperAlloy": 2,
         "WaterBottle": 2,
         "UraniumRod": 1,
         "PowerProduction": "86.50 kW/s"
-      },
-      "NuclearReactorT2": {
+    },
+    {
+        "name": "NuclearReactorT2",
         "SuperAlloy": 1,
         "WaterBottle": 3,
         "UraniumRod": 3,
         "ExplosivePowder": 1,
         "PowerProduction": "331.50 kW/s"
-      },
-      "NuclearFusionGenerator": {
+    },
+    {
+        "name": "NuclearFusionGenerator",
         "PulsarQuartz": 5,
         "SuperAlloy": 4,
         "PowerProduction": "1485 kW/s"
-      }
-  }
+    },
+    {
+        "name": "VegetubeT1",
+        "Iron": 1,
+        "Ice": 1,
+        "Magnesium": 1,
+        "Oxygen": "0.15 ppq/s",
+        "PowerUsage": "0.35 kW/s"
+    },
+    {
+        "name": "VegetubeT2",
+        "Iron": 1,
+        "Ice": 2,
+        "Magnesium": 1,
+        "Silicon": 1,
+        "Oxygen": "1.20 ppq/s",
+        "PowerUsage": "1.25 kW/s"
+    },
+    {
+        "name": "VegetubeT3",
+        "WaterBottle": 1,
+        "Silicon": 2,
+        "Magnesium": 1,
+        "Aluminum": 1,
+        "Oxygen": "13 ppq/s",
+        "PowerUsage": "7.25 kW/s"
+    }
+]
