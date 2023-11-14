@@ -1,6 +1,7 @@
 [
     {
         "name": "HeaterT1",
+        "category": "Heaters",
         "Iridium": 1,
         "Iron": 1,
         "Silicon": 1,
@@ -9,6 +10,7 @@
     },
     {
         "name": "HeaterT2",
+        "category": "Heaters",
         "Iridium": 2,
         "Silicon": 1,
         "Titanium": 1,
@@ -19,6 +21,7 @@
     },
     {
         "name": "HeaterT3",
+        "category": "Heaters",
         "Silicon": 1,
         "Titanium": 1,
         "Aluminum": 1,
@@ -29,6 +32,7 @@
     },
     {
         "name": "HeaterT4",
+        "category": "Heaters",
         "SuperAlloy": 3,
         "IridiumRods": 2,
         "ExplosivePowder": 1,
@@ -38,6 +42,7 @@
     },
     {
         "name": "HeaterT5",
+        "category": "Heaters",
         "IridiumRods": 3,
         "ExplosivePowder": 3,
         "SuperAlloyRods": 3,
@@ -47,6 +52,7 @@
     },
     {
         "name": "DrillT1",
+        "category": "Drills",
         "Iron": 1,
         "Titanium": 1,
         "Pressure": "0.2 nPa/s",
@@ -54,6 +60,7 @@
     },
     {
         "name": "DrillT2",
+        "category": "Drills",
         "Iron": 1,
         "Titanium": 2,
         "Pressure": "1.5 nPa/s",
@@ -62,6 +69,7 @@
     },
     {
         "name": "DrillT3",
+        "category": "Drills",
         "Iron": 2,
         "Titanium": 2,
         "Aluminum": 2,
@@ -71,6 +79,7 @@
     },
     {
         "name": "DrillT4",
+        "category": "Drills",
         "SuperAlloy": 6,
         "Osmium": 3,
         "Pressure": "459.00 nPa/s",
@@ -79,6 +88,7 @@
     },
     {
         "name": "DrillT5",
+        "category": "Drills",
         "SuperAlloyRods": 2,
         "OsmiumRod": 1,
         "Pressure": "3950 nPa/s",
@@ -87,11 +97,13 @@
     },
     {
         "name": "WindTurbine",
+        "category": "Power Generators",
         "Iron": 1,
         "PowerProduction": "1.20 kW/s"
     },
     {
         "name": "SolarPanelT1",
+        "category": "Power Generators",
         "Iron": 1,
         "Cobalt": 2,
         "Silicon": 1,
@@ -99,6 +111,7 @@
     },
     {
         "name": "SolarPanelT2",
+        "category": "Power Generators",
         "Iron": 1,
         "Cobalt": 2,
         "Silicon": 1,
@@ -108,6 +121,7 @@
     },
     {
         "name": "NuclearReactorT1",
+        "category": "Power Generators",
         "SuperAlloy": 2,
         "WaterBottle": 2,
         "UraniumRod": 1,
@@ -115,6 +129,7 @@
     },
     {
         "name": "NuclearReactorT2",
+        "category": "Power Generators",
         "SuperAlloy": 1,
         "WaterBottle": 3,
         "UraniumRod": 3,
@@ -123,12 +138,14 @@
     },
     {
         "name": "NuclearFusionGenerator",
+        "category": "Power Generators",
         "PulsarQuartz": 5,
         "SuperAlloy": 4,
         "PowerProduction": "1485 kW/s"
     },
     {
         "name": "VegetubeT1",
+        "category": "Oxygen Farms",
         "Iron": 1,
         "Ice": 1,
         "Magnesium": 1,
@@ -137,6 +154,7 @@
     },
     {
         "name": "VegetubeT2",
+        "category": "Oxygen Farms",
         "Iron": 1,
         "Ice": 2,
         "Magnesium": 1,
@@ -146,6 +164,7 @@
     },
     {
         "name": "VegetubeT3",
+        "category": "Oxygen Farms",
         "WaterBottle": 1,
         "Silicon": 2,
         "Magnesium": 1,
