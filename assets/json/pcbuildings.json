@@ -1,6 +1,6 @@
 [
     {
-        "name": "HeaterT1",
+        "name": "Heater T1",
         "category": "Heaters",
         "Iridium": 1,
         "Iron": 1,
@@ -9,7 +9,7 @@
         "PowerUsage": "1.0 kW/s"
     },
     {
-        "name": "HeaterT2",
+        "name": "Heater T2",
         "category": "Heaters",
         "Iridium": 2,
         "Silicon": 1,
@@ -20,7 +20,7 @@
         "PowerUsage": "3.5 kW/s"
     },
     {
-        "name": "HeaterT3",
+        "name": "Heater T3",
         "category": "Heaters",
         "Silicon": 1,
         "Titanium": 1,
@@ -28,30 +28,33 @@
         "IridiumRods": 1,
         "Heat": "28.5 pK/s",
         "Pressure": "0.6 nPa/s",
-        "PowerUsage": "17.5 kW/s"
+        "PowerUsage": "17.5 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "HeaterT4",
+        "name": "Heater T4",
         "category": "Heaters",
         "SuperAlloy": 3,
         "IridiumRods": 2,
         "ExplosivePowder": 1,
         "Heat": "538 pK/s",
         "Pressure": "35.5 nPa/s",
-        "PowerUsage": "51.5 kW/s"
+        "PowerUsage": "51.5 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "HeaterT5",
+        "name": "Heater T5",
         "category": "Heaters",
         "IridiumRods": 3,
         "ExplosivePowder": 3,
         "SuperAlloyRods": 3,
         "Heat": "4530 pK/s",
         "Pressure": "280 nPa/s",
-        "PowerUsage": "360.5 kW/s"
+        "PowerUsage": "360.5 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "DrillT1",
+        "name": "Drill T1",
         "category": "Drills",
         "Iron": 1,
         "Titanium": 1,
@@ -59,7 +62,7 @@
         "PowerUsage": "0.5 kW/s"
     },
     {
-        "name": "DrillT2",
+        "name": "Drill T2",
         "category": "Drills",
         "Iron": 1,
         "Titanium": 2,
@@ -68,7 +71,7 @@
         "PowerUsage": "5.00 kW/s"
     },
     {
-        "name": "DrillT3",
+        "name": "Drill T3",
         "category": "Drills",
         "Iron": 2,
         "Titanium": 2,
@@ -78,31 +81,33 @@
         "PowerUsage": "8.50 kW/s"
     },
     {
-        "name": "DrillT4",
+        "name": "Drill T4",
         "category": "Drills",
         "SuperAlloy": 6,
         "Osmium": 3,
         "Pressure": "459.00 nPa/s",
         "Heat": "25.00 pK/s",
-        "PowerUsage": "45.50 kW/s"
+        "PowerUsage": "45.50 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "DrillT5",
+        "name": "Drill T5",
         "category": "Drills",
         "SuperAlloyRods": 2,
         "OsmiumRod": 1,
         "Pressure": "3950 nPa/s",
         "Heat": "295 pK/s",
-        "PowerUsage": "375.5 kW/s"
+        "PowerUsage": "375.5 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "WindTurbine",
+        "name": "Wind Turbine",
         "category": "Power Generators",
         "Iron": 1,
         "PowerProduction": "1.20 kW/s"
     },
     {
-        "name": "SolarPanelT1",
+        "name": "Solar Panel T1",
         "category": "Power Generators",
         "Iron": 1,
         "Cobalt": 2,
@@ -110,7 +115,7 @@
         "PowerProduction": "6.50 kW/s"
     },
     {
-        "name": "SolarPanelT2",
+        "name": "Solar Panel T2",
         "category": "Power Generators",
         "Iron": 1,
         "Cobalt": 2,
@@ -120,31 +125,34 @@
         "PowerProduction": "19.50 kW/s"
     },
     {
-        "name": "NuclearReactorT1",
+        "name": "Nuclear Reactor T1",
         "category": "Power Generators",
         "SuperAlloy": 2,
         "WaterBottle": 2,
         "UraniumRod": 1,
-        "PowerProduction": "86.50 kW/s"
+        "PowerProduction": "86.50 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "NuclearReactorT2",
+        "name": "Nuclear Reactor T2",
         "category": "Power Generators",
         "SuperAlloy": 1,
         "WaterBottle": 3,
         "UraniumRod": 3,
         "ExplosivePowder": 1,
-        "PowerProduction": "331.50 kW/s"
+        "PowerProduction": "331.50 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "NuclearFusionGenerator",
+        "name": "Nuclear Fusion Generator",
         "category": "Power Generators",
         "PulsarQuartz": 5,
         "SuperAlloy": 4,
-        "PowerProduction": "1485 kW/s"
+        "PowerProduction": "1485 kW/s",
+        "advanced": "true"
     },
     {
-        "name": "VegetubeT1",
+        "name": "Vegetube T1",
         "category": "Oxygen Farms",
         "Iron": 1,
         "Ice": 1,
@@ -153,7 +161,7 @@
         "PowerUsage": "0.35 kW/s"
     },
     {
-        "name": "VegetubeT2",
+        "name": "Vegetube T2",
         "category": "Oxygen Farms",
         "Iron": 1,
         "Ice": 2,
@@ -163,13 +171,14 @@
         "PowerUsage": "1.25 kW/s"
     },
     {
-        "name": "VegetubeT3",
+        "name": "Vegetube T3",
         "category": "Oxygen Farms",
         "WaterBottle": 1,
         "Silicon": 2,
         "Magnesium": 1,
         "Aluminum": 1,
         "Oxygen": "13 ppq/s",
-        "PowerUsage": "7.25 kW/s"
+        "PowerUsage": "7.25 kW/s",
+        "advanced": "true"
     }
 ]

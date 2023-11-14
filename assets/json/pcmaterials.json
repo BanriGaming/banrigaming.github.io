@@ -1,39 +1,90 @@
 [
     {
-        "name": "basicMaterials",
-        "Ice": 0,
-        "Iron": 0,
-        "Titanium": 0,
-        "Silicon": 0,
-        "Cobalt": 0,
-        "Magnesium": 0,
-        "Aluminum": 0,
-        "Iridium": 0,
-        "Uranium": 0,
-        "Sulfur": 0,
-        "Osmium": 0,
-        "Zeolite": 0
+        "name": "Ice",
+        "type": "Basic"
     },
     {
-        "name": "advancedMaterials",
-        "IridiumRod": {
-            "Iridium": 9
-        },
-        "UraniumRod": {
-            "Uranium": 9
-        },
-        "SuperAlloy": {
+        "name": "Iron",
+        "type": "Basic"
+    },
+    {
+        "name": "Titanium",
+        "type": "Basic"
+    },
+    {
+        "name": "Silicon",
+        "type": "Basic"
+    },
+    {
+        "name": "Cobalt",
+        "type": "Basic"
+    },
+    {
+        "name": "Magnesium",
+        "type": "Basic"
+    },
+    {
+        "name": "Aluminum",
+        "type": "Basic"
+    },
+    {
+        "name": "Iridium",
+        "type": "Basic"
+    },
+    {
+        "name": "Uranium",
+        "type": "Basic"
+    },
+    {
+        "name": "Ice",
+        "type": "Basic"
+    },
+    {
+        "name": "Sulfur",
+        "type": "Basic"
+    },
+    {
+        "name": "Osmium",
+        "type": "Basic"
+    },
+    {
+        "name": "Zeolite",
+        "type": "Basic"
+    },
+    {
+        "name": "Iridium Rod",
+        "type": "Advanced",
+        "materials" : "Iridium",
+        "qty" : "9"
+    },
+    {
+        "name": "Uranium Rod",
+        "type": "Advanced",
+        "materials" : "Uranium",
+        "qty" : "9"
+    },
+    {
+        "name": "Osmium Rod",
+        "type": "Advanced",
+        "materials" : "Osmium",
+        "qty" : "9"
+    },
+    {
+        "name": "Super Alloy",
+        "type": "Advanced",
+        "materials": {
             "Cobalt": 1,
             "Iron": 1,
             "Magnesium": 1,
             "Silicon": 1,
             "Titanium": 1,
             "Aluminum": 1
-        },
-        "OsmiumRod": {
-            "Osmium": 9
-        },
-        "ExplosivePowder": {
+        }
+    },
+    {
+        "name": "Explosive Powder",
+        "type": "Advanced",
+        "materials": {
             "Sulfur": 2,
             "Iridium": 1
         }
