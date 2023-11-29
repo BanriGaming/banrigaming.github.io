@@ -1,0 +1,5112 @@
+{
+    "items": [
+    {
+      "id": "96c02591-b827-4c05-b12b-a1c67464a6f9",
+      "name": "Boo"
+    },
+    {
+      "id": "ed7d57f9-cd5a-4fd4-bdf6-d8b8a6ee10b3",
+      "name": "Heavy Vase"
+    },
+    {
+      "id": "17742f3f-9c7f-4dab-be21-0d653a80cb12",
+      "name": "Crumbling Marble"
+    },
+    {
+      "id": "26b29e36-7f64-422c-8513-4109d356ba4a",
+      "name": "Desecrated Relief"
+    },
+    {
+      "id": "d5c32289-4fcc-483c-885c-1b8ddd519d44",
+      "name": "Ring of Crabsight"
+    },
+    {
+      "id": "c021c3e7-a363-42b3-8a28-56a994198530",
+      "name": "Githyanki Disruptor Crystal"
+    },
+    {
+      "id": "10110b88-4945-4aaf-9b36-552d00aefe14",
+      "name": "Glyph Of Teleportation"
+    },
+    {
+      "id": "d08c61cb-6aad-4237-82e4-70a6ab738c79",
+      "name": "Inert Planecaster"
+    },
+    {
+      "id": "194613a3-2994-4b65-8816-6926e986b63a",
+      "name": "Chains"
+    },
+    {
+      "id": "2981327d-9a53-4cb1-8b06-9b6101f4edab",
+      "name": "Chains"
+    },
+    {
+      "id": "174904fa-69fb-4751-b40a-3fcc25774804",
+      "name": "Crown of Karsus"
+    },
+    {
+      "id": "3576ad38-6d0d-4e22-b5b4-4cabb937a167",
+      "name": "Storage Key"
+    },
+    {
+      "id": "faf9842d-c11d-414e-a757-cf6e893a1f60",
+      "name": "Chipped Tile"
+    },
+    {
+      "id": "29bdbdd1-3f74-46b0-b42b-41bea7d6f94a",
+      "name": "Skiff"
+    },
+    {
+      "id": "c569bae0-627a-4e9c-864c-8c44603226d8",
+      "name": "Wall of Force"
+    },
+    {
+      "id": "ad3c0c6b-bcc4-488e-a5cf-32b809188633",
+      "name": "Damaged Headpiece"
+    },
+    {
+      "id": "8733edb7-f04e-4b6d-ad48-7d49fb782bef",
+      "name": "Sussur Dagger"
+    },
+    {
+      "id": "44dedec0-df82-4ed3-b9ca-147bd830e312",
+      "name": "Sussur Greatsword"
+    },
+    {
+      "id": "6b95bb45-41c3-4954-ac2f-ef1aa169b0b6",
+      "name": "Sussur Sickle"
+    },
+    {
+      "id": "65b41886-823d-416b-b53e-c332a3aad530",
+      "name": "Steelforged Sword"
+    },
+    {
+      "id": "94af8697-bee3-4f35-90c0-801fdcb6ee03",
+      "name": "Flame Sphere"
+    },
+    {
+      "id": "3065f8bf-1d06-4b89-8f2a-268f82155317",
+      "name": "Stone of Shadows"
+    },
+    {
+      "id": "9cfae0fb-ef7a-430c-a6aa-6efffae4a690",
+      "name": "Infernal Diamond"
+    },
+    {
+      "id": "2a11a29e-ee3e-4ad7-9d06-beb79efea4e5",
+      "name": "Qua'nith Psionic Detector"
+    },
+    {
+      "id": "c245cb1a-ecfb-4dac-b686-26013dbb00d9",
+      "name": "Roasted Dwarf Ribs"
+    },
+    {
+      "id": "84e8df93-cba4-4a0c-b946-73f59258e792",
+      "name": "Roasted Dwarf Belly"
+    },
+    {
+      "id": "dc83c211-ef84-4e54-96c4-94aadbd3184a",
+      "name": "Roasted Dwarf Leg"
+    },
+    {
+      "id": "f57ad063-af4c-411c-9c91-9ca02cd57dd4",
+      "name": "Suspicious Meat"
+    },
+    {
+      "id": "1308e876-6541-447f-b3b4-2f981965435d",
+      "name": "Statue"
+    },
+    {
+      "id": "35f37f05-6942-42dd-98a9-d5c6ebf624eb",
+      "name": "Auntie Ethel"
+    },
+    {
+      "id": "d9863839-e955-47a2-8a06-070f5c3c9541",
+      "name": "Flawed Helldusk Armour"
+    },
+    {
+      "id": "6d60fcbb-e7a5-47ad-9cca-44565cbc0856",
+      "name": "Flawed Helldusk Helmet"
+    },
+    {
+      "id": "b673f1dc-d925-4811-a78e-53adcce847e8",
+      "name": "Flawed Helldusk Gloves"
+    },
+    {
+      "id": "b9eeaebb-9b00-4552-940f-5d829a66e8cb",
+      "name": "Orthon Explosive"
+    },
+    {
+      "id": "11fdda30-7f37-46b5-9491-bf738810874d",
+      "name": "Skiff"
+    },
+    {
+      "id": "9e31fd58-c2a6-487c-9054-913aecd5ce32",
+      "name": "Promise"
+    },
+    {
+      "id": "bcd0ad1a-19b3-4068-a3b0-b968c8d50bf7",
+      "name": "Hermit Crab"
+    },
+    {
+      "id": "7b587210-09a6-4333-85ad-4591831d9828",
+      "name": "Fallen Debris"
+    },
+    {
+      "id": "1b2fc147-7d51-468f-9c0b-f8c1f0c27b7a",
+      "name": "Heat Detector"
+    },
+    {
+      "id": "9be48133-7a5d-4515-ad2d-fbbce695c25c",
+      "name": "Bubbling Emergence"
+    },
+    {
+      "id": "1a36a3e0-5a03-4736-9869-5f98fe76b524",
+      "name": "Security Card"
+    },
+    {
+      "id": "f548f892-a91d-473b-a081-b4ba8280833f",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "ab546f8b-7a7b-432a-b045-b7697c04105c",
+      "name": "Stone Hand"
+    },
+    {
+      "id": "e4c17191-72da-42e5-bb48-c1eac2e536b9",
+      "name": "Sarin at Peace"
+    },
+    {
+      "id": "d41a9f59-bf00-46c6-81eb-b38d9a588fdc",
+      "name": "Motivator"
+    },
+    {
+      "id": "2e271e7b-36a7-46ca-90ec-290d1abcc8f1",
+      "name": "Forsaken Skeleton"
+    },
+    {
+      "id": "1d0137cc-2735-4ba1-8e33-67537848c0fe",
+      "name": "Forsaken Skull"
+    },
+    {
+      "id": "a5ba71a8-989b-479c-92e9-0a12b85d1e9e",
+      "name": "Old Armchair"
+    },
+    {
+      "id": "1a62610c-567e-4f92-9a88-4aac11f6c401",
+      "name": "Inert Infernal Gem"
+    },
+    {
+      "id": "e692fe33-f719-459a-90cf-497ccd22e48d",
+      "name": "Infernal Control Gem"
+    },
+    {
+      "id": "267cf1bc-59fd-4876-bd84-93ebbf724b2d",
+      "name": "Construct"
+    },
+    {
+      "id": "2071b74c-95b4-4490-91b7-cf5e250f22ab",
+      "name": "Destroyed Kill Collar"
+    },
+    {
+      "id": "47af23c3-7eb0-4a49-a4a4-f2ee5ab521c0",
+      "name": "Kill Collar"
+    },
+    {
+      "id": "88cb9fcf-3626-4f68-8781-ab747bf12dd3",
+      "name": "Balthazar's Book"
+    },
+    {
+      "id": "d8796aaf-224e-4726-8b2e-f1418db0a21b",
+      "name": "Book Title"
+    },
+    {
+      "id": "03e61bb2-e411-4380-ab09-d9a4d04d9c83",
+      "name": "Balthazar's Book"
+    },
+    {
+      "id": "3deeefb0-fa5b-4b40-a894-8d92f5163b44",
+      "name": "Book Title"
+    },
+    {
+      "id": "814f2a2c-9be9-47b4-897a-aea2c313a1e1",
+      "name": "Ancient Altar"
+    },
+    {
+      "id": "a049e7f9-0cbc-4efe-8ec5-4c353d9b1a9b",
+      "name": "Cube 1x1x1"
+    },
+    {
+      "id": "71bd8602-ea3e-4f6d-95b0-7c77298561e0",
+      "name": "Moonrise Guard's Key"
+    },
+    {
+      "id": "3301071e-be9c-4473-92c0-4eb1c51b66e3",
+      "name": "Cryptic Artefact"
+    },
+    {
+      "id": "5c90f6c2-80ef-4640-9fbb-aa89fb89ba43",
+      "name": "Triune Netherstone"
+    },
+    {
+      "id": "91dcff74-81db-4d14-9242-7f38c3f6b011",
+      "name": "Gortash's Netherstone"
+    },
+    {
+      "id": "99d576b9-46b5-4da6-b9c4-197d17c668a4",
+      "name": "Ketheric's Netherstone"
+    },
+    {
+      "id": "bbf64afc-a02d-4186-a3be-d6579735c018",
+      "name": "Orin's Netherstone"
+    },
+    {
+      "id": "ffc6092a-58a1-4446-a226-84456e87f79b",
+      "name": "Dirge of the Unholy Assassin"
+    },
+    {
+      "id": "020e5c6c-d8d6-4792-aba6-713c2e40cec1",
+      "name": "Broken Platform"
+    },
+    {
+      "id": "1dcc46e4-ca45-4ca6-b7ad-0158847290c1",
+      "name": "Wooden Planks"
+    },
+    {
+      "id": "9955f0bd-cf96-4541-a73f-2d6258b6b5d5",
+      "name": "Rope"
+    },
+    {
+      "id": "ad871cbd-aa9f-43bd-b491-16a33d1d40bf",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "b4d78b91-222e-43f2-82fd-6a1fae228abe",
+      "name": "Ruined Bridge"
+    },
+    {
+      "id": "49a19618-8a19-4bd4-a9c2-afb0248ea82f",
+      "name": "Portal to the Astral Plane"
+    },
+    {
+      "id": "7e5ca70d-7ec3-4eb6-b9c9-7cbc004dfd91",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "8d1183be-290d-45ed-be44-4469a3013306",
+      "name": "Makeshift Vessel"
+    },
+    {
+      "id": "f1defa42-3b48-4451-9451-e48f05053dba",
+      "name": "Alchemy Lab"
+    },
+    {
+      "id": "5b4b20c7-3b27-4237-8a1f-611c896b3239",
+      "name": "Gauntlet of Shar Map"
+    },
+    {
+      "id": "610df3fc-9976-453b-b316-c7551f09f52e",
+      "name": "Orb Socket"
+    },
+    {
+      "id": "fd3fd8a9-a5fc-4726-9b6e-77f5ecf54cea",
+      "name": "Umbral Gem"
+    },
+    {
+      "id": "446baacd-e5e1-4557-a6a9-0ae0f094b218",
+      "name": "Sacrificial Bowl"
+    },
+    {
+      "id": "d76b561b-4122-4f98-bae4-06691f804046",
+      "name": "Sacrificial Bowl"
+    },
+    {
+      "id": "4a997f13-4fb8-4aca-b3f1-cf206b108805",
+      "name": "Vampiric Dagger"
+    },
+    {
+      "id": "73d60327-a321-4d8f-b0db-161b65917fb7",
+      "name": "Balduran trial gem"
+    },
+    {
+      "id": "def9e410-c2a3-4132-a38c-f7dc436679ad",
+      "name": "Accursed Coins - Left Arm"
+    },
+    {
+      "id": "6dce5e63-42bd-4d49-830a-e40d9641cef4",
+      "name": "Accursed Coins - Right Arm"
+    },
+    {
+      "id": "d7ba60e5-fe90-4503-9919-0f831c306c53",
+      "name": "Accursed Coins - Head"
+    },
+    {
+      "id": "17e965b2-7ae6-4b28-b545-b11469efbd9c",
+      "name": "Accursed Coins - Left Leg"
+    },
+    {
+      "id": "cb3330bd-672d-4d4c-973c-fcc7e7c037c5",
+      "name": "Accursed Coins - Right Leg"
+    },
+    {
+      "id": "ee8533b8-483e-4ce6-93d4-82d5a1c29a30",
+      "name": "Accursed Coins - Chest"
+    },
+    {
+      "id": "f2b2327e-0aae-4389-87fb-cc999f7121ed",
+      "name": "Fetish of Callarduran Smoothhands"
+    },
+    {
+      "id": "a2b87e2f-cd46-430d-aa80-19ff7dfb2cd6",
+      "name": "Rock Face"
+    },
+    {
+      "id": "1064fce3-46ff-448e-9768-d6460bfe6fcb",
+      "name": "Toy Chest"
+    },
+    {
+      "id": "b37c96da-816d-42cd-a839-af7b94b0cee9",
+      "name": "The Sovereign's Key"
+    },
+    {
+      "id": "43570a53-3f94-442c-9317-f964ed76fdf0",
+      "name": "Beckoning Cave"
+    },
+    {
+      "id": "b551469c-5a53-4df3-a2c9-91516ef55695",
+      "name": "Flail of Dread Skulls"
+    },
+    {
+      "id": "90b745f4-5166-49a5-9225-1234dde533ae",
+      "name": "Gemless Ring"
+    },
+    {
+      "id": "cecf95a1-5a07-45cb-9f69-f892054e494e",
+      "name": "Suelto's Ethic of War"
+    },
+    {
+      "id": "17085d73-6f20-4dad-b40e-26fa2b68f8ed",
+      "name": "Stedd's Virtues of Unions"
+    },
+    {
+      "id": "f97e6e80-1f6e-4560-9fb8-27e399c80d57",
+      "name": "Amaps' Memoirs"
+    },
+    {
+      "id": "40899561-06fa-4cbf-8031-c839fea44331",
+      "name": "Red Knight Chess Piece"
+    },
+    {
+      "id": "9030e638-b086-4e0d-aeb9-365b03470679",
+      "name": "Magic Ring"
+    },
+    {
+      "id": "219a9d40-41b3-4225-a187-64bbc8e96525",
+      "name": "Ringless Gemstone"
+    },
+    {
+      "id": "435685c4-f7ec-4720-8d3c-c297b75267ea",
+      "name": "Execution Notice"
+    },
+    {
+      "id": "35877d3c-e31e-485e-a8b9-a053abd0fd23",
+      "name": "Coiled Rope"
+    },
+    {
+      "id": "5a487ea1-3b04-4012-9e6a-f20d03030024",
+      "name": "Vines"
+    },
+    {
+      "id": "e5dad8d6-6e77-4596-b200-bf345174777c",
+      "name": "Loose Boulder"
+    },
+    {
+      "id": "10051779-42d5-4bc6-8d55-10f6ce504758",
+      "name": "Attuned Crystal"
+    },
+    {
+      "id": "710fc72b-14c9-4ccc-8cce-c0c1eedf1e89",
+      "name": "Fissured Stalactite"
+    },
+    {
+      "id": "0febed02-0ae8-4076-9f7b-65bff3b4121d",
+      "name": "Lightning Strike"
+    },
+    {
+      "id": "88fbb698-6dd9-4239-a29c-51606b95af1c",
+      "name": "Brine Bulb"
+    },
+    {
+      "id": "10c7fb61-9c54-4910-a152-78ae743e51fb",
+      "name": "Brine Bulb"
+    },
+    {
+      "id": "27f77a61-a259-4fe2-9d7d-d94d2f0a5bee",
+      "name": "Heavy Stone"
+    },
+    {
+      "id": "47d0ac01-b412-44f6-9fcf-fe6888764c1d",
+      "name": "Skeletal Involucre"
+    },
+    {
+      "id": "374111f7-6756-4f5f-b6e3-e45e8d25def0",
+      "name": "Owlbear Egg"
+    },
+    {
+      "id": "0b8b0139-300e-4133-9e6c-6807067d02d3",
+      "name": "Divine Odds"
+    },
+    {
+      "id": "e89505df-2be5-4b3c-b1bc-c49e77c4b866",
+      "name": "War Horn"
+    },
+    {
+      "id": "7f19a186-4f04-4a8d-b1eb-c2442b3eba33",
+      "name": "Transport Barrel"
+    },
+    {
+      "id": "6774f642-6aa3-4756-a07d-a6be51ad6f06",
+      "name": "Head of a Broken Spear"
+    },
+    {
+      "id": "414956be-4aa5-447f-99c0-fb6382881ff5",
+      "name": "Shaft of a Broken Spear"
+    },
+    {
+      "id": "ea99e006-80e1-414a-8995-c03d92eaf170",
+      "name": "Sussur Tree Bark"
+    },
+    {
+      "id": "909dbdf7-c4de-4317-a9d9-623f911a660c",
+      "name": "Imp"
+    },
+    {
+      "id": "3023d5a5-14f0-4549-8ff2-1f34336c243c",
+      "name": "Crusher's Ring"
+    },
+    {
+      "id": "efa87028-d04d-4f70-8b63-2cccbbcb4374",
+      "name": "Klagga's Pants"
+    },
+    {
+      "id": "01d74aea-9e8a-4d03-9b55-e43458b61163",
+      "name": "Beastmaster's Chain"
+    },
+    {
+      "id": "1481eb98-786c-48bc-8b30-4f0b2a0a4b27",
+      "name": "Mushroom"
+    },
+    {
+      "id": "eec5de82-c988-40e6-8f10-474d5675c550",
+      "name": "Auntie Ethel's Hair"
+    },
+    {
+      "id": "d16922ba-a36b-4015-8072-27610821fb53",
+      "name": "Auntie Ethel's Hair"
+    },
+    {
+      "id": "7e3afbf6-4e1a-444e-826d-f8e0e0a8308f",
+      "name": "Auntie Ethel's Hair"
+    },
+    {
+      "id": "9abbab89-d29f-47c0-9ffe-f12018dd83d9",
+      "name": "Auntie Ethel's Hair"
+    },
+    {
+      "id": "8f6b0c08-d1b1-4ae7-ade2-da3c679ce323",
+      "name": "Auntie Ethel's Hair"
+    },
+    {
+      "id": "de2c9582-fab5-4d5e-9a81-44d67af6a681",
+      "name": "Auntie Ethel's Hair"
+    },
+    {
+      "id": "8d10c2c9-91fd-4f4c-ae59-03ef06c1673b",
+      "name": "Tracks"
+    },
+    {
+      "id": "8108ee1e-9992-4464-b679-cb70815aa750",
+      "name": "Selunite Mace"
+    },
+    {
+      "id": "4c25cfed-9a0f-4c38-ba09-cf11f272c0e5",
+      "name": "Selunite Spear"
+    },
+    {
+      "id": "d2fe9a24-affd-464a-b757-a48d6f50dd7d",
+      "name": "Selûne's Spear of Night"
+    },
+    {
+      "id": "9046e0e3-1e70-4267-9430-3901201e8cbd",
+      "name": "Moonblade"
+    },
+    {
+      "id": "735997bc-d726-40d2-abcc-c6ac72f9429a",
+      "name": "Prayers and Charming Charms"
+    },
+    {
+      "id": "a27b505a-ab5b-4714-bee1-5f0435014741",
+      "name": "Darkblade"
+    },
+    {
+      "id": "21ef368f-11b2-44c1-8d8d-9e95617f5a81",
+      "name": "Nightsong's Heart"
+    },
+    {
+      "id": "d9ea2161-694c-436d-b049-7537d52dd699",
+      "name": "Imp"
+    },
+    {
+      "id": "258551c8-b0a9-4222-9acc-a1e9f55689c5",
+      "name": "Imp"
+    },
+    {
+      "id": "e94fa62c-d974-4334-a9d9-e4edec70dfc3",
+      "name": "Imp"
+    },
+    {
+      "id": "e51eee05-4464-488c-87ca-9c23a964a033",
+      "name": "Imp"
+    },
+    {
+      "id": "f1af66ca-d492-4b28-94fc-85ae6882897b",
+      "name": "Imp"
+    },
+    {
+      "id": "6810d76d-0db4-4b68-89c8-3c7dba2d6cf3",
+      "name": "Imp"
+    },
+    {
+      "id": "468f7203-e615-4888-89d7-9e380f2e2678",
+      "name": "Imp"
+    },
+    {
+      "id": "539be3b4-523b-418c-9775-e4410eccb1de",
+      "name": "Imp"
+    },
+    {
+      "id": "d7d60037-0619-45a1-b913-2f5f54c515de",
+      "name": "Red Dragon"
+    },
+    {
+      "id": "e4e73ef5-ab76-4831-ad9c-183821555970",
+      "name": "Beast Tracks"
+    },
+    {
+      "id": "33483035-c9ee-497c-8e05-e2150021946a",
+      "name": "Wulbren's head"
+    },
+    {
+      "id": "2b858e2d-1431-4208-9024-b233d271d6db",
+      "name": "Map"
+    },
+    {
+      "id": "dc1a3895-a328-4ba9-a090-e5251f4b44bd",
+      "name": "Cube 1x1x1"
+    },
+    {
+      "id": "ee193eb1-83e0-4373-b862-5b58fb2f62b7",
+      "name": "Reference Chest"
+    },
+    {
+      "id": "6af96f40-eeec-4b20-93bb-7ab2faf6e431",
+      "name": "Reference Chest"
+    },
+    {
+      "id": "3baeb26e-7d36-4d5c-95fd-9352f2e4bbc4",
+      "name": "Reference Chest"
+    },
+    {
+      "id": "a8128065-6377-44ea-8796-6c593c4d7770",
+      "name": "Toxic Mushroom"
+    },
+    {
+      "id": "538c37f5-b913-4be4-8c18-70fc49f2c963",
+      "name": "Iron Door"
+    },
+    {
+      "id": "7fd7fea7-865e-49a6-a971-c85366f1a336",
+      "name": "Wooden Door"
+    },
+    {
+      "id": "34b67317-8375-42cc-a5a5-606989ffa3f0",
+      "name": "Double Iron Doors"
+    },
+    {
+      "id": "238d10d8-54be-4bc2-b5f7-0bdc8f071603",
+      "name": "Double Oak Doors"
+    },
+    {
+      "id": "2c74b381-baf6-4476-b5a2-87d6878ab615",
+      "name": "Double Doors"
+    },
+    {
+      "id": "d2c05242-b20e-49c8-a2b5-4ac8eca56226",
+      "name": "Double Doors"
+    },
+    {
+      "id": "e2de5ad2-ca7a-4a90-bf59-518d226cde30",
+      "name": "Double Doors"
+    },
+    {
+      "id": "c8f6c76d-e5c8-416f-90de-0f97f5ef67b6",
+      "name": "Double Doors"
+    },
+    {
+      "id": "a8799bf3-d7a3-4d1b-95ae-e939769b195e",
+      "name": "Double Oak Doors"
+    },
+    {
+      "id": "f5f21d83-8e7c-48c5-9103-3293c5dd07d8",
+      "name": "Iron Grate"
+    },
+    {
+      "id": "83067a86-5558-4e32-a707-737ba70a9d30",
+      "name": "Iron Grate"
+    },
+    {
+      "id": "4bbe1faa-6473-4565-855a-15ffa18fd0e2",
+      "name": "Portcullis"
+    },
+    {
+      "id": "d19066e4-649d-485a-b94b-e61fae7edb88",
+      "name": "Hatch"
+    },
+    {
+      "id": "e6b2c824-c25e-43fb-818e-638f4779169b",
+      "name": "Iron Door"
+    },
+    {
+      "id": "d12486d9-030a-4bf0-a5d6-d36fb39d39f2",
+      "name": "Wooden Door"
+    },
+    {
+      "id": "fdcc7682-7d4c-410c-88c1-5aaedb6f4a0c",
+      "name": "Wall"
+    },
+    {
+      "id": "f42bb689-a84b-4051-a1bb-57edd7f20acc",
+      "name": "Bed"
+    },
+    {
+      "id": "d90384de-6ab2-45a2-aec5-3a224bca33a5",
+      "name": "Wooden Bench"
+    },
+    {
+      "id": "5f9243d8-892f-4b4b-81ae-346c5ccd217c",
+      "name": "Chair"
+    },
+    {
+      "id": "4d4f30a9-e61d-4943-b3bc-4c0e1186c161",
+      "name": "Mattress"
+    },
+    {
+      "id": "0e92c207-f20f-46a7-a92a-6d71114122f8",
+      "name": "Cube 1x1x1"
+    },
+    {
+      "id": "6d9c000e-e8eb-4ee8-9c5e-96112111b6e2",
+      "name": "Cube 1x1x1"
+    },
+    {
+      "id": "03aa01e4-d743-4e5e-b263-3658f5adb053",
+      "name": "Cube 2x2x2"
+    },
+    {
+      "id": "d576b381-92d6-4d44-8c55-9c692dfa5b3e",
+      "name": "Cube"
+    },
+    {
+      "id": "9d71809c-765b-4451-85b0-5949e6e709e5",
+      "name": "Cube 3x3x3"
+    },
+    {
+      "id": "548b0870-6103-489e-bdff-b936f73c7d12",
+      "name": "Backpack"
+    },
+    {
+      "id": "6993a790-f9e2-4c79-a633-79605becdd35",
+      "name": "Pouch"
+    },
+    {
+      "id": "53c481bf-a37b-48db-907b-0728745877c1",
+      "name": "Touch"
+    },
+    {
+      "id": "340d2b77-5cdd-4e17-8758-ad35225c9ddf",
+      "name": "Dirt Pile"
+    },
+    {
+      "id": "e2a26e55-e455-4f71-97b1-f51657285f75",
+      "name": "Iron Grate"
+    },
+    {
+      "id": "b2caaad3-a783-43ea-a371-dcb77628823d",
+      "name": "Lever"
+    },
+    {
+      "id": "c42768fb-ee31-459c-b0c3-1c92efaf0304",
+      "name": "Lever"
+    },
+    {
+      "id": "b66736fc-36db-4c79-8b9d-4098787fd35f",
+      "name": "Spiked Device"
+    },
+    {
+      "id": "3301c80e-d2c5-44d3-b750-b0203fc5919b",
+      "name": "Spikes"
+    },
+    {
+      "id": "74f6080c-c525-4dbb-9bdb-1c294303f791",
+      "name": "Cube 5x5x5"
+    },
+    {
+      "id": "157b16a0-3cf8-4172-8048-d2911d1bf298",
+      "name": "Cube 5x5x5"
+    },
+    {
+      "id": "39a4ae95-9bd8-3e28-2bab-db052b8f486d",
+      "name": "Reference Primitives: Cube 5x5x5"
+    },
+    {
+      "id": "edb70fff-9a8a-4c5d-aad2-af361873bd27",
+      "name": "Ladder"
+    },
+    {
+      "id": "57205d8e-f176-433e-8156-c7406d606142",
+      "name": "Portal"
+    },
+    {
+      "id": "ce486c60-427e-4ddf-8a11-9992392b7821",
+      "name": "Portal"
+    },
+    {
+      "id": "711d4995-7913-4217-8785-2159bbf178df",
+      "name": "Bedroll"
+    },
+    {
+      "id": "d590884d-55a2-4136-9777-531ee7d53f7e",
+      "name": "Spear of Night"
+    },
+    {
+      "id": "71723f45-380a-4707-b507-41750348c133",
+      "name": "Brazier"
+    },
+    {
+      "id": "460abd2c-3f01-42d2-a532-1e5bd54c9ae7",
+      "name": "Fresh Grave"
+    },
+    {
+      "id": "f908ab45-01a2-4e1e-912a-a74715305f05",
+      "name": "Grave Marker"
+    },
+    {
+      "id": "ede89af4-5416-406b-a2d2-2fdf261f98bc",
+      "name": "Key to Cazador's Dungeon"
+    },
+    {
+      "id": "6bf1c054-4095-4e83-bbe3-993c86870122",
+      "name": "The Astral Prism Heist"
+    },
+    {
+      "id": "723707e1-73ff-4aee-bc89-b24c6edfe0dd",
+      "name": "Bookcase"
+    },
+    {
+      "id": "d2986570-0c0a-434e-a393-65c3047113e8",
+      "name": "Empty Potion of Sleep"
+    },
+    {
+      "id": "b2409a86-dc0d-4193-9985-4f11419c64be",
+      "name": "Devilfoil Mask"
+    },
+    {
+      "id": "3c7bd24f-c0b1-4839-b31e-1b74f05b59ef",
+      "name": "Rat Tunnel"
+    },
+    {
+      "id": "6907d0ff-c1d3-4171-b9bd-71974e0a12f4",
+      "name": "Blood-Stained Boards"
+    },
+    {
+      "id": "7e0a2990-7526-4807-a14f-d5d9442d969d",
+      "name": "Fraygo's Flophouse Guestbook"
+    },
+    {
+      "id": "291662b7-f0f1-404f-9de5-54e308748d64",
+      "name": "Prison Entrance Key"
+    },
+    {
+      "id": "4f7bcf44-0e1b-4e1f-a498-d6975ccf023b",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "8b5f7965-6cd1-42c1-8449-c6562a270ad9",
+      "name": "Simple Toxin"
+    },
+    {
+      "id": "2fe60c2f-9071-4ca2-9af3-e41e4107a639",
+      "name": "Black Marble Stone"
+    },
+    {
+      "id": "a6852f3a-795e-4a6a-8adf-c359e1553136",
+      "name": "Wooden Crate"
+    },
+    {
+      "id": "3334893b-504a-4339-ac8a-97722e70d702",
+      "name": "Wooden Crate"
+    },
+    {
+      "id": "c57161c0-bb24-42f2-9961-6795bab5e469",
+      "name": "Throwable Boulder"
+    },
+    {
+      "id": "a1645f21-4934-4225-882f-b1e002874782",
+      "name": "Bedroll"
+    },
+    {
+      "id": "530e440f-2c2e-44d5-b632-278c8c10ca4f",
+      "name": "Bedroll"
+    },
+    {
+      "id": "6d597738-bd49-471f-94bf-5a9ad8393342",
+      "name": "Power Generator"
+    },
+    {
+      "id": "638f981f-f06d-4813-9eb0-d8e1925ecc54",
+      "name": "Power Generator"
+    },
+    {
+      "id": "80ba6a39-ac48-4261-8a07-b7a7427ad3ad",
+      "name": "Broken Power Generator"
+    },
+    {
+      "id": "2a0f1421-9695-40d4-a7da-66ee4ff0fd86",
+      "name": "Teleportation Platform"
+    },
+    {
+      "id": "4d2d0b3e-a02d-4a7d-9892-245e414081b2",
+      "name": "Teleportation Platform"
+    },
+    {
+      "id": "788278b2-4772-4372-a5e7-accb3e48857e",
+      "name": "Barber Kit"
+    },
+    {
+      "id": "68621363-4d85-4c74-a7c5-cefe7ae36d15",
+      "name": "Barber kit"
+    },
+    {
+      "id": "f146f74f-6871-4a98-8f65-30329d564e82",
+      "name": "Barber Shears"
+    },
+    {
+      "id": "ac769cef-e9c3-4e93-a7e3-6c5eeff22b13",
+      "name": "Branch"
+    },
+    {
+      "id": "6d4888e6-6133-46cf-842c-5e9af1c22a34",
+      "name": "Branch"
+    },
+    {
+      "id": "e99c1760-ad76-455d-948c-0a1870c9f93b",
+      "name": "Branch"
+    },
+    {
+      "id": "cbb98d74-68e9-4d0f-a4ff-6fa92cfcea13",
+      "name": "Broom"
+    },
+    {
+      "id": "c012aabc-8263-4c0e-b146-fd69a5b2f2d8",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "7e695757-a137-4bbc-9a1d-8dcf1db63fee",
+      "name": "Broom"
+    },
+    {
+      "id": "b06df50c-e665-4e06-91a2-9282f2cc694c",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "22c74b5e-bef2-41b1-b9ed-f4acc766d4ee",
+      "name": "Trap Disarm Toolkit"
+    },
+    {
+      "id": "239edfa9-46b4-44ad-b0c4-faa4421a8a57",
+      "name": "Disguise Kit"
+    },
+    {
+      "id": "8ec2a70b-32cc-4223-9c4e-fb845deb262d",
+      "name": "Disguise Kit"
+    },
+    {
+      "id": "d621fb20-02e2-464c-9793-f902612c5b65",
+      "name": "Ballista"
+    },
+    {
+      "id": "2a5091cf-5637-4472-8432-16267b6ff19e",
+      "name": "Ballista Arrow"
+    },
+    {
+      "id": "5114c34c-d779-46d9-ae98-d15a0ff0ac31",
+      "name": "Forgery Kit"
+    },
+    {
+      "id": "0a1bde2b-8bc0-47ab-aec9-9204b8e4d1ba",
+      "name": "Forgery Kit"
+    },
+    {
+      "id": "dc7b9a9e-02f6-4a95-be1b-c2d480fcd207",
+      "name": "Gong"
+    },
+    {
+      "id": "c2a14b56-9dca-4ad1-bcea-71204365f6a9",
+      "name": "Hammer"
+    },
+    {
+      "id": "a63fa775-bd30-4753-8c63-395aa5e9d03c",
+      "name": "Magnifying Glass"
+    },
+    {
+      "id": "8693aa7e-cd47-4990-80e7-51041f036400",
+      "name": "Pickaxe"
+    },
+    {
+      "id": "868fa1ab-8044-4a82-9c2b-bf4ffb241536",
+      "name": "War Drum"
+    },
+    {
+      "id": "4c9ea428-7679-434c-9679-071847c648a6",
+      "name": "Hand Drum"
+    },
+    {
+      "id": "76944b2f-1e79-4c22-8d9a-e6c30e5194e0",
+      "name": "Hand Drum"
+    },
+    {
+      "id": "848ad8dc-59f3-464b-b8b2-95eab6022446",
+      "name": "Flute"
+    },
+    {
+      "id": "79b74639-066c-4099-87de-30d435a78f3e",
+      "name": "Broken Lute"
+    },
+    {
+      "id": "d8f758fa-34db-4c00-a56a-25e32941d2b4",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "f2487101-548f-4494-9ec8-b20fa3ad6f7b",
+      "name": "Lute"
+    },
+    {
+      "id": "410229c5-ac20-4d0c-9205-af557abe9782",
+      "name": "Lute"
+    },
+    {
+      "id": "a33acb20-c036-46b5-bbad-5b38e9b5bf7c",
+      "name": "Broken Lute"
+    },
+    {
+      "id": "697ce5fe-08ab-49f5-89dc-69684112a8c7",
+      "name": "Broken Lute"
+    },
+    {
+      "id": "cc0e5642-fed1-425a-a997-20b94b2ff696",
+      "name": "Horn"
+    },
+    {
+      "id": "cdd2f2e1-09a1-4069-b955-7869c9d986d2",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "810c748b-e70b-419f-b707-1162b221d01d",
+      "name": "Horn"
+    },
+    {
+      "id": "13739f15-7366-4d7f-9926-991e98b9e964",
+      "name": "Lyre"
+    },
+    {
+      "id": "ebdae296-fa2c-4b43-a466-ec592d3017fc",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "288e21d0-6d1e-4346-b7b3-9cf519b3b5a5",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "5ec5cdf2-cbe3-42bb-b55b-bc6043c76469",
+      "name": "Viol"
+    },
+    {
+      "id": "aca5d144-773b-42ba-aca1-6903c60c418c",
+      "name": "Violin"
+    },
+    {
+      "id": "7efb7ddb-1c1a-4dd5-bf4a-3b737684ef30",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "c8274575-61a2-43a7-bde0-65a278dde287",
+      "name": "Pitchfork"
+    },
+    {
+      "id": "a4e6d25a-989d-4293-8815-0e187b122b9c",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "4002fe47-3c18-4381-b853-74b9d7eff251",
+      "name": "Plaque"
+    },
+    {
+      "id": "29ac515d-7c7f-4583-bc55-c8e88bc26980",
+      "name": "Poisoner's Kit"
+    },
+    {
+      "id": "ed1335e1-5804-4d7e-afbd-5700103f481a",
+      "name": "Poisoner's Kit"
+    },
+    {
+      "id": "866b0263-ce85-4af6-a990-df075e10f9db",
+      "name": "Signpost"
+    },
+    {
+      "id": "be3fce60-d0ea-4009-afcf-9109d1eaeb61",
+      "name": "Broken Signpost"
+    },
+    {
+      "id": "caddc03b-b1a0-4999-9a90-d4c3b56e82a3",
+      "name": "Signpost"
+    },
+    {
+      "id": "2ac42999-df36-44d1-8614-8665d17dcc8f",
+      "name": "Signpost"
+    },
+    {
+      "id": "60b5787c-8ab0-4c51-ad2d-1169920e7d14",
+      "name": "Signpost"
+    },
+    {
+      "id": "4c96a306-3c4d-498e-aef8-cd6a95361e6c",
+      "name": "Broken Signpost"
+    },
+    {
+      "id": "808fec9f-b0e2-4f88-ad40-7d567db6d5e1",
+      "name": "Signpost"
+    },
+    {
+      "id": "ae8b0d21-dcaa-4882-9ad9-940e4014c3ec",
+      "name": "Signpost"
+    },
+    {
+      "id": "73efd1f7-5616-4ca8-84e6-6128aa6efaea",
+      "name": "Shovel"
+    },
+    {
+      "id": "2f61dd35-f64c-49a9-bbf2-f55c41cecfa5",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "f4242851-8bf5-47b0-926e-d7b2c932e109",
+      "name": "Small Shovel"
+    },
+    {
+      "id": "49844a53-bf40-48a2-a8d5-80ea5863f207",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "e2da16ab-e787-4bb1-a6e5-2b34db59e8c6",
+      "name": "Arcane Harpoon"
+    },
+    {
+      "id": "7f34cd03-dbd9-4653-9eee-52047464a5e7",
+      "name": "Arcane Harpoon Arrow"
+    },
+    {
+      "id": "0cbd644f-4b14-4e73-a692-328f82eb4087",
+      "name": "Sign"
+    },
+    {
+      "id": "b1b8a6ff-3eb7-4d31-badf-49c49c204e14",
+      "name": "Sign"
+    },
+    {
+      "id": "7dc63d8d-c4b7-49a1-906d-9dff56e805f8",
+      "name": "Telescope"
+    },
+    {
+      "id": "08851ac0-3bfa-44f3-80c6-6ab0536f0e10",
+      "name": "Thieves' Tools"
+    },
+    {
+      "id": "50d8cbfb-c98f-4013-8c67-53b3767a9bd9",
+      "name": "Tongs"
+    },
+    {
+      "id": "6051a6d2-88e9-4ab4-999c-f463632453eb",
+      "name": "Bell"
+    },
+    {
+      "id": "4d64bcbe-a37d-4537-8ff1-510083989435",
+      "name": "Cultist Brand"
+    },
+    {
+      "id": "2c4a5085-b485-4956-8063-99ff9d2e1e65",
+      "name": "Touch"
+    },
+    {
+      "id": "28ab797e-47ba-4b2b-812b-57590ad59a9c",
+      "name": "Control Panel"
+    },
+    {
+      "id": "b933e64e-7508-4cfb-bf50-c57e09fdc7dc",
+      "name": "Control Panel"
+    },
+    {
+      "id": "f989c605-8931-4610-bb8d-5a94f8ca0251",
+      "name": "Control Panel"
+    },
+    {
+      "id": "61187e8b-1f32-4085-a684-9d15fbfb33d9",
+      "name": "Control Panel"
+    },
+    {
+      "id": "4d04eb21-092a-4eb4-857a-2f1dc0882200",
+      "name": "Githyanki Portal Stone"
+    },
+    {
+      "id": "4aa89614-e2fb-4d3c-82e8-bfd6a5a4496f",
+      "name": "Lever"
+    },
+    {
+      "id": "df17b2fb-c14f-4b22-9660-f4da4999adee",
+      "name": "Microscope"
+    },
+    {
+      "id": "aa04567d-02f7-44a9-910a-f9697000cd04",
+      "name": "Portal"
+    },
+    {
+      "id": "9001f0a0-63a3-4686-b18a-0b5df64712b4",
+      "name": "Portal"
+    },
+    {
+      "id": "e6218c99-620e-49c8-96e6-289ebc537243",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "a396879d-a4d3-4805-af32-8b9415194b02",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "eefbc03b-377c-4426-bb72-95460affa95e",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "3c263ddd-7491-4d8f-af76-fc73eda6a2f6",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "2af717c0-52f7-4220-a751-47e5404bc7e4",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "30a6e2cd-f922-4545-b3f7-c4edf2862282",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "e8e2a955-97ed-4739-a0c0-96402c283e33",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "89fd03d0-381d-4404-9480-ef9a829bbe62",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "70b86e8f-06b1-4eb2-8211-17f1d850086d",
+      "name": "Surgery Kit"
+    },
+    {
+      "id": "55fb2f34-00d7-4149-8b52-e189e05ba0ca",
+      "name": "Surgery kit"
+    },
+    {
+      "id": "3d01cf80-2d13-4225-a520-6558a7f407cd",
+      "name": "Scalpel"
+    },
+    {
+      "id": "d029bf99-3dcb-4682-b67d-215011c8fef6",
+      "name": "Anvil"
+    },
+    {
+      "id": "4873848c-a509-4890-9c0f-4e6489410874",
+      "name": "Anvil"
+    },
+    {
+      "id": "6781372e-564a-44a5-89d5-6e4d89baf074",
+      "name": "Sturdy Base"
+    },
+    {
+      "id": "e44b41b1-14ec-4427-aedd-985707e7bedb",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "bc3c04f9-f093-4c4e-890c-66037a2ee99b",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "cddaade0-c8f6-40c4-874c-3c5e3aae3907",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "275b9d94-b37d-489d-990c-7d0602e38d46",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "98318032-1fc1-4d63-84d9-0acd2ed0b8d7",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "4b1d9733-ca52-4927-8c68-db62fc90f980",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "1fd18bae-46fe-4b44-8965-b947648917ef",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "cb2541d0-b0fa-429e-8cc5-3e8b635f2351",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "14ccbc29-1aa1-405c-93e3-96b243779385",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "3140ac92-227f-4eda-9d6f-cd7ea45c4e5d",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "7fd62b6c-544b-44b6-949d-e5291c91fc24",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "1095718f-9ca3-419c-a5f5-43a387ba0d33",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "b7a66c3f-f393-48d9-88a6-9d65359aa3f4",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "c2892b9a-726e-4e80-ba10-87e29a8e6906",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "77a4cc60-ad7b-44a0-a11e-6602e279821b",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "f2cd62ef-f654-4880-ab3e-01589d6402c8",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "3cd5823b-94b1-452e-a756-7220a5052204",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "36048a68-0ee2-4357-83fa-589fcb2a16fc",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "dd4421a2-1f82-4ed1-9842-431d0443552a",
+      "name": "Climbable Cliff"
+    },
+    {
+      "id": "5f6cd718-a74f-4ce0-b63d-d0d99da2dfe6",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "4d253321-bdad-4749-9701-cc2858fe640f",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "608019b3-460c-4824-a4bc-7b63a9d8678b",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "3b7082fe-4c34-4c45-be24-a1f654371706",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "bf1d6402-ec74-46f1-87bd-f3f4a3abbef4",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "46c17b6e-4fed-40f9-8a3f-e23d2c0f5e44",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "d486a214-69ca-495f-a804-e5bb80f95162",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "fe5b3e83-1ee8-4b80-878d-d7c0f140038b",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "212d5304-f845-4551-ae0f-7b29e13719fb",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "8cb17a24-e531-4ca0-9d12-60e0545027df",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "31ac7295-dbe6-4641-907e-ca6c299e11d5",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "7bf9c821-a950-445c-a4cc-af8c7e70a822",
+      "name": "Cragged Rock"
+    },
+    {
+      "id": "1851f8da-3791-4f5a-83be-1c5a67780e61",
+      "name": "Roots"
+    },
+    {
+      "id": "efae57c5-ee7b-4cad-8d87-c7e6d6f34d2e",
+      "name": "Roots"
+    },
+    {
+      "id": "0594b5d7-db02-4ad5-8fae-ea01baff271b",
+      "name": "Roots"
+    },
+    {
+      "id": "c97a9df5-79e5-428c-8d80-f35be6d05763",
+      "name": "Roots"
+    },
+    {
+      "id": "7f0ab379-bf5c-4913-b811-9eb01ecc47a4",
+      "name": "Roots"
+    },
+    {
+      "id": "9129e946-c138-4b9c-abdd-3383b7905703",
+      "name": "Roots"
+    },
+    {
+      "id": "0b957643-2177-4ae6-8667-986204478828",
+      "name": "Rope Netting"
+    },
+    {
+      "id": "06f9fce8-de04-4522-8eb5-312729ce2362",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "3fe4c8f5-881f-4995-8e60-9fcf4e44307d",
+      "name": "Rope Netting"
+    },
+    {
+      "id": "cbcf5726-ca66-491b-8b29-67b99568097b",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "987ec285-6b53-4928-9a27-30d1cdd01823",
+      "name": "Rope Netting"
+    },
+    {
+      "id": "395f694f-0524-4ef2-8b78-c1a35ddcf9fd",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "9410b71e-bfee-4845-b72f-918976b34bf7",
+      "name": "Rope Netting"
+    },
+    {
+      "id": "94bf5340-b023-470c-9a78-8943b6523093",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "a71ca7b9-814c-423e-8444-981419f68a5a",
+      "name": "Arterial Mesh"
+    },
+    {
+      "id": "5aabdd22-7b10-43d2-890c-be1e6dfb8cd3",
+      "name": "Arterial Mesh"
+    },
+    {
+      "id": "bdf1878a-4db3-4398-b8aa-0831de13d842",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "8d3f1378-2d20-44e0-8baa-be42afe05172",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "1036ed50-aafc-4d46-8dc3-5c1ca44c3559",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "cd44c50b-a405-4259-82b5-b2d7bf11aa2d",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "ad5f68ed-44d3-40d4-b7bc-e6b10ae8ee65",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "264bd21d-b4bc-4e0e-aa4d-1365c9d94844",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "43649b09-8e92-464a-8313-1920d427e0bf",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "12479101-0c91-438b-9673-741fd6a1aa1a",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "8eacbe23-0364-4260-b4ba-1692a6ad2fe7",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "0faf2f62-047d-48a3-a0a8-d0e9bd910a0b",
+      "name": "Iron Ladder"
+    },
+    {
+      "id": "65f8abd2-d7b3-4473-afe0-f6f5935268de",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "d39ac761-bab8-4d85-aad7-8b09f5d129df",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "1e80f01e-167b-4ba1-b35d-dc49cacc47db",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "bfce18d5-93c2-41c6-8e8b-9850f2c159e6",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "3cf67bbb-a75f-4b92-85f8-9a81001d04ee",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "6897797a-3cef-4194-853a-57256c98d078",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "7a393f77-9adb-4508-a57c-d8ea1e6261aa",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "28a2a709-c462-42f8-b730-594ae51da5c4",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "a3bafe30-5bb3-4958-83bd-df33af6d4291",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "dec3ed22-2090-416c-8160-b0509d2d4b89",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "d20db7ac-132b-4a08-920c-69ba7e7e729d",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "eaf196cd-a009-4e2a-8652-e391391f96c6",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "3de0e999-4f06-4327-9858-67f942c64e79",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "dc6a20b5-0e3b-4aae-bf26-61d52c14e498",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "7fac2c2d-86a2-44d8-830d-331c19266f0c",
+      "name": "Rope Ladder"
+    },
+    {
+      "id": "2b2286bf-927f-4159-a589-feb1b19dfb7d",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "a8cf2166-9cb3-4265-983d-bf8b2cb29482",
+      "name": "Rope Ladder"
+    },
+    {
+      "id": "434d4bde-dd19-43c8-8edb-7fa08495e7d4",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "c04c74fc-0718-4f81-9d27-b287c831ea4d",
+      "name": "Rope Ladder"
+    },
+    {
+      "id": "ab385ca1-826b-400e-b636-56d57277c0ef",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "e491f5de-f432-46c7-b3d5-7d1620300e43",
+      "name": "Rope Ladder"
+    },
+    {
+      "id": "d0d310a3-9497-4577-9152-813326e5be28",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "f75c4c9b-2656-4bb8-933d-8c120912c765",
+      "name": "Rope Ladder"
+    },
+    {
+      "id": "0c95c537-39cf-4ac0-9add-243e7170c729",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "af5e123b-6f8b-4b85-a952-e4de34f97b73",
+      "name": "Rope Ladder"
+    },
+    {
+      "id": "5cb8d2a2-0c89-419c-92f9-42b0a100acef",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "cbe097ab-ee9d-4042-bda5-87b69bdf4476",
+      "name": "Rope Ladder"
+    },
+    {
+      "id": "cf2f2429-ac89-4972-9c41-0e7270a56699",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "55c748a8-c57e-4d08-90a2-eafbcd922980",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "b8e850a6-bd14-4aaa-b0e7-afd75f397e65",
+      "name": "Knotted Roots"
+    },
+    {
+      "id": "1d8510fc-4475-444d-b546-399707074596",
+      "name": "Spiderweb"
+    },
+    {
+      "id": "2729976b-f474-4608-8d4f-585c58d21100",
+      "name": "Spiderweb"
+    },
+    {
+      "id": "f1f7a83f-9d09-4195-a3ab-857fb9ff21d7",
+      "name": "Spiderweb"
+    },
+    {
+      "id": "44a84984-2a9e-4f07-b9fe-57231965f51c",
+      "name": "Spiderweb"
+    },
+    {
+      "id": "f3c4ab15-94bf-491e-99e7-5589961b2360",
+      "name": "Spiderweb"
+    },
+    {
+      "id": "1c1f6604-7f41-4d67-8f43-d91d7ba9d440",
+      "name": "Spiderweb"
+    },
+    {
+      "id": "7460fc4c-54f9-4929-b928-61cd75fc16ee",
+      "name": "Spiderweb"
+    },
+    {
+      "id": "770c3d74-4682-4eab-8d89-eccd9f494ca2",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "f261b2d3-e708-4f64-aebd-872b5bf8b6a9",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "99647e37-8638-4317-a221-a470c3de24bb",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "71aab28c-4aee-4fc0-9087-29bedf95b687",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "70eaf29d-d35f-48ed-aed9-8702e7933f02",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "eaaad297-9b33-4f56-923c-4923340cc822",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "6a0011eb-834e-4b1e-9b5d-7df6a727f567",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "afbb7661-b2c0-4b00-af1f-f75e00ffa8d2",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "404a7ffe-4ad1-4931-af1e-70a00ecc63fc",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "644b80a8-19a2-454c-a642-951a72907dfe",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "fb7c34f5-0649-47c2-81c0-312dcb739979",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "901fc99f-5405-44f2-8a72-0ce6214c320c",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "f6578347-0631-4d5c-8fc5-b3e9cbb70a1a",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "a0bea3d0-20dd-440b-acf3-6918f302c74f",
+      "name": "Wooden Ladder"
+    },
+    {
+      "id": "a7249edb-3444-4194-8f50-7189be6b46fc",
+      "name": "Resonance Stone"
+    },
+    {
+      "id": "a7edf7ca-1999-4d2c-b1bf-035d6e2b9e6e",
+      "name": "Resonance Stone"
+    },
+    {
+      "id": "b8a2487f-b870-4bfb-b436-fdc17af731ae",
+      "name": "Weathered Chisel Set"
+    },
+    {
+      "id": "dd5c7204-df29-4bab-b012-9831f84b7fc7",
+      "name": "Lump Hammer"
+    },
+    {
+      "id": "a79a6a96-0ce7-4f17-b915-1c381dfa0edf",
+      "name": "Anvil"
+    },
+    {
+      "id": "84dc46a0-eb7e-43fb-b3cd-9200bd017a15",
+      "name": "Anvil"
+    },
+    {
+      "id": "93007451-a8db-462c-837c-8c6ca6143632",
+      "name": "Shattered Anvil"
+    },
+    {
+      "id": "2bb3ae90-316a-476c-8af3-507940aa7467",
+      "name": "Anvil"
+    },
+    {
+      "id": "45ecb2cc-3bcb-4a85-8d59-0a813d37997e",
+      "name": "Whetstone"
+    },
+    {
+      "id": "27162cbf-ab57-401b-a578-cd9f34209926",
+      "name": "Whetstone"
+    },
+    {
+      "id": "1b5ea20d-5bae-4311-930e-72650ef586e9",
+      "name": "Bell Mechanism"
+    },
+    {
+      "id": "0be6c453-8150-49df-b5ea-ba1eaea16fb7",
+      "name": "Wand of Fireballs"
+    },
+    {
+      "id": "a5d93495-c01c-4dd4-928c-3793f620121f",
+      "name": "Karabasan's Poison"
+    },
+    {
+      "id": "0e92e1a8-2422-47e9-8d90-50807244189a",
+      "name": "Test Helmet"
+    },
+    {
+      "id": "8e592329-ddb0-435d-b548-ebdf3d26f6c8",
+      "name": "Hole"
+    },
+    {
+      "id": "941dd668-253a-4966-8f02-03a4b89fddb2",
+      "name": "Hole"
+    },
+    {
+      "id": "069b4a98-5a0e-4ee9-95f7-29d37eebfb16",
+      "name": "Hole"
+    },
+    {
+      "id": "eb4ee306-92ed-4171-983c-beb52b9a5855",
+      "name": "Hole"
+    },
+    {
+      "id": "f1237064-035d-4e6f-8f67-ae12c5edf4c7",
+      "name": "Hole"
+    },
+    {
+      "id": "e2e44a79-4342-409a-b1d7-61270023cefb",
+      "name": "Hole"
+    },
+    {
+      "id": "c2358c3b-9d0e-477d-b9ee-14534b061794",
+      "name": "Hole"
+    },
+    {
+      "id": "5ff88763-e8ca-4b32-84d0-1f94ef0951e0",
+      "name": "Hole"
+    },
+    {
+      "id": "c6779a39-92de-402d-ba4a-b943ad9223d7",
+      "name": "Hole"
+    },
+    {
+      "id": "cc311e88-9276-4e3e-adc4-f29d3ccbb1ee",
+      "name": "Bibberbang"
+    },
+    {
+      "id": "8d8bcfc9-ce4d-4fc1-9d9c-99412943d7aa",
+      "name": "Crushed Body"
+    },
+    {
+      "id": "d0342f97-8329-4d42-a55f-04b3648daa11",
+      "name": "Stool of Hill Giant Strength"
+    },
+    {
+      "id": "9676d66b-9387-4325-820e-d99c3ae4ee5e",
+      "name": "Eyes of Selûne"
+    },
+    {
+      "id": "85aedcb0-e2f4-443e-815f-16630d4c8cff",
+      "name": "Eyes of Selûne"
+    },
+    {
+      "id": "0c7d5be3-89cf-483f-b490-efc25bde9798",
+      "name": "Eyes of Selûne"
+    },
+    {
+      "id": "827421ea-d85d-432a-ae14-8e64b29bac0b",
+      "name": "Eyes of Selûne"
+    },
+    {
+      "id": "3245bfb6-d1c0-437e-902a-873088bf2dd6",
+      "name": "Eyes of Selûne"
+    },
+    {
+      "id": "fa671dce-4ca0-4708-a650-75f85f928c57",
+      "name": "Eyes of Selûne"
+    },
+    {
+      "id": "a47c13a1-1a8e-4b3b-9cd9-53cf9c7058f0",
+      "name": "Helmet of Autonomy"
+    },
+    {
+      "id": "046598e3-8cb4-497c-bfd2-866ff88b50db",
+      "name": "Explorer's Ring"
+    },
+    {
+      "id": "1a4f004c-d050-49e7-b0d6-d76ad2d62510",
+      "name": "Burrow"
+    },
+    {
+      "id": "4aa70e55-f2e4-401c-a56f-49e58e679cac",
+      "name": "Statue"
+    },
+    {
+      "id": "768010ce-dcfe-43bb-8398-2d681d4fa6eb",
+      "name": "Club of Hill Giant Strength"
+    },
+    {
+      "id": "67914214-e45d-4181-97e6-1c22e406b031",
+      "name": "Phalar Aluve"
+    },
+    {
+      "id": "df040e30-b424-4a89-be1b-83ffd57eb5a1",
+      "name": "Unwanted Masterwork Greaves"
+    },
+    {
+      "id": "1abd032b-c138-45ee-b85e-62b5bbb6ea2d",
+      "name": "Ring of Being Really Invisible"
+    },
+    {
+      "id": "4ca7ff5f-2c7b-407c-b754-b227d6e4fc31",
+      "name": "Ring of Resistance to Ants"
+    },
+    {
+      "id": "1f2df119-5ca2-4860-ba0c-ecbb9c140e37",
+      "name": "Ring of Infinite Wishes"
+    },
+    {
+      "id": "46e1228a-6682-4766-af76-bf5a42fe8611",
+      "name": "Ring of the Lekinesus"
+    },
+    {
+      "id": "eb4e9410-3d33-4986-a5c2-8642ca5bbfc4",
+      "name": "'Magic' Ring"
+    },
+    {
+      "id": "b337cd63-d206-4229-84fd-4b77809f7eb3",
+      "name": "Unwanted Masterwork Gauntlets"
+    },
+    {
+      "id": "c1cb7388-bd2f-4cc7-8305-7d7a0651874f",
+      "name": "Amulet of Elemental Torment"
+    },
+    {
+      "id": "6d84b9e5-e9e4-477c-8d5b-a3f232a4415a",
+      "name": "Gloves of Archery"
+    },
+    {
+      "id": "58315437-f06a-4797-a26a-6bbcff80c4fe",
+      "name": "Bracers of Defence"
+    },
+    {
+      "id": "9481aa27-ce9c-414c-84ff-5e974fd64d89",
+      "name": "Gauntlets of Frost Giant Strength"
+    },
+    {
+      "id": "687cc55b-77a3-4893-a7d7-cfbafdc2737c",
+      "name": "Gloves of Missile Snaring"
+    },
+    {
+      "id": "fef0dda1-1d06-45b5-a302-a31e545b8ede",
+      "name": "Helm of Arcane Gate"
+    },
+    {
+      "id": "935f9927-2df0-4a8d-a831-b7cb5bbbcae3",
+      "name": "Sarevok's Wretched Armour"
+    },
+    {
+      "id": "139b28dc-7db0-40b2-a383-3a4ce4c09812",
+      "name": "Sarevok's Horned Helmet"
+    },
+    {
+      "id": "5ff8df3a-6924-4eb4-9d1a-9e87bd644bf7",
+      "name": "Unwanted Masterwork Scalemail"
+    },
+    {
+      "id": "25fea821-5ec1-4052-bd6c-60c249e72a79",
+      "name": "Elixir of Silvanus"
+    },
+    {
+      "id": "8677c8eb-6b43-4e4f-971a-93c64f461033",
+      "name": "Mould Chamber"
+    },
+    {
+      "id": "4433079e-9cd3-4d58-9611-f52be75052f5",
+      "name": "Platform"
+    },
+    {
+      "id": "6f70dceb-1370-4eee-b983-9e8269cd529b",
+      "name": "Platform"
+    },
+    {
+      "id": "27401ebe-5abd-4407-bff6-2c325ab85811",
+      "name": "Platform"
+    },
+    {
+      "id": "e50a3124-4233-48ec-97ba-54dd9621f2d3",
+      "name": "Platform"
+    },
+    {
+      "id": "643c6650-7680-4f2a-9011-2fc4150baf45",
+      "name": "Platform"
+    },
+    {
+      "id": "378f8cf9-26e1-49f9-bd91-5327646e2051",
+      "name": "Platform"
+    },
+    {
+      "id": "2e188f6e-7e0e-4aa6-ab72-d95e15d6b45a",
+      "name": "Platform"
+    },
+    {
+      "id": "8c3f9e99-dc6a-43f0-945a-43d2526e4064",
+      "name": "Platform"
+    },
+    {
+      "id": "432ab95d-e594-47b4-923f-9e15a9f4ccf3",
+      "name": "Opening a Hell Gate"
+    },
+    {
+      "id": "f5e8b331-c495-4d3a-ab82-90f6b9a1f3d6",
+      "name": "Halfred's Ledger."
+    },
+    {
+      "id": "1cf7de46-086c-44a0-8a88-536ffa81e830",
+      "name": "Adventures on the Sea of Fallen Stars"
+    },
+    {
+      "id": "d63694a2-69c3-443d-ba79-f332ea8e89fc",
+      "name": "Starborn Auction Receipt"
+    },
+    {
+      "id": "127f9061-d225-457b-b73a-38ebaddffc6a",
+      "name": "Treasured Map"
+    },
+    {
+      "id": "ee6af396-bd5b-45e9-b91e-968cc8295918",
+      "name": "Night-Night, Pirate Ship"
+    },
+    {
+      "id": "b52bdc3a-b07a-44fe-a57f-e9d6dfec713b",
+      "name": "Upper City Access Orders"
+    },
+    {
+      "id": "23fc188f-cce7-41df-a64c-3db3fb37a586",
+      "name": "Reports from the Battlefield"
+    },
+    {
+      "id": "f9afd678-3773-4d61-a645-eda741c49901",
+      "name": "Registry of Citizens' Complaints"
+    },
+    {
+      "id": "3ad0df7b-5d29-4655-b685-567e7f1dbf57",
+      "name": "URGENT - Bhaalist Resurgence"
+    },
+    {
+      "id": "09ddf5b0-f8eb-45c2-ad59-a1bebb9f92ec",
+      "name": "Urgent - Rapid Increase in Reported Disapperances"
+    },
+    {
+      "id": "33333b99-a3d2-4f28-8ca1-f489fe5b2c92",
+      "name": "Counsellor Florrick's Sentence"
+    },
+    {
+      "id": "79e449c6-eba2-498d-bfde-3c7228c53820",
+      "name": "Steel Watcher Maintenance"
+    },
+    {
+      "id": "d9ecb5d7-bb47-41c0-976e-6ca0d7187f42",
+      "name": "Ongoing Murder Investigations"
+    },
+    {
+      "id": "0793bbed-520b-4914-8258-c0f8edacc674",
+      "name": "Orders from Duke Ravengard"
+    },
+    {
+      "id": "706852f5-576a-4c50-a475-03e7ec5e5dbc",
+      "name": "The Stone Lord: A New Threat"
+    },
+    {
+      "id": "4cc147e0-cb1c-45e8-958f-47c6834d4946",
+      "name": "Writ: High Alert"
+    },
+    {
+      "id": "2887f89c-2b85-407f-85b0-1f0e5855bc1b",
+      "name": "Got the Shivering Fantods"
+    },
+    {
+      "id": "3a4fb92b-b14a-4b71-aff6-388fae0949ec",
+      "name": "I Have a Serious Complaint!"
+    },
+    {
+      "id": "0d9697ec-fb88-472a-8558-a5be06066d02",
+      "name": "To Glumbor from Derryth"
+    },
+    {
+      "id": "11cf7f6b-fc91-4993-88d5-f68b404527a0",
+      "name": "Derryth's Journal"
+    },
+    {
+      "id": "cee1fe69-bf00-4ddd-b3c2-642831172e9d",
+      "name": "Derryth's Journal"
+    },
+    {
+      "id": "4ef75ca7-1f32-4cc7-a490-089aded03514",
+      "name": "Derryth's Journal"
+    },
+    {
+      "id": "2ec5ceb8-eacd-4570-b935-ee0f250c6ddb",
+      "name": "Don't Sniff The Specimen"
+    },
+    {
+      "id": "85d16edb-f995-4b8e-823c-1f5cac8081b2",
+      "name": "Don't Swallow The Specimen"
+    },
+    {
+      "id": "5b4f5863-9235-4677-b53c-e0d2568e3c70",
+      "name": "Don't Prod The Specimen"
+    },
+    {
+      "id": "308ced2d-fbca-4947-b379-cb8c03c040e1",
+      "name": "Shipments Registry"
+    },
+    {
+      "id": "11e2fa84-b1c8-4f82-b905-7cd20c13fdd1",
+      "name": "Vault Pass Ledger"
+    },
+    {
+      "id": "a7d4442e-93a9-45f4-a349-83ed73c2673a",
+      "name": "Detailed Ledger"
+    },
+    {
+      "id": "a47c492f-fd85-4c25-af46-f7e4fcbf7efe",
+      "name": "Beating the House: Divination and Gambling"
+    },
+    {
+      "id": "90f0d480-8104-46d7-81e8-2f23d377f2b3",
+      "name": "A PARDON"
+    },
+    {
+      "id": "89226194-a30a-4cee-a51e-c2440aacf330",
+      "name": "Counting House Accounts - Number 47"
+    },
+    {
+      "id": "c284c394-e73a-4e68-a01d-3aec67e71293",
+      "name": "Basics of Beginner's Dwarvish"
+    },
+    {
+      "id": "8e7c71db-e39f-4086-a015-34468c897774",
+      "name": "Instructions for Receipt of Chest"
+    },
+    {
+      "id": "d06ccb7c-e349-489f-b298-a057694ad7c8",
+      "name": "Record of the Honoured"
+    },
+    {
+      "id": "d487a192-9346-4dc4-bdd7-26a118db25e5",
+      "name": "Orders from J"
+    },
+    {
+      "id": "730d1d0b-c001-4a85-978b-6aa1f9b7d73f",
+      "name": "Our Little Secret"
+    },
+    {
+      "id": "b080fe62-1389-43df-b3f8-7fde608d7d3c",
+      "name": "Counting House Family Vault List"
+    },
+    {
+      "id": "b45868e5-18e0-42aa-b0ca-df6b28ff61ef",
+      "name": "Counting House Vault Rules"
+    },
+    {
+      "id": "6c622922-fd5b-452a-80b1-d567b5fcefa1",
+      "name": "Vault Visitor Log"
+    },
+    {
+      "id": "d7908626-8248-4cda-b7a0-d1a36551f94b",
+      "name": "Safe and Sound: a Guide to our Vaults"
+    },
+    {
+      "id": "0bd7ff5a-871c-4738-b9a5-14b842026eb2",
+      "name": "Waukeen's Guide to Commerce"
+    },
+    {
+      "id": "fd204b28-68cb-4d39-9578-1ee4db92bb1a",
+      "name": "Waukeen's Imprisonment"
+    },
+    {
+      "id": "c27aaee7-7014-4b5e-9ce2-5d6648591175",
+      "name": "After the Interdeium"
+    },
+    {
+      "id": "c2ddbd05-71dd-4bc9-8934-1297c8e32cf6",
+      "name": "The Red Knight's Final Strategem"
+    },
+    {
+      "id": "af78fb06-9f2f-4da0-b65f-e06bcd502f7a",
+      "name": "Dammon's Journal"
+    },
+    {
+      "id": "8f79740f-dc98-4ca5-a63c-0af22ab62a49",
+      "name": "The Enigmatic Art of Hemomancy"
+    },
+    {
+      "id": "caa0f367-2f31-43b6-9923-1442d2a35e2b",
+      "name": "Whipping up Booms"
+    },
+    {
+      "id": "4b566ec1-1d8d-48a2-bb66-f3f48b8d9cf7",
+      "name": "Boom, Bang, Blast: The joy of fireworks"
+    },
+    {
+      "id": "76a5673d-db19-4d20-9263-d82264c2785a",
+      "name": "Installation Report"
+    },
+    {
+      "id": "bb8e2f0f-79f2-4450-aa88-a1467112b288",
+      "name": "Ledger of Production: Explosives"
+    },
+    {
+      "id": "960378af-2689-42d3-9f82-c075eff02bb9",
+      "name": "Scrapbook of Letters"
+    },
+    {
+      "id": "4373a78f-e768-4d43-92ab-62438569e34c",
+      "name": "The Ultimate State"
+    },
+    {
+      "id": "9038f8fb-5670-412c-aa34-98edd21931c6",
+      "name": "Shield Steward Interrogation LogScroll or letter"
+    },
+    {
+      "id": "5655e70a-6150-4ea5-b7e1-03bdfd55b15a",
+      "name": "Security Breach"
+    },
+    {
+      "id": "2766a645-74da-4abd-86f1-00432189b4d9",
+      "name": "Guest Book"
+    },
+    {
+      "id": "8eb14f02-ad67-49a0-86ed-b16bbb24d049",
+      "name": "The Glitter Gala - Glittering Baldur's Gate for over Twenty Years"
+    },
+    {
+      "id": "a8043f0e-f39a-4979-b1c7-b0ceb0b490ea",
+      "name": "Stock Display: A Primer, by Sana Aeran"
+    },
+    {
+      "id": "0a118ee9-b4d4-4950-adcf-2712925bdee7",
+      "name": "I Miss You!"
+    },
+    {
+      "id": "7389b3c1-b876-487b-b8e8-0585734e8e34",
+      "name": "Music and Lyrics: 'Bard Dance'"
+    },
+    {
+      "id": "602e4e17-4969-4260-bb96-ea14f17def7b",
+      "name": "Music and Lyrics: 'Of Divinity and Sin'"
+    },
+    {
+      "id": "032e5784-040d-4879-9558-86499eca07d0",
+      "name": "Music and Lyrics: 'Old Time Battles'"
+    },
+    {
+      "id": "181861a2-2696-43af-a0d9-3a7838fed6d3",
+      "name": "Music and Lyrics: 'The Queen's High Seas'"
+    },
+    {
+      "id": "3e368974-1c74-49dc-a3fc-af944d599a5d",
+      "name": "Music and Lyrics: 'Sing For Me'"
+    },
+    {
+      "id": "53b32e10-99fd-49d7-8214-549a9976ba4b",
+      "name": "Music and Lyrics: 'The Power'"
+    },
+    {
+      "id": "e0d64b31-07f4-4573-9cf7-b4acfb63338f",
+      "name": "Sword Coast Songbook"
+    },
+    {
+      "id": "97b8a9e0-ef1f-470c-afb8-9ea64b34404c",
+      "name": "Letter from Sylai"
+    },
+    {
+      "id": "fb10d21a-ffdc-4af7-ae5b-23a8889fe5ce",
+      "name": "Mantras and Meditations of the Sun Soul"
+    },
+    {
+      "id": "679c531a-ef16-423e-b808-2134df97528c",
+      "name": "Creased Missing Poster"
+    },
+    {
+      "id": "5c950fd9-7ebd-4aad-b9e2-57899a6327e4",
+      "name": "Faded Missing Poster"
+    },
+    {
+      "id": "1fc1fd22-31f2-4cde-9664-c71a3df7062e",
+      "name": "Damp Missing Poster"
+    },
+    {
+      "id": "9618910c-df56-424b-92f9-7f250642db53",
+      "name": "Curled Missing Poster"
+    },
+    {
+      "id": "e16e94f6-be06-4bdf-a7b9-691661b9ef8c",
+      "name": "A Murderous Masterpiece"
+    },
+    {
+      "id": "0f5bc3eb-b91e-445c-b33b-be0bc32b3bde",
+      "name": "An Unexpected Talent"
+    },
+    {
+      "id": "3e085a90-cf0a-4b8c-add6-b1625558ce1a",
+      "name": "A Promising Candidate"
+    },
+    {
+      "id": "b9170400-152f-4e12-a673-316b1fba10e2",
+      "name": "Merchant's Almanac: The Coast Way"
+    },
+    {
+      "id": "92460efe-6ad5-4665-9250-f0493a5f0786",
+      "name": "My Thanks, Cora"
+    },
+    {
+      "id": "31c986dd-0f75-4a15-8881-76822efb8b09",
+      "name": "Tear-stained Letter"
+    },
+    {
+      "id": "4911de84-7b94-4767-8a24-e0b6f232f0d0",
+      "name": "Dusty Prayerbook"
+    },
+    {
+      "id": "0704ee73-4471-447e-b0b9-ddf4d117c953",
+      "name": "Merchant's Almanac: The Trade Way"
+    },
+    {
+      "id": "74dc0ae4-2f88-4579-97e9-229509d472fc",
+      "name": "A Modest Guide To Sword Coast Wine"
+    },
+    {
+      "id": "c56a5d58-ac72-43c8-bf7d-06355e3ec7f8",
+      "name": "Stained Letter"
+    },
+    {
+      "id": "7b290606-909c-437b-991a-f2e125d271bb",
+      "name": "Caution Before the Seelie"
+    },
+    {
+      "id": "126adf20-9f9d-4b57-98eb-190ebae96fff",
+      "name": "A Plea"
+    },
+    {
+      "id": "281c2850-8c24-44ae-ad4a-93b1bfcb903c",
+      "name": "CONFIDENTIAL: REPORT RECORD"
+    },
+    {
+      "id": "6bf81178-ec84-41d8-9be1-0885590af7de",
+      "name": "Blessings for the Refugees"
+    },
+    {
+      "id": "2eabd463-e5f3-41a2-ad6f-adffa400fa03",
+      "name": "In-progress Essay"
+    },
+    {
+      "id": "22ff2ddd-cbf6-419c-b5cc-26a1a0fb229d",
+      "name": "Charter of Tabernacle Donations"
+    },
+    {
+      "id": "b06b9c80-cf21-4783-ba60-c75efd5c9692",
+      "name": "The Layperson's Guide To Holy Exorcism"
+    },
+    {
+      "id": "e68bad7f-d035-471f-9edc-a9b75f4daf93",
+      "name": "Dedications to the Pantheon"
+    },
+    {
+      "id": "3a9da8f2-3c13-4515-b753-6f0c659f0280",
+      "name": "Prayer to Tempus"
+    },
+    {
+      "id": "c9792c72-d217-44e4-8a77-2c9c653ea24b",
+      "name": "Hear My Prayer. Please?"
+    },
+    {
+      "id": "af63faa5-c058-4a75-83a4-47cfb0ed39eb",
+      "name": "Non-Demoninational Prayer of Peace"
+    },
+    {
+      "id": "5b79c81b-11a7-4ecf-b57b-7a1ce1e73b5b",
+      "name": "Regarding Prayer Monitoring"
+    },
+    {
+      "id": "c10384cf-0151-4790-ba68-8dc8a07d553f",
+      "name": "Stained Letter"
+    },
+    {
+      "id": "f0f94de7-bbfd-472f-a83c-0d5311295872",
+      "name": "Get to Baldur's Gate"
+    },
+    {
+      "id": "130b4eb0-e432-4fce-9fd9-34fe8cb1a52d",
+      "name": "Orders"
+    },
+    {
+      "id": "4735acba-ab0f-4e75-b2ca-074a58b86b19",
+      "name": "Investigation Notes."
+    },
+    {
+      "id": "852ee9d1-c9b8-4ddd-9e95-ac07a6e94b95",
+      "name": "The Task at Hand."
+    },
+    {
+      "id": "6e9bfde4-1153-4b88-8376-9e0bc592d643",
+      "name": "Journal Log of True Soul Korliss"
+    },
+    {
+      "id": "065ce896-e8e0-4d00-beea-d15bbc9b0904",
+      "name": "Orders from B"
+    },
+    {
+      "id": "b63e0bbd-4e23-4930-a79c-354d9a9978bf",
+      "name": "Instructions from B"
+    },
+    {
+      "id": "0cf9ee12-fa16-4ef0-bb8f-6e984c0c53b0",
+      "name": "Tome of Faith-leap Trial"
+    },
+    {
+      "id": "e6e91952-d96b-4b30-8a57-f62725f39308",
+      "name": "The Final Sacrifice of the Moon Daughter"
+    },
+    {
+      "id": "a62996b4-c5ff-4423-9967-f1016b832f32",
+      "name": "Sharran Initiate's Notes"
+    },
+    {
+      "id": "679e625f-e5f7-4547-9ec1-961ed8d3f1e5",
+      "name": "Mason's Log"
+    },
+    {
+      "id": "5e8253cd-2529-4566-8ff1-e03ae5c7e296",
+      "name": "Populism and PropagandaStack of paper"
+    },
+    {
+      "id": "08c75e58-6e70-469a-a22e-44c184995e6c",
+      "name": "Smokepowder Satchel"
+    },
+    {
+      "id": "20f935fc-c55b-4841-9f14-1bd71c4bf3c8",
+      "name": "Karlach's Boots"
+    },
+    {
+      "id": "6ba92e84-2a6d-4a28-80f6-48f0882b417a",
+      "name": "A Diabolist's Exhortation"
+    },
+    {
+      "id": "b4431865-5b66-4727-8eeb-23b54af2ba1e",
+      "name": "A Little Gift"
+    },
+    {
+      "id": "216f0362-f77b-420c-84cb-d84853aa173d",
+      "name": "Dreamsome Boots"
+    },
+    {
+      "id": "edcc4d57-ba17-4470-ad78-bc2b967b524c",
+      "name": "Jaheira's Boots"
+    },
+    {
+      "id": "db4a3e0f-6315-4337-abce-aad5f38513aa",
+      "name": "Spellthief"
+    },
+    {
+      "id": "ee20ef22-87f5-4ebc-864e-21c040022437",
+      "name": "Pedestal"
+    },
+    {
+      "id": "e89d55a7-9a68-445a-bac9-b4a02654f0c7",
+      "name": "The Amulet of Lost Voices"
+    },
+    {
+      "id": "4075b462-15a9-4f4d-b3af-843a6b9d1ae7",
+      "name": "Ritual Candle"
+    },
+    {
+      "id": "dbc5b484-26d6-41f3-bd50-dc74b8f9cc9b",
+      "name": "Summon Us"
+    },
+    {
+      "id": "fd2fe1eb-af9e-4233-8cad-ccc47eec03dc",
+      "name": "Mysterious Potion"
+    },
+    {
+      "id": "de6b186e-839e-41d0-87af-a1a9d9327785",
+      "name": "Goodberry"
+    },
+    {
+      "id": "a81549e9-3abd-4d67-aad1-6a99c5ba07ad",
+      "name": "Elixir of Immortality"
+    },
+    {
+      "id": "7090a500-c392-4566-a79f-0c9453323bc8",
+      "name": "Potion of Sleep"
+    },
+    {
+      "id": "f73bb86b-6091-4b5e-b5d5-ccf730971fd9",
+      "name": "Potion of Sleep"
+    },
+    {
+      "id": "7c95e3bd-90c8-4ed4-bd9d-97f5fb624774",
+      "name": "Mysterious Artefact"
+    },
+    {
+      "id": "4e00f7f9-7ee0-4eaa-be95-db3f0ad9427a",
+      "name": "Perfumed Letter"
+    },
+    {
+      "id": "24d15799-8781-4a18-98fc-a094ccb22341",
+      "name": "Harper's Map"
+    },
+    {
+      "id": "3b05b86b-4282-4a92-ace7-e323c1fc1d1e",
+      "name": "Dawnmaster's Crest"
+    },
+    {
+      "id": "96a35552-0c05-4df0-9974-2a8f142e4be6",
+      "name": "Blood of Lathander"
+    },
+    {
+      "id": "3462aa18-bb93-403c-b28d-9841c147787f",
+      "name": "Varsh Ko'kuu's Boots"
+    },
+    {
+      "id": "c6555b5d-4d26-41ce-bcd6-d31ed7bed86b",
+      "name": "Missive from Moonrise"
+    },
+    {
+      "id": "55f57f88-bed2-43bd-9f2d-4fd839b7b531",
+      "name": "Imperfectly Cut Sun Gem"
+    },
+    {
+      "id": "a6bc05c1-5cca-4b54-b83f-0ed546b5e326",
+      "name": "Raw Sun Crystal"
+    },
+    {
+      "id": "b80175d7-8faf-4bc0-a7c8-c122186d6f27",
+      "name": "Control panel with a unique slot."
+    },
+    {
+      "id": "30c5721d-bdc3-4150-8cd1-d99197eb4870",
+      "name": "Debtor's Attire"
+    },
+    {
+      "id": "9f8a0a1c-b1f0-4f09-93eb-de364f1063f1",
+      "name": "Mysterious Elixir"
+    },
+    {
+      "id": "c5375a2c-f03c-464b-a482-5251debbfabb",
+      "name": "Rhapsody"
+    },
+    {
+      "id": "b1e7bbad-db77-4790-af6b-f300b52498e7",
+      "name": "Dog Collar"
+    },
+    {
+      "id": "b50eeee7-09dd-492c-8929-8dc216967a66",
+      "name": "Shadow-Cursed Tree"
+    },
+    {
+      "id": "7ffc896d-1916-4f9a-8cac-9ff5892e0227",
+      "name": "Bubbling Cauldron"
+    },
+    {
+      "id": "b9cb5ac8-8ba0-4568-898c-86feda9bf77e",
+      "name": "Wooden Crates"
+    },
+    {
+      "id": "0402786b-de54-4e4b-b551-1f2acb5f61a8",
+      "name": "Wooden Crates"
+    },
+    {
+      "id": "6ded8312-9f38-4c48-bb6e-2dc0d3ba6042",
+      "name": "Wooden Crates"
+    },
+    {
+      "id": "22df3f62-41c7-4aea-b356-57b7a10c63d8",
+      "name": "Emperors Robes"
+    },
+    {
+      "id": "2cbb6a53-5702-42cb-afc3-ed5eb7882d2d",
+      "name": "Glutinous Brain"
+    },
+    {
+      "id": "be745c7b-f5a0-48cb-a7bd-3b7713f6e702",
+      "name": "Komira's Locket"
+    },
+    {
+      "id": "0de9e072-7048-4d07-8bbe-79e0591674c2",
+      "name": "Sorrow"
+    },
+    {
+      "id": "eadad0c4-d4a5-45cb-b4c3-e16a9b3ebe0a",
+      "name": "Ring of Colour Spray"
+    },
+    {
+      "id": "276f2902-308d-4efe-9144-226c73f3edaa",
+      "name": "Kanon's Handkerchief"
+    },
+    {
+      "id": "b47a53a6-9533-4896-9d74-69aa0cff7c81",
+      "name": "Poison Branch"
+    },
+    {
+      "id": "d22e2679-aff0-4244-9ed2-7aac981b82cf",
+      "name": "Gloves of Power"
+    },
+    {
+      "id": "28b38ae1-8d66-4d8e-a4f0-5d4c6c342c59",
+      "name": "Rain Dancer"
+    },
+    {
+      "id": "db4d4560-dc72-4d64-b552-5caf442c0927",
+      "name": "Hellrider's Pride"
+    },
+    {
+      "id": "d943c31f-a8c9-49b0-8eba-f120b5075a67",
+      "name": "Elegant Robe"
+    },
+    {
+      "id": "bf4700bb-f1db-4586-8332-4e3e0c3e0fe0",
+      "name": "Elegant Robe"
+    },
+    {
+      "id": "aa0917ea-5f66-4a22-97de-654228484128",
+      "name": "Elegant Robe"
+    },
+    {
+      "id": "dd3f1c98-cdf7-46f3-bb8b-5489dc3433ca",
+      "name": "Nightsinger's Half-Plate"
+    },
+    {
+      "id": "3523b640-e9da-4d89-b031-6ffe1d5fd3ed",
+      "name": "Dark Justiciar Helmet"
+    },
+    {
+      "id": "dff731f7-d6da-403d-80cf-7f3d9cc7345b",
+      "name": "The Deathstalker Mantle"
+    },
+    {
+      "id": "a96864dd-63b5-4851-accd-db3ad70c0f11",
+      "name": "Monster's Horn"
+    },
+    {
+      "id": "339cc090-786f-4566-8ad7-75b7e3d5db2c",
+      "name": "Monster's Skull"
+    },
+    {
+      "id": "5feb233d-7992-4c6b-adba-b574daa271aa",
+      "name": "Monster's Skull"
+    },
+    {
+      "id": "67a88e15-bccf-411c-941d-45f70685025f",
+      "name": "This dagger, forged to honour the Frozen Prince of Stygia, sends a prickling shiver down the spine when grasped."
+    },
+    {
+      "id": "86aab372-cd8a-47bb-8f5b-cc3486d01412",
+      "name": "Bestowed Bounty"
+    },
+    {
+      "id": "2f481fef-1877-4eac-820d-dc3210ff0b36",
+      "name": "Doom Hammer"
+    },
+    {
+      "id": "259e206a-75d1-47a1-8996-811704c4743e",
+      "name": "Impenetrable Vines"
+    },
+    {
+      "id": "73121309-2863-434b-a565-aeaa649b6eaa",
+      "name": "Statue"
+    },
+    {
+      "id": "11a1e00f-3c6c-49a9-acc8-7ec884aeb217",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "58226238-d68d-49e8-b55b-9d84574eeaa7",
+      "name": "Fallen Statue"
+    },
+    {
+      "id": "4b714a4c-cbf4-499a-92e2-ee8334bf55a3",
+      "name": "Bloody Journal"
+    },
+    {
+      "id": "0eb19717-e850-4fc5-a3fb-910d06ddd916",
+      "name": "Tattered Journal"
+    },
+    {
+      "id": "aa278c4f-d191-43a6-8699-73ffcfe68fb7",
+      "name": "Burnt Journal"
+    },
+    {
+      "id": "1227a1ce-c286-4e08-a117-93263dff6d22",
+      "name": "Web-Covered Journal"
+    },
+    {
+      "id": "f09b6c2f-e5f3-43df-82c7-9ed5862a7421",
+      "name": "Absolute's Smite"
+    },
+    {
+      "id": "08712231-9c7c-4a83-8125-289a419e210f",
+      "name": "Highcliff's Blueprints"
+    },
+    {
+      "id": "8f4876f1-44d9-4bb8-802e-907c6b0a0dba",
+      "name": "Warped Headband of Intellect"
+    },
+    {
+      "id": "0db056b3-23d1-4873-883d-482b5d9337b5",
+      "name": "Poisoner's Robe"
+    },
+    {
+      "id": "d0666101-d24e-4d2b-bc63-63f67532b38c",
+      "name": "Spiderstep Boots"
+    },
+    {
+      "id": "79f752d4-1680-4eaa-acfa-1c92c9b9477b",
+      "name": "The Necromancy of Thay"
+    },
+    {
+      "id": "87918b9b-8551-476b-8544-68a2a3ce9e2e",
+      "name": "The Necromancy of Thay"
+    },
+    {
+      "id": "215dc202-2b77-4825-b6d1-c72954f6394a",
+      "name": "The Necromancy of Thay"
+    },
+    {
+      "id": "feecea9b-c091-46fd-9795-738e9c0e3019",
+      "name": "The Necromancy of Thay"
+    },
+    {
+      "id": "baa8bd91-09ec-4c92-a0e1-4a5a9d4ea8ed",
+      "name": "Spiderstep Staff"
+    },
+    {
+      "id": "6d8706b9-b5b3-47e6-b928-229fb4cd3bcd",
+      "name": "Table Rich"
+    },
+    {
+      "id": "aa9c5d5f-2818-4880-8be7-a71ed06f2a1a",
+      "name": "Wardrobe"
+    },
+    {
+      "id": "9aca1109-a59d-47d3-8f35-f248b70518f9",
+      "name": "Moonlantern"
+    },
+    {
+      "id": "2c99f1f1-776b-45dd-a9d7-06e6a8e14b3f",
+      "name": "Broken Moonlantern"
+    },
+    {
+      "id": "c9ebcfae-8c9a-4acc-8a30-da7830b32121",
+      "name": "Shadow Lantern"
+    },
+    {
+      "id": "66079879-2c5c-492a-8fb6-bfbae79475e6",
+      "name": "Orin's Temple Ring"
+    },
+    {
+      "id": "338848e7-b2c6-4f97-879b-cb3439b4f959",
+      "name": "Amulet of Misty Step"
+    },
+    {
+      "id": "0271f69c-ef7f-4246-9286-41036fd2e235",
+      "name": "Dwarf's Poem"
+    },
+    {
+      "id": "95b04c9c-8b58-44c5-bf1f-7d4d1027d57e",
+      "name": "Absolute's Talisman"
+    },
+    {
+      "id": "711d3410-e033-4cc1-b3e2-0e3b3abc9a85",
+      "name": "Goblin's Drawing"
+    },
+    {
+      "id": "e7bf966a-b611-4c36-89fe-0a3b28393d97",
+      "name": "Amulet of Selûne's Chosen"
+    },
+    {
+      "id": "3d57c1a7-2dee-4a0f-aa7a-e7b6574b75e3",
+      "name": "Absolute's Warboard"
+    },
+    {
+      "id": "1771fba5-526e-4279-a679-1bd8a4002c12",
+      "name": "Wooden Crevice"
+    },
+    {
+      "id": "0bf738cf-c0b7-471c-b66e-91578a6f657f",
+      "name": "Reinforced Greatsword"
+    },
+    {
+      "id": "910ed403-38b3-4128-b07b-0de5d14da8f8",
+      "name": "Reinforced Helmet"
+    },
+    {
+      "id": "4e96bce7-827d-4a72-9532-2449a675bfeb",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "b1b872db-43f0-45f7-b34f-d814ef9cb64c",
+      "name": "Second Marriage"
+    },
+    {
+      "id": "78e4a3ef-eb0f-4beb-b95f-895ab4d38362",
+      "name": "Bitter Divorce"
+    },
+    {
+      "id": "fa8ebc43-7fa6-4d8f-946c-59f45466b353",
+      "name": "Blackboard"
+    },
+    {
+      "id": "062c6dd0-113d-4ca0-935c-bd937091a9eb",
+      "name": "Arrow of Sparrow Slaying"
+    },
+    {
+      "id": "e14df0f7-0361-42ea-a0af-a4d4033f85e2",
+      "name": "Spoon of Saltiness"
+    },
+    {
+      "id": "ac49f3e0-d5d5-448c-b3cf-dd1ad9a96013",
+      "name": "Decanter of Nearly Endless Water"
+    },
+    {
+      "id": "a366a1b3-2338-434a-9815-97243bb1821e",
+      "name": "Fishing Rod of Alertness"
+    },
+    {
+      "id": "60d14cc7-d47f-4e8d-a888-50619b80bf28",
+      "name": "Sending Shell"
+    },
+    {
+      "id": "66d6cbd5-c231-4fc4-a3b7-80f781b579f7",
+      "name": "Shadow Blade"
+    },
+    {
+      "id": "4668297e-7fc8-4384-af34-165813e9abe1",
+      "name": "Cemetery-Blue Torch"
+    },
+    {
+      "id": "6b4aca7f-69dd-484a-a663-5807f1efeeb1",
+      "name": "Curse-Pink Torch"
+    },
+    {
+      "id": "fabf8b48-9c73-498a-a4ad-f9bf07024f19",
+      "name": "Plague-Green Torch"
+    },
+    {
+      "id": "f7c72034-b7ed-459f-9f2f-3c42144271ef",
+      "name": "Drunk-Purple Torch"
+    },
+    {
+      "id": "f893a2a4-6b64-40c2-8130-26bd362e230f",
+      "name": "Sepulchre-White Torch"
+    },
+    {
+      "id": "987b5a8d-1300-4f32-9e01-c07313b17a11",
+      "name": "Voodoo Doll"
+    },
+    {
+      "id": "3d8889c6-936b-4009-955c-d1f3aef46df5",
+      "name": "Feast Supplies"
+    },
+    {
+      "id": "fffed42d-f849-47ad-9931-3f7fe72e364c",
+      "name": "Lump's War Horn"
+    },
+    {
+      "id": "1f4f4587-ed01-4a11-ad5c-f9e98e0e7492",
+      "name": "Lump's War Horn"
+    },
+    {
+      "id": "94988aa9-03e9-491a-9861-462ebc758364",
+      "name": "Gold Key"
+    },
+    {
+      "id": "21dbfaab-6274-46b1-bdf9-203c3d6ac984",
+      "name": "A key that unlocks the display case in the House of Hope Archive."
+    },
+    {
+      "id": "9a4382e3-6b8d-40b9-b92b-824f9c4ea9ca",
+      "name": "Rosewood Desk Key"
+    },
+    {
+      "id": "59578cc3-b49f-4355-a860-d86225e95d5d",
+      "name": "House of Hope - West Wing Key"
+    },
+    {
+      "id": "1a00cf0b-e8ea-467f-b122-0bea5f0c3ff2",
+      "name": "Metal Crate Key"
+    },
+    {
+      "id": "4feea24d-ebe3-4140-8944-624dedf2a01c",
+      "name": "Key"
+    },
+    {
+      "id": "d7fdb70e-75b3-487a-8ece-3e7d4b3a8370",
+      "name": "Necrotic Laboratory Spare Key"
+    },
+    {
+      "id": "d6622a6a-47a5-4fd3-8dc1-4fae24099ecb",
+      "name": "Tollhouse Clerk's Key"
+    },
+    {
+      "id": "348649e0-e74c-4968-9613-fe3712796dd6",
+      "name": "Longsword Mould"
+    },
+    {
+      "id": "a1cd6c84-84bc-4546-b052-a58e38faf4a5",
+      "name": "Mace Mould"
+    },
+    {
+      "id": "e0dd88fa-b057-499a-b2fd-fe8e92a856df",
+      "name": "Scale Mail Mould"
+    },
+    {
+      "id": "fecf2955-a5a2-42e5-86f3-4bf87b3d0e2a",
+      "name": "Scimitar Mould"
+    },
+    {
+      "id": "8e2c856e-6317-40f3-89a4-b195b70b9fa1",
+      "name": "Shield Mould"
+    },
+    {
+      "id": "e3526b0a-b74f-43c5-9466-334c08de88fe",
+      "name": "Splint Mould"
+    },
+    {
+      "id": "c8fa7c2f-d34a-4b42-a4fa-c2476fab6c92",
+      "name": "Gale's Severed Hand"
+    },
+    {
+      "id": "86b7cbe1-c6b9-48d8-b53e-c750c031d7ae",
+      "name": "Mol's Eyepatch"
+    },
+    {
+      "id": "3aa5fdba-f1a5-40ce-aadb-7a22d273a649",
+      "name": "Article Block"
+    },
+    {
+      "id": "5ffe11b1-4949-47cd-ab49-80053db261f9",
+      "name": "Baldur's Mouth Gazette"
+    },
+    {
+      "id": "bd2b33f4-c7ea-4c39-a151-8b9bb2a7ea1e",
+      "name": "Pressed Print Block"
+    },
+    {
+      "id": "989c36c4-490a-46ea-9791-14c3da8707cb",
+      "name": "A blank master print block."
+    },
+    {
+      "id": "ae4af670-5674-4fed-bbf9-4083f06519b0",
+      "name": "Spaceshunt Boots"
+    },
+    {
+      "id": "31ee026d-5d51-4efb-97ba-7992b642efbc",
+      "name": "Alarm Machine"
+    },
+    {
+      "id": "0cccc96d-ad0e-4329-8079-c0c9a35ced59",
+      "name": "Infernal Marble"
+    },
+    {
+      "id": "7dc0d241-f391-4714-a996-1400bc9b0200",
+      "name": "Thirsty Ward"
+    },
+    {
+      "id": "ff95f7c4-8366-418d-aee4-dbbab06273ec",
+      "name": "Ward"
+    },
+    {
+      "id": "d49d9c13-4c1c-42eb-8a90-0dd70a381ba1",
+      "name": "Silver Key"
+    },
+    {
+      "id": "be7ef1cc-3be9-4e1c-8e0f-0fb7dc091352",
+      "name": "Flour Sack"
+    },
+    {
+      "id": "46b1d5d4-34e0-467e-b1b8-a43ae33f7541",
+      "name": "Guild Ring"
+    },
+    {
+      "id": "79304aa1-be73-48bb-8255-81338d8f4939",
+      "name": "Restoration Faucet"
+    },
+    {
+      "id": "c41ae0f5-7936-49de-8739-b33399b92e20",
+      "name": "Silver Key"
+    },
+    {
+      "id": "5c64e2f7-ad13-465c-9fb9-e994fc8d0af4",
+      "name": "Boudoir Invitation"
+    },
+    {
+      "id": "25fd19c7-26d9-4e85-ac3e-dc8987af7be9",
+      "name": "Invitation Box"
+    },
+    {
+      "id": "64f0c416-3959-48cd-9b88-1aa07d423a32",
+      "name": "Rich Clock"
+    },
+    {
+      "id": "443a4b1a-92d4-4a62-816e-d7437eee0a0e",
+      "name": "Silver Key"
+    },
+    {
+      "id": "21727b7b-1ed0-40e8-a329-1daa1cec511a",
+      "name": "The Forge Key"
+    },
+    {
+      "id": "d4d4c5a2-84e2-4b8f-bbf1-d6ce72316cc5",
+      "name": "Basement Key"
+    },
+    {
+      "id": "b5d480b0-a0f2-4b69-a9a6-f4bbf7f7279f",
+      "name": "Tombstone Shop Key"
+    },
+    {
+      "id": "e7968b1c-d109-4a4f-b296-d90dd3662a9d",
+      "name": "FOR THE STOUT AND STURDY"
+    },
+    {
+      "id": "948b5555-1ebd-455b-ab22-781111cd9d0b",
+      "name": "Wyvern Whiskey"
+    },
+    {
+      "id": "b627f83f-8533-4440-95a0-ad2f319fe4ed",
+      "name": "Scroll of Bestial Communion"
+    },
+    {
+      "id": "21e67b0e-913d-411a-9046-6c54e8d0bf53",
+      "name": "Scroll of Artistry of War"
+    },
+    {
+      "id": "b2e1168a-021d-4a81-a041-6d2e1421a1fb",
+      "name": "Scroll of Dethrone"
+    },
+    {
+      "id": "846d27b5-c247-4049-9872-86171c172015",
+      "name": "Szarr Family Ring"
+    },
+    {
+      "id": "4ece815c-aff2-45c3-8b07-dd3a04454243",
+      "name": "Bloodstained Parchment"
+    },
+    {
+      "id": "88be0257-cd9a-4922-85c9-178ad8579af2",
+      "name": "Torch of Revocation"
+    },
+    {
+      "id": "e88dd9ea-1b8b-4edc-9fee-3c7ec286ba60",
+      "name": "Torch of True Revocation"
+    },
+    {
+      "id": "09e375ca-21cb-4c29-9c0a-2346f00fb2f2",
+      "name": "Moonbeam"
+    },
+    {
+      "id": "ac578c5e-d568-4a42-b419-216e0587da6e",
+      "name": "Key"
+    },
+    {
+      "id": "8baa6d5d-ad19-4328-a1ca-2074c7b7732e",
+      "name": "Moonrise Guard Key"
+    },
+    {
+      "id": "0998e761-af33-4077-8449-85a049959b0e",
+      "name": "Selûnite Brooch"
+    },
+    {
+      "id": "1bcab543-e87b-4a34-8324-886131a0dc43",
+      "name": "Teleportation Beacon"
+    },
+    {
+      "id": "fedc0837-e39f-480e-89fd-b9e2ee354ab0",
+      "name": "Teleportation Beacon"
+    },
+    {
+      "id": "ec715e1b-9b94-4a4f-a4a6-e8c4afcde176",
+      "name": "Teleportation Beacon"
+    },
+    {
+      "id": "2adf497b-2e26-47d6-962c-91ded0c79aea",
+      "name": "Sending Stone"
+    },
+    {
+      "id": "35308cf1-3480-4a22-be9c-c0f41c3eb14c",
+      "name": "Icy Crystal"
+    },
+    {
+      "id": "44bb4707-398c-4a38-9959-eb3052ebabc2",
+      "name": "Icy Helve"
+    },
+    {
+      "id": "db32d957-c708-4694-a863-271e6a9a4676",
+      "name": "Icy Metal"
+    },
+    {
+      "id": "4aef9bb0-38a8-428e-8b87-6e462d612dd6",
+      "name": "The Whispering Promise"
+    },
+    {
+      "id": "0bd70497-f7b4-4ea0-8be0-21a0c66f0576",
+      "name": "Minsc Cape"
+    },
+    {
+      "id": "f707a269-04e0-4d28-ae39-0565a78adbee",
+      "name": "Vial of Blood"
+    },
+    {
+      "id": "7dbbded9-04fa-4b70-8b5a-131beedc1479",
+      "name": "Polished Dagger"
+    },
+    {
+      "id": "ac9145d1-31d0-4aa3-8755-62cc85dad22b",
+      "name": "Disintegrating Night Walkers"
+    },
+    {
+      "id": "20963422-5c20-4d10-9227-584adcc7e41a",
+      "name": "Gale's Pouch"
+    },
+    {
+      "id": "7ee02bb4-79a0-41d5-9f0a-7feae2e6561a",
+      "name": "Gale's Pouch"
+    },
+    {
+      "id": "82cca611-a421-4a85-93ad-a73a1de92497",
+      "name": "Green Card"
+    },
+    {
+      "id": "f9d31ece-1702-4ee8-a166-05365bb32ce4",
+      "name": "Entry Card"
+    },
+    {
+      "id": "520666df-5f1b-4fd9-983e-c0753f224855",
+      "name": "Infernal Mask"
+    },
+    {
+      "id": "8a527abd-a2ff-4267-a067-d26bdf6742ee",
+      "name": "Shattered Flail"
+    },
+    {
+      "id": "704653bc-b65c-4178-a7c1-d55e7fe880ce",
+      "name": "Painting of an Oskar Fevras"
+    },
+    {
+      "id": "ffb6d084-0900-4f58-ae39-f0360f7488d1",
+      "name": "Painting of a Smiling Maiden"
+    },
+    {
+      "id": "8a407bd7-effe-4306-b2a0-02624ad45074",
+      "name": "Painting of an Elegant Noble"
+    },
+    {
+      "id": "1b2b1b04-646a-492e-8c6e-8f11a4004ebd",
+      "name": "Collapsed Bridge"
+    },
+    {
+      "id": "784843e5-e89a-4ffb-a556-417ba2018287",
+      "name": "Severed Head"
+    },
+    {
+      "id": "1b47637d-fdea-431f-a828-7ff8d9b4341e",
+      "name": "Smuggler's Ring"
+    },
+    {
+      "id": "4090ca27-dcca-4028-a887-173e87b602da",
+      "name": "Dowry Ring"
+    },
+    {
+      "id": "455383a5-1211-4500-85f9-b71fad3fbf15",
+      "name": "Sword of Justice"
+    },
+    {
+      "id": "69271c04-ab3d-4efc-ab3c-4ca6c5ec7db3",
+      "name": "Gloves of Hail of Thorns"
+    },
+    {
+      "id": "f014efe0-b010-408e-b3b5-a17ace100d82",
+      "name": "Proximity Explosive"
+    },
+    {
+      "id": "253d6840-52ef-47e5-9d90-d1284a11f8a3",
+      "name": "Blast Mine"
+    },
+    {
+      "id": "869540cf-e598-47ca-9768-8c03af7d67f6",
+      "name": "Blast Mine"
+    },
+    {
+      "id": "5a4acd64-d766-4f85-81fb-38b5211b5cfa",
+      "name": "Explosive Glyph"
+    },
+    {
+      "id": "ab848f5a-69dc-4d05-9b54-2575d68fe05b",
+      "name": "Explosive Toy"
+    },
+    {
+      "id": "e2b52df4-c8f0-4c65-88c7-24339458a291",
+      "name": "Canopic Jar"
+    },
+    {
+      "id": "377620bf-b923-4311-a219-d28e4eb7afaa",
+      "name": "Canopic Jar"
+    },
+    {
+      "id": "32119033-c810-45d1-8507-210f92a24053",
+      "name": "Canopic Jar"
+    },
+    {
+      "id": "e9e3ec79-f1af-4e06-9811-4aafeeead3f0",
+      "name": "Canopic Jar"
+    },
+    {
+      "id": "1eac2760-47ef-4a7b-a12c-84d148b499cb",
+      "name": "Broken Jar"
+    },
+    {
+      "id": "6db9ed3d-2d72-43ad-a2b8-02365728f29f",
+      "name": "Thisobald's Brewed-Up Bellyglummer"
+    },
+    {
+      "id": "1cb6c2f9-0548-4e7a-8bd3-853ce02f8bf5",
+      "name": "Mephit Liquid"
+    },
+    {
+      "id": "5c6904cc-5bb0-4ed9-a97c-b2df9aa2a9b6",
+      "name": "Shadow Vestige"
+    },
+    {
+      "id": "637f2b2f-9947-406e-b942-8b3b884172c0",
+      "name": "Emblazoned Plate of the Marshal"
+    },
+    {
+      "id": "48b4f49b-2937-4664-ac87-7db2c64d09c9",
+      "name": "Corellon's Grace"
+    },
+    {
+      "id": "35688051-90df-40e1-890b-c3cde2c82fde",
+      "name": "Ring of Poison Resistance"
+    },
+    {
+      "id": "ffed890a-69fe-4798-8c71-1bd3b72369bc",
+      "name": "Robe of Summer"
+    },
+    {
+      "id": "64b31781-85f6-4266-8fac-430d79bcbdb4",
+      "name": "Khalid's Gift"
+    },
+    {
+      "id": "717a063b-9517-438e-8804-865ee259f320",
+      "name": "Rubble"
+    },
+    {
+      "id": "9297096d-98d6-4637-9b7c-843af752505e",
+      "name": "Shadow-Cloaked Ring"
+    },
+    {
+      "id": "2228a6ab-4c34-46be-8bc9-e7c6b76e3c5b",
+      "name": "Nightdome"
+    },
+    {
+      "id": "10d32d82-4b92-407e-86c9-4e4ba0ed4ff2",
+      "name": "Filigreed Feywild Bell"
+    },
+    {
+      "id": "98282bec-aeaa-4490-ae43-0c27bed58c74",
+      "name": "Spider's Lyre"
+    },
+    {
+      "id": "972ad5f3-4b26-4af9-b136-66f328c3c107",
+      "name": "Rubble"
+    },
+    {
+      "id": "3607fc46-8e4a-427d-95f1-a0a25c6f3e2b",
+      "name": "Falling Rubble"
+    },
+    {
+      "id": "e33850ba-f697-40f5-abec-2951077f2cef",
+      "name": "Dark Justiciar Boots"
+    },
+    {
+      "id": "f8a25225-667f-48cf-853a-76a791a460b9",
+      "name": "Cube 1x1x1"
+    },
+    {
+      "id": "73a443e0-2056-4e4c-b8d2-d4283d8d3595",
+      "name": "Dark Justiciar Gauntlets"
+    },
+    {
+      "id": "44f8f5c2-4e42-48ee-9eb7-9c1773a7d769",
+      "name": "Silver Key"
+    },
+    {
+      "id": "bf2949fe-6739-4149-ac68-106a00eec905",
+      "name": "Sandthief's Ring"
+    },
+    {
+      "id": "742d43ff-b74d-4cbe-9554-51773bbccdc2",
+      "name": "Dark Justiciar Half-Plate"
+    },
+    {
+      "id": "91fcac28-d688-4961-ad40-4b7814aff604",
+      "name": "Spider Meat"
+    },
+    {
+      "id": "274b6c3c-cf13-46b9-ba51-7b9e01f05676",
+      "name": "Summon Golem Bell"
+    },
+    {
+      "id": "47fb4e7f-34e1-480e-8acf-f677a31f260c",
+      "name": "Teleportation Stone"
+    },
+    {
+      "id": "31ee023c-d151-40f6-917e-84066772783b",
+      "name": "DEBUG BOOK"
+    },
+    {
+      "id": "a07f2e91-e084-4fe5-9dbb-ef7de76a3c0a",
+      "name": "Sickle of BOOOAL"
+    },
+    {
+      "id": "cb8405e3-704c-43d2-9bbe-89959b4f085e",
+      "name": "Sickle of BOOOAL"
+    },
+    {
+      "id": "ad1f91df-63ae-4f45-b940-aae444116a8c",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "59f6996f-b95d-43d1-9ebc-8de6930e9256",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "e9c4f029-28e6-4626-8d3d-c62da17d862a",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "ea6e19be-3283-4092-b4fe-5350225a2bad",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "89ee9a0f-0571-46ce-9541-b5141a08188a",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "97d58d1d-2eee-4cd2-bbee-a2194624a175",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "a1fc935a-2502-4ad1-b1c4-f23334934c07",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "5c1f646e-18ad-4741-a67e-8a8bc30480b8",
+      "name": "Take a Long Rest"
+    },
+    {
+      "id": "ab846656-a9f7-4ed5-93ae-85a8df39b5ac",
+      "name": "Kiam Goda's Kilat Drum"
+    },
+    {
+      "id": "09de8b63-12ad-43d5-a2cf-b9b32692e777",
+      "name": "Dostrealt's Piccolo"
+    },
+    {
+      "id": "59a1ed6f-b530-44b2-972e-2a73e02080cb",
+      "name": "Stolyarof's Table Lute"
+    },
+    {
+      "id": "3542b820-713a-4dd3-9cc8-35586f4e7f46",
+      "name": "Falataeric Cli Lyre"
+    },
+    {
+      "id": "209c50b2-1e39-4484-905d-588741eba320",
+      "name": "Glimmergad's Selgaunt Fiddle"
+    },
+    {
+      "id": "7fe2b8bb-473a-4a1b-96a6-840a629c2444",
+      "name": "Crooked Wand of Fireballs"
+    },
+    {
+      "id": "b3720630-15ba-4384-87c6-56392097e02c",
+      "name": "Broken Wand of Fireballs"
+    },
+    {
+      "id": "7becedf0-a90a-40d3-a726-e4e671f3d73f",
+      "name": "True Love's Embrace"
+    },
+    {
+      "id": "bf59a1e5-e3d1-48f1-9970-4aa3fdcaa780",
+      "name": "True Love's Caress"
+    },
+    {
+      "id": "8838eb53-ed3d-4d64-9fe7-a82ab7249c18",
+      "name": "Boots of Apparent Death"
+    },
+    {
+      "id": "afb45f49-67f3-4930-80d3-afaa97cafb34",
+      "name": "Rotten Cheese Wheel"
+    },
+    {
+      "id": "5cf0bffd-6d1d-4955-bced-97c5cbf2883c",
+      "name": "Wooden Crate"
+    },
+    {
+      "id": "a0e27395-883a-4fd3-b5b8-5cee1892bc08",
+      "name": "Plaque"
+    },
+    {
+      "id": "44ef607a-0da5-4ab3-a1ef-055ca509b4c8",
+      "name": "Distillery Machine"
+    },
+    {
+      "id": "995350b8-1f00-407f-bece-a8452945da66",
+      "name": "Purple Worm Glands"
+    },
+    {
+      "id": "be9a70dd-8bbd-4c1f-9459-6197056c708b",
+      "name": "Bloodbank Bottle"
+    },
+    {
+      "id": "beb3f8a3-bb27-4054-99a2-500126fc7e5d",
+      "name": "Jar of Coagulated Blood"
+    },
+    {
+      "id": "95ba617e-6d3f-4a1b-a726-ebf8039cc8bf",
+      "name": "Missing Cat Poster"
+    },
+    {
+      "id": "9c475429-a847-49e4-b1dd-f27137f80b76",
+      "name": "Missing Dog Poster"
+    },
+    {
+      "id": "a0e95c42-150d-4158-90c2-59992dea3b2b",
+      "name": "Notice"
+    },
+    {
+      "id": "9c10ac72-da07-4aca-a2ce-3d04d1ce3485",
+      "name": "Shar's Temptation"
+    },
+    {
+      "id": "7773610f-f246-4837-a75f-2d260f815718",
+      "name": "Shar's Sting"
+    },
+    {
+      "id": "f2c940ba-3049-49d2-bb90-af9f4830057c",
+      "name": "Signed Trade Visa"
+    },
+    {
+      "id": "2fd443cd-f7e8-4097-945e-2a569bde6c6b",
+      "name": "Unsigned Trade Visa"
+    },
+    {
+      "id": "7ee0b513-403b-4fe3-a445-b599defa9331",
+      "name": "Rat Bat"
+    },
+    {
+      "id": "cb2b1ac8-5589-464f-ac9f-ccd6fd27ebed",
+      "name": "Watcher's Shield"
+    },
+    {
+      "id": "3c14116f-43da-4e73-92d1-903f46a9d55d",
+      "name": "Assassin's Shortsword"
+    },
+    {
+      "id": "3f12408f-22b1-4a02-bd8c-e513c3407ccf",
+      "name": "The Waning Moon"
+    },
+    {
+      "id": "d1f2b294-fdf8-43df-8d11-19743077cb68",
+      "name": "Gift from the Absolute"
+    },
+    {
+      "id": "1c725b47-184b-4906-a891-c67a7dbc57c2",
+      "name": "Broken Parasite Jar"
+    },
+    {
+      "id": "11600b5b-999b-4444-b9a1-f3aa110c7604",
+      "name": "Merregon Potion"
+    },
+    {
+      "id": "7986467d-60e6-4aef-89c7-12ce95828695",
+      "name": "Tree"
+    },
+    {
+      "id": "d46206c9-fb4f-44a4-a4f4-f70f8cd2a64c",
+      "name": "Shadow of Menzoberranzan"
+    },
+    {
+      "id": "baa49153-718e-4dc4-b039-4d2a90fb7f14",
+      "name": "Message in a Bottle"
+    },
+    {
+      "id": "cade1d3e-ee29-40b9-ba85-bc1f0b43e1e0",
+      "name": "Grubby Bottle"
+    },
+    {
+      "id": "85f6aec3-a6df-458c-8ef4-b3fa58d85a56",
+      "name": "Frayed Drow Hood"
+    },
+    {
+      "id": "733a70a1-2e0f-46f4-aca1-037c0335dc72",
+      "name": "Skybreaker"
+    },
+    {
+      "id": "4d1f9bce-1884-47d0-a420-69417f397139",
+      "name": "Intransigent Warhammer"
+    },
+    {
+      "id": "6e05319b-d8c4-4dbc-b0f4-cea561810fa6",
+      "name": "Exterminator's Axe"
+    },
+    {
+      "id": "1e172d76-3433-4ee7-ae1a-9e7d8ae0f12b",
+      "name": "Shortsword of First Blood"
+    },
+    {
+      "id": "c5945272-2d59-4f9d-92ad-fdcba1de2de0",
+      "name": "Hole"
+    },
+    {
+      "id": "09d63912-2a69-499e-9497-dc832487e426",
+      "name": "Flumph Mating Rituals"
+    },
+    {
+      "id": "b4d60093-28b0-4076-b2f4-c7c3d3aa9d50",
+      "name": "The Great Furnace of Grymforge"
+    },
+    {
+      "id": "d0e9a8cd-ca87-42bc-bc48-8bf20975a927",
+      "name": "Duergar Antidote"
+    },
+    {
+      "id": "6b1c4d55-e0d1-4b58-a26d-57d807bca488",
+      "name": "Grymskull Helm"
+    },
+    {
+      "id": "91b3e19f-35e7-48e0-8cd9-8d727482d725",
+      "name": "Broken Cane"
+    },
+    {
+      "id": "a42bf0f7-3a78-4aae-b94f-ed92a89e847c",
+      "name": "Deep Delver"
+    },
+    {
+      "id": "c7a58f48-f24f-4139-b0f0-8b12e1bf074e",
+      "name": "Ring of Absolute Force"
+    },
+    {
+      "id": "5fe8fcb8-e99b-44da-9fdd-fe8966c3215f",
+      "name": "Arcane Brazier"
+    },
+    {
+      "id": "fe67bcc7-f7b5-44ce-813a-67341ab7a23f",
+      "name": "Arcane Brazier"
+    },
+    {
+      "id": "1c7419ad-b115-4359-96be-e2e25b1af746",
+      "name": "Arcane Brazier"
+    },
+    {
+      "id": "f6d1d4f0-0565-4d1c-a1ca-833de21abeef",
+      "name": "Arcane Brazier"
+    },
+    {
+      "id": "b96d16dc-da98-4108-9a0e-5e55720dbf5c",
+      "name": "Amulet of the Unworthy"
+    },
+    {
+      "id": "086ae8fd-c44e-43a7-b8be-777b551a06d6",
+      "name": "Sentient Amulet"
+    },
+    {
+      "id": "f3ff7066-f407-41c7-b936-0aff066c08e4",
+      "name": "Herbalist's Gloves"
+    },
+    {
+      "id": "f6963e1e-b95a-496d-9d57-d4ad79a4394c",
+      "name": "Champion's Chain"
+    },
+    {
+      "id": "5556b0c1-5b0a-47f9-8bc6-91c8f293f83e",
+      "name": "Envoy's Amulet"
+    },
+    {
+      "id": "6acd3cfa-3dcc-4b42-ad25-ca898ce237f7",
+      "name": "Nere's Head"
+    },
+    {
+      "id": "55249c82-7b97-4f8b-8fc2-ba0053aa6621",
+      "name": "Blooming Drow Head"
+    },
+    {
+      "id": "ba0a465a-f438-41ca-93bc-dacd63421344",
+      "name": "Blingdenstone Blush"
+    },
+    {
+      "id": "83fd50ff-7b20-49c3-b2d3-20ffcb1c4462",
+      "name": "Keepsake Gem"
+    },
+    {
+      "id": "163cdc6e-681e-4dcf-869d-33a12d5a6b9c",
+      "name": "Cave-In"
+    },
+    {
+      "id": "b41f8053-8310-4e58-98ff-0df55215198d",
+      "name": "Cave-In"
+    },
+    {
+      "id": "992dacfe-4ba0-43db-8418-f2e2f1bdbe9c",
+      "name": "Cave-In"
+    },
+    {
+      "id": "79dfb371-cd87-48f3-b542-26db2d39cfe2",
+      "name": "Runepowder Barrel"
+    },
+    {
+      "id": "9220d896-4ff3-430f-9523-00d2a4dfbc17",
+      "name": "Runepowder Vial"
+    },
+    {
+      "id": "592a4157-1b4d-483c-a86b-9900f980e961",
+      "name": "Selûnite Key"
+    },
+    {
+      "id": "73786a58-63c7-407a-af07-b612cd2b11ec",
+      "name": "Moonstone"
+    },
+    {
+      "id": "e8b6eb1d-c4f2-4b46-979c-ad3b9469030e",
+      "name": "Sunwalker's Gift"
+    },
+    {
+      "id": "62da3651-f2e4-4371-b5f2-fd06dd705030",
+      "name": "Creation's Echo"
+    },
+    {
+      "id": "4a9f0479-954f-486c-9534-d7d72c11f919",
+      "name": "Psychic Spark"
+    },
+    {
+      "id": "a6fe2fbc-b0f8-4c35-a3ab-d5deb6aa2978",
+      "name": "Ring of Salving"
+    },
+    {
+      "id": "c8f05ff8-58f9-49f9-8ea7-abda1fea27d6",
+      "name": "Ring of Mind-Shielding"
+    },
+    {
+      "id": "8706eab3-e05b-478d-833e-308379972dad",
+      "name": "Sussur Bloom"
+    },
+    {
+      "id": "bf2e05d1-5a39-4d92-afbe-afe63022a6c2",
+      "name": "Sussur Bloom"
+    },
+    {
+      "id": "44aaa3df-e08c-4554-8d4d-fb11e97622b4",
+      "name": "Sussur Bloom"
+    },
+    {
+      "id": "6d0d3206-50b5-48ed-af92-a146ed6b98f2",
+      "name": "Phalar Aluve"
+    },
+    {
+      "id": "8f5915b3-3da6-4c27-9b36-c8734b0876a4",
+      "name": "Phalar Aluve"
+    },
+    {
+      "id": "cfbda235-8cb7-4ee7-bd94-b9a2249ed82e",
+      "name": "Uncovered Mysteries"
+    },
+    {
+      "id": "baae9783-dcd3-4d6b-bba3-86faf2fe4c8e",
+      "name": "Mystra's Grace"
+    },
+    {
+      "id": "4b6d7c53-43b5-4c17-8139-732ca0fc2972",
+      "name": "Mage's Friend"
+    },
+    {
+      "id": "70ad7889-e1e2-4c2f-980f-28eaa02c2022",
+      "name": "Guiding Light"
+    },
+    {
+      "id": "da0ba39a-366d-456b-8dbd-1c5790ca40bf",
+      "name": "Staff of Arcane Blessing"
+    },
+    {
+      "id": "df6698d2-b690-4aea-be83-956d3b2ea97e",
+      "name": "Sword of Screams"
+    },
+    {
+      "id": "f5f07e9e-98e5-407d-827e-47ad1f41aeb5",
+      "name": "Withered Blue Petal"
+    },
+    {
+      "id": "a05c2c63-23b4-4700-8a51-655053d832b5",
+      "name": "Withered Sussur Petal"
+    },
+    {
+      "id": "9be43b61-6cd4-42d7-ad3b-a7febcd68bfc",
+      "name": "Regarding the Slayer"
+    },
+    {
+      "id": "dfb5a6ef-baee-4c0e-9b9d-7f5bd9458131",
+      "name": "Flame Blade"
+    },
+    {
+      "id": "b3ed22d9-dd32-46c3-928a-e7253a843dfc",
+      "name": "Very Heavy Greataxe"
+    },
+    {
+      "id": "e3781c5c-b674-4c9b-aec8-885e8c54698b",
+      "name": "Bag of Moulding"
+    },
+    {
+      "id": "5121d4a2-10c7-45e6-a46f-b279cd554bce",
+      "name": "Beast Cage Key"
+    },
+    {
+      "id": "c554df25-a6dd-4a30-b99d-27ae556dfe41",
+      "name": "Clown's Severed Arm"
+    },
+    {
+      "id": "c115ee19-9281-41cb-b2a4-28e2e81696ba",
+      "name": "Clown's Severed Foot"
+    },
+    {
+      "id": "72207448-c6b6-42fc-b9ef-a34fdd3c1265",
+      "name": "Clown Hammer"
+    },
+    {
+      "id": "d888727b-07cb-482b-84a6-70757ddfcf77",
+      "name": "Clown's Severed Hand"
+    },
+    {
+      "id": "78f9c440-f21b-49ef-b800-4419640ea63f",
+      "name": "Clown's Severed Head"
+    },
+    {
+      "id": "b9b087a8-0cb8-4e65-ba26-5c6469ad4669",
+      "name": "Clown's Severed Leg"
+    },
+    {
+      "id": "506b9031-008b-400e-8102-ef6ef7dbc23f",
+      "name": "Clown's Severed Torso"
+    },
+    {
+      "id": "9c3fcbb2-d080-49bd-b88a-4bf48a4080a8",
+      "name": "Clown's Severed Pelvis"
+    },
+    {
+      "id": "e2af0df7-3659-42c9-b9d3-0651da898c04",
+      "name": "Circus Advertiser Dummy"
+    },
+    {
+      "id": "7f17d8e4-5edb-4a77-88c0-55558a2db5f7",
+      "name": "Face-Painting Kit"
+    },
+    {
+      "id": "82999790-f80d-47f7-9383-9bb6cf57a10b",
+      "name": "Comeback Handaxe"
+    },
+    {
+      "id": "420d1b1f-8147-4ae7-aedb-456dc391d61b",
+      "name": "Mouldy Food"
+    },
+    {
+      "id": "cd8e6f82-d128-4077-916e-a6179fd1d190",
+      "name": "Staff of a Mumbling Wizard"
+    },
+    {
+      "id": "480a8519-e375-4ce0-ae0a-513bc9d39820",
+      "name": "Boots of Very Fast Blinking"
+    },
+    {
+      "id": "39e420ae-ceae-441c-ab6b-251e97c3c26d",
+      "name": "Unlucky Thief's Gloves"
+    },
+    {
+      "id": "fc9f7223-6b39-4734-b600-820fad6c4a08",
+      "name": "Reverse Rain Cloak"
+    },
+    {
+      "id": "258f4d35-959c-497b-a38a-df3a1e71f3a0",
+      "name": "Djinni Ring"
+    },
+    {
+      "id": "77cd8eaa-2cde-4a53-bc76-71fb48624406",
+      "name": "Archducal Coronation - Admission Pass"
+    },
+    {
+      "id": "162203ba-7413-4417-8f05-bd03538ff2b4",
+      "name": "Crate"
+    },
+    {
+      "id": "29dcb091-043a-45b6-8bad-481c19488f9b",
+      "name": "Crate"
+    },
+    {
+      "id": "28b36956-1369-4634-8832-d68d8128810d",
+      "name": "Essential Trade Visa"
+    },
+    {
+      "id": "e077ef28-5de9-439d-bbaf-59536585c938",
+      "name": "Surprise-Based Teddy Bear"
+    },
+    {
+      "id": "1b7e91d0-5de8-46fa-87c0-b3a9d35939e6",
+      "name": "Unfinished Toy"
+    },
+    {
+      "id": "3762d9ce-3506-4d2c-8b36-454d9fef979f",
+      "name": "Unfinished Stuffed Bear"
+    },
+    {
+      "id": "dbe284a5-177a-440b-ba91-687eb7aa3fb5",
+      "name": "Worthless Treasure Crates"
+    },
+    {
+      "id": "e07beeb6-7c48-4415-985b-0d96c7438b0f",
+      "name": "Illithid Jar with Larvae"
+    },
+    {
+      "id": "837fd379-2765-4436-a1d7-f0535a69effe",
+      "name": "Key with a flower motif."
+    },
+    {
+      "id": "a8e5a8bf-cf3f-4716-ba09-0eb1f48a89a8",
+      "name": "Key with a flower motif"
+    },
+    {
+      "id": "0a172d65-748c-4ff1-bf66-200fceb5ca79",
+      "name": "Lower City Pass"
+    },
+    {
+      "id": "f8e0e45b-7549-4831-9a6e-10166ab96575",
+      "name": "Red Hat"
+    },
+    {
+      "id": "d6b14418-583d-4d56-8ac8-1fdc839130a2",
+      "name": "Qualms"
+    },
+    {
+      "id": "4816726d-0e75-4abb-bc0a-89936ae48683",
+      "name": "Careful Meeting"
+    },
+    {
+      "id": "96a2c017-06d4-4dd4-880d-ad3dcde2b3d4",
+      "name": "Theft"
+    },
+    {
+      "id": "9a7be068-0093-4c51-aeb6-a6b6202e17fa",
+      "name": "Chase"
+    },
+    {
+      "id": "011ea5cb-73d1-40e8-aafb-3313833a1d64",
+      "name": "Judgement"
+    },
+    {
+      "id": "c97a9198-0dff-4dca-b2f0-75e680446a4a",
+      "name": "Hanging"
+    },
+    {
+      "id": "827df830-08c1-4a7a-8201-8cf7faa6736b",
+      "name": "Freedom"
+    },
+    {
+      "id": "9e6fbe35-e0fd-4b3a-be5b-b75935e17fc0",
+      "name": "Cell"
+    },
+    {
+      "id": "7409c7be-ec13-48d9-8e9d-94c19df2b210",
+      "name": "Runepowder explosive detonator"
+    },
+    {
+      "id": "14a43b9d-0913-4a24-8f19-a2db6e87bc36",
+      "name": "Hoots' Hooch"
+    },
+    {
+      "id": "2561ddc7-2ca4-409d-aea4-0dcf481722eb",
+      "name": "Sharess' Caress Rooms Key"
+    },
+    {
+      "id": "dc3d793e-c605-4016-9753-27d1c2da4b2c",
+      "name": "Baldur's Gate Stone"
+    },
+    {
+      "id": "42d56907-aa68-4f77-a024-3789c323214d",
+      "name": "Holy Hand Soap"
+    },
+    {
+      "id": "64f8c9de-b6a2-4058-8224-993f70cbf665",
+      "name": "Urgent Report For Duke Ravengard"
+    },
+    {
+      "id": "afda0da3-ed3e-4464-b305-e9399a9ed455",
+      "name": "Storage Key"
+    },
+    {
+      "id": "486a1a14-2d67-4b9c-a2dc-7858c2a6a473",
+      "name": "The Tharchiate Codex"
+    },
+    {
+      "id": "4b30a649-fd88-4f64-a57b-1149d7b9ac41",
+      "name": "Astarion's Underwear"
+    },
+    {
+      "id": "5cdc0fe0-dbda-4f31-89f8-9e16782daef1",
+      "name": "Netherese Briefs"
+    },
+    {
+      "id": "9ebb9117-a0ae-46f2-a243-8d67650e9586",
+      "name": "Halsin's Underwear"
+    },
+    {
+      "id": "91259e65-dd71-4312-ba3c-c55757978788",
+      "name": "Jaheira's Underwear"
+    },
+    {
+      "id": "e865db4c-4df3-48e9-8cf3-5abad75510ba",
+      "name": "Karlach's Underwear"
+    },
+    {
+      "id": "185ab1be-e93d-4518-b053-d6d4d7168d68",
+      "name": "Lae'zel's Underwear"
+    },
+    {
+      "id": "48a3ffbe-f14e-4cfe-b45e-ebadb3af0fd4",
+      "name": "Minsc's Underwear"
+    },
+    {
+      "id": "73874ef8-a3c4-4a68-8d2a-ed3d580dfb52",
+      "name": "Minthara's Underwear"
+    },
+    {
+      "id": "b460bd0c-58fe-4a56-831c-af92fd4ba7e2",
+      "name": "Shadowheart's Underwear"
+    },
+    {
+      "id": "1930ceec-4a50-43d9-8589-94593c449be4",
+      "name": "Wyll's Underwear"
+    },
+    {
+      "id": "398871eb-45dd-4f37-b1ce-bae03ec80830",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "90850db1-2241-4f4c-9e80-bb689a0b050f",
+      "name": "Ritual Pentagram"
+    },
+    {
+      "id": "f872f9a7-d43f-4f29-9b51-a59c1ff5ac31",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "fe61e5c9-e31c-44f3-8256-d9b7db040b0d",
+      "name": "Arcane Barrier"
+    },
+    {
+      "id": "ce950496-dd07-499c-9529-6a0f3840ab95",
+      "name": "Impervious Sphere"
+    },
+    {
+      "id": "53e52e6d-a7bd-9766-de42-25605e4da084",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "cb37011d-a311-4a84-bec9-66d133bac57e",
+      "name": "Mirror Portal"
+    },
+    {
+      "id": "e8c0d5ae-b7bd-44ee-ae59-9d3373a1897c",
+      "name": "Fireflies"
+    },
+    {
+      "id": "861638b7-d3be-43e5-bcc6-936c536f442d",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "a1cb96fb-ceaf-43bc-9692-27f651e3e203",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "678cab8a-baf5-4a43-bc9e-1b837f7f14c8",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "90e61825-db31-43a3-ba8b-f0689e4f48ec",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "70331572-c388-49e9-a855-0a1798400635",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "0459eacd-9663-4366-bfc8-e6618bf9128a",
+      "name": "Broken Barricade"
+    },
+    {
+      "id": "90a169d6-c84f-4df7-8d10-a58553f2d8e8",
+      "name": "Blade Barrier Section"
+    },
+    {
+      "id": "4e8161b9-6483-4600-9c40-2c3e246fd6fb",
+      "name": "Blade Barrier Section"
+    },
+    {
+      "id": "dbdb72e8-46fb-46bd-804a-2930b73a524e",
+      "name": "Blade Barrier Section"
+    },
+    {
+      "id": "bbe22243-6a91-497f-9960-5b909c4cafe2",
+      "name": "Wall of Fire"
+    },
+    {
+      "id": "09283999-492f-45b4-a987-9c50d0eb8b9c",
+      "name": "Wall of Ice"
+    },
+    {
+      "id": "990af72b-0a7b-47f0-aaf7-b08de31a8dfb",
+      "name": "Ice Pillar"
+    },
+    {
+      "id": "b2d5acc4-bdec-400a-b388-95037dabf912",
+      "name": "Ice Pillar"
+    },
+    {
+      "id": "44295329-00c6-463f-a30e-55e9609ae29c",
+      "name": "Wall of Thorns"
+    },
+    {
+      "id": "2332a53e-d0d2-4c5e-8f2b-646d94b7f0e6",
+      "name": "Stairs"
+    },
+    {
+      "id": "0b674c38-44c6-4d69-84fe-b88c1df30fa4",
+      "name": "Stairs"
+    },
+    {
+      "id": "2aee9dee-d10c-4ea0-bf25-4942619c1395",
+      "name": "ls::TranslatedStringRepository::s_HandleUnknown"
+    },
+    {
+      "id": "f606e1cb-b6ad-4787-a633-d74c480e4eea",
+      "name": "Staff"
+    },
+    {
+      "id": "7507770e-7cef-46b5-8e5d-454d8fedcb6a",
+      "name": "Glaive"
+    },
+    {
+      "id": "96df6fd6-a688-47ab-b448-0b6d27d1cf1d",
+      "name": "Brewing Ladle"
+    },
+    {
+      "id": "5ca50a09-548b-4134-a0c7-98f10e8d69e6",
+      "name": "Morningstar"
+    },
+    {
+      "id": "e8df5166-5a68-42ec-b71f-4dfb754f7aa4",
+      "name": "Dolor's Dagger"
+    },
+    {
+      "id": "36aab945-ad5d-46b5-95ed-ab9cf1a5a228",
+      "name": "Dryad Staff"
+    },
+    {
+      "id": "b61f3c6e-a224-4af8-ad16-51b3799e7715",
+      "name": "Twisted Oak Crook"
+    },
+    {
+      "id": "3a9e4e60-9f58-4fb9-8a16-4cf784ad6f0d",
+      "name": "Whipping Cane"
+    },
+    {
+      "id": "b66d62c4-b38f-43dd-920d-40d250d66d03",
+      "name": "Dagger"
+    },
+    {
+      "id": "1576903a-cb77-4a05-be24-1714d8c61e34",
+      "name": "Scimitar"
+    },
+    {
+      "id": "96f7647b-7485-4c0c-aaad-73a332d8e626",
+      "name": "Djinni Scimitar"
+    },
+    {
+      "id": "e4b4c45f-0563-4b00-851c-30a64fcb18ec",
+      "name": "Iron-Banded Shield"
+    },
+    {
+      "id": "004ab562-5cd4-4f1f-8aa5-497e7e2c5f4f",
+      "name": "Iron-Banded Shield"
+    },
+    {
+      "id": "ad0b5ac2-ca57-4538-a326-8e819d6ab034",
+      "name": "Drow Shield"
+    },
+    {
+      "id": "8cdcb6bb-be71-4f26-9871-9312514c2436",
+      "name": "Studded Shield"
+    },
+    {
+      "id": "b7d8a185-dfc5-4113-ab53-0ca009073c8d",
+      "name": "Studded Shield"
+    },
+    {
+      "id": "5908898d-5d9e-40de-ab07-3f8fb5f0174c",
+      "name": "King's Knife"
+    },
+    {
+      "id": "1ce80e1b-7db1-42bd-baec-114142b5bc15",
+      "name": "Dummy"
+    },
+    {
+      "id": "71f5b932-137f-4e05-9392-e6b921e3aca6",
+      "name": "Air Myrmidon Flail"
+    },
+    {
+      "id": "8f8ad4f1-ee45-45f5-9368-3da979ada65a",
+      "name": "Flail of the Vortex"
+    },
+    {
+      "id": "229dd0c4-6b13-4dbd-be48-0fedf292700a",
+      "name": "Flail of the Vortex"
+    },
+    {
+      "id": "3af0f251-36b5-425f-8d2a-f81559a70967",
+      "name": "Scrap Sword"
+    },
+    {
+      "id": "608e265d-f81b-4c13-a786-e5602852fcf4",
+      "name": "Chaos Flail"
+    },
+    {
+      "id": "28373d60-893f-411c-a029-35c31665c821",
+      "name": "Cultist Brand"
+    },
+    {
+      "id": "7ebf3d2b-39ff-4a18-9114-4d09d17f432f",
+      "name": "Crude Mace"
+    },
+    {
+      "id": "11aa209f-6e42-40bd-a12c-aa33445c21ea",
+      "name": "Ritual Dagger"
+    },
+    {
+      "id": "5c996c03-99e9-40c1-8acf-d761550d26f5",
+      "name": "Ritual Axe"
+    },
+    {
+      "id": "b1dc33ba-c595-4036-9683-26635f297e44",
+      "name": "Loviatar's Scourge"
+    },
+    {
+      "id": "288356cc-0c6b-43c1-b049-dde418faf1f2",
+      "name": "Goblin Scimitar"
+    },
+    {
+      "id": "dd7550d6-112d-476e-9234-4901a95bd7f6",
+      "name": "Scrapwood Shield"
+    },
+    {
+      "id": "89bb450f-d976-4981-b43e-b5d16948da1e",
+      "name": "Goblin Shield"
+    },
+    {
+      "id": "e0d5a057-328a-467d-b8fb-1bfd298d59e7",
+      "name": "Spiked Shield"
+    },
+    {
+      "id": "fd6f48fc-b153-4e6b-9a7f-86ac2963c95f",
+      "name": "Goblin Bow"
+    },
+    {
+      "id": "5e0afa45-29ec-4154-ae8b-1c0b2bde5590",
+      "name": "Goblin Bow"
+    },
+    {
+      "id": "81b017b5-d185-4026-8871-a053aca8648c",
+      "name": "Makeshift Spear"
+    },
+    {
+      "id": "58c90cf9-5541-4909-a853-d1a0ca31c046",
+      "name": "Ritual Staff"
+    },
+    {
+      "id": "d1082e88-b1e2-479d-913f-1413784d95a1",
+      "name": "Githyanki Greatsword"
+    },
+    {
+      "id": "b674ea52-2b6f-4977-b6d5-98810304a98b",
+      "name": "Githyanki Crossbow"
+    },
+    {
+      "id": "907a794b-b089-406b-880d-6f2df2bb3f13",
+      "name": "Githyanki Longsword"
+    },
+    {
+      "id": "776324ed-a368-4994-b5f6-fd9112a10c9b",
+      "name": "Orphic Hammer"
+    },
+    {
+      "id": "4b54911a-a32d-48ad-8691-ff28801e1275",
+      "name": "Githyanki Shortsword"
+    },
+    {
+      "id": "1ebdc61e-3bc6-4da5-adb9-34dd839b012a",
+      "name": "Githyanki Greatsword"
+    },
+    {
+      "id": "7821978d-c720-4651-9693-936960145636",
+      "name": "Sanguine Explosive"
+    },
+    {
+      "id": "f8a1cb8d-3e40-4c33-8a92-92ee742b6439",
+      "name": "Orthonic Handbomb"
+    },
+    {
+      "id": "efdb7b03-83b0-4284-b1fb-06c5c78424d0",
+      "name": "Fossilised Shell"
+    },
+    {
+      "id": "f28bf96c-83ba-4536-936c-c2574db85569",
+      "name": "Scrimshaw Sickle"
+    },
+    {
+      "id": "22baa548-56a4-494c-a9d0-4880d6f1da91",
+      "name": "Azer Warhammer"
+    },
+    {
+      "id": "a086b825-8f17-4f0e-855b-178f8cdc515a",
+      "name": "Battleaxe"
+    },
+    {
+      "id": "3030f1f1-74fc-4008-9317-80c71075c8e3",
+      "name": "Rusty Battleaxe"
+    },
+    {
+      "id": "c17ee133-cbb5-418f-88be-5ef27991cf50",
+      "name": "Battleaxe +1"
+    },
+    {
+      "id": "7faff867-9cb3-432b-aa27-8de281b7428e",
+      "name": "Battleaxe +2"
+    },
+    {
+      "id": "407954e3-71e4-4611-9221-0ba3ea71d6e8",
+      "name": "Pactbound Battleaxe"
+    },
+    {
+      "id": "b9739be6-7c2b-4fe9-be36-13ff1094e79c",
+      "name": "Bonesaw"
+    },
+    {
+      "id": "3d4fa7bf-b914-47ff-b663-6566a335210e",
+      "name": "Cazador Staff"
+    },
+    {
+      "id": "b6b4ac25-e54b-441f-b6d3-423ea728cfb1",
+      "name": "Cleaver"
+    },
+    {
+      "id": "d9c87013-1f41-4c17-b71d-f353ec0d64e8",
+      "name": "Club"
+    },
+    {
+      "id": "b30dca22-22bc-496e-b3b6-dd5744b73869",
+      "name": "Club +1"
+    },
+    {
+      "id": "0ca0e540-dabe-4bf4-9e23-c006f03ffae2",
+      "name": "Broken Club"
+    },
+    {
+      "id": "569b0f3d-abcd-4b01-aaf0-979091288163",
+      "name": "Dagger"
+    },
+    {
+      "id": "6a321455-d00f-4164-ab12-3601fef2ae6e",
+      "name": "Rusty Dagger"
+    },
+    {
+      "id": "1eab180b-5bf9-48ea-aece-7ba20d1deb78",
+      "name": "Dagger +1"
+    },
+    {
+      "id": "c68026c8-8af9-4a05-b77a-246a01bafe61",
+      "name": "Dagger +2"
+    },
+    {
+      "id": "fbb9fdb1-932d-47df-81fb-5785cb19d3a3",
+      "name": "Dagger"
+    },
+    {
+      "id": "46dc47d8-dc5c-4f97-87e2-596e594a3477",
+      "name": "Honed Blade"
+    },
+    {
+      "id": "9e6d5d59-e582-454f-a4e5-6dfffb1bfc9b",
+      "name": "Blade of the First Blood"
+    },
+    {
+      "id": "1667126c-fd47-4e83-919b-c7534081b9ad",
+      "name": "Netherstone-Studded Blade"
+    },
+    {
+      "id": "fb08eef6-f6a0-454e-ab14-c1470f3ba18d",
+      "name": "Dart"
+    },
+    {
+      "id": "5557cbf6-ce24-48de-beed-3be1a77e1c82",
+      "name": "Dart +1"
+    },
+    {
+      "id": "e292c502-b116-4a46-a232-dd53f7838f6f",
+      "name": "Dart +2"
+    },
+    {
+      "id": "9eadef92-5dd0-408e-9b55-1cf791cafe9d",
+      "name": "Flail"
+    },
+    {
+      "id": "04ae8618-3f49-453a-91f2-e5ac68cf366f",
+      "name": "Rusty Flail"
+    },
+    {
+      "id": "9076abf1-1029-4be9-a7cf-428d2b6fdea5",
+      "name": "Flail +1"
+    },
+    {
+      "id": "23ab9011-ef66-463e-a8ee-012321be6d1c",
+      "name": "Flail +2"
+    },
+    {
+      "id": "4c86f6ac-5829-41f2-a3f0-d3e893334961",
+      "name": "Flail of Myrkul"
+    },
+    {
+      "id": "05ca18da-41f4-4385-b370-0f75a989e119",
+      "name": "Myrkulite Scourge"
+    },
+    {
+      "id": "99f3b2d9-e03d-4cd5-9a67-5435a95682da",
+      "name": "Glaive"
+    },
+    {
+      "id": "be861724-206e-483e-a42d-9dd131030ad6",
+      "name": "Rusty Glaive"
+    },
+    {
+      "id": "15d2830c-ac76-4b5b-969d-05197875b1c2",
+      "name": "Glaive +1"
+    },
+    {
+      "id": "bc1c2a84-27f5-46e4-b4b4-0f5ca534469c",
+      "name": "Glaive +2"
+    },
+    {
+      "id": "e7dab8bd-8037-4d8e-9c4e-ebec705912aa",
+      "name": "Pactbound Glaive"
+    },
+    {
+      "id": "d5712e24-ce9e-42ce-8fad-6e049b62c28c",
+      "name": "Greataxe"
+    },
+    {
+      "id": "a8f37e10-8590-4a65-85d1-29bf8ef5bd64",
+      "name": "Rusty Greataxe"
+    },
+    {
+      "id": "afbfaee7-e2cd-48e7-8c46-d2377c7320e3",
+      "name": "Greataxe +1"
+    },
+    {
+      "id": "ce8a894c-3dc6-48dc-bb8f-af5390890d43",
+      "name": "Greataxe +2"
+    },
+    {
+      "id": "19ce6720-03b6-4d22-bf35-4963b510d1da",
+      "name": "Greatclub"
+    },
+    {
+      "id": "d64e1a13-18a5-4cdc-ac02-977523435f8f",
+      "name": "Greatclub +1"
+    },
+    {
+      "id": "adf0ef57-7811-40ed-9d29-05c6336f9e1f",
+      "name": "Greatclub +2"
+    },
+    {
+      "id": "ecfb9f69-5bc3-402e-acd8-c91d57e28403",
+      "name": "Greatsword"
+    },
+    {
+      "id": "82311843-dae9-4bda-86fb-40b722daf82e",
+      "name": "Rusty Greatsword"
+    },
+    {
+      "id": "1a2a58b7-4bd5-44d5-b1fe-8cd7e5b53def",
+      "name": "Greatsword +1"
+    },
+    {
+      "id": "2741505a-9d0b-4c9e-adcd-2e6339491e95",
+      "name": "Greatsword +2"
+    },
+    {
+      "id": "e90936db-7f65-446c-819d-c7fc6ba44d6c",
+      "name": "Pactbound Greatsword"
+    },
+    {
+      "id": "f928a70d-5b23-4605-9cae-5342f9ed206e",
+      "name": "Halberd"
+    },
+    {
+      "id": "7addb7c0-f428-4033-9065-f4ad6e4c7e81",
+      "name": "Rusty Halberd"
+    },
+    {
+      "id": "d1019d9d-e5ae-4601-8a63-1b33421926e1",
+      "name": "Halberd +1"
+    },
+    {
+      "id": "0e3b29e8-572f-459d-b382-234ec53b1c08",
+      "name": "Halberd +2"
+    },
+    {
+      "id": "a5d843ab-c3af-4e60-a925-bb2e15828938",
+      "name": "Hand Crossbow"
+    },
+    {
+      "id": "794f58a7-4bc5-4c98-8e66-7a8e242fb7ef",
+      "name": "Rusty Hand Crossbow"
+    },
+    {
+      "id": "d2f396c2-9b1b-4eea-bf21-2f25934f092d",
+      "name": "Hand Crossbow +1"
+    },
+    {
+      "id": "ab150a98-0a8e-4ee2-9dca-580d77f99be3",
+      "name": "Hand Crossbow +2"
+    },
+    {
+      "id": "46b64a36-8446-45bd-98e8-ee81e3136baa",
+      "name": "Handaxe"
+    },
+    {
+      "id": "2c362536-7ffa-43f4-926c-70dc682ffbff",
+      "name": "Rusty Handaxe"
+    },
+    {
+      "id": "7a05135d-b285-4186-8a32-a870f1684b60",
+      "name": "Handaxe +1"
+    },
+    {
+      "id": "04622e3d-5b3f-4f2c-a0db-513a717d911f",
+      "name": "Heavy Crossbow"
+    },
+    {
+      "id": "181104f6-6423-42de-b624-e225e5fb8a4d",
+      "name": "Rusty Heavy Crossbow"
+    },
+    {
+      "id": "6af59cba-cc38-4511-9c3b-75caac4b96b5",
+      "name": "Heavy Crossbow +1"
+    },
+    {
+      "id": "59c190d2-4b91-44f5-a720-f75d338dd341",
+      "name": "Heavy Crossbow +2"
+    },
+    {
+      "id": "0a7adc8d-b561-4f81-a8f2-ec07b5d54955",
+      "name": "Javelin"
+    },
+    {
+      "id": "b908f109-b379-4a49-8f41-5b7f154d9b76",
+      "name": "Javelin +1"
+    },
+    {
+      "id": "d8461adb-44f5-49b3-87ff-ea652f6d4081",
+      "name": "Javelin +2"
+    },
+    {
+      "id": "7050c02e-f0e1-46b8-9400-2514805ecd2e",
+      "name": "Katana"
+    },
+    {
+      "id": "91a45770-6596-4ca9-9ae8-eb35cb54a36f",
+      "name": "Spear"
+    },
+    {
+      "id": "81158eec-1fd0-4fd7-8b02-ce7f5e45f8b5",
+      "name": "Artificial Leech"
+    },
+    {
+      "id": "124c31a8-bd29-4262-81ca-267beaa26e03",
+      "name": "Legendary Rapier"
+    },
+    {
+      "id": "43b7fbf5-7f6e-4e9e-bce7-c679eea44593",
+      "name": "Light Crossbow"
+    },
+    {
+      "id": "6f0568b1-86ac-4039-8d3a-5db844b55fe8",
+      "name": "Rusty Light Crossbow"
+    },
+    {
+      "id": "509dd5c3-7c72-4335-9b23-19a14a884f2e",
+      "name": "Light Crossbow +1"
+    },
+    {
+      "id": "fa9b6992-dbfc-4265-996b-73d9836cf7fe",
+      "name": "Light Crossbow +2"
+    },
+    {
+      "id": "52f9bd01-fe6e-416d-896e-8600446abb0d",
+      "name": "Makeshift Crossbow"
+    },
+    {
+      "id": "494f21ac-5a1b-4e91-bd30-551b79532516",
+      "name": "Light Hammer"
+    },
+    {
+      "id": "0c8a9530-273d-4f64-81b9-0d169d890483",
+      "name": "Rusty Light Hammer"
+    },
+    {
+      "id": "d0419aaf-9e20-4029-b8e9-9e1a62661b13",
+      "name": "Light Hammer +1"
+    },
+    {
+      "id": "647f2f89-f10f-4def-ba9e-9078e49b6157",
+      "name": "Light Hammer +2"
+    },
+    {
+      "id": "86e3d864-309c-4c17-ba38-877ce487d481",
+      "name": "Longbow"
+    },
+    {
+      "id": "049173ec-636a-487e-a9ed-bfafeadf6bb7",
+      "name": "Longbow +1"
+    },
+    {
+      "id": "118967f7-14de-41fa-bec8-3ba383252e9a",
+      "name": "Longbow +2"
+    },
+    {
+      "id": "1865323f-b428-4791-a0a9-578841e57463",
+      "name": "Longsword"
+    },
+    {
+      "id": "dddd2204-0ee3-47b0-a7ea-6b5216a65e89",
+      "name": "Rusty Longsword"
+    },
+    {
+      "id": "3fc2ba50-3070-4caa-abe8-3bf885969bde",
+      "name": "Longsword +1"
+    },
+    {
+      "id": "970c962d-dca1-4b90-8d02-81a4e59e3f08",
+      "name": "Longsword +1"
+    },
+    {
+      "id": "e3b2adb6-7493-466e-9c65-4281fb74e83f",
+      "name": "Longsword +2"
+    },
+    {
+      "id": "d116f35c-4399-408c-ba90-b455a5d29a1f",
+      "name": "Adamantine Longsword"
+    },
+    {
+      "id": "2af7255d-bae1-4d4c-a8ba-4a2b5909a794",
+      "name": "Longsword"
+    },
+    {
+      "id": "a4338d7c-5b70-4076-9711-d3803fab2e1b",
+      "name": "Longsword"
+    },
+    {
+      "id": "dd0e60fd-a334-411b-97cf-fa6a015c578b",
+      "name": "Longsword"
+    },
+    {
+      "id": "3186796d-3ab3-4d49-bfc2-cba1aff0cf5a",
+      "name": "Mace"
+    },
+    {
+      "id": "ce1c45a5-5606-4604-9afa-beca19fd03e1",
+      "name": "Rusty Mace"
+    },
+    {
+      "id": "5a948b12-ca43-4256-9821-0d151036dbd1",
+      "name": "Mace +1"
+    },
+    {
+      "id": "f203a318-ea9a-4117-8d27-299dabafd1d3",
+      "name": "Mace +2"
+    },
+    {
+      "id": "df08ec01-52f0-4fdf-b5e7-4fa0970a480a",
+      "name": "Adamantine Mace"
+    },
+    {
+      "id": "6835bc61-36a4-4055-889b-4931e570682a",
+      "name": "Staff"
+    },
+    {
+      "id": "10123d22-dcba-4469-a45c-ca719f1f43df",
+      "name": "Lorroakan's Staff"
+    },
+    {
+      "id": "5487ceb4-b009-46ae-8ed6-cd3baaf0a18d",
+      "name": "Maul"
+    },
+    {
+      "id": "67e97333-2225-4797-9c06-0a0e08e6edd7",
+      "name": "Rusty Maul"
+    },
+    {
+      "id": "7e8ef269-0e7b-4352-8828-89c5fced943c",
+      "name": "Maul +1"
+    },
+    {
+      "id": "904286be-03fc-4755-adf0-9fd5f44942f4",
+      "name": "Maul +2"
+    },
+    {
+      "id": "0a6f620d-32f4-499a-9c11-db105441a57a",
+      "name": "Shortsword"
+    },
+    {
+      "id": "26a9fba6-1a60-4691-84ea-da7ffcb304e0",
+      "name": "Morningstar"
+    },
+    {
+      "id": "f8856d2d-ffda-417c-b7a8-c7aa757903b7",
+      "name": "Rusty Morningstar"
+    },
+    {
+      "id": "deea755b-5335-49d9-bd0e-dbaab9eaf94c",
+      "name": "Morningstar +1"
+    },
+    {
+      "id": "9e2c45b2-0411-42cc-bac6-6222c1334cb0",
+      "name": "Morningstar +2"
+    },
+    {
+      "id": "baa5b139-42ad-40fd-b6c3-6b52b092c48e",
+      "name": "Pike"
+    },
+    {
+      "id": "0eddcd68-36fb-4c9f-8cbb-66513d8d718e",
+      "name": "Rusty Pike"
+    },
+    {
+      "id": "40fa8049-b6c1-4463-b212-52ad13b5d687",
+      "name": "Pike +1"
+    },
+    {
+      "id": "50ffcd8e-eaa2-479c-b8ed-117ef5436b49",
+      "name": "Pike +2"
+    },
+    {
+      "id": "8454a13e-291f-47ec-a600-d41c32391064",
+      "name": "Broken Pike"
+    },
+    {
+      "id": "96e2abaf-78ff-4dcb-a6a3-a5f0c348bd9f",
+      "name": "Quarterstaff"
+    },
+    {
+      "id": "2fa18ee4-92df-486f-97d2-dd0a720b6fad",
+      "name": "Quarterstaff +1"
+    },
+    {
+      "id": "e1e112b2-5465-4e37-acdc-372666ec1521",
+      "name": "Quarterstaff +2"
+    },
+    {
+      "id": "45c9d3a2-8ea5-4bbf-b1cf-e0acaa0f23b2",
+      "name": "Broken Quarterstaff"
+    },
+    {
+      "id": "7061f489-4b13-4982-aa09-cf0ad961e75f",
+      "name": "Rapier"
+    },
+    {
+      "id": "1958c259-3772-46ac-9de3-741806f18703",
+      "name": "Rusty Rapier"
+    },
+    {
+      "id": "5a6cea10-b3f6-4370-8eed-0b69b4ba531a",
+      "name": "Rapier +1"
+    },
+    {
+      "id": "5c572e8e-8693-48cf-b494-2df0341f7ced",
+      "name": "Rapier +2"
+    },
+    {
+      "id": "705662e8-2a7f-4c7e-b0a0-e505395a45e3",
+      "name": "Pactbound Rapier"
+    },
+    {
+      "id": "e082f373-81ec-4f4b-818b-9ee86952e2fa",
+      "name": "Salami"
+    },
+    {
+      "id": "b47c0946-bac7-4c2e-9db8-f943728bedf9",
+      "name": "Sceptre"
+    },
+    {
+      "id": "868217db-9dcb-414c-bb88-e321ab3e0349",
+      "name": "Scimitar"
+    },
+    {
+      "id": "134cca90-23ea-497d-8698-b7a66bab59d3",
+      "name": "Rusty Scimitar"
+    },
+    {
+      "id": "7cc7a0e1-d0b8-4569-afb2-d538e8941894",
+      "name": "Scimitar +1"
+    },
+    {
+      "id": "5193af64-48c1-406f-90bf-87f7f01b4684",
+      "name": "Scimitar +2"
+    },
+    {
+      "id": "503b4f8d-da61-4fc1-a4b7-cad124a10c69",
+      "name": "Adamantine Scimitar"
+    },
+    {
+      "id": "d2af60ea-1b72-4d25-a188-6d8bc4fe255b",
+      "name": "Studded Shield"
+    },
+    {
+      "id": "cb2d6c27-ec29-4555-adf2-41e8c1952439",
+      "name": "Shield +1"
+    },
+    {
+      "id": "49979c37-1a3a-46f8-af5b-2ea63fc11722",
+      "name": "Shield +2"
+    },
+    {
+      "id": "96907713-b560-4daf-ab32-3c1aec3f3890",
+      "name": "Adamantine Shield"
+    },
+    {
+      "id": "24fa28d4-f679-44bf-865e-c7e70dcb9588",
+      "name": "Wooden Shield"
+    },
+    {
+      "id": "a28ecc05-b67b-493b-8cd2-ac7229e703d2",
+      "name": "Iron-Banded Shield +1"
+    },
+    {
+      "id": "d59619ef-320f-4c16-8e21-0644034f0c26",
+      "name": "Broken Shield"
+    },
+    {
+      "id": "4491fcaf-03bf-4087-baf3-b638657080f6",
+      "name": "Wooden Shield"
+    },
+    {
+      "id": "badf2418-01ac-410d-931e-72b1dac071c7",
+      "name": "Studded Shield +1"
+    },
+    {
+      "id": "8c02c87f-955d-4cc2-b547-f22462ad7106",
+      "name": "Rusty Studded Shield"
+    },
+    {
+      "id": "26b81847-b0dd-4150-aef7-602fcbb72eca",
+      "name": "Iron-Banded Shield +1"
+    },
+    {
+      "id": "ab10f66f-6e93-43f5-9384-82565f14124a",
+      "name": "Metal Shield"
+    },
+    {
+      "id": "6fb7aabd-bdf8-4fd4-b43c-6cc6c07e99b1",
+      "name": "Flaming Fist Shield"
+    },
+    {
+      "id": "5d4c7c48-8531-494f-8fc3-936122d8a6fa",
+      "name": "Myrkul Shield"
+    },
+    {
+      "id": "c5403c1d-f372-43e1-927a-9189e9e3545d",
+      "name": "Shortbow"
+    },
+    {
+      "id": "a46173b7-afd6-48e0-9c76-817acd027574",
+      "name": "Shortbow +1"
+    },
+    {
+      "id": "d9a98dce-1027-4324-939c-3c9cfe776731",
+      "name": "Shortbow +2"
+    },
+    {
+      "id": "82992370-cb61-4381-b390-891a3a9bd075",
+      "name": "Makeshift Bow"
+    },
+    {
+      "id": "467ddb4f-6791-41fa-99f7-ee8620d63bbe",
+      "name": "Shortsword"
+    },
+    {
+      "id": "9d66df2d-8e8f-4798-8684-77b738d26704",
+      "name": "Rusty Shortsword"
+    },
+    {
+      "id": "261b946f-154b-4f75-8985-cab6531034a2",
+      "name": "Shortsword +1"
+    },
+    {
+      "id": "0839fb15-24ab-4c3a-b168-413a47ed710a",
+      "name": "Shortsword +2"
+    },
+    {
+      "id": "50d677ed-3a0e-40e9-8291-ee6823af5672",
+      "name": "Sickle"
+    },
+    {
+      "id": "1d75dc84-b276-47b0-a0be-a5b25dfcb086",
+      "name": "Rusty Sickle"
+    },
+    {
+      "id": "d31af642-ae35-4f22-b7a6-100f3048be33",
+      "name": "Sling"
+    },
+    {
+      "id": "bca0fca1-b81d-47a7-9be3-18e43a8fe626",
+      "name": "Spear of Night"
+    },
+    {
+      "id": "9f0f1c0e-012d-44e1-9b29-86c64d2bf675",
+      "name": "Spear"
+    },
+    {
+      "id": "86450ec8-d876-457f-92c0-7bb11e8f38f8",
+      "name": "Rusty Spear"
+    },
+    {
+      "id": "158e6f29-89e9-4279-8f8f-85078f047225",
+      "name": "Spear +1"
+    },
+    {
+      "id": "74d9758a-84e9-4244-9ae8-14acee76acb3",
+      "name": "Spear +2"
+    },
+    {
+      "id": "81d1c0d2-ed2d-4261-9ea0-2b29c1cc21f5",
+      "name": "Staff of Small Magic"
+    },
+    {
+      "id": "9515172b-511a-44dc-bf97-8b63bca4ea10",
+      "name": "Staff"
+    },
+    {
+      "id": "4f0bc5b8-ff1e-49cd-b1f0-ee45c1ae4a9e",
+      "name": "Staff of the Moonmaiden"
+    },
+    {
+      "id": "a24ceeff-2db2-40be-b633-720b0bbab736",
+      "name": "Sun Mace"
+    },
+    {
+      "id": "78837dd4-b4fb-4c9d-937d-d3ef56b4d9c9",
+      "name": "Dawngrip Mace"
+    },
+    {
+      "id": "75cea463-4395-4600-ad93-7017415b16e3",
+      "name": "Syringe"
+    },
+    {
+      "id": "50c43f27-a12e-412c-88f0-56e15eba692a",
+      "name": "Torch"
+    },
+    {
+      "id": "81705db9-5b32-4ccd-91be-f8bad863ec48",
+      "name": "Lantern"
+    },
+    {
+      "id": "e13facc6-aced-4b48-b239-b0e76448013f",
+      "name": "Training Shield"
+    },
+    {
+      "id": "5e651778-cc78-425e-b27d-483b1c8afa82",
+      "name": "Practice Sword"
+    },
+    {
+      "id": "764dcd70-9206-457c-9366-7aa9e3370514",
+      "name": "Trepan"
+    },
+    {
+      "id": "d3807461-7c32-44ae-9aba-49ef4d3bf35e",
+      "name": "Trident"
+    },
+    {
+      "id": "27ef84b1-ea40-4f06-a013-f6281511f0e9",
+      "name": "Rusty Trident"
+    },
+    {
+      "id": "2fab5801-76b1-4669-95d9-7df76bed12dd",
+      "name": "Trident +1"
+    },
+    {
+      "id": "6cf827d6-5bae-480a-a1b4-d7fdb0e68801",
+      "name": "Trident +2"
+    },
+    {
+      "id": "fd1b4c45-e2df-4add-bc56-697d0339c4bd",
+      "name": "Pactbound Trident"
+    },
+    {
+      "id": "0e74cc0c-efd5-4865-b0f3-327c8b87a269",
+      "name": "Wand"
+    },
+    {
+      "id": "bc817e28-0266-4453-8f79-aaa1ed6e1a2f",
+      "name": "Wand"
+    },
+    {
+      "id": "60d6429b-eb12-4654-988d-911e2fab3b93",
+      "name": "Wand"
+    },
+    {
+      "id": "251ff7e1-412e-4804-b8b3-8b9e3aad06be",
+      "name": "Wand"
+    },
+    {
+      "id": "c330eaf6-1616-42a6-b6aa-0fe9d6194d0f",
+      "name": "Wand"
+    },
+    {
+      "id": "fb6cf351-6071-4575-b3aa-22fa553cb210",
+      "name": "Wand"
+    },
+    {
+      "id": "bcaf919a-f644-41f0-92c3-cb033fff27f7",
+      "name": "Wand"
+    },
+    {
+      "id": "edcfcd84-55ad-4b3c-a15f-70c587f2609b",
+      "name": "Wand"
+    },
+    {
+      "id": "25e4f2e5-115d-4350-8f96-56955fb4026a",
+      "name": "Wand"
+    },
+    {
+      "id": "0ec20c3d-a446-40ac-aaed-8b973cae075f",
+      "name": "Wand"
+    },
+    {
+      "id": "d4f00c34-9bb8-4175-9c1c-7487010e7f9d",
+      "name": "Wand"
+    },
+    {
+      "id": "07259e5d-53c1-413d-ab8d-c7b8dd9a8331",
+      "name": "Wand"
+    },
+    {
+      "id": "6b17998d-2e79-405d-8b1f-beb53658312f",
+      "name": "Warhammer"
+    },
+    {
+      "id": "ed53c828-d185-408e-8381-9b042849de8e",
+      "name": "Rusty Warhammer"
+    },
+    {
+      "id": "3e1b3db9-036e-4931-ab92-c3730a1c3d5f",
+      "name": "Warhammer +1"
+    },
+    {
+      "id": "e6b027a7-40bb-445e-b199-38b08d2b4832",
+      "name": "Warhammer +2"
+    },
+    {
+      "id": "fdaf8461-4d1a-4364-8d7d-4dd9ce824a1e",
+      "name": "Pactbound Warhammer"
+    },
+    {
+      "id": "a088775a-8f75-42f2-aa74-76a3f80701fa",
+      "name": "War Pick"
+    },
+    {
+      "id": "1d6d5983-4546-4eba-b9e6-d23021d08805",
+      "name": "Rusty War Pick"
+    },
+    {
+      "id": "75586d3e-21b2-4d94-ac99-99a6b0e8c3dd",
+      "name": "War Pick +1"
+    },
+    {
+      "id": "a5012da9-9cfa-467b-901a-61e33db55516",
+      "name": "War Pick +2"
+    },
+    {
+      "id": "64000dd2-aae4-41c4-a16f-dca738d9743a",
+      "name": "Shadow Cursed Woodcutter Axe"
+    },
+    {
+      "id": "1534c8ee-3651-477d-999c-b22efc9f850d",
+      "name": "Light of Creation"
+    },
+    {
+      "id": "8fdd7b33-6740-4d15-935c-9e54f54e16d4",
+      "name": "BOOOAL's Arms"
+    },
+    {
+      "id": "2099af4a-caa2-4e06-9b6d-fa6e9754bd09",
+      "name": "Fossilised Shell"
+    },
+    {
+      "id": "917d76c0-1969-4cd5-b5fe-7bf406081283",
+      "name": "Kuo-Toa Shield"
+    },
+    {
+      "id": "91ae041c-b0b6-456a-805d-b2d7982f3d94",
+      "name": "Kurwin's Cauteriser"
+    },
+    {
+      "id": "20bd2850-f6b3-4f13-bf96-c566d8df0de4",
+      "name": "Greatclub"
+    },
+    {
+      "id": "3112f0f5-4073-45d2-8e37-eeafa1558896",
+      "name": "Scythe of Myrkul"
+    },
+    {
+      "id": "c0fb0a11-1f29-470c-a95b-102377ef2356",
+      "name": "Deva Mace"
+    },
+    {
+      "id": "c86a3bf4-16b4-4d76-a33d-3df5c265aca8",
+      "name": "Merregon Halberd"
+    },
+    {
+      "id": "9a3a1719-3f18-400e-ab77-55b575c12090",
+      "name": "Moonlantern"
+    },
+    {
+      "id": "f554e750-4a86-45d7-b1a5-027e27df55ef",
+      "name": "Hand Crossbow"
+    },
+    {
+      "id": "7f2203f8-0162-4c3d-8635-c700fa2982ab",
+      "name": "Hand Crossbow"
+    },
+    {
+      "id": "0d5e17a5-510d-468a-8607-77a326bc453c",
+      "name": "Shortsword"
+    },
+    {
+      "id": "b3f8f4ad-c56d-4fc2-8173-8a17cc36d756",
+      "name": "Shortsword"
+    },
+    {
+      "id": "01da5a5b-97cd-4989-9ae3-af646eb35bc9",
+      "name": "Gnarled Tree Branch"
+    },
+    {
+      "id": "1fdc0473-8d0f-4e59-8ef8-9bd67568c002",
+      "name": "Heavy Spiked Club"
+    },
+    {
+      "id": "2b72f224-a182-43c7-97e9-dc9a6ba4f9f5",
+      "name": "Sahuagin Longbow"
+    },
+    {
+      "id": "b8878c58-e510-4c2f-97f0-da9cc442a75f",
+      "name": "Spear"
+    },
+    {
+      "id": "8323e1ec-1588-4044-9119-70b87a5fe938",
+      "name": "Sahuagin Spear"
+    },
+    {
+      "id": "8dcd8335-c066-4b33-ac3a-00f29dedb05f",
+      "name": "Bonesaw"
+    },
+    {
+      "id": "0b1e7b94-6ec9-4ae4-a81b-5c91b88eff1f",
+      "name": "Bonesaw"
+    },
+    {
+      "id": "9de4ffa7-4d2f-44c5-8bc9-0a17a732f74c",
+      "name": "Artificial Leech"
+    },
+    {
+      "id": "0e60fb18-4b91-430b-ada8-ed605a450ba1",
+      "name": "Surgeon Leech"
+    },
+    {
+      "id": "96c4bb75-ccc2-4a92-b81c-0465f10e3ea1",
+      "name": "Syringe"
+    },
+    {
+      "id": "21ec46af-c9bb-43af-9450-bdbb309021ff",
+      "name": "Surgeon Syringe"
+    },
+    {
+      "id": "bd96b22d-cc43-4ce9-bd3b-7454262a0b9e",
+      "name": "Trepan"
+    },
+    {
+      "id": "21ba27b3-85b6-4e6b-9210-3109f2faf8c8",
+      "name": "Surgeon Trepan"
+    },
+    {
+      "id": "1803db62-d4c8-4f36-a9b9-49e114d07570",
+      "name": "Fire Myrmidon's Burning Scimitar"
+    },
+    {
+      "id": "cac16ce7-f5fd-4314-8b79-94b56d6a8a09",
+      "name": "Scimitar of Cinder"
+    },
+    {
+      "id": "19710a61-25df-4851-884e-1c33d2fa4d45",
+      "name": "Scimitar of Cinder"
+    },
+    {
+      "id": "54616284-03ad-4a60-884c-91e43cdea83b",
+      "name": "Toll Collector Halberd"
+    },
+    {
+      "id": "c818edc1-85c4-4c4b-bd62-03ba59265922",
+      "name": "Trident Water Myrmidon"
+    },
+    {
+      "id": "ba86b029-9232-4ad2-9e2d-9edcdd1d728b",
+      "name": "Trident of the Depths"
+    },
+    {
+      "id": "639a6279-f487-4783-9381-493f63e66ade",
+      "name": "Trident of the Depths"
+    },
+    {
+      "id": "e2391c41-845c-4d8e-9aba-d2392e193bfd",
+      "name": "Watcher Crossbow"
+    },
+    {
+      "id": "c25e9381-7fbd-4e07-9383-9df8aa43d4ed",
+      "name": "Watcher Greatsword"
+    },
+    {
+      "id": "ebdf1022-bb30-4a03-ac29-82f488bfce4f",
+      "name": "Watcher Greatsword"
+    },
+    {
+      "id": "73bb434e-c6c1-465f-a389-78148ac2584d",
+      "name": "Wand"
+    },
+    {
+      "id": "c71e2798-31ae-4f57-8073-c6195c2e9d02",
+      "name": "Twisting Branch"
+    },
+    {
+      "id": "41b07341-1bf3-450d-9303-377c035c09ac",
+      "name": "Organic Shield"
+    },
+    {
+      "id": "18c6beaf-e553-462d-aa59-74b5ff1adb1c",
+      "name": "To the Best of Wives and Mothers"
+    },
+    {
+      "id": "4a7dbf09-3bd1-4547-ae5f-dcc1ce4b3ea9",
+      "name": "Bane's Fist"
+    },
+    {
+      "id": "9dc895b8-4247-44e3-a343-60622843ff09",
+      "name": "Gortash Coronation Poster"
+    }
+]
+}

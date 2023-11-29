@@ -1,13 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const select = document.getElementById('categories'); // Check the ID here
+    const select = document.getElementById('categories');
     const quantityInput = document.getElementById('quantity');
     const generateButton = document.getElementById('generateButton');
     const shoppingList = document.getElementById('shoppingList');
-
-    if (!select || !quantityInput || !generateButton || !shoppingList) {
-        console.error('One or more elements not found in the DOM.');
-        return;
-    }
 
     let buildingsData;
     let materialsData;
@@ -19,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     ])
     .then(data => {
         [buildingsData, materialsData] = data;
+        console.log('Buildings data:', buildingsData);
+        console.log('Materials data:', materialsData);
         populateDropdown(buildingsData);
     })
     .catch(error => console.error('Error fetching data:', error));
@@ -47,81 +44,59 @@ document.addEventListener('DOMContentLoaded', function () {
             select.appendChild(option);
         });
     }
+
     generateButton.addEventListener('click', function () {
         const selectedBuilding = select.value;
         const quantity = parseInt(quantityInput.value);
 
-        if (!isNaN(quantity) && quantity > 0 && buildingsData) {
+        console.log('Selected Building:', selectedBuilding);
+        console.log('Quantity:', quantity);
+
+        if (!isNaN(quantity) && quantity > 0 && buildingsData && materialsData) {
             const buildingData = buildingsData.find(building => building.name === selectedBuilding);
 
             if (buildingData) {
                 generateShoppingList(buildingData, quantity);
+            } else {
+                console.log('Building data not found for:', selectedBuilding);
             }
+        } else {
+            console.log('Invalid quantity or no building data available.');
         }
     });
 
     function generateShoppingList(buildingData, quantity) {
-        const basicMaterials = materialsData.basicMaterials;
-        console.log("Selected building:", buildingData.name); // Add this line for debugging
-        const advancedMaterials = materialsData.advancedMaterials[buildingData.name];
-    
+        console.log('Generating shopping list for:', buildingData.name);
+        console.log('Quantity:', quantity);
+        const advancedMaterials = buildingData.advancedMaterials || {};
         const materialsList = document.createElement('div');
         materialsList.innerHTML = `<h3>Materials for ${quantity} ${buildingData.name}:</h3>`;
-    
-        for (const material in advancedMaterials) {
-            const materialQuantity = advancedMaterials[material] * quantity;
+
+        for (const materialName in advancedMaterials) {
+            const materialQuantity = advancedMaterials[materialName] * quantity;
             const materialItem = document.createElement('p');
-            materialItem.textContent = `- ${material}: ${materialQuantity} units (${advancedMaterials[material]} per ${buildingData.name} x ${quantity} ${buildingData.name})`;
-    
-            const basicMaterialsForItem = getBasicMaterialsForItem(material, materialQuantity);
-            if (basicMaterialsForItem.length > 0) {
-                const basicMaterialsList = document.createElement('p');
-                basicMaterialsList.textContent = `    Basic Materials for ${material}: ${basicMaterialsForItem.join(', ')}`;
-                materialItem.appendChild(basicMaterialsList);
-            }
-    
-            materialsList.appendChild(materialItem);
-        }
-    
-        const totalPowerUsage = parseFloat(buildingData.PowerUsage) * quantity;
-        const totalProduction = calculateTotalProduction(buildingData, quantity);
-    
-        const powerUsage = document.createElement('p');
-        powerUsage.textContent = `Total Power Usage: ${totalPowerUsage.toFixed(2)} kW/s`;
-        const production = document.createElement('p');
-        production.textContent = `Total Production: ${totalProduction}`;
-    
-        materialsList.appendChild(powerUsage);
-        materialsList.appendChild(production);
-    
-        shoppingList.innerHTML = '';
-        shoppingList.appendChild(materialsList);
-    }
-    
-    function getBasicMaterialsForItem(material, quantity) {
-        const requiredMaterials = [];
-        for (const mat in basicMaterials) {
-            if (materialsData.advancedMaterials.hasOwnProperty(mat) && materialsData.advancedMaterials[mat].hasOwnProperty(material)) {
-                const requiredQuantity = materialsData.advancedMaterials[mat][material] * quantity;
-                if (basicMaterials[mat] < requiredQuantity) {
-                    requiredMaterials.push(`${requiredQuantity - basicMaterials[mat]} ${mat}`);
+            materialItem.textContent = `- ${materialName}: ${materialQuantity} units (${advancedMaterials[materialName]} per ${buildingData.name} x ${quantity} ${buildingData.name})`;
+
+            if (materialsData) {
+                const materialInfo = materialsData.find(material => material.name === materialName);
+                if (materialInfo && materialInfo.type === 'Advanced') {
+                    if (materialInfo.materials) {
+                        const basicMaterialsList = document.createElement('p');
+                        basicMaterialsList.textContent = `    Basic Materials for ${materialName}: ${JSON.stringify(materialInfo.materials)}`;
+                        materialItem.appendChild(basicMaterialsList);
+                    } else if (materialInfo.qty) {
+                        const basicMaterialsList = document.createElement('p');
+                        basicMaterialsList.textContent = `    ${materialInfo.materials} for ${materialName}: ${materialInfo.qty}`;
+                        materialItem.appendChild(basicMaterialsList);
+                    }
                 }
             }
+
+            materialsList.appendChild(materialItem);
         }
-        return requiredMaterials;
-    }
-    
-    function calculateTotalProduction(buildingData, quantity) {
-        let totalProduction = '';
-        if (buildingData.Heat) {
-            totalProduction += `Heat: ${parseFloat(buildingData.Heat) * quantity} `;
-        }
-        if (buildingData.Oxygen) {
-            totalProduction += `Oxygen: ${buildingData.Oxygen.replace(' ppq/s', '') * quantity} `;
-        }
-        if (buildingData.Pressure) {
-            totalProduction += `Pressure: ${buildingData.Pressure.replace(' nPa/s', '') * quantity} `;
-        }
-        return totalProduction.trim();
+
+        shoppingList.innerHTML = '';
+        shoppingList.appendChild(materialsList);
+        console.log('Shopping list generated.');
     }
 });
