@@ -31,7 +31,7 @@ $(document).ready(function() {
             title: "Diablo 4",
             description: "Currently contains a Paragon Tracker tool.",
             tags: ["D4",],
-            link: "/landing-pages/diablo4/"
+            link: "/landing-pages/diablo4"
         },
         {
             title: "Melvor Idle",
@@ -41,19 +41,19 @@ $(document).ready(function() {
         },
         {
             title: "Vampire Survivors",
-            description: "Builds and Guides for Vampire Survivors.",
+            description: "Builds for Vampire Survivors.",
             tags: ["VS",],
             link: "/landing-pages/vampiresurvivors"
         },
         {
             title: "Grounded",
-            description: "All Grounded related pages.",
+            description: "All Grounded related content.",
             tags: ["gd",],
             link: "/landing-pages/grounded"
         },
         {
             title: "Valheim",
-            description: "All Valheim related pages.",
+            description: "All Valheim related content",
             tags: ["VS",],
             link: "/landing-pages/valheim"
         }

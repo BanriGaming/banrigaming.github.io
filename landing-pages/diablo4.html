@@ -10,13 +10,22 @@
   <link  rel="stylesheet" href="../assets/css/main.css"></link>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
   <script src="../assets/js/nav.js"></script>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+</style>
 </head>
 <body>
     <div w3-include-html="../../nav.html"></div> <hr>
     <div class="jumbotron jumbotron-fluid">   
-        <h1 class="display-4">Diablo 4</h1>
-        <p class="lead">All content related to Diablo 4. Currently only tools to help with gameplay will be here.</p>
-    </div> 
+        <h1 class="display-4">Diablo 4 Paragon Point Calculator</h1>
+        <p class="lead">The functionality of this tool is to provide a player with the ability to find out how many paragon they have obtained, how many are left and what level they need to be to reach the a target paragon.</p>
     </div>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -26,8 +35,341 @@
       </ol>
     </nav>
     <hr>
-    <p>This page is under construction.</p>
+    <label for="level">Current Level:</label>
+    <input type="number" id="level" min="50" max="100" placeholder="Enter your level" required>
+    <br>
+    <label for="renownOption">Renown Option:</label>
+    <select id="renownOption">
+        <option value="0">None</option>
+        <option value="20">All Renown</option>
+        <option value="4">4 Statues</option>
+    </select>
+    <br>
+    <label for="targetPoints">Target Points:</label>
+    <input type="number" id="targetPoints" min="0" placeholder="Enter target points">
+    <br>
+    <label for="expProgressOption">Progress in Level:</label>
+    <select id="expProgressOption">
+        <option value="0">0%</option>
+        <option value="25">25%</option>
+        <option value="50">50%</option>
+        <option value="75">75%</option>
+    </select>
+    <br>
+    <button onclick="calculatePoints()">Calculate</button>
+    <br>
+    <p>Total Paragon Points Obtained: <span id="totalObtained">-</span></p>
+    <p>Total Paragon Points Left to Acquire: <span id="totalLeft">-</span></p>
+    <p>Level Needed to Reach Target Points: <span id="levelNeeded">-</span></p>
+
+    <script>
+        function calculatePoints() {
+            const currentLevel = parseInt(document.getElementById("level").value);
+            const renownOption = parseInt(document.getElementById("renownOption").value);
+            const targetPointsInput = document.getElementById("targetPoints").value.trim(); // Get target points input as a string
+            const targetPoints = targetPointsInput === "" ? NaN : parseInt(targetPointsInput); // Convert to integer or NaN if empty
+            const expProgressOption = parseInt(document.getElementById("expProgressOption").value);
+            let totalObtained = 0;
+            let totalLeft = 0;
+            let levelNeeded = targetPoints ? currentLevel : "N/A"; // Default to "N/A" when target is not provided
+
+            if (currentLevel >= 50 && currentLevel <= 100) {
+                // Calculate total Paragon points obtained before reaching the current level
+                totalObtained = (currentLevel - 50) * 4 + 1;
+
+                // Add points based on Renown and Lilith Statues
+                if (renownOption > 0) {
+                    if (renownOption === 20) {
+                        totalObtained += 20; // Add 20 points for All Renown
+                        totalObtained += 4;  // Add 4 points for Lilith Statues
+                    } else {
+                        totalObtained += parseInt(renownOption);
+                    }
+                }
+
+                totalLeft = 225 - totalObtained;
+
+                // Adjust totalObtained based on expProgressOption
+                if (expProgressOption === 25) {
+                    totalObtained += 1; // 25% through the level
+                    totalLeft -= 1; // Adjust points left
+                } else if (expProgressOption === 50) {
+                    totalObtained += 2; // 50% through the level
+                    totalLeft -= 2; // Adjust points left
+                } else if (expProgressOption === 75) {
+                    totalObtained += 3; // 75% through the level
+                    totalLeft -= 3; // Adjust points left
+                }
+
+                // Calculate the number of quarters to reach the target points
+                if (!isNaN(targetPoints)) {
+                    const quartersNeeded = Math.ceil((targetPoints - totalObtained) / 4);
+
+                    // Calculate the level needed to reach the target points and quarters
+                    levelNeeded = currentLevel + quartersNeeded;
+
+                    // Calculate the total Paragon points obtained at the target level
+                    totalObtained += quartersNeeded * 4;
+                }
+            }
+
+            document.getElementById("totalObtained").textContent = totalObtained;
+            document.getElementById("totalLeft").textContent = totalLeft;
+            document.getElementById("levelNeeded").textContent = levelNeeded;
+        }
+    </script>
+    <!-- Add Bootstrap JS scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>includeHTML();</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<!-- BEFORE ADDING TARGET POINTS
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diablo 4 Paragon Points Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diablo 4 Paragon Points Calculator</h1>
+    <label for="level">Current Level:</label>
+    <input type="number" id="level" min="50" max="100" placeholder="Enter your level" required>
+    <br>
+    <label for="renownCompleted">All Renown:</label>
+    <input type="radio" name="renown" id="renownCompleted" value="all">
+    <br>
+    <label for="lilithStatuesFound">4 Statues:</label>
+    <input type="radio" name="renown" id="lilithStatuesFound" value="4">
+    <br>
+    <button onclick="calculatePoints()">Calculate</button>
+    <br>
+    <p>Total Paragon Points Obtained: <span id="totalObtained">-</span></p>
+    <p>Total Paragon Points Left to Acquire: <span id="totalLeft">-</span></p>
+
+    <script>
+        function calculatePoints() {
+            const currentLevel = parseInt(document.getElementById("level").value);
+            let totalObtained = 0;
+            let totalLeft = 0;
+
+            if (currentLevel >= 50 && currentLevel <= 100) {
+                totalObtained = (currentLevel - 50) * 4 + 1;
+
+                const renownOption = document.querySelector('input[name="renown"]:checked');
+                if (renownOption) {
+                    if (renownOption.value === "all") {
+                        totalObtained += 20; // Add 20 points for All Renown
+                        totalObtained += 4;  // Add 4 points for Lilith Statues
+                    } else {
+                        totalObtained += parseInt(renownOption.value);
+                    }
+                }
+
+                totalLeft = 225 - totalObtained;
+            }
+
+            document.getElementById("totalObtained").textContent = totalObtained;
+            document.getElementById("totalLeft").textContent = totalLeft;
+        }
+    </script>
+</body>
+</html>
+-->
+
+
+<!-- AFTER TEST <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diablo 4 Paragon Points Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diablo 4 Paragon Points Calculator</h1>
+    <label for="level">Current Level:</label>
+    <input type="number" id="level" min="50" max="100" placeholder="Enter your level" required>
+    <br>
+    <label for="renownOption">Renown Option:</label>
+    <select id="renownOption">
+        <option value="0">None</option>
+        <option value="20">All Renown</option>
+        <option value="4">4 Statues</option>
+    </select>
+    <br>
+    <label for="targetPoints">Target Points:</label>
+    <input type="number" id="targetPoints" min="0" placeholder="Enter target points">
+    <br>
+    <button onclick="calculatePoints()">Calculate</button>
+    <br>
+    <p>Total Paragon Points Obtained: <span id="totalObtained">-</span></p>
+    <p>Total Paragon Points Left to Acquire: <span id="totalLeft">-</span></p>
+    <p>Level Needed to Reach Target Points: <span id="levelNeeded">-</span></p>
+
+    <script>
+        function calculatePoints() {
+            const currentLevel = parseInt(document.getElementById("level").value);
+            const renownOption = parseInt(document.getElementById("renownOption").value);
+            const targetPoints = parseInt(document.getElementById("targetPoints").value);
+            let totalObtained = 0;
+            let totalLeft = 0;
+            let levelNeeded = currentLevel;
+
+            if (currentLevel >= 50 && currentLevel <= 100) {
+                totalObtained = (currentLevel - 50) * 4 + 1;
+
+                if (renownOption > 0) {
+                    if (renownOption === 20) {
+                        totalObtained += 20; // Add 20 points for All Renown
+                        totalObtained += 4;  // Add 4 points for Lilith Statues
+                    } else {
+                        totalObtained += parseInt(renownOption);
+                    }
+                }
+
+                totalLeft = 225 - totalObtained;
+
+                while (totalObtained < targetPoints && levelNeeded < 100) {
+                    levelNeeded++;
+                    totalObtained += 4; // Paragon points increase by 4 with each level
+                }
+            }
+
+            document.getElementById("totalObtained").textContent = totalObtained;
+            document.getElementById("totalLeft").textContent = totalLeft;
+            document.getElementById("levelNeeded").textContent = levelNeeded;
+        }
+    </script>
+</body>
+</html>-->
+
+<!-- NEEDS CHECK ON THE TARGET POINTS BLANK AREA <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diablo 4 Paragon Points Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diablo 4 Paragon Points Calculator</h1>
+    <label for="level">Current Level:</label>
+    <input type="number" id="level" min="50" max="100" placeholder="Enter your level" required>
+    <br>
+    <label for="renownOption">Renown Option:</label>
+    <select id="renownOption">
+        <option value="0">None</option>
+        <option value="20">All Renown</option>
+        <option value="4">4 Statues</option>
+    </select>
+    <br>
+    <label for="targetPoints">Target Points:</label>
+    <input type="number" id="targetPoints" min="0" placeholder="Enter target points">
+    <br>
+    <label for="expProgressOption">Progress in Level:</label>
+    <select id="expProgressOption">
+        <option value="0">0%</option>
+        <option value="25">25%</option>
+        <option value="50">50%</option>
+        <option value="75">75%</option>
+    </select>
+    <br>
+    <button onclick="calculatePoints()">Calculate</button>
+    <br>
+    <p>Total Paragon Points Obtained: <span id="totalObtained">-</span></p>
+    <p>Total Paragon Points Left to Acquire: <span id="totalLeft">-</span></p>
+    <p>Level Needed to Reach Target Points: <span id="levelNeeded">-</span></p>
+
+    <script>
+        function calculatePoints() {
+            const currentLevel = parseInt(document.getElementById("level").value);
+            const renownOption = parseInt(document.getElementById("renownOption").value);
+            const targetPointsInput = document.getElementById("targetPoints").value.trim(); // Get target points input as a string
+            const targetPoints = targetPointsInput === "" ? NaN : parseInt(targetPointsInput); // Convert to integer or NaN if empty
+            const expProgressOption = parseInt(document.getElementById("expProgressOption").value);
+            let totalObtained = 0;
+            let totalLeft = 0;
+            let levelNeeded = currentLevel;
+
+            if (currentLevel >= 50 && currentLevel <= 100) {
+                // Calculate total Paragon points obtained before reaching the current level
+                totalObtained = (currentLevel - 50) * 4 + 1;
+
+                // Add points based on Renown and Lilith Statues
+                if (renownOption > 0) {
+                    if (renownOption === 20) {
+                        totalObtained += 20; // Add 20 points for All Renown
+                        totalObtained += 4;  // Add 4 points for Lilith Statues
+                    } else {
+                        totalObtained += parseInt(renownOption);
+                    }
+                }
+
+                totalLeft = 225 - totalObtained;
+
+                // Adjust totalObtained based on expProgressOption
+                if (expProgressOption === 25) {
+                    totalObtained += 1; // 25% through the level
+                    totalLeft -= 1; // Adjust points left
+                } else if (expProgressOption === 50) {
+                    totalObtained += 2; // 50% through the level
+                    totalLeft -= 2; // Adjust points left
+                } else if (expProgressOption === 75) {
+                    totalObtained += 3; // 75% through the level
+                    totalLeft -= 3; // Adjust points left
+                }
+
+                // Check if a valid target points value is provided
+                if (!isNaN(targetPoints)) {
+                    // Clear the "N/A" values
+                    document.getElementById("targetPoints").value = "";
+                    document.getElementById("levelNeeded").textContent = "";
+
+                    // Calculate the number of quarters to reach the target points
+                    const quartersNeeded = Math.ceil((targetPoints - totalObtained) / 4);
+
+                    // Calculate the level needed to reach the target points and quarters
+                    levelNeeded += quartersNeeded;
+
+                    // Calculate the total Paragon points obtained at the target level
+                    totalObtained += quartersNeeded * 4;
+                }
+            }
+
+            document.getElementById("totalObtained").textContent = totalObtained;
+            document.getElementById("totalLeft").textContent = totalLeft;
+        }
+    </script>
+</body>
+</html> -->
