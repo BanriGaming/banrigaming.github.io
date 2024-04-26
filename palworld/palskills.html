@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap"
+        rel="stylesheet">
+    <script src="../assets/js/nav.js"></script>
+</head>
+
+<body>
+    <div w3-include-html="../../nav.html"></div>
+    <hr>
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="display-4">Starfield Dynamic Planetary Resource Archive</h1>
+        <p class="lead">This is a dynamically generated resource archive written by my wife, that displays and filters based on
+            selected resources for
+            planets and star systems. <br> Planets and Star Systems can be searched individually. Searching a system
+            will show all planets in the system searched.</p>
+    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/index">Home</a></li>
+            <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
+            <li class="breadcrumb-item"><a href="/landing-pages/starfield">Starfield</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Planetary Star Chart</li>
+        </ol>
+    </nav>
+    <div class="container-fluid">
+        <!-- Bootstrap 5 accordion -->
+        <div class="accordion" id="starAccordion">
+            <div class="accordion-item2">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Star Map
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    data-bs-parent="#starAccordion">
+                    <div class="accordion-body text-center">
+                        <a href="../assets/img/starfield/Starfield-Map.png"><img class="img-fluid" alt="Starfield Galaxy Map" src="../assets/img/starfield/Starfield-Map.png"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="resource-buttons mt-2 filter-buttons">
+            <!-- Add resource filter buttons here -->
+            <button id="filter-None">None</button>
+            <button id="filter-Ad">Aldumite</button>
+            <button id="filter-HnCn">Alkanes</button>
+            <button id="filter-Al">Aluminum</button>
+            <button id="filter-Sb">Antimony</button>
+            <button id="filter-Ar">Argon</button>
+            <button id="filter-C6Hn">Benzene</button>
+            <button id="filter-Be">Beryllium</button>
+            <button id="filter-Cs">Caesium</button>
+            <button id="filter-R-COOH">Carboxylic Acids</button>
+            <button id="filter-Cl">Chlorine</button>
+            <button id="filter-SiH3Cl">Chlorosilanes</button>
+            <button id="filter-Co">Cobalt</button>
+            <button id="filter-Cu">Copper</button>
+            <button id="filter-Dy">Dysprosium</button>
+            <button id="filter-Eu">Europium</button>
+            <button id="filter-F">Fluorine</button>
+            <button id="filter-Au">Gold</button>
+            <button id="filter-He-3">Helium</button>
+            <button id="filter-Ie">Indicite</button>
+            <button id="filter-IL">Ionic Liquids</button>
+            <button id="filter-Ir">Iridium</button>
+            <button id="filter-Fe">Iron</button>
+            <button id="filter-Pb">Lead</button>
+            <button id="filter-Li">Lithium</button>
+            <button id="filter-Hg">Mercury</button>
+            <button id="filter-Nd">Neodymium</button>
+            <button id="filter-Ne">Neon</button>
+            <button id="filter-Ni">Nickel</button>
+            <button id="filter-Pd">Palladium</button>
+            <button id="filter-Pt">Platinum</button>
+            <button id="filter-Pu">Plutonium</button>
+            <button id="filter-Rc">Rothicite</button>
+            <button id="filter-Ag">Silver</button>
+            <button id="filter-Ta">Tantalum</button>
+            <button id="filter-Tsn">Tasine</button>
+            <button id="filter-xF4">Tetrafluorides</button>
+            <button id="filter-Ti">Titanium</button>
+            <button id="filter-W">Tungsten</button>
+            <button id="filter-U">Uranium</button>
+            <button id="filter-V">Vanadium</button>
+            <button id="filter-Vr">Veryl</button>
+            <button id="filter-Vy">Vytinium</button>
+            <button id="filter-H20">Water</button>
+            <button id="filter-Xe">Xenon</button>
+            <button id="filter-Yb">Ytterbium</button>
+        </div>
+        <div class="selected-filters my-3" id="s-filters">
+            Selected Filters:
+        </div>
+        <div class="form-check mt-2">
+            <input class="form-check-input" type="radio" name="search-type" id="search-star-system" checked>
+            <label class="form-check-label" for="search-star-system">
+                Star System
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="search-type" id="search-planet">
+            <label class="form-check-label" for="search-planet">
+                Planet
+            </label>
+        </div>
+        <input type="text" id="search-input" class="form-control my-3 planet-bar-container planet-bar" placeholder="Search for a planet or star system">
+        <!--<input type="text" id="search-input" class="form-control my-3" placeholder="Search for a planet or star system">-->
+        <div class="my-3">
+            Displayed Planets: <span id="d-planets"> </span>
+        </div>
+        <!-- Add a grid layout for data cards -->
+        <div class="card-container">
+
+        </div>
+    </div>
+    <!-- Include the PapaParse library for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.min.js"></script>
+    <!-- Include the JavaScript file that fetches data and generates data cards -->
+    <script src="../assets/js/starchart.js"></script>
+    <!-- Add Bootstrap JS scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>includeHTML();</script>
+</body>
+</html>

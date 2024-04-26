@@ -1,0 +1,2290 @@
+{
+    "craftingTables": {
+
+    "refinement": {
+      "Furnace": {
+        "items": [
+          {
+            "item": "Copper Ingot",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Copper Ore", "quantity": 20, "flooringBonus": 15}
+            ]
+          },
+          {
+            "item": "Sulphur",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Sulpher Ore", "quantity": 20, "flooringBonus": 15}
+            ]
+          },
+          {
+            "item": "Whetstone",
+            "quantityProduced": 2,
+            "ingredients": [
+              {"item": "Copper Ingot", "quantity": 1},
+              {"item": "Stone Dust", "quantity": 12, "flooringBonus": 9}
+            ]
+          },
+          {
+            "item": "Ingot",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Iron Ore", "quantity": 20, "flooringBonus": 15}
+            ]
+          },
+          {
+            "item": "Glass",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Quartz", "quantity": 20, "flooringBonus": 15}
+            ]
+          },
+          {
+            "item": "Empty Glass Bottle",
+            "quantityProduced": 5,
+            "ingredients": [
+              {"item": "Glass", "quantity": 12, "flooringBonus": 9}
+            ]
+          },
+          {
+            "item": "Scouragestone",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Whetstone", "quantity": 4, "flooringBonus": 3},
+              {"item": "Grave Dust", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Radium Alloy",
+            "quantityProduced": 4,
+            "ingredients": [
+              {"item": "Sludge-Filled Canister", "quantity": 1},
+              {"item": "Sulphur", "quantity": 4, "flooringBonus": 3},
+              {"item": "Tech Scrap", "quantity": 60, "flooringBonus": 45}
+            ]
+          },
+          {
+            "item": "Dark Silver Ingot",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Spectral Dust", "quantity": 4, "flooringBonus": 3},
+              {"item": "Silver Ore", "quantity": 20, "flooringBonus": 15}
+            ]
+          },
+          {
+            "item": "Gold Ingot",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Sulphur", "quantity": 1, "flooringBonus": 1},
+              {"item": "Gold Jewelry", "quantity": 4, "flooringBonus": 3}
+            ]
+          }
+        ]
+      },
+      "Fabricator": {
+        "items": [
+          {
+            "item": "Empty Canister",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Iron Ingot", "quantity": 1},
+              {"item": "Glass", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Power Core",
+            "quantityProduced": 2,
+            "ingredients": [
+              {"item": "Charged Battery", "quantity": 4, "flooringBonus": 3},
+              {"item": "Radium Alloy", "quantity": 8, "flooringBonus": 6}
+            ]
+          },
+          {
+            "item": "EMP",
+            "quantityProduced": 5,
+            "ingredients": [
+              {"item": "Iron Ingot", "quantity": 12, "flooringBonus": 9},
+              {"item": "Power Core", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Copper Coin",
+            "quantityProduced": 20,
+            "ingredients": [
+              {"item": "Copper Ingot", "quantity": 8, "flooringBonus": 6}
+            ]
+          },
+          {
+            "item": "Silver Coin",
+            "quantityProduced": 20,
+            "ingredients": [
+              {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3},
+              {"item": "Silver Ore", "quantity": 60, "flooringBonus": 45}
+            ]
+          },
+          {
+            "item": "Goldsun Coin",
+            "quantityProduced": 20,
+            "ingredients": [
+              {"item": "Gold Ingot", "quantity": 4, "flooringBonus": 3},
+              {"item": "Silver Coin", "quantity": 20, "flooringBonus": 15}
+            ]
+          }
+        ]
+      },
+      "Grinder": {
+        "items": [
+          {
+            "item": "Stone Brick",
+            "quantityProduced": 1,
+            "ingredients": [
+                {"item": "Stone", "quantity": 12, "flooringBonus": 9}
+            ],
+            "byproduct": [
+                {"item": "Stone Dust", "quantity": 1}
+            ]
+          },
+            {
+            "item": "Stone Body",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Stone Brick", "quantity": 4, "flooringBonus": 3},
+              {"item": "Clay", "quantity": 12, "flooringBonus": 9}
+            ]
+          },
+          {
+            "item": "Grave Dust",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Bone", "quantity": 64, "flooringBonus": 48}
+            ]
+          },
+          {
+            "item": "Spectral Dust",
+            "quantityProduced": 4,
+            "ingredients": [
+              {"item": "Scouragestone", "quantity": 1},
+              {"item": "Ghost Crystal", "quantity": 32, "flooringBonus": 24}
+            ]
+          },
+          {
+            "item": "Pollen",
+            "quantityProduced": 10,
+            "ingredients": [
+              {"item": "Flowers", "quantity": 20, "flooringBonus": 15}
+            ]
+          },
+          {
+            "item": "Gem Dust",
+            "quantityProduced": 4,
+            "ingredients": [
+              {"item": "Crude Gem", "quantity": 1},
+              {"item": "Gem Dust", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Gem Dust",
+            "recipes": [
+              {
+                "ingredients": [
+                  {"item": "Crude Gem", "quantity": 1},
+                  {"item": "Gem Dust", "quantity": 4, "flooringBonus": 3}
+                ],
+                "quantityProduced": 4
+              },
+              {
+                "ingredients": [
+                  {"item": "Regular Gem", "quantity": 1},
+                  {"item": "Gem Dust", "quantity": 16, "flooringBonus": 12}
+                ],
+                "quantityProduced": 16
+              },
+              {
+                "ingredients": [
+                  {"item": "Flawless Gem", "quantity": 1},
+                  {"item": "Gem Dust", "quantity": 64}
+                ],
+                "quantityProduced": 64
+              }
+            ]
+          }
+        ]
+      },
+      "Tannery": {
+        "items": [
+          {
+            "item": "Leather",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Rugged Hide", "quantity": 16, "flooringBonus": 12}
+            ]
+          },
+          {
+            "item": "Thick Leather",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Oil", "quantity": 1},
+              {"item": "Thick Hide", "quantity": 16, "flooringBonus": 12}
+            ]
+          },
+          {
+            "item": "Pristine Leather",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Mutant Grease", "quantity": 20, "flooringBonus": 15},
+              {"item": "Pristine Hide", "quantity": 20, "flooringBonus": 15}
+            ]
+          },
+          {
+            "item": "Empty Waterskin",
+            "recipes": [
+              {
+                "ingredients": [
+                  {"item": "Plant Fibre", "quantity": 40, "flooringBonus": 30},
+                  {"item": "Leather", "quantity": 16, "flooringBonus": 12}
+                ],
+                "quantityProduced": 5
+              },
+              {
+                "ingredients": [
+                  {"item": "Plant Fibre", "quantity": 40, "flooringBonus": 30},
+                  {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6}
+                ],
+                "quantityProduced": 5
+              }
+            ]
+          }
+        ]
+      },
+      "PaperPress": {
+        "items": [
+          {
+            "item": "Paper",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Plant Fibre", "quantity": 4, "flooringBonus": 3},
+              {"item": "Sawdust", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Scroll",
+            "quantityProduced": 4,
+            "ingredients": [
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+              {"item": "Paper", "quantity": 8, "flooringBonus": 6}
+            ]
+          },
+          {
+            "item": "Schematic",
+            "quantityProduced": 12,
+            "ingredients": [
+              {"item": "Tech Scrap", "quantity": 40, "flooringBonus": 30},
+              {"item": "Scroll", "quantity": 16, "flooringBonus": 12}
+            ]
+          }
+        ]
+      },
+      "VerminNest": {
+        "items": [
+          {
+            "item": "Rat",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Plant Fibre", "quantity": 12, "flooringBonus": 9},
+              {"item": "Bone", "quantity": 12, "flooringBonus": 9}
+            ]
+          },
+          {
+            "item": "Giant Rat",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Plant Fibre", "quantity": 12, "flooringBonus": 9},
+              {"item": "Fish Bone", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Putrid Rat",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Grave Dust", "quantity": 4, "flooringBonus": 3},
+              {"item": "Unsullied Heart", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Mutated Rat",
+            "quantityProduced": 6,
+            "ingredients": [
+              {"item": "Grave Dust", "quantity": 4, "flooringBonus": 3},
+              {"item": "Sludge-Filled Canister", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Spiderling",
+            "quantityProduced": 6,
+            "ingredients": [
+              {"item": "Mutant Grease", "quantity": 16, "flooringBonus": 12},
+              {"item": "Fish Bone", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Mosquito",
+            "quantityProduced": 3,
+            "ingredients": [
+              {"item": "Plague Briar", "quantity": 20, "flooringBonus": 15},
+              {"item": "Blood Snapper", "quantity": 1}
+            ]
+          }
+        ]
+      },
+      "Loom": {
+        "items": [
+          {
+            "item": "Cloth",
+            "recipes": [
+              {
+                "ingredients": [
+                  {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Plant Fibre", "quantity": 12, "flooringBonus": 9}
+                ],
+                "quantityProduced": 1
+              },
+              {
+                "ingredients": [
+                  {"item": "Thick Leather", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Plant Fibre", "quantity": 16, "flooringBonus": 12}
+                ],
+                "quantityProduced": 4
+              },
+              {
+                "ingredients": [
+                  {"item": "Pristine Leather", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Plant Fibre", "quantity": 24, "flooringBonus": 18}
+                ],
+                "quantityProduced": 8
+              }
+            ]
+          },
+          {
+            "item": "Coarse Thread",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Pollen", "quantity": 16, "flooringBonus": 12},
+              {"item": "Plant Fibre", "quantity": 12, "flooringBonus": 9}
+            ]
+          },
+          {
+            "item": "Carpet Roll",
+            "quantityProduced": 2,
+            "ingredients": [
+              {"item": "Wool Thread", "quantity": 1},
+              {"item": "Cloth", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Cotton Yarn",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Cotton", "quantity": 16, "flooringBonus": 12}
+            ]
+          },
+          {
+            "item": "Wool Thread",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+              {"item": "Cloth", "quantity": 1, "flooringBonus": 1}
+            ]
+          },
+          {
+            "item": "Silk",
+            "quantityProduced": 2,
+            "ingredients": [
+              {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+              {"item": "Silkworm", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Ghost Yarn",
+            "quantityProduced": 2,
+            "ingredients": [
+              {"item": "Cotton Yarn", "quantity": 2},
+              {"item": "Wool Thread", "quantity": 4, "flooringBonus": 3},
+              {"item": "Ghost Shroom", "quantity": 16, "flooringBonus": 12}
+            ]
+          }
+        ]
+      },
+      "BloodPress": {
+        "items": [
+          {
+            "item": "Oil",
+            "recipes": [
+              {
+                "ingredients": [
+                  {"item": "Fat Goby", "quantity": 1}
+                ],
+                "quantityProduced": 6,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              },
+              {
+                "ingredients": [
+                  {"item": "Fierce Stinger", "quantity": 1}
+                ],
+                "quantityProduced": 6,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              },
+              {
+                "ingredients": [
+                  {"item": "Rainbow Trout", "quantity": 1}
+                ],
+                "quantityProduced": 6,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              },
+              {
+                "ingredients": [
+                  {"item": "Blood Snapper", "quantity": 1}
+                ],
+                "quantityProduced": 10,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              },
+              {
+                "ingredients": [
+                  {"item": "Sage Fish", "quantity": 1}
+                ],
+                "quantityProduced": 10,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              },
+              {
+                "ingredients": [
+                  {"item": "Twilight Snapper", "quantity": 1}
+                ],
+                "quantityProduced": 10,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              },
+              {
+                "ingredients": [
+                  {"item": "Golden River Bass", "quantity": 1}
+                ],
+                "quantityProduced": 14,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              },
+              {
+                "ingredients": [
+                  {"item": "Swamp Dweller", "quantity": 1}
+                ],
+                "quantityProduced": 14,
+                "byproducts": [
+                  {"item": "Fish Bone", "quantity": 2}
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Blood Essence",
+            "recipes": [
+              {
+                "ingredients": [
+                  {"item": "Rat", "quantity": 4, "flooringBonus": 3}
+                ],
+                "quantityProduced": 10
+              },
+              {
+                "ingredients": [
+                  {"item": "Tainted Heart", "quantity": 4, "flooringBonus": 3}
+                ],
+                "quantityProduced": 60
+              }
+            ]
+          },
+          {
+            "item": "Greater Blood Essence",
+            "recipes": [
+              {
+                "ingredients": [
+                  {"item": "Blood Essence", "quantity": 200, "flooringBonus": 150}
+                ],
+                "quantityProduced": 1
+              },
+              {
+                "ingredients": [
+                  {"item": "Unsullied Heart", "quantity": 4, "flooringBonus": 3}
+                ],
+                "quantityProduced": 1
+              }
+            ]
+          },
+          {
+            "item": "Primal Blood Essence",
+            "recipes": [
+              {
+                "ingredients": [
+                  {"item": "Greater Blood Essence", "quantity": 8, "flooringBonus": 6}
+                ],
+                "quantityProduced": 1
+              },
+              {
+                "ingredients": [
+                  {"item": "Exquisite Heart", "quantity": 4, "flooringBonus": 3}
+                ],
+                "quantityProduced": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Sawmill": {
+        "items":[
+            {
+                "item": "Plank",
+                "recipes": [
+                  {
+                    "ingredients": [
+                      {"item": "Wood", "quantity": 20, "flooringBonus": 15}
+                    ],
+                    "quantityProduced": 1,
+                    "byproducts": [
+                      {"item": "Sawdust", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "ingredients": [
+                      {"item": "Hallow Wood", "quantity": 40, "flooringBonus": 30}
+                    ],
+                    "quantityProduced": 4,
+                    "byproducts": [
+                      {"item": "Oil", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "ingredients": [
+                      {"item": "Gloom Wood", "quantity": 40, "flooringBonus": 30}
+                    ],
+                    "quantityProduced": 4,
+                    "byproducts": [
+                      {"item": "Mutant Grease", "quantity": 2}
+                    ]
+                  },
+                  {
+                    "ingredients": [
+                      {"item": "Cursed Wood", "quantity": 40, "flooringBonus": 30}
+                    ],
+                    "quantityProduced": 4,
+                    "byproducts": [
+                      {"item": "Ghost Shroom", "quantity": 2}
+                    ]
+                  }
+                ]
+              },
+              {
+                "item": "Reinforced Plank",
+                "recipes": [
+                  {
+                    "ingredients": [
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Plank", "quantity": 4, "flooringBonus": 3}
+                    ],
+                    "quantityProduced": 1
+                  }
+                ]
+              }
+        ]
+      },
+      "Tomb":{
+        "items":[
+            {
+                "item": "Skeleton",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Blood Rose", "quantity": 8}
+                ]
+              },
+              {
+                "item": "Ghoul",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Mourning Lily", "quantity": 12}
+                ]
+              },
+              {
+                "item": "Skeleton Priest",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Gem Dust", "quantity": 4},
+                  {"item": "Sunflower", "quantity": 24}
+                ]
+              },
+              {
+                "item": "Banshee",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Gem Dust", "quantity": 8},
+                  {"item": "Plague Briar", "quantity": 24}
+                ]
+              }    
+        ]
+      }
+    },
+
+    "crafting": {
+        "Anvil": {
+          "items": [
+            {
+              "item": "Dark Silver Sword",
+              "image": "https://static.wikia.nocookie.net/vrising/images/b/b8/Weapon_DarkSilverSword.png/revision/latest?cb=20220528171226",
+              "quantityProduced": 1,
+              "ingredients": [
+                {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+              ]
+            },
+            {
+              "item": "Dark Silver Axes",
+              "image": "https://static.wikia.nocookie.net/vrising/images/3/33/Weapon_DarkSilverAxes.png/revision/latest?cb=20220528171337",
+              "quantityProduced": 1,
+              "ingredients": [
+                {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+              ]
+            },
+            {
+                "item": "Dark Silver Mace",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Dark Silver Spear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Dark Silver Reaper",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Dark Silver Slashers",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Dark Silver Greatsword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Dark Silver Pistols",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Dark Silver Crossbow",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Dark Silver Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Reinforced Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Sanguine Sword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Sapphire", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Sword", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Axes",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Ruby", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Axes", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Mace",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Topaz", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Mace", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Spear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Emerald", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Spear", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Reaper",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Miststone", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Reaper", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Slashers",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Amethyst", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Slashers", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Greatsword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Sapphire", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Greatsword", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Pistols",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Ruby", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Pistols", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Sanguine Crossbow",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Flawless Topaz", "quantity": 1},
+                  {"item": "Primal Blood Essence", "quantity": 1},
+                  {"item": "Gold Ingot", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Dark Silver Crossbow", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Onyx Tear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Spectral Dust", "quantity": 8, "flooringBonus": 6},
+                  {"item": "Gold Ingot", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Power Core", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Blood Merlot", "quantity": 1}
+                ]
+              }
+          ]
+        },
+        "Smithy": {
+            "items": [
+              {
+                "item": "Iron Sword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Axes",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Mace",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Spear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Reaper",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Slashers",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Greatsword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Pistols",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Iron Crossbow",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Iron Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Merciless Iron Sword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Sapphire", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Sword", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Axes",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Ruby", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Axes", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Mace",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Topaz", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Mace", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Spear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Emerald", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Spear", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Reaper",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Miststone", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Reaper", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Slashers",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Amethyst", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Slashers", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Greatsword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Sapphire", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Greatsword", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Pistols",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Ruby", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Pistols", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Iron Crossbow",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Regular Topaz", "quantity": 1},
+                  {"item": "Greater Blood Essence", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3},
+                  {"item": "Iron Crossbow", "quantity": 1}
+                ]
+              }
+            ]
+          },
+        "Simple Workbench": {
+            "items": [
+              {
+                "item": "Reinforced Bone Axes",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Stone", "quantity": 128, "flooringBonus": 96},
+                  {"item": "Bone Axes", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Reinforced Bone Mace",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Stone", "quantity": 128, "flooringBonus": 96},
+                  {"item": "Bone Mace", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Reinforced Bone Spear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Stone", "quantity": 128, "flooringBonus": 96},
+                  {"item": "Bone Spear", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Reinforced Bone Crossbow",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9},
+                  {"item": "Stone", "quantity": 128, "flooringBonus": 96},
+                  {"item": "Bone Crossbow", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Copper Sword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Copper Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Copper Axes",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Copper Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Copper Mace",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Copper Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Copper Spear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Copper Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Copper Crossbow",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Copper Ingot", "quantity": 16, "flooringBonus": 12},
+                  {"item": "Plank", "quantity": 12, "flooringBonus": 9}
+                ]
+              },
+              {
+                "item": "Merciless Copper Sword",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Crude Sapphire", "quantity": 2},
+                  {"item": "Copper Sword", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Copper Axes",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Crude Ruby", "quantity": 2},
+                  {"item": "Copper Axes", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Copper Mace",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Crude Topaz", "quantity": 2},
+                  {"item": "Copper Mace", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Copper Spear",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Crude Emerald", "quantity": 2},
+                  {"item": "Copper Spear", "quantity": 1}
+                ]
+              },
+              {
+                "item": "Merciless Copper Crossbow",
+                "quantityProduced": 1,
+                "ingredients": [
+                  {"item": "Crude Topaz", "quantity": 2},
+                  {"item": "Copper Crossbow", "quantity": 1}
+                ]
+              },
+              {
+            "item": "Plated Boneguard Chestguard",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Rugged Hide", "quantity": 64, "flooringBonus": 48},
+              {"item": "Boneguard Chestguard", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Plated Boneguard Leggings",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Rugged Hide", "quantity": 64, "flooringBonus": 48},
+              {"item": "Boneguard Leggings", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Plated Boneguard Gloves",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Rugged Hide", "quantity": 64, "flooringBonus": 48},
+              {"item": "Boneguard Gloves", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Plated Boneguard Boots",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Rugged Hide", "quantity": 64, "flooringBonus": 48},
+              {"item": "Boneguard Boots", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Nightstalker Vest",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 6, "flooringBonus": 5},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Nightstalker Leggings",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 6, "flooringBonus": 5},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Nightstalker Gloves",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 6, "flooringBonus": 5},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Nightstalker Boots",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 6, "flooringBonus": 5},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Merciless Nightstalker Vest",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+              {"item": "Copper Ingot", "quantity": 8, "flooringBonus": 6},
+              {"item": "Nightstalker Vest", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Merciless Nightstalker Leggings",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+              {"item": "Copper Ingot", "quantity": 8, "flooringBonus": 6},
+              {"item": "Nightstalker Leggings", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Merciless Nightstalker Gloves",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+              {"item": "Copper Ingot", "quantity": 8, "flooringBonus": 6},
+              {"item": "Nightstalker Gloves", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Merciless Nightstalker Boots",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+              {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+              {"item": "Copper Ingot", "quantity": 8, "flooringBonus": 6},
+              {"item": "Nightstalker Boots", "quantity": 1}
+            ]
+          },          
+          {
+            "item": "Traveller's Wrap",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Immortal King's Drape",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Razer Serpent Wrap",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Chemical Soaked Drape",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+              {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+            ]
+          },
+          {
+            "item": "Blood Rose Ring",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Bone Ring", "quantity": 1},
+              {"item": "Plant Fibre", "quantity": 64, "flooringBonus": 48},
+              {"item": "Blood Rose", "quantity": 32, "flooringBonus": 24}
+            ]
+          },
+          {
+            "item": "Gravedigger Ring",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Grave Dust", "quantity": 12, "flooringBonus": 9},
+              {"item": "Mourning Lily", "quantity": 32, "flooringBonus": 24}
+            ]
+          },
+          {
+            "item": "Ring of the Dawnrunner",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Crude Emerald", "quantity": 4, "flooringBonus": 3},
+              {"item": "Greater Blood Essence", "quantity": 1},
+              {"item": "Gravedigger Ring", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Ring of the Warlock",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Crude Sapphire", "quantity": 4, "flooringBonus": 3},
+              {"item": "Greater Blood Essence", "quantity": 1},
+              {"item": "Gravedigger Ring", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Ring of the Duskwatcher",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Crude Topaz", "quantity": 4, "flooringBonus": 3},
+              {"item": "Greater Blood Essence", "quantity": 1},
+              {"item": "Gravedigger Ring", "quantity": 1}
+            ]
+          },
+          {
+            "item": "Ring of the Spellweaver",
+            "quantityProduced": 1,
+            "ingredients": [
+              {"item": "Crude Miststone", "quantity": 4, "flooringBonus": 3},
+              {"item": "Greater Blood Essence", "quantity": 1},
+              {"item": "Gravedigger Ring", "quantity": 1}
+            ]
+          }
+            ]
+        },
+        "Tailoring Bench" : {
+            "items": [
+                {
+                    "item": "Traveller's Wrap",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Immortal King's Drape",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Razer Serpent Wrap",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Chemical Soaked Drape",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cloth", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                {
+                    "item": "Hunter's Cloak",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Immortal King's Cloak",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Razer Serpent Cloak",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Chemical Soak Cloak",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Phantom's Veil",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Spectral Dust", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Immortal King's Mantle",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Spectral Dust", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Razer Serpent Mantle",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Spectral Dust", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Chemical Soaked Regalia",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Spectral Dust", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Shroud of the Forest",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Hide", "quantity": 200, "flooringBonus": 150},
+                      {"item": "Plant Fibre", "quantity": 200, "flooringBonus": 150},
+                      {"item": "Ghost Shroom", "quantity": 20, "flooringBonus": 15}
+                    ]
+                  },
+                  {
+                    "item": "Hollowfang Chestguard",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Wool Thread", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Hollowfang Leggings",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Wool Thread", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Hollowfang Gloves",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Wool Thread", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Hollowfang Boots",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Cotton Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Wool Thread", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Merciless Hollowfang Vest",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Thick Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Hollowfang Chestguard", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Merciless Hollowfang Leggings",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Thick Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Hollowfang Leggings", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Merciless Hollowfang Gloves",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Thick Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Hollowfang Gloves", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Merciless Hollowfang Boots",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Thick Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Hollowfang Boots", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Dawnthorn Chestguard",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Dawnthorn Leggings",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Dawnthorn Gloves",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Dawnthorn Boots",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Silk", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Bloodmoon Chestguard",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Ghost Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Primal Blood Essence", "quantity": 1},
+                      {"item": "Dawnthorn Chestguard", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Bloodmoon Leggings",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Ghost Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Primal Blood Essence", "quantity": 1},
+                      {"item": "Dawnthorn Leggings", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Bloodmoon Gloves",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Ghost Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Primal Blood Essence", "quantity": 1},
+                      {"item": "Dawnthorn Gloves", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Bloodmoon Boots",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Ghost Yarn", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Primal Blood Essence", "quantity": 1},
+                      {"item": "Dawnthorn Boots", "quantity": 1}
+                    ]
+                  }
+            ]
+        },
+        "Artisan Table": {
+            "items":[
+                {
+                    "item": "Bone Ring",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Bone", "quantity": 32, "flooringBonus": 24}
+                    ]
+                  },
+                {
+                    "item": "Blood Rose Ring",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Bone Ring", "quantity": 1},
+                      {"item": "Plant Fibre", "quantity": 64, "flooringBonus": 48},
+                      {"item": "Blood Rose", "quantity": 32, "flooringBonus": 24}
+                    ]
+                  },
+                  {
+                    "item": "Gravedigger Ring",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Grave Dust", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Mourning Lily", "quantity": 32, "flooringBonus": 24}
+                    ]
+                  },
+                  {
+                    "item": "Ring of the Dawnrunner",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Emerald", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Greater Blood Essence", "quantity": 1},
+                      {"item": "Gravedigger Ring", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Ring of the Warlock",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Sapphire", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Greater Blood Essence", "quantity": 1},
+                      {"item": "Gravedigger Ring", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Ring of the Duskwatcher",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Topaz", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Greater Blood Essence", "quantity": 1},
+                      {"item": "Gravedigger Ring", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Ring of the Spellweaver",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Miststone", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Greater Blood Essence", "quantity": 1},
+                      {"item": "Gravedigger Ring", "quantity": 1}
+                    ]
+                  },
+                {
+                    "item": "Scouragestone Pendant",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Scouragestone", "quantity": 12, "flooringBonus": 9},
+                      {"item": "Gem Dust", "quantity": 16, "flooringBonus": 12}
+                    ]
+                  },
+                  {
+                    "item": "Pendant of the Warlock",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Scouragestone Pendant", "quantity": 1},
+                      {"item": "Regular Sapphire", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Pendant of the Sorceror",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Scouragestone Pendant", "quantity": 1},
+                      {"item": "Regular Amethyst", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Pendant of the Knight",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Scouragestone Pendant", "quantity": 1},
+                      {"item": "Regular Ruby", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Pendant of the Duskwatcher",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Scouragestone Pendant", "quantity": 1},
+                      {"item": "Regular Topaz", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Pendant of the Dawnrunner",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Scouragestone Pendant", "quantity": 1},
+                      {"item": "Regular Emerald", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Pendant of the Spellweaver",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Scouragestone Pendant", "quantity": 1},
+                      {"item": "Regular Miststone", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Blood Merlot Amulet",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Merlot", "quantity": 1},
+                      {"item": "Dark Silver Ingot", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Radium Alloy", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Amulet of the Arch-Warlock",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Merlot Amulet", "quantity": 1},
+                      {"item": "Flawless Sapphire", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Power Core", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Amulet of the Wicket Prophet",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Merlot Amulet", "quantity": 1},
+                      {"item": "Flawless Amethyst", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Power Core", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Amulet of the Crimson Commander",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Merlot Amulet", "quantity": 1},
+                      {"item": "Flawless Ruby", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Power Core", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Amulet of the Blademaster",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Merlot Amulet", "quantity": 1},
+                      {"item": "Flawless Topaz", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Power Core", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Amulet of the Unyielding Charger",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Merlot Amulet", "quantity": 1},
+                      {"item": "Flawless Emerald", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Power Core", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Amulet of the Master Spellweaver",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Merlot Amulet", "quantity": 1},
+                      {"item": "Flawless Miststone", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Power Core", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Blood Key",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Flawless Ruby", "quantity": 1},
+                      {"item": "Onyx Tear", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Primal Blood Essence", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  }
+            ]
+        },
+        "Gem Cutting Table": {
+            "items":[
+                {
+                    "item": "Regular Ruby",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Ruby", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Flawless Ruby",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Ruby", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Regular Sapphire",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Sapphire", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Flawless Sapphire",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Sapphire", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Regular Emerald",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Emerald", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Flawless Emerald",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Emerald", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Regular Topaz",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Topaz", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Flawless Topaz",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Topaz", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Regular Miststone",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Miststone", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Flawless Miststone",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Miststone", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Regular Amethyst",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Crude Amethyst", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Flawless Amethyst",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Amethyst", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  }                  
+            ]
+        },
+        "Woodworking Bench":{
+            "items":[
+                {
+                    "item": "Painting Frame",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Plank", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Sculptured Wood",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Plank", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Fishing Pole",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Plank", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Copper Ingot", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Barrel Disguise",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Reinforced Plank", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  }
+                  
+            ]
+        },
+        "Leatherworking Station":{
+            "items":[
+                {
+                    "item": "Vampire Horse Saddle",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Plague Chemist's Saddle",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Small Gem Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Gem Dust", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Small Herb Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Blood Rose", "quantity": 20, "flooringBonus": 15}
+                    ]
+                  },
+                  {
+                    "item": "Small Research Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Paper", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Small Coin Purse",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Leather", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Coarse Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Copper Coin", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Medium Gem Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Wool Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Gem Dust", "quantity": 32, "flooringBonus": 24}
+                    ]
+                  },
+                  {
+                    "item": "Medium Herb Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Wool Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Sunflower", "quantity": 32, "flooringBonus": 24}
+                    ]
+                  },
+                  {
+                    "item": "Medium Research Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Wool Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Scroll", "quantity": 8, "flooringBonus": 6}
+                    ]
+                  },
+                  {
+                    "item": "Medium Coin Purse",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Wool Thread", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Silver Coin", "quantity": 24, "flooringBonus": 18}
+                    ]
+                  },
+                  {
+                    "item": "Large Gem Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Radium Alloy", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Gem Dust", "quantity": 160, "flooringBonus": 120}
+                    ]
+                  },
+                  {
+                    "item": "Large Herb Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Radium Alloy", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Sacred Grapes", "quantity": 90, "flooringBonus": 68}
+                    ]
+                  },
+                  {
+                    "item": "Large Research Bag",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Radium Alloy", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Schematic", "quantity": 12, "flooringBonus": 9}
+                    ]
+                  },
+                  {
+                    "item": "Large Coin Purse",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Pristine Leather", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Radium Alloy", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Goldsun Coin", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  }
+            ]
+        },
+        "Jewelcrafting Table":{
+            "items":[
+                {
+                    "item": "Blood Jewel Tier 2",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Ruby", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Chaos Jewel Tier 2",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Amethyst", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Unholy Jewel Tier 2",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Emerald", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Illusion Jewel Tier 2",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Miststone", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Frost Jewel Tier 2",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Sapphire", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Storm Jewel Tier 2",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Regular Topaz", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Iron Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Blood Jewel Tier 3",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Flawless Ruby", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Dark Silver Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Chaos Jewel Tier 3",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Flawless Amethyst", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Dark Silver Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Unholy Jewel Tier 3",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Flawless Emerald", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Dark Silver Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Illusion Jewel Tier 3",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Flawless Miststone", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Dark Silver Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Frost Jewel Tier 3",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Flawless Sapphire", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Dark Silver Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Storm Jewel Tier 3",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Flawless Topaz", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Dark Silver Ingot", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  }                  
+            ]
+        },
+        "Alchemy Table":{
+            "items":[
+                {
+                    "item": "Empty Waterskin",
+                    "recipes": [
+                      {
+                        "ingredients": [
+                          {"item": "Plant Fibre", "quantity": 40, "flooringBonus": 30},
+                          {"item": "Leather", "quantity": 16, "flooringBonus": 12}
+                        ],
+                        "quantityProduced": 5
+                      },
+                      {
+                        "ingredients": [
+                          {"item": "Plant Fibre", "quantity": 40, "flooringBonus": 30},
+                          {"item": "Thick Leather", "quantity": 8, "flooringBonus": 6}
+                        ],
+                        "quantityProduced": 5
+                      }
+                    ]
+                  },
+                  {
+                    "item": "Empty Glass Bottle",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Glass", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Vermin Salve",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Rat", "quantity": 1},
+                      {"item": "Plant Fibre", "quantity": 60, "flooringBonus": 45},
+                      {"item": "Bone", "quantity": 20, "flooringBonus": 15}
+                    ]
+                  },
+                  {
+                    "item": "Blood Rose Brew",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Rose", "quantity": 40, "flooringBonus": 30},
+                      {"item": "Filled Waterskin", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Blood Rose Potion",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Blood Rose", "quantity": 60, "flooringBonus": 45},
+                      {"item": "Water-Filled Bottle", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Irradiant Gruel",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Plague Briar", "quantity": 20, "flooringBonus": 15},
+                      {"item": "Mutant Grease", "quantity": 20, "flooringBonus": 15}
+                    ]
+                  },
+                  {
+                    "item": "Brew of Ferocity",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Hell's Clarion", "quantity": 30, "flooringBonus": 23},
+                      {"item": "Fish Bone", "quantity": 1},
+                      {"item": "Filled Waterskin", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Potion of Rage",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Fierce Stinger", "quantity": 1},
+                      {"item": "Hell's Clarion", "quantity": 90, "flooringBonus": 68},
+                      {"item": "Water-Filled Bottle", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Enchanted Brew",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Snow Flower", "quantity": 30, "flooringBonus": 23},
+                      {"item": "Fish Bone", "quantity": 1},
+                      {"item": "Filled Waterskin", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Witch Potion",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Swamp Dweller", "quantity": 1},
+                      {"item": "Snow Flower", "quantity": 90, "flooringBonus": 68},
+                      {"item": "Water-Filled Bottle", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Wrangler's Potion",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Fire Blossom", "quantity": 60, "flooringBonus": 45},
+                      {"item": "Water-Filled Bottle", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Minor Sun Resistance Brew",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Mourning Lily", "quantity": 20, "flooringBonus": 15},
+                      {"item": "Blood Rose", "quantity": 20, "flooringBonus": 15},
+                      {"item": "Filled Waterskin", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Fire Resistance Brew",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Fire Blossom", "quantity": 40, "flooringBonus": 30},
+                      {"item": "Oil", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Filled Waterskin", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Silver Resistance Brew",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Snow Flower", "quantity": 30, "flooringBonus": 23},
+                      {"item": "Filled Waterskin", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Silver Resistance Potion",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Plague Briar", "quantity": 40, "flooringBonus": 30},
+                      {"item": "Water-Filled Bottle", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Holy Resistance Potion",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Sunflower", "quantity": 60, "flooringBonus": 45},
+                      {"item": "Grave Dust", "quantity": 1},
+                      {"item": "Water-Filled Bottle", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Holy Resistance Flask",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Holy Resistance Potion", "quantity": 1},
+                      {"item": "Sacred Grapes", "quantity": 60, "flooringBonus": 45}
+                    ]
+                  },
+                  {
+                    "item": "Minor Garlic Resistance Brew",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Hell's Clarion", "quantity": 20, "flooringBonus": 15},
+                      {"item": "Rat", "quantity": 1},
+                      {"item": "Filled Waterskin", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Garlic Resistance Potion",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Hell's Clarion", "quantity": 20, "flooringBonus": 15},
+                      {"item": "Rat", "quantity": 1},
+                      {"item": "Water-Filled Bottle", "quantity": 1}
+                    ]
+                  },
+                  {
+                    "item": "Dusk Caller",
+                    "quantityProduced": 5,
+                    "ingredients": [
+                      {"item": "Scouragestone", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Hell's Clarion", "quantity": 60, "flooringBonus": 45}
+                    ]
+                  },
+                  {
+                    "item": "Minor Explosive Box",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Sulphur", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Plank", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Whetstone", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  },
+                  {
+                    "item": "Major Explosive Box",
+                    "quantityProduced": 1,
+                    "ingredients": [
+                      {"item": "Reinforced Plank", "quantity": 8, "flooringBonus": 6},
+                      {"item": "Sulphur", "quantity": 4, "flooringBonus": 3},
+                      {"item": "Radium Alloy", "quantity": 4, "flooringBonus": 3}
+                    ]
+                  }                    
+            ]
+        }
+    },
+
+    "flooringBonus": {
+      "Forge Flooring": 0.25
+    }
+  }
+}
+  

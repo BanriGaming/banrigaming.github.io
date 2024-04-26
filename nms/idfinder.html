@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSV Processing</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+  <input type="file" id="file-input" />
+  <div id="output"></div>
+
+  <script>
+    document.getElementById('file-input').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(event) {
+        var csvData = event.target.result;
+        
+        Papa.parse(csvData, {
+          header: true,
+          complete: function(results) {
+            processData(results.data);
+          }
+        });
+      };
+
+      reader.readAsText(file);
+    });
+
+    function processData(data) {
+      var maxCombinedStats = -Infinity;
+      var maxItems = [];
+
+      data.forEach(row => {
+        //var cooldown = parseFloat(row['Weapon_Projectile_BurstCooldown']);
+        //var damage = parseFloat(row['Weapon_Projectile_Damage']);
+        //var rate = parseFloat(row['Weapon_Projectile_Rate']);
+        //var reloadTime = parseFloat(row['Weapon_Projectile_ReloadTime']);
+        //var laserchargetime = parseFloat(row['Weapon_Laser_ChargeTime']);
+        //var laserdamage = parseFloat(row['Weapon_Laser_Damage']);
+        var laserdrain = parseFloat(row['Weapon_Laser_Drain']);
+        var laserheat = parseFloat(row['Weapon_Laser_HeatTime']);
+        var lasermining = parseFloat(row['Weapon_Laser_Mining_Speed']);
+        var laserreload = parseFloat(row['Weapon_Laser_ReloadTime']);
+        var itemId = row['Seed'];
+
+        // Define the maximum possible values for each stat
+        // var maxCooldown = 25; // Replace with the actual maximum roll for Cooldown
+        //var maxDamage = 4; // Replace with the actual maximum roll for Damage
+        //var maxRate = 20; // Replace with the actual maximum roll for Rate
+        //var maxReloadTime = 15; // Replace with the actual maximum roll for Reload Time
+        //var maxChargeTime = 85; // Replace with the actual maximum roll for Charge Time
+        //var maxLaserDamage = 25; // Replace with the actual maximum roll for Laser Damage
+
+        // Mining Laser Module
+        var maxLaserDrain = 26; // Replace with the actual maximum roll for Laser Drain
+        var maxLaserHeat = 55; // Replace with the actual maximum roll for Laser Heat
+        var maxLaserMining = 20; // Replace with the actual maximum roll for Laser Mining
+        var maxLaserReload = 25; // Replace with the actual maximum roll for Rate
+
+
+        // Calculate combined stats, considering proximity to the maximum roll for each stat
+        var combinedStats = (
+          //(cooldown / maxCooldown) +
+          //(damage / maxDamage) +
+          //(rate / maxRate) +
+          //(reloadTime / maxReloadTime)
+          //(laserchargetime / maxChargeTime) +
+          //(laserdamage / maxLaserDamage)
+          (laserdrain / maxLaserDrain) +
+          (laserheat / maxLaserHeat) +
+          (lasermining / maxLaserMining) +
+          (laserreload / maxLaserReload) 
+        );
+
+        if (combinedStats > maxCombinedStats) {
+          maxCombinedStats = combinedStats;
+          maxItems = [row];
+        } else if (combinedStats === maxCombinedStats) {
+          maxItems.push(row);
+        }
+      });
+
+      var output = document.getElementById('output');
+      if (maxItems.length > 0) {
+        output.innerHTML = `
+          <p>Combined Stats (Closest to Maximum Possible): ${maxCombinedStats}</p>
+          <p>Item ID(s) with Highest Possible Stats:</p>
+          <p>Maximum Projectile Burst Cooldown: ${maxItems[0]['Weapon_Projectile_BurstCooldown']}</p>
+          <p>Maximum Projectile Damage: ${maxItems[0]['Weapon_Projectile_Damage']}</p>
+          <p>Maximum Projectile Rate: ${maxItems[0]['Weapon_Projectile_Rate']}</p>
+          <p>Maximum Projectile Reload Time: ${maxItems[0]['Weapon_Projectile_ReloadTime']}</p>
+          <p>Maximum Projectile Reload Time: ${maxItems[0]['Weapon_Laser_ChargeTime']}</p>
+          <p>Maximum Projectile Reload Time: ${maxItems[0]['Weapon_Laser_Damage']}</p>
+          <p>Maximum Projectile Reload Time: ${maxItems[0]['Weapon_Laser_Drain']}</p>
+          <p>Maximum Projectile Reload Time: ${maxItems[0]['Weapon_Laser_HeatTime']}</p>
+          <p>Maximum Projectile Reload Time: ${maxItems[0]['Weapon_Laser_Mining_Speed']}</p>
+          <p>Maximum Projectile Reload Time: ${maxItems[0]['Weapon_Laser_ReloadTime']}</p>
+          <p>Item ID(s) with Maximum Stats:</p>
+          <ul>
+            ${maxItems.map(item => `<li>${item['Seed']}</li>`).join('')}
+          </ul>
+          <!-- Add other required output based on max stats -->
+        `;
+      } else {
+        output.innerHTML = 'No data found or missing required fields.';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -866,3 +866,9 @@ iframe{
 .card{
   box-shadow: rgba(255, 255, 255, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.1) 0px 30px 60px -30px;
 }
+
+/* No Man Sky Code */
+.glyph img{
+  max-width: 100px;
+  height: auto;
+}
