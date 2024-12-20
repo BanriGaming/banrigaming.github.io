@@ -283,6 +283,8 @@ font-size: 1.3rem;
     border-radius: 6px 0 6px 6px;
 }
 
+.navbar-brand{color: white}
+
 .navbar-nav li:hover > ul.dropdown-menu {
   display: block;
   border: 1px solid gray;
