@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link  rel="stylesheet" href="./././assets/css/main.css"   ></link>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+    <script src="./././assets/js/nav.js"></script>
+    <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--<script data-main="script/main.js" src="assets/js/require.js"></script>
+    <script src="assets/js/xiv.js"></script>-->
+    <style>
+    span {
+        color: white !important;
+        }
+    </style>
+</head>
+<body class="gradient-border">
+    <div w3-include-html="nav.html"></div> 
+    <div class="banner">
+        <div class="hero-text">
+        <h1>Welcome to Banri Gaming</h1>
+        </div>
+    </div>
+ 
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+        <h2>Current & Latest Stream</h2>
+    <div id="twitch-embed"></div>
+    <script type="text/javascript">
+      var options = {
+        channel: "banrigaming",
+        layout: "video",
+        autoplay: false,
+        parent: ["banrigaming.github.io"]
+      };
+      var player = new Twitch.Player("twitch-embed", options);
+      player.setVolume(0.5);
+    </script>
+    </div>
+    <!--<div id="medalData" class="col-sm-12 col-md-6 col-lg-6">
+        <h2>Latest Medal Clip</h2>
+        <script>
+            // Function to make AJAX request
+            function fetchMedalData() {
+                var xhr = new XMLHttpRequest();
+                var url = "https://developers.medal.tv/v1/latest?userId=BanriGaming&categoryId=10&limit=2";
+                xhr.open("GET", url, true);
+                xhr.setRequestHeader("Authorization", "pub_VlOe6Z11T0bChWpM8wrX7TITvTfaLbxl");
+    
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        displayMedalData(response);
+                    }
+                };
+    
+                xhr.send();
+            }
+    
+            // Function to display data on the webpage
+            function displayMedalData(data) {
+                var medalDataDiv = document.getElementById("medalData");
+                var output = "<h2>Latest Medal.tv Data</h2>";
+                output += "<ul>";
+                data.forEach(function (item) {
+                    output += "<li>Title: " + item.title + ", Category: " + item.category + "</li>";
+                });
+                output += "</ul>";
+                medalDataDiv.innerHTML = output;
+            }
+    
+            // Call the function to fetch data when the page loads
+            window.onload = fetchMedalData;
+        </script>
+    </div>-->
+    
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <h2>Latest YouTube Video</h2>
+        <iframe class="latestVideoEmbed" vnum='0' cid="UCjvlUOoPLVplygreKqj4LYA" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+    </div>
+<!--    <div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <iframe src="https://discord.com/widget?id=287291770356760587&theme=dark"  allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" &username=""></iframe>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <iframe src="https://discord.com/widget?id=765819077930909736&theme=dark"  allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" &username=""></iframe>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <iframe src="https://discord.com/widget?id=677975606020800545&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" &username=""></iframe>
+            </div>
+        </div>
+    </div>-->
+    
+    <script>
+    var reqURL = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://www.youtube.com/feeds/videos.xml?channel_id=");
+
+        function loadVideo(iframe) {
+        $.getJSON(reqURL + iframe.getAttribute('cid'),
+            function(data) {
+            var videoNumber = (iframe.getAttribute('vnum') ? Number(iframe.getAttribute('vnum')) : 0);
+            console.log(videoNumber);
+            var link = data.items[videoNumber].link;
+            id = link.substr(link.indexOf("=") + 1);
+            iframe.setAttribute("src", "https://youtube.com/embed/" + id + "?controls=0&autoplay=0");
+            }
+        );
+        }
+        var iframes = document.getElementsByClassName('latestVideoEmbed');
+        for (var i = 0, len = iframes.length; i < len; i++) {
+        loadVideo(iframes[i]);
+        }
+    </script>
+    <script>includeHTML();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
