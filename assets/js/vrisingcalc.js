@@ -1,42 +1,61 @@
-$(document).ready(function() {
-    // Initialize an empty array to store the added items
-    var itemList = [];
-
-    // Function to add item to the list
-    function addItemToList(itemName, quantity) {
-        // Check if the item already exists in the list
-        var existingItem = itemList.find(item => item.name === itemName);
-        if (existingItem) {
-            // If item exists, update its quantity
-            existingItem.quantity += quantity;
-        } else {
-            // If item doesn't exist, add it to the list
-            itemList.push({ name: itemName, quantity: quantity });
+// Function to fetch item data from JSON file
+function fetchItemData() {
+    // Fetch the JSON file
+    fetch('https://banrigaming.github.io/assets/json/vrisingcalc.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-        // Refresh the displayed list
-        displayItemList();
-    }
+        return response.json();
+      })
+      .then(data => {
+        console.log('JSON data:', data); // Add this line for logging
+        // Call function to populate search options
+        populateSearchOptions(data);
+      })
+      .catch(error => {
+        console.error('There was a problem fetching the item data:', error);
+      });
+}
 
-    // Function to display the list of added items
-    function displayItemList() {
-        // Get the element where the item list will be displayed
-        var itemListElement = $("#itemList");
-        // Clear the existing content
-        itemListElement.empty();
-        // Loop through the itemList array and add each item to the displayed list
-        itemList.forEach(function(item) {
-            var itemHtml = `<div class="item">${item.name}: ${item.quantity}</div>`;
-            itemListElement.append(itemHtml);
+// Function to populate search options with item names
+function populateSearchOptions(data) {
+    const searchInput = document.getElementById('searchInput');
+    const searchDropdown = document.getElementById('searchDropdown');
+
+    // Add event listener to search input for input changes
+    searchInput.addEventListener('input', function(event) {
+        const searchTerm = event.target.value.toLowerCase();
+
+        // Clear existing dropdown items
+        searchDropdown.innerHTML = '';
+
+        // Loop through each crafting table and its items
+        Object.values(data.craftingTables).forEach(craftingTable => {
+            Object.values(craftingTable).forEach(itemGroup => {
+                if (itemGroup.items) {
+                    itemGroup.items.forEach(item => {
+                        if (item.item.toLowerCase().includes(searchTerm)) {
+                            const dropdownItem = document.createElement('li');
+                            dropdownItem.classList.add('dropdown-item');
+                            dropdownItem.textContent = item.item;
+                            dropdownItem.addEventListener('click', () => {
+                                searchInput.value = item.item;
+                            });
+                            searchDropdown.appendChild(dropdownItem);
+                        }
+                    });
+                }
+            });
         });
-    }
-
-    // Event listener for the "Add to List" button
-    $("#addItemButton").click(function() {
-        // Get the item name from the search input
-        var itemName = $("#searchInput").val();
-        // Get the quantity from the user input (you may need to add an input field for quantity)
-        var quantity = 1; // For now, let's assume quantity is always 1
-        // Add the item to the list
-        addItemToList(itemName, quantity);
     });
-});
+}
+
+function openQuantityModal(item) {
+    // Open modal for specifying quantity
+    console.log('Opening modal for:', item);
+    // Here you can implement your logic to open the modal and handle quantity selection
+}
+
+// Fetch item data when the page loads
+window.addEventListener('load', fetchItemData);

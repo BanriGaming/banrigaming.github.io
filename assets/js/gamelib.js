@@ -16,6 +16,12 @@ $(document).ready(function() {
             // Add more properties for each game as needed
         },
         {
+            title: "No Man's Sky",
+            description: "All No Man's Sky related content",
+            tags: ["NMS",],
+            link: "/landing-pages/nms"
+        },
+        {
             title: "Starfield",
             description: "A collection of Game Tools and Trackers for Starfield.",
             tags: ["Sf",],
@@ -54,7 +60,7 @@ $(document).ready(function() {
         {
             title: "Valheim",
             description: "All Valheim related content",
-            tags: ["VS",],
+            tags: ["Vl",],
             link: "/landing-pages/valheim"
         }
         // Add other game objects in a similar format

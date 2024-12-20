@@ -29,19 +29,41 @@
     </nav>
     <hr>
     <main>
-        <section id="search">
-            <input type="text" id="searchInput" placeholder="Search for an item...">
-            <button id="addItemButton">Add to List</button>
+        <section id="search" class="position-relative">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search for an item...">
+            <div id="searchDropdown" class="dropdown-menu" aria-labelledby="searchInput"></div>
+            <button id="addItemButton" class="btn btn-primary mt-2">Add to List</button>
         </section>
-
+        <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="quantityModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="quantityModalLabel">Specify Quantity</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Add input field for quantity -->
+                  <input type="number" id="quantityInput" class="form-control" placeholder="Enter quantity...">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="confirmQuantityBtn">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    
         <section id="itemList">
             <!-- List of added items will be displayed here -->
         </section>
-
+    
         <section id="materials">
             <!-- Breakdown of materials needed will be displayed here -->
         </section>
     </main>
+    
+    
     <script>includeHTML();</script>
     <script src="../assets/js/vrisingcalc.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

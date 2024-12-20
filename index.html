@@ -42,6 +42,43 @@
       player.setVolume(0.5);
     </script>
     </div>
+    <!--<div id="medalData" class="col-sm-12 col-md-6 col-lg-6">
+        <h2>Latest Medal Clip</h2>
+        <script>
+            // Function to make AJAX request
+            function fetchMedalData() {
+                var xhr = new XMLHttpRequest();
+                var url = "https://developers.medal.tv/v1/latest?userId=BanriGaming&categoryId=10&limit=2";
+                xhr.open("GET", url, true);
+                xhr.setRequestHeader("Authorization", "pub_VlOe6Z11T0bChWpM8wrX7TITvTfaLbxl");
+    
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        displayMedalData(response);
+                    }
+                };
+    
+                xhr.send();
+            }
+    
+            // Function to display data on the webpage
+            function displayMedalData(data) {
+                var medalDataDiv = document.getElementById("medalData");
+                var output = "<h2>Latest Medal.tv Data</h2>";
+                output += "<ul>";
+                data.forEach(function (item) {
+                    output += "<li>Title: " + item.title + ", Category: " + item.category + "</li>";
+                });
+                output += "</ul>";
+                medalDataDiv.innerHTML = output;
+            }
+    
+            // Call the function to fetch data when the page loads
+            window.onload = fetchMedalData;
+        </script>
+    </div>-->
+    
     <div class="col-sm-12 col-md-6 col-lg-6">
         <h2>Latest YouTube Video</h2>
         <iframe class="latestVideoEmbed" vnum='0' cid="UCjvlUOoPLVplygreKqj4LYA" width="600" height="340" frameborder="0" allowfullscreen></iframe>

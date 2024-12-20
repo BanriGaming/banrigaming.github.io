@@ -1,0 +1,895 @@
+html {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background-image: url(../img/nms/terminusbg.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    min-height: 100%;
+    font-family: roboto;
+    font-weight: 300;
+  }
+  .bg-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1;
+  }
+  .content {
+    display: block;
+    width: 100%;
+  }
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 13px;
+    font-family: roboto;
+    padding: 5px;
+  }
+  .author a {
+    text-decoration: none;
+    color: #fff;
+  }
+  .title {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0 5px;
+    background-color: #1a4148;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'GeoNMS';
+    font-size: 27px;
+    letter-spacing: 2px;
+  }
+  .title i {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #333;
+    vertical-align: middle;
+    flex-shrink: 0;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .title span {
+    display: flex;
+    width: 100%;
+    line-height: 30px;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .version {
+    position: absolute;
+    right: 10px;
+    top: 32px;
+    font-family: roboto;
+    font-weight: 100;
+    font-size: 10px;
+  }
+  .description {
+    display: block;
+    background: #171a1d; /*Old: 0f1413*/
+    color: #fff;
+    font-family: roboto;
+    font-size: 12px;
+    padding: 0px 15px 5px;
+    text-align: center;
+    font-weight: 100;
+  }
+  
+  .sharecoords {
+    text-align: center;
+  }
+  .loadcoords {
+    text-align: center;
+  }
+  .glyphs {
+    display: block;
+    margin: 4px auto 4px;
+    height: 28px;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+  }
+  .result {
+    display: flex;
+    height: calc(100vw - 92.185vw);
+    letter-spacing: 4px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    max-height: 70px;
+  }
+  .result i {
+    display: flex;
+    position: relative;
+    width: calc(100vw - 92.81vw);
+    height: calc(100vw - 92.81vw);
+    margin: 1px;
+    flex-shrink: 0;
+    border: none;
+    image-rendering: -webkit-optimize-contrast;
+    background: transparent;
+    max-width: 70px;
+    max-height: 70px;
+    /*background: radial-gradient(#8ed3c8, #224945);*/
+  }
+  .result i:before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center, center;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .titletext, .clearglyphs, .clickedglyphs, .clearglyphsurl ,.deleteOne {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'GeoNMS';
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  .titletext {
+    width: 100%;
+    margin: 0;
+    padding: 5px 0;
+    background-color: #171a1d; /*Old: 0f1413*/
+    color: #fff;
+  }
+  .deleteOne, .clearglyphs {
+    cursor: pointer;
+  }
+  .glyphsblock {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0px;
+    width: 100%;
+    height: 40px;
+    user-select: none;
+  }
+  
+  .glyphsblock i {
+    display: inline-block;
+    background: radial-gradient(#3A3A3A, #232323); /*Old: (#8ed3c8, #224945);*/
+    position: relative;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #fff;
+    margin: 0px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all ease 0.1s;
+  }
+  .glyphsblock i:before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center, center;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .glyphsblock i:active {
+    transform: translateY(2px);
+  }
+  .clickedglyphs {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 4px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: roboto;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0 60px; /*Original: 40*/
+    width: 320px; /*Original: 220*/
+  }
+  .gaTitleblock,.gacodeTitleblock, .linktoglyph {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'GeoNMS';
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    padding: 5px 0 2px;
+    line-height: 25px;
+    height: 25px;
+  }
+  .portalGlyphBox {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 4px 40px 4px;
+    height: 30px;
+  }
+  .portalCodeBox {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    height: 90px;
+    padding: 4px 0px 4px;
+  }
+  
+  .portalTitle {
+    display: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'GeoNMS';
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    padding: 5px 0 2px;
+    line-height: 25px;
+    height: 25px;
+  }
+  .deleteglyphs, .clearglyphs,.gaTitleblock .gaTitle, .gaTitleCode, .linkTitle, #copybtn, #copybtncode, .clearglyphsurl, .clearga, #copygaaddressLink {display: none;}
+  
+  .galacticAddress {
+    display: flex;
+    text-transform: uppercase;
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+  }
+  .galacticAddressCode {
+    display: flex;
+    text-transform: uppercase;
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+  }
+  .glyphscheck {
+    display: flex;
+    height: calc(100vw - 92.185vw);
+    letter-spacing: 4px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 10px 0 10px;
+    max-height: 50px;
+  }
+  .glyphscheck i {
+    display: flex;
+    position: relative;
+    width: calc(100vw - 92.81vw);
+    height: calc(100vw - 92.81vw);
+    margin: 1px;
+    flex-shrink: 0;
+    border: none;
+    image-rendering: -webkit-optimize-contrast;
+    background: transparent;
+    max-width: 50px;
+    max-height: 50px;
+    /*background: radial-gradient(#8ed3c8, #224945);*/
+  }
+  .glyphscheck i:before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center, center;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .galacticAddressBox {
+    display: inline-block;
+    padding: 3px 40px;
+  }
+  .galacticAddressCodeBox {
+    display: inline-block;
+    padding: 3px 40px;
+  }
+  .linkbuttons {
+    display: block;
+    text-align: center;
+  }
+  .cleardelbuttons {
+    display: block;
+    text-align: center;
+    height: 48px;
+  }
+  #glyphcode, #glyphlink, #galacticAddress, #galacticAddressCode, #gacoordstoglyphslink {
+    display: block;
+    opacity: 0;
+    position: absolute;
+    top: -500px;
+  }
+  .glyphlinkbox {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0px 0px 4px;
+    text-align: center;
+  }
+  .glyphlink, .gacoordstoglyphslink {
+    display: flex;
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 1px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+  }
+  #copygaaddress {
+    display: none;
+    margin: 5px 20px;
+    background: #3d7a96; /*Old Color: 346162 07DF:0020:0FF2:004D */
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: roboto;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  #copygaaddresscode {
+    display: none;
+    margin: 5px 20px;
+    background: #3d7a96; /*Old Color: 346162 07DF:0020:0FF2:004D */
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: roboto;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .portalError, .glyphsError {
+    display: none;
+    background: #bf0000;
+    color: #fff;
+    width: 310px;
+    padding: 5px;
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 12px;
+    margin: 0 auto 4px;
+  }
+  .errorsp {
+    display: inline-block;
+    width: 4px;
+    height: 14px;
+    background-color: #fff;
+    transform: skew(-20deg);
+    vertical-align: bottom;
+    margin: 0 8px 0 2px;
+  }
+  .errorsp:after {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 14px;
+    background-color: #fff;
+    margin-left: 6px;
+  }
+  .atlasmsgerror {
+    margin: 2px 0 0;
+  }
+  #copybtn, #copybtncode, #copygaaddressLink {
+    margin: 5px 20px;
+    background: #3d7a96; /*Old Color: 346162 07DF:0020:0FF2:004D */
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: roboto;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .clearglyphs, .clearglyphsurl, .clearga, .deleteglyphs {
+    margin: 5px 20px;
+    background: #3A3A3A; /*Old Color: 5d2e2e*/
+    border: none;
+    padding: 10px 20px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: roboto;
+    font-weight: 400;
+  }
+  .portalNumberBox {
+    text-align: center;
+    font-family: roboto;
+    font-size: 14px;
+    margin: 5px 0 0;
+  }
+  .portalNumber {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    height: 20px;
+    font-size: 15px;
+    padding: 0px;
+    text-align: center;
+    outline: none;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    color: #fff;
+    width: 50px;
+  }
+  .portalNumber option {
+    background:#000;
+    padding: 0px;
+    font-size: 13px;
+  }
+  .portalNumber:placeholder {color:#fff}
+  .portalNumberDesc {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 100;
+    background: #0f1413;
+    margin: 3px 0 0;
+  }
+  .gacoordsError {
+    display: none;
+    font-size: 14px;
+    font-weight: 100;
+    background: #bf0000;
+    color: #fff;
+    width: 160px;
+    margin: 0 auto;
+    padding: 3px;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  .wrongcoords {
+    margin-left: 5px;
+    font-weight: 400;
+  }
+  .gacoords {
+    display: block;
+    margin: 4px auto 4px;
+    height: 28px;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+    outline: none;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+  }
+  .gacoords:placeholder {color: #aeaeae;}
+  .gacoordstoglyphs {
+    display: flex;
+    text-transform: uppercase;
+    font-family: roboto;
+    font-weight: 100;
+    font-size: 20px;
+    letter-spacing: 2px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+  .portalglyphs {
+    display: flex;
+    height: calc(100vw - 92.185vw);
+    letter-spacing: 4px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    max-height: 70px;
+  }
+  .portalglyphs i {
+    display: flex;
+    position: relative;
+    width: calc(100vw - 92.81vw);
+    height: calc(100vw - 92.81vw);
+    margin: 1px;
+    flex-shrink: 0;
+    border: none;
+    image-rendering: -webkit-optimize-contrast;
+    background: transparent;
+    max-width: 70px;
+    max-height: 70px;
+    /*background: radial-gradient(#8ed3c8, #224945);*/
+  }
+  .portalglyphs i:before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center, center;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .clearbuttonbox {
+    display: inline-block;
+    position: relative;
+  }
+  .blackgd {
+    background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 20%, rgba(0,0,0,0.75) 80%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 20%,rgba(0,0,0,0.75) 80%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 20%,rgba(0,0,0,0.75) 80%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+  }
+  
+  .tabs-menu {
+    display: flex;
+    justify-content: space-between;
+    background: #272627;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .tabs-menu li {
+    margin: 0 auto;
+    display: flex;
+    background-color: #232323; /*Old: 203030*/
+    width: 100%;
+    justify-content: center;
+  }
+  .tabs-menu li i {
+    display: block;
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 56px;
+    margin: 0 auto;
+  }
+  
+  .tabs-menu li.current {
+    position: relative;
+    background-color: #3A3A3A; /*Old: 2b4849*/
+  }
+  .tabs-menu li.none {
+    display: none;
+  }
+  .tabs-menu li a {
+    font-family: 'Roboto', Microsoft YaHei;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    height: 40px;
+    display: flex;
+    text-transform: capitalize;
+    align-items: center;
+    white-space: normal;
+    justify-content: center;
+    padding: 5px 10px;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+  }
+  .tabs-menu .current a {
+    color: #fff;
+  }
+  .tabs-menu li span {
+    font-family: 'Roboto', Microsoft YaHei;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    height: 40px;
+    display: flex;
+    text-transform: capitalize;
+    align-items: center;
+    white-space: normal;
+    justify-content: center;
+    padding: 5px 10px;
+  }
+  
+  .tab {
+    width: 100%;
+    padding: 0;
+    color: #fff;
+  }
+  
+  .tab-content {
+    display: none;
+    margin: 0 auto;
+  }
+  #tab-1 {
+    display: block;
+  }
+  
+  /* MEDIA QUERIES */
+  @media screen and (max-width:320px){
+    .title {
+      font-size: 16px;
+      padding: 0;
+    }
+    .title i {
+      width: 36px;
+      height: 36px;
+      margin: 5px;
+    }
+    .title span {
+      font-size: 16px;
+      margin: 0 0 0 5px;
+      letter-spacing: 1px;
+    }
+    .titletext {
+      font-size: 16px;
+    }
+  }
+  @media screen and (max-width:359px){
+      .tabs-menu li a {
+        font-size: 12px;
+        line-height: 16px;
+        height: 30px;
+      }
+  }
+  @media screen and (min-width:320px) and (max-width:382px){
+    .title {
+      font-size: 16px;
+      padding: 0;
+    }
+    .title i {
+      width: 36px;
+      height: 36px;
+      margin: 5px;
+    }
+    .title span {
+      font-size: 16px;
+      margin: 0 0 0 5px;
+      letter-spacing: 1px;
+    }
+    .titletext {
+      font-size: 16px;
+    }
+    .version {
+    right: 11px;
+    top: 32px;
+    }
+  }
+  .copymsg {
+      display: none;
+      position: absolute;
+      width: 110px;
+      color: #346162;
+      background: #fff;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      border-radius: 0px;
+      font-size: 13px;
+      font-weight: 500;
+      top: 0px;
+  }
+  .copybtnportallink {
+      left: 20px;
+  }
+  .copybtnportalcode {
+      left: 45px;
+  }
+  .copybtngaaddress {
+      left: 69.5px;
+  }
+  .copybtngaportallink {
+      left: 20px;
+      width: 109px;
+  }
+  .relative {
+      position: relative;
+  }
+  .inline-block {
+      display: inline-block;
+  }
+  @media screen and (min-width:382px) {
+    .version {
+      right: 11px;
+      top: 55px;
+    }
+  }
+  @media screen and (min-width:320px) and (max-width:640px) {
+    .glyphsblock {
+      width: 320px;
+      height: 80px;
+    }
+  }
+  @media screen and (min-width:320px) and (max-width:540px){
+    .title {
+      font-size: 16px;
+      padding: 0;
+    }
+  }
+  @media screen and (min-width:630px){
+  
+  }
+  @media screen and (min-width:640px){
+    .glyphsblock {
+      display: block;
+      width: 420px;
+      height: 105px;
+    }
+    .glyphsblock i {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  @media screen and (min-width:832px){
+    .glyphsblock i {
+      width: 50px;
+      height: 50px;
+    }
+    .glyphsblock {
+      width: 100%;
+      height: 52px;
+    }
+  }
+  @media screen and (min-width:980px){
+    .glyphsblock i {
+      width: 58px;
+      height: 58px;
+    }
+    .glyphsblock {
+      height: 60px;
+    }
+  }
+  @media screen and (min-width:1160px){
+    .glyphsblock i {
+      width: 70px;
+      height: 70px;
+    }
+    .glyphsblock {
+      height: 74px;
+    }
+  }
+  .clicked:before {
+    animation-name: anim;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    background-color: #525252; /*Old: 224945*/
+  }
+  @keyframes anim {
+    to {
+      background-color: #232323; /*Old: 4f948d*/
+    }
+  }
+  @keyframes anim-half {
+    50% {
+      background-color: #3A3A3A; /*Old: 4f948d*/
+    }
+  }
+  .portal {
+    background-image: url(../img/nms/portal.png);
+  }
+  .glyph-A:before {
+    background-image: url(../img/nms/glyphs/a.png);
+  }
+  .glyph-B:before {
+    background-image: url(../img/nms/glyphs/b.png);
+  }
+  .glyph-C:before {
+    background-image: url(../img/nms/glyphs/c.png);
+  }
+  .glyph-D:before {
+    background-image: url(../img/nms/glyphs/d.png);
+  }
+  .glyph-E:before {
+    background-image: url(../img/nms/glyphs/e.png);
+  }
+  .glyph-F:before {
+    background-image: url(../img/nms/glyphs/f.png);
+  }
+  .glyph-0:before {
+    background-image: url(../img/nms/glyphs/0.png);
+  }
+  .glyph-1:before {
+    background-image: url(../img/nms/glyphs/1.png);
+  }
+  .glyph-2:before {
+    background-image: url(../img/nms/glyphs/2.png);
+  }
+  .glyph-3:before {
+    background-image: url(../img/nms/glyphs/3.png);
+  }
+  .glyph-4:before {
+    background-image: url(../img/nms/glyphs/4.png);
+  }
+  .glyph-5:before {
+    background-image: url(../img/nms/glyphs/5.png);
+  }
+  .glyph-6:before {
+    background-image: url(../img/nms/glyphs/6.png);
+  }
+  .glyph-7:before {
+    background-image: url(../img/nms/glyphs/7.png);
+  }
+  .glyph-8:before {
+    background-image: url(../img/nms/glyphs/8.png);
+  }
+  .glyph-9:before {
+    background-image: url("../img/nms/glyphs/9.png");
+  }
+  @font-face {
+  font-family: 'GeoNMS';
+  src: url('../fonts/geonms.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  }
+  @font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  }
+  @font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  }
+  @font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  }

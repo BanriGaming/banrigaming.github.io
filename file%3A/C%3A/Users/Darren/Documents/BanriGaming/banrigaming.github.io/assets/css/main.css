@@ -360,7 +360,7 @@ a.dropdown-item:hover,a.dropdown-item:focus {
 }
 
 hr:first-of-type {
-  color: transparent;
+  color: #a1282800;
 }
 
 nav{
@@ -466,7 +466,7 @@ iframe{
   }
 
   .nav-link, a{
-      color:white
+      color:white;
   }
   
   /*Sidebar navigation*/
@@ -867,47 +867,6 @@ iframe{
   box-shadow: rgba(255, 255, 255, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.1) 0px 30px 60px -30px;
 }
 
-/* Custom Modal Background */
-.modal-content {
-  background-color: #232323; /* Change to desired background color */
-  color: white; /* Adjust text color to contrast with the background */
-}
-
-/* Custom Modal Header */
-.modal-header {
-  background-color: #3A3A3A; /* Change to desired header background color */
-  color: white; /* Text color */
-}
-
-/* Optional: Customizing the Close Button */
-.modal-header .btn-close {
-  filter: invert(1); /* Changes the close button to be visible on dark background */
-}
-
-/* Custom Modal Body */
-.modal-body {
-  background-color: #232323; /* You can set a different background for the body */
-}
-
-/* Customizing Modal Footer (optional) */
-.modal-footer {
-  background-color: #e74a3b; /* Change to any color you prefer */
-}
-
-/* Customizing <hr> in the Modal */
-.modal hr {
-  border: none;              /* Removes the default border */
-  height: 2px;               /* Adjust the height (thickness) of the line */
-  background-color: #232323; /* Set the color of the line (custom color) */
-  margin: 10px 0;            /* Adjust the margin around the <hr> to control spacing */
-}
-
- /* Change the color of the HR inside the card */
- .card-hr {
-  border-color: #007BFF; /* Customize this to your desired color */
-  border-width: 2px;
-}
-
 /* No Man Sky Code */
 .glyph img{
   max-width: 100px;
@@ -929,9 +888,4 @@ iframe{
 
 #searchInput:focus + #searchDropdown {
   display: block; /* Show dropdown when search input is focused */
-}
-
-.small-fluid-image {
-  max-width: 750px;
-  width: 100%;
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text and Open URL</title>
+    <style>
+        #displayText {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="displayText">Hello, World!</div>
+    <button onclick="copyTextAndOpenURL()">Copy Text and Open URL</button>
+
+    <script>
+        function copyTextAndOpenURL() {
+            // Get the displayed text
+            const text = document.getElementById('displayText').innerText;
+
+            // Copy the text to the clipboard
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    console.log('Text copied to clipboard:', text);
+                    // Open the specified URL
+                    window.open('https://example.com', '_blank');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        }
+    </script>
+</body>
+</html>

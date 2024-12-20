@@ -19,14 +19,15 @@
     <div w3-include-html="../../nav.html"></div>
     <hr>
     <div class="jumbotron jumbotron-fluid">
-        <h1 class="display-4">No Man Sky Pathfinder</h1>
-        <p class="lead">A collection of portal glyph addresses for modules, multi-tools and ships.</p>
+        <h1 class="display-4">No Man's Sky Pathfinder</h1>
+        <p class="lead">A collection of portal addresses for modules, multi-tools, freighters, starships, planets and fauna we saved.</p>
     </div>
     </div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/index">Home</a></li>
             <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
+            <li class="breadcrumb-item"><a href="/landing-pages/nms">No Man's Sky</a></li>
             <li class="breadcrumb-item active" aria-current="page">Portal Coordinates</li>
         </ol>
     </nav>
@@ -49,13 +50,16 @@
             <option value="Multi-Tool">Multi-Tool</option>
             <option value="Freighter">Freighter</option>
             <option value="Frigate">Frigate</option>
+            <option value="Planets">Planets</option>
             <option value="Misc">Misc</option>
         </select>
       </div>
     </div>
   </section>
     <div class="card-content">
-        <!-- Exosuit -->
+                
+        <!-- /////////////////////////// EXOSUIT SECTION /////////////////////////// -->
+
             <!-- Card for each module -->
             <div class="card-columns">
                 <!-- Card 1: Suspicious Hazard Module -->
@@ -220,7 +224,9 @@
                     </div>
                 </div>
             </div>
-                <!-- STARSHIP -->
+                
+            <!-- /////////////////////////// STARSHIP SECTION /////////////////////////// -->
+
                 <div class="card text-white bg-dark" data-name="Living Ship,Euclid" data-categories="Starship">
                     <div class="card-body">
                         <h5 class="card-title">Copper, Black, White Living Ship</h5>
@@ -250,7 +256,9 @@
                         </p>
                     </div>
                 </div>
-                <!-- EXOCRAFT -->
+
+                <!-- /////////////////////////// EXOCRAFT SECTION /////////////////////////// -->
+
                 <div class="card text-white bg-dark" data-name="Exocraft Booster,Euclid" data-categories="Exocraft">
                     <div class="card-body">
                         <h5 class="card-title">Exocraft Booster Module S</h5>
@@ -386,12 +394,74 @@
                     </div>
                 </div>
 
-                <!-- MULTI TOOL -->
-                <div class="card text-white bg-dark" data-name="Blah"  data-categories="Multi-Tool">
-                    
+                <!-- /////////////////////////// MULTI-TOOL SECTION /////////////////////////// -->
+
+                <div class="card text-white bg-dark" data-name="Sentinel,Euclid" data-categories="Multi-Tool">
+                    <div class="card-body">
+                        <h5 class="card-title">Sentinel MT Square Supercharged</h5>
+                        <p>Euclid</p>
+                        <p class="card-text">
+                            <p><b>Galactic Address</b></p>
+                            <div id="displayText">07DF:0020:0FF2:004D</div>
+                            <hr class="card-hr">
+                            <button class="btn btn-primary" onclick="copyTextAndOpenURL()">Decode</button>
+                        </p>
+                    </div>
                 </div>
 
-                <!-- MISC -->
+                <!-- /////////////////////////// FREIGHTER SECTION /////////////////////////// -->
+                
+                <div class="card text-white bg-dark" data-name="Freighter,Pirate,Euclid" data-categories="Freighter">
+                    <div class="card-body">
+                        <h5 class="card-title">Pirate Freighter 4 Square Supercharged</h5>
+                        <p>Euclid</p>
+                        <p>
+                            <ol>
+                                <li>Disable Multiplayer in Network Settings before going through Portal.</li>
+                                <li>Set Combat Settings to None before going through the Portal.</li>
+                                <li>Upon arrival, go to space and warp to an adjacent system</li>
+                                <li>Land at the Space Station and Turn combat settings back to Normal before getting out of your ship.</li>
+                                <li><u>Exit your ship to Create a Restore Point.</u></li>
+                                <li>Warp back to the target system you arrived at to get the Freighter Battle.</li>
+                                <li>Destroy only the Engines & Big Beam Turrets and then Enter the freighter and check the class via Scanner.</li>
+                                <li>If its a C, B or A class, Reload Restore Point and Repeat steps 6 and 7 until you get S Class.</li>
+                            </ol>
+                        </p>
+                        <p class="card-text">
+                        <div class="glyph">
+                            <img src="../assets/img/nms/birdglyph.png" alt="Glyph 1">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 2">
+                            <img src="../assets/img/nms/treeglyph.png" alt="Glyph 3">
+                            <img src="../assets/img/nms/faceglyph.png" alt="Glyph 4">
+                            <img src="../assets/img/nms/atlasglyph.png" alt="Glyph 5">
+                            <img src="../assets/img/nms/fishglyph.png" alt="Glyph 6">
+                            <img src="../assets/img/nms/galaxyglyph.png" alt="Glyph 7">
+                            <img src="../assets/img/nms/fishglyph.png" alt="Glyph 8">
+                            <img src="../assets/img/nms/dragonflyglyph.png" alt="Glyph 9">
+                            <img src="../assets/img/nms/faceglyph.png" alt="Glyph 10">
+                            <img src="../assets/img/nms/rocketglyph.png" alt="Glyph 11">
+                            <img src="../assets/img/nms/atlasglyph.png" alt="Glyph 12">
+                        </div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#piratefreighter">Show Image</button>
+                        </p>
+                        <div class="modal fade" id="piratefreighter" tabindex="-1" aria-labelledby="piratefreighterLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="piratefreighterLabel">Pirate Freighter</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="../assets/img/nms/discoveries/PirateFreighter.jpg" alt="Fluid Image" class="img-fluid" style="width: 100%; height: auto;">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /////////////////////////// MISC SECTION /////////////////////////// -->
+
                 <div class="card text-white bg-dark" data-name="Core,Galaxy,Euclid" data-categories="Misc">
                     <div class="card-body">
                         <h5 class="card-title">Galactic Core</h5>
@@ -449,6 +519,47 @@
                         </p>
                     </div>
                 </div>
+
+                <!-- /////////////////////////// PLANET SECTION /////////////////////////// -->
+
+                <div class="card text-white bg-dark" data-name="Planet,Paradise,Lush,Paholiang" data-categories="Planets">
+                    <div class="card-body">
+                        <!-- Button to toggle visibility -->
+                        <h5 class="card-title">Planet Test - Lush - Paradise</h5>
+                        <p>Paholiang</p>
+                        <p class="card-text">
+                        <div class="glyph">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 1">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 2">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 3">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 4">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 5">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 6">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 7">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 8">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 9">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 10">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 11">
+                            <img src="../assets/img/nms/sunsetglyph.png" alt="Glyph 12">
+                        </div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#planetModal1">Show Image</button>
+                        </p>
+                    </div>
+                    <!-- Modal for displaying image -->
+                    <div class="modal fade" id="planetModal1" tabindex="-1" aria-labelledby="planetModal1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="planetModal1Label">Planet Test</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="../assets/img/nms/discoveries/20241214142040_1.jpg" alt="Fluid Image 1" class="img-fluid" style="width: 100%; height: auto;">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 </div>
         <!-- Template 
@@ -474,7 +585,7 @@
                         </p>
                     </div>
                 </div> -->
-    <script src="../assets/js/glyphsets.js"></script>
+    <script src="../assets/js/pathfinder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

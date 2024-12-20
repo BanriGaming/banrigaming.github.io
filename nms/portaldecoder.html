@@ -1,0 +1,204 @@
+
+<html >
+<head>
+    <title>No Man's Sky Portal Decoder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Convert No Man's Sky Portal glyphs to text and text glyphs, share your portal coordinates!">
+    <meta name="keywords" content="No Man's Sky, Potals, Codes, Glyphs, Share, Galactic Hub">
+    <link type="text/css" rel="stylesheet" href="../assets/css/glyphs.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104462399-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-104462399-1');
+		</script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap"
+            rel="stylesheet">
+        <script src="../assets/js/nav.js"></script>
+        <link rel="stylesheet" href="../assets/css/main.css"></link>
+</head>
+
+<body>
+    <div w3-include-html="../../nav.html"></div>
+    <hr>
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="display-4">No Man's Sky Portal Decoder</h1>
+        <p class="lead">A Tool to decode Portal Codes and Galactic Addresses, as well as creating the code, address and also a link to share it directly.</p>
+    </div>
+    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/index">Home</a></li>
+            <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
+            <li class="breadcrumb-item"><a href="/landing-pages/nms">No Man's Sky</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Portal Decoder</li>
+        </ol>
+    </nav>
+    <hr>
+	<div class="bg-overlay"></div>
+    <div class="content">
+      <div class="menu">
+        <ul class="tabs-menu">
+          <li class="current"><a href="#tab-1">
+            Share Coordinates
+            </a></li>
+          <li><a href="#tab-2">
+            Convert Portal Code
+            </a></li>
+          <li><a href="#tab-3">
+            Galactic Coordinates
+            </a></li>
+        </ul>
+      </div>
+
+      <div class="tab">
+        <div id="tab-1" class="tab-content">
+          <div class="sharecoords">
+            <div class="titletext">Share your portal Coordinates:</div>
+            <div class="description">Clicking glyphs makes an alphanumeric sequence, convert your portal glyphs to Galactic Coordinates and generate a link to share below.</div>
+            <div class="glyphsblock">
+              <i class="glyph-0" data-id="0"></i>
+              <i class="glyph-1" data-id="1"></i>
+              <i class="glyph-2" data-id="2"></i>
+              <i class="glyph-3" data-id="3"></i>
+              <i class="glyph-4" data-id="4"></i>
+              <i class="glyph-5" data-id="5"></i>
+              <i class="glyph-6" data-id="6"></i>
+              <i class="glyph-7" data-id="7"></i>
+              <i class="glyph-8" data-id="8"></i>
+              <i class="glyph-9" data-id="9"></i>
+              <i class="glyph-A" data-id="A"></i>
+              <i class="glyph-B" data-id="B"></i>
+              <i class="glyph-C" data-id="C"></i>
+              <i class="glyph-D" data-id="D"></i>
+              <i class="glyph-E" data-id="E"></i>
+              <i class="glyph-F" data-id="F"></i>
+            </div>
+            <div class="sharecoordsbox">
+              <div class="clickedglyphs"></div>
+              <div class="glyphsError">
+                <span class="atlaserror">ATLAS TRANSPORT ERROR</span>
+                <i class="errorsp"></i>
+                <span class="atlaserror">LOCATION CORRUPTED</span>
+                <p class="atlasmsgerror">You will be teleported to an approximate destination</p>
+              </div>
+              <div class="glyphscheck"></div>
+              <div class="cleardelbuttons">
+                <button class="clearglyphs">Clear</button>
+                <button class="deleteglyphs">Delete Glyphs</button>
+              </div>
+              <div class="glyphlinkbox">
+                <div class="linktoglyph">
+                  <span class="linkTitle">Portal Code:</span>
+                </div>
+                <div class="glyphlink"></div>
+              </div>
+              <div class="linkbuttons">
+				<div class="relative inline-block">
+					<span class="copymsg copybtnportallink">Copied!</span>
+					<button id="copybtn">Copy link</button>
+				</div>
+				<div class="relative inline-block">
+					<span class="copymsg copybtnportalcode">Copied!</span>
+					<button id="copybtncode">Copy code only</button>
+				</div>
+              </div>
+              <div class="galacticAddressBox">
+                <div class="gaTitleblock"><span class="gaTitle">Galactic Address:</span></div>
+                <div class="galacticAddress"></div>
+              </div>
+              <div class="buttonblock">
+				<div class="relative inline-block">
+					<div class="relative inline-block">
+						<span class="copymsg copybtngaaddress">Copied!</span>
+						<button id="copygaaddress">Copy Galactic Address</button>
+					</div>
+				</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-2" class="tab-content">
+          <div class="loadcoords">
+            <div class="titletext">Portal code to Glyphs:</div>
+            <div class="description">Paste the shared code here to convert into glyphs</div>
+            <input class="glyphs" maxlength="12">
+            <div class="portalError">
+              <span class="atlaserror">ATLAS TRANSPORT ERROR</span>
+              <i class="errorsp"></i>
+              <span class="atlaserror">LOCATION CORRUPTED</span>
+              <p class="atlasmsgerror">You will be teleported to an approximate destination</p>
+            </div>
+            <div class="result"></div>
+            <div class="galacticAddressCodeBox">
+              <div class="gacodeTitleblock"><span class="gaTitleCode">Galactic Address:</span></div>
+              <div class="galacticAddressCode"></div>
+            </div>
+            <div class="buttonblock">
+				<div class="relative inline-block">
+					<span class="copymsg copybtngaaddress">Copied!</span>
+					<button id="copygaaddresscode">Copy Galactic Address</button>
+				</div>
+            </div>
+            <div class="linkbuttons">
+              <div class="clearbuttonbox">
+                <button class="clearglyphsurl">Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-3" class="tab-content">
+          <div class="loadcoords">
+            <div class="titletext">Galactic Address to Glyphs:</div>
+            <div class="description">Paste your galactic address here to convert into glyphs</div>
+            <div class="portalNumberBox">
+              <span class="portalNumberText">Portal Number:</span>
+              <select class="portalNumber">
+              </select>
+              <div class="descbox">
+                <p class="portalNumberDesc">If you don't know that number, leave as it is (It represents the first glyph)</p>
+              </div>
+              <input class="gacoords" placeholder="000F:000F:000F:000F" maxlength="19">
+              <div class="gacoordsError">Invalid Address:<span class="wrongcoords"></span></div>
+            </div>
+            <div class="portalGlyphBox">
+              <span class="portalTitle">Portal Glyphs:</span>
+            </div>
+            <div class="portalglyphs"></div>
+            <div class="portalCodeBox">
+              <span class="portalTitle">Portal Code:</span>
+              <div class="gacoordstoglyphs"></div>
+              <div class="gacoordstoglyphslink"></div>
+            </div>
+            <div class="linkbuttons">
+              <div class="clearbuttonbox">
+				<div class="relative inline-block">
+					<span class="copymsg copybtngaportallink">Copied!</span>
+					<button id="copygaaddressLink">Copy Link</button>
+				</div>
+                <button class="clearga">Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input id="galacticAddress" type='text'/>
+      <input id="glyphlink" type='text'/>
+      <input id="glyphcode" type='text'/>
+      <input id="galacticAddressCode" type='text'/>
+      <input id="gacoordstoglyphslink" type='text'/>
+    </div>
+  <script src='../assets/js/jquery.min.js'></script>
+  <script src='../assets/js/glyphs.js'></script>
+</body>
+</html>
