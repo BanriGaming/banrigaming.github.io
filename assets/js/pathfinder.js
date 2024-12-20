@@ -68,7 +68,7 @@ function filterCardsByName(searchTerm) {
     });
 }
 
-// Function to trigger the modal on button click
+/* Function to trigger the modal on button click
 document.getElementById("showImageButton").addEventListener("click", function() {
     // Create a new instance of the Bootstrap Modal
     var modal = new bootstrap.Modal(document.getElementById('imageModal'), {
@@ -77,7 +77,7 @@ document.getElementById("showImageButton").addEventListener("click", function() 
 
     // Show the modal
     modal.show();
-});
+});*/
 
 function copyTextAndOpenURL() {
     // Get the displayed text
