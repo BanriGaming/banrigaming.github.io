@@ -209,7 +209,7 @@ $('document').ready(function() {
       var codevalue = $('#glyphcode').val();
       var linkvalue = $('.linkglyphs').html();
       var icon = ('<i class="glyph-'+glyph+'">');
-      var url = ('http://' + window.location.hostname + '/nms/portaldecoder');
+      var url = ('http://' + window.location.hostname + '/nms/dhd');
       if (value.length < 12) {
         $('.clickedglyphs').html(value +glyph);
         $('#glyphcode').val(codevalue +glyph);
