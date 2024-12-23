@@ -66,13 +66,13 @@
     <script>
         $(document).ready(function () {
             // Load and parse the CSV file
-            Papa.parse("/assets/files/nmsgalaxies.csv", {
+            Papa.parse("../assets/files/nmsgalaxies.csv", {
                 download: true,
                 header: true,
                 skipEmptyLines: true,
                 complete: function (results) {
                     const tableBody = $('#galaxiesTable tbody');
-
+                    
                     // Populate table rows
                     results.data.forEach(row => {
                         const typeClass = row.Type.toLowerCase(); // Match class names to type
