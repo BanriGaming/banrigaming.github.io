@@ -1,3 +1,55 @@
-item,galaxy,type,portalcode,galaxyaddress,coordinates,image,link,note
-suspicious hazard module,Euclid,Exosuit,10F9FF00F003,0802:007E:080E:00F9,Space Station,,http://banrigaming.github.io/nms/dhd#10F9FF00F003,
-Suspicious Life & Movement Module,Euclid,Exosuit,11A305234EE9,06E8:0084:0A33:01A3,Space Station,,,
+item,galaxy,type,portalcode,galaxyaddress,coordinates,image,note
+Suspicious Hazard Module,Euclid,Exosuit,10F9FF00F003,0802:007E:080E:00F9,Space Station,,
+Suspicious Life & Movement Module,Euclid,Exosuit,11A305234EE9,06E8:0084:0A33:01A3,Space Station,,
+Thermal Protection Module S (Heat),Euclid,Exosuit,101BF4557C2D,042C:0073:0D56:001B,Space Station,,
+Toxic Protection Module S,Euclid,Exosuit,10BEFC636CC5,04C4:007B:0E35:00BE,Space Station,,
+Radiation Protection Module S,Euclid,Exosuit,1169FE1E069B,0E9A:007D:09DF:0169,Space Station,,
+Thermal Protection Module S (Cold),Euclid,Exosuit,102244551F012,0811:00C4:0D1E:0022,Space Station,,
+Underwater Protection Module S,Euclid,Exosuit,108E0A05F518,0D17:0089:085E:008E,Space Station,,
+"Copper, Black, White Living Ship",Euclid,Starship,10790147A52A,0D29:0080:0C79:0079,"+17.49, -92.23",,"1. Pulse in Space with Void Egg in Exosuit. Talk to Living Ship and Start the Mission. Proceed to Portal and go through and find the ship.
+2. There will be a random ship there. Make a restore point from your ship and restart mission and the random ship will turn into the Living Ship."
+Iron Vulture Custom Square Supercharged,Euclid,Starship,11AA0B240662,0E61:008A:0A3F:01AA,Space Station,,"1. Go to Space Station in the System
+2. Proceed to the Starship Builder
+3. Slot the Following:
+     a. S Class Reactor
+     b. Iron Vulture Engines
+     c. Iron Vulture Wings
+     d. Iron Vulture Cockpit"
+Suspicious Launch Thruster Module,Euclid,Starship,10DCFAFF5005,0804:0079:07F4:00DC,Space Station,,
+Suspicious Starship Shield Module,Euclid,Starship,10DCFAFF5005,0804:0079:07F4:00DC,Space Station,,
+Suspicious Hyperdrive Module,Euclid,Starship,11CA0117006B,086A:0080:096F:01CA,Space Station,,
+Suspicious Pulse Engine Module,Euclid,Starship,10D0FF00DFFC,07FB:007E:080C:00D0,Space Station,,
+Suspicious Photon Cannon Module,Euclid,Starship,10D0FF00DFFC,07FB:007E:080C:00D0,Space Station,,
+Suspicious Cyclotron Module,Euclid,Starship,11CA0117006B,086A:0080:096F:01CA,Space Station,,
+Suspicious Infra-Knife Module,Euclid,Starship,11CA0117006B,086A:0080:096F:01CA,Space Station,,
+Suspicious Positron Ejector Module,Euclid,Starship,10D0FF00DFFC,07FB:007E:080C:00D0,Space Station,,
+Suspicious Phase Beam Module,Euclid,Starship,10D0FF00DFFC,07FB:007E:080C:00D0,Space Station,,
+Exocraft Booster Module S,Euclid,Exocraft,101BF4557C2D,042C:0073:0D56:001B,Space Station,,
+Exocraft Cannon Module S,Euclid,Exocraft,10234551A012,0811:00C4:0D19:0023,Space Station,,
+Exocraft Laser Module S,Euclid,Exocraft,11AD022A76D0,0ECF:0081:0AA6:01AD,Space Station,,
+Exocraft Engine Module S,Euclid,Exocraft,1197F9AC647D,0C7C:0078:02C5:0197,Space Station,,
+Minotaur Engine & Cannon Module S,Euclid,Exocraft,11A4FEFE2065,0864:007D:07E1:01A4,Space Station,,
+Minotaur Laser Module S,Euclid,Exocraft,105402FC36DF,0EDE:0081:07C2:0054,Space Station,,
+Sentinel MT Square Supercharged,Euclid,Multi-Tool,104DA17F3FE0,07DF:0020:0FF2:004D,"+28.58, -75.31",,"1. Disable Multiplayer Before Entering Portal
+2. Requires a Restore Point from Space Station and Reloading that Restore Point
+3. Drop marker before leaving for Station"
+"Suspicious Plasma Launcher, Geology Cannon, Blaze Javelin, Scanner and Scatter Blaster",Euclid,Multi-Tool,11CA0117006B,086A:0080:096F:01CA,Space Station,,
+"Suspicious Boltcaster, Mining Beam",Euclid,Multi-Tool,1096E9A83A9E,029D:0068:0282:0096,Space Station,,
+Suspicious Pulse Spitter & Neutron Cannon,Euclid,Multi-Tool,10D0FF00DFFC,07FB:007E:080C:00D0,Space Station,,
+Pirate Freighter 4 Square Supercharged,Euclid,Freighter,10E2FB9B82DF,0ADE:007A:01B7:00E2,System Battle,https://banrigaming.github.io/assets/img/nms/discoveries/PirateFreighter.jpg,"1. Disable Multiplayer in Network Settings before going through Portal.
+2. Set Combat Settings to None before going through the Portal.
+3. Upon arrival, go to space and warp to an adjacent system
+4. Land at the Space Station and Turn combat settings back to Normal before getting out of your ship.
+5. Exit your ship to Create a Restore Point.
+6. Warp back to the target system you arrived at to get the Freighter Battle.
+7. Destroy only the Engines & Big Beam Turrets and then Enter the freighter and check the class via Scanner.
+8. If its a C, B or A class, Reload Restore Point and Repeat steps 6 and 7 until you get S Class."
+Galactic Core,All Galaxies,Misc,100104005005,0804:0083:0804:0001,,,Use another ship and a multi-tool without upgrades before jumping galaxies.
+S Class Freighter Tech Modules,Euclid,Misc,213506E8A6C0,0EBF:0085:0689:0135,Derelict Freighter,,"1. Use Emergency Signal Scanner.
+2. Place Emergency Signal Scanner in Personal Refinery.
+3. Pulse to the Derelict Freighter, Land and unseal the entry. (but don't enter)
+4. Move the Emergency Signal Scanner from your Personal Refinery to your Exosuit.
+5. Run to Room 3 and claim the Technology Upgrade.
+~To Repeat the same Emergency Signal Scanner:
+6. Hop Back into your ship and pulse away for 2 seconds.
+7. Repeat Steps 1-6 as many times as you want."
