@@ -7,42 +7,36 @@
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-    <style>
-        @font-face {
-            font-family: 'CustomFont';
-            src: url('../assets/fonts/NMSGeoSans_Kerned.woff') format('woff2'),
-                 url('../assets/fonts/NMSGeoSans_Kerned.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        body, table {
-            font-family: 'CustomFont', Arial, sans-serif;
-        }
-
-        .lush { color: #65C629 !important; font-weight: bold; }    /* Dark green for Lush */
-        .harsh { color: #a83232 !important; font-weight: bold; }  /* Dark red for Harsh */
-        .empty { color: #b1b2b2 !important; font-weight: bold; }  /* Gray for Empty */
-        .norm { color: #1bc5e0 !important; font-weight: bold; }   /* Light blue for Norm */
-
-        .checkmark {
-            color: green;
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        table tbody tr:hover {
-            background-color: #f5f5f5; /* Light gray background on hover */
-            cursor: pointer;          /* Pointer cursor for better interactivity */
-            transition: background-color 0.3s ease; /* Smooth transition */
-        }
-    </style>
+    <link  rel="stylesheet" href="../assets/css/main.css"></link>
+    <link  rel="stylesheet" href="../assets/css/galaxies.css"></link>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="display-4">No Man's Sky</h1>
+    <div w3-include-html="../nav.html"></div> <hr>
+    <!--<div class="hunterpie_img">  153C4E  -->
+    <div class="jumbotron jumbotron-fluid">   
+        <h1 class="display-4">No Man's Sky Galaxy List</h1>
         <p class="lead">Discover information about the galaxies in No Man's Sky, dynamically loaded from a CSV.</p>
-        
+    </div> 
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/index">Home</a></li>
+        <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
+        <li class="breadcrumb-item"><a href="/landing-pages/nms">No Man's Sky</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Galaxy Datasheet</li>
+      </ol>
+    </nav>
+    <hr>
+    <div class="container mt-5">
+        <!-- Filter for Access -->
+        <div class="filter-bar">
+            <label for="accessFilter" class="form-label">Filter by Access:</label>
+            <select id="accessFilter" class="form-select">
+                <option value="">All</option>
+                <option value="yes">Accessible</option>
+                <option value="no">Not Accessible</option>
+            </select>
+        </div>
+        <div class="table-responsive">
         <table id="galaxiesTable" class="table table-striped">
             <thead>
                 <tr>
@@ -57,54 +51,14 @@
             </tbody>
         </table>
     </div>
-
+</div>
     <!-- Include necessary JS libraries -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Load and parse the CSV file
-            Papa.parse("../assets/files/nmsgalaxies.csv", {
-                download: true,
-                header: true,
-                skipEmptyLines: true,
-                complete: function (results) {
-                    const tableBody = $('#galaxiesTable tbody');
-                    
-                    // Populate table rows
-                    results.data.forEach(row => {
-                        const typeClass = row.Type.toLowerCase(); // Match class names to type
-                        const accessIcon = row.Access === "Yes" 
-                            ? '<span class="checkmark">&#10003;</span>' 
-                            : '<span class="text-danger">&#10007;</span>';
-                        
-                        const newRow = `
-                            <tr>
-                                <td>${row.Number}</td>
-                                <td>${row.Galaxy}</td>
-                                <td class="${typeClass}">${row.Type}</td>
-                                <td>${accessIcon}</td>
-                            </tr>
-                        `;
-                        tableBody.append(newRow);
-                    });
-
-                    // Initialize DataTable
-                    $('#galaxiesTable').DataTable({
-                        paging: true,
-                        searching: true,
-                        ordering: true,
-                        pageLength: 5,
-                        lengthMenu: [5, 10, 25, 50]
-                    });
-                },
-                error: function (err) {
-                    console.error("Error loading the CSV:", err);
-                }
-            });
-        });
-    </script>
+    <script>includeHTML();</script>
+    <script src='../assets/js/galaxies.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

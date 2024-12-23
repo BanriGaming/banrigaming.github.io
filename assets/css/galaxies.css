@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('https://banrigaming.github.io/assets/fonts/NMSFuturaProBook_Kerned.woff') format('woff2'),
+         url('https://banrigaming.github.io//assets/fonts/NMSGeoSans_Kerned.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, table {
+    font-family: 'CustomFont', Arial, sans-serif;
+}
+
+/* Styling for the Number and Type columns */
+#galaxiesTable td:nth-child(1), /* Number column */
+#galaxiesTable td:nth-child(3) { /* Type column */
+    color: white; /* Set text color to white */
+}
+
+/* Styling for Table Headers (Set text color to white) */
+#galaxiesTable th {
+    color: white !important;
+}
+
+/* Improve visibility for the sorting arrows */
+#galaxiesTable th.sorting:after,
+#galaxiesTable th.sorting_asc:after,
+#galaxiesTable th.sorting_desc:after {
+    color: white; /* Make sorting arrows white */
+}
+
+
+.lush { color: #65C629 !important; font-weight: bold; }    /* Dark green for Lush */
+.harsh { color: #a83232 !important; font-weight: bold; }  /* Dark red for Harsh */
+.empty { color: #b1b2b2 !important; font-weight: bold; }  /* Gray for Empty */
+.normal { color: #1bc5e0 !important; font-weight: bold; }   /* Light blue for Norm */
+
+.checkmark {
+    color: green;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+table tbody tr:hover {
+    background-color: #646464; /* Light gray background on hover */
+    cursor: pointer;          /* Pointer cursor for better interactivity */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.filter-bar {
+    margin-bottom: 15px;
+}
+
+/* Ensure the table and pagination bar is fully visible on small screens */
+table.dataTable {
+    width: 100% !important; /* Force table to occupy the full available width */
+}
+
+table.dataTable .dataTables_paginate {
+    overflow: visible !important; /* Prevent cutting off the pagination controls */
+}
+
+/* Make the pagination responsive and ensure it's visible on mobile */
+@media screen and (max-width: 576px) {
+    .dataTables_paginate {
+        font-size: 12px; /* Adjust pagination font size for mobile */
+    }
+
+    .dataTables_info {
+        font-size: 12px; /* Adjust table info font size */
+    }
+}
