@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Man's Sky Galaxies</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+    <!-- Link Custom Font -->
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('../assets/fonts/NMSGeoSans_Kerned.woff') format('woff2'),
+                 url('../assets/fonts/NMSGeoSans_Kerned.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, table {
+            font-family: 'CustomFont', Arial, sans-serif;
+        }
+
+        /* Galaxy type-specific styles */
+        .lush {color: #65C629!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;font-weight: bold;}    /* Dark green for Lush */
+        .harsh { color: #a83232; font-weight: bold; }  /* Dark red for Harsh */
+        .empty { color: #b1b2b2; font-weight: bold; }  /* Dark blue for Empty */
+        .norm { color: #1bc5e0; font-weight: bold; }   /* Gold for Norm */
+
+        .access-icon {
+            width: 20px;
+            height: 20px;
+        }
+        .checkmark {
+            color: green;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">No Man's Sky Galaxies</h1>
+        <table id="galaxiesTable" class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Galaxy Number</th>
+                    <th>Galaxy Name</th>
+                    <th>Type</th>
+                    <th>Access</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Lush Galaxies -->
+                <tr>
+                    <td>10</td>
+                    <td class="lush">Eissentam</td>
+                    <td>Lush</td>
+                    <td><span class="checkmark">✔️</span></td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td class="lush">Isdoraijung</td>
+                    <td>Lush</td>
+                    <td></td>
+                </tr>
+                <!-- Harsh Galaxies -->
+                <tr>
+                    <td>3</td>
+                    <td class="harsh">Calypso</td>
+                    <td>Harsh</td>
+                    <td><span class="checkmark">✔️</span></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td class="harsh">Ogtialabi</td>
+                    <td>Harsh</td>
+                    <td></td>
+                </tr>
+                <!-- Empty Galaxies -->
+                <tr>
+                    <td>7</td>
+                    <td class="empty">Kikolgallr</td>
+                    <td>Empty</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td class="empty">Aptarkaba</td>
+                    <td>Empty</td>
+                    <td><span class="checkmark">✔️</span></td>
+                </tr>
+                <!-- Norm Galaxies -->
+                <tr>
+                    <td>1</td>
+                    <td class="norm">Euclid</td>
+                    <td>Norm</td>
+                    <td><span class="checkmark">✔️</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="norm">Hilbert Dimension</td>
+                    <td>Norm</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- Include DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- Include Bootstrap DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#galaxiesTable').DataTable({
+                paging: true,        // Enables pagination
+                searching: true,     // Enables search functionality
+                ordering: true,      // Enables column sorting
+                pageLength: 5,       // Default number of rows per page
+                lengthMenu: [5, 10, 25, 50] // Options for rows per page
+            });
+        });
+    </script>
+</body>
+</html>
