@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('https://banrigaming.github.io/assets/fonts/NMSFuturaProBook_Kerned.woff') format('woff2'),
+         url('https://banrigaming.github.io//assets/fonts/NMSGeoSans_Kerned.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, table {
+    font-family: 'CustomFont', Arial, sans-serif;
+}
+
+/* Basic styling for the cards and modal */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    
+}
+
+.card-header {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.modal {
+    background: black;
+}
+
+.card-body {
+    font-family: 'CustomFont', Arial, sans-serif;
+}

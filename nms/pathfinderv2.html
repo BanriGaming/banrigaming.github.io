@@ -7,31 +7,18 @@
     <title>Portal Item Cards</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/main.css"></link>
-    <link rel="stylesheet" href="../assets/css/galaxies.css"></link>
-    <style>
-        /* Basic styling for the cards and modal */
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .card-header {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-    </style>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    </link>
+    <link rel="stylesheet" href="../assets/css/pathfinderv2.css">
+    </link>
 </head>
-
 <body>
     <div w3-include-html="../../nav.html"></div>
     <hr>
     <div class="jumbotron jumbotron-fluid">
         <h1 class="display-4">No Man's Sky Pathfinder</h1>
-        <p class="lead">A collection of portal addresses for modules, multi-tools, freighters, starships, planets and fauna we saved.</p>
+        <p class="lead">A collection of portal addresses for modules, multi-tools, freighters, starships, planets and
+            fauna we saved.</p>
     </div>
     </div>
     <nav aria-label="breadcrumb">
@@ -45,186 +32,51 @@
     <hr>
     <section class="container mt-3" aria-label="Page header">
         <div class="row">
-          <div class="col-sm-6 col-md-8">
-            <div class="border-0 border-bottom rounded-0 mb-3">
-              <input  type="text" id="searchBox" placeholder="Search by name or galaxy" class="pb-1 ps-0 form-control rounded-0 border-0 fs-5">
+            <div class="col-sm-6 col-md-8">
+                <div class="border-0 border-bottom rounded-0 mb-3">
+                    <input type="text" id="searchBox" placeholder="Search by name or galaxy"
+                        class="pb-1 ps-0 form-control rounded-0 border-0 fs-5">
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <select id="typeFilter" class="form-select mb-3">
-                <option value="All Categories">All Categories</option>
-            </select>
-          </div>
+            <div class="col-sm-6 col-md-4">
+                <select id="typeFilter" class="form-select mb-3">
+                    <option value="All Categories">All Categories</option>
+                </select>
+            </div>
         </div>
-      </section>
+    </section>
 
     <div id="cardsContainer" class="cards-container"></div>
 
+    <!-- Modal Structure -->
+    <div class="modal fade" id="piratefreighter" tabindex="-1" aria-labelledby="piratefreighterLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="piratefreighterLabel">Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalImageContainer">
+                        <img id="modalImage" class="img-fluid" alt="Item Image">
+                    </div>
+                    <ul id="modalList">
+                        <!-- List items will be inserted here dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script>includeHTML();</script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
     <!-- External JS file or inline script -->
-    <script>
-        // CSV Data URL
-        const csvUrl = 'https://banrigaming.github.io/assets/files/addressbook.csv';
-        let originalCardsData = []; // Store original data for filtering
-
-        // Fetch and parse the CSV
-        async function fetchCSVData() {
-            const response = await fetch(csvUrl);
-            const csvText = await response.text();
-
-            return new Promise((resolve, reject) => {
-                Papa.parse(csvText, {
-                    header: false, // CSV does not have headers
-                    skipEmptyLines: true,
-                    complete: (results) => resolve(results.data),
-                    error: (error) => reject(error),
-                });
-            });
-        }
-
-        // Generate glyph images based on portal code
-        function generateGlyphs(portalCode) {
-            const glyphContainer = document.createElement('div');
-            glyphContainer.classList.add('glyph');
-
-            portalCode.split('').forEach((char) => {
-                const glyphImage = document.createElement('img');
-                glyphImage.src = `https://banrigaming.github.io/assets/img/nms/glyphs/${char.toLowerCase()}.png`;
-                glyphImage.alt = `Glyph ${char}`;
-                glyphContainer.appendChild(glyphImage);
-            });
-
-            return glyphContainer;
-        }
-
-        // Render cards
-        function renderCards(data) {
-            const cardsContainer = document.getElementById('cardsContainer');
-            cardsContainer.innerHTML = ''; // Clear existing cards
-
-            if (data.length === 0) {
-                // No results found message
-                const noResults = document.createElement('p');
-                noResults.textContent = 'No matching results found.';
-                cardsContainer.appendChild(noResults);
-                return;
-            }
-
-            data.forEach((row) => {
-                const [itemName, itemGalaxy, type, portalCode, galacticAddress] = row;
-
-                // Create card structure
-                const card = document.createElement('div');
-                card.classList.add('card', 'text-white', 'bg-dark');
-                card.dataset.name = `${itemName}, ${itemGalaxy}`;
-                card.dataset.categories = type;
-                card.style.display = 'block';
-
-                const cardBody = document.createElement('div');
-                cardBody.classList.add('card-body');
-
-                const title = document.createElement('h5');
-                title.classList.add('card-title');
-                title.textContent = itemName;
-
-                const galaxyParagraph = document.createElement('p');
-                galaxyParagraph.textContent = itemGalaxy;
-
-                const addressParagraph = document.createElement('p');
-                addressParagraph.classList.add('card-text');
-                addressParagraph.textContent = galacticAddress || 'N/A';
-
-                const glyphs = generateGlyphs(portalCode);
-
-                // Append elements to card body
-                cardBody.appendChild(title);
-                cardBody.appendChild(galaxyParagraph);
-                cardBody.appendChild(addressParagraph);
-                cardBody.appendChild(glyphs);
-
-                // Append card body to card
-                card.appendChild(cardBody);
-
-                // Add card to container
-                cardsContainer.appendChild(card);
-            });
-        }
-
-        // Filter cards dynamically
-        function filterCards() {
-            const searchQuery = document.getElementById('searchBox').value.toLowerCase();
-            const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
-
-            const filteredData = originalCardsData.filter((row) => {
-                const [itemName, itemGalaxy, type] = row.map((cell) => cell.toLowerCase());
-
-                const matchesSearch =
-                    itemName.includes(searchQuery) ||
-                    itemGalaxy.includes(searchQuery) ||
-                    type.includes(searchQuery);
-                const matchesType = typeFilter === 'all categories' || type === typeFilter;
-
-                return matchesSearch && matchesType;
-            });
-
-            renderCards(filteredData);
-        }
-
-        // Populate dropdown with types
-        function populateTypeDropdown(types) {
-            const dropdown = document.getElementById('typeFilter');
-            const uniqueTypes = ['All Categories', ...new Set(types)].sort();
-
-            dropdown.innerHTML = ''; // Clear existing options
-            uniqueTypes.forEach((type) => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                dropdown.appendChild(option);
-            });
-        }
-
-        // Initialize event listeners
-        function initializeEventListeners() {
-            const searchBox = document.getElementById('searchBox');
-            const typeFilter = document.getElementById('typeFilter');
-
-            searchBox.addEventListener('input', () => {
-                if (searchBox.value || typeFilter.value !== 'All Categories') {
-                    filterCards();
-                }
-            });
-
-            typeFilter.addEventListener('change', () => {
-                if (searchBox.value || typeFilter.value !== 'All Categories') {
-                    filterCards();
-                }
-            });
-        }
-
-        // Populate cards dynamically
-        async function populateCards() {
-            try {
-                const csvData = await fetchCSVData();
-
-                originalCardsData = csvData.slice(1); // Skip the header row
-
-                const types = originalCardsData.map((row) => row[2]);
-                populateTypeDropdown(types);
-
-                initializeEventListeners();
-            } catch (error) {
-                console.error('Error fetching or parsing CSV data:', error);
-            }
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', populateCards);
-
-    </script>
+    <script src="../assets/js/pathfinderv2.js"></script>
 </body>
 
 </html>

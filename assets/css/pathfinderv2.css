@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('https://banrigaming.github.io/assets/fonts/NMSFuturaProBook_Kerned.woff') format('woff2'),
+         url('https://banrigaming.github.io//assets/fonts/NMSGeoSans_Kerned.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, table {
+    font-family: 'CustomFont', Arial, sans-serif;
+}
+
+/* Basic styling for the cards and modal */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    padding: 5px;
+    margin-bottom: 10px;
+    max-width: 1200px;
+}
+
+.card-header {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.modal {
+    background: black;
+}
+
+.card-title, p, h4 {
+    font-family: 'CustomFont', Arial, sans-serif;
+}
+
+/* Ensure the container holding the cards takes the full screen */
+#cardsContainer {
+    display: flex;             /* Apply Flexbox */
+    flex-wrap: wrap;           /* Allow wrapping of cards if there are too many */
+    justify-content: center;   /* Center the cards horizontally */
+    align-items: center;       /* Center the cards vertically */
+  }

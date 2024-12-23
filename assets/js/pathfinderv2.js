@@ -1,124 +1,216 @@
-// Parse CSV function (use PapaParse or FileReader for your case)
-// Assuming PapaParse library is included
-function parseCSV(csvData) {
-    return Papa.parse(csvData, { header: true }).data;
-}
+// CSV Data URL
+const csvUrl = 'https://banrigaming.github.io/assets/files/addressbook.csv';
+let originalCardsData = []; // Store original data for filtering
 
-// Render Cards
-function renderCards(parsedData) {
-    const container = document.getElementById('cards-container'); // Assume you have a container for cards
-    
-    parsedData.forEach((item) => {
-        // Create card element
-        const card = document.createElement('div');
-        card.className = 'card';
-        
-        // Add Item Name
-        const nameElement = document.createElement('h3');
-        nameElement.innerText = item.Item;
-        card.appendChild(nameElement);
+// Fetch and parse the CSV
+async function fetchCSVData() {
+    const response = await fetch(csvUrl);
+    const csvText = await response.text();
 
-        // Add Galaxy and Type
-        const galaxyElement = document.createElement('p');
-        galaxyElement.innerText = `Galaxy: ${item.Galaxy}`;
-        card.appendChild(galaxyElement);
-
-        const typeElement = document.createElement('p');
-        typeElement.innerText = `Category: ${item.Type}`;
-        card.appendChild(typeElement);
-        
-        // Add Portal Code and corresponding glyphs
-        const portalCode = item.Portalcode.trim();
-        const portalContainer = document.createElement('div');
-        portalCode.split('').forEach((glyphChar) => {
-            const glyphName = getGlyphName(glyphChar);
-            const glyphImage = document.createElement('img');
-            glyphImage.src = `https://banrigaming.github.io/assets/img/nms/glyphs/${glyphName}.png`;  // Assuming image names match the glyph names
-            glyphImage.alt = glyphName;
-            portalContainer.appendChild(glyphImage);
+    return new Promise((resolve, reject) => {
+        Papa.parse(csvText, {
+            header: false, // CSV does not have headers
+            skipEmptyLines: true,
+            complete: (results) => resolve(results.data),
+            error: (error) => reject(error),
         });
-        card.appendChild(portalContainer);
-
-        // Add Galactic Address and Coordinates (if available)
-        if (item.GalacticAddress) {
-            const addressElement = document.createElement('p');
-            addressElement.innerText = `Address: ${item.GalacticAddress}`;
-            card.appendChild(addressElement);
-        }
-
-        if (item.Coordinates) {
-            const coordinatesElement = document.createElement('p');
-            coordinatesElement.innerText = `Coordinates: ${item.Coordinates}`;
-            card.appendChild(coordinatesElement);
-        }
-
-        // Add Notes (if available)
-        if (item.Notes) {
-            const notesElement = document.createElement('p');
-            notesElement.innerText = `Notes: ${item.Notes}`;
-            card.appendChild(notesElement);
-        }
-
-        // Add Image (with Modal functionality)
-        if (item.Image) {
-            const imgElement = document.createElement('img');
-            imgElement.src = item.Image;
-            imgElement.className = 'card-image';  // Add some classes for styling
-            imgElement.addEventListener('click', function() {
-                openModal(item.Image); // Open image modal (implement separately)
-            });
-            card.appendChild(imgElement);
-        }
-
-        // Add the card to the container
-        container.appendChild(card);
     });
 }
 
-// Get the Glyph Name for each character in the Portal Code
-function getGlyphName(char) {
-    const glyphs = {
-        '0': 'Sunset',
-        '1': 'Bird',
-        '2': 'Face',
-        '3': 'Diplo',
-        '4': 'Eclipse',
-        '5': 'Balloon',
-        '6': 'Boat',
-        '7': 'Bug',
-        '8': 'Dragonfly',
-        '9': 'Galaxy',
-        'A': 'Voxel',
-        'B': 'Fish',
-        'C': 'Tent',
-        'D': 'Rocket',
-        'E': 'Tree',
-        'F': 'Atlas'
-    };
+// Generate glyph images based on portal code
+function generateGlyphs(portalCode) {
+    const glyphContainer = document.createElement('div');
+    glyphContainer.classList.add('glyph');
 
-    return glyphs[char] || '';  // return the glyph name or an empty string if invalid
+    portalCode.split('').forEach((char) => {
+        const glyphImage = document.createElement('img');
+        glyphImage.src = `https://banrigaming.github.io/assets/img/nms/glyphs/${char.toLowerCase()}.png`;
+        glyphImage.alt = `Glyph ${char}`;
+        glyphContainer.appendChild(glyphImage);
+    });
+
+    return glyphContainer;
 }
 
-// Function to handle modal (if applicable)
-function openModal(imageUrl) {
-    const modal = document.getElementById('imageModal');  // Assume there's a modal element
-    const modalImage = modal.querySelector('img');
-    modalImage.src = imageUrl;
-    modal.style.display = 'block';  // Show the modal
+function renderCards(data) {
+    const cardsContainer = document.getElementById('cardsContainer');
+    cardsContainer.innerHTML = ''; // Clear existing cards
+
+    if (data.length === 0) {
+        // No results found message
+        const noResults = document.createElement('p');
+        noResults.textContent = 'No matching results found.';
+        cardsContainer.appendChild(noResults);
+        return;
+    }
+
+    data.forEach((row) => {
+        const [itemName, itemGalaxy, type, portalCode, galacticAddress, coordinates, imageSrc, additionalData] = row;
+
+        // Create card structure
+        const card = document.createElement('div');
+        card.classList.add('card', 'text-white', 'bg-dark');
+        card.dataset.name = `${itemName}, ${itemGalaxy}`;
+        card.dataset.categories = type;
+        card.style.display = 'block';
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        const title = document.createElement('h2');
+        title.classList.add('card-title');
+        title.textContent = itemName;
+
+        const coord = document.createElement('p');
+        coord.textContent = coordinates;
+
+        const galaxyParagraph = document.createElement('h4');
+        galaxyParagraph.textContent = itemGalaxy;
+
+        const addressParagraph = document.createElement('p');
+        addressParagraph.classList.add('card-text');
+        addressParagraph.textContent = galacticAddress || 'N/A';
+
+        const glyphs = generateGlyphs(portalCode);
+
+        // Append elements to card body
+        cardBody.appendChild(title);
+        cardBody.appendChild(galaxyParagraph);
+        cardBody.appendChild(coord);
+        cardBody.appendChild(addressParagraph);
+        cardBody.appendChild(glyphs);
+
+        if(imageSrc !== "" || additionalData  !== ""){
+            // Create and append the Show Data button
+            const showDataButton = document.createElement('button');
+            showDataButton.classList.add('btn', 'btn-primary');
+            showDataButton.setAttribute('data-bs-toggle', 'modal');
+            showDataButton.setAttribute('data-bs-target', '#piratefreighter');
+            showDataButton.textContent = 'Show Data';
+
+            // Event Listener for modal button
+            showDataButton.addEventListener('click', () => {
+                populateModal(imageSrc, additionalData);
+            });
+            cardBody.appendChild(showDataButton);
+        }
+        
+        
+
+        // Append card body to card
+        card.appendChild(cardBody);
+
+        // Append card to container
+        cardsContainer.appendChild(card);
+    });
 }
 
-function closeModal() {
-    const modal = document.getElementById('imageModal');
-    modal.style.display = 'none'; // Hide the modal when clicked outside
+// Function to populate the modal with data
+function populateModal(imageSrc, additionalData) {
+    const modalImage = document.getElementById('modalImage');
+    const modalList = document.getElementById('modalList');
+
+    if(imageSrc == ""){
+        modalImage.classList.add("d-none");
+    }else{
+        // Set the image in the modal
+        modalImage.classList.remove("d-none");
+        modalImage.src = imageSrc;
+    }
+    
+    // Clear the previous list
+    modalList.innerHTML = '';
+
+    // Split additionalData by newline (ALT + Enter splits data in CSV to new lines)
+    if (additionalData) {
+        const dataList = additionalData.split('\n');
+        dataList.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = item;
+            modalList.appendChild(listItem);
+        });
+    }
 }
 
-// Example usage: CSV parsing and rendering
-document.getElementById('https://banrigaming.github.io/assets/files/addressbook.csv').addEventListener('change', function(event) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const csvData = e.target.result;
-        const parsedData = parseCSV(csvData);
-        renderCards(parsedData);
-    };
-    reader.readAsText(event.target.files[0]);
-});
+// Filter cards dynamically
+function filterCards() {
+    const searchQuery = document.getElementById('searchBox').value.toLowerCase();
+    const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
+    const cardsContainer = document.getElementById('cardsContainer');
+
+    // Clear cards if input is empty and "All Categories" is selected
+    if (!searchQuery && typeFilter === 'all categories') {
+        cardsContainer.innerHTML = '';
+        return;
+    }
+
+    const filteredData = originalCardsData.filter((row) => {
+        const [itemName, itemGalaxy, type] = row.map((cell) => cell.toLowerCase());
+
+        const matchesSearch =
+            itemName.includes(searchQuery) ||
+            itemGalaxy.includes(searchQuery) ||
+            type.includes(searchQuery);
+        const matchesType = typeFilter === 'all categories' || type === typeFilter;
+
+        return matchesSearch && matchesType;
+    });
+
+    renderCards(filteredData);
+}
+
+
+// Populate dropdown with types
+function populateTypeDropdown(types) {
+    const dropdown = document.getElementById('typeFilter');
+    const uniqueTypes = ['All Categories', ...new Set(types)].sort();
+
+    dropdown.innerHTML = ''; // Clear existing options
+    uniqueTypes.forEach((type) => {
+        const option = document.createElement('option');
+        option.value = type;
+        option.textContent = type;
+        dropdown.appendChild(option);
+    });
+}
+
+// Initialize event listeners
+function initializeEventListeners() {
+    const searchBox = document.getElementById('searchBox');
+    const typeFilter = document.getElementById('typeFilter');
+    const cardsContainer = document.getElementById('cardsContainer');
+    searchBox.addEventListener('input', () => {
+        if (searchBox.value || typeFilter.value !== 'All Categories') {
+            filterCards();
+        } else {
+            cardsContainer.innerHTML = ''; // Clear previous cards
+        }
+    });
+
+    typeFilter.addEventListener('change', () => {
+        if (searchBox.value || typeFilter.value !== 'All Categories') {
+            filterCards();
+        } else {
+            cardsContainer.innerHTML = ''; // Clear previous cards
+        }
+    });
+}
+
+// Populate cards dynamically
+async function populateCards() {
+    try {
+        const csvData = await fetchCSVData();
+
+        originalCardsData = csvData.slice(1); // Skip the header row
+
+        const types = originalCardsData.map((row) => row[2]);
+        populateTypeDropdown(types);
+
+        initializeEventListeners();
+    } catch (error) {
+        console.error('Error fetching or parsing CSV data:', error);
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', populateCards);
