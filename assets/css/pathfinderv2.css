@@ -39,3 +39,16 @@ body, table {
     justify-content: center;   /* Center the cards horizontally */
     align-items: center;       /* Center the cards vertically */
   }
+
+.large-modal .modal-dialog {
+    max-width: 50%; /* 80% of the viewport width */
+    width: auto;
+    max-height: 80%; /* Optional: Limit the height */
+    overflow-y: auto; /* Scroll content if it exceeds modal height */
+}
+
+.large-modal img {
+    max-width: 100%; /* Ensure images fit within the modal */
+    height: auto;
+}
+
