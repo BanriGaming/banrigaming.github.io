@@ -116,6 +116,7 @@ function populateModal(imageSrc, additionalData) {
         // Set the image in the modal
         modalImage.classList.remove("d-none");
         modalImage.src = imageSrc;
+        modalImage.classList.add("img-fluid"); // Ensure the img-fluid class is added
     }
     
     // Clear the previous list

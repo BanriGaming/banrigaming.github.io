@@ -11,6 +11,24 @@ There will be a random ship there. Make a restore point from your ship and resta
 Iron Vulture Custom Square Supercharged,Euclid,Starship,11AA0B240662,0E61:008A:0A3F:01AA,Space Station,,"Go to Space Station in the System
 Proceed to the Starship Builder
 Slot the Following: S Class Reactor, Iron Vulture Engines, Iron Vulture Wings, Iron Vulture Cockpit"
+Square SC Black & Blue Sentinel Dragonfly,Euclid,Starship,611A4A4C43BC,0BBB:00C9:0CC3:011A,"-34.32, -153.66",https://banrigaming.github.io/assets/img/nms/discoveries/sentinelblackbluedrag.png,"Disable Multiplayer before going through portal
+Fly to Coordinates listed and claim the sentinel ship.
+Comes as B Class, Upgrade to S Class to get 4 Square Supercharged."
+Square SC Green & Red Sentinel Dragonfly,Euclid,Starship,310EDBC4BD5C,055B:005A:044A:010E,"+27.03, -82.53",https://banrigaming.github.io/assets/img/nms/discoveries/sentinelgreenreddrag.png,"Disable Multiplayer before going through portal
+Fly to Coordinates listed and claim the sentinel ship.
+Comes as B Class, Upgrade to S Class to get 4 Square Supercharged."
+Square SC Red & Black Sentinel Ship,Euclid,Starship,4081075A43AF,0BAE:0086:0DA3:0081,"+61.51, -74.75",https://banrigaming.github.io/assets/img/nms/discoveries/sentinelrednblack.png,"Disable Multiplayer before going through portal
+Fly to Coordinates listed and claim the sentinel ship.
+Comes as A Class, Upgrade to S Class to get 4 Square Supercharged."
+Square SC Purple & Black Sentinel Dragonfly,Euclid,Starship,11C30166ADFB,05FA:0080:0E69:01C3,"+56.58, -75.81",https://banrigaming.github.io/assets/img/nms/discoveries/sentdragpurpblack.png,"Disable Multiplayer before going through portal
+Fly to Coordinates listed and claim the sentinel ship.
+Comes as B Class, Upgrade to S Class to get 4 Square Supercharged."
+Square SC Orange & White Sentinel Ship,Euclid,Starship,50AEFFAA95E1,0DE0:007E:02A8:00AE,"+76.15, +153.44",https://banrigaming.github.io/assets/img/nms/discoveries/sentorangewhite.png,"Disable Multiplayer before going through portal
+Fly to Coordinates listed and claim the sentinel ship.
+Comes as C Class, Upgrade to S Class to get 4 Square Supercharged."
+L-Shape SC White & Black Sentinel Ship,Euclid,Starship,412DFD5DC09A,0899:007C:0DDB:012D,"+60.91, -82.40",https://banrigaming.github.io/assets/img/nms/discoveries/banriship.png,"Disable Multiplayer before going through portal
+Fly to Coordinates listed and claim the sentinel ship.
+Comes as A Class, Upgrade to S Class to get 4 Square Supercharged."
 Suspicious Launch Thruster Module,Euclid,Starship,10DCFAFF5005,0804:0079:07F4:00DC,Space Station,,
 Suspicious Starship Shield Module,Euclid,Starship,10DCFAFF5005,0804:0079:07F4:00DC,Space Station,,
 Suspicious Hyperdrive Module,Euclid,Starship,11CA0117006B,086A:0080:096F:01CA,Space Station,,
@@ -50,3 +68,4 @@ To Repeat the same Emergency Signal Scanner:
 Hop Back into your ship and pulse away for 2 seconds.
 Repeat Steps 1-6 as many times as you want."
 Tetho Major - Paradise,Paholiang,Planet,4100F9FF4FFC,07FB:0078:07F3:0100,,https://banrigaming.github.io/assets/img/nms/discoveries/tethomajor.jpg,"Luminesent grass, bubbles, clear weather"
+Paradise,Paholiang,Planet,11F7F8FF1FFA,,,,
