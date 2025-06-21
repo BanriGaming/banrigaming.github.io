@@ -1,0 +1,122 @@
+[
+    {
+        "item": "Anvil F7C-M MK II Ball Turret",
+        "sellPrice": 450000,
+        "size": "2x3"
+    },
+    {
+        "item": "Ardor 2 Salvaged Repeater",
+        "sellPrice": 350000,
+        "size": "2"
+    },
+    {
+        "item": "Ardor 3 Salvaged Repeater",
+        "sellPrice": 350000,
+        "size": "3"
+    },
+    {
+        "item": "Absolution Distortion Cannon",
+        "sellPrice": 450000,
+        "size": "5"
+    },
+    {
+        "item": "Avalanche",
+        "sellPrice": 450000,
+        "size": "2"
+    },
+    {
+        "item": "Eclipse",
+        "sellPrice": 650000,
+        "size": "2"
+    },
+    {
+        "item": "FR-66",
+        "sellPrice": 500000,
+        "size": "1"
+    },
+    {
+        "item": "FR-76",
+        "sellPrice": 1600000,
+        "size": "2"
+    },
+    {
+        "item": "Glacier",
+        "sellPrice": 400000,
+        "size": "1"
+    },
+    {
+        "item": "JS-400",
+        "sellPrice": 600000,
+        "size": "2"
+    },
+    {
+        "item": "JS-300",
+        "sellPrice": 500000,
+        "size": "1"
+    },
+    {
+        "item": "Mirage",
+        "sellPrice": 500000,
+        "size": "1"
+    },
+    {
+        "item": "NDB-26 Repeater",
+        "sellPrice": 350000,
+        "size": "1"
+    },
+    {
+        "item": "NDB-28 Repeater",
+        "sellPrice": 350000,
+        "size": "2"
+    },
+    {
+        "item": "NDB-30 Repeater",
+        "sellPrice": 350000,
+        "size": "3"
+    },
+    {
+        "item": "NightFall",
+        "sellPrice": 450000,
+        "size": "2"
+    },
+    {
+        "item": "Slipstream",
+        "sellPrice": 500000,
+        "size": "1"
+    },
+    {
+        "item": "Snowblind",
+        "sellPrice": 400000,
+        "size": "1"
+    },
+    {
+        "item": "Spectre",
+        "sellPrice": 800000,
+        "size": "1"
+    },
+    {
+        "item": "Spicule",
+        "sellPrice": 2000000,
+        "size": "2"
+    },
+    {
+        "item": "Umbra",
+        "sellPrice": 650000,
+        "size": "2"
+    },
+    {
+        "item": "VK-00",
+        "sellPrice": 800000,
+        "size": "1"
+    },
+    {
+        "item": "Antium Armor Set",
+        "sellPrice": 2000000,
+        "size": "1"
+    },
+    {
+        "item": "XL1",
+        "sellPrice": 2000000,
+        "size": "2"
+    }
+]
