@@ -3,41 +3,79 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Item Cards</title>
-    <!-- Include Bootstrap CSS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Banlonant Emporium Pricer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/main.css"></link>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    </link>
+    </link>
     <script src="../assets/js/nav.js"></script>
 </head>
+
 <body>
     <div w3-include-html="../../nav.html"></div>
     <hr>
+
     <div class="jumbotron jumbotron-fluid">
         <h1 class="display-4">Banlonant Emporium Pricer</h1>
-        <p class="lead">A tool used by the Staff in the Banlonant Emporium to calculate trade deals with players.</p>
+        <p class="lead">A pricing tool created by Banri's wife to help with Star Citizen Trading and Calculations.</p>
     </div>
+
     </div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/index">Home</a></li>
             <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
             <li class="breadcrumb-item"><a href="/landing-pages/starcitizen">Star Citizen</a></li>
-            <li class="breadcrumb-item active" aria-current="page">SC Pricer</li>
+            <li class="breadcrumb-item active" aria-current="page">SC Market Pricer</li>
         </ol>
     </nav>
     <hr>
 
+    <div id="app">
+        <h2 class="mb-3">Application</h2>
 
+        <!-- Dynamic Item Lines -->
+        <div id="order-lines" class=" mb-4"></div>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script>includeHTML();</script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
-    <!-- External JS file or inline script -->
+        <button id="add-line" class="bg-blue-600 px-4 py-1 rounded hover:bg-blue-700 mb-6">
+            + Add Item to Order
+        </button>
+
+        <!-- Discount + Delivery -->
+        <div>
+            <div class="w-50">
+                <label class="block mb-1 font-medium">Discount (%)</label>
+                <input type="number" id="discount" value="0" class="w-full p-2 border rounded bg-dark" min="0" max="100" />
+            </div>
+            <div class="w-50 mt-3">
+                <label class="block mb-1 font-medium">Delivery</label>
+                <select id="delivery" class="w-100 p-2 border rounded bg-dark">
+                    <option value="No">No Delivery</option>
+                    <option value="Stanton">Stanton (¤200,000)</option>
+                    <option value="Pyro">Pyro (¤350,000)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Totals -->
+        <div class="text-left text-lg font-semibold my-5">
+            <p>Subtotal: <span id="subtotal">¤0</span></p>
+            <p>Final Total: <span id="final-total">¤0</span></p>
+        </div>
+
+        <!-- Generate Image -->
+        <button id="generateImage" class="bg-green-600 px-4 py-2 rounded hover:bg-green-700">
+            📸 Generate Receipt Image
+        </button>
+
+        <!-- Hidden Receipt & Image Output -->
+        <div id="receipt" class="mt-5 p-4 rounded border bg-dark w-75"  style="display:none;"></div>
+        <div id="imagePreview" class="mt-4 text-center bg-dark w-75"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script defer src="../assets/js/scpricer.js"></script>
 </body>
 
 </html>
