@@ -17,6 +17,12 @@
     "size": "5",
         "category": "Weapons"
   },
+    {
+    "item": "Salvation Distortion Cannon",
+    "sellPrice": 450000,
+    "size": "4",
+        "category": "Weapons"
+  },
   {
     "item": "Ardor 2 Salvaged Repeater",
     "sellPrice": 350000,
@@ -49,6 +55,12 @@
   },
   {
     "item": "NN-13",
+    "sellPrice": 350000,
+    "size": "1",
+        "category": "Weapons"
+  },
+    {
+    "item": "NN-14",
     "sellPrice": 350000,
     "size": "2",
         "category": "Weapons"
@@ -152,7 +164,7 @@
   {
     "item": "Antium Armor Set",
     "sellPrice": 2000000,
-    "size": "1",
+    "size": "",
         "category": "Equipment"
   }
 ]

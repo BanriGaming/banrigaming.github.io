@@ -7,6 +7,17 @@ async function loadItems() {
     addOrderLine(); // start with one line
 }
 
+// ✅ Group items by category (e.g., Shields, Weapons, etc.)
+function groupItemsByCategory(items) {
+    const groups = {};
+    items.forEach((item, i) => {
+        const category = item.category || 'Uncategorized';
+        if (!groups[category]) groups[category] = [];
+        groups[category].push({ ...item, index: i });
+    });
+    return groups;
+}
+
 function addOrderLine() {
     const index = orderLines.length;
     orderLines.push({ itemIndex: null, quantity: 0 });
@@ -17,15 +28,37 @@ function addOrderLine() {
     row.className = 'flex gap-2 items-center mb-2';
     row.dataset.index = index;
 
-    // Dropdown for item
+    // ✅ Group items by category and create dropdown with optgroups
+    const groups = groupItemsByCategory(items);
+
     const select = document.createElement('select');
     select.className = 'border p-1 w-64 bg-dark';
-    select.innerHTML = `<option value="">Select an item...</option>` +
-        items.map((item, i) =>
-            `<option value="${i}">${item.item}</option>`
-        ).join('');
+    select.innerHTML = `<option value="">Select an item...</option>`;
+
+    for (const category in groups) {
+        const optGroup = document.createElement('optgroup');
+        optGroup.label = category;
+
+        groups[category].forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.index;
+            option.textContent = `${item.item} - Size ${item.size}`;
+            optGroup.appendChild(option);
+        });
+
+        select.appendChild(optGroup);
+    }
+
+    // ✅ Prevent duplicate item selection
     select.addEventListener('change', () => {
-        orderLines[index].itemIndex = parseInt(select.value);
+        const selectedValue = parseInt(select.value);
+        const alreadyUsed = orderLines.some((line, i) => line.itemIndex === selectedValue && i !== index);
+        if (alreadyUsed) {
+            alert("This item is already selected in another line.");
+            select.value = "";
+            return;
+        }
+        orderLines[index].itemIndex = selectedValue;
         updateLine(row, index);
         updateTotals();
     });
@@ -105,12 +138,11 @@ document.getElementById('generateImage').addEventListener('click', () => {
     const receipt = document.getElementById('receipt');
     const preview = document.getElementById('imagePreview');
 
-    // Clear and hide previous image
     preview.innerHTML = '';
-    preview.style.display = 'none'; // ✅ make sure it's hidden
+    preview.style.display = 'none';
 
     let html = `<h2 class="fs-4 font-bold mb-5">Banlonant Emporium Receipt</h2>`;
-    html += `<table class="bg-dark w-full mb-4 border border-collapse text-center align-middles fs-6">
+    html += `<table class="bg-dark w-full mb-4 border border-collapse text-center align-middle fs-6">
     <thead><tr>
       <th class="border pb-3 text-center align-middle">Item</th>
       <th class="border pb-3 text-center align-middle">Qty</th>
@@ -133,7 +165,6 @@ document.getElementById('generateImage').addEventListener('click', () => {
     <td class="border pb-3 align-middle">${qty}</td>
     <td class="border pb-3 align-middle">¤${price.toLocaleString()}</td>
     <td class="border pb-3 align-middle">¤${total.toLocaleString()}</td>
-
       </tr>`;
         }
     });
@@ -144,19 +175,17 @@ document.getElementById('generateImage').addEventListener('click', () => {
     const discounted = subtotal - (subtotal * discount / 100);
     const final = discounted + deliveryFee;
 
-    html += `</tbody></table>
-    <div class="text-left font-semibold space-y-1">
-      <p>Total: ¤${subtotal.toLocaleString()}</p>
-      <p>Discount: ${discount}%</p>
-      <p class="mb-3">Delivery: ${deliveryFee > 0 ? `¤${deliveryFee.toLocaleString()} (${delivery})` : 'None'}</p>
-      <p class="fs-6">Final Total: ¤${final.toLocaleString()}</p>
-    </div>`;
+    html += `</tbody></table><div class="text-left font-semibold space-y-1"><p>Total: ¤${subtotal.toLocaleString()}</p>`;
+    if(discount > 0){
+        html += `<p>Discount: ${discount}%</p>`;
+    }
+    html += `<p class="mb-3">Delivery: ${deliveryFee > 0 ? `¤${deliveryFee.toLocaleString()} (${delivery})` : 'None'}</p><p class="fs-6">Final Total: ¤${final.toLocaleString()}</p></div>`;
 
     receipt.innerHTML = html;
     receipt.style.display = 'block';
 
     html2canvas(receipt, { scale: 2 }).then(canvas => {
-        receipt.style.display = 'none'; // ✅ hide the receipt again
+        receipt.style.display = 'none';
 
         const img = new Image();
         img.src = canvas.toDataURL('image/png');
@@ -164,58 +193,10 @@ document.getElementById('generateImage').addEventListener('click', () => {
 
         preview.innerHTML = '';
         preview.appendChild(img);
-        preview.style.display = 'block'; // ✅ reveal the image preview now
+        preview.style.display = 'block';
 
         img.scrollIntoView({ behavior: 'smooth' });
     });
 });
-
-// ✅ Group items by category (e.g., Shields, Weapons, etc.)
-function groupItemsByCategory(items) {
-    const groups = {};
-    items.forEach((item, i) => {
-        const category = item.category || 'Uncategorized';
-        if (!groups[category]) groups[category] = [];
-        // Add index so we can track which one is selected
-        groups[category].push({ ...item, index: i });
-    });
-    return groups;
-}
-
-// ✅ Create dropdown with optgroups based on category
-const groups = groupItemsByCategory(items);
-
-const select = document.createElement('select');
-select.className = 'border p-1 w-64 bg-dark';
-select.innerHTML = `<option value="">Select an item...</option>`;
-
-// ✅ Append grouped options to the dropdown
-for (const category in groups) {
-    const optGroup = document.createElement('optgroup');
-    optGroup.label = category;
-    groups[category].forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.index;
-        // ✅ Include size in label
-        option.textContent = `${item.item} (Size ${item.size})`;
-        optGroup.appendChild(option);
-    });
-    select.appendChild(optGroup);
-}
-
-// ✅ Prevent selecting the same item more than once
-select.addEventListener('change', () => {
-    const selectedValue = parseInt(select.value);
-    const alreadyUsed = orderLines.some((line, i) => line.itemIndex === selectedValue && i !== index);
-    if (alreadyUsed) {
-        alert("This item is already selected in another line.");
-        select.value = "";
-        return;
-    }
-    orderLines[index].itemIndex = selectedValue;
-    updateLine(row, index);
-    updateTotals();
-});
-
 
 loadItems();
