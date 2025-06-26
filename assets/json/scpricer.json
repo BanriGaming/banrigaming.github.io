@@ -15,156 +15,174 @@
     "item": "Absolution Distortion Cannon",
     "sellPrice": 450000,
     "size": "5",
-        "category": "Weapons"
+    "category": "Weapons"
   },
-    {
+  {
     "item": "Salvation Distortion Cannon",
     "sellPrice": 450000,
     "size": "4",
-        "category": "Weapons"
+    "category": "Weapons"
   },
   {
     "item": "Ardor 2 Salvaged Repeater",
     "sellPrice": 350000,
     "size": "2",
-        "category": "Weapons"
+    "category": "Weapons"
   },
   {
     "item": "Ardor 3 Salvaged Repeater",
     "sellPrice": 350000,
     "size": "3",
-        "category": "Weapons"
+    "category": "Weapons"
   },
   {
     "item": "NDB-26 Repeater",
     "sellPrice": 350000,
     "size": "1",
-        "category": "Weapons"
+    "category": "Weapons"
   },
   {
     "item": "NDB-28 Repeater",
     "sellPrice": 350000,
     "size": "2",
-        "category": "Weapons"
+    "category": "Weapons"
   },
   {
     "item": "NDB-30 Repeater",
     "sellPrice": 350000,
     "size": "3",
-        "category": "Weapons"
+    "category": "Weapons"
   },
   {
     "item": "NN-13",
     "sellPrice": 350000,
     "size": "1",
-        "category": "Weapons"
+    "category": "Weapons"
   },
-    {
+  {
     "item": "NN-14",
     "sellPrice": 350000,
     "size": "2",
-        "category": "Weapons"
+    "category": "Weapons"
   },
   {
     "item": "Avalanche",
     "sellPrice": 450000,
     "size": "2",
-        "category": "Coolers"
+    "category": "Coolers"
   },
   {
     "item": "NightFall",
     "sellPrice": 450000,
     "size": "2",
-        "category": "Coolers"
+    "category": "Coolers"
   },
   {
     "item": "Glacier",
     "sellPrice": 400000,
     "size": "1",
-        "category": "Coolers"
+    "category": "Coolers"
   },
   {
     "item": "SnowBlind",
     "sellPrice": 400000,
     "size": "1",
-        "category": "Coolers"
+    "category": "Coolers"
   },
   {
     "item": "JS-400",
     "sellPrice": 600000,
     "size": "2",
-        "category": "Power Plants"
+    "category": "Power Plants"
   },
   {
     "item": "Eclipse",
     "sellPrice": 650000,
     "size": "2",
-        "category": "Power Plants"
+    "category": "Power Plants"
   },
   {
     "item": "JS-300",
     "sellPrice": 500000,
     "size": "1",
-        "category": "Power Plants"
+    "category": "Power Plants"
   },
   {
     "item": "Slipstream",
     "sellPrice": 500000,
     "size": "1",
-        "category": "Power Plants"
+    "category": "Power Plants"
   },
   {
     "item": "FR-76",
     "sellPrice": 1600000,
     "size": "2",
-        "category": "Shields"
+    "category": "Shields"
   },
   {
     "item": "Umbra",
     "sellPrice": 650000,
     "size": "2",
-        "category": "Shields"
+    "category": "Shields"
   },
   {
     "item": "FR-66",
     "sellPrice": 500000,
     "size": "1",
-        "category": "Shields"
+    "category": "Shields"
   },
   {
     "item": "Mirage",
     "sellPrice": 500000,
     "size": "1",
-        "category": "Shields"
+    "category": "Shields"
   },
   {
     "item": "XL1",
     "sellPrice": 2000000,
     "size": "2",
-        "category": "Quantum Drive"
+    "category": "Quantum Drive"
   },
   {
     "item": "Spicule",
     "sellPrice": 2000000,
-    "size": "2", 
-        "category": "Quantum Drive"
+    "size": "2",
+    "category": "Quantum Drive"
   },
   {
     "item": "VK-00",
     "sellPrice": 800000,
     "size": "1",
-        "category": "Quantum Drive"
+    "category": "Quantum Drive"
   },
   {
     "item": "Spectre",
     "sellPrice": 800000,
     "size": "1",
-        "category": "Quantum Drive"
+    "category": "Quantum Drive"
   },
   {
     "item": "Antium Armor Set",
     "sellPrice": 2000000,
     "size": "",
-        "category": "Equipment"
+    "category": "Equipment"
+  },
+  {
+    "item": "Carinite Ore",
+    "sellPrice": 175000,
+    "size": "",
+    "category": "Materials"
+  },
+  {
+    "item": "Saldynium Ore",
+    "sellPrice": 175000,
+    "size": "",
+    "category": "Materials"
+  },
+  {
+    "item": "Jaclium Ore",
+    "sellPrice": 175000,
+    "size": "",
+    "category": "Materials"
   }
 ]
