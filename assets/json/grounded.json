@@ -61,24 +61,24 @@
         "armor": [
           {
             "name": "Assassin's Mask",
-            "img": "https://static.wikia.nocookie.net/grounded9429/images/e/eb/Assassin%27s_Mask.png/revision/latest/scale-to-width-down/100?cb=20220928005857",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/e/eb/Assassin%27s_Mask.png",
             "upgrade": "Sleek"
           },
           {
             "name": "Assassin's Chestplate",
-            "img": "https://static.wikia.nocookie.net/grounded9429/images/8/8b/Assassin%27s_Chestplate.png/revision/latest/scale-to-width-down/100?cb=20220928005854",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/8/8b/Assassin%27s_Chestplate.png",
             "upgrade": "Sleek"
           },
           {
             "name": "Fire Ant Legplates",
-            "img": "https://static.wikia.nocookie.net/grounded9429/images/5/54/Fire_Ant_Legplates.png/revision/latest/scale-to-width-down/100?cb=20220928005914",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/5/54/Fire_Ant_Legplates.png",
             "upgrade": "Bulky"
           }
         ],
         "trinket": [
             {
           "name": "Mantis Trinket",
-          "img": "https://static.wikia.nocookie.net/grounded9429/images/0/0f/Mantis_Trinket.png/revision/latest?cb=20220928021004"
+          "img": "https://static.wikia.nocookie.net/grounded9429/images/0/0f/Mantis_Trinket.png"
             }
     ],
         "weapons": [
