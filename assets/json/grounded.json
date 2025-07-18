@@ -109,5 +109,130 @@
         "notes": "This variant uses the Assassin set + Mantis Trinket to unleash crits with blazing attack speed for boss fights."
       }
     }
+  },
+  {
+    "title": "Acid Executioner Build",
+    "armor": [
+      {
+        "name": "Fire Ant Helmet",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/0/0e/Fire_Ant_Helmet.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Fire Ant Chestplate",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/6/67/Fire_Ant_Arm_Guards.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Fire Ant Legplates",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/5/54/Fire_Ant_Legplates.png",
+        "upgrade": "Sleek"
+      }
+    ],
+    "trinket": [
+      {
+        "name": "Thor's Pendant",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/9/9a/Thor%27s_Pendant.png"
+      },
+      {
+        "name": "Unstable Capacitor",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/0/01/Unstable_Capacitor.png"
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Acid Edge",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/6/67/Acid_Edge.png",
+        "upgrade": "Mighty"
+      },
+      {
+        "name": "Ant Queen Staff",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/5/59/Ant_Queen_Staff.png",
+        "upgrade": "Mighty"
+      }
+    ],
+    "mutations": [
+      {
+        "name": "Chopper",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/b/b4/Mutation_Chopper.png"
+      },
+      {
+        "name": "Buff Lungs",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2c/Mutation_Buff_Lungs.png"
+      },
+      {
+        "name": "Whittle Wizard",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/4/43/Mutation_Whittle_Wizard.png"
+      },
+      {
+        "name": "Trapper PEEP.R",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+      },
+      {
+        "name": "Coup de Grass",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+      }
+    ],
+    "notes": "This build uses high acid output and AoE damage with Whittle Wizard and Chopper synergy for area clearing and consistent debuffing."
+  },
+  {
+    "title": "Doomstalker",
+    "armor": [
+      {
+        "name": "Bard's Tudor",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/3/3a/Bard%27s_Tudor.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Moth Robe",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/9/95/Moth_Robe.png",
+        "upgrade": "Bulky"
+      },
+      {
+        "name": "Bee Shin Guards",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/e/ea/Bee_Shin_Guards.png",
+        "upgrade": "Sleek"
+      }
+    ],
+    "trinket": [
+      {
+        "name": "Nifty Needle",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/f/fd/Nifty_Needle.png"
+      },
+      {
+        "name": "Wasp Queen Trinket",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/4/41/Wasp_Queen_Trinket.png"
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Bard's Bow",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2b/Bard%27s_Bow.png",
+        "upgrade": "Mighty"
+      }
+    ],
+    "mutations": [
+      {
+        "name": "Sharpshooter",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/3/3b/Mutation_Sharpshooter.png"
+      },
+      {
+        "name": "Apex Predator",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/f/f7/Mutation_Apex_Predator.png"
+      },
+      {
+        "name": "Bardic Inspiration",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/0/03/Mutation_Bardic_Inspiration.png"
+      },
+      {
+        "name": "Trapper PEEP.R",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+      },
+      {
+        "name": "Coup de Grass",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+      }
+    ],
+    "notes": "This build uses high acid output and AoE damage with Whittle Wizard and Chopper synergy for area clearing and consistent debuffing."
   }
 ]
