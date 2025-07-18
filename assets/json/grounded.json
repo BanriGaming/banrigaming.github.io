@@ -20,10 +20,12 @@
             "upgrade": "Bulky"
           }
         ],
-        "trinket": {
-          "name": "Giddy Goop",
-          "img": "https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"
-        },
+        "trinket": [
+          {
+            "name": "Giddy Goop",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"
+          }
+        ],
         "weapons": [
           {
             "name": "Scythe of Blossoms",
@@ -73,10 +75,12 @@
             "upgrade": "Bulky"
           }
         ],
-        "trinket": {
+        "trinket": [
+            {
           "name": "Mantis Trinket",
           "img": "https://static.wikia.nocookie.net/grounded9429/images/0/0f/Mantis_Trinket.png/revision/latest?cb=20220928021004"
-        },
+            }
+    ],
         "weapons": [
           {
             "name": "Scythe of Blossoms",
