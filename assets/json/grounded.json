@@ -313,5 +313,117 @@
       }
     ],
     "notes": "<p>The Ox Wizard is a <strong>versatile elemental caster</strong> that wields all four staves to dominate <span style=\"color:#fb8c00;\">every enemy type</span> in Grounded.</p><p>This build focuses on <span style=\"color:#43a047;\"><strong>charged attacks</strong></span> enhanced by the full <strong>Black Ox Armor</strong> set (Sleek), granting:</p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><strong>+36% faster charge speed</strong> via <em>Quick Charge</em></li><li><strong>+25 stun damage</strong> via <em>Stun Charger</em></li><li><strong>33% chance to reduce enemy damage</strong> by 20% (Overbearing)</li></ul><p>The build’s backbone is <strong>Whittle Wizard (Mastery)</strong>, which enhances stave effects and reduces stamina cost by <span style=\"color:#1e88e5;\"><strong>50%</strong></span>, making spellcasting vastly more efficient.</p><p>Each stave has a distinct purpose:</p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><strong>Mint Staff</strong> — Slows targets by <span style=\"color:#43a047;\">30%</span></li><li><strong>Spicy Staff</strong> — Burns for <span style=\"color:#e53935;\">75 damage every 5s</span></li><li><strong>Sour Staff</strong> — Delivers high stun for crowd control</li><li><strong>Acid Staff</strong> — Deals <span style=\"color:#8e24aa;\">true damage</span> that ignores all resistances</li></ul><p>For passive boosts, equip the <strong>Entomologist Badge</strong> for <span style=\"color:#f4511e;\"><strong>+10% damage</strong></span> (non-boss fights), and bring along:</p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><strong>Baby Fire Ant Pet</strong> — <span style=\"color:#f4511e;\">+25% total damage</span></li><li><strong>OR Baby Black Ant Pet</strong> — <span style=\"color:#1e88e5;\">+50% damage resistance</span></li></ul><p>Finish it off with food buffs like:</p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><em>Miteloaf</em> or <em>Funguspaccio</em> — <strong>-10% stamina cost</strong> for staves</li><li><em>Liquid Rage</em> — <strong>+10% overall damage</strong></li></ul><p>Whether freezing wasps mid-flight, burning spiders alive, stunning shield bugs, or melting bosses with <span style=\"color:#8e24aa;\">resistance-ignoring acid</span>, the Ox Wizard is your <strong>all-purpose mage</strong> and <strong>boss-melting spellcaster</strong> built for style, control, and destruction.</p>"
+  },
+  {
+    "title": "Blightfang Knight",
+    "armor": [
+      {
+        "name": "Mask of the Mother Demon",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/6/6d/Mask_of_the_Mother_Demon.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Chest of the Mother Demon",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/7/7c/Chest_of_the_Mother_Demon.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Greaves of the Mother Demon",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/5/5d/Greaves_of_the_Mother_Demon.png",
+        "upgrade": "Sleek"
+      }
+    ],
+    "trinket": [
+      {
+        "name": "Thor's Pendant",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/9/9a/Thor%27s_Pendant.png"
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Club of the Mother Demon",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/c/cb/Club_of_the_Mother_Demon.png",
+        "upgrade": "Mighty"
+      }
+    ],
+    "mutations": [
+      {
+        "name": "Barbarian",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/4/43/Mutation_Barbarian.png"
+      },
+      {
+        "name": "Apex Predator",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/f/f7/Mutation_Apex_Predator.png"
+      },
+      {
+        "name": "Mom's Genes",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/c/c9/Mutation_Mom_Genes.png"
+      },
+      {
+        "name": "Coup de Grass",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+      },
+      {
+        "name": "Trapper PEEP.R",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+      }
+    ],
+    "notes": "<p>The <strong>Blightfang Knight</strong> is a <span style=\"color:#e53935;\"><strong>hard-hitting poison juggernaut</strong></span> designed to <em>smash, melt, and crush</em> anything in your path.</p><p><strong>Weapon:</strong> <em>Club of the Mother Demon</em> (Mighty) dishes out <span style=\"color:#1e88e5;\"><strong>565 base damage</strong></span> in a 3-hit combo and <strong>max stun potential</strong>.</p><p><strong>Trinket:</strong> <em>Thor's Pendant</em> gives <span style=\"color:#43a047;\">HP + Stamina regen</span>, <span style=\"color:#f4511e;\">+1% crit chance</span>, and <span style=\"color:#f4511e;\">+10% crit damage</span>.</p><p><strong>Armor Set 1:</strong> <em>Full Mother Demon Armor</em> (Sleek)</p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><strong>Poison Coating</strong>: 25% chance to apply <span style=\"color:#8e24aa;\">204 poison</span> over 30s</li><li><strong>Poison Nova</strong>: 10% chance for an AoE <span style=\"color:#8e24aa;\">150 poison</span> over 25s</li><li><em>99.9% uptime</em> on coatings, <em>88.1% uptime</em> on nova</li></ul><p><strong>Armor Set 2 (Boss Variant):</strong> Swap in <em>Assassin Greaves</em> (Bulky) for:</p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><strong>Cutman</strong>: 50% chance to inflict <span style=\"color:#e53935;\">200 bleed</span> over 10s</li></ul><p><strong>Mutations:</strong></p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><em>Mom’s Genes</em>: Spiderling summon buffs poison by 50%</li><li><em>Apex Predator</em>: 20% chance to apply <span style=\"color:#8e24aa;\">Venom (135 dmg)</span> that ignores resistance</li><li><em>Coup de Grass</em> + <em>Trapper PEEP.R</em>: +5% crit, +60% crit dmg</li><li><em>Barbarian</em>: +25% melee dmg and +1 HP/sec (Mastery)</li></ul><p><em>Swap to</em> <strong>Cardio Fan</strong> for Whoa/Boss fights to maintain stamina uptime.</p><p><strong>Buffs:</strong></p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li>Sticky Liquid Rage: +10% damage</li><li>Sticky Boss Sauce: +5% crit</li><li>Spider Slider / Larvagna / Perfect Toast: +5% crit, +40% crit dmg</li></ul><p><strong>Pet:</strong> <em>Baby Fire Ant</em>: <span style=\"color:#f4511e;\"><strong>+25% total damage</strong></span></p><p><strong>Max Combo:</strong> <span style=\"color:#e53935;\">763+ damage per 3-hit combo</span>, up to <span style=\"color:#f4511e;\"><strong>2.7x crit multiplier</strong></span>, plus <span style=\"color:#8e24aa;\">792 DOT from venom/poison</span> over 30s.</p><p>Enemies don’t stand a <em>chance</em>.</p>"
+  },
+   {
+    "title": "Scarlet Lifesteal",
+    "armor": [
+      {
+        "name": "Ladybug Faceplate",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/5/5d/Ladybug_Faceplate.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Ladybug Chestplate",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/4/47/Ladybug_Chestplate.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Ladybug Shin Guards",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/6/6f/Ladybug_Shin_Guards.png",
+        "upgrade": "Sleek"
+      }
+    ],
+    "trinket": [
+      {
+        "name": "Compliance Badge",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/a4/Compliance_Badge.png"
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Tiger Mosquito Rapier",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/c/ce/Tiger_Mosquito_Rapier.png",
+        "upgrade": "Mighty"
+      }
+    ],
+    "mutations": [
+      {
+        "name": "Blademaster",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/3/32/Mutation_Blade_Master.png"
+      },
+      {
+        "name": "Meat Shield",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2f/Mutation_Meat_Shield.png"
+      },
+      {
+        "name": "Coup de Grass",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+      },
+      {
+        "name": "Corporate Kickback",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2b/Mutation_Corporate_Kickback.png"
+      },
+      {
+        "name": "Trapper PEEP.R",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+      }
+    ],
+    "notes": "<p>The <strong>Scarlet Lifesteal</strong> build is a <span style=\"color:#43a047;\"><strong>sustain tank</strong></span> that turns you into an unkillable vampire lord. With smart parrying and healing synergy, <span style=\"color:#e53935;\">you. just. don’t. die.</span></p><p><strong>Weapon:</strong> <em>Tiger Mosquito Rapier</em> (Mighty) with <span style=\"color:#f4511e;\"><strong>9.15% lifesteal</strong></span> per strike, thanks to synergy with Ladybug armor.</p><p><strong>Trinket:</strong> <em>Compliance Badge</em> heals <span style=\"color:#43a047;\"><strong>12.2% of max HP</strong></span> on parry. Or swap to <em>Biomedical Badge</em> for passive healing (1 HP every 10s).</p><p><strong>Armor:</strong> <em>Full Ladybug Set</em> (Sleek)</p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><strong>Block Strength</strong>: +25 to block gauge</li><li><strong>Scarlet Embrace</strong>: 50% chance to heal <span style=\"color:#1e88e5;\">15 HP</span> over 20s</li><li><strong>Sleek Bonus</strong>: <span style=\"color:#43a047;\">+52.5% to all healing</span></li></ul><p>Altogether, this setup grants <span style=\"color:#43a047;\"><strong>stackable healing from 3 sources</strong></span>, letting you face-tank nearly anything.</p><p><strong>Mutations:</strong></p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><em>Meat Shield</em>: More max HP = more healing value</li><li><em>Corporate Kickback</em>: Chance to gain temporary enhanced lifesteal</li><li><em>Blade Master</em>: Less exhaustion + <span style=\"color:#e53935;\">-30% enemy damage (Mastery)</span></li><li><em>Coup de Grass</em>: +5% crit chance</li><li><em>Trapper PEEP.R</em>: +60% crit damage</li></ul><p><strong>Pet:</strong></p><ul style=\"text-align:left; padding-left:1.2rem; color:#ddd;\"><li><em>Baby Black Ant</em>: <span style=\"color:#1e88e5;\">+50% damage resistance</span> (unkillable mode)</li><li><em>OR Baby Fire Ant</em>: <span style=\"color:#f4511e;\">+25% damage</span></li></ul><p><strong>Consumables:</strong> <em>Bandage</em>, <em>Sticky Soothing Syrup</em>, <em>Black Ox Burger</em> for <span style=\"color:#43a047;\">even MORE sustain</span>.</p><p>This is <strong>the ultimate survivability build</strong> — ideal for long fights, boss rushes, and face-tanking the entire backyard.</p>"
   }
 ]
