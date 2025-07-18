@@ -115,7 +115,7 @@
     }
   },
   {
-    "title": "Acid Executioner Build",
+    "title": "Acid Executioner",
     "armor": [
       {
         "name": "Fire Ant Helmet",
@@ -238,5 +238,80 @@
       }
     ],
     "notes": "This build uses high acid output and AoE damage with Whittle Wizard and Chopper synergy for area clearing and consistent debuffing."
+  },
+    {
+    "title": "Ox Wizard",
+    "armor": [
+      {
+        "name": "Black Ox Helmet",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/ad/Black_Ox_Helm.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Black Ox Harness",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/4/43/Black_Ox_Harness.png",
+        "upgrade": "Sleek"
+      },
+      {
+        "name": "Black Ox Legwraps",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/6/6a/Black_Ox_Legwraps.png",
+        "upgrade": "Sleek"
+      }
+    ],
+    "trinket": [
+      {
+        "name": "Entomologist Badge",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/b/b6/Entomologist_Badge.png"
+      },
+      {
+        "name": "Giddy Goop",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Spicy Staff",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/2/27/Spicy_Staff.png",
+        "upgrade": "Mighty"
+      },
+      {
+        "name": "Mint Staff",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/f/f9/Mint_Staff.png",
+        "upgrade": "Mighty"
+      },
+      {
+        "name": "Sour Staff",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/5/5b/Sour_Staff.png",
+        "upgrade": "Mighty"
+      },
+      {
+        "name": "Ant Queen Staff",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/5/59/Ant_Queen_Staff.png",
+        "upgrade": "Mighty"
+      }
+    ],
+    "mutations": [
+      {
+        "name": "Whittle Wizard",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/4/43/Mutation_Whittle_Wizard.png"
+      },
+      {
+        "name": "Buff Lungs",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2c/Mutation_Buff_Lungs.png"
+      },
+      {
+        "name": "Meat Shield",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2f/Mutation_Meat_Shield.png"
+      },
+      {
+        "name": "Cardio Fan",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/4/44/Mutation_Cardio_Fan.png"
+      },
+      {
+        "name": "Spicy Safety",
+        "img": "https://static.wikia.nocookie.net/grounded9429/images/a/ad/Mutation_Spicy_Safety.png"
+      }
+    ],
+    "notes": "<p>The Ox Wizard is a <strong>versatile elemental caster</strong> that wields all four staves to dominate <span style=\\\"color:#fb8c00;\\\">every enemy type</span> in Grounded.<br><br>This build focuses on <span style=\\\"color:#43a047;\\\"><strong>charged attacks</strong></span> enhanced by the full <strong>Black Ox Armor</strong> set (Sleek), granting:</p><ul style=\\\"text-align:left; padding-left:1.2rem;\\\"><li><strong>+36% faster charge speed</strong> via <em>Quick Charge</em></li><li><strong>+25 stun damage</strong> via <em>Stun Charger</em></li><li><strong>33% chance to reduce enemy damage</strong> by 20% (Overbearing)</li></ul><p>The build’s backbone is <strong>Whittle Wizard (Mastery)</strong>, which enhances stave effects and reduces stamina cost by <span style=\\\"color:#1e88e5;\\\"><strong>50%</strong></span>, making spellcasting vastly more efficient.<br><br>Each stave has a distinct purpose:</p><ul style=\\\"text-align:left; padding-left:1.2rem;\\\"><li><strong>Mint Staff</strong> — Slows targets by <span style=\\\"color:#43a047;\\\">30%</span></li><li><strong>Spicy Staff</strong> — Burns for <span style=\\\"color:#e53935;\\\">75 damage every 5s</span></li><li><strong>Sour Staff</strong> — Delivers high stun for crowd control</li><li><strong>Acid Staff</strong> — Deals <span style=\\\"color:#8e24aa;\\\">true damage</span> that ignores all resistances</li></ul><p>For passive boosts, equip the <strong>Entomologist Badge</strong> for <span style=\\\"color:#f4511e;\\\"><strong>+10% damage</strong></span> (non-boss fights), and bring along:</p><ul style=\\\"text-align:left; padding-left:1.2rem;\\\"><li><strong>Baby Fire Ant Pet</strong> — <span style=\\\"color:#f4511e;\\\">+25% total damage</span></li><li><strong>OR Baby Black Ant Pet</strong> — <span style=\\\"color:#1e88e5;\\\">+50% damage resistance</span></li></ul><p>Finish it off with food buffs like:</p><ul style=\\\"text-align:left; padding-left:1.2rem;\\\"><li><em>Miteloaf</em> or <em>Funguspaccio</em> — <strong>-10% stamina cost</strong> for staves</li><li><em>Liquid Rage</em> — <strong>+10% overall damage</strong></li></ul><p>Whether freezing wasps mid-flight, burning spiders alive, stunning shield bugs, or melting bosses with <span style=\\\"color:#8e24aa;\\\">resistance-ignoring acid</span>, the Ox Wizard is your <strong>all-purpose mage</strong> and <strong>boss-melting spellcaster</strong> built for style, control, and destruction.</p>"
   }
 ]
