@@ -1,0 +1,113 @@
+[
+  {
+    "title": "Reaper of Blossoms",
+    "variants": {
+      "backyard": {
+        "armor": [
+          {
+            "name": "Widow Hood",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2d/Widow_Hood.png",
+            "upgrade": "Bulky"
+          },
+          {
+            "name": "Widow Spaulder",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/1/1d/Widow_Spaulder.png",
+            "upgrade": "Bulky"
+          },
+          {
+            "name": "Widow Leggings",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/d/d4/Widow_Leggings.png",
+            "upgrade": "Sleek"
+          }
+        ],
+        "trinket": {
+          "name": "Giddy Goop",
+          "img": "https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"
+        },
+        "weapons": [
+          {
+            "name": "Scythe of Blossoms",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/9/96/Scythe_of_Blossoms.png",
+            "upgrade": "Mighty"
+          }
+        ],
+        "mutations": [
+          {
+            "name": "Assassin",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/b/b0/Mutation_Assassin.png"
+          },
+          {
+            "name": "Parry Master",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/4/46/Mutation_Parry_Master.png"
+          },
+          {
+            "name": "Coup de Grass",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+          },
+          {
+            "name": "Trapper PEEP.R",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+          },
+          {
+            "name": "Apex Predator",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/f/f7/Mutation_Apex_Predator.png"
+          }
+        ],
+        "notes": "This Reaper build is a glass cannon powerhouse designed for overwhelming crit-based burst damage..."
+      },
+      "boss": {
+        "armor": [
+          {
+            "name": "Assassin's Mask",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/e/eb/Assassin%27s_Mask.png/revision/latest/scale-to-width-down/100?cb=20220928005857",
+            "upgrade": "Sleek"
+          },
+          {
+            "name": "Assassin's Chestplate",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/8/8b/Assassin%27s_Chestplate.png/revision/latest/scale-to-width-down/100?cb=20220928005854",
+            "upgrade": "Sleek"
+          },
+          {
+            "name": "Fire Ant Legplates",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/5/54/Fire_Ant_Legplates.png/revision/latest/scale-to-width-down/100?cb=20220928005914",
+            "upgrade": "Bulky"
+          }
+        ],
+        "trinket": {
+          "name": "Mantis Trinket",
+          "img": "https://static.wikia.nocookie.net/grounded9429/images/0/0f/Mantis_Trinket.png/revision/latest?cb=20220928021004"
+        },
+        "weapons": [
+          {
+            "name": "Scythe of Blossoms",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/9/96/Scythe_of_Blossoms.png",
+            "upgrade": "Mighty"
+          }
+        ],
+        "mutations": [
+          {
+            "name": "Assassin",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/b/b0/Mutation_Assassin.png"
+          },
+          {
+            "name": "Parry Master",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/4/46/Mutation_Parry_Master.png"
+          },
+          {
+            "name": "Coup de Grass",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+          },
+          {
+            "name": "Trapper PEEP.R",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+          },
+          {
+            "name": "Apex Predator",
+            "img": "https://static.wikia.nocookie.net/grounded9429/images/f/f7/Mutation_Apex_Predator.png"
+          }
+        ],
+        "notes": "This variant uses the Assassin set + Mantis Trinket to unleash crits with blazing attack speed for boss fights."
+      }
+    }
+  }
+]

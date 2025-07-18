@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/css/main.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Marcellus+SC&amp;family=Roboto+Condensed:wght@300;400&amp;display=swap"
+    rel="stylesheet" />
+  <script src="../assets/js/nav.js"></script>
+  <style>
+    .build-card img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .modal-body img {
+      width: 40px;
+      height: 40px;
+      margin: 0.25rem;
+    }
+
+    .card {
+        background: black;
+    }
+
+    .build-card {
+      min-height: 150px;
+    }
+
+    .modal-content {
+      /* background: rgb(255, 255, 255); */
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .modal-title {
+      width: 100%;
+      text-align: center;
+    }
+
+    .modal-footer {
+      justify-content: center;
+    }
+
+    .modal-dialog {
+        max-width: 700px;
+        margin: 1.75rem auto;
+    }
+    .modal-row {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: nowrap;
+    }
+
+    .modal-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .modal-section h6 {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .horizontal-icon-row {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+      justify-content: center;
+    }
+
+    .modal-section .icon-label {
+      display: block;
+      font-size: 0.65rem;
+      color: #555;
+      text-align: center;
+      margin-top: -0.2rem;
+    }
+
+    .horizontal-icon-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 0.25rem;
+    }
+
+    .modal-row {
+      gap: 2rem;
+    }
+
+    .icon-title {
+      display: block;
+      font-size: 0.65rem;
+      color: #888;
+      text-align: center;
+      margin-bottom: -0.3rem;
+    }
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div w3-include-html="../../nav.html"></div>
+  <hr />
+  <div class="jumbotron jumbotron-fluid">
+    <h1 class="display-4">Grounded Resources</h1>
+    <p class="lead">A page for Grounded game to help Banri and friends with more centralized data.</p>
+  </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/index">Home</a></li>
+      <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
+      <li aria-current="page" class="breadcrumb-item active">Grounded</li>
+    </ol>
+  </nav>
+  <hr />
+  <div class="container py-5">
+    <h1 class="mb-4">Builds</h1>
+    <div class="row g-4">
+
+
+      <!-- BEGIN BUILD 1 -->
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card text-center shadow build-card">
+          <div class="card-body">
+            <h5 class="card-title">Reaper of Blossoms</h5>
+            <div class="mb-2">
+              <img alt="Black Ant Helmet" src="https://static.wikia.nocookie.net/grounded9429/images/2/2d/Widow_Hood.png"/>
+              <img alt="Black Ant Chestplate" src="https://static.wikia.nocookie.net/grounded9429/images/9/96/Scythe_of_Blossoms.png"/>
+              <img alt="Shovel" src="https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"/>
+            </div>
+            <button class="btn btn-primary btn-sm" data-bs-target="#build1" data-bs-toggle="modal">View Build</button>
+          </div>
+        </div>
+      </div>
+      <div aria-hidden="true" aria-labelledby="build1Label" class="modal fade" id="build1" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="build1Label">Reaper of Blossoms</h5>
+              <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-row">
+                <div class="modal-section">
+                  <h6>Armor</h6>
+                  <div class="horizontal-icon-row">
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Widow Hood</div><img alt="Widow Hood"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/2/2d/Widow_Hood.png"
+                        title="Widow Hood" />
+                      <div class="icon-label">Sleek</div>
+                    </div>
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Widow Spaulder</div><img alt="Widow Spaulder"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/1/1d/Widow_Spaulder.png"
+                        title="Widow Spaulder" />
+                      <div class="icon-label">Bulky</div>
+                    </div>
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Widow Leggings</div><img alt="Widow Leggings"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/d/d4/Widow_Leggings.png"
+                        title="Widow Leggings" />
+                      <div class="icon-label">Bulky</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-row">
+                <div class="modal-section">
+                  <h6>Trinket</h6>
+                  <div class="horizontal-icon-row">
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Giddy Goop</div><img alt="Giddy Goop"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"
+                        title="Giddy Goop" />
+                      <div class="icon-label"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-row">
+                <div class="modal-section">
+                  <h6>Weapons</h6>
+                  <div class="horizontal-icon-row">
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Scythe of Blossoms</div><img alt="Scythe of Blossoms"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/9/96/Scythe_of_Blossoms.png"
+                        title="Scythe of Blossoms" />
+                      <div class="icon-label">Spicy</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-section">
+                <h6>Mutations</h6>
+                <div class="horizontal-icon-row">
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Assassin</div><img alt="Assassin"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/b/b0/Mutation_Assassin.png"
+                      title="Assassin" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Parry Master</div><img alt="Parry Master"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/4/46/Mutation_Parry_Master.png"
+                      title="Parry Master" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Coup de Grass</div><img alt="Coup de Grass"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+                      title="Coup de Grass" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Trapper PEEP.R</div><img alt="Trapper PEEP.R"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+                      title="Trapper PEEP.R" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Apex Predator</div><img alt="Apex Predator"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/f/f7/Mutation_Apex_Predator.png"
+                      title="Apex Predator" />
+                  </div>
+                </div>
+              </div>
+              <div class="modal-section">
+                <h6>Notes</h6>
+                <p>This Reaper build is a glass cannon powerhouse built for overwhelming offense and relentless speed.
+                  With a base 21% critical hit chance that stacks infinitely thanks to the Mantis Trinket (+2% crit per
+                  3-hit combo), you’ll be critting almost constantly. Combined with +5% from Coup de Grass, +5% from
+                  Perfect Toast, +5% from Sticky Boss Sauce, and +60% crit damage from Trapper Peeper, your burst
+                  potential skyrockets. The Scythe of Blossoms (Mighty) adds dual damage typing and an extra +5% crit
+                  chance, while Apex Predator grants +25% attack speed after unlocking it from defeating the Mantis.
+                  Pair this with Death’s Impetus from Widow armor for +15% attack speed and 150 HP healing over 10
+                  seconds after each kill, pushing total speed to a game-breaking +40%. Crit effects include Crit Stun
+                  (25 stun damage), Cutman (200 bleed over 10s), and Acid Splash (15% enemy damage vulnerability). With
+                  additional boosts from Liquid Rage (+10% damage) and Human Food (+10% resistance), plus your Fire Ant
+                  pet (+25% total damage), this setup becomes a death machine. Perfect for bosses like the Mantis, Wasp
+                  Queen, and Broodmother, this build excels in both single-target burst and crowd-clearing
+                  efficiency—leaving a trail of bodies and crit pop-ups in your wake.</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END BUILD 1 -->
+
+      <!-- BEGIN BUILD 2 -->
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card text-center shadow build-card">
+          <div class="card-body">
+            <h5 class="card-title">Reaper of Blossoms</h5>
+            <div class="mb-2">
+              <img alt="Black Ant Helmet" src="https://static.wikia.nocookie.net/grounded9429/images/2/2d/Widow_Hood.png"/>
+              <img alt="Black Ant Chestplate" src="https://static.wikia.nocookie.net/grounded9429/images/9/96/Scythe_of_Blossoms.png"/>
+              <img alt="Shovel" src="https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"/>
+            </div>
+            <button class="btn btn-primary btn-sm" data-bs-target="#build1" data-bs-toggle="modal">View Build</button>
+          </div>
+        </div>
+      </div>
+      <div aria-hidden="true" aria-labelledby="build1Label" class="modal fade" id="build1" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="build1Label">Reaper of Blossoms</h5>
+              <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-row">
+                <div class="modal-section">
+                  <h6>Armor</h6>
+                  <div class="horizontal-icon-row">
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Widow Hood</div><img alt="Widow Hood"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/2/2d/Widow_Hood.png"
+                        title="Widow Hood" />
+                      <div class="icon-label">Sleek</div>
+                    </div>
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Widow Spaulder</div><img alt="Widow Spaulder"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/1/1d/Widow_Spaulder.png"
+                        title="Widow Spaulder" />
+                      <div class="icon-label">Bulky</div>
+                    </div>
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Widow Leggings</div><img alt="Widow Leggings"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/d/d4/Widow_Leggings.png"
+                        title="Widow Leggings" />
+                      <div class="icon-label">Bulky</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-row">
+                <div class="modal-section">
+                  <h6>Trinket</h6>
+                  <div class="horizontal-icon-row">
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Giddy Goop</div><img alt="Giddy Goop"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/a/a6/Giddy_Goop.png"
+                        title="Giddy Goop" />
+                      <div class="icon-label"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-row">
+                <div class="modal-section">
+                  <h6>Weapons</h6>
+                  <div class="horizontal-icon-row">
+                    <div class="horizontal-icon-wrap">
+                      <div class="icon-title">Scythe of Blossoms</div><img alt="Scythe of Blossoms"
+                        src="https://static.wikia.nocookie.net/grounded9429/images/9/96/Scythe_of_Blossoms.png"
+                        title="Scythe of Blossoms" />
+                      <div class="icon-label">Spicy</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-section">
+                <h6>Mutations</h6>
+                <div class="horizontal-icon-row">
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Assassin</div><img alt="Assassin"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/b/b0/Mutation_Assassin.png"
+                      title="Assassin" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Parry Master</div><img alt="Parry Master"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/4/46/Mutation_Parry_Master.png"
+                      title="Parry Master" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Coup de Grass</div><img alt="Coup de Grass"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/a/aa/Mutation_Coup_de_Grass.png"
+                      title="Coup de Grass" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Trapper PEEP.R</div><img alt="Trapper PEEP.R"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/8/89/Mutation_Trapper_PEEP.R.png"
+                      title="Trapper PEEP.R" />
+                  </div>
+                  <div class="horizontal-icon-wrap">
+                    <div class="icon-title">Apex Predator</div><img alt="Apex Predator"
+                      src="https://static.wikia.nocookie.net/grounded9429/images/f/f7/Mutation_Apex_Predator.png"
+                      title="Apex Predator" />
+                  </div>
+                </div>
+              </div>
+              <div class="modal-section">
+                <h6>Notes</h6>
+                <p>This Reaper build is a glass cannon powerhouse built for overwhelming offense and relentless speed.
+                  With a base 21% critical hit chance that stacks infinitely thanks to the Mantis Trinket (+2% crit per
+                  3-hit combo), you’ll be critting almost constantly. Combined with +5% from Coup de Grass, +5% from
+                  Perfect Toast, +5% from Sticky Boss Sauce, and +60% crit damage from Trapper Peeper, your burst
+                  potential skyrockets. The Scythe of Blossoms (Mighty) adds dual damage typing and an extra +5% crit
+                  chance, while Apex Predator grants +25% attack speed after unlocking it from defeating the Mantis.
+                  Pair this with Death’s Impetus from Widow armor for +15% attack speed and 150 HP healing over 10
+                  seconds after each kill, pushing total speed to a game-breaking +40%. Crit effects include Crit Stun
+                  (25 stun damage), Cutman (200 bleed over 10s), and <span class="red">-0000000000000000000000000Acid Splash (15% enemy damage vulnerability)</span>. With
+                  additional boosts from Liquid Rage (+10% damage) and Human Food (+10% resistance), plus your Fire Ant
+                  pet (+25% total damage), this setup becomes a death machine. Perfect for bosses like the Mantis, Wasp
+                  Queen, and Broodmother, this build excels in both single-target burst and crowd-clearing
+                  efficiency—leaving a trail of bodies and crit pop-ups in your wake.</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END BUILD 2 -->
+
+    </div>
+  </div>
+  <script>includeHTML();</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
