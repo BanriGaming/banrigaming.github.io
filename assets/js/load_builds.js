@@ -1,6 +1,6 @@
 
 async function loadBuilds() {
-  const res = await fetch('grounded.json');
+  const res = await fetch('https://banrigaming.github.io/assets/json/grounded.json');
   const builds = await res.json();
   const container = document.getElementById('builds-container');
 
@@ -27,8 +27,8 @@ async function loadBuilds() {
       img.src = item.img;
       img.alt = item.name;
       img.title = item.name;
-      img.style.width = '32px';
-      img.style.height = '32px';
+      img.style.width = '50px';
+      img.style.height = '50px';
       imgRow.appendChild(img);
     });
 
@@ -67,26 +67,22 @@ async function loadBuilds() {
                 <div class="modal-section"><h6>Armor</h6><div class="d-flex justify-content-center flex-wrap">
                   ${variantData.armor.map(piece => `
                     <div class="text-center me-2">
-                      <img src="${piece.img}" title="${piece.name}" alt="${piece.name}" style="width:40px;height:40px;"><br>
-                      <small>${piece.name}<br><em>${piece.upgrade}</em></small>
+                      <div class="horizontal-icon-wrap"><div class="icon-title">${piece.name}</div><img src="${piece.img}" title="${piece.name}" alt="${piece.name}" style="width:40px;height:40px;"><div class="icon-label">${piece.upgrade}</div></div>
                     </div>`).join('')}
                 </div></div>
                 <div class="modal-section"><h6>Trinket</h6><div>
-                  <img src="${variantData.trinket.img}" title="${variantData.trinket.name}" alt="${variantData.trinket.name}" style="width:40px;height:40px;">
-                  <div><small>${variantData.trinket.name}</small></div>
+                  <div class="horizontal-icon-wrap"><div class="icon-title">${variantData.trinket.name}</div><img src="${variantData.trinket.img}" title="${variantData.trinket.name}" alt="${variantData.trinket.name}" style="width:40px;height:40px;"></div>
                 </div></div>
                 <div class="modal-section"><h6>Weapons</h6><div class="d-flex justify-content-center flex-wrap">
                   ${variantData.weapons.map(w => `
                     <div class="text-center me-2">
-                      <img src="${w.img}" title="${w.name}" alt="${w.name}" style="width:40px;height:40px;"><br>
-                      <small>${w.name}<br><em>${w.upgrade}</em></small>
+                      <div class="horizontal-icon-wrap"><div class="icon-title">${w.name}</div><img src="${w.img}" title="${w.name}" alt="${w.name}" style="width:40px;height:40px;"><div class="icon-label">${w.upgrade}</div></div>
                     </div>`).join('')}
                 </div></div>
                 <div class="modal-section"><h6>Mutations</h6><div class="d-flex justify-content-center flex-wrap">
                   ${variantData.mutations.map(m => `
                     <div class="text-center me-2">
-                      <img src="${m.img}" title="${m.name}" alt="${m.name}" style="width:40px;height:40px;"><br>
-                      <small>${m.name}</small>
+                      <div class="horizontal-icon-wrap"><div class="icon-title">${m.name}</div><img src="${m.img}" title="${m.name}" alt="${m.name}" style="width:40px;height:40px;"></div>
                     </div>`).join('')}
                 </div></div>
                 <div class="modal-section"><h6>Notes</h6><p>${variantData.notes}</p></div>

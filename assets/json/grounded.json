@@ -7,7 +7,7 @@
           {
             "name": "Widow Hood",
             "img": "https://static.wikia.nocookie.net/grounded9429/images/2/2d/Widow_Hood.png",
-            "upgrade": "Bulky"
+            "upgrade": "Sleek"
           },
           {
             "name": "Widow Spaulder",
@@ -17,7 +17,7 @@
           {
             "name": "Widow Leggings",
             "img": "https://static.wikia.nocookie.net/grounded9429/images/d/d4/Widow_Leggings.png",
-            "upgrade": "Sleek"
+            "upgrade": "Bulky"
           }
         ],
         "trinket": {
