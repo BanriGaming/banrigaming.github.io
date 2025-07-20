@@ -1,0 +1,35 @@
+
+/* Modal content with gradient border and no white gap */
+.modal-content {
+  border: 5px solid;
+  border-image: linear-gradient(45deg, #d4af37, #f0e68c);
+  border-image-slice: 1;
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Modal header with silver gradient background */
+.modal-header {
+  background: linear-gradient(to right, #c0c0c0, #eeeeee);
+  color: #000;
+  border-bottom: 2px solid #ccc;
+  font-weight: bold;
+  padding: 1rem 1.5rem;
+  margin: 0;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+/* Ensure modal-body blends with content */
+.modal-body {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+}
+
+.modal-title {
+  font-family: 'Marcellus SC', serif;
+  font-size: 1.5rem;
+}

@@ -1,190 +1,52 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../assets/css/main.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&amp;family=Roboto+Condensed:wght@300;400&amp;display=swap" rel="stylesheet"/>
-<script src="../assets/js/nav.js"></script>
-<style>
-    .build-card img {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-    }
-
-    .modal-body img {
-      width: 50px;
-      height: 50px;
-      margin: 0.25rem;
-    }
-
-    .card {
-        background: black;
-    }
-
-    .build-card {
-      min-height: 150px;
-    }
-
-    .modal-content {
-      background: rgb(255, 255, 255);
-      text-align: center;
-      border-radius: 10px;
-    }
-
-    .modal-title {
-      width: 100%;
-      text-align: center;
-    }
-
-    .modal-footer {
-      justify-content: center;
-    }
-
-    .modal-dialog {
-        max-width: 1000px;
-        margin: 1.75rem auto;
-    }
-    .modal-row {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      flex-wrap: nowrap;
-    }
-
-    .variant-buttons {
-      margin-bottom: 1rem;
-    }
-
-    .variant-buttons button {
-      margin: 0 5px;
-      padding: 0.4rem 0.8rem;
-      font-size: 0.9rem;
-      color: white;
-      background-color: #444;
-      border: none;
-      border-radius: 5px;
-    }
-
-    .variant-buttons button.active {
-      background-color: #dc3545;
-    }
-
-    .modal-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    .modal-section h6 {
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-    }
-
-    .horizontal-icon-row {
-      display: flex;
-      flex-direction: row;
-      gap: 0.25rem;
-      justify-content: center;
-    }
-
-    .modal-section .icon-label {
-      display: block;
-      font-size: 0.85rem;
-      color: #555;
-      text-align: center;
-      margin-top: -0.2rem;
-    }
-
-    .horizontal-icon-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 0.25rem;
-    }
-    
-    .modal-row {
-      gap: 2rem;
-    }
-
-    .icon-title {
-      display: block;
-      font-size: 0.95rem;
-      color: #888;
-      text-align: center;
-      margin-bottom: -0.3rem;
-    }
-    .red {
-      color: red;
-    }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
   
-    .variant-buttons button {
-      background-color: #222;
-      color: #f8f9fa;
-    }
-    .variant-buttons button.active {
-      background-color: #dc3545;
-    }
-
-    .horizontal-icon-wrap {
-      margin: 0 0.5rem;
-    }
-
-    .modal-section .icon-label {
-      margin-top: 0.4rem;
-    }
-
-    .horizontal-icon-wrap .icon-title {
-      margin-bottom: 0.5rem;
-    }
-
-    .modal-section {
-      margin-bottom: 1.5rem;
-    }
-    
-    .modal-body img {
-      width: 50px !important;
-      height: 50px !important;
-    }
-
-    .modal-content .btn {
-      color: #4f97e9 !important;
-      font-weight: bold;
-      text-transform: capitalize;
-    }
-
-    .ul {
-      list-style-type: none !important;
-    }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link  rel="stylesheet" href="../assets/css/main.css"></link>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+  <script src="../assets/js/nav.js"></script>
 </head>
 <body>
-<div w3-include-html="../../nav.html"></div>
-<hr/>
-<div class="jumbotron jumbotron-fluid">
-<h1 class="display-4">Grounded Resources</h1>
-<p class="lead">A page for Grounded game to help Banri and friends with more centralized data.</p>
-</div>
-<nav aria-label="breadcrumb">
-<ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="/index">Home</a></li>
-<li class="breadcrumb-item"><a href="/games">Game Library</a></li>
-<li aria-current="page" class="breadcrumb-item active">Grounded</li>
-</ol>
-</nav>
-<hr/>
-<div class="container py-5">
-<h1 class="mb-4 text-center">Grounded Builds</h1>
-<div class="row" id="builds-container"></div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/load_builds.js"></script>
+    <div w3-include-html="../../nav.html"></div> <hr>
+    <div class="jumbotron jumbotron-fluid">   
+        <h1 class="display-4">Grounded</h1>
+        <p class="lead">All tools, builds, and data related to Grounded and Grounded 2.</p>
+    </div> 
+    </div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/index">Home</a></li>
+        <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Grounded</li>
+      </ol>
+    </nav>
+    <hr>
+    <div class="row g-4">
+      <div class="col-sm-2 col-md-4 col-lg-4">
+          <div class="card text-white bg-dark">
+              <div class="card-body">
+                  <h2 class="card-title">Builds</h2>
+                  <p class="card-text">A collection of builds by Banri for Grounded.</p>
+                  <a href="/grounded/groundedbuilds" class="btn btn-primary">View</a>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-2 col-md-4 col-lg-4">
+          <div class="card text-white bg-dark">
+              <div class="card-body">
+                  <h2 class="card-title">Creature Data Finder</h2>
+                  <p class="card-text">One Page. All Weakness and Resistance Data for All Creatures in Grounded.</p>
+                  <a href="/grounded/bugdata" class="btn btn-primary">View</a>
+              </div>
+          </div>
+      </div>
+  </div> 
+    <script>includeHTML();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

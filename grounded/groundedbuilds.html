@@ -1,15 +1,15 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="../assets/css/main.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet"/>
-  <script src="../assets/js/nav.js"></script>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../assets/css/main.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&amp;family=Roboto+Condensed:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/nav.js"></script>
+<style>
     .build-card img {
       width: 50px;
       height: 50px;
@@ -46,7 +46,7 @@
     }
 
     .modal-dialog {
-        max-width: 300px;
+        max-width: 1000px;
         margin: 1.75rem auto;
     }
     .modal-row {
@@ -163,59 +163,29 @@
     .ul {
       list-style-type: none !important;
     }
-
-    .modal-content {
-  transition: transform 0.1s ease;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  will-change: transform;
-}
     </style>
 </head>
 <body>
-  <div w3-include-html="../../nav.html"></div>
-  <hr/>
-  <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-4">Grounded Resources</h1>
-    <p class="lead">A page for Grounded game to help Banri and friends with more centralized data.</p>
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/index">Home</a></li>
-      <li class="breadcrumb-item"><a href="/games">Game Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Grounded</li>
-    </ol>
-  </nav>
-  <hr/>
-
-  <div class="container my-4">
-    <input type="text" id="searchInput" class="form-control mb-4" placeholder="Search creatures..." />
-    <div class="row" id="creatureGrid"></div>
-  </div>
-  <script>
-document.addEventListener('mousemove', function(e) {
-  document.querySelectorAll('.modal.show .modal-content').forEach(modal => {
-    const rect = modal.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
-
-    modal.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-});
-
-document.addEventListener('mouseleave', function() {
-  document.querySelectorAll('.modal-content').forEach(modal => {
-    modal.style.transform = 'rotateX(0deg) rotateY(0deg)';
-  });
-});
-</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/load_creatures.js"></script>
+<div w3-include-html="../../nav.html"></div>
+<hr/>
+<div class="jumbotron jumbotron-fluid">
+<h1 class="display-4">Grounded Builds</h1>
+<p class="lead">This is a collection of Builds for Grounded which are made by Banri and personally tested by him and his friends.</p>
+</div>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="/index">Home</a></li>
+<li class="breadcrumb-item"><a href="/games">Game Library</a></li>
+<li class="breadcrumb-item"><a href="/landing-pages/grounded">Grounded</a></li>
+<li aria-current="page" class="breadcrumb-item active">Builds</li>
+</ol>
+</nav>
+<hr/>
+<div class="container py-5">
+<h1 class="mb-4 text-center">Grounded Builds</h1>
+<div class="row" id="builds-container"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/load_builds.js"></script>
 </body>
 </html>

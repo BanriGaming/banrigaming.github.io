@@ -17,7 +17,7 @@ async function loadCreatures() {
     col.dataset.name = creature.name.toLowerCase();
     col.innerHTML = `
       <div class="card text-center h-100 text-white bg-dark shadow-sm">
-        <img src="${creature.image}" class="mx-auto mt-3" style="width:80px;height:80px;object-fit:contain;" />
+        <img src="${creature.image}" class="mx-auto mt-3" style="width:100px;height:100px;object-fit:contain;" />
         <div class="card-body">
           <h5 class="card-title fw-bold">${creature.name}</h5>
           <button class="btn btn-outline-info btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#${modalId}">Details</button>
@@ -28,10 +28,11 @@ async function loadCreatures() {
 
     // Helper for icons
     const makeIcons = (arr) => arr.map(type =>
-      `<div class="text-center me-2">
-        <img src="../assets/icons/${type}.png" width="35" height="35" title="${type}" alt="${type}"><br>
-        <small>${type}</small>
-      </div>`
+      icons[type] ? `
+      <div class="text-center me-2 mb-2">
+        <img src="${icons[type]}" width="35" height="35" title="${type}" alt="${type}"><br>
+        <small class="text-muted">${type}</small>
+      </div>` : ''
     ).join('');
 
     // MODAL
@@ -41,40 +42,40 @@ async function loadCreatures() {
     modal.tabIndex = -1;
     modal.innerHTML = `
       <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content p-3">
+        <div class="modal-content">
           <div class="modal-header border-0">
             <h4 class="modal-title w-100 text-center">${creature.name}</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body text-center">
-            <img src="${creature.image}" class="img-fluid mb-3" style="width:100px;height:100px;object-fit:contain;" alt="${creature.name}">
-            <div class="row text-start">
+            <img src="${creature.image}" class="img-fluid mb-4" style="width:200px;height:200px;object-fit:contain;" alt="${creature.name}">
+            <div class="row text-start mb-3">
               <div class="col-6">
-                <h6>Element Weakness</h6>
+                <h6 class="text-uppercase small">Element Weakness</h6>
                 <div class="d-flex justify-content-center flex-wrap">${makeIcons(creature.elementweakness || [])}</div>
               </div>
               <div class="col-6">
-                <h6>Element Resistance</h6>
+                <h6 class="text-uppercase small">Element Resistance</h6>
                 <div class="d-flex justify-content-center flex-wrap">${makeIcons(creature.elementresistance || [])}</div>
               </div>
             </div>
-            <div class="row text-start mt-3">
+            <div class="row text-start mb-3">
               <div class="col-6">
-                <h6>Weakness</h6>
+                <h6 class="text-uppercase small">Weakness</h6>
                 <div class="d-flex justify-content-center flex-wrap">${makeIcons(creature.weaknesses || [])}</div>
               </div>
               <div class="col-6">
-                <h6>Resistance</h6>
+                <h6 class="text-uppercase small">Resistance</h6>
                 <div class="d-flex justify-content-center flex-wrap">${makeIcons(creature.resistances || [])}</div>
               </div>
             </div>
-            <div class="row text-start mt-3">
+            <div class="row text-start mb-3">
               <div class="col-6">
-                <h6>Weakpoint</h6>
+                <h6 class="text-uppercase small">Weakpoint</h6>
                 <div class="d-flex justify-content-center flex-wrap">${makeIcons(creature.weakpoint || [])}</div>
               </div>
               <div class="col-6">
-                <h6>Immunities</h6>
+                <h6 class="text-uppercase small">Immunities</h6>
                 <div class="d-flex justify-content-center flex-wrap">${makeIcons(creature.immunities || [])}</div>
               </div>
             </div>

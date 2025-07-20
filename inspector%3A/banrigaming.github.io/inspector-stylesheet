@@ -1,5 +1,0 @@
-button.navbar-toggler {}
-
-button.navbar-toggler {
-    color: white;
-}
