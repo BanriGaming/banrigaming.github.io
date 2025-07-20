@@ -8,7 +8,29 @@
     "weaknesses": ["Stabbing"],
     "resistances": ["Chopping", "Slashing"],
     "weakpoint": ["Eyes"],
-    "immunities": ["Stun"]
+    "immunities": ["Stun"],
+    "damageModifiers": {
+      "element": {
+        "Fresh": 1.0,
+        "Spicy": 1.5,
+        "Sour": 1.0,
+        "Salty": 1.0
+      },
+      "physical": {
+        "Generic": 1.0,
+        "Slashing": 0.5,
+        "Busting": 1.0,
+        "Stabbing": 1.25,
+        "Chopping": 0.75
+      },
+      "Other": {
+        "Bleed": 1.0,
+        "Venom": 1.0,
+        "Poison": 1.0,
+        "Explosive": 1.0,
+        "Gas_Hazard": 1.0
+      }
+    }
   },
   {
     "name": "Lawn Mite",
@@ -19,7 +41,29 @@
     "weaknesses": ["Stabbing", "Chopping"],
     "resistances": [],
     "weakpoint": [],
-    "immunities": []    
+    "immunities": [],
+    "damageModifiers": {
+      "element": {
+        "Fresh": 1.0,
+        "Spicy": 1.0,
+        "Sour": 1.0,
+        "Salty": 1.0
+      },
+      "physical": {
+        "Generic": 1.0,
+        "Slashing": 1.0,
+        "Busting": 1.0,
+        "Stabbing": 1.25,
+        "Chopping": 1.25
+      },
+      "Other": {
+        "Bleed": 1.0,
+        "Venom": 1.0,
+        "Poison": 1.0,
+        "Explosive": 1.0,
+        "Gas_Hazard": 1.0
+      }
+    }   
   },
   {
     "name": "Larva",
@@ -30,7 +74,29 @@
     "weaknesses": [],
     "resistances": ["Chopping"],
     "weakpoint": [],
-    "immunities": []
+    "immunities": [],
+    "damageModifiers": {
+      "element": {
+        "Fresh": 1.0,
+        "Spicy": 1.25,
+        "Sour": 1.0,
+        "Salty": 1.0
+      },
+      "physical": {
+        "Generic": 1.0,
+        "Slashing": 1.0,
+        "Busting": 1.0,
+        "Stabbing": 1.0,
+        "Chopping": 0.75
+      },
+      "Other": {
+        "Bleed": 1.0,
+        "Venom": 1.0,
+        "Poison": 1.0,
+        "Explosive": 1.0,
+        "Gas_Hazard": 1.0
+      }
+    }
   },
   {
     "name": "RUZ.T",
@@ -41,7 +107,29 @@
     "weaknesses": ["Busting"],
     "resistances": [],
     "weakpoint": ["Back"],
-    "immunities": ["Bleed", "Gas Hazard", "Poison", "Venom"]
+    "immunities": ["Bleed", "Gas Hazard", "Poison", "Venom"],
+    "damageModifiers": {
+      "element": {
+        "Fresh": 1.0,
+        "Spicy": 1.0,
+        "Sour": 1.0,
+        "Salty": 1.0
+      },
+      "physical": {
+        "Generic": 1.0,
+        "Slashing": 1.0,
+        "Busting": 1.5,
+        "Stabbing": 1.0,
+        "Chopping": 1.0
+      },
+      "Other": {
+        "Bleed": 0,
+        "Venom": 0,
+        "Poison": 0,
+        "Explosive": 1.0,
+        "Gas_Hazard": 0
+      }
+    }
   },
   {
     "name": "Water Flea",
@@ -52,7 +140,29 @@
     "weaknesses": ["Stabbing"],
     "resistances": ["Slashing"],
     "weakpoint": [],
-    "immunities": []
+    "immunities": [],
+    "damageModifiers": {
+      "element": {
+        "Fresh": 1.0,
+        "Spicy": 1.0,
+        "Sour": 1.0,
+        "Salty": 1.0
+      },
+      "physical": {
+        "Generic": 1.0,
+        "Slashing": 1.0,
+        "Busting": 1.0,
+        "Stabbing": 1.0,
+        "Chopping": 1.0
+      },
+      "Other": {
+        "Bleed": 1.0,
+        "Venom": 1.0,
+        "Poison": 1.0,
+        "Explosive": 1.0,
+        "Gas_Hazard": 1.0
+      }
+    }
   },
   {
     "name": "Orb Weaver Jr",

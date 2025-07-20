@@ -167,8 +167,9 @@
     .modal-content {
       transition: transform 0.3s ease, background-color 0.3s ease;
       transform-style: preserve-3d;
-      perspective: 1000px;
+      /* perspective: 1004px; */
       will-change: transform;
+      transform: translate3d(0, 0, 0);
     }
   </style>
 </head>
@@ -195,38 +196,27 @@
     <div class="row" id="creatureGrid"></div>
   </div>
   <script>
-  function clamp(val, min, max) {
-    return Math.max(min, Math.min(max, val));
-  }
+    document.addEventListener('mousemove', function (e) {
+      document.querySelectorAll('.modal.show .modal-content').forEach(modal => {
+        const rect = modal.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-  document.addEventListener('mousemove', function (e) {
-    document.querySelectorAll('.modal.show .modal-content').forEach(modal => {
-      const rect = modal.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
 
-      // Prevent wild flipping when cursor is outside the modal
-      if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
-        return;
-      }
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = clamp(((y - centerY) / centerY) * -10, -10, 10);
-      const rotateY = clamp(((x - centerX) / centerX) * 30, -30, 30);
-
-      modal.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        modal.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
     });
-  });
 
-  document.addEventListener('mouseleave', function () {
-    document.querySelectorAll('.modal-content').forEach(modal => {
-      modal.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    document.addEventListener('mouseleave', function () {
+      document.querySelectorAll('.modal-content').forEach(modal => {
+        modal.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
     });
-  });
-</script>
-
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/load_creatures.js"></script>
