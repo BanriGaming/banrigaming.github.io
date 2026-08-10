@@ -25,7 +25,8 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
   let referenceApiIndex = null;
   let referenceApiError = "";
   let state = loadState();
-  let activeBuildId = state.activeBuildId || state.builds[0]?.id || null;
+  let draftBuild = newBuild();
+  let activeBuildId = state.activeBuildId || state.builds[0]?.id || draftBuild.id;
   let selectedSlot = 0;
   let editingLibraryId = null;
   let editingPartySlot = 0;
@@ -36,7 +37,6 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
   let cloudUnsubscribers = [];
 
   const els = {libraryList:$("#libraryList"),partySlots:$("#partySlots"),details:$("#detailsContent"),toast:$("#toast"),libraryDialog:$("#libraryDialog"),partyDialog:$("#partyDialog"),buildDialog:$("#buildDialog"),viewerDialog:$("#loadoutViewerDialog"),confirmDialog:$("#confirmDialog"),importFile:$("#importFile")};
-  if (!state.builds.length) { const b = newBuild(); state.builds.push(b); activeBuildId=b.id; persist(); }
   await initializeReferenceData();
   buildForms(); enhanceSearchPickers(); bind(); initCloudSync(); render(); updateReferenceStatusUi();
 
@@ -48,7 +48,7 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
   function normalizeBuild(b={}){const base=newBuild();return {...base,...b,id:b.id||uid(),visibility:b.visibility==="public"?"public":"private",pals:Array.from({length:5},(_,i)=>normalizePal(b.pals?.[i]||{}))}}
   function loadState(){try{for(const k of [STORAGE_KEY,"palLoadoutVault.v6","palLoadoutVault.v5","palLoadoutVault.v4","palLoadoutVault.v3","palLoadoutVault.v2","palLoadoutVault.v1"]){const raw=localStorage.getItem(k);if(!raw)continue;const p=JSON.parse(raw);return {builds:(p.builds||[]).map(normalizeBuild),library:(p.library||[]).map(x=>({...normalizePal(x),id:x.id||uid()})),activeBuildId:p.activeBuildId||null}}}catch(e){console.warn(e)}return {builds:[],library:[],activeBuildId:null}}
   function persist(){state.activeBuildId=activeBuildId;localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
-  function build(){return state.builds.find(b=>b.id===activeBuildId)||state.builds[0]}
+  function build(){const saved=state.builds.find(b=>b.id===activeBuildId);if(saved)return saved;if(draftBuild.id!==activeBuildId)activeBuildId=draftBuild.id;return draftBuild}
   function refFor(species){return byName.get(String(species||"").trim().toLowerCase())}
 
   async function initializeReferenceData(){
@@ -205,10 +205,10 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
     $("#globalSearch").oninput=e=>{$("#librarySearch").value=e.target.value;renderLibrary()};
     $("#clearPartyButton").onclick=async()=>{if(await confirmPalVault("Clear all five party slots?","Clear Party")){build().pals=Array.from({length:5},emptyPal);build().updatedAt=Date.now();selectedSlot=0;persist();render()}};
     $("#applyPartyPalButton").onclick=applyPartyPal; $("#clearSlotButton").onclick=clearSlot;
-    $("#saveBuildButton").onclick=openBuildDialog; $("#confirmSaveBuildButton").onclick=saveBuild;
-    $("#newBuildButton").onclick=()=>{const b=newBuild();state.builds.unshift(b);activeBuildId=b.id;persist();render();openBuildDialog()};
-    $("#duplicateBuildButton").onclick=()=>{const b=JSON.parse(JSON.stringify(build()));b.id=uid();b.name=`${b.name} Copy`;b.visibility="private";b.ownerUid=currentUser?.uid||"";b.ownerDisplayName=currentUser?.displayName||"";b.createdAt=b.updatedAt=Date.now();state.builds.unshift(b);activeBuildId=b.id;persist();render();toast("Loadout duplicated.")};
-    $("#deleteBuildButton").onclick=async()=>{if(!await confirmPalVault(`Delete "${build().name}"?`,"Delete Loadout"))return;state.builds=state.builds.filter(x=>x.id!==activeBuildId);if(!state.builds.length)state.builds.push(newBuild());activeBuildId=state.builds[0].id;persist();render()};
+    $("#saveBuildButton").onclick=openBuildDialog; $("#confirmSaveBuildButton").onclick=()=>saveBuild();
+    $("#newBuildButton").onclick=()=>{draftBuild=newBuild();activeBuildId=draftBuild.id;selectedSlot=0;persist();render();openBuildDialog()};
+    $("#duplicateBuildButton").onclick=()=>{const b=normalizeBuild(JSON.parse(JSON.stringify(build())));b.id=uid();b.name=`${b.name} Copy`;b.visibility="private";b.ownerUid=currentUser?.uid||"";b.ownerDisplayName=currentUser?.displayName||"";b.createdAt=b.updatedAt=Date.now();draftBuild=b;activeBuildId=b.id;selectedSlot=0;persist();render();openBuildDialog();toast("Loadout duplicated as a draft. Save Loadout to publish it to Firebase.")};
+    $("#deleteBuildButton").onclick=async()=>{const current=build();if(!await confirmPalVault(`Clear "${current.name}" from the active builder? Firebase copies are managed in My Loadouts.`,"Clear Active Loadout"))return;state.builds=state.builds.filter(x=>x.id!==activeBuildId);if(current.id===draftBuild.id)draftBuild=newBuild();activeBuildId=state.builds[0]?.id||draftBuild.id;selectedSlot=0;persist();render()};
     $("#exportButton").onclick=exportData; $("#importButton").onclick=()=>els.importFile.click(); els.importFile.onchange=importData;
     $("#buildNotes").oninput=e=>{build().notes=e.target.value;build().updatedAt=Date.now();persist()};
     $("#editNotesButton").onclick=()=>$("#buildNotes").focus();
@@ -259,9 +259,9 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
   async function clearSlot(){if(!await confirmPalVault(`Clear party slot ${editingPartySlot+1}?`,"Clear Slot"))return;build().pals[editingPartySlot]=emptyPal();build().updatedAt=Date.now();persist();els.partyDialog.close();render()}
 
   function openBuildDialog(){$("#buildName").value=build().name;$("#buildPurpose").value=build().purpose;$("#buildVisibility").value=build().visibility==="public"?"public":"private";setCloudStatus(currentUser?"Firebase sync ready.":"Sign in to sync this loadout to Firebase.");els.buildDialog.showModal()}
-  function saveBuild(){const current=build();current.name=$("#buildName").value.trim()||"Untitled Loadout";current.purpose=$("#buildPurpose").value.trim();current.visibility=$("#buildVisibility").value==="public"?"public":"private";current.ownerUid=currentUser?.uid||current.ownerUid||"";current.ownerDisplayName=currentUser?.displayName||currentUser?.email||current.ownerDisplayName||"Nexus User";current.updatedAt=Date.now();persist();els.buildDialog.close();saveBuildToCloud(current).catch((error)=>toast(`Local save complete. Firebase sync failed: ${error.message}`));toast(currentUser?"Loadout saved locally and queued for Firebase sync.":"Loadout saved locally. Sign in to sync.")}
+  async function saveBuild(){const current=build();if(!currentUser){setCloudStatus("Sign in through Nexus before saving this loadout to Firebase.");toast("Sign in through Nexus before saving loadouts to Firebase.");return;}current.name=$("#buildName").value.trim()||"Untitled Loadout";current.purpose=$("#buildPurpose").value.trim();current.visibility=$("#buildVisibility").value==="public"?"public":"private";current.ownerUid=currentUser.uid;current.ownerDisplayName=currentUser.displayName||currentUser.email||"Nexus User";current.updatedAt=Date.now();try{const savedBuild=await saveBuildToCloud(current);const localBuild=upsertLocalBuild(savedBuild);activeBuildId=localBuild.id;if(draftBuild.id===current.id)draftBuild=newBuild();persist();els.buildDialog.close();render();toast(localBuild.visibility==="public"?"Public loadout saved to Firebase.":"Private loadout saved to Firebase.");}catch(error){setCloudStatus(`Firebase save failed: ${error.message}`);toast(`Firebase save failed: ${error.message}`)}}
   function exportData(){const blob=new Blob([JSON.stringify({app:"Pal Loadout Vault",version:4,exportedAt:new Date().toISOString(),...state},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`pal-loadout-vault-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href)}
-  async function importData(e){const f=e.target.files[0];if(!f)return;try{const p=JSON.parse(await f.text());state={builds:(p.builds||[]).map(normalizeBuild),library:(p.library||[]).map(x=>({...normalizePal(x),id:x.id||uid()})),activeBuildId:p.activeBuildId||p.builds?.[0]?.id};activeBuildId=state.activeBuildId;if(!state.builds.length)state.builds=[newBuild()];persist();render();toast("Archive imported.")}catch(err){toast(`Import failed: ${err.message}`)}e.target.value=""}
+  async function importData(e){const f=e.target.files[0];if(!f)return;try{const p=JSON.parse(await f.text());state={builds:(p.builds||[]).map(normalizeBuild),library:(p.library||[]).map(x=>({...normalizePal(x),id:x.id||uid()})),activeBuildId:p.activeBuildId||p.builds?.[0]?.id};activeBuildId=state.activeBuildId||state.builds[0]?.id||draftBuild.id;if(!state.builds.length){draftBuild=newBuild();activeBuildId=draftBuild.id;}persist();render();toast("Archive imported.")}catch(err){toast(`Import failed: ${err.message}`)}e.target.value=""}
 
   function initCloudSync(){
     onAuthStateChanged(auth,(user)=>{
@@ -298,22 +298,25 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
     let changed=false;
     cloudRecords.forEach(record=>{
       const cloudBuild=normalizeBuild(record.build||record);
-      const index=state.builds.findIndex(item=>item.id===cloudBuild.id);
-      if(index<0){
-        state.builds.push(cloudBuild);
-        changed=true;
-      }else if((Number(cloudBuild.updatedAt)||0)>(Number(state.builds[index].updatedAt)||0)){
-        state.builds[index]=cloudBuild;
-        changed=true;
-      }
+      const before=JSON.stringify(state.builds.find(item=>item.id===cloudBuild.id)||null);
+      upsertLocalBuild(cloudBuild);
+      if(before!==JSON.stringify(cloudBuild))changed=true;
     });
     if(changed)persist();
+  }
+
+  function upsertLocalBuild(item){
+    const normalized=normalizeBuild(item);
+    const index=state.builds.findIndex(build=>build.id===normalized.id);
+    if(index>=0)state.builds[index]=normalized;
+    else state.builds.unshift(normalized);
+    return normalized;
   }
 
   function renderLoadouts(){
     const target=$("#cloudLoadoutList");
     if(!target)return;
-    const loadouts=[...state.builds].filter(item=>!item.ownerUid||item.ownerUid===currentUser?.uid).sort((a,b)=>(Number(b.updatedAt)||0)-(Number(a.updatedAt)||0));
+    const loadouts=[...state.builds].filter(item=>cloudLocationsFor(item.id).length>0).filter(item=>!item.ownerUid||item.ownerUid===currentUser?.uid).sort((a,b)=>(Number(b.updatedAt)||0)-(Number(a.updatedAt)||0));
     target.innerHTML=loadouts.length?loadouts.map(item=>{
       const pals=item.pals.filter(p=>p.species);
       const isActive=item.id===activeBuildId;
@@ -322,12 +325,11 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
       const hasCloudCopy=cloudCopies.length>0;
       const displayVisibility=hasCloudCopy?item.visibility:"private";
       const displayOwner=hasCloudCopy?(item.ownerDisplayName||"Nexus User"):"Local";
-      return `<article class="vault-loadout-card${isActive?" is-active":""}"><div><p>${esc(displayVisibility==="public"?"Public":"Private")} / ${esc(displayOwner)}</p><h2>${esc(item.name||"Untitled Loadout")}</h2><span>${esc(item.purpose||"No purpose set.")}</span><small>${pals.length} / 5 Pals ${item.updatedAt?`/ Updated ${new Date(item.updatedAt).toLocaleDateString()}`:""}</small></div><div>${pals.map(p=>`<b>${esc(p.nickname||p.species)}</b>`).join("")||"<b>Empty party</b>"}</div><footer><button class="button button--cyan" type="button" data-open-loadout="${esc(item.id)}">Open</button>${owned?`<button class="button" type="button" data-save-cloud="${esc(item.id)}">Sync</button>${hasCloudCopy?`<button class="button button--danger" type="button" data-delete-cloud="${esc(item.id)}">Delete Cloud</button>`:`<button class="button button--danger" type="button" data-delete-local="${esc(item.id)}">Delete Local</button>`}`:""}</footer></article>`;
-    }).join(""):`<div class="detail-section"><p>No saved loadouts yet. Build a team and hit Save Build.</p></div>`;
+      return `<article class="vault-loadout-card${isActive?" is-active":""}"><div><p>${esc(displayVisibility==="public"?"Public":"Private")} / ${esc(displayOwner)}</p><h2>${esc(item.name||"Untitled Loadout")}</h2><span>${esc(item.purpose||"No purpose set.")}</span><small>${pals.length} / 5 Pals ${item.updatedAt?`/ Updated ${new Date(item.updatedAt).toLocaleDateString()}`:""}</small></div><div>${pals.map(p=>`<b>${esc(p.nickname||p.species)}</b>`).join("")||"<b>Empty party</b>"}</div><footer><button class="button button--cyan" type="button" data-open-loadout="${esc(item.id)}">Open</button>${owned?`<button class="button" type="button" data-save-cloud="${esc(item.id)}">Sync</button><button class="button button--danger" type="button" data-delete-cloud="${esc(item.id)}">Delete Cloud</button>`:""}</footer></article>`;
+    }).join(""):`<div class="detail-section"><p>No Firebase loadouts yet. Build a team and hit Save Loadout.</p></div>`;
     $$("[data-open-loadout]",target).forEach(button=>button.onclick=()=>openLoadout(button.dataset.openLoadout));
-    $$("[data-save-cloud]",target).forEach(button=>button.onclick=()=>{const item=state.builds.find(build=>build.id===button.dataset.saveCloud);if(item)saveBuildToCloud(item).then(()=>toast("Loadout synced to Firebase.")).catch(error=>toast(error.message));});
-    $$("[data-delete-cloud]",target).forEach(button=>button.onclick=async()=>{const item=state.builds.find(build=>build.id===button.dataset.deleteCloud);if(!item||!await confirmPalVault(`Delete the Firebase copy of "${item.name}"? Your local copy will remain private.`,"Delete Cloud Copy"))return;try{await deleteCloudBuild(item);markLocalAfterCloudDelete(item.id);toast("Cloud copy deleted. Local copy kept private.");}catch(error){toast(`Cloud delete failed: ${error.message}`);}});
-    $$("[data-delete-local]",target).forEach(button=>button.onclick=async()=>{const item=state.builds.find(build=>build.id===button.dataset.deleteLocal);if(item&&await confirmPalVault(`Delete local loadout "${item.name}"?`,"Delete Local Loadout"))deleteLocalBuild(item.id);});
+    $$("[data-save-cloud]",target).forEach(button=>button.onclick=()=>{const item=state.builds.find(build=>build.id===button.dataset.saveCloud);if(item)saveBuildToCloud(item).then(saved=>{upsertLocalBuild(saved);persist();renderLoadouts();renderPublicLoadouts();toast("Loadout synced to Firebase.");}).catch(error=>toast(error.message));});
+    $$("[data-delete-cloud]",target).forEach(button=>button.onclick=async()=>{const item=state.builds.find(build=>build.id===button.dataset.deleteCloud);if(!item||!await confirmPalVault(`Delete "${item.name}" from Firebase?`,"Delete Firebase Loadout"))return;try{await deleteCloudBuild(item);removeCachedBuild(item.id);toast("Firebase loadout deleted.");}catch(error){toast(`Cloud delete failed: ${error.message}`);}});
   }
 
   function renderPublicLoadouts(){
@@ -382,15 +384,20 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
   }
 
   async function saveBuildToCloud(item){
-    if(!currentUser)return;
+    if(!currentUser)throw new Error("Sign in through Nexus before saving loadouts to Firebase.");
     const payload=cloudPayload(item);
     if(payload.visibility==="public"){
       await set(ref(database,`palworldLoadouts/public/${item.id}`),payload);
       await remove(ref(database,`palworldLoadouts/private/${currentUser.uid}/${item.id}`)).catch(()=>{});
+      cloudPublicBuilds[payload.id]=payload;
+      delete cloudPrivateBuilds[payload.id];
     }else{
       await set(ref(database,`palworldLoadouts/private/${currentUser.uid}/${item.id}`),payload);
       await remove(ref(database,`palworldLoadouts/public/${item.id}`)).catch(()=>{});
+      cloudPrivateBuilds[payload.id]=payload;
+      delete cloudPublicBuilds[payload.id];
     }
+    return normalizeBuild(payload.build);
   }
 
   function cloudLocationsFor(id){
@@ -412,25 +419,24 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
     }));
   }
 
-  function markLocalAfterCloudDelete(id){
+  function removeCachedBuild(id){
     delete cloudPublicBuilds[id];
     delete cloudPrivateBuilds[id];
-    const item=state.builds.find(build=>build.id===id);
-    if(item){
-      item.visibility="private";
-      item.ownerUid="";
-      item.ownerDisplayName="";
-      item.updatedAt=Date.now();
+    state.builds=state.builds.filter(build=>build.id!==id);
+    if(activeBuildId===id){
+      draftBuild=newBuild();
+      activeBuildId=state.builds[0]?.id||draftBuild.id;
+      selectedSlot=0;
     }
     persist();
+    render();
     renderLoadouts();
     renderPublicLoadouts();
   }
 
   function deleteLocalBuild(id){
     state.builds=state.builds.filter(build=>build.id!==id);
-    if(!state.builds.length)state.builds.push(newBuild());
-    if(activeBuildId===id)activeBuildId=state.builds[0].id;
+    if(activeBuildId===id){draftBuild=newBuild();activeBuildId=state.builds[0]?.id||draftBuild.id;}
     persist();
     render();
     toast("Local loadout deleted.");

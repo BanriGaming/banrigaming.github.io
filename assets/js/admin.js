@@ -32,7 +32,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260810d";
+} from "./site-store.js?v=20260810e";
 
 const state = {
   user: null,
@@ -484,7 +484,7 @@ function renderHomepageEditor() {
               ${state.medalClipsError ? `<small class="text-warning d-block mt-2">${escapeHtml(state.medalClipsError)}</small>` : ""}
             </div>
             <div class="col-12 col-xl-4">
-              <button id="refreshFeaturedClipsButton" class="btn btn-banri-outline w-100" type="button">Refresh Clips</button>
+              <button id="saveFeaturedClipButton" class="btn btn-banri-primary w-100" type="button">Save Featured Clip</button>
             </div>
             <div class="col-12">
               <p class="admin-help mb-0">${escapeHtml(featured.title || "Choose a Medal clip")} / ${escapeHtml(featured.game || "Medal Clip")} / ${escapeHtml(featured.date || "Featured transmission")}</p>
@@ -757,6 +757,21 @@ function updateFeaturedClipPreview() {
   }
 }
 
+async function saveFeaturedClipSetting() {
+  const nextFeaturedClip = readFeaturedClip();
+  if (!nextFeaturedClip.url && !nextFeaturedClip.video) {
+    throw new Error("Choose a Medal clip before saving.");
+  }
+
+  state.featuredClip = nextFeaturedClip;
+  await saveSiteConfigPatch({ featuredClip: state.featuredClip });
+  const savedData = await loadPublicSiteData();
+  state.featuredClip = normalizeFeaturedClip(savedData.featuredClip);
+  await pushActivity(activityMeta({ category: "Homepage", title: "Featured clip updated", message: state.featuredClip.title || "Homepage featured Medal clip changed." })).catch(() => {});
+  renderHomepageEditor();
+  setStatus(`Featured clip saved: ${state.featuredClip.title}`, "success");
+}
+
 function setupNewGameModal() {
   const status = document.getElementById("newGameStatus");
   const tone = document.getElementById("newGameTone");
@@ -992,19 +1007,21 @@ function bindAdminEvents() {
   });
 
   elements.homepageEditor?.addEventListener("click", (event) => {
-    const refreshButton = event.target.closest("#refreshFeaturedClipsButton");
-    if (!refreshButton) return;
-    refreshButton.disabled = true;
-    refreshButton.textContent = "Refreshing...";
-    loadMedalClipOptions()
+    const saveButton = event.target.closest("#saveFeaturedClipButton");
+    if (!saveButton) return;
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+    saveFeaturedClipSetting()
       .then(() => {
-        renderHomepageEditor();
-        setStatus(state.medalClipsError || "Medal clip list refreshed.", state.medalClipsError ? "error" : "success");
+        if (saveButton.isConnected) {
+          saveButton.disabled = false;
+          saveButton.textContent = "Save Featured Clip";
+        }
       })
       .catch((error) => {
-        refreshButton.disabled = false;
-        refreshButton.textContent = "Refresh Clips";
-        setStatus(error.message || "Could not refresh Medal clips.", "error");
+        saveButton.disabled = false;
+        saveButton.textContent = "Save Featured Clip";
+        setStatus(error.message || "Could not save featured clip.", "error");
       });
   });
 

@@ -29,7 +29,7 @@
     <button class="topnav__item" data-view="public" type="button">Party Vault</button>
     <button class="topnav__item" data-view="data" type="button">Sync</button>
   </nav>
-  <div class="top-actions"><label class="global-search"><span class="sr-only">Search</span><input id="globalSearch" type="search" placeholder="Search pals, skills, tags..."><span>Search</span></label><button class="icon-button" id="themeButton" type="button" aria-label="Toggle appearance">Mode</button></div>
+  <div class="top-actions"><label class="global-search"><span class="sr-only">Search</span><input id="globalSearch" type="search" placeholder="Search pals, skills, tags..."><span>Search</span></label></div>
 </header>
 
 <main id="main">
@@ -65,7 +65,7 @@
     </div>
   </section>
 
-  <section id="loadoutsView" class="app-view" data-page="loadouts" hidden><div class="simple-page panel"><p class="eyebrow">MY TEAMS</p><h1>My Loadouts</h1><p>Use Save Loadout in the action bar to name the current party. This tab shows your local teams plus private and public loadouts owned by your Nexus account.</p><div id="cloudLoadoutList" class="vault-loadout-list"></div></div></section>
+  <section id="loadoutsView" class="app-view" data-page="loadouts" hidden><div class="simple-page panel"><p class="eyebrow">MY TEAMS</p><h1>My Loadouts</h1><p>Use Save Loadout in the action bar to publish the current party to Firebase. This tab only shows private and public loadouts owned by your Nexus account.</p><div id="cloudLoadoutList" class="vault-loadout-list"></div></div></section>
   <section id="publicView" class="app-view" data-page="public" hidden><div class="simple-page panel"><p class="eyebrow">SHARED TEAMS</p><h1>Public Loadouts</h1><p>Public teams are view-only unless you are the owner. Opening one here never overwrites your active party.</p><div id="publicLoadoutList" class="vault-loadout-list"></div></div></section>
   <section id="dataView" class="app-view" data-page="data" hidden><div class="simple-page panel"><p class="eyebrow">REFERENCE DATABASE</p><h1>Data Sync</h1><p id="dataStatusText">Connecting to the BANRI Palworld API…</p></div></section>
 </main>
@@ -79,7 +79,7 @@
 
 <dialog id="partyDialog" class="modal"><form method="dialog"><div class="modal__header"><div><p class="eyebrow">PARTY SLOT <span id="dialogSlotNumber"></span></p><h2>Add Pal to Party</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close">X</button></div><label class="full-width-field"><span>Choose a saved Pal</span><select id="savedPalPicker"></select></label><div id="partyPalPreview"></div><div class="modal__actions"><button class="button button--danger" id="clearSlotButton" type="button">Clear Slot</button><div><button class="button" type="button" data-close-dialog>Cancel</button><button class="button button--cyan" id="applyPartyPalButton" type="button">Apply Pal</button></div></div></form></dialog>
 
-<dialog id="buildDialog" class="modal modal--small"><form method="dialog"><div class="modal__header"><div><p class="eyebrow">LOADOUT DETAILS</p><h2>Save Loadout</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close">X</button></div><div class="form-grid"><label><span>Build name</span><input id="buildName" maxlength="80"></label><label><span>Purpose</span><input id="buildPurpose" maxlength="120"></label><label><span>Firebase Visibility</span><select id="buildVisibility"><option value="private">Private</option><option value="public">Public</option></select></label></div><div class="modal__actions"><span id="palVaultCloudStatus">Local save is always available.</span><div><button class="button" type="button" data-close-dialog>Cancel</button><button class="button button--gold" id="confirmSaveBuildButton" type="button">Save Loadout</button></div></div></form></dialog>
+<dialog id="buildDialog" class="modal modal--small"><form method="dialog"><div class="modal__header"><div><p class="eyebrow">LOADOUT DETAILS</p><h2>Save Loadout</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close">X</button></div><div class="form-grid"><label><span>Build name</span><input id="buildName" maxlength="80"></label><label><span>Purpose</span><input id="buildPurpose" maxlength="120"></label><label><span>Firebase Visibility</span><select id="buildVisibility"><option value="private">Private</option><option value="public">Public</option></select></label></div><div class="modal__actions"><span id="palVaultCloudStatus">Sign in through Nexus to save this loadout to Firebase.</span><div><button class="button" type="button" data-close-dialog>Cancel</button><button class="button button--gold" id="confirmSaveBuildButton" type="button">Save Loadout</button></div></div></form></dialog>
 
 <dialog id="loadoutViewerDialog" class="modal"><form method="dialog"><div class="modal__header"><div><p class="eyebrow">PUBLIC LOADOUT VIEWER</p><h2 id="loadoutViewerTitle">Shared Team</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close">X</button></div><div id="loadoutViewerBody" class="loadout-viewer-body"></div><div class="modal__actions"><span>View-only public record.</span><div><button class="button button--cyan" type="button" data-close-dialog>Close</button></div></div></form></dialog>
 
@@ -89,6 +89,6 @@
 <script src="pal-data.js?v=20260808b"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="module" src="../../assets/js/firebase-auth.js?v=20260808c"></script>
-<script type="module" src="app.js?v=20260810d"></script>
+<script type="module" src="app.js?v=20260810e"></script>
 <script>includeHTML();</script>
 </body></html>
