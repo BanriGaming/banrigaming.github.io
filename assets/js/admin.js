@@ -32,7 +32,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js";
+} from "./site-store.js?v=20260810d";
 
 const state = {
   user: null,
@@ -138,7 +138,13 @@ function featuredClipOptionList(selectedKey = "") {
     return `<option value="">${state.medalClipsError ? "Could not load Medal clips" : "Loading Medal clips..."}</option>`;
   }
 
-  return state.medalClips
+  const featured = normalizeFeaturedClip(state.featuredClip);
+  const hasSelected = selectedKey && state.medalClips.some((clip) => clip.id === selectedKey || clip.url === selectedKey);
+  const options = hasSelected || (!featured.id && !featured.url)
+    ? state.medalClips
+    : [featured, ...state.medalClips];
+
+  return options
     .map((clip) => {
       const key = clip.id || clip.url;
       const selected = key === selectedKey || clip.url === selectedKey;
@@ -386,102 +392,107 @@ function renderQuotesEditor() {
 
 function renderHomepageEditor() {
   if (!elements.homepageEditor) return;
+  elements.homepageEditor.classList.add("admin-homepage-grid");
   const hero = normalizeHeroCopy(state.hero);
   const visual = normalizeHeroVisual(state.heroVisual);
   const featured = normalizeFeaturedClip(state.featuredClip);
   const selectedClipKey = featured.id || featured.url || "";
   elements.homepageEditor.innerHTML = `
-    <article class="admin-card">
-      <div class="admin-card-body">
-        <div class="admin-card-heading"><span>Hero Text</span></div>
-        <div class="row g-3">
-          <div class="col-12">
-            <label>Eyebrow</label>
-            <input class="form-control" data-home-field="eyebrow" value="${escapeAttr(hero.eyebrow)}" />
-          </div>
-          <div class="col-12">
-            <label>Statement</label>
-            <input class="form-control" data-home-field="statement" value="${escapeAttr(hero.statement)}" />
-          </div>
-          <div class="col-12">
-            <label>Main Copy</label>
-            <textarea class="form-control" rows="3" data-home-field="copy">${escapeHtml(hero.copy)}</textarea>
-          </div>
-        </div>
-      </div>
-    </article>
-    <article class="admin-card">
-      <div class="admin-card-body">
-        <div class="admin-card-heading"><span>Side Note</span></div>
-        <div class="row g-3">
-          <div class="col-12">
-            <label>Line 1</label>
-            <input class="form-control" data-home-side="0" value="${escapeAttr(hero.sideLines[0] || "")}" />
-          </div>
-          <div class="col-12">
-            <label>Line 2</label>
-            <input class="form-control" data-home-side="1" value="${escapeAttr(hero.sideLines[1] || "")}" />
-          </div>
-          <div class="col-12">
-            <label>Line 3</label>
-            <input class="form-control" data-home-side="2" value="${escapeAttr(hero.sideLines[2] || "")}" />
-          </div>
-        </div>
-      </div>
-    </article>
-    <article class="admin-card admin-card-wide hero-visual-admin">
-      <div class="admin-card-preview" style="--preview-image: url('${escapeAttr(visual.images.find((image) => image.id === visual.activeId)?.image || visual.images[0]?.image || "")}')"></div>
-      <div class="admin-card-body">
-        <div class="admin-card-heading"><span>Hero Visual</span></div>
-        <div class="row g-3">
-          <div class="col-12 col-lg-4">
-            <label>Display Mode</label>
-            <select class="form-select" data-hero-visual-field="mode">
-              <option value="fixed"${visual.mode === "fixed" ? " selected" : ""}>Fixed Image</option>
-              <option value="sequence"${visual.mode === "sequence" ? " selected" : ""}>Sequence</option>
-              <option value="shuffle"${visual.mode === "shuffle" ? " selected" : ""}>Shuffle</option>
-            </select>
-          </div>
-          <div class="col-12 col-lg-4">
-            <label>Fixed Image</label>
-            <select class="form-select" data-hero-visual-field="activeId">${heroOptionList(visual.activeId)}</select>
-          </div>
-          <div class="col-12 col-lg-4">
-            <label>Interval Minutes</label>
-            <input class="form-control" type="number" min="1" max="1440" data-hero-visual-field="intervalMinutes" value="${escapeAttr(visual.intervalMinutes)}" />
-          </div>
-        </div>
-        <div class="hero-admin-grid mt-3">
-          ${visual.images.map((image) => `
-            <div class="hero-admin-tile${image.id === visual.activeId ? " active" : ""}" style="--tile-image: url('${escapeAttr(image.image)}')">
-              <span>${escapeHtml(image.id)}</span>
-              <strong>${escapeHtml(image.title)}</strong>
+    <div class="homepage-editor-row">
+      <article class="admin-card">
+        <div class="admin-card-body">
+          <div class="admin-card-heading"><span>Hero Text</span></div>
+          <div class="row g-3">
+            <div class="col-12">
+              <label>Eyebrow</label>
+              <input class="form-control" data-home-field="eyebrow" value="${escapeAttr(hero.eyebrow)}" />
             </div>
-          `).join("")}
-        </div>
-      </div>
-    </article>
-    <article class="admin-card admin-card-wide hero-visual-admin">
-      <div class="admin-card-preview" style="--preview-image: url('${escapeAttr(featured.thumbnail || "/assets/img/hero/banri-hero-03.webp")}')"></div>
-      <div class="admin-card-body">
-        <div class="admin-card-heading"><span>Featured Clip</span></div>
-        <div class="row g-3 align-items-end">
-          <div class="col-12 col-lg-8">
-            <label>Medal Clip</label>
-            <select class="form-select" data-featured-clip-select>
-              ${featuredClipOptionList(selectedClipKey)}
-            </select>
-            ${state.medalClipsError ? `<small class="text-warning d-block mt-2">${escapeHtml(state.medalClipsError)}</small>` : ""}
-          </div>
-          <div class="col-12 col-lg-4">
-            <button id="refreshFeaturedClipsButton" class="btn btn-banri-outline w-100" type="button">Refresh Clips</button>
-          </div>
-          <div class="col-12">
-            <p class="admin-help mb-0">${escapeHtml(featured.title || "Choose a Medal clip")} / ${escapeHtml(featured.game || "Medal Clip")} / ${escapeHtml(featured.date || "Featured transmission")}</p>
+            <div class="col-12">
+              <label>Statement</label>
+              <input class="form-control" data-home-field="statement" value="${escapeAttr(hero.statement)}" />
+            </div>
+            <div class="col-12">
+              <label>Main Copy</label>
+              <textarea class="form-control" rows="3" data-home-field="copy">${escapeHtml(hero.copy)}</textarea>
+            </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+      <article class="admin-card">
+        <div class="admin-card-body">
+          <div class="admin-card-heading"><span>Side Note</span></div>
+          <div class="row g-3">
+            <div class="col-12">
+              <label>Line 1</label>
+              <input class="form-control" data-home-side="0" value="${escapeAttr(hero.sideLines[0] || "")}" />
+            </div>
+            <div class="col-12">
+              <label>Line 2</label>
+              <input class="form-control" data-home-side="1" value="${escapeAttr(hero.sideLines[1] || "")}" />
+            </div>
+            <div class="col-12">
+              <label>Line 3</label>
+              <input class="form-control" data-home-side="2" value="${escapeAttr(hero.sideLines[2] || "")}" />
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="homepage-editor-row homepage-editor-row--media">
+      <article class="admin-card admin-card-wide hero-visual-admin">
+        <div class="admin-card-preview" style="--preview-image: url('${escapeAttr(visual.images.find((image) => image.id === visual.activeId)?.image || visual.images[0]?.image || "")}')"></div>
+        <div class="admin-card-body">
+          <div class="admin-card-heading"><span>Hero Visual</span></div>
+          <div class="row g-3">
+            <div class="col-12 col-lg-4">
+              <label>Display Mode</label>
+              <select class="form-select" data-hero-visual-field="mode">
+                <option value="fixed"${visual.mode === "fixed" ? " selected" : ""}>Fixed Image</option>
+                <option value="sequence"${visual.mode === "sequence" ? " selected" : ""}>Sequence</option>
+                <option value="shuffle"${visual.mode === "shuffle" ? " selected" : ""}>Shuffle</option>
+              </select>
+            </div>
+            <div class="col-12 col-lg-4">
+              <label>Fixed Image</label>
+              <select class="form-select" data-hero-visual-field="activeId">${heroOptionList(visual.activeId)}</select>
+            </div>
+            <div class="col-12 col-lg-4">
+              <label>Interval Minutes</label>
+              <input class="form-control" type="number" min="1" max="1440" data-hero-visual-field="intervalMinutes" value="${escapeAttr(visual.intervalMinutes)}" />
+            </div>
+          </div>
+          <div class="hero-admin-grid mt-3">
+            ${visual.images.map((image) => `
+              <div class="hero-admin-tile${image.id === visual.activeId ? " active" : ""}" style="--tile-image: url('${escapeAttr(image.image)}')">
+                <span>${escapeHtml(image.id)}</span>
+                <strong>${escapeHtml(image.title)}</strong>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </article>
+      <article class="admin-card admin-card-wide featured-clip-admin">
+        <div class="admin-card-preview" style="--preview-image: url('${escapeAttr(featured.thumbnail || "/assets/img/hero/banri-hero-03.webp")}')"></div>
+        <div class="admin-card-body">
+          <div class="admin-card-heading"><span>Featured Clip</span></div>
+          <div class="row g-3 align-items-end">
+            <div class="col-12 col-xl-8">
+              <label>Medal Clip</label>
+              <select class="form-select" data-featured-clip-select>
+                ${featuredClipOptionList(selectedClipKey)}
+              </select>
+              ${state.medalClipsError ? `<small class="text-warning d-block mt-2">${escapeHtml(state.medalClipsError)}</small>` : ""}
+            </div>
+            <div class="col-12 col-xl-4">
+              <button id="refreshFeaturedClipsButton" class="btn btn-banri-outline w-100" type="button">Refresh Clips</button>
+            </div>
+            <div class="col-12">
+              <p class="admin-help mb-0">${escapeHtml(featured.title || "Choose a Medal clip")} / ${escapeHtml(featured.game || "Medal Clip")} / ${escapeHtml(featured.date || "Featured transmission")}</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
   `;
 }
 
@@ -736,6 +747,16 @@ function readFeaturedClip() {
   return normalizeFeaturedClip(selected || state.featuredClip);
 }
 
+function updateFeaturedClipPreview() {
+  const featured = normalizeFeaturedClip(state.featuredClip);
+  const card = elements.homepageEditor?.querySelector(".featured-clip-admin");
+  card?.querySelector(".admin-card-preview")?.style.setProperty("--preview-image", `url('${featured.thumbnail || "/assets/img/hero/banri-hero-03.webp"}')`);
+  const help = card?.querySelector(".admin-help");
+  if (help) {
+    help.textContent = `${featured.title || "Choose a Medal clip"} / ${featured.game || "Medal Clip"} / ${featured.date || "Featured transmission"}`;
+  }
+}
+
 function setupNewGameModal() {
   const status = document.getElementById("newGameStatus");
   const tone = document.getElementById("newGameTone");
@@ -896,6 +917,8 @@ function bindAdminEvents() {
     state.heroVisual = readHeroVisual();
     state.featuredClip = readFeaturedClip();
     await saveSiteConfigPatch({ hero: state.hero, heroVisual: state.heroVisual, featuredClip: state.featuredClip });
+    const savedData = await loadPublicSiteData();
+    state.featuredClip = normalizeFeaturedClip(savedData.featuredClip);
     await pushActivity(activityMeta({ category: "Homepage", title: "Homepage updated", message: "Hero copy, visual rotation, or featured clip settings were updated." }));
     renderHomepageEditor();
     setStatus("Homepage settings saved.", "success");
@@ -988,7 +1011,7 @@ function bindAdminEvents() {
   elements.homepageEditor?.addEventListener("change", (event) => {
     if (!event.target.matches("[data-featured-clip-select]")) return;
     state.featuredClip = readFeaturedClip();
-    renderHomepageEditor();
+    updateFeaturedClipPreview();
     setStatus("Featured clip selected locally. Save Homepage to publish it.", "info");
   });
 

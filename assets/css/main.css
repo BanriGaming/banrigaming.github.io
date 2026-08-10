@@ -3773,6 +3773,22 @@ body.legacy-theme::before {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+#homepageEditor.admin-homepage-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.homepage-editor-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.homepage-editor-row--media {
+  grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+}
+
 .admin-card {
   position: relative;
   overflow: hidden;
@@ -3788,6 +3804,14 @@ body.legacy-theme::before {
 .admin-card-wide {
   display: grid;
   grid-template-columns: minmax(180px, 260px) 1fr;
+}
+
+#homepageEditor .admin-card-wide {
+  grid-template-columns: minmax(190px, 42%) minmax(0, 1fr);
+}
+
+#homepageEditor .featured-clip-admin {
+  grid-template-columns: minmax(180px, 36%) minmax(0, 1fr);
 }
 
 .admin-card-preview {
@@ -6811,6 +6835,8 @@ body.legacy-theme::before {
   }
 
   .admin-card-wide,
+  .homepage-editor-row,
+  .homepage-editor-row--media,
   .admin-library-row,
   .admin-activity-row,
   .activity-card,

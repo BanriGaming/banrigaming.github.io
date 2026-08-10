@@ -318,11 +318,16 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
       const pals=item.pals.filter(p=>p.species);
       const isActive=item.id===activeBuildId;
       const owned=!item.ownerUid||item.ownerUid===currentUser?.uid;
-      return `<article class="vault-loadout-card${isActive?" is-active":""}"><div><p>${esc(item.visibility==="public"?"Public":"Private")} / ${esc(item.ownerDisplayName||"Local")}</p><h2>${esc(item.name||"Untitled Loadout")}</h2><span>${esc(item.purpose||"No purpose set.")}</span><small>${pals.length} / 5 Pals ${item.updatedAt?`/ Updated ${new Date(item.updatedAt).toLocaleDateString()}`:""}</small></div><div>${pals.map(p=>`<b>${esc(p.nickname||p.species)}</b>`).join("")||"<b>Empty party</b>"}</div><footer><button class="button button--cyan" type="button" data-open-loadout="${esc(item.id)}">Open</button>${owned?`<button class="button" type="button" data-save-cloud="${esc(item.id)}">Sync</button><button class="button button--danger" type="button" data-delete-cloud="${esc(item.id)}">Delete Cloud</button>`:""}</footer></article>`;
+      const cloudCopies=cloudLocationsFor(item.id);
+      const hasCloudCopy=cloudCopies.length>0;
+      const displayVisibility=hasCloudCopy?item.visibility:"private";
+      const displayOwner=hasCloudCopy?(item.ownerDisplayName||"Nexus User"):"Local";
+      return `<article class="vault-loadout-card${isActive?" is-active":""}"><div><p>${esc(displayVisibility==="public"?"Public":"Private")} / ${esc(displayOwner)}</p><h2>${esc(item.name||"Untitled Loadout")}</h2><span>${esc(item.purpose||"No purpose set.")}</span><small>${pals.length} / 5 Pals ${item.updatedAt?`/ Updated ${new Date(item.updatedAt).toLocaleDateString()}`:""}</small></div><div>${pals.map(p=>`<b>${esc(p.nickname||p.species)}</b>`).join("")||"<b>Empty party</b>"}</div><footer><button class="button button--cyan" type="button" data-open-loadout="${esc(item.id)}">Open</button>${owned?`<button class="button" type="button" data-save-cloud="${esc(item.id)}">Sync</button>${hasCloudCopy?`<button class="button button--danger" type="button" data-delete-cloud="${esc(item.id)}">Delete Cloud</button>`:`<button class="button button--danger" type="button" data-delete-local="${esc(item.id)}">Delete Local</button>`}`:""}</footer></article>`;
     }).join(""):`<div class="detail-section"><p>No saved loadouts yet. Build a team and hit Save Build.</p></div>`;
     $$("[data-open-loadout]",target).forEach(button=>button.onclick=()=>openLoadout(button.dataset.openLoadout));
     $$("[data-save-cloud]",target).forEach(button=>button.onclick=()=>{const item=state.builds.find(build=>build.id===button.dataset.saveCloud);if(item)saveBuildToCloud(item).then(()=>toast("Loadout synced to Firebase.")).catch(error=>toast(error.message));});
-    $$("[data-delete-cloud]",target).forEach(button=>button.onclick=async()=>{const item=state.builds.find(build=>build.id===button.dataset.deleteCloud);if(item&&await confirmPalVault(`Delete the Firebase copy of "${item.name}"?`,"Delete Cloud Copy"))deleteCloudBuild(item).then(()=>toast("Cloud copy deleted.")).catch(error=>toast(error.message));});
+    $$("[data-delete-cloud]",target).forEach(button=>button.onclick=async()=>{const item=state.builds.find(build=>build.id===button.dataset.deleteCloud);if(!item||!await confirmPalVault(`Delete the Firebase copy of "${item.name}"? Your local copy will remain private.`,"Delete Cloud Copy"))return;try{await deleteCloudBuild(item);markLocalAfterCloudDelete(item.id);toast("Cloud copy deleted. Local copy kept private.");}catch(error){toast(`Cloud delete failed: ${error.message}`);}});
+    $$("[data-delete-local]",target).forEach(button=>button.onclick=async()=>{const item=state.builds.find(build=>build.id===button.dataset.deleteLocal);if(item&&await confirmPalVault(`Delete local loadout "${item.name}"?`,"Delete Local Loadout"))deleteLocalBuild(item.id);});
   }
 
   function renderPublicLoadouts(){
@@ -388,13 +393,47 @@ import { PalworldAPI } from "./palworld-api.js?v=20260810a";
     }
   }
 
+  function cloudLocationsFor(id){
+    const locations=[];
+    const publicRecord=cloudPublicBuilds?.[id];
+    if(publicRecord)locations.push({path:`palworldLoadouts/public/${id}`,record:publicRecord,kind:"public"});
+    const privateRecord=cloudPrivateBuilds?.[id];
+    if(currentUser&&privateRecord)locations.push({path:`palworldLoadouts/private/${currentUser.uid}/${id}`,record:privateRecord,kind:"private"});
+    return locations;
+  }
+
   async function deleteCloudBuild(item){
     if(!currentUser)return;
-    if(item.ownerUid&&item.ownerUid!==currentUser.uid)throw new Error("Only the loadout owner can delete this record.");
-    await Promise.all([
-      remove(ref(database,`palworldLoadouts/private/${currentUser.uid}/${item.id}`)).catch(()=>{}),
-      item.ownerUid===currentUser.uid||!item.ownerUid?remove(ref(database,`palworldLoadouts/public/${item.id}`)).catch(()=>{}):Promise.resolve()
-    ]);
+    const locations=cloudLocationsFor(item.id);
+    if(!locations.length)throw new Error("No Firebase copy exists for this loadout.");
+    await Promise.all(locations.map(({path,record})=>{
+      if(record?.uid&&record.uid!==currentUser.uid)throw new Error("Only the loadout owner can delete this record.");
+      return remove(ref(database,path));
+    }));
+  }
+
+  function markLocalAfterCloudDelete(id){
+    delete cloudPublicBuilds[id];
+    delete cloudPrivateBuilds[id];
+    const item=state.builds.find(build=>build.id===id);
+    if(item){
+      item.visibility="private";
+      item.ownerUid="";
+      item.ownerDisplayName="";
+      item.updatedAt=Date.now();
+    }
+    persist();
+    renderLoadouts();
+    renderPublicLoadouts();
+  }
+
+  function deleteLocalBuild(id){
+    state.builds=state.builds.filter(build=>build.id!==id);
+    if(!state.builds.length)state.builds.push(newBuild());
+    if(activeBuildId===id)activeBuildId=state.builds[0].id;
+    persist();
+    render();
+    toast("Local loadout deleted.");
   }
 
   function setCloudStatus(message){
