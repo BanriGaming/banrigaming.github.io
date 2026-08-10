@@ -1,65 +1,78 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link  rel="stylesheet" href="assets/css/main.css"></link>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery | BANRI Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260807h" />
     <script src="assets/js/nav.js"></script>
-</head>
-<body>
-    <div w3-include-html="../nav.html"></div> <hr>
-    <!--<div class="hunterpie_img">  153C4E  -->
-    <div class="jumbotron jumbotron-fluid">   
-        <h1 class="display-4">Gallery</h1>
-        <p class="lead">Screenshot Collection Homepage.</p>
-    </div> 
-    </div>
-    <hr>
-    <div class="row g-4">
-        <div class="col-sm-2 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark">
-              <img src="https://switchplayer.net/wp-content/uploads/2019/02/6NEYjVZeqpmoRzI7CrL7EK4xBVAQk-vh.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h2 class="card-title">Ark: Survival Evolved</h2>
-                    <a href="collections/ark" class="btn btn-primary">View Collection</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark">
-              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/892970/capsule_616x353.jpg?t=1642794501" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h2 class="card-title">Valheim</h2>
-                    <a href="collections/valheim" class="btn btn-primary">View Collection</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark">
-              <img src="https://www.mygamer.com/wp-content/uploads/2020/06/Satisfactory.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h2 class="card-title">Satisfactory</h2>
-                    <a href="#" class="btn btn-primary">View Collection</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2 col-md-4 col-lg-3">
-            <div class="card text-white bg-dark">
-              <img src="https://i.ytimg.com/vi/hrlfyVHzEZo/maxresdefault.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h2 class="card-title">Grounded</h2>
-                    <a href="#" class="btn btn-primary">View Collection</a>
-                </div>
-            </div>
-        </div>
-    </div> 
+    <script src="assets/js/banri-theme.js?v=20260807h" defer></script>
+  </head>
+  <body class="banri-theme gallery-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="banri-noise" aria-hidden="true"></div>
+    <div w3-include-html="nav.html"></div>
 
-    <script>includeHTML();</script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    </body>
-    </html>
+    <main id="main-content">
+      <section class="subpage-hero gallery-hero">
+        <div class="container-fluid px-3 px-lg-5">
+          <p class="eyebrow-line">Visual Archive</p>
+          <h1 class="subpage-title">
+            Gallery
+            <span>Collections</span>
+          </h1>
+          <p class="subpage-copy">
+            Screenshot collections, visual records, and worlds worth remembering.
+          </p>
+        </div>
+      </section>
+
+      <section class="banri-section">
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="section-heading">
+            <p><span>//</span> 01</p>
+            <h2>Collections</h2>
+          </div>
+
+          <div id="galleryCollectionGrid" class="gallery-collection-grid" aria-live="polite">
+            <div class="vault-loading">Loading gallery collections...</div>
+          </div>
+
+          <section id="galleryStage" class="gallery-stage panel-frame mt-4" aria-live="polite" hidden>
+            <div class="gallery-stage-heading">
+              <div>
+                <p id="galleryStageKicker" class="banri-modal-kicker mb-1">Collection</p>
+                <h2 id="galleryStageTitle">Visual Record</h2>
+              </div>
+              <div class="gallery-stage-actions">
+                <button id="galleryPrevButton" class="btn btn-banri-outline btn-sm" type="button" aria-label="Previous image">&lt;</button>
+                <button id="galleryNextButton" class="btn btn-banri-outline btn-sm" type="button" aria-label="Next image">&gt;</button>
+              </div>
+            </div>
+            <div id="gallerySlider" class="gallery-slider"></div>
+            <div id="galleryThumbs" class="gallery-thumbs"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="banri-footer compact-footer">
+      <div class="container-fluid px-3 px-lg-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+          <p class="footer-kicker mb-0">Screenshots / Worlds / Records</p>
+          <small>&copy; 2026 Banri Gaming. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      includeHTML();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/gallery.js?v=20260807h"></script>
+  </body>
+</html>

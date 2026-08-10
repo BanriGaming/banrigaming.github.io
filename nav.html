@@ -1,164 +1,315 @@
-<nav class="gradient-border navbar navbar-dark navbar-expand-lg">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"  aria-expanded="false" aria-label="Toggle navigation">
+<header class="banri-site-header">
+  <nav class="navbar navbar-expand-xl navbar-dark banri-navbar" aria-label="Primary navigation">
+    <div class="container-fluid px-3 px-lg-5">
+      <a class="navbar-brand banri-brand" href="/index.html" aria-label="Banri Gaming home">
+        <span class="banri-brand-mark" aria-hidden="true">B</span>
+        <span class="banri-brand-text">
+          <strong>BANRI</strong>
+          <small>GAMING</small>
+        </span>
+      </a>
+
+      <button class="navbar-toggler banri-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#banriPrimaryNav" aria-controls="banriPrimaryNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav me-auto my-2 my-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index">Home</a>
-            </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-                Games
-            </a>
-            <ul class="dropdown-menu">
-                <li class="dropdown-submenu">
-                    <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Monster Hunter: World
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" href="/mhw/builds">Builds</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/mhw/builds/gs">Great Sword</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/ls">Long Sword</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/sns">Sword & Shield</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/db">Dual Blades</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/ham">Hammer</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/hh">Hunting Horn</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/lnc">Lance</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/gl">Gun Lance</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/sa">Switch Axe</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/cb">Charge Blade</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/ig">Insect Glaive</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/lbg">Light Bowgun</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/hbg">Heavy Bowgun</a></li>
-                                <li><a class="dropdown-item" href="/mhw/builds/bow">Bow</a></li>
-                            </ul>
-                            </li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" href="#">Guides</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/mhw/guides/guidinglands">Guiding Lands</a></li>
-                                <li><a class="dropdown-item" href="/mhw/guides/hunterpie">HunterPie</a></li>
-                                <li><a class="dropdown-item" href="/mhw/guides/mhwbackup">MHW Backup</a></li>
-                                <li><a class="dropdown-item" href="/mhw/guides/questchecklist">Optional Checklist</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="dropdown-item" href="/mhw/resources">Resources</a></li>
-                    </ul>
-                </li>
-                <!-- MONSTER HUNTER RISE MENU -->
-                <li class="dropdown-submenu">
-                    <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Monster Hunter: Rise
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" href="/mhr/builds">Builds</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/mhr/builds/gs">Great Sword</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/ls">Long Sword</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/sns">Sword & Shield</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/db">Dual Blades</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/ham">Hammer</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/hh">Hunting Horn</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/lnc">Lance</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/gl">Gun Lance</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/sa">Switch Axe</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/cb">Charge Blade</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/ig">Insect Glaive</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/lbg">Light Bowgun</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/hbg">Heavy Bowgun</a></li>
-                                <li><a class="dropdown-item" href="/mhr/builds/bow">Bow</a></li>
-                            </ul>
-                            </li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" href="#">Guides</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/mhr/guides/switchskills">Switch Skills</a></li>
-                                <li><a class="dropdown-item" href="/mhr/guides/gatherpath">Zenny & Point Path</a></li>
-                                <li><a class="dropdown-item" href="/mhr/guides/oreandbones">Ore & Bone Locations</a></li>
-                                <li><a class="dropdown-item" href="/mhr/guides/palico">Palico & Palamute Guide</a></li>
-                                <li><a class="dropdown-item" href="/mhr/guides/hunterpie">HunterPie v2</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="dropdown-item" href="/mhr/resources">Resources</a></li>
-                    </ul>
-                </li>
-                <!-- FINAL FANTASY 14 MENU --><!--
-                <li class="dropdown-submenu">
-                    <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Final Fantasy XIV
-                    </a>
-                    <ul class="dropdown-menu">-->
-                        <!--<li class="dropdown-submenu">
-                        <a class="dropdown-item" href="/ff14/fc">Free Company</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/ff14/fc/events">Events</a></li>
-				    </ul>
-			    </li>--><!--
-                        <li><a class="dropdown-item" href="/ff14/videos">Videos</a></li>
-                        <li><a class="dropdown-item" href="/ff14/resources">Resources</a></li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" href="/ff14/prog">Progression</a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item" href="#">Macros</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-submenu"> 
-                                            <a class="dropdown-item" href="#">Crafting</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/ff14/progression/macros/crafting/macros60x">6.0x Macros</a></li>
-                                                <li><a class="dropdown-item" href="/ff14/progression/macros/crafting/macros61x">6.1x Macros</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a class="dropdown-item" href="/ff14/progression/macros/qolmacro">QoL</a></li>
-                                    </ul>
-                                
-                                </li>
-                                <li><a class="dropdown-item" href="/ff14/progression/raiding">Raiding</a></li>
-				            </ul>
-			            </li>
-                    </ul>
-                </li>-->
-                <!-- MELVOR MENU -->
-                <li class="dropdown-submenu">
-                    <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   Starfield
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/starfield/starchart">Planetary Archive</a></li>
-                        <li><a class="dropdown-item" href="/starfield/suitlocker">Spacesuit Locker</a></li>
-                        <li><a class="dropdown-item" href="/starfield/gunlocker">Gun Locker</a></li>
-                        <li><a class="dropdown-item" href="/starfield/magazines">Magazine Shelf</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu">
-                    <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   Palia
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/palia/ptimecalc">Time Calculator</a></li>
-                        <li><a class="dropdown-item" href="/palia/palianpc">Villager Gifts</a></li>
-                    </ul>
-                </li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/games">Game Library</a></li>
+      </button>
+
+      <div class="collapse navbar-collapse" id="banriPrimaryNav">
+        <ul class="navbar-nav mx-xl-auto mb-3 mb-xl-0">
+          <li class="nav-item"><a class="nav-link" href="/index.html" data-nav-key="home">Home</a></li>
+
+          <li class="nav-item dropdown banri-mega-dropdown">
+            <a class="nav-link dropdown-toggle" href="/games.html" id="banriGamingMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-nav-key="gaming">Gaming</a>
+            <div class="dropdown-menu banri-mega-panel" aria-labelledby="banriGamingMenu">
+              <div class="row g-4">
+                <section class="col-12 col-lg-4">
+                  <p class="mega-kicker">Library</p>
+                  <h2>Gaming Archive</h2>
+                  <a href="/games.html">Game Library</a>
+                  <a href="/activity.html">Latest Activity</a>
+                  <a href="/index.html#currently-playing">Currently Playing</a>
+                </section>
+                <section class="col-12 col-lg-4">
+                  <p class="mega-kicker">Monster Hunter</p>
+                  <h2>Hubs</h2>
+                  <a href="/landing-pages/mhw.html">Monster Hunter: World</a>
+                  <a href="/landing-pages/mhr.html">Monster Hunter: Rise</a>
+                  <span class="mega-disabled">Monster Hunter Wilds / Reserved</span>
+                </section>
+                <section class="col-12 col-lg-4">
+                  <p class="mega-kicker">Tools</p>
+                  <h2>Trackers & Utilities</h2>
+                  <a href="/starfield/starchart.html">Planetary Archive</a>
+                  <a href="/starfield/suitlocker.html">Spacesuit Locker</a>
+                  <a href="/starfield/gunlocker.html">Gun Locker</a>
+                  <a href="/palia/ptimecalc.html">Palia Time Calculator</a>
+                </section>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown banri-mega-dropdown">
+            <a class="nav-link dropdown-toggle" href="/games.html" id="banriWorldsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-nav-key="worlds">Worlds</a>
+            <div class="dropdown-menu banri-mega-panel" aria-labelledby="banriWorldsMenu">
+              <div class="row g-4">
+                <section class="col-12 col-lg-4">
+                  <p class="mega-kicker">Rotation</p>
+                  <h2>Active Rotation</h2>
+                  <a href="/landing-pages/grounded.html">Grounded</a>
+                  <a href="/landing-pages/palworld.html">Palworld</a>
+                  <a href="/landing-pages/helldivers-2.html">Helldivers 2</a>
+                  <a href="/landing-pages/starfield.html">Starfield</a>
+                </section>
+                <section class="col-12 col-lg-4">
+                  <p class="mega-kicker">Explore</p>
+                  <h2>World Hubs</h2>
+                  <a href="/landing-pages/nms.html">No Man's Sky</a>
+                  <a href="/landing-pages/palia.html">Palia</a>
+                  <a href="/landing-pages/valheim.html">Valheim</a>
+                  <a href="/Elden%20Ring/eldenring.html">Elden Ring</a>
+                </section>
+                <section class="col-12 col-lg-4">
+                  <p class="mega-kicker">Records</p>
+                  <h2>Creative Index</h2>
+                  <a href="/gallery.html">Gallery Collections</a>
+                  <a href="/ai-creations.html">AI Creations</a>
+                  <a href="/clips.html">Medal Clips</a>
+                  <a href="/projects.html">Project Archive</a>
+                </section>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="/clips.html" data-nav-key="clips">Clips</a></li>
+          <li class="nav-item"><a class="nav-link" href="/gallery.html" data-nav-key="gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="/projects.html" data-nav-key="projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="/aboutme.html" data-nav-key="about">About</a></li>
         </ul>
-        <li class="nav-item">
-        <a class="nav-link" href="/gallery">Gallery</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/aboutme">About Me</a>
-    </li>
-    </li>
-    </ul>
-    <!--<form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>-->
-    </form>
+
+        <div class="banri-nav-actions">
+          <div id="banriMusicPlayer" class="banri-music-player">
+            <button id="banriMusicToggle" class="btn btn-banri-ghost banri-music-toggle" type="button" aria-expanded="false" aria-controls="banriMusicPanel">
+              Audio
+            </button>
+            <div id="banriMusicPanel" class="banri-music-panel" hidden>
+              <div class="banri-music-head">
+                <p>Site Playlist</p>
+                <strong id="banriMusicNow">No track selected</strong>
+              </div>
+              <div class="banri-music-controls">
+                <button id="banriMusicPrev" type="button" aria-label="Previous track">&lt;</button>
+                <button id="banriMusicPlay" type="button">Play</button>
+                <button id="banriMusicNext" type="button" aria-label="Next track">&gt;</button>
+              </div>
+              <div id="banriMusicTracks" class="banri-music-tracks" role="list"></div>
+              <label class="banri-music-volume" for="banriMusicVolume">
+                Volume
+                <input id="banriMusicVolume" type="range" min="0" max="1" step="0.05" value="0.45" />
+              </label>
+            </div>
+          </div>
+          <button id="banriAuthNavButton" class="btn btn-banri-ghost" type="button" data-bs-toggle="modal" data-bs-target="#banriLoginModal">
+            Login
+          </button>
+          <button class="btn btn-banri-nexus" type="button" data-bs-toggle="modal" data-bs-target="#banriNexusModal">
+            Enter Nexus <span aria-hidden="true">-&gt;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="modal fade banri-login-modal" id="banriLoginModal" tabindex="-1" aria-labelledby="banriLoginTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <p class="banri-modal-kicker mb-1">Secure Access</p>
+          <h2 class="modal-title" id="banriLoginTitle">Nexus Login</h2>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body banri-login-form">
+        <section id="banriAuthSignedOut" class="auth-panel" aria-label="Sign in or create account">
+          <div class="auth-copy">
+            <p>Unlock profile settings and future Nexus sync.</p>
+          </div>
+
+          <label for="banriLoginDisplayName">Display Name</label>
+          <input id="banriLoginDisplayName" class="form-control" type="text" autocomplete="nickname" maxlength="32" placeholder="Banri" />
+
+          <label for="banriLoginEmail">Email</label>
+          <input id="banriLoginEmail" class="form-control" type="email" autocomplete="email" placeholder="you@example.com" />
+
+          <label for="banriLoginPassword">Password</label>
+          <input id="banriLoginPassword" class="form-control" type="password" autocomplete="current-password" placeholder="Password" />
+
+          <div class="auth-actions">
+            <button id="banriSignInButton" class="btn btn-banri-primary" type="button">Sign In</button>
+            <button id="banriCreateAccountButton" class="btn btn-banri-outline" type="button" disabled aria-disabled="true" title="Account creation is currently closed.">Create Account</button>
+          </div>
+        </section>
+
+        <section id="banriAuthProfile" class="auth-panel d-none" aria-label="Profile settings">
+          <div class="profile-chip">
+            <span id="banriProfileInitial" aria-hidden="true">B</span>
+            <div>
+              <strong id="banriProfileName">Nexus User</strong>
+              <small id="banriProfileEmail">Signed in</small>
+            </div>
+          </div>
+
+          <label for="banriProfileDisplayName">Display Name</label>
+          <input id="banriProfileDisplayName" class="form-control" type="text" autocomplete="nickname" maxlength="32" placeholder="Display name" />
+
+          <label for="banriProfileBio">Profile Signal</label>
+          <textarea id="banriProfileBio" class="form-control" rows="3" maxlength="160" placeholder="Creator. Player. Explorer."></textarea>
+
+          <label for="banriProfileStatus">Status Message</label>
+          <input id="banriProfileStatus" class="form-control" type="text" maxlength="120" placeholder="Currently exploring the Outer Rim." />
+
+          <label for="banriProfileAvatarUrl">Avatar URL</label>
+          <input id="banriProfileAvatarUrl" class="form-control" type="url" maxlength="500" placeholder="https://..." />
+
+          <label for="banriProfileAvatarFile">Upload Avatar</label>
+          <input id="banriProfileAvatarFile" class="form-control" type="file" accept="image/webp,image/gif,image/png,image/jpeg" />
+
+          <label for="banriProfileFavoriteGames">Favorite Games</label>
+          <textarea id="banriProfileFavoriteGames" class="form-control" rows="2" maxlength="300" placeholder="Palworld, Monster Hunter, Starfield..."></textarea>
+
+          <div class="profile-platform-grid">
+            <label for="banriProfileYoutube">YouTube<input id="banriProfileYoutube" class="form-control" type="url" maxlength="500" placeholder="https://youtube.com/..." /></label>
+            <label for="banriProfileTwitch">Twitch<input id="banriProfileTwitch" class="form-control" type="url" maxlength="500" placeholder="https://twitch.tv/..." /></label>
+            <label for="banriProfileSteam">Steam<input id="banriProfileSteam" class="form-control" type="url" maxlength="500" placeholder="https://steamcommunity.com/..." /></label>
+            <label for="banriProfileDiscord">Discord<input id="banriProfileDiscord" class="form-control" type="text" maxlength="80" placeholder="Discord handle or invite" /></label>
+            <label for="banriProfileWebsite">Website<input id="banriProfileWebsite" class="form-control" type="url" maxlength="500" placeholder="https://..." /></label>
+          </div>
+
+          <div class="profile-privacy-grid" aria-label="Public profile visibility">
+            <label><input id="banriPrivacyAvatar" type="checkbox" checked /> Show Avatar</label>
+            <label><input id="banriPrivacyBio" type="checkbox" checked /> Show Signal</label>
+            <label><input id="banriPrivacyStatus" type="checkbox" checked /> Show Status</label>
+            <label><input id="banriPrivacyFavorites" type="checkbox" checked /> Show Favorites</label>
+            <label><input id="banriPrivacyPlatforms" type="checkbox" checked /> Show Platforms</label>
+          </div>
+
+          <div class="auth-actions">
+            <button id="banriSaveProfileButton" class="btn btn-banri-primary" type="button">Save Profile</button>
+            <button id="banriSignOutButton" class="btn btn-banri-outline" type="button">Sign Out</button>
+          </div>
+        </section>
+
+        <p id="banriAuthStatus" class="auth-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
 </div>
+
+<button id="banriBackToTop" class="banri-back-top" type="button" aria-label="Back to top">
+  <span aria-hidden="true"></span>
+  <strong aria-hidden="true">↑</strong>
+</button>
+
+<div class="modal fade banri-nexus-modal" id="banriNexusModal" tabindex="-1" aria-labelledby="banriNexusTitle" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <p class="banri-modal-kicker mb-1">Command Hub</p>
+          <h2 class="modal-title" id="banriNexusTitle">Enter Nexus</h2>
+        </div>
+        <div class="nexus-modal-actions">
+          <button id="nexusAudioToggle" class="nexus-audio-toggle" type="button" aria-pressed="false">Audio On</button>
+          <button type="button" class="btn-close btn-close-white nexus-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="nexus-stage" aria-label="Nexus destination map">
+          <a id="banriMembersNode" class="nexus-members-link" href="/members.html" aria-hidden="false">
+            Members <span aria-hidden="true">-&gt;</span>
+          </a>
+          <a id="banriAdminNode" class="nexus-admin-link d-none" href="/admin.html" aria-hidden="true">
+            Admin Console <span aria-hidden="true">-&gt;</span>
+          </a>
+          <div class="nexus-grid" aria-hidden="true"></div>
+          <div class="nexus-rings" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="nexus-core">
+            <div class="nexus-operative" aria-hidden="true"></div>
+            <strong>NEXUS</strong>
+            <small>encrypted relay</small>
+          </div>
+
+          <aside id="nexusRouteDrawer" class="nexus-route-drawer" hidden aria-live="polite">
+            <p>// Route Branch</p>
+            <h3 id="nexusRouteDrawerTitle">Select Path</h3>
+            <div id="nexusRouteDrawerLinks" class="nexus-route-links"></div>
+          </aside>
+
+          <div class="nexus-node node-gaming nexus-branch" data-nexus-branch data-nexus-route-key="gaming">
+            <div class="nexus-node-head">
+              <a href="/games.html">
+                <strong>Gaming</strong>
+                <span>Library / Builds / Guides</span>
+              </a>
+              <button type="button" data-nexus-expand aria-expanded="false" aria-label="Expand gaming routes">+</button>
+            </div>
+            <div class="nexus-branch-panel">
+              <a href="/games.html">Game Library</a>
+              <a href="/landing-pages/mhw.html">Monster Hunter: World</a>
+              <a href="/mhw/builds.html">MHW Builds</a>
+              <a href="/mhw/guides.html">MHW Guides</a>
+              <a href="/landing-pages/mhr.html">Monster Hunter: Rise</a>
+            </div>
+          </div>
+          <a class="nexus-node node-clips" href="/clips.html">
+            <strong>Clips</strong>
+            <span>Recent captures / Medal vault</span>
+          </a>
+          <a class="nexus-node node-gallery" href="/gallery.html">
+            <strong>Gallery</strong>
+            <span>Screenshots / Collections</span>
+          </a>
+          <div class="nexus-node node-tools nexus-branch" data-nexus-branch data-nexus-route-key="tools">
+            <div class="nexus-node-head">
+              <a href="/projects.html">
+                <strong>Tools</strong>
+                <span>Trackers / Calculators</span>
+              </a>
+              <button type="button" data-nexus-expand aria-expanded="false" aria-label="Expand tool routes">+</button>
+            </div>
+            <div class="nexus-branch-panel">
+              <a href="/projects.html">Projects Toolkit</a>
+              <a href="/starfield/starchart.html">Starfield: Planetary Archive</a>
+              <a href="/starfield/suitlocker.html">Starfield: Spacesuit Locker</a>
+              <a href="/starfield/gunlocker.html">Starfield: Gun Locker</a>
+              <a href="/starfield/magazines.html">Starfield: Magazine Shelf</a>
+              <a href="/palworld/palworld-build-vault-api-v8/index.html">Palworld: Build Vault</a>
+              <a href="/palia/ptimecalc.html">Palia Time Calculator</a>
+              <a href="/nms/galaxies.html">NMS Galaxy List</a>
+            </div>
+          </div>
+          <button class="nexus-node node-worlds nexus-disabled" type="button" disabled>
+            <strong>Worlds</strong>
+            <span>Reserved signal / coming later</span>
+          </button>
+          <a id="banriChroniclesNode" class="nexus-node node-chronicles d-none" href="/chronicles.html" aria-hidden="true">
+            <strong>Chronicles</strong>
+            <span>Play-by-post / private writing corner</span>
+          </a>
+          <a id="banriRelayNode" class="nexus-node node-relay d-none" href="/midnight-relay.html" aria-hidden="true">
+            <strong>Midnight Relay</strong>
+            <span>Private chat room / online signals</span>
+          </a>
+          <a class="nexus-node node-about" href="/aboutme.html">
+            <strong>About</strong>
+            <span>Origin / Contact</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</nav>

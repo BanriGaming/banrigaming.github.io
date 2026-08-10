@@ -1,0 +1,382 @@
+{
+  "rules": {
+    "admins": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": false,
+        ".validate": "newData.isBoolean()"
+      }
+    },
+    "siteConfig": {
+      ".read": true,
+      ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
+    },
+    "gamesLibrary": {
+      ".read": true,
+      ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
+    },
+    "activityFeed": {
+      ".read": true,
+      "$activityId": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
+      }
+    },
+    "activityArchive": {
+      ".read": true,
+      "$activityId": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
+      }
+    },
+    "galleryCollections": {
+      ".read": true,
+      "$collectionId": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
+      }
+    },
+    "galleryImages": {
+      ".read": true,
+      "$collectionId": {
+        "$imageId": {
+          ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
+        }
+      }
+    },
+    "relayMessages": {
+      ".read": "auth != null",
+      "$messageId": {
+        ".write": "auth != null && ((!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",
+        ".validate": "newData.hasChildren(['uid', 'displayName', 'text', 'createdAt'])",
+        "uid": {
+          ".validate": "newData.val() === auth.uid || data.val() === auth.uid"
+        },
+        "displayName": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+        },
+        "text": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 2000"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "editedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "replyTo": {
+          ".validate": "newData.hasChildren(['id', 'displayName', 'text'])",
+          "id": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+          },
+          "displayName": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+          },
+          "text": {
+            ".validate": "newData.isString() && newData.val().length <= 180"
+          },
+          "$other": {
+            ".validate": false
+          }
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "relayReactions": {
+      ".read": "auth != null",
+      "$messageId": {
+        "$reactionId": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid && root.child('relayMessages').child($messageId).exists()",
+            ".validate": "newData.hasChildren(['emoji', 'displayName', 'createdAt'])",
+            "emoji": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 8"
+            },
+            "displayName": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+            },
+            "createdAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      }
+    },
+    "presence": {
+      ".read": true,
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.hasChildren(['uid', 'displayName', 'online', 'lastSeen'])",
+        "uid": {
+          ".validate": "newData.val() === $uid"
+        },
+        "displayName": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+        },
+        "online": {
+          ".validate": "newData.isBoolean()"
+        },
+        "lastSeen": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "palworldLoadouts": {
+      "public": {
+        ".read": true,
+        "$loadoutId": {
+          ".write": "auth != null && ((!data.exists() && newData.child('uid').val() === auth.uid && newData.child('visibility').val() === 'public') || (data.exists() && data.child('uid').val() === auth.uid))",
+          ".validate": "newData.hasChildren(['id', 'uid', 'ownerDisplayName', 'visibility', 'updatedAt', 'build'])",
+          "id": {
+            ".validate": "newData.val() === $loadoutId"
+          },
+          "uid": {
+            ".validate": "newData.isString() && newData.val() === auth.uid"
+          },
+          "ownerDisplayName": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 64"
+          },
+          "visibility": {
+            ".validate": "newData.val() === 'public'"
+          },
+          "$other": {
+            ".validate": true
+          }
+        }
+      },
+      "private": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          "$loadoutId": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.hasChildren(['id', 'uid', 'ownerDisplayName', 'visibility', 'updatedAt', 'build'])",
+            "id": {
+              ".validate": "newData.val() === $loadoutId"
+            },
+            "uid": {
+              ".validate": "newData.isString() && newData.val() === $uid"
+            },
+            "visibility": {
+              ".validate": "newData.val() === 'private'"
+            },
+            "$other": {
+              ".validate": true
+            }
+          }
+        }
+      }
+    },
+    "chronicles": {
+      ".read": "auth != null",
+      "worlds": {
+        "$worldId": {
+          ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+          ".validate": "newData.hasChildren(['id', 'title', 'description', 'createdAt'])",
+          "$other": {
+            ".validate": true
+          }
+        }
+      },
+      "threads": {
+        "$worldId": {
+          "$threadId": {
+            ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+            ".validate": "newData.hasChildren(['id', 'worldId', 'title', 'description', 'createdAt'])",
+            "$other": {
+              ".validate": true
+            }
+          }
+        }
+      },
+      "categories": {
+        "$worldId": {
+          "$categoryId": {
+            ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+            ".validate": "newData.hasChildren(['id', 'worldId', 'title', 'createdAt'])",
+            "$other": {
+              ".validate": true
+            }
+          }
+        }
+      },
+      "posts": {
+        "$worldId": {
+          "$threadId": {
+            "$postId": {
+              ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",
+              ".validate": "newData.hasChildren(['uid', 'authorName', 'body', 'createdAt'])",
+              "uid": {
+                ".validate": "newData.isString() && newData.val().length >= 1"
+              },
+              "authorName": {
+                ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 48"
+              },
+              "title": {
+                ".validate": "newData.isString() && newData.val().length <= 120"
+              },
+              "body": {
+                ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 12000"
+              },
+              "createdAt": {
+                ".validate": "newData.isNumber()"
+              },
+              "updatedAt": {
+                ".validate": "newData.isNumber()"
+              },
+              "$other": {
+                ".validate": true
+              }
+            }
+          }
+        }
+      },
+      "deletedThreads": {
+        "$worldId": {
+          "$threadId": {
+            ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+            ".validate": "newData.isBoolean()"
+          }
+        }
+      },
+      "deletedPosts": {
+        "$worldId": {
+          "$threadId": {
+            "$postId": {
+              ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+              ".validate": "newData.isBoolean()"
+            }
+          }
+        }
+      },
+      "characters": {
+        "$characterId": {
+          ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",
+          ".validate": "newData.hasChildren(['uid', 'ownerDisplayName', 'worldId', 'name', 'createdAt'])",
+          "uid": {
+            ".validate": "newData.isString() && newData.val().length >= 1"
+          },
+          "ownerDisplayName": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 48"
+          },
+          "worldId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 90"
+          },
+          "name": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 100"
+          },
+          "$other": {
+            ".validate": true
+          }
+        }
+      }
+    },
+    "profiles": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid",
+        "uid": {
+          ".validate": "newData.val() === $uid"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().length <= 254"
+        },
+        "displayName": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+        },
+        "displayNameLower": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+        },
+        "bio": {
+          ".validate": "newData.isString() && newData.val().length <= 160"
+        },
+        "status": {
+          ".validate": "newData.isString() && newData.val().length <= 120"
+        },
+        "favoriteGames": {
+          ".validate": "newData.isString() && newData.val().length <= 300"
+        },
+        "platforms": {
+          "youtube": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "twitch": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "steam": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "discord": { ".validate": "newData.isString() && newData.val().length <= 80" },
+          "website": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "$other": { ".validate": false }
+        },
+        "privacy": {
+          "showAvatar": { ".validate": "newData.isBoolean()" },
+          "showBio": { ".validate": "newData.isBoolean()" },
+          "showStatus": { ".validate": "newData.isBoolean()" },
+          "showFavorites": { ".validate": "newData.isBoolean()" },
+          "showPlatforms": { ".validate": "newData.isBoolean()" },
+          "$other": { ".validate": false }
+        },
+        "photoURL": {
+          ".validate": "newData.val() === null || (newData.isString() && newData.val().length <= 1300000)"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "publicProfiles": {
+      "$uid": {
+        ".read": true,
+        ".write": "auth != null && auth.uid === $uid",
+        "uid": {
+          ".validate": "newData.val() === $uid"
+        },
+        "displayName": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+        },
+        "bio": {
+          ".validate": "newData.isString() && newData.val().length <= 160"
+        },
+        "status": {
+          ".validate": "newData.isString() && newData.val().length <= 120"
+        },
+        "favoriteGames": {
+          ".validate": "newData.isString() && newData.val().length <= 300"
+        },
+        "platforms": {
+          "youtube": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "twitch": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "steam": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "discord": { ".validate": "newData.isString() && newData.val().length <= 80" },
+          "website": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "$other": { ".validate": false }
+        },
+        "privacy": {
+          "showAvatar": { ".validate": "newData.isBoolean()" },
+          "showBio": { ".validate": "newData.isBoolean()" },
+          "showStatus": { ".validate": "newData.isBoolean()" },
+          "showFavorites": { ".validate": "newData.isBoolean()" },
+          "showPlatforms": { ".validate": "newData.isBoolean()" },
+          "$other": { ".validate": false }
+        },
+        "photoURL": {
+          ".validate": "newData.val() === null || (newData.isString() && newData.val().length <= 1300000)"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    ".read": false,
+    ".write": false
+  }
+}

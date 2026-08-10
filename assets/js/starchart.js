@@ -1,10 +1,10 @@
 // Function to fetch planet data from CSV and generate data cards
 function fetchPlanetDataAndGenerateDataCards() {
-    return fetch('https://banrigaming.github.io/assets/files/starfieldresources.csv')
+    return fetch('/assets/files/starfieldresources.csv')
         .then(response => response.text())
         .then(data => {
-            const parsedData = Papa.parse(data, { header: true }).data;
-            let array = $.csv.toObjects(data); //uses jquery.csv.min.js library to convert csv to array
+            const parsedData = Papa.parse(data, { header: true, skipEmptyLines: true }).data;
+            let array = parsedData;
             generateDataCards(parsedData);
             handleSearchInput(array);
             handleResourceFilterInput(array);
@@ -80,177 +80,72 @@ function getResourceName(abbreviation) {
 // Function to generate data cards based on planet data
 function generateDataCards(data) {
     const cardContainer = document.querySelector('.card-container');
-    var count = 0;
-    // Clear the card container
-    cardContainer.innerHTML = '';
+    if (!cardContainer) return;
 
     // Get the list of available resources
-    const availableResources = new Set();
-
-    // Loop through the data and generate data cards
-    data.forEach(planet => {
-        const card = document.createElement('div');
-        card.classList.add('card', 'text-white', 'bg-dark');
-
-        // Create a list to display resources
-        const resourceList = document.createElement('ul');
-        resourceList.classList.add('list-unstyled');
-
-        // Loop through the data keys to find resource properties
-        Object.keys(planet).forEach(key => {
-            if (planet[key] === 'X' && key !== 'System' && key !== 'Location' && key !== 'Type') {
-                // Add resource to the available resources set
-                availableResources.add(key);
-                
-                //create span
-                const s_tag = document.createElement('span');
-                s_tag.classList.add("me-2","d-inline-block");
-                var resource = getResourceName(key);
-                s_tag.classList.add("block-element");
-                if(resource == "Alkanes"){
-                    s_tag.classList.add("block-alkanes");
-                }else if(resource == "Aluminum"){
-                    s_tag.classList.add("block-aluminum");
-                }else if(resource == "Antimony"){
-                    s_tag.classList.add("block-antimony");
-                }else if(resource == "Argon"){
-                    s_tag.classList.add("block-argon");
-                }else if(resource == "Benzene"){
-                    s_tag.classList.add("block-benzene");
-                }else if(resource == "Beryllium"){
-                    s_tag.classList.add("block-beryllium");
-                }else if(resource == "Caesium"){
-                    s_tag.classList.add("block-caesium");
-                }else if(resource == "Carboxylic Acids"){
-                    s_tag.classList.add("block-carboxylicacids");
-                }else if(resource == "Chlorine"){
-                    s_tag.classList.add("block-chlorine");
-                }else if(resource == "Chlorosilanes"){
-                    s_tag.classList.add("block-chlorosilanes");
-                }else if(resource == "Cobalt"){
-                    s_tag.classList.add("block-cobalt");
-                }else if(resource == "Copper"){
-                    s_tag.classList.add("block-copper");
-                }else if(resource == "Dysprosium"){
-                    s_tag.classList.add("block-dysprosium");
-                }else if(resource == "Europium"){
-                    s_tag.classList.add("block-europium");
-                }else if(resource == "Fluorine"){
-                    s_tag.classList.add("block-fluorine");
-                }else if(resource == "Gold"){
-                    s_tag.classList.add("block-gold");
-                }else if(resource == "Helium"){
-                    s_tag.classList.add("block-helium");
-                }else if(resource == "Ionic Liquids"){
-                    s_tag.classList.add("block-ionicliquids");
-                }else if(resource == "Iridium"){
-                    s_tag.classList.add("block-iridium");
-                }else if(resource == "Iron"){
-                    s_tag.classList.add("block-iron");
-                }else if(resource == "Lead"){
-                    s_tag.classList.add("block-lead");
-                }else if(resource == "Lithium"){
-                    s_tag.classList.add("block-lithium");
-                }else if(resource == "Mercury"){
-                    s_tag.classList.add("block-mercury");
-                }else if(resource == "Neodymium"){
-                    s_tag.classList.add("block-neodymium");
-                }else if(resource == "Neon"){
-                    s_tag.classList.add("block-neon");
-                }else if(resource == "Nickel"){
-                    s_tag.classList.add("block-nickel");
-                }else if(resource == "Palladium"){
-                    s_tag.classList.add("block-palladium");
-                }else if(resource == "Platinum"){
-                    s_tag.classList.add("block-platinum");
-                }else if(resource == "Plutonium"){
-                    s_tag.classList.add("block-plutonium");
-                }else if(resource == "Silver"){
-                    s_tag.classList.add("block-silver");
-                }else if(resource == "Tantalum"){
-                    s_tag.classList.add("block-tantalum");
-                }else if(resource == "Tetrafluorides"){
-                    s_tag.classList.add("block-tetrafluorides");
-                }else if(resource == "Titanium"){
-                    s_tag.classList.add("block-titanium");
-                }else if(resource == "Tungsten"){
-                    s_tag.classList.add("block-tungsten");
-                }else if(resource == "Uranium"){
-                    s_tag.classList.add("block-uranium");
-                }else if(resource == "Vanadium"){
-                    s_tag.classList.add("block-vanadium");
-                }else if(resource == "Water"){
-                    s_tag.classList.add("block-water");
-                }else if(resource == "Xenon"){
-                    s_tag.classList.add("block-xenon");
-                }else if(resource == "Ytterbium"){
-                    s_tag.classList.add("block-ytterbium");
-                }else if(resource == "Aldumite"){
-                    s_tag.classList.add("block-aldumite");
-                }else if(resource == "Indicite"){
-                    s_tag.classList.add("block-indicite");
-                }else if(resource == "Rothicite"){
-                    s_tag.classList.add("block-rothicite");
-                }else if(resource == "Tasine"){
-                    s_tag.classList.add("block-tasine");
-                }else if(resource == "Veryl"){
-                    s_tag.classList.add("block-veryl");
-                }else if(resource == "Vytinium"){
-                    s_tag.classList.add("block-vytinium");
-                }else{
-
-                }
-                // Create a list item for the resource
-                const listItem = document.createElement('li');
-                // Display the resource with abbreviation and name in parentheses
-                
-                if(resource == "None"){
-                    listItem.textContent = `None`;
-                }else{
-                    listItem.textContent = `${key} (${getResourceName(key)})`;
-                }
-                listItem.insertBefore(s_tag , listItem.firstChild); //append span tag
-                // Append the list item to the resource list
-                resourceList.appendChild(listItem);
-            }
-        });
-
-        card.innerHTML = `
-            <div class="card-header">
-                <h5 class="card-title">${planet['Location']}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${planet['System']}</h6>
-                <p class="card-text">${planet['Type']}</p>
-            </div>
-            <div class="card-body">
-            <p>Resources:</p>
-            </p>
-            ${resourceList.outerHTML}
-            </p>
-        `;
-
-        // Add resource information dynamically
-        const resources = Object.keys(planet);
-        resources.splice(resources.indexOf('System'), 1); // Remove 'System' from resources
-        resources.splice(resources.indexOf('Location'), 1); // Remove 'Location' from resources
-        resources.splice(resources.indexOf('Type'), 1); // Remove 'Type' from resources
-
-        resources.forEach(resource => {
-            const resourceValue = planet[resource] === 'None' ? 'No' : planet[resource] === 'Yes' ? 'Yes' : '';
-            if (resourceValue === 'Yes') {              
-                availableResources.add(resource);
-                const listItem = document.createElement('li');
-                listItem.textContent = `${resource}`;
-                resourceList.appendChild(listItem);
-            }
-        });
-
-        cardContainer.appendChild(card);
-        count++;
-    });
+    const availableResources = collectAvailableResources(data);
+    cardContainer.innerHTML = data.map(buildPlanetCard).join('');
 
     // Update the resource filter buttons based on available resources
     updateResourceFilterButtons(availableResources);
-    document.getElementById("d-planets").innerHTML = count;
+    document.getElementById("d-planets").innerHTML = data.length;
+}
+
+function collectAvailableResources(data) {
+    const availableResources = new Set();
+    data.forEach(planet => {
+        Object.keys(planet).forEach(key => {
+            if (planet[key] === 'X' && key !== 'System' && key !== 'Location' && key !== 'Type') {
+                availableResources.add(key);
+            }
+        });
+    });
+    return availableResources;
+}
+
+function buildPlanetCard(planet) {
+    const resourceItems = Object.keys(planet)
+        .filter(key => planet[key] === 'X' && key !== 'System' && key !== 'Location' && key !== 'Type')
+        .map(key => {
+            const resource = getResourceName(key);
+            const resourceClass = getResourceClass(resource);
+            const label = resource === "None" ? "None" : `${key} (${resource})`;
+
+            return `
+                <li>
+                    <span class="me-2 d-inline-block block-element ${resourceClass}"></span>
+                    ${escapeHtml(label)}
+                </li>
+            `;
+        })
+        .join('');
+
+    return `
+        <div class="card text-white bg-dark">
+            <div class="card-header">
+                <h5 class="card-title">${escapeHtml(planet['Location'])}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${escapeHtml(planet['System'])}</h6>
+                <p class="card-text">${escapeHtml(planet['Type'])}</p>
+            </div>
+            <div class="card-body">
+                <p>Resources:</p>
+                <ul class="list-unstyled">${resourceItems}</ul>
+            </div>
+        </div>
+    `;
+}
+
+function getResourceClass(resource) {
+    return `block-${String(resource || "").toLowerCase().replace(/[^a-z0-9]/g, "")}`;
+}
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 // Function to update resource filter buttons based on available resources
@@ -260,8 +155,13 @@ function updateResourceFilterButtons(availableResources) {
     resourceFilterButtons.forEach(button => {
         const resource = button.id.replace('filter-', '');
         if (availableResources.has(resource)) {
+            button.dataset.available = "true";
             button.classList.add("d-inline");
+            if (!button.classList.contains("active")) {
+                button.classList.remove("d-none");
+            }
         } else {
+            button.dataset.available = "false";
             button.classList.add("d-none");
         }
     });
@@ -271,7 +171,7 @@ function updateResourceFilterButtons(availableResources) {
 /*Function to filter and display data based on search input
 function filterAndDisplayData(data) {
     const searchInput = document.getElementById('search-input').value.toLowerCase();
-    let array = $.csv.toObjects(data); //uses jquery.csv.min.js library to convert csv to array
+    let array = data;
     const searchType = document.querySelector('input[name="search-type"]:checked').id;
     console.log(searchType);
     const filteredData = array.filter(planet => {
@@ -321,7 +221,7 @@ function handleResourceFilterInput(data) {
                 // Show all data if 'None' filter is selected
                 generateDataCards(data);
             } else {
-                let array = $.csv.toObjects(data); //uses jquery.csv.min.js library to convert csv to array
+                let array = data;
                 console.log(array);
                 // Filter and display data based on resource filter
                 const filteredData = array.filter(planet => planet[resource] === 'X');
@@ -368,17 +268,53 @@ function filterAndDisplayData(data) {
 // Function to handle resource filter input
 function handleResourceFilterInput(data) {
     const resourceFilterButtons = document.querySelectorAll('.resource-buttons button');
+    const clearFiltersButton = document.getElementById('clear-resource-filters');
 
     resourceFilterButtons.forEach(button => {
         button.addEventListener('click', () => {
             button.classList.toggle('active'); // Toggle the 'active' class on filter button
             button.classList.add("d-none");
-             // Create a <span> element with text
-            var newSpan = $('<span class="bg-primary p-1 me-2 rounded-2">'+button.innerHTML+'</span>');
-            // Append the <span> element to the #s-filters element
-            $("#s-filters").append(newSpan);
+            renderSelectedFilters();
             // Trigger data filtering when a filter button is clicked
             filterAndDisplayData(data);
         });
     });
+
+    if (clearFiltersButton) {
+        clearFiltersButton.addEventListener('click', () => {
+            clearActiveResourceFilters();
+            filterAndDisplayData(data);
+        });
+    }
+
+    renderSelectedFilters();
+}
+
+function clearActiveResourceFilters() {
+    const resourceFilterButtons = document.querySelectorAll('.resource-buttons button');
+
+    resourceFilterButtons.forEach(button => {
+        button.classList.remove('active');
+        if (button.dataset.available === "true") {
+            button.classList.remove("d-none");
+            button.classList.add("d-inline");
+        }
+    });
+
+    renderSelectedFilters();
+}
+
+function renderSelectedFilters() {
+    const selectedFiltersContainer = document.getElementById("s-filters");
+    if (!selectedFiltersContainer) return;
+
+    const selectedButtons = Array.from(document.querySelectorAll('.resource-buttons button.active'));
+    if (!selectedButtons.length) {
+        selectedFiltersContainer.innerHTML = "Selected Filters: <span class=\"selected-filter-empty\">None</span>";
+        return;
+    }
+
+    selectedFiltersContainer.innerHTML = "Selected Filters: " + selectedButtons
+        .map(button => `<span class="selected-filter-chip">${button.innerHTML}</span>`)
+        .join(" ");
 }

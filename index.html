@@ -1,122 +1,181 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BANRI Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260807i" />
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/banri-theme.js?v=20260807i" defer></script>
+  </head>
+  <body class="banri-theme home-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="banri-noise" aria-hidden="true"></div>
+    <div w3-include-html="nav.html"></div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link  rel="stylesheet" href="./././assets/css/main.css"   ></link>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
-    <script src="./././assets/js/nav.js"></script>
-    <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!--<script data-main="script/main.js" src="assets/js/require.js"></script>
-    <script src="assets/js/xiv.js"></script>-->
-    <style>
-    span {
-        color: white !important;
-        }
-    </style>
-</head>
-<body class="gradient-border">
-    <div w3-include-html="nav.html"></div> 
-    <div class="banner">
-        <div class="hero-text">
-        <h1>Welcome to Banri Gaming</h1>
+    <main id="main-content">
+      <section class="home-hero" aria-labelledby="home-hero-title">
+        <div class="hero-atmosphere" aria-hidden="true"></div>
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="row min-vh-100 align-items-center">
+            <div class="col-12 col-lg-7 col-xxl-5">
+              <p id="homeHeroEyebrow" class="eyebrow-line">Create <span></span> Play <span></span> Explore</p>
+              <h1 id="home-hero-title" class="hero-title">
+                <span class="hero-title-main" data-text="BANRI">BANRI</span>
+                <span class="hero-title-sub">GAMING</span>
+              </h1>
+              <p id="homeHeroStatement" class="hero-statement">Stories. Games. Worlds. Ideas.</p>
+              <p id="homeHeroCopy" class="hero-copy">
+                A digital realm built on curiosity, creativity, and the worlds that move us.
+              </p>
+              <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+                <a class="btn btn-banri-primary" href="#currently-playing">Explore Worlds <span aria-hidden="true">-&gt;</span></a>
+                <a class="btn btn-banri-outline" href="/games.html">View Gaming Library <span aria-hidden="true">-&gt;</span></a>
+              </div>
+            </div>
+
+            <div class="col-lg-5 d-none d-lg-block">
+              <div id="homeHeroSideNote" class="hero-side-note">
+                <span>Same sky.</span>
+                <span>Different worlds.</span>
+                <span>Let's see what's out there.</span>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
- 
-    <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6">
-        <h2>Current & Latest Stream</h2>
-    <div id="twitch-embed"></div>
-    <script type="text/javascript">
-      var options = {
-        channel: "banrigaming",
-        layout: "video",
-        autoplay: false,
-        parent: ["banrigaming.github.io"]
-      };
-      var player = new Twitch.Player("twitch-embed", options);
-      player.setVolume(0.5);
-    </script>
-    </div>
-    <!--<div id="medalData" class="col-sm-12 col-md-6 col-lg-6">
-        <h2>Latest Medal Clip</h2>
-        <script>
-            // Function to make AJAX request
-            function fetchMedalData() {
-                var xhr = new XMLHttpRequest();
-                var url = "https://developers.medal.tv/v1/latest?userId=BanriGaming&categoryId=10&limit=2";
-                xhr.open("GET", url, true);
-                xhr.setRequestHeader("Authorization", "pub_VlOe6Z11T0bChWpM8wrX7TITvTfaLbxl");
-    
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        displayMedalData(response);
-                    }
-                };
-    
-                xhr.send();
-            }
-    
-            // Function to display data on the webpage
-            function displayMedalData(data) {
-                var medalDataDiv = document.getElementById("medalData");
-                var output = "<h2>Latest Medal.tv Data</h2>";
-                output += "<ul>";
-                data.forEach(function (item) {
-                    output += "<li>Title: " + item.title + ", Category: " + item.category + "</li>";
-                });
-                output += "</ul>";
-                medalDataDiv.innerHTML = output;
-            }
-    
-            // Call the function to fetch data when the page loads
-            window.onload = fetchMedalData;
-        </script>
-    </div>-->
-    
-    <div class="col-sm-12 col-md-6 col-lg-6">
-        <h2>Latest YouTube Video</h2>
-        <iframe class="latestVideoEmbed" vnum='0' cid="UCjvlUOoPLVplygreKqj4LYA" width="600" height="340" frameborder="0" allowfullscreen></iframe>
-    </div>
-<!--    <div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-4">
-                <iframe src="https://discord.com/widget?id=287291770356760587&theme=dark"  allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" &username=""></iframe>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-4">
-                <iframe src="https://discord.com/widget?id=765819077930909736&theme=dark"  allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" &username=""></iframe>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-4">
-                <iframe src="https://discord.com/widget?id=677975606020800545&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" &username=""></iframe>
-            </div>
+        <ol class="hero-pagination" aria-label="Homepage section index">
+          <li class="active">01</li>
+          <li>02</li>
+          <li>03</li>
+          <li>04</li>
+          <li>05</li>
+        </ol>
+      </section>
+
+      <section id="currently-playing" class="banri-section">
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="section-heading">
+            <p><span>//</span> 01</p>
+            <h2>Currently Playing</h2>
+            <a href="/games.html">See All Games <span aria-hidden="true">-&gt;</span></a>
+          </div>
+          <div class="row g-4" id="current-games" aria-live="polite"></div>
         </div>
-    </div>-->
-    
+      </section>
+
+      <section id="latest-vault" class="banri-section">
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="row g-4 align-items-stretch">
+            <div class="col-12 col-xl-6">
+              <div class="section-heading compact-heading">
+                <p><span>//</span> 02</p>
+                <h2>Latest From The Vault</h2>
+              </div>
+              <div id="latest-medal" class="vault-shell" aria-live="polite">
+                <div class="vault-loading">Loading latest Medal clip...</div>
+              </div>
+            </div>
+
+            <div class="col-12 col-xl-6" id="ai-creations">
+              <div class="section-heading compact-heading">
+                <p><span>//</span> 03</p>
+                <h2>AI Creations</h2>
+                <a href="/ai-creations.html">Explore AI <span aria-hidden="true">-&gt;</span></a>
+              </div>
+              <div class="row g-3" id="ai-grid" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tactical-feed" class="banri-section feed-section">
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="row g-4">
+            <div class="col-12 col-xl-9">
+              <div class="panel-frame">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 04</p>
+                  <h2>Tactical Feed</h2>
+                  <a href="/activity.html">Latest Updates</a>
+                </div>
+                <div id="feed-list" class="feed-list" aria-live="polite"></div>
+              </div>
+            </div>
+            <aside class="col-12 col-xl-3">
+              <div class="quote-panel">
+                <p id="homeQuoteLine1">Better worlds don't just happen.</p>
+                <span id="homeQuoteLine2">They're built.</span>
+                <strong id="homeQuoteAuthor">- Banri</strong>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="banri-footer">
+      <div class="container-fluid px-3 px-lg-5">
+        <div class="row g-4 align-items-end">
+          <div class="col-12 col-lg-4">
+            <p class="footer-kicker">Explore / Create / Belong</p>
+            <div class="social-strip" aria-label="Social links">
+              <a href="https://www.youtube.com/@banrigaming3622" aria-label="Banri Gaming YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8c0-2 1-3 3-3h12c2 0 3 1 3 3v8c0 2-1 3-3 3H6c-2 0-3-1-3-3V8Z"/><path d="m10 9 5 3-5 3V9Z"/></svg>
+              </a>
+              <a href="https://www.youtube.com/@PolarisFrequency" aria-label="Polaris Frequency YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8c0-2 1-3 3-3h12c2 0 3 1 3 3v8c0 2-1 3-3 3H6c-2 0-3-1-3-3V8Z"/><path d="m9 8 7 4-7 4V8Z"/><path d="M5 20h14"/></svg>
+              </a>
+              <a href="https://steamcommunity.com/id/--Banri--/" aria-label="Steam">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="15" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 13.5 7 15m5.2-1.8 3.1-3.1M20 7h.01M9 15h.01"/></svg>
+              </a>
+              <a href="https://www.twitch.tv/banrigaming" aria-label="Twitch">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h15v10l-4 4h-4l-3 3v-3H5V4Z"/><path d="M9 8v5M14 8v5"/></svg>
+              </a>
+              <a class="is-disabled" href="#" aria-label="Discord disabled" aria-disabled="true" tabindex="-1">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8c3-1 7-1 10 0l1 8c-4 2-8 2-12 0l1-8Z"/><path d="M9 15c2 1 4 1 6 0M9 12h.01M15 12h.01M8 8 7 5M16 8l1-3"/></svg>
+              </a>
+              <a class="is-disabled" href="#" aria-label="Spotify disabled" aria-disabled="true" tabindex="-1">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7 10c4-1 7-1 10 1M8 13c3-1 6-1 8 1M9 16c2-.5 4-.5 6 .5"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 text-center">
+            <div class="footer-sigil" aria-hidden="true">B</div>
+            <small>&copy; 2026 Banri Gaming. All rights reserved.</small>
+          </div>
+          <div class="col-12 col-lg-4 text-lg-end">
+            <p class="footer-line">Different games.</p>
+            <p class="footer-line strong">One place.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal fade clip-modal" id="clipModal" tabindex="-1" aria-labelledby="clipModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p id="clipModalGame" class="banri-modal-kicker mb-1">Medal Clip</p>
+              <h2 class="modal-title" id="clipModalTitle">Latest Clip</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="clipPlayer" class="clip-player"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
-    var reqURL = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://www.youtube.com/feeds/videos.xml?channel_id=");
-
-        function loadVideo(iframe) {
-        $.getJSON(reqURL + iframe.getAttribute('cid'),
-            function(data) {
-            var videoNumber = (iframe.getAttribute('vnum') ? Number(iframe.getAttribute('vnum')) : 0);
-            console.log(videoNumber);
-            var link = data.items[videoNumber].link;
-            id = link.substr(link.indexOf("=") + 1);
-            iframe.setAttribute("src", "https://youtube.com/embed/" + id + "?controls=0&autoplay=0");
-            }
-        );
-        }
-        var iframes = document.getElementsByClassName('latestVideoEmbed');
-        for (var i = 0, len = iframes.length; i < len; i++) {
-        loadVideo(iframes[i]);
-        }
+      includeHTML();
     </script>
-    <script>includeHTML();</script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/home.js?v=20260807i"></script>
+  </body>
 </html>

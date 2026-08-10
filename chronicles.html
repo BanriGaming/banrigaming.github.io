@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chronicles | BANRI Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260808a" />
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/banri-theme.js?v=20260808a" defer></script>
+  </head>
+  <body class="banri-theme chronicles-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="banri-noise" aria-hidden="true"></div>
+    <div w3-include-html="nav.html"></div>
+
+    <main id="main-content">
+      <section class="subpage-hero chronicles-hero">
+        <div class="container-fluid px-3 px-lg-5">
+          <p class="eyebrow-line">Private Chronicle</p>
+          <h1 class="subpage-title">
+            Chronicles
+            <span>Play By Post</span>
+          </h1>
+          <p class="subpage-copy">
+            A logged-in writing corner for worlds, characters, location threads, and old-school narrative posts.
+          </p>
+          <div class="chronicles-command-grid mt-4" aria-label="Chronicles quick actions">
+            <button class="chronicles-command" type="button" data-chronicles-open="post">
+              <span>01</span>
+              <strong>Create Post</strong>
+              <small>Transmit to a location thread</small>
+            </button>
+            <button class="chronicles-command" type="button" data-chronicles-open="character">
+              <span>02</span>
+              <strong>Create Character</strong>
+              <small>Build a registry record</small>
+            </button>
+            <button class="chronicles-command d-none" type="button" data-chronicles-open="thread" data-chronicles-admin-only>
+              <span>03</span>
+              <strong>New Thread</strong>
+              <small>Admin location builder</small>
+            </button>
+            <button class="chronicles-command d-none" type="button" data-chronicles-open="world" data-chronicles-admin-only>
+              <span>04</span>
+              <strong>New World</strong>
+              <small>Admin world builder</small>
+            </button>
+            <a class="chronicles-command" href="/midnight-relay.html">
+              <span>05</span>
+              <strong>Midnight Relay</strong>
+              <small>Open the live chat room</small>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="banri-section pt-0">
+        <div class="container-fluid px-3 px-lg-5">
+          <div id="chroniclesLocked" class="panel-frame placeholder-panel">
+            <p class="banri-modal-kicker">Login Required</p>
+            <h2>Nexus signal required.</h2>
+            <p>Sign in through Enter Nexus to open Chronicles.</p>
+          </div>
+
+          <div id="chroniclesApp" class="chronicles-app d-none">
+            <div class="chronicles-tabs" role="tablist" aria-label="Chronicles sections">
+              <button class="active" type="button" data-chronicles-view-button="dashboard">Dashboard</button>
+              <button type="button" data-chronicles-view-button="worlds">Worlds</button>
+              <button type="button" data-chronicles-view-button="characters">Characters</button>
+              <a href="/midnight-relay.html">Midnight Relay</a>
+              <a id="chroniclesAdminLink" class="d-none" href="/admin.html" data-chronicles-admin-only>Admin Console</a>
+            </div>
+
+            <div class="row g-4">
+              <aside class="col-12 col-xl-3">
+                <div class="chronicles-side">
+                  <section class="panel-frame">
+                    <p class="banri-modal-kicker">Signal</p>
+                    <h2 id="chroniclesProfileName">Nexus User</h2>
+                    <p id="chroniclesProfileRole">Chronicle participant</p>
+                  </section>
+
+                  <section class="panel-frame">
+                    <div class="section-heading compact-heading">
+                      <p><span>//</span> Stats</p>
+                      <h2>Overview</h2>
+                    </div>
+                    <div id="chroniclesStats" class="chronicles-stat-grid" aria-live="polite"></div>
+                  </section>
+
+                  <section class="panel-frame">
+                    <div class="section-heading compact-heading">
+                      <p><span>//</span> Tools</p>
+                      <h2>Quick Actions</h2>
+                    </div>
+                    <div class="chronicles-side-actions">
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="post">Create Post</button>
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="character">Create Character</button>
+                      <button class="btn btn-banri-outline btn-sm d-none" type="button" data-chronicles-open="thread" data-chronicles-admin-only>New Thread</button>
+                      <button class="btn btn-banri-outline btn-sm d-none" type="button" data-chronicles-open="world" data-chronicles-admin-only>New World</button>
+                      <button id="chroniclesNotifyButton" class="btn btn-banri-outline btn-sm" type="button" data-chronicles-notifications>Notify New Posts</button>
+                    </div>
+                  </section>
+                </div>
+              </aside>
+
+              <div class="col-12 col-xl-9">
+                <section class="chronicles-view active" data-chronicles-view="dashboard" aria-labelledby="chroniclesDashboardTitle">
+                  <div class="section-heading">
+                    <p><span>//</span> Dashboard</p>
+                    <h2 id="chroniclesDashboardTitle">Recent Posts</h2>
+                    <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="post">Create Post</button>
+                  </div>
+                  <div id="chroniclesRecentPosts" class="chronicles-post-list" aria-live="polite"></div>
+
+                  <div class="section-heading mt-5">
+                    <p><span>//</span> Primer</p>
+                    <h2>How Play By Post Works</h2>
+                  </div>
+                  <div id="chroniclesHowItWorks" class="chronicles-primer-grid" aria-live="polite"></div>
+                </section>
+
+                <section class="chronicles-view" data-chronicles-view="worlds" aria-labelledby="chroniclesWorldsTitle">
+                  <div class="section-heading">
+                    <p><span>//</span> Worlds</p>
+                    <h2 id="chroniclesWorldsTitle">World Registry</h2>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button class="btn btn-banri-outline btn-sm d-none" type="button" data-chronicles-open="world" data-chronicles-admin-only>New World</button>
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-view-all-worlds>View All Worlds</button>
+                    </div>
+                  </div>
+                  <div id="chroniclesWorldGrid" class="chronicles-world-grid" aria-live="polite"></div>
+
+                  <div class="chronicles-thread-console panel-frame mt-4">
+                    <div class="section-heading compact-heading">
+                      <p><span>//</span> Locations</p>
+                      <h2 id="chroniclesThreadTitle">Location Threads</h2>
+                      <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-banri-outline btn-sm d-none" type="button" data-chronicles-open="category" data-chronicles-admin-only>New Category</button>
+                        <button class="btn btn-banri-outline btn-sm d-none" type="button" data-chronicles-open="thread" data-chronicles-admin-only>New Thread</button>
+                      </div>
+                    </div>
+                    <div class="chronicles-thread-toolbar">
+                      <label class="search-control" for="chroniclesThreadSearch">
+                        <input id="chroniclesThreadSearch" type="search" placeholder="Search locations, sectors, or notes..." autocomplete="off" />
+                      </label>
+                    </div>
+                    <div id="chroniclesThreadList" class="chronicles-thread-list" aria-live="polite"></div>
+                  </div>
+                </section>
+
+                <section class="chronicles-view" data-chronicles-view="characters" aria-labelledby="chroniclesCharactersTitle">
+                  <div class="section-heading">
+                    <p><span>//</span> Registry</p>
+                    <h2 id="chroniclesCharactersTitle">Characters</h2>
+                    <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="character">Create Character</button>
+                  </div>
+                  <div id="chroniclesCharacterGrid" class="chronicles-character-grid" aria-live="polite"></div>
+                </section>
+
+                <section class="chronicles-view" data-chronicles-view="thread" aria-labelledby="chroniclesThreadViewTitle">
+                  <div class="chronicles-thread-header panel-frame">
+                    <div>
+                      <p id="chroniclesThreadViewMeta" class="banri-modal-kicker mb-1">Thread</p>
+                      <h2 id="chroniclesThreadViewTitle">Location Thread</h2>
+                      <p id="chroniclesThreadViewDescription">Select a thread to begin reading.</p>
+                    </div>
+                    <div class="chronicles-thread-actions">
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-view-jump="worlds">Back to Worlds</button>
+                      <button class="btn btn-banri-primary btn-sm" type="button" data-chronicles-open="post">Create Post</button>
+                    </div>
+                  </div>
+                  <div id="chroniclesThreadViewPosts" class="chronicles-forum-posts mt-4" aria-live="polite"></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal fade chronicles-modal" id="chroniclesWorldModal" tabindex="-1" aria-labelledby="chroniclesWorldModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <form class="modal-content" id="chroniclesWorldForm">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Admin Builder</p>
+              <h2 class="modal-title" id="chroniclesWorldModalTitle">New World</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label for="chroniclesWorldTitle">World Title</label>
+                <input id="chroniclesWorldTitle" class="form-control" type="text" required maxlength="80" />
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="chroniclesWorldGenre">Genre / System</label>
+                <input id="chroniclesWorldGenre" class="form-control" type="text" maxlength="80" placeholder="Star Wars RPG" />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesWorldImage">Image URL</label>
+                <input id="chroniclesWorldImage" class="form-control" type="url" placeholder="/assets/img/hero/banri-hero-05.webp" />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesWorldDescription">Short Description</label>
+                <textarea id="chroniclesWorldDescription" class="form-control" rows="3" required maxlength="600"></textarea>
+              </div>
+              <div class="col-12">
+                <label for="chroniclesWorldLore">Lore Primer</label>
+                <textarea id="chroniclesWorldLore" class="form-control" rows="7" maxlength="20000"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-banri-primary" type="submit">Save World</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade chronicles-modal chronicles-reader-modal" id="chroniclesLoreModal" tabindex="-1" aria-labelledby="chroniclesLoreModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p id="chroniclesLoreGenre" class="banri-modal-kicker mb-1">World Lore</p>
+              <h2 class="modal-title" id="chroniclesLoreModalTitle">World Lore</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="chroniclesLoreRead" class="chronicles-readable"></div>
+            <form id="chroniclesLoreEditForm" class="chronicles-edit-form d-none">
+              <div class="row g-3">
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesLoreTitleInput">World Title</label>
+                  <input id="chroniclesLoreTitleInput" class="form-control" type="text" maxlength="80" required />
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesLoreGenreInput">Genre / System</label>
+                  <input id="chroniclesLoreGenreInput" class="form-control" type="text" maxlength="80" />
+                </div>
+                <div class="col-12">
+                  <label for="chroniclesLoreImageInput">Image URL</label>
+                  <input id="chroniclesLoreImageInput" class="form-control" type="url" />
+                </div>
+                <div class="col-12">
+                  <label for="chroniclesLoreDescriptionInput">Short Description</label>
+                  <textarea id="chroniclesLoreDescriptionInput" class="form-control" rows="3" maxlength="600" required></textarea>
+                </div>
+                <div class="col-12">
+                  <label for="chroniclesLoreBodyInput">Lore Body</label>
+                  <textarea id="chroniclesLoreBodyInput" class="form-control" rows="12" maxlength="20000"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <p id="chroniclesLoreStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
+            <button id="chroniclesLoreEditToggle" class="btn btn-banri-outline d-none" type="button" data-chronicles-admin-only>Edit Lore</button>
+            <button id="chroniclesLoreSaveButton" class="btn btn-banri-primary d-none" type="button">Save Lore</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade chronicles-modal" id="chroniclesThreadModal" tabindex="-1" aria-labelledby="chroniclesThreadModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <form class="modal-content" id="chroniclesThreadForm">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Location Thread</p>
+              <h2 class="modal-title" id="chroniclesThreadModalTitle">New Thread</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label for="chroniclesThreadWorld">World</label>
+                <select id="chroniclesThreadWorld" class="form-select" required></select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="chroniclesThreadCategory">Category / Province</label>
+                <select id="chroniclesThreadCategory" class="form-select"></select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="chroniclesThreadTitleInput">Thread / Location Name</label>
+                <input id="chroniclesThreadTitleInput" class="form-control" type="text" required maxlength="100" />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesThreadDescription">Guidelines / Location Notes</label>
+                <textarea id="chroniclesThreadDescription" class="form-control" rows="5" required maxlength="2000"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-banri-primary" type="submit">Save Thread</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade chronicles-modal" id="chroniclesCategoryModal" tabindex="-1" aria-labelledby="chroniclesCategoryModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <form class="modal-content" id="chroniclesCategoryForm">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Location Category</p>
+              <h2 class="modal-title" id="chroniclesCategoryModalTitle">New Category</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="chroniclesCategoryWorld">World</label>
+                <select id="chroniclesCategoryWorld" class="form-select" required></select>
+              </div>
+              <div class="col-12">
+                <label for="chroniclesCategoryTitle">Category / Province Name</label>
+                <input id="chroniclesCategoryTitle" class="form-control" type="text" required maxlength="80" placeholder="Galactic Core" />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesCategoryDescription">Short Note</label>
+                <textarea id="chroniclesCategoryDescription" class="form-control" rows="3" maxlength="400" placeholder="Core worlds, senate routes, old seats of power..."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <p id="chroniclesCategoryStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
+            <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-banri-primary" type="submit">Save Category</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade chronicles-modal" id="chroniclesPostModal" tabindex="-1" aria-labelledby="chroniclesPostModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <form class="modal-content" id="chroniclesPostForm">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Transmission Entry</p>
+              <h2 class="modal-title" id="chroniclesPostModalTitle">Create Post</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesPostWorld">World</label>
+                <select id="chroniclesPostWorld" class="form-select" required></select>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesPostThread">Thread / Location</label>
+                <select id="chroniclesPostThread" class="form-select" required></select>
+              </div>
+              <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
+                <label for="chroniclesPostAuthor">Author Override</label>
+                <input id="chroniclesPostAuthor" class="form-control" type="text" maxlength="48" placeholder="Banri, Aelira, Rykard..." />
+              </div>
+              <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
+                <label for="chroniclesPostOwner">Owner Display</label>
+                <input id="chroniclesPostOwner" class="form-control" type="text" maxlength="48" placeholder="Who this post belongs to" />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesPostTitle">Post Title</label>
+                <input id="chroniclesPostTitle" class="form-control" type="text" maxlength="120" placeholder="Coruscant // Heart of the Republic" />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesPostBody">Narrative Post</label>
+                <div class="chronicles-editor-toolbar" aria-label="Markdown tools">
+                  <button type="button" data-chronicles-markdown="bold">B</button>
+                  <button type="button" data-chronicles-markdown="italic">I</button>
+                  <button type="button" data-chronicles-markdown="heading">H</button>
+                  <button type="button" data-chronicles-markdown="quote">&gt;</button>
+                  <button type="button" data-chronicles-markdown="list">List</button>
+                  <button type="button" data-chronicles-markdown="code">&lt;/&gt;</button>
+                  <button type="button" data-chronicles-markdown="link">Link</button>
+                  <button type="button" data-chronicles-markdown="image">Image</button>
+                  <button type="button" data-chronicles-preview-toggle>Preview</button>
+                </div>
+                <textarea id="chroniclesPostBody" class="form-control" rows="10" required maxlength="12000" placeholder="Write the entry in third-person past tense."></textarea>
+                <div id="chroniclesPostPreview" class="chronicles-markdown-preview d-none"></div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesPostImageUrl">Attach Image URL</label>
+                <input id="chroniclesPostImageUrl" class="form-control" type="url" placeholder="https://..." />
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesPostImageFile">Upload Image</label>
+                <input id="chroniclesPostImageFile" class="form-control" type="file" accept="image/*" multiple />
+              </div>
+              <div class="col-12">
+                <div id="chroniclesPostAttachments" class="chronicles-attachment-preview"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <p id="chroniclesPostStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
+            <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-banri-primary" type="submit">Transmit Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade chronicles-modal" id="chroniclesCharacterModal" tabindex="-1" aria-labelledby="chroniclesCharacterModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <form class="modal-content" id="chroniclesCharacterForm">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Character Registry</p>
+              <h2 class="modal-title" id="chroniclesCharacterModalTitle">Create Character</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterWorld">World</label>
+                <select id="chroniclesCharacterWorld" class="form-select" required></select>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterName">Name</label>
+                <input id="chroniclesCharacterName" class="form-control" type="text" required maxlength="100" />
+              </div>
+              <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
+                <label for="chroniclesCharacterOwner">Created By</label>
+                <input id="chroniclesCharacterOwner" class="form-control" type="text" maxlength="48" placeholder="Banri, Bhumika, Rikstarf..." />
+              </div>
+              <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
+                <label for="chroniclesCharacterOwnerUid">Owner UID</label>
+                <input id="chroniclesCharacterOwnerUid" class="form-control" type="text" maxlength="96" placeholder="Optional Firebase UID" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterSpecies">Species / Origin</label>
+                <input id="chroniclesCharacterSpecies" class="form-control" type="text" maxlength="120" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterAge">Cycle of Years</label>
+                <input id="chroniclesCharacterAge" class="form-control" type="text" maxlength="40" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterRole">Vocation / Role</label>
+                <input id="chroniclesCharacterRole" class="form-control" type="text" maxlength="120" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterAlignment">Alignment</label>
+                <input id="chroniclesCharacterAlignment" class="form-control" type="text" maxlength="80" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterAffiliation">Affiliation</label>
+                <input id="chroniclesCharacterAffiliation" class="form-control" type="text" maxlength="120" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterLocation">Current Location</label>
+                <input id="chroniclesCharacterLocation" class="form-control" type="text" maxlength="120" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterImage">Portrait URL</label>
+                <input id="chroniclesCharacterImage" class="form-control" type="url" />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesCharacterOrigin">Origin Tale</label>
+                <textarea id="chroniclesCharacterOrigin" class="form-control" rows="5" maxlength="5000"></textarea>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterEquipment">Armament / Equipment</label>
+                <textarea id="chroniclesCharacterEquipment" class="form-control" rows="4" maxlength="2000"></textarea>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterSkills">Skills / Aptitudes</label>
+                <textarea id="chroniclesCharacterSkills" class="form-control" rows="4" maxlength="2000"></textarea>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterPersonality">Personality Notes</label>
+                <textarea id="chroniclesCharacterPersonality" class="form-control" rows="4" maxlength="2000"></textarea>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterHooks">Hooks / Rumors</label>
+                <textarea id="chroniclesCharacterHooks" class="form-control" rows="4" maxlength="2000"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <p id="chroniclesCharacterStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
+            <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-banri-primary" type="submit">Save Character</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade chronicles-modal chronicles-reader-modal" id="chroniclesCharacterDetailModal" tabindex="-1" aria-labelledby="chroniclesCharacterDetailTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p id="chroniclesCharacterDetailWorld" class="banri-modal-kicker mb-1">Character Record</p>
+              <h2 class="modal-title" id="chroniclesCharacterDetailTitle">Character</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="chroniclesCharacterRead" class="chronicles-character-readable"></div>
+            <form id="chroniclesCharacterEditForm" class="chronicles-edit-form d-none">
+              <div class="row g-3">
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditWorld">World</label>
+                  <select id="chroniclesCharacterEditWorld" class="form-select" required></select>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditName">Name</label>
+                  <input id="chroniclesCharacterEditName" class="form-control" type="text" required maxlength="100" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditOwner">Created By</label>
+                  <input id="chroniclesCharacterEditOwner" class="form-control" type="text" maxlength="48" />
+                </div>
+                <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
+                  <label for="chroniclesCharacterEditOwnerUid">Owner UID</label>
+                  <input id="chroniclesCharacterEditOwnerUid" class="form-control" type="text" maxlength="96" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditSpecies">Species / Origin</label>
+                  <input id="chroniclesCharacterEditSpecies" class="form-control" type="text" maxlength="120" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditAge">Cycle of Years</label>
+                  <input id="chroniclesCharacterEditAge" class="form-control" type="text" maxlength="40" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditRole">Vocation / Role</label>
+                  <input id="chroniclesCharacterEditRole" class="form-control" type="text" maxlength="120" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditAlignment">Alignment</label>
+                  <input id="chroniclesCharacterEditAlignment" class="form-control" type="text" maxlength="80" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditAffiliation">Affiliation</label>
+                  <input id="chroniclesCharacterEditAffiliation" class="form-control" type="text" maxlength="120" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditLocation">Current Location</label>
+                  <input id="chroniclesCharacterEditLocation" class="form-control" type="text" maxlength="120" />
+                </div>
+                <div class="col-12">
+                  <label for="chroniclesCharacterEditImage">Portrait URL</label>
+                  <input id="chroniclesCharacterEditImage" class="form-control" type="url" />
+                </div>
+                <div class="col-12">
+                  <label for="chroniclesCharacterEditOrigin">Origin Tale</label>
+                  <textarea id="chroniclesCharacterEditOrigin" class="form-control" rows="5" maxlength="12000"></textarea>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditEquipment">Armament / Equipment</label>
+                  <textarea id="chroniclesCharacterEditEquipment" class="form-control" rows="4" maxlength="5000"></textarea>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditSkills">Skills / Aptitudes</label>
+                  <textarea id="chroniclesCharacterEditSkills" class="form-control" rows="4" maxlength="5000"></textarea>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditPersonality">Personality Notes</label>
+                  <textarea id="chroniclesCharacterEditPersonality" class="form-control" rows="4" maxlength="5000"></textarea>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditHooks">Hooks / Rumors</label>
+                  <textarea id="chroniclesCharacterEditHooks" class="form-control" rows="4" maxlength="5000"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <p id="chroniclesCharacterDetailStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
+            <button id="chroniclesCharacterEditToggle" class="btn btn-banri-outline d-none" type="button">Edit Character</button>
+            <button id="chroniclesCharacterSaveButton" class="btn btn-banri-primary d-none" type="button">Save Character</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="banri-footer compact-footer">
+      <div class="container-fluid px-3 px-lg-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+          <p class="footer-kicker mb-0">Chronicles / Worlds / Writing</p>
+          <small>&copy; 2026 Banri Gaming. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      includeHTML();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@13.0.3/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+    <script type="module" src="assets/js/chronicles.js?v=20260808b"></script>
+  </body>
+</html>

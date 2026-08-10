@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Console | BANRI Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260807h" />
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/banri-theme.js?v=20260807h" defer></script>
+  </head>
+  <body class="banri-theme admin-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="banri-noise" aria-hidden="true"></div>
+    <div w3-include-html="nav.html"></div>
+
+    <main id="main-content">
+      <section class="subpage-hero admin-hero">
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="row align-items-end g-4">
+            <div class="col-12 col-lg-7">
+              <p class="eyebrow-line">Encrypted Control</p>
+              <h1 class="subpage-title">
+                Admin
+                <span>Console</span>
+              </h1>
+              <p class="subpage-copy">
+                Set current games, tune library status, edit quotes, and publish activity signals to the public site.
+              </p>
+            </div>
+            <div class="col-12 col-lg-5">
+              <div class="profile-signal panel-frame">
+                <p>Access State</p>
+                <strong id="adminAccessState">Checking</strong>
+                <span id="adminUidText">Waiting for Firebase auth.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="banri-section pt-0">
+        <div class="container-fluid px-3 px-lg-5">
+          <div id="adminLockedPanel" class="panel-frame admin-lock-panel">
+            <div class="section-heading compact-heading">
+              <p><span>//</span> Locked</p>
+              <h2>Nexus Admin Required</h2>
+            </div>
+            <p id="adminLockedMessage">
+              Sign in from the Login button, then add your Firebase UID to <code>admins/{uid}: true</code>.
+            </p>
+            <button class="btn btn-banri-primary" type="button" data-bs-toggle="modal" data-bs-target="#banriLoginModal">Open Login</button>
+          </div>
+
+          <div id="adminConsole" class="d-none">
+            <div class="admin-toolbar panel-frame">
+              <div>
+                <p class="banri-modal-kicker mb-1">Firebase Control</p>
+                <h2>Site Data</h2>
+              </div>
+              <div class="admin-toolbar-actions">
+                <button id="seedDefaultsButton" class="btn btn-banri-outline" type="button">Seed Defaults</button>
+                <a class="btn btn-banri-outline" href="/activity.html">Activity Page</a>
+              </div>
+            </div>
+
+            <ul class="nav nav-pills admin-tabs" id="adminTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="current-tab" data-bs-toggle="pill" data-bs-target="#currentPane" type="button" role="tab">Current Games</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="library-tab" data-bs-toggle="pill" data-bs-target="#libraryPane" type="button" role="tab">Game Library</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="feed-tab" data-bs-toggle="pill" data-bs-target="#feedPane" type="button" role="tab">Tactical Feed</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="quotes-tab" data-bs-toggle="pill" data-bs-target="#quotesPane" type="button" role="tab">Quotes</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="homepage-tab" data-bs-toggle="pill" data-bs-target="#homepagePane" type="button" role="tab">Homepage</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="gallery-admin-tab" data-bs-toggle="pill" data-bs-target="#galleryPane" type="button" role="tab">Gallery</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="activity-tab" data-bs-toggle="pill" data-bs-target="#activityPane" type="button" role="tab">Activity</button>
+              </li>
+            </ul>
+
+            <div class="tab-content admin-tab-content">
+              <section class="tab-pane fade show active" id="currentPane" role="tabpanel" aria-labelledby="current-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 01</p>
+                  <h2>Homepage Current Games</h2>
+                  <button id="saveCurrentGamesButton" class="btn btn-banri-primary" type="button">Save Current Games</button>
+                </div>
+                <div id="currentGamesEditor" class="admin-grid"></div>
+              </section>
+
+              <section class="tab-pane fade" id="libraryPane" role="tabpanel" aria-labelledby="library-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 02</p>
+                  <h2>Library Records</h2>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button id="addGameButton" class="btn btn-banri-outline" type="button" data-bs-toggle="modal" data-bs-target="#adminAddGameModal">Add Game</button>
+                    <button id="syncSteamButton" class="btn btn-banri-outline" type="button">Sync Steam Hours</button>
+                    <button id="saveLibraryButton" class="btn btn-banri-primary" type="button">Save Library</button>
+                  </div>
+                </div>
+                <div class="admin-note panel-frame">
+                  New game records use <code>/game.html?id=slug</code> as an editable Firebase-backed profile. If you later build a custom page, update Page Link to that real path.
+                </div>
+                <label class="search-control admin-library-search" for="adminLibrarySearch">
+                  <input id="adminLibrarySearch" type="search" placeholder="Search library records by title, status, category, or slug..." />
+                  <span aria-hidden="true"></span>
+                </label>
+                <div id="libraryEditor" class="admin-list"></div>
+              </section>
+
+              <section class="tab-pane fade" id="feedPane" role="tabpanel" aria-labelledby="feed-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 03</p>
+                  <h2>Tactical Feed</h2>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button id="addFeedButton" class="btn btn-banri-outline" type="button">Add Feed</button>
+                    <button id="saveFeedButton" class="btn btn-banri-primary" type="button">Save Feed</button>
+                  </div>
+                </div>
+                <div id="feedEditor" class="admin-list"></div>
+              </section>
+
+              <section class="tab-pane fade" id="quotesPane" role="tabpanel" aria-labelledby="quotes-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 04</p>
+                  <h2>Quote Controls</h2>
+                  <button id="saveQuotesButton" class="btn btn-banri-primary" type="button">Save Quotes</button>
+                </div>
+                <div id="quotesEditor" class="admin-grid"></div>
+              </section>
+
+              <section class="tab-pane fade" id="homepagePane" role="tabpanel" aria-labelledby="homepage-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 05</p>
+                  <h2>Homepage Control</h2>
+                  <button id="saveHomepageButton" class="btn btn-banri-primary" type="button">Save Homepage</button>
+                </div>
+                <div id="homepageEditor" class="admin-grid"></div>
+              </section>
+
+              <section class="tab-pane fade" id="galleryPane" role="tabpanel" aria-labelledby="gallery-admin-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 06</p>
+                  <h2>Gallery Collections</h2>
+                  <a class="btn btn-banri-outline" href="/gallery.html">Open Gallery</a>
+                </div>
+                <div class="admin-note panel-frame">
+                  Collections are based on existing game-library records. Small images save as Realtime Database data URLs; larger screenshots can use image URLs.
+                </div>
+                <div id="galleryEditor" class="admin-grid"></div>
+              </section>
+
+              <section class="tab-pane fade" id="activityPane" role="tabpanel" aria-labelledby="activity-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 07</p>
+                  <h2>Activity Signal</h2>
+                  <button id="publishActivityButton" class="btn btn-banri-primary" type="button">Publish Activity</button>
+                </div>
+                <div class="admin-card">
+                  <div class="admin-card-body">
+                    <div class="row g-3">
+                      <div class="col-12 col-md-3">
+                        <label for="activityCategory">Category</label>
+                        <input id="activityCategory" class="form-control" value="System" />
+                      </div>
+                      <div class="col-12 col-md-5">
+                        <label for="activityTitle">Title</label>
+                        <input id="activityTitle" class="form-control" value="Site updated" />
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label for="activityDate">Date</label>
+                        <input id="activityDate" class="form-control" type="date" />
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label for="activityTime">Time</label>
+                        <input id="activityTime" class="form-control" type="time" />
+                      </div>
+                      <div class="col-12 col-md-8">
+                        <label for="activityActor">Updated By</label>
+                        <input id="activityActor" class="form-control" placeholder="Banri" />
+                      </div>
+                      <div class="col-12">
+                        <label for="activityMessage">Message</label>
+                        <textarea id="activityMessage" class="form-control" rows="3">Updated the Nexus archive.</textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="activityPreview" class="admin-list mt-4"></div>
+              </section>
+            </div>
+
+            <p id="adminStatus" class="auth-status mt-4" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="banri-footer compact-footer">
+      <div class="container-fluid px-3 px-lg-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+          <p class="footer-kicker mb-0">Admin / Nexus / Firebase</p>
+          <small>&copy; 2026 Banri Gaming. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal fade banri-login-modal" id="adminEditGameModal" tabindex="-1" aria-labelledby="adminEditGameTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Library Record</p>
+              <h2 class="modal-title" id="adminEditGameTitle">Edit Game</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body banri-login-form">
+            <div id="adminEditGameBody"></div>
+            <div class="auth-actions">
+              <button id="deleteEditedGameButton" class="btn btn-banri-outline" type="button">Delete Record</button>
+              <button id="saveEditedGameButton" class="btn btn-banri-primary" type="button">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade banri-login-modal" id="adminAddGameModal" tabindex="-1" aria-labelledby="adminAddGameTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Library Intake</p>
+              <h2 class="modal-title" id="adminAddGameTitle">Add Game</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body banri-login-form">
+            <div class="row g-3">
+              <div class="col-12 col-lg-6">
+                <label for="newGameTitle">Title</label>
+                <input id="newGameTitle" class="form-control" placeholder="RuneScape: Dragonwilds" />
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="newGameSlug">Slug</label>
+                <input id="newGameSlug" class="form-control" placeholder="runescape-dragonwilds" />
+              </div>
+              <div class="col-12">
+                <label for="newGameDescription">Description</label>
+                <textarea id="newGameDescription" class="form-control" rows="3" placeholder="Placeholder profile created from the admin console."></textarea>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="newGameCategories">Categories</label>
+                <input id="newGameCategories" class="form-control" value="RPG, Survival" />
+              </div>
+              <div class="col-6 col-lg-3">
+                <label for="newGameStatus">Status</label>
+                <select id="newGameStatus" class="form-select"></select>
+              </div>
+              <div class="col-6 col-lg-3">
+                <label for="newGameTone">Tone</label>
+                <select id="newGameTone" class="form-select"></select>
+              </div>
+              <div class="col-12">
+                <label for="newGameImage">Image URL</label>
+                <input id="newGameImage" class="form-control" value="/assets/banri-hero-noir.png" />
+              </div>
+              <div class="col-12">
+                <label for="newGameLink">Page Link</label>
+                <input id="newGameLink" class="form-control" placeholder="/game.html?id=runescape-dragonwilds" />
+              </div>
+            </div>
+            <div class="auth-actions">
+              <button id="submitNewGameButton" class="btn btn-banri-primary" type="button">Submit Game</button>
+              <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      includeHTML();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/admin.js?v=20260808b"></script>
+  </body>
+</html>

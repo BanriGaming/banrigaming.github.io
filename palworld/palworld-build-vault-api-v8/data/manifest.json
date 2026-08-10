@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 7,
+  "source": "Palpedia.net",
+  "generatedAt": "2026-08-10T21:34:30.698Z",
+  "counts": {
+    "pals": 287,
+    "activeSkills": 315,
+    "passiveSkills": 310,
+    "linkedPalImages": 287
+  },
+  "lastSyncSection": "active",
+  "sections": {
+    "passive": {
+      "syncedAt": "2026-08-08T10:10:51.326Z",
+      "indexRecords": 309,
+      "saved": 310
+    },
+    "active": {
+      "syncedAt": "2026-08-10T21:34:30.699Z",
+      "indexRecords": 315,
+      "learnedFromPalPages": 0,
+      "saved": 315
+    },
+    "pals": {
+      "syncedAt": "2026-08-08T10:20:42.141Z",
+      "requested": 287,
+      "accepted": 287,
+      "missingImages": []
+    }
+  },
+  "primaryBase": "https://www.palpedia.net",
+  "skillSourcePages": [
+    "https://www.palpedia.net/skills/active",
+    "https://www.palpedia.net/skills/passive"
+  ],
+  "notes": "Pal records, Active Skills, and Passive Skills are synchronized independently. npm run sync:all runs all three stages sequentially."
+}

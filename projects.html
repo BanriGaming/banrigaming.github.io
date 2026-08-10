@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects | BANRI Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260810a" />
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/banri-theme.js?v=20260808a" defer></script>
+  </head>
+  <body class="banri-theme projects-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="banri-noise" aria-hidden="true"></div>
+    <div w3-include-html="nav.html"></div>
+
+    <main id="main-content">
+      <section class="subpage-hero projects-hero">
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="row align-items-end g-4">
+            <div class="col-12 col-lg-7">
+              <p class="eyebrow-line">Systems Lab</p>
+              <h1 class="subpage-title">
+                Projects
+                <span>Tools / Calculators</span>
+              </h1>
+              <p class="subpage-copy">
+                Searchable utility records for game tools, calculators, trackers, and experimental builds that belong in the workshop.
+              </p>
+            </div>
+            <div class="col-12 col-lg-5">
+              <div class="profile-signal panel-frame">
+                <p>Project Index</p>
+                <strong id="projectCount">00</strong>
+                <span>Active tools tracked in this archive.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="banri-section">
+        <div class="container-fluid px-3 px-lg-5">
+          <div class="projects-toolbar panel-frame">
+            <div>
+              <p class="banri-modal-kicker mb-1">Search Array</p>
+              <h2>Find A Tool</h2>
+            </div>
+            <label class="search-control projects-search" for="projectSearch">
+              <input id="projectSearch" type="search" placeholder="Search projects, tools, calculators, game names..." />
+              <span aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="section-heading">
+            <p><span>//</span> 01</p>
+            <h2>Active Projects</h2>
+          </div>
+          <div id="projectGrid" class="project-grid" aria-live="polite"></div>
+
+          <section class="project-archive mt-4">
+            <button class="project-archive-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#archivedProjects" aria-expanded="false" aria-controls="archivedProjects">
+              <span>// Archived Systems</span>
+              <strong>Older tools preserved for reference</strong>
+            </button>
+            <div id="archivedProjects" class="collapse">
+              <div id="projectArchiveGrid" class="project-grid project-grid-archive"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="banri-footer compact-footer">
+      <div class="container-fluid px-3 px-lg-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+          <p class="footer-kicker mb-0">Projects / Tools / Calculators</p>
+          <small>&copy; 2026 Banri Gaming. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      includeHTML();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/projects.js?v=20260810a" defer></script>
+  </body>
+</html>

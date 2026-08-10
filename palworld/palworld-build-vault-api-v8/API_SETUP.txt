@@ -1,0 +1,18 @@
+PAL LOADOUT VAULT - API MIGRATION v8.0
+
+1. Open index.html.
+2. Find:
+   <meta name="palworld-api-base" content="https://YOUR-WORKER.workers.dev">
+3. Replace only the content value with the exact origin of your deployed Cloudflare Worker.
+   Example shape: https://banri-palworld-api.YOUR-SUBDOMAIN.workers.dev
+   Do NOT add /api/palworld and do NOT add a trailing slash.
+
+What v8.0 changes:
+- Pal roster is loaded from GET /api/palworld/pals.
+- Individual Pal details are loaded on demand from GET /api/palworld/pal/:slug.
+- Worker status is read from GET /api/palworld/status.
+- Existing localStorage and Firebase loadout data are unchanged.
+- pal-data.js remains temporarily for active/passive master skill lists and as an emergency Pal fallback.
+- No admin token is placed in the public website.
+
+This is intentionally the first frontend migration step. Once Active/Passive Skill API endpoints exist, pal-data.js can be removed from production.

@@ -1,0 +1,17 @@
+{
+  "name": "pal-loadout-vault",
+  "private": true,
+  "version": "8.0.0",
+  "type": "module",
+  "scripts": {
+    "sync:data": "node scripts/sync-data.mjs pals",
+    "sync:active": "node scripts/sync-data.mjs active",
+    "sync:passive": "node scripts/sync-data.mjs passive",
+    "sync:all": "node scripts/sync-data.mjs all",
+    "serve": "npx http-server . -p 8080 -c-1",
+    "sync:wiki": "node scripts/sync-wiki.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  }
+}
