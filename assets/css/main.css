@@ -3797,6 +3797,12 @@ body.legacy-theme::before {
     var(--preview-image) center / cover no-repeat;
 }
 
+.admin-help {
+  color: rgba(216, 240, 244, 0.72);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
 .admin-library-search {
   margin: 0 0 1rem;
 }

@@ -5,17 +5,20 @@ import {
   TONE_OPTIONS,
   defaultActivity,
   defaultCurrentGames,
+  defaultFeaturedClip,
   defaultGamesLibrary,
   defaultHeroCopy,
   defaultHeroVisual,
   defaultQuotes,
   defaultTacticalFeed,
   deleteGalleryCollection,
+  fetchMedalClips,
   getFirebaseServices,
   isAdminUid,
   loadGalleryData,
   loadPublicSiteData,
   normalizeCurrentGame,
+  normalizeFeaturedClip,
   normalizeFeedItem,
   normalizeGame,
   normalizeHeroCopy,
@@ -40,6 +43,9 @@ const state = {
   quotes: structuredClone(defaultQuotes),
   hero: structuredClone(defaultHeroCopy),
   heroVisual: structuredClone(defaultHeroVisual),
+  featuredClip: structuredClone(defaultFeaturedClip),
+  medalClips: [],
+  medalClipsError: "",
   activityFeed: [...defaultActivity],
   galleryCollections: [],
   galleryImagesByCollection: {},
@@ -124,6 +130,20 @@ function galleryCollectionOptionList(selectedId = "") {
 function heroOptionList(selectedId = "") {
   return state.heroVisual.images
     .map((image) => `<option value="${escapeAttr(image.id)}"${image.id === selectedId ? " selected" : ""}>${escapeHtml(image.id)} / ${escapeHtml(image.title)}</option>`)
+    .join("");
+}
+
+function featuredClipOptionList(selectedKey = "") {
+  if (!state.medalClips.length) {
+    return `<option value="">${state.medalClipsError ? "Could not load Medal clips" : "Loading Medal clips..."}</option>`;
+  }
+
+  return state.medalClips
+    .map((clip) => {
+      const key = clip.id || clip.url;
+      const selected = key === selectedKey || clip.url === selectedKey;
+      return `<option value="${escapeAttr(key)}"${selected ? " selected" : ""}>${escapeHtml(clip.title)} / ${escapeHtml(clip.game)} / ${escapeHtml(clip.date)}</option>`;
+    })
     .join("");
 }
 
@@ -368,6 +388,8 @@ function renderHomepageEditor() {
   if (!elements.homepageEditor) return;
   const hero = normalizeHeroCopy(state.hero);
   const visual = normalizeHeroVisual(state.heroVisual);
+  const featured = normalizeFeaturedClip(state.featuredClip);
+  const selectedClipKey = featured.id || featured.url || "";
   elements.homepageEditor.innerHTML = `
     <article class="admin-card">
       <div class="admin-card-body">
@@ -436,6 +458,27 @@ function renderHomepageEditor() {
               <strong>${escapeHtml(image.title)}</strong>
             </div>
           `).join("")}
+        </div>
+      </div>
+    </article>
+    <article class="admin-card admin-card-wide hero-visual-admin">
+      <div class="admin-card-preview" style="--preview-image: url('${escapeAttr(featured.thumbnail || "/assets/img/hero/banri-hero-03.webp")}')"></div>
+      <div class="admin-card-body">
+        <div class="admin-card-heading"><span>Featured Clip</span></div>
+        <div class="row g-3 align-items-end">
+          <div class="col-12 col-lg-8">
+            <label>Medal Clip</label>
+            <select class="form-select" data-featured-clip-select>
+              ${featuredClipOptionList(selectedClipKey)}
+            </select>
+            ${state.medalClipsError ? `<small class="text-warning d-block mt-2">${escapeHtml(state.medalClipsError)}</small>` : ""}
+          </div>
+          <div class="col-12 col-lg-4">
+            <button id="refreshFeaturedClipsButton" class="btn btn-banri-outline w-100" type="button">Refresh Clips</button>
+          </div>
+          <div class="col-12">
+            <p class="admin-help mb-0">${escapeHtml(featured.title || "Choose a Medal clip")} / ${escapeHtml(featured.game || "Medal Clip")} / ${escapeHtml(featured.date || "Featured transmission")}</p>
+          </div>
         </div>
       </div>
     </article>
@@ -594,7 +637,9 @@ async function loadData() {
   state.quotes = normalizeQuotes(data.quotes);
   state.hero = normalizeHeroCopy(data.hero);
   state.heroVisual = normalizeHeroVisual(data.heroVisual);
+  state.featuredClip = normalizeFeaturedClip(data.featuredClip);
   state.activityFeed = data.activityFeed.length ? data.activityFeed : [...defaultActivity];
+  await loadMedalClipOptions();
   await loadGalleryState();
   renderAll();
 }
@@ -603,6 +648,19 @@ async function loadGalleryState() {
   const gallery = await loadGalleryData();
   state.galleryCollections = gallery.collections;
   state.galleryImagesByCollection = gallery.imagesByCollection;
+}
+
+async function loadMedalClipOptions() {
+  try {
+    state.medalClips = await fetchMedalClips();
+    state.medalClipsError = "";
+    if ((!state.featuredClip?.id && !state.featuredClip?.url) && state.medalClips.length) {
+      state.featuredClip = normalizeFeaturedClip(state.medalClips[1] || state.medalClips[0]);
+    }
+  } catch (error) {
+    state.medalClips = [];
+    state.medalClipsError = error?.message || "Medal clips could not be loaded.";
+  }
 }
 
 function readCurrentGames() {
@@ -670,6 +728,12 @@ function readHeroVisual() {
     visual[input.dataset.heroVisualField] = input.value;
   });
   return normalizeHeroVisual(visual);
+}
+
+function readFeaturedClip() {
+  const selectedKey = document.querySelector("[data-featured-clip-select]")?.value || "";
+  const selected = state.medalClips.find((clip) => clip.id === selectedKey || clip.url === selectedKey);
+  return normalizeFeaturedClip(selected || state.featuredClip);
 }
 
 function setupNewGameModal() {
@@ -830,8 +894,9 @@ function bindAdminEvents() {
   document.getElementById("saveHomepageButton")?.addEventListener("click", async () => {
     state.hero = readHomepage();
     state.heroVisual = readHeroVisual();
-    await saveSiteConfigPatch({ hero: state.hero, heroVisual: state.heroVisual });
-    await pushActivity(activityMeta({ category: "Homepage", title: "Homepage updated", message: "Hero copy or visual rotation settings were updated." }));
+    state.featuredClip = readFeaturedClip();
+    await saveSiteConfigPatch({ hero: state.hero, heroVisual: state.heroVisual, featuredClip: state.featuredClip });
+    await pushActivity(activityMeta({ category: "Homepage", title: "Homepage updated", message: "Hero copy, visual rotation, or featured clip settings were updated." }));
     renderHomepageEditor();
     setStatus("Homepage settings saved.", "success");
   });
@@ -843,13 +908,15 @@ function bindAdminEvents() {
     state.quotes = structuredClone(defaultQuotes);
     state.hero = structuredClone(defaultHeroCopy);
     state.heroVisual = structuredClone(defaultHeroVisual);
+    state.featuredClip = structuredClone(defaultFeaturedClip);
     await saveGamesLibrary(state.games);
     await saveSiteConfigPatch({
       currentGames: state.currentGames,
       tacticalFeed: state.tacticalFeed,
       quotes: state.quotes,
       hero: state.hero,
-      heroVisual: state.heroVisual
+      heroVisual: state.heroVisual,
+      featuredClip: state.featuredClip
     });
     await pushActivity(activityMeta({ category: "System", title: "Defaults seeded", message: "Firebase site defaults were initialized." }));
     renderAll();
@@ -899,6 +966,30 @@ function bindAdminEvents() {
     state.activityFeed = state.activityFeed.slice(0, 25);
     renderActivityPreview();
     setStatus("Activity published.", "success");
+  });
+
+  elements.homepageEditor?.addEventListener("click", (event) => {
+    const refreshButton = event.target.closest("#refreshFeaturedClipsButton");
+    if (!refreshButton) return;
+    refreshButton.disabled = true;
+    refreshButton.textContent = "Refreshing...";
+    loadMedalClipOptions()
+      .then(() => {
+        renderHomepageEditor();
+        setStatus(state.medalClipsError || "Medal clip list refreshed.", state.medalClipsError ? "error" : "success");
+      })
+      .catch((error) => {
+        refreshButton.disabled = false;
+        refreshButton.textContent = "Refresh Clips";
+        setStatus(error.message || "Could not refresh Medal clips.", "error");
+      });
+  });
+
+  elements.homepageEditor?.addEventListener("change", (event) => {
+    if (!event.target.matches("[data-featured-clip-select]")) return;
+    state.featuredClip = readFeaturedClip();
+    renderHomepageEditor();
+    setStatus("Featured clip selected locally. Save Homepage to publish it.", "info");
   });
 
   elements.galleryEditor?.addEventListener("click", (event) => {

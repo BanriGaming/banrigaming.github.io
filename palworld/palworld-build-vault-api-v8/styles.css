@@ -70,7 +70,7 @@ button {
 .topbar {
   height: 64px;
   display: grid;
-  grid-template-columns: 285px 1fr auto;
+  grid-template-columns: 285px minmax(0, 1fr) auto;
   align-items: center;
   border-bottom: 1px solid #172838;
   background: rgba(5, 13, 22, 0.95);
@@ -111,11 +111,13 @@ button {
   border-right: 1px solid transparent;
   background: transparent;
   color: #91a2b2;
-  padding: 0 25px;
+  padding: 0 18px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 9px;
   position: relative;
+  white-space: nowrap;
 }
 .topnav__item.is-active {
   color: #dcfaff;
@@ -140,6 +142,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 .global-search,
 .search-box {
@@ -390,6 +393,20 @@ fieldset select {
   background: transparent;
   color: #899baa;
   font-size: 18px;
+  line-height: 1;
+  transition:
+    color 0.16s ease,
+    text-shadow 0.16s ease,
+    transform 0.16s ease;
+}
+.favorite-button:hover,
+.favorite-button:focus-visible,
+.favorite-button.is-favorite {
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(240, 183, 53, 0.45);
+}
+.favorite-button:active {
+  transform: scale(0.9);
 }
 .add-pal-button {
   margin-top: 10px;
@@ -753,12 +770,20 @@ fieldset select {
 .modal--small {
   width: 650px;
 }
+.modal--confirm {
+  width: min(460px, calc(100vw - 32px));
+  max-height: none;
+}
 .modal form {
   padding: 20px;
   max-height: 90vh;
   overflow: hidden;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
+}
+#confirmDialog form {
+  grid-template-rows: auto auto auto;
+  max-height: none;
 }
 
 #libraryFormFields,
@@ -767,6 +792,10 @@ fieldset select {
   min-height: 0;
   overflow: auto;
   padding-right: 6px;
+}
+#confirmDialog .confirm-dialog-message {
+  overflow: visible;
+  padding-right: 0;
 }
 .modal__header,
 .modal__actions {
@@ -1126,6 +1155,7 @@ body.pal-vault-page {
 .pal-vault-page .topbar {
   top: 78px;
   z-index: 1020;
+  grid-template-columns: minmax(230px, 285px) minmax(0, 1fr) minmax(270px, auto);
   border-color: rgba(22, 232, 255, 0.22);
   background: rgba(0, 7, 10, 0.92);
   backdrop-filter: blur(14px);
@@ -1145,6 +1175,28 @@ body.pal-vault-page {
 .pal-vault-page select,
 .pal-vault-page textarea {
   border-radius: 0;
+}
+.pal-vault-page .topnav {
+  min-width: 0;
+  justify-content: center;
+}
+.pal-vault-page .topnav__item {
+  min-width: 0;
+  padding-inline: clamp(10px, 1.15vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.pal-vault-page .top-actions {
+  justify-content: flex-end;
+}
+.pal-vault-page .global-search input {
+  width: clamp(150px, 13vw, 210px);
+}
+.pal-vault-page .summary-title .button {
+  min-width: 48px;
+}
+.pal-vault-page .sync-status {
+  gap: 9px;
 }
 .pal-vault-page .panel,
 .pal-vault-page .modal,

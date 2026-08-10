@@ -353,6 +353,18 @@ export const defaultHeroVisual = {
   images: [...defaultHeroImages]
 };
 
+export const defaultFeaturedClip = {
+  id: "",
+  title: "Featured Clip",
+  game: "Medal Clip",
+  gameSlug: "",
+  url: "",
+  video: "",
+  thumbnail: "",
+  timestamp: "",
+  date: "Featured transmission"
+};
+
 export const defaultActivity = [
   {
     category: "System",
@@ -547,6 +559,63 @@ export function normalizeHeroVisual(visual = {}) {
   };
 }
 
+export function formatMedalGameName(slug) {
+  if (!slug) return "Medal Clip";
+
+  return String(slug)
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+export function cleanMedalClipTitle(title) {
+  return String(title || "Untitled Clip")
+    .replace(/\s*-\s*Clipped.*$/i, "")
+    .trim();
+}
+
+export function formatMedalClipDate(value) {
+  if (!value) return "Featured transmission";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Featured transmission";
+
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }).format(date);
+}
+
+export function normalizeMedalClip(clip = {}, index = 0) {
+  const url = String(clip.url || "").trim();
+  const timestamp = String(clip.timestamp || clip.createdAt || "").trim();
+  const title = cleanMedalClipTitle(clip.title || `Medal Clip ${index + 1}`);
+  const id = String(clip.id || clip.contentId || clip.clipId || url || `${title}-${timestamp}-${index}`).trim();
+
+  return {
+    id,
+    title,
+    game: String(clip.game || formatMedalGameName(clip.gameSlug)).trim(),
+    gameSlug: String(clip.gameSlug || "").trim(),
+    url,
+    video: String(clip.video || clip.videoUrl || "").trim(),
+    thumbnail: String(clip.thumbnail || clip.thumbnailUrl || "").trim(),
+    timestamp,
+    date: formatMedalClipDate(timestamp)
+  };
+}
+
+export function normalizeFeaturedClip(clip = {}) {
+  return {
+    ...defaultFeaturedClip,
+    ...normalizeMedalClip(clip),
+    id: String(clip?.id || clip?.url || defaultFeaturedClip.id).trim(),
+    title: cleanMedalClipTitle(clip?.title || defaultFeaturedClip.title),
+    game: String(clip?.game || formatMedalGameName(clip?.gameSlug) || defaultFeaturedClip.game).trim(),
+    date: String(clip?.date || formatMedalClipDate(clip?.timestamp) || defaultFeaturedClip.date).trim()
+  };
+}
+
 export function normalizeGalleryCollection(collection = {}, index = 0) {
   const title = String(collection.title || collection.gameTitle || "Untitled Collection").trim();
   const id = slugify(collection.id || collection.gameId || title);
@@ -605,6 +674,7 @@ export async function loadPublicSiteData() {
     quotes: normalizeQuotes(siteConfig.quotes),
     hero: normalizeHeroCopy(siteConfig.hero),
     heroVisual: normalizeHeroVisual(siteConfig.heroVisual),
+    featuredClip: normalizeFeaturedClip(siteConfig.featuredClip),
     activityFeed: remoteActivity
       .map(normalizeActivityEntry)
       .filter((item) => item.enabled !== false)
@@ -681,6 +751,11 @@ export async function loadGalleryData() {
 }
 
 export async function fetchLatestMedalClip() {
+  const clips = await fetchMedalClips();
+  return clips[0] || null;
+}
+
+export async function fetchMedalClips() {
   const response = await fetch(`${MEDAL_WORKER_URL}?t=${Date.now()}`, {
     cache: "no-store"
   });
@@ -690,7 +765,9 @@ export async function fetchLatestMedalClip() {
   }
 
   const data = await response.json();
-  return Array.isArray(data.clips) ? data.clips[0] : data;
+  return (Array.isArray(data.clips) ? data.clips : [data])
+    .filter(Boolean)
+    .map(normalizeMedalClip);
 }
 
 export async function isAdminUid(uid) {

@@ -90,6 +90,7 @@ let activeCurrentGames = [...currentGames];
 let activeTacticalFeed = [...tacticalFeed];
 let activeQuotes = null;
 let activeHeroCopy = null;
+let activeFeaturedClip = null;
 let activeHeroVisual = {
   activeId: "01",
   mode: "fixed",
@@ -145,6 +146,83 @@ function renderAiCreations() {
       </div>
     `)
     .join("");
+}
+
+function normalizeClip(clip, index = 0) {
+  const timestamp = clip?.timestamp || "";
+  const title = cleanMedalTitle(clip?.title || `Medal Clip ${index + 1}`);
+  return {
+    id: String(clip?.id || clip?.contentId || clip?.clipId || clip?.url || `${title}-${timestamp}-${index}`),
+    title,
+    game: clip?.game || formatGameName(clip?.gameSlug),
+    gameSlug: clip?.gameSlug || "",
+    url: clip?.url || "",
+    video: clip?.video || clip?.videoUrl || "",
+    thumbnail: clip?.thumbnail || clip?.thumbnailUrl || "",
+    timestamp,
+    date: clip?.date || formatClipDate(timestamp)
+  };
+}
+
+async function fetchMedalClipList() {
+  const response = await fetch(`${MEDAL_WORKER_URL}?t=${Date.now()}`, {
+    cache: "no-store"
+  });
+
+  if (!response.ok) {
+    throw new Error(`Worker returned ${response.status}`);
+  }
+
+  const data = await response.json();
+  return (Array.isArray(data.clips) ? data.clips : [data])
+    .filter(Boolean)
+    .map(normalizeClip);
+}
+
+function resolveFeaturedClip(clips) {
+  const selected = activeFeaturedClip;
+  if (selected?.id || selected?.url) {
+    const match = clips.find((clip) => (
+      selected.id && clip.id === selected.id
+    ) || (
+      selected.url && clip.url === selected.url
+    ));
+
+    if (match) return match;
+    return normalizeClip(selected);
+  }
+
+  return clips[1] || clips[0] || null;
+}
+
+function vaultCardTemplate(clip, badge = "Medal") {
+  const title = cleanMedalTitle(clip.title || "Medal Clip");
+  const game = clip.game || formatGameName(clip.gameSlug);
+  const thumbnail = clip.thumbnail || "";
+  const video = clip.video || "";
+  const date = clip.date || formatClipDate(clip.timestamp);
+
+  return `
+    <article class="vault-card">
+      <div class="vault-media">
+        ${thumbnail ? `<img src="${escapeHtml(thumbnail)}" alt="">` : ""}
+        ${
+          video
+            ? `<button class="vault-play" type="button" data-video="${escapeHtml(video)}" data-title="${escapeHtml(title)}" data-game="${escapeHtml(game)}" aria-label="Play ${escapeHtml(title)}"><span></span></button>`
+            : `<a class="vault-play" href="${escapeHtml(clip.url || "/clips.html")}" target="_blank" rel="noopener" aria-label="Watch ${escapeHtml(title)} on Medal"><span></span></a>`
+        }
+        <div class="vault-badge">${escapeHtml(badge)}</div>
+      </div>
+      <div class="vault-info">
+        <div>
+          <p>${escapeHtml(game)}</p>
+          <h3>${escapeHtml(title)}</h3>
+          <small>${escapeHtml(date)}</small>
+        </div>
+        <a class="btn btn-banri-outline btn-sm" href="${escapeHtml(clip.url || "/clips.html")}" target="_blank" rel="noopener">Watch on Medal <span aria-hidden="true">-&gt;</span></a>
+      </div>
+    </article>
+  `;
 }
 
 function renderTacticalFeed() {
@@ -299,9 +377,11 @@ async function loadRemoteSiteData() {
 
     activeQuotes = data.quotes;
     activeHeroCopy = data.hero;
+    activeFeaturedClip = data.featuredClip;
     activeHeroVisual = data.heroVisual || activeHeroVisual;
     applyQuotes();
     applyHeroCopy();
+    renderFeaturedClip();
     scheduleHeroVisual();
   } catch {
     applyQuotes();
@@ -330,50 +410,15 @@ async function renderLatestMedal() {
   if (!target) return;
 
   try {
-    const response = await fetch(`${MEDAL_WORKER_URL}?t=${Date.now()}`, {
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error(`Worker returned ${response.status}`);
-    }
-
-    const data = await response.json();
-    const clip = Array.isArray(data.clips) ? data.clips[0] : data;
+    const clip = (await fetchMedalClipList())[0];
 
     if (!clip || !clip.url) {
       throw new Error("No Medal clip returned.");
     }
 
-    const title = cleanMedalTitle(clip.title || "Latest Medal Clip");
-    const game = formatGameName(clip.gameSlug);
-    const thumbnail = clip.thumbnail || "";
-    const video = clip.video || "";
-    const date = formatClipDate(clip.timestamp);
-    latestMedalClip = { title, date };
+    latestMedalClip = { title: clip.title, date: clip.date };
     renderTacticalFeed();
-
-    target.innerHTML = `
-      <article class="vault-card">
-        <div class="vault-media">
-          ${thumbnail ? `<img src="${escapeHtml(thumbnail)}" alt="">` : ""}
-          ${
-            video
-              ? `<button class="vault-play" type="button" data-video="${escapeHtml(video)}" data-title="${escapeHtml(title)}" data-game="${escapeHtml(game)}" aria-label="Play ${escapeHtml(title)}"><span></span></button>`
-              : `<a class="vault-play" href="${escapeHtml(clip.url)}" target="_blank" rel="noopener" aria-label="Watch ${escapeHtml(title)} on Medal"><span></span></a>`
-          }
-          <div class="vault-badge">Medal</div>
-        </div>
-        <div class="vault-info">
-          <div>
-            <p>${escapeHtml(game)}</p>
-            <h3>${escapeHtml(title)}</h3>
-            <small>${escapeHtml(date)}</small>
-          </div>
-          <a class="btn btn-banri-outline btn-sm" href="${escapeHtml(clip.url)}" target="_blank" rel="noopener">Watch on Medal <span aria-hidden="true">-&gt;</span></a>
-        </div>
-      </article>
-    `;
+    target.innerHTML = vaultCardTemplate(clip);
 
     setupVaultPlayback();
   } catch (error) {
@@ -385,8 +430,33 @@ async function renderLatestMedal() {
   }
 }
 
+async function renderFeaturedClip() {
+  const target = document.getElementById("featured-clip");
+  if (!target) return;
+
+  try {
+    const clips = await fetchMedalClipList();
+    const clip = resolveFeaturedClip(clips);
+
+    if (!clip?.url && !clip?.video) {
+      throw new Error("No featured Medal clip selected.");
+    }
+
+    target.innerHTML = vaultCardTemplate(clip, "Featured");
+    setupVaultPlayback();
+  } catch (error) {
+    target.innerHTML = `
+      <div class="vault-empty">
+        Featured clip unavailable: ${escapeHtml(error.message)}
+      </div>
+    `;
+  }
+}
+
 function setupVaultPlayback() {
   document.querySelectorAll(".vault-play[data-video]").forEach((button) => {
+    if (button.dataset.vaultPlaybackBound === "true") return;
+    button.dataset.vaultPlaybackBound = "true";
     button.addEventListener("click", () => {
       openClipModal({
         video: button.dataset.video,
@@ -468,10 +538,10 @@ function escapeAttr(value) {
 }
 
 renderCurrentGames();
-renderAiCreations();
 renderTacticalFeed();
 bindHeroPagination();
 scheduleHeroVisual();
 renderLatestMedal();
+renderFeaturedClip();
 setupModalCleanup();
 loadRemoteSiteData();
