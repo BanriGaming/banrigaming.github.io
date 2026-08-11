@@ -317,8 +317,8 @@ function renderGames() {
   }
 
   elements.grid.innerHTML = games
-    .map((game) => `
-      <a class="library-card" href="${escapeAttr(game.link)}" style="--card-image: url('${escapeAttr(game.art)}')">
+    .map((game) => {
+      const cardInner = `
         <div class="library-card-media">
           <span class="status-pill ${escapeHtml(game.tone)}"><i aria-hidden="true"></i>${escapeHtml(game.status)}</span>
         </div>
@@ -330,8 +330,11 @@ function renderGames() {
             <span>${game.completion}%</span>
           </div>
         </div>
-      </a>
-    `)
+      `;
+      return game.link
+        ? `<a class="library-card" href="${escapeAttr(game.link)}" style="--card-image: url('${escapeAttr(game.art)}')">${cardInner}</a>`
+        : `<article class="library-card library-card--static" style="--card-image: url('${escapeAttr(game.art)}')">${cardInner}</article>`;
+    })
     .join("");
 }
 
@@ -359,7 +362,7 @@ function applyLibraryQuote(quotes) {
 
 async function loadRemoteLibraryData() {
   try {
-    const { loadPublicSiteData } = await import("/assets/js/site-store.js");
+    const { loadPublicSiteData } = await import("/assets/js/site-store.js?v=20260811a");
     const data = await loadPublicSiteData();
     if (data.gamesLibrary.length) gamesData = data.gamesLibrary;
     applyLibraryQuote(data.quotes);

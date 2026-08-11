@@ -132,11 +132,8 @@
       <div class="modal-body banri-login-form">
         <section id="banriAuthSignedOut" class="auth-panel" aria-label="Sign in or create account">
           <div class="auth-copy">
-            <p>Unlock profile settings and future Nexus sync.</p>
+            <p>Open a Nexus session with email and password, or register with a valid cipher key.</p>
           </div>
-
-          <label for="banriLoginDisplayName">Display Name</label>
-          <input id="banriLoginDisplayName" class="form-control" type="text" autocomplete="nickname" maxlength="32" placeholder="Banri" />
 
           <label for="banriLoginEmail">Email</label>
           <input id="banriLoginEmail" class="form-control" type="email" autocomplete="email" placeholder="you@example.com" />
@@ -146,7 +143,41 @@
 
           <div class="auth-actions">
             <button id="banriSignInButton" class="btn btn-banri-primary" type="button">Sign In</button>
-            <button id="banriCreateAccountButton" class="btn btn-banri-outline" type="button" disabled aria-disabled="true" title="Account creation is currently closed.">Create Account</button>
+            <button id="banriCreateAccountButton" class="btn btn-banri-outline" type="button">Register</button>
+          </div>
+        </section>
+
+        <section id="banriAuthRegisterGate" class="auth-panel d-none" aria-label="Registration cipher key">
+          <div class="auth-copy">
+            <p>Enter the Nexus Cipher Key provided by Banri to unlock registration.</p>
+          </div>
+
+          <label for="banriRegisterCode">Nexus Cipher Key</label>
+          <input id="banriRegisterCode" class="form-control" type="text" autocomplete="off" spellcheck="false" placeholder="NVX-..." />
+
+          <div class="auth-actions">
+            <button id="banriUnlockRegisterButton" class="btn btn-banri-primary" type="button">Unlock Register</button>
+            <button id="banriBackToLoginButton" class="btn btn-banri-outline" type="button">Back</button>
+          </div>
+        </section>
+
+        <section id="banriAuthRegisterForm" class="auth-panel d-none" aria-label="Register Nexus account">
+          <div class="auth-copy">
+            <p>Create your Nexus identity. The display name becomes your public profile name.</p>
+          </div>
+
+          <label for="banriRegisterDisplayName">Display Name</label>
+          <input id="banriRegisterDisplayName" class="form-control" type="text" autocomplete="nickname" maxlength="32" placeholder="Banri" required />
+
+          <label for="banriRegisterEmail">Email</label>
+          <input id="banriRegisterEmail" class="form-control" type="email" autocomplete="email" placeholder="you@example.com" required />
+
+          <label for="banriRegisterPassword">Password</label>
+          <input id="banriRegisterPassword" class="form-control" type="password" autocomplete="new-password" placeholder="Password" required />
+
+          <div class="auth-actions">
+            <button id="banriSubmitRegisterButton" class="btn btn-banri-primary" type="button">Register</button>
+            <button id="banriCancelRegisterButton" class="btn btn-banri-outline" type="button">Back</button>
           </div>
         </section>
 

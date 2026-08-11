@@ -32,7 +32,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260810e";
+} from "./site-store.js?v=20260811a";
 
 const state = {
   user: null,
@@ -95,6 +95,29 @@ function optionList(options, selected) {
   return options
     .map((option) => `<option value="${escapeHtml(option)}"${option === selected ? " selected" : ""}>${escapeHtml(option)}</option>`)
     .join("");
+}
+
+function getLibraryCategories() {
+  return [...new Set(state.games.flatMap((game) => game.categories || []).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+}
+
+function categoryOptionList(selected = []) {
+  const selectedSet = new Set(selected);
+  return getLibraryCategories()
+    .map((category) => `<option value="${escapeAttr(category)}"${selectedSet.has(category) ? " selected" : ""}>${escapeHtml(category)}</option>`)
+    .join("");
+}
+
+function readNewGameCategories() {
+  const selected = [...document.getElementById("newGameCategories")?.selectedOptions || []]
+    .map((option) => option.value.trim())
+    .filter(Boolean);
+  const custom = String(document.getElementById("newGameCustomCategories")?.value || "")
+    .split(",")
+    .map((category) => category.trim())
+    .filter(Boolean);
+  return [...new Set([...selected, ...custom])];
 }
 
 function activityMeta(extra = {}) {
@@ -267,6 +290,12 @@ function gameModalFields(game) {
         <label for="editGameLink">Page Link</label>
         <input id="editGameLink" class="form-control" data-edit-game-field="link" value="${escapeAttr(game.link)}" />
       </div>
+      <div class="col-12 col-lg-4 d-flex align-items-end">
+        <label class="admin-switch mb-2">
+          <input id="editGameHasPage" type="checkbox" data-edit-game-field="hasPage"${game.hasPage !== false ? " checked" : ""} />
+          Enable page link
+        </label>
+      </div>
       <div class="col-12 col-lg-4">
         <label for="editGameSteamApp">Steam App ID</label>
         <input id="editGameSteamApp" class="form-control" data-edit-game-field="steamAppId" value="${escapeAttr(game.steamAppId || "")}" placeholder="39210" />
@@ -295,7 +324,7 @@ function openGameEditor(index) {
 function readEditedGame() {
   const source = {};
   document.querySelectorAll("[data-edit-game-field]").forEach((input) => {
-    source[input.dataset.editGameField] = input.value;
+    source[input.dataset.editGameField] = input.type === "checkbox" ? input.checked : input.value;
   });
 
   return normalizeGame({
@@ -694,6 +723,15 @@ function readGames() {
   }, index));
 }
 
+async function persistGameLibrary(message = "Game library saved.") {
+  state.games = readGames();
+  await saveGamesLibrary(state.games);
+  await pushActivity(activityMeta({ category: "Library", title: "Game library updated", message })).catch(() => {});
+  renderLibraryEditor();
+  renderCurrentEditor();
+  renderGalleryEditor();
+}
+
 function readFeed() {
   return [...document.querySelectorAll("[data-feed-index]")]
     .map((row) => normalizeFeedItem({
@@ -775,12 +813,55 @@ async function saveFeaturedClipSetting() {
 function setupNewGameModal() {
   const status = document.getElementById("newGameStatus");
   const tone = document.getElementById("newGameTone");
+  const categories = document.getElementById("newGameCategories");
   if (status && !status.options.length) {
     status.innerHTML = optionList(STATUS_OPTIONS, "Occasional");
   }
   if (tone && !tone.options.length) {
     tone.innerHTML = optionList(TONE_OPTIONS, "blue");
   }
+  if (categories) {
+    categories.innerHTML = categoryOptionList(["RPG"]);
+  }
+
+  const syncPageLinkState = () => {
+    const checkbox = document.getElementById("newGameCreatePage");
+    const linkInput = document.getElementById("newGameLink");
+    const slugSource = document.getElementById("newGameSlug")?.value || document.getElementById("newGameTitle")?.value || "";
+    const slug = slugSource.trim() ? slugify(slugSource) : "";
+    const enabled = checkbox?.checked !== false;
+    if (linkInput) {
+      linkInput.disabled = !enabled;
+      if (!enabled) linkInput.value = "";
+      else if (!linkInput.value.trim() && slug) linkInput.value = `/game.html?id=${slug}`;
+    }
+  };
+
+  const resetNewGameModal = () => {
+    const fields = {
+      newGameTitle: "",
+      newGameSlug: "",
+      newGameDescription: "",
+      newGameCustomCategories: "",
+      newGameImage: "/assets/banri-hero-noir.png",
+      newGameLink: ""
+    };
+    Object.entries(fields).forEach(([id, value]) => {
+      const input = document.getElementById(id);
+      if (input) input.value = value;
+    });
+    if (status) status.value = "Occasional";
+    if (tone) tone.value = "blue";
+    if (categories) {
+      categories.innerHTML = categoryOptionList(["RPG"]);
+      [...categories.options].forEach((option) => {
+        option.selected = option.value === "RPG";
+      });
+    }
+    const createPage = document.getElementById("newGameCreatePage");
+    if (createPage) createPage.checked = true;
+    syncPageLinkState();
+  };
 
   document.getElementById("newGameTitle")?.addEventListener("input", (event) => {
     const slugInput = document.getElementById("newGameSlug");
@@ -788,17 +869,22 @@ function setupNewGameModal() {
     if (!slugInput || !linkInput) return;
     const slug = slugify(slugInput.value || event.target.value);
     if (!slugInput.value.trim()) slugInput.value = slug;
-    if (!linkInput.value.trim()) linkInput.value = `/game.html?id=${slug}`;
+    if (document.getElementById("newGameCreatePage")?.checked !== false && (!linkInput.value.trim() || /\/game\.html\?id=/i.test(linkInput.value))) {
+      linkInput.value = `/game.html?id=${slug}`;
+    }
   });
 
   document.getElementById("newGameSlug")?.addEventListener("input", (event) => {
     const linkInput = document.getElementById("newGameLink");
     if (!linkInput) return;
     const slug = slugify(event.target.value);
-    if (!linkInput.value.trim() || linkInput.value.includes("/game.html?id=")) {
+    if (document.getElementById("newGameCreatePage")?.checked !== false && (!linkInput.value.trim() || linkInput.value.includes("/game.html?id="))) {
       linkInput.value = `/game.html?id=${slug}`;
     }
   });
+
+  document.getElementById("newGameCreatePage")?.addEventListener("change", syncPageLinkState);
+  document.getElementById("adminAddGameModal")?.addEventListener("show.bs.modal", resetNewGameModal);
 }
 
 function setGalleryFile(file) {
@@ -892,9 +978,7 @@ function bindAdminEvents() {
   });
 
   document.getElementById("saveLibraryButton")?.addEventListener("click", async () => {
-    state.games = readGames();
-    await saveGamesLibrary(state.games);
-    await pushActivity(activityMeta({ category: "Library", title: "Game library updated", message: "Game statuses, images, or records were updated." }));
+    await persistGameLibrary("Game statuses, images, or records were updated.");
     renderAll();
     setStatus("Game library saved.", "success");
   });
@@ -961,27 +1045,35 @@ function bindAdminEvents() {
     setStatus("Defaults seeded to Firebase.", "success");
   });
 
-  document.getElementById("submitNewGameButton")?.addEventListener("click", () => {
+  document.getElementById("submitNewGameButton")?.addEventListener("click", async () => {
     const title = document.getElementById("newGameTitle")?.value.trim() || "New Game";
     const nextId = slugify(document.getElementById("newGameSlug")?.value || title);
+    const hasPage = document.getElementById("newGameCreatePage")?.checked !== false;
+    const link = hasPage
+      ? (document.getElementById("newGameLink")?.value || `/game.html?id=${nextId}`)
+      : "";
     state.games.push(normalizeGame({
       id: nextId,
       title,
       description: document.getElementById("newGameDescription")?.value || "Placeholder profile created from the admin console.",
-      categories: document.getElementById("newGameCategories")?.value || "Unsorted",
+      categories: readNewGameCategories().length ? readNewGameCategories() : ["Unsorted"],
       status: document.getElementById("newGameStatus")?.value || "Occasional",
       tone: document.getElementById("newGameTone")?.value || "blue",
-      link: document.getElementById("newGameLink")?.value || `/game.html?id=${nextId}`,
+      link,
+      hasPage,
       art: document.getElementById("newGameImage")?.value || "/assets/banri-hero-noir.png",
       steamName: title,
       hours: 0,
       completion: 0,
       recentRank: state.games.length + 1
     }));
-    renderLibraryEditor();
-    renderCurrentEditor();
-    bootstrap.Modal.getInstance(document.getElementById("adminAddGameModal"))?.hide();
-    setStatus("Game added locally. Save Library to publish it to Firebase.", "info");
+    try {
+      await persistGameLibrary(`${title} was added to the game library.`);
+      bootstrap.Modal.getInstance(document.getElementById("adminAddGameModal"))?.hide();
+      setStatus(`${title} saved to Firebase.`, "success");
+    } catch (error) {
+      setStatus(error.message || "Could not save the new game to Firebase.", "error");
+    }
   });
 
   document.getElementById("syncSteamButton")?.addEventListener("click", () => {
@@ -1097,13 +1189,17 @@ function bindAdminEvents() {
     openGameEditor(Number(row.dataset.gameIndex));
   });
 
-  document.getElementById("saveEditedGameButton")?.addEventListener("click", () => {
+  document.getElementById("saveEditedGameButton")?.addEventListener("click", async () => {
     if (state.editingGameIndex < 0) return;
-    state.games[state.editingGameIndex] = readEditedGame();
-    renderLibraryEditor();
-    renderCurrentEditor();
-    bootstrap.Modal.getInstance(elements.editGameModal)?.hide();
-    setStatus("Game updated locally. Save Library to publish it.", "info");
+    const game = readEditedGame();
+    state.games[state.editingGameIndex] = game;
+    try {
+      await persistGameLibrary(`${game.title} was updated in the game library.`);
+      bootstrap.Modal.getInstance(elements.editGameModal)?.hide();
+      setStatus(`${game.title} saved to Firebase.`, "success");
+    } catch (error) {
+      setStatus(error.message || "Could not save that game to Firebase.", "error");
+    }
   });
 
   document.getElementById("deleteEditedGameButton")?.addEventListener("click", async () => {
@@ -1112,10 +1208,13 @@ function bindAdminEvents() {
     if (!await confirmAdminAction(`Delete ${game.title} from the library records?`, "Delete Game Record")) return;
     state.games.splice(state.editingGameIndex, 1);
     state.editingGameIndex = -1;
-    renderLibraryEditor();
-    renderCurrentEditor();
-    bootstrap.Modal.getInstance(elements.editGameModal)?.hide();
-    setStatus("Game removed locally. Save Library to publish it.", "info");
+    try {
+      await persistGameLibrary(`${game.title} was removed from the game library.`);
+      bootstrap.Modal.getInstance(elements.editGameModal)?.hide();
+      setStatus(`${game.title} removed from Firebase.`, "success");
+    } catch (error) {
+      setStatus(error.message || "Could not delete that game from Firebase.", "error");
+    }
   });
 
   elements.feedEditor?.addEventListener("click", (event) => {
@@ -1146,8 +1245,12 @@ function bindAdminEvents() {
   });
 
   document.addEventListener("input", (event) => {
-    const imageInput = event.target.matches('[data-current-field="image"], [data-game-field="art"]') ? event.target : null;
+    const imageInput = event.target.matches('[data-current-field="image"], [data-game-field="art"], [data-edit-game-field="art"]') ? event.target : null;
     if (!imageInput) return;
+    if (imageInput.matches('[data-edit-game-field="art"]')) {
+      document.querySelector("#adminEditGameBody .admin-card-preview")?.style.setProperty("--preview-image", `url('${imageInput.value}')`);
+      return;
+    }
     const row = imageInput.closest(".admin-card");
     row?.querySelector(".admin-card-preview")?.style.setProperty("--preview-image", `url('${imageInput.value}')`);
   });

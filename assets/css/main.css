@@ -2232,6 +2232,26 @@ body.banri-theme::before {
   background: var(--banri-cyan);
 }
 
+.status-pill.red i {
+  background: #ff4f66;
+}
+
+.status-pill.aqua i {
+  background: #00ffd5;
+}
+
+.status-pill.yellow i {
+  background: #ffe66d;
+}
+
+.status-pill.white i {
+  background: #f4fbff;
+}
+
+.status-pill.orange i {
+  background: #ff9d38;
+}
+
 .poster-palworld {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.92)),
@@ -2783,6 +2803,10 @@ body.banri-theme::before {
   background: rgba(1, 11, 14, 0.82);
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.library-card--static {
+  cursor: default;
 }
 
 .library-card-media {

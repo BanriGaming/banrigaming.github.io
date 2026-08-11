@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/main.css?v=20260807h" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260811a" />
     <script src="assets/js/nav.js"></script>
     <script src="assets/js/banri-theme.js?v=20260807h" defer></script>
   </head>
@@ -112,7 +112,7 @@
                   </div>
                 </div>
                 <div class="admin-note panel-frame">
-                  New game records use <code>/game.html?id=slug</code> as an editable Firebase-backed profile. If you later build a custom page, update Page Link to that real path.
+                  Game records save directly to Firebase. Enable the placeholder link when you want <code>/game.html?id=slug</code>, or leave it off for a library-only card.
                 </div>
                 <label class="search-control admin-library-search" for="adminLibrarySearch">
                   <input id="adminLibrarySearch" type="search" placeholder="Search library records by title, status, category, or slug..." />
@@ -264,8 +264,12 @@
                 <textarea id="newGameDescription" class="form-control" rows="3" placeholder="Placeholder profile created from the admin console."></textarea>
               </div>
               <div class="col-12 col-lg-6">
-                <label for="newGameCategories">Categories</label>
-                <input id="newGameCategories" class="form-control" value="RPG, Survival" />
+                <label for="newGameCategories">Existing Categories</label>
+                <select id="newGameCategories" class="form-select" multiple size="4"></select>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="newGameCustomCategories">New Categories</label>
+                <input id="newGameCustomCategories" class="form-control" placeholder="Co-op, Builder" />
               </div>
               <div class="col-6 col-lg-3">
                 <label for="newGameStatus">Status</label>
@@ -283,6 +287,12 @@
                 <label for="newGameLink">Page Link</label>
                 <input id="newGameLink" class="form-control" placeholder="/game.html?id=runescape-dragonwilds" />
               </div>
+              <div class="col-12">
+                <label class="admin-switch">
+                  <input id="newGameCreatePage" type="checkbox" checked />
+                  Enable placeholder page link
+                </label>
+              </div>
             </div>
             <div class="auth-actions">
               <button id="submitNewGameButton" class="btn btn-banri-primary" type="button">Submit Game</button>
@@ -297,6 +307,6 @@
       includeHTML();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="assets/js/admin.js?v=20260810e"></script>
+    <script type="module" src="assets/js/admin.js?v=20260811a"></script>
   </body>
 </html>

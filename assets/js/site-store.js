@@ -16,7 +16,7 @@ export const MEDAL_WORKER_URL = "https://medalclips.monkguru-guardian.workers.de
 export const ACTIVITY_RECENT_LIMIT = 25;
 
 export const STATUS_OPTIONS = ["Active", "Returning Soon", "On Hold", "Completed", "Occasional"];
-export const TONE_OPTIONS = ["green", "amber", "blue", "purple", "cyan"];
+export const TONE_OPTIONS = ["green", "amber", "blue", "purple", "cyan", "red", "aqua", "yellow", "white", "orange"];
 export const ICON_OPTIONS = ["gamepad", "play", "image", "pen", "gear"];
 
 export const defaultGamesLibrary = [
@@ -422,7 +422,8 @@ export function toArray(value) {
 export function normalizeGame(game, index = 0) {
   const title = String(game?.title || "Untitled Game").trim();
   const id = slugify(game?.id || title);
-  const rawLink = String(game?.link || `/game.html?id=${encodeURIComponent(id)}`).trim();
+  const hasPage = game?.hasPage !== false;
+  const rawLink = String(game?.link || (hasPage ? `/game.html?id=${encodeURIComponent(id)}` : "")).trim();
   const normalizedTitle = title.toLowerCase();
   const link = normalizedTitle.includes("helldivers") && rawLink === "/clips.html"
     ? "/landing-pages/helldivers-2.html"
@@ -443,7 +444,8 @@ export function normalizeGame(game, index = 0) {
     categories,
     status: STATUS_OPTIONS.includes(game?.status) ? game.status : "Occasional",
     tone: TONE_OPTIONS.includes(game?.tone) ? game.tone : statusToTone(game?.status),
-    link,
+    link: hasPage ? link : "",
+    hasPage,
     hours: Number(game?.hours || 0),
     completion: Math.max(0, Math.min(100, Number(game?.completion || 0))),
     art: String(game?.art || game?.image || "/assets/banri-hero-noir.png").trim(),

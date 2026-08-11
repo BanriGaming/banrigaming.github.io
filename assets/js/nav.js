@@ -1,6 +1,6 @@
 const BANRI_SHARED_SCRIPTS = [
   { src: "/assets/js/banri-theme.js?v=20260808a" },
-  { src: "/assets/js/firebase-auth.js?v=20260808c", type: "module" },
+  { src: "/assets/js/firebase-auth.js?v=20260811a", type: "module" },
   { src: "/assets/js/music-player.js?v=20260808b" }
 ];
 

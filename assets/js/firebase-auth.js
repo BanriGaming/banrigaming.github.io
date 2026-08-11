@@ -20,6 +20,7 @@ import { firebaseConfig } from "./firebase-config.js";
 import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
 
 (function () {
+  const REGISTER_CIPHER_KEY = "NVX-7Q-26-CIPHER";
   const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const database = getDatabase(app);
@@ -37,12 +38,21 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
       chroniclesNode: document.getElementById("banriChroniclesNode"),
       relayNode: document.getElementById("banriRelayNode"),
       signedOut: document.getElementById("banriAuthSignedOut"),
+      registerGate: document.getElementById("banriAuthRegisterGate"),
+      registerForm: document.getElementById("banriAuthRegisterForm"),
       profile: document.getElementById("banriAuthProfile"),
-      displayName: document.getElementById("banriLoginDisplayName"),
       email: document.getElementById("banriLoginEmail"),
       password: document.getElementById("banriLoginPassword"),
+      registerCode: document.getElementById("banriRegisterCode"),
+      registerDisplayName: document.getElementById("banriRegisterDisplayName"),
+      registerEmail: document.getElementById("banriRegisterEmail"),
+      registerPassword: document.getElementById("banriRegisterPassword"),
       signIn: document.getElementById("banriSignInButton"),
       create: document.getElementById("banriCreateAccountButton"),
+      unlockRegister: document.getElementById("banriUnlockRegisterButton"),
+      backToLogin: document.getElementById("banriBackToLoginButton"),
+      submitRegister: document.getElementById("banriSubmitRegisterButton"),
+      cancelRegister: document.getElementById("banriCancelRegisterButton"),
       profileInitial: document.getElementById("banriProfileInitial"),
       profileName: document.getElementById("banriProfileName"),
       profileEmail: document.getElementById("banriProfileEmail"),
@@ -76,10 +86,38 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
   }
 
   function setBusy(isBusy) {
-    const { signIn, create, save, signOut: signOutButton } = getElements();
-    [signIn, create, save, signOutButton].forEach((button) => {
+    const { signIn, create, unlockRegister, backToLogin, submitRegister, cancelRegister, save, signOut: signOutButton } = getElements();
+    [signIn, create, unlockRegister, backToLogin, submitRegister, cancelRegister, save, signOutButton].forEach((button) => {
       if (button) button.disabled = isBusy;
     });
+  }
+
+  function setAuthView(view) {
+    const elements = getElements();
+    elements.signedOut?.classList.toggle("d-none", view !== "login");
+    elements.registerGate?.classList.toggle("d-none", view !== "gate");
+    elements.registerForm?.classList.toggle("d-none", view !== "register");
+    elements.profile?.classList.toggle("d-none", view !== "profile");
+    const title = document.getElementById("banriLoginTitle");
+    if (title) {
+      title.textContent = view === "profile"
+        ? "Nexus Profile"
+        : view === "gate"
+          ? "Cipher Gate"
+          : view === "register"
+            ? "Nexus Register"
+            : "Nexus Login";
+    }
+  }
+
+  function hideLoginModal() {
+    const modal = document.getElementById("banriLoginModal");
+    if (!modal || !window.bootstrap) return;
+    window.bootstrap.Modal.getInstance(modal)?.hide();
+  }
+
+  function normalizeCipherKey(value) {
+    return String(value || "").trim().toUpperCase().replace(/\s+/g, "");
   }
 
   function cleanDisplayName(value) {
@@ -239,8 +277,7 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     clearPresence();
     currentUser = null;
 
-    elements.signedOut?.classList.remove("d-none");
-    elements.profile?.classList.add("d-none");
+    setAuthView("login");
     elements.adminNode?.classList.add("d-none");
     elements.adminNode?.setAttribute("aria-hidden", "true");
     elements.membersNode?.classList.remove("d-none");
@@ -251,6 +288,7 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     elements.relayNode?.setAttribute("aria-hidden", "true");
     if (elements.navButton) elements.navButton.textContent = "Login";
     if (elements.password) elements.password.value = "";
+    if (elements.registerPassword) elements.registerPassword.value = "";
     setStatus("");
   }
 
@@ -315,8 +353,7 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     currentUser = user;
     startPresence(user);
     touchPresence(true);
-    elements.signedOut?.classList.add("d-none");
-    elements.profile?.classList.remove("d-none");
+    setAuthView("profile");
     elements.membersNode?.classList.remove("d-none");
     elements.membersNode?.setAttribute("aria-hidden", "false");
     elements.chroniclesNode?.classList.remove("d-none");
@@ -369,6 +406,7 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     try {
       await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
       setStatus("Signed in.", "success");
+      hideLoginModal();
     } catch (error) {
       setStatus(friendlyError(error), "error");
     } finally {
@@ -377,16 +415,23 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
   }
 
   async function handleCreateAccount() {
-    const { displayName, email, password } = getElements();
-    const name = cleanDisplayName(displayName.value || email.value.split("@")[0]);
+    const { registerDisplayName, registerEmail, registerPassword } = getElements();
+    const name = cleanDisplayName(registerDisplayName.value);
+    const email = registerEmail.value.trim();
+    const password = registerPassword.value;
+    if (!name) {
+      setStatus("Display name is required to register.", "error");
+      return;
+    }
     setBusy(true);
     setStatus("Creating Nexus profile...");
 
     try {
-      const credential = await createUserWithEmailAndPassword(auth, email.value.trim(), password.value);
+      const credential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(credential.user, { displayName: name });
       await writeProfile(credential.user, { displayName: name, bio: "" });
       setStatus("Account created and profile synced.", "success");
+      hideLoginModal();
     } catch (error) {
       setStatus(friendlyError(error), "error");
     } finally {
@@ -467,18 +512,55 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     if (!elements.signIn || elements.signIn.dataset.banriAuthBound === "true") return;
 
     elements.signIn.dataset.banriAuthBound = "true";
+    document.getElementById("banriLoginModal")?.addEventListener("show.bs.modal", () => {
+      setAuthView(currentUser ? "profile" : "login");
+      setStatus("");
+      if (!currentUser) {
+        if (elements.registerCode) elements.registerCode.value = "";
+        if (elements.registerPassword) elements.registerPassword.value = "";
+      }
+    });
     elements.signIn.addEventListener("click", handleSignIn);
-    if (elements.create) {
-      elements.create.disabled = true;
-      elements.create.setAttribute("aria-disabled", "true");
-      elements.create.title = "Account creation is currently closed.";
-    }
+    elements.create?.addEventListener("click", () => {
+      setAuthView("gate");
+      setStatus("");
+      elements.registerCode?.focus();
+    });
+    elements.unlockRegister?.addEventListener("click", () => {
+      if (normalizeCipherKey(elements.registerCode?.value) !== REGISTER_CIPHER_KEY) {
+        setStatus("Cipher key rejected.", "error");
+        return;
+      }
+      if (elements.registerEmail && elements.email?.value) elements.registerEmail.value = elements.email.value.trim();
+      setAuthView("register");
+      setStatus("Cipher accepted. Complete registration.", "success");
+      elements.registerDisplayName?.focus();
+    });
+    elements.backToLogin?.addEventListener("click", () => {
+      setAuthView("login");
+      setStatus("");
+    });
+    elements.cancelRegister?.addEventListener("click", () => {
+      setAuthView("login");
+      setStatus("");
+    });
+    elements.submitRegister?.addEventListener("click", handleCreateAccount);
     elements.save?.addEventListener("click", handleSaveProfile);
     elements.signOut?.addEventListener("click", handleSignOut);
 
     [elements.email, elements.password].forEach((input) => {
       input?.addEventListener("keydown", (event) => {
         if (event.key === "Enter") handleSignIn();
+      });
+    });
+
+    elements.registerCode?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") elements.unlockRegister?.click();
+    });
+
+    [elements.registerDisplayName, elements.registerEmail, elements.registerPassword].forEach((input) => {
+      input?.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") handleCreateAccount();
       });
     });
 
