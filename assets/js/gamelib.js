@@ -362,7 +362,7 @@ function applyLibraryQuote(quotes) {
 
 async function loadRemoteLibraryData() {
   try {
-    const { loadPublicSiteData } = await import("/assets/js/site-store.js?v=20260811a");
+    const { loadPublicSiteData } = await import("/assets/js/site-store.js?v=20260811c");
     const data = await loadPublicSiteData();
     if (data.gamesLibrary.length) gamesData = data.gamesLibrary;
     applyLibraryQuote(data.quotes);

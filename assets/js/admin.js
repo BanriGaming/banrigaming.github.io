@@ -10,9 +10,12 @@ import {
   defaultHeroCopy,
   defaultHeroVisual,
   defaultQuotes,
+  defaultSteamConfig,
+  defaultSteamSignal,
   defaultTacticalFeed,
   deleteGalleryCollection,
   fetchMedalClips,
+  fetchSteamSignal,
   getFirebaseServices,
   isAdminUid,
   loadGalleryData,
@@ -24,15 +27,18 @@ import {
   normalizeHeroCopy,
   normalizeHeroVisual,
   normalizeQuotes,
+  normalizeSteamConfig,
+  normalizeSteamSignal,
   pushActivity,
   saveGalleryCollection,
   saveGalleryImageMetadata,
   saveGamesLibrary,
   saveSiteConfigPatch,
+  saveSteamSignal,
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260811a";
+} from "./site-store.js?v=20260811c";
 
 const state = {
   user: null,
@@ -44,6 +50,8 @@ const state = {
   hero: structuredClone(defaultHeroCopy),
   heroVisual: structuredClone(defaultHeroVisual),
   featuredClip: structuredClone(defaultFeaturedClip),
+  steamConfig: structuredClone(defaultSteamConfig),
+  steamSignal: structuredClone(defaultSteamSignal),
   medalClips: [],
   medalClipsError: "",
   activityFeed: [...defaultActivity],
@@ -68,6 +76,12 @@ const elements = {
   galleryEditor: document.getElementById("galleryEditor"),
   activityPreview: document.getElementById("activityPreview"),
   librarySearch: document.getElementById("adminLibrarySearch"),
+  steamProfileId: document.getElementById("steamProfileId"),
+  steamProxyUrl: document.getElementById("steamProxyUrl"),
+  steamCountryCode: document.getElementById("steamCountryCode"),
+  steamSyncLibrary: document.getElementById("steamSyncLibrary"),
+  steamLastSynced: document.getElementById("steamLastSynced"),
+  steamSyncSummary: document.getElementById("steamSyncSummary"),
   editGameModal: document.getElementById("adminEditGameModal"),
   status: document.getElementById("adminStatus")
 };
@@ -128,6 +142,101 @@ function activityMeta(extra = {}) {
     date: now.toISOString().slice(0, 10),
     time: now.toTimeString().slice(0, 5),
     ...extra
+  };
+}
+
+function formatDateTime(value) {
+  const date = new Date(Number(value || 0));
+  if (Number.isNaN(date.getTime()) || !Number(value)) return "Awaiting sync";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(date);
+}
+
+function readSteamConfig() {
+  return normalizeSteamConfig({
+    steamId: elements.steamProfileId?.value || state.steamConfig.steamId,
+    proxyUrl: elements.steamProxyUrl?.value || "",
+    countryCode: elements.steamCountryCode?.value || state.steamConfig.countryCode,
+    syncLibrary: elements.steamSyncLibrary?.checked !== false
+  });
+}
+
+function renderSteamAdmin() {
+  const config = normalizeSteamConfig(state.steamConfig);
+  const signal = normalizeSteamSignal(state.steamSignal);
+
+  if (elements.steamProfileId) elements.steamProfileId.value = config.steamId;
+  if (elements.steamProxyUrl) elements.steamProxyUrl.value = config.proxyUrl;
+  if (elements.steamCountryCode) elements.steamCountryCode.value = config.countryCode;
+  if (elements.steamSyncLibrary) elements.steamSyncLibrary.checked = config.syncLibrary;
+  if (elements.steamLastSynced) elements.steamLastSynced.textContent = formatDateTime(signal.summary.syncedAt);
+  if (elements.steamSyncSummary) {
+    const matches = signal.libraryMatches?.length || 0;
+    elements.steamSyncSummary.textContent = signal.summary.totalGames
+      ? `${signal.summary.playedGames} of ${signal.summary.totalGames} Steam games played / ${signal.summary.totalHours.toLocaleString()}h on record / ${matches} library match${matches === 1 ? "" : "es"} from last sync.`
+      : "Uses a private Worker so the Steam API key stays out of the public website.";
+  }
+}
+
+function normalizeSteamLookupName(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/\b(game of the year|complete edition|anniversary edition|online|standard edition)\b/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function findSteamGameForLibraryGame(game, steamGames = []) {
+  const appId = String(game.steamAppId || "").trim();
+  if (appId) {
+    const byAppId = steamGames.find((steamGame) => String(steamGame.appId) === appId);
+    if (byAppId) return byAppId;
+  }
+
+  const wantedNames = [
+    game.steamName,
+    game.title
+  ].map(normalizeSteamLookupName).filter(Boolean);
+
+  return steamGames.find((steamGame) => {
+    const candidate = normalizeSteamLookupName(steamGame.name);
+    return wantedNames.some((wanted) => candidate === wanted || candidate.includes(wanted) || wanted.includes(candidate));
+  }) || null;
+}
+
+function applySteamSignalToLibrary(signal) {
+  const steamSignal = normalizeSteamSignal(signal);
+  const matches = [];
+  state.games = state.games.map((game, index) => {
+    const steamGame = findSteamGameForLibraryGame(game, steamSignal.games);
+    if (!steamGame) return normalizeGame(game, index);
+
+    const playtimeHours = Number(steamGame.playtimeHours || 0);
+    matches.push({
+      siteGameId: game.id,
+      appId: steamGame.appId,
+      name: steamGame.name,
+      playtimeHours
+    });
+
+    return normalizeGame({
+      ...game,
+      hours: Math.round(playtimeHours),
+      steamAppId: game.steamAppId || steamGame.appId,
+      steamName: game.steamName || steamGame.name
+    }, index);
+  });
+
+  return {
+    ...steamSignal,
+    libraryMatches: matches
   };
 }
 
@@ -242,7 +351,8 @@ function renderLibraryEditor() {
         </div>
         <div class="admin-library-meta">
           <span>${escapeHtml(game.id)}</span>
-          <small>${escapeHtml(game.link)}</small>
+          <small>${escapeHtml(game.link || "Library-only record")}</small>
+          <small>${Number(game.hours || 0).toLocaleString()} hrs / ${Number(game.completion || 0)}%</small>
         </div>
         <button class="btn btn-banri-outline btn-sm" type="button" data-edit-game>Edit</button>
       </article>
@@ -319,6 +429,14 @@ function openGameEditor(index) {
   document.getElementById("adminEditGameTitle").textContent = `Edit ${game.title}`;
   document.getElementById("adminEditGameBody").innerHTML = gameModalFields(game);
   bootstrap.Modal.getOrCreateInstance(elements.editGameModal).show();
+}
+
+function refreshOpenGameEditor() {
+  if (state.editingGameIndex < 0 || !elements.editGameModal?.classList.contains("show")) return;
+  const game = state.games[state.editingGameIndex];
+  if (!game) return;
+  document.getElementById("adminEditGameTitle").textContent = `Edit ${game.title}`;
+  document.getElementById("adminEditGameBody").innerHTML = gameModalFields(game);
 }
 
 function readEditedGame() {
@@ -662,6 +780,7 @@ function confirmAdminAction(message, title = "Confirm Action") {
 function renderAll() {
   renderCurrentEditor();
   renderLibraryEditor();
+  renderSteamAdmin();
   renderFeedEditor();
   renderQuotesEditor();
   renderHomepageEditor();
@@ -678,6 +797,8 @@ async function loadData() {
   state.hero = normalizeHeroCopy(data.hero);
   state.heroVisual = normalizeHeroVisual(data.heroVisual);
   state.featuredClip = normalizeFeaturedClip(data.featuredClip);
+  state.steamConfig = normalizeSteamConfig(data.steamConfig);
+  state.steamSignal = normalizeSteamSignal(data.steamSignal);
   state.activityFeed = data.activityFeed.length ? data.activityFeed : [...defaultActivity];
   await loadMedalClipOptions();
   await loadGalleryState();
@@ -1076,8 +1197,52 @@ function bindAdminEvents() {
     }
   });
 
-  document.getElementById("syncSteamButton")?.addEventListener("click", () => {
-    setStatus("Steam hours sync needs a private Steam API proxy/Worker so the API key is not exposed in frontend code. Steam App ID fields are ready for that next step.", "info");
+  document.getElementById("saveSteamConfigButton")?.addEventListener("click", async () => {
+    state.steamConfig = readSteamConfig();
+    await saveSiteConfigPatch({ steam: state.steamConfig });
+    renderSteamAdmin();
+    setStatus("Steam sync config saved.", "success");
+  });
+
+  document.getElementById("syncSteamButton")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    button.textContent = "Syncing...";
+    setStatus("Contacting Steam signal Worker...");
+
+    try {
+      state.steamConfig = readSteamConfig();
+      await saveSiteConfigPatch({ steam: state.steamConfig });
+      const fetchedSignal = await fetchSteamSignal(state.steamConfig);
+      state.steamSignal = state.steamConfig.syncLibrary
+        ? applySteamSignalToLibrary(fetchedSignal)
+        : normalizeSteamSignal(fetchedSignal);
+      state.steamSignal = await saveSteamSignal(state.steamSignal);
+
+      if (state.steamConfig.syncLibrary) {
+        await saveGamesLibrary(state.games);
+        const savedData = await loadPublicSiteData();
+        state.games = savedData.gamesLibrary.length ? savedData.gamesLibrary : state.games;
+        renderLibraryEditor();
+        renderCurrentEditor();
+        renderGalleryEditor();
+        refreshOpenGameEditor();
+      }
+
+      await pushActivity(activityMeta({
+        category: "Steam",
+        title: "Steam signal synced",
+        message: `${state.steamSignal.summary.totalHours.toLocaleString()} Steam hours scanned across ${state.steamSignal.summary.totalGames} games.`
+      })).catch(() => {});
+
+      renderSteamAdmin();
+      setStatus(`Steam signal synced. ${state.steamSignal.libraryMatches.length} library record${state.steamSignal.libraryMatches.length === 1 ? "" : "s"} matched.`, "success");
+    } catch (error) {
+      setStatus(error.message || "Steam sync failed.", "error");
+    } finally {
+      button.disabled = false;
+      button.textContent = "Sync Steam Signal";
+    }
   });
 
   document.getElementById("publishActivityButton")?.addEventListener("click", async () => {

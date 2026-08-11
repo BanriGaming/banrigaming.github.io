@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/main.css?v=20260811a" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260811c" />
     <script src="assets/js/nav.js"></script>
     <script src="assets/js/banri-theme.js?v=20260807h" defer></script>
   </head>
@@ -107,13 +107,47 @@
                   <h2>Library Records</h2>
                   <div class="d-flex flex-wrap gap-2">
                     <button id="addGameButton" class="btn btn-banri-outline" type="button" data-bs-toggle="modal" data-bs-target="#adminAddGameModal">Add Game</button>
-                    <button id="syncSteamButton" class="btn btn-banri-outline" type="button">Sync Steam Hours</button>
                     <button id="saveLibraryButton" class="btn btn-banri-primary" type="button">Save Library</button>
                   </div>
                 </div>
                 <div class="admin-note panel-frame">
                   Game records save directly to Firebase. Enable the placeholder link when you want <code>/game.html?id=slug</code>, or leave it off for a library-only card.
                 </div>
+                <article class="admin-card steam-sync-card">
+                  <div class="admin-card-body">
+                    <div class="admin-card-heading">
+                      <span>Steam Signal</span>
+                      <strong id="steamLastSynced">Awaiting sync</strong>
+                    </div>
+                    <div class="row g-3 align-items-end">
+                      <div class="col-12 col-lg-3">
+                        <label for="steamProfileId">SteamID64</label>
+                        <input id="steamProfileId" class="form-control" value="76561198134543238" />
+                      </div>
+                      <div class="col-12 col-lg-5">
+                        <label for="steamProxyUrl">Worker URL</label>
+                        <input id="steamProxyUrl" class="form-control" placeholder="https://your-steam-signal-worker.workers.dev/" />
+                      </div>
+                      <div class="col-6 col-lg-2">
+                        <label for="steamCountryCode">Country</label>
+                        <input id="steamCountryCode" class="form-control" value="us" maxlength="2" />
+                      </div>
+                      <div class="col-6 col-lg-2">
+                        <label class="admin-switch steam-switch">
+                          <input id="steamSyncLibrary" type="checkbox" checked />
+                          Sync library hours
+                        </label>
+                      </div>
+                      <div class="col-12 d-flex flex-wrap gap-2">
+                        <button id="saveSteamConfigButton" class="btn btn-banri-outline" type="button">Save Steam Config</button>
+                        <button id="syncSteamButton" class="btn btn-banri-primary" type="button">Sync Steam Signal</button>
+                      </div>
+                    </div>
+                    <p id="steamSyncSummary" class="admin-help mt-3 mb-0">
+                      Uses a private Worker so the Steam API key stays out of the public website.
+                    </p>
+                  </div>
+                </article>
                 <label class="search-control admin-library-search" for="adminLibrarySearch">
                   <input id="adminLibrarySearch" type="search" placeholder="Search library records by title, status, category, or slug..." />
                   <span aria-hidden="true"></span>
@@ -307,6 +341,6 @@
       includeHTML();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="assets/js/admin.js?v=20260811a"></script>
+    <script type="module" src="assets/js/admin.js?v=20260811c"></script>
   </body>
 </html>

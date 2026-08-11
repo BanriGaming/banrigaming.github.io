@@ -15,6 +15,10 @@
       ".read": true,
       ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
     },
+    "steamSignal": {
+      ".read": true,
+      ".write": "auth != null && root.child('admins').child(auth.uid).val() === true"
+    },
     "activityFeed": {
       ".read": true,
       "$activityId": {
@@ -99,6 +103,111 @@
             },
             "$other": {
               ".validate": false
+            }
+          }
+        }
+      }
+    },
+    "relayThreads": {
+      "$threadId": {
+        ".read": "auth != null && data.child('participants').child(auth.uid).val() === true",
+        ".write": "auth != null && newData.child('id').val() === $threadId && newData.child('type').val() === 'dm' && newData.child('participants').child(auth.uid).val() === true",
+        ".validate": "newData.hasChildren(['id', 'type', 'participants', 'participantNames', 'updatedAt'])",
+        "id": {
+          ".validate": "newData.val() === $threadId"
+        },
+        "type": {
+          ".validate": "newData.val() === 'dm'"
+        },
+        "participants": {
+          "$uid": {
+            ".validate": "newData.isBoolean() && newData.val() === true"
+          }
+        },
+        "participantNames": {
+          "$uid": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+          }
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "lastMessage": {
+          ".validate": "newData.isString() && newData.val().length <= 180"
+        },
+        "lastSenderUid": {
+          ".validate": "newData.isString() && newData.val().length >= 1"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "relayThreadMessages": {
+      "$threadId": {
+        ".read": "auth != null && root.child('relayThreads').child($threadId).child('participants').child(auth.uid).val() === true",
+        "$messageId": {
+          ".write": "auth != null && root.child('relayThreads').child($threadId).child('participants').child(auth.uid).val() === true && ((!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",
+          ".validate": "newData.hasChildren(['uid', 'displayName', 'text', 'createdAt'])",
+          "uid": {
+            ".validate": "newData.val() === auth.uid || data.val() === auth.uid"
+          },
+          "displayName": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+          },
+          "text": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 2000"
+          },
+          "createdAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "editedAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "replyTo": {
+            ".validate": "newData.hasChildren(['id', 'displayName', 'text'])",
+            "id": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+            },
+            "displayName": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+            },
+            "text": {
+              ".validate": "newData.isString() && newData.val().length <= 180"
+            },
+            "$other": {
+              ".validate": false
+            }
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    },
+    "relayThreadReactions": {
+      "$threadId": {
+        ".read": "auth != null && root.child('relayThreads').child($threadId).child('participants').child(auth.uid).val() === true",
+        "$messageId": {
+          "$reactionId": {
+            "$uid": {
+              ".write": "auth != null && auth.uid === $uid && root.child('relayThreads').child($threadId).child('participants').child(auth.uid).val() === true && root.child('relayThreadMessages').child($threadId).child($messageId).exists()",
+              ".validate": "newData.hasChildren(['emoji', 'displayName', 'createdAt'])",
+              "emoji": {
+                ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 8"
+              },
+              "displayName": {
+                ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32"
+              },
+              "createdAt": {
+                ".validate": "newData.isNumber()"
+              },
+              "$other": {
+                ".validate": false
+              }
             }
           }
         }

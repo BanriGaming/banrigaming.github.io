@@ -43,6 +43,9 @@ const EMOJI_OPTIONS = [
 
 const state = {
   currentUser: null,
+  mode: "global",
+  activeThreadId: "",
+  activeRecipientUid: "",
   messages: [],
   reactions: {},
   presence: {},
@@ -57,6 +60,9 @@ const elements = {
   console: document.getElementById("relayConsole"),
   messages: document.getElementById("relayMessages"),
   presence: document.getElementById("relayPresenceList"),
+  dmList: document.getElementById("relayDmList"),
+  channelTitle: document.getElementById("relayChannelTitle"),
+  channelMeta: document.getElementById("relayChannelMeta"),
   form: document.getElementById("relayComposer"),
   input: document.getElementById("relayMessageInput"),
   send: document.getElementById("relaySendButton"),
@@ -71,6 +77,28 @@ let unsubscribePresence = null;
 let unsubscribeProfiles = null;
 let resizeTimer = null;
 let presenceTouchAt = 0;
+
+function getMessageBasePath() {
+  return state.mode === "dm" && state.activeThreadId
+    ? `relayThreadMessages/${state.activeThreadId}`
+    : "relayMessages";
+}
+
+function getReactionBasePath() {
+  return state.mode === "dm" && state.activeThreadId
+    ? `relayThreadReactions/${state.activeThreadId}`
+    : "relayReactions";
+}
+
+function getDmThreadId(uidA, uidB) {
+  return `dm_${[uidA, uidB].sort().join("_")}`;
+}
+
+function getProfileDisplayName(uid) {
+  return state.profiles?.[uid]?.displayName
+    || state.presence?.[uid]?.displayName
+    || "Nexus User";
+}
 
 function setStatus(message, tone = "info") {
   if (!elements.status) return;
@@ -203,6 +231,21 @@ function renderInlineMarkdown(value) {
 
 function renderPresence() {
   if (!elements.presence) return;
+  const signals = getSignals();
+  const online = signals.filter((signal) => signal.online);
+  const offline = signals.filter((signal) => !signal.online);
+
+  elements.presence.innerHTML = signals.length
+    ? `
+      ${renderPresenceGroup("Online", online)}
+      ${renderPresenceGroup("Offline", offline)}
+    `
+    : '<div class="relay-empty">No signals detected.</div>';
+
+  renderDmList(signals);
+}
+
+function getSignals() {
   const byUid = {};
 
   Object.entries(state.profiles).forEach(([uid, profile]) => {
@@ -223,17 +266,8 @@ function renderPresence() {
     };
   });
 
-  const signals = Object.values(byUid)
+  return Object.values(byUid)
     .sort((a, b) => Number(b.online) - Number(a.online) || String(a.displayName || "").localeCompare(String(b.displayName || "")));
-  const online = signals.filter((signal) => signal.online);
-  const offline = signals.filter((signal) => !signal.online);
-
-  elements.presence.innerHTML = signals.length
-    ? `
-      ${renderPresenceGroup("Online", online)}
-      ${renderPresenceGroup("Offline", offline)}
-    `
-    : '<div class="relay-empty">No signals detected.</div>';
 }
 
 function renderPresenceGroup(label, signals) {
@@ -247,10 +281,51 @@ function renderPresenceGroup(label, signals) {
             <strong>${escapeHtml(signal.displayName || "Nexus User")}</strong>
             <small>${signal.online ? "Online" : `Last seen ${formatPresenceTime(signal.lastSeen)}`}</small>
           </div>
+          ${signal.uid !== state.currentUser?.uid ? `<button type="button" data-open-dm="${escapeAttr(signal.uid)}" aria-label="Message ${escapeAttr(signal.displayName || "Nexus User")}">DM</button>` : ""}
         </article>
       `).join("") : '<div class="relay-empty small">No signals.</div>'}
     </section>
   `;
+}
+
+function renderDmList(signals = getSignals()) {
+  if (!elements.dmList) return;
+  const users = signals.filter((signal) => signal.uid !== state.currentUser?.uid);
+  elements.dmList.innerHTML = `
+    <div class="relay-dm-heading">
+      <span>// Direct Signals</span>
+      <small>${users.length}</small>
+    </div>
+    ${users.length ? users.map((signal) => `
+      <button class="${signal.uid === state.activeRecipientUid ? "active" : ""}" type="button" data-open-dm="${escapeAttr(signal.uid)}">
+        <span class="${signal.online ? "online" : ""}" aria-hidden="true"></span>
+        <strong>${escapeHtml(signal.displayName || "Nexus User")}</strong>
+        <small>${signal.online ? "Online" : `Last ${formatPresenceTime(signal.lastSeen)}`}</small>
+      </button>
+    `).join("") : '<div class="relay-empty small">No direct signals yet.</div>'}
+  `;
+}
+
+function renderChannelUi() {
+  document.querySelectorAll("[data-relay-mode]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.relayMode === state.mode);
+  });
+  elements.dmList?.classList.toggle("d-none", state.mode !== "dm");
+
+  if (state.mode === "dm") {
+    const name = state.activeRecipientUid ? getProfileDisplayName(state.activeRecipientUid) : "Choose Signal";
+    if (elements.channelTitle) elements.channelTitle.textContent = state.activeRecipientUid ? `Direct / ${name}` : "Direct Signals";
+    if (elements.channelMeta) {
+      elements.channelMeta.textContent = state.activeRecipientUid
+        ? "Private transmission visible only to this two-person signal."
+        : "Choose a Nexus member on the left to open a private transmission.";
+    }
+  } else {
+    if (elements.channelTitle) elements.channelTitle.textContent = "Global Transmission";
+    if (elements.channelMeta) elements.channelMeta.textContent = "Everyone signed into the Nexus can read this channel.";
+  }
+
+  renderDmList();
 }
 
 function aggregateReactions(messageId) {
@@ -267,12 +342,39 @@ function aggregateReactions(messageId) {
 }
 
 function bindStreams() {
-  unsubscribeMessages?.();
-  unsubscribeReactions?.();
   unsubscribePresence?.();
   unsubscribeProfiles?.();
 
-  unsubscribeMessages = onValue(query(ref(database, "relayMessages"), limitToLast(150)), (snapshot) => {
+  bindMessageStreams();
+
+  unsubscribePresence = onValue(ref(database, "presence"), (snapshot) => {
+    state.presence = snapshot.val() || {};
+    renderPresence();
+    renderChannelUi();
+  });
+
+  unsubscribeProfiles = onValue(ref(database, "publicProfiles"), (snapshot) => {
+    state.profiles = snapshot.val() || {};
+    renderPresence();
+    renderChannelUi();
+  });
+}
+
+function bindMessageStreams() {
+  unsubscribeMessages?.();
+  unsubscribeReactions?.();
+  unsubscribeMessages = null;
+  unsubscribeReactions = null;
+  state.messages = [];
+  state.reactions = {};
+
+  if (state.mode === "dm" && !state.activeThreadId) {
+    renderMessages();
+    renderChannelUi();
+    return;
+  }
+
+  unsubscribeMessages = onValue(query(ref(database, getMessageBasePath()), limitToLast(150)), (snapshot) => {
     const raw = snapshot.val() || {};
     state.messages = Object.entries(raw)
       .map(([id, message]) => ({ id, ...message }))
@@ -280,25 +382,68 @@ function bindStreams() {
     renderMessages();
   });
 
-  unsubscribeReactions = onValue(ref(database, "relayReactions"), (snapshot) => {
+  unsubscribeReactions = onValue(ref(database, getReactionBasePath()), (snapshot) => {
     state.reactions = snapshot.val() || {};
     renderMessages();
   });
 
-  unsubscribePresence = onValue(ref(database, "presence"), (snapshot) => {
-    state.presence = snapshot.val() || {};
-    renderPresence();
+  renderChannelUi();
+}
+
+async function openDirectMessage(uid) {
+  if (!state.currentUser || !uid || uid === state.currentUser.uid) return;
+  const threadId = getDmThreadId(state.currentUser.uid, uid);
+  const now = Date.now();
+  const participantNames = {
+    [state.currentUser.uid]: displayNameFor(state.currentUser),
+    [uid]: getProfileDisplayName(uid)
+  };
+
+  await update(ref(database, `relayThreads/${threadId}`), {
+    id: threadId,
+    type: "dm",
+    participants: {
+      [state.currentUser.uid]: true,
+      [uid]: true
+    },
+    participantNames,
+    updatedAt: now,
+    createdAt: now
   });
 
-  unsubscribeProfiles = onValue(ref(database, "publicProfiles"), (snapshot) => {
-    state.profiles = snapshot.val() || {};
-    renderPresence();
-  });
+  state.mode = "dm";
+  state.activeThreadId = threadId;
+  state.activeRecipientUid = uid;
+  clearComposerState();
+  bindMessageStreams();
+  setStatus(`Direct signal open with ${participantNames[uid]}.`, "success");
+}
+
+function switchRelayMode(mode) {
+  if (!state.currentUser) return;
+  if (mode === "global") {
+    state.mode = "global";
+    state.activeThreadId = "";
+    state.activeRecipientUid = "";
+    clearComposerState();
+    bindMessageStreams();
+    setStatus("Global relay open.", "success");
+    return;
+  }
+
+  state.mode = "dm";
+  clearComposerState();
+  bindMessageStreams();
+  setStatus("Choose a member to open a direct signal.", "info");
 }
 
 async function submitMessage(event) {
   event.preventDefault();
   if (!state.currentUser) return;
+  if (state.mode === "dm" && !state.activeThreadId) {
+    setStatus("Choose a direct signal before transmitting.", "error");
+    return;
+  }
   touchPresence(true);
 
   const text = elements.input.value.trim().slice(0, 2000);
@@ -308,7 +453,7 @@ async function submitMessage(event) {
   elements.send.textContent = state.editingMessageId ? "Saving..." : "Transmitting...";
 
   if (state.editingMessageId) {
-    await update(ref(database, `relayMessages/${state.editingMessageId}`), {
+    await update(ref(database, `${getMessageBasePath()}/${state.editingMessageId}`), {
       text,
       editedAt: Date.now()
     });
@@ -322,7 +467,18 @@ async function submitMessage(event) {
       createdAt: Date.now()
     };
     if (state.replyTo) payload.replyTo = state.replyTo;
-    await set(push(ref(database, "relayMessages")), payload);
+    await set(push(ref(database, getMessageBasePath())), payload);
+    if (state.mode === "dm" && state.activeThreadId) {
+      await update(ref(database, `relayThreads/${state.activeThreadId}`), {
+        updatedAt: Date.now(),
+        lastMessage: trimExcerpt(text, 140),
+        lastSenderUid: state.currentUser.uid,
+        participantNames: {
+          [state.currentUser.uid]: displayNameFor(state.currentUser),
+          [state.activeRecipientUid]: getProfileDisplayName(state.activeRecipientUid)
+        }
+      }).catch(() => {});
+    }
     clearComposerState();
     setStatus("Delivered.", "success");
   }
@@ -471,8 +627,8 @@ function handleMessageAction(event) {
 
 async function deleteMessage(messageId) {
   if (!await confirmRelay("Delete this transmission?", "Delete Message")) return;
-  await remove(ref(database, `relayReactions/${messageId}`)).catch(() => {});
-  await remove(ref(database, `relayMessages/${messageId}`));
+  await remove(ref(database, `${getReactionBasePath()}/${messageId}`)).catch(() => {});
+  await remove(ref(database, `${getMessageBasePath()}/${messageId}`));
   if (state.editingMessageId === messageId) clearComposerState();
   setStatus("Transmission deleted.", "success");
 }
@@ -526,7 +682,7 @@ async function toggleReaction(messageId, reactionId) {
   const reaction = REACTION_OPTIONS.find((item) => item.id === reactionId);
   if (!reaction || !state.currentUser) return;
 
-  const path = `relayReactions/${messageId}/${reaction.id}/${state.currentUser.uid}`;
+  const path = `${getReactionBasePath()}/${messageId}/${reaction.id}/${state.currentUser.uid}`;
   const hasReaction = !!state.reactions?.[messageId]?.[reaction.id]?.[state.currentUser.uid];
   if (hasReaction) {
     await remove(ref(database, path));
@@ -621,6 +777,11 @@ function bindComposerTools() {
 function showLocked() {
   const priorUser = state.currentUser;
   state.currentUser = null;
+  state.mode = "global";
+  state.activeThreadId = "";
+  state.activeRecipientUid = "";
+  state.messages = [];
+  state.reactions = {};
   markOffline(priorUser);
   elements.locked?.classList.remove("d-none");
   elements.console?.classList.add("d-none");
@@ -632,11 +793,15 @@ function showLocked() {
 
 async function showRelay(user) {
   state.currentUser = user;
+  state.mode = "global";
+  state.activeThreadId = "";
+  state.activeRecipientUid = "";
   elements.locked?.classList.add("d-none");
   elements.console?.classList.remove("d-none");
   await setPresence(user);
   touchPresence(true);
   bindStreams();
+  renderChannelUi();
   setStatus("Relay connected.", "success");
 }
 
@@ -694,6 +859,20 @@ elements.form?.addEventListener("submit", (event) => {
         elements.send.textContent = state.editingMessageId ? "Save Edit" : "Transmit";
       }
     });
+});
+elements.console?.addEventListener("click", (event) => {
+  const modeButton = event.target.closest("[data-relay-mode]");
+  const dmButton = event.target.closest("[data-open-dm]");
+
+  if (modeButton) {
+    switchRelayMode(modeButton.dataset.relayMode);
+    return;
+  }
+
+  if (dmButton) {
+    openDirectMessage(dmButton.dataset.openDm)
+      .catch((error) => setStatus(error.message || "Direct signal failed.", "error"));
+  }
 });
 elements.messages?.addEventListener("click", handleMessageAction);
 elements.messages?.addEventListener("contextmenu", (event) => {

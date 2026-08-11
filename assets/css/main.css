@@ -2920,6 +2920,182 @@ body.banri-theme::before {
   line-height: 1.55;
 }
 
+.steam-signal-panel {
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.steam-signal-loader,
+.steam-signal-empty {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  color: var(--banri-muted);
+  text-align: center;
+}
+
+.steam-signal-loader span {
+  width: 54px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(22, 232, 255, 0.42);
+  border-top-color: var(--banri-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 24px rgba(22, 232, 255, 0.2);
+  animation: banri-spin 1100ms linear infinite;
+}
+
+.steam-signal-empty {
+  align-content: center;
+  justify-items: start;
+  text-align: left;
+}
+
+.steam-signal-empty h3 {
+  margin: 0 0 0.7rem;
+  color: var(--banri-text);
+  font: 800 clamp(2rem, 5vw, 4rem)/0.9 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.steam-signal-empty p:last-child {
+  max-width: 780px;
+  margin: 0;
+  color: var(--banri-muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.steam-signal-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.steam-avatar {
+  display: grid;
+  width: clamp(72px, 9vw, 108px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--banri-cyan);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(22, 232, 255, 0.16), rgba(0, 0, 0, 0.86));
+  box-shadow: 0 0 34px rgba(22, 232, 255, 0.18);
+}
+
+.steam-avatar img {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.steam-signal-header h3 {
+  margin: 0;
+  color: var(--banri-text);
+  font: 800 clamp(2rem, 5vw, 5.4rem)/0.86 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.steam-profile-meta,
+.steam-progress-meta,
+.steam-bucket-panel .admin-card-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.steam-profile-meta span,
+.steam-progress-meta span,
+.steam-progress-meta strong,
+.steam-bucket-panel small {
+  color: var(--banri-cyan);
+  font: 800 0.78rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.steam-progress-block {
+  margin: 1.4rem 0;
+}
+
+.steam-progress-meta {
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.steam-progress-track {
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(22, 232, 255, 0.24);
+  background: rgba(217, 240, 245, 0.12);
+}
+
+.steam-progress-track span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--banri-cyan), rgba(22, 232, 255, 0.38));
+  box-shadow: 0 0 18px rgba(22, 232, 255, 0.28);
+}
+
+.steam-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.steam-stat-grid div,
+.steam-bucket-panel {
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  background: rgba(0, 7, 10, 0.58);
+}
+
+.steam-stat-grid div {
+  padding: 1rem;
+}
+
+.steam-stat-grid span,
+.steam-bucket-list span {
+  display: block;
+  color: var(--banri-muted);
+  font: 800 0.72rem/1.35 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.steam-stat-grid strong {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--banri-text);
+  font: 800 clamp(2.1rem, 4vw, 4rem)/0.9 Rajdhani, sans-serif;
+}
+
+.steam-bucket-panel {
+  padding: 1rem;
+}
+
+.steam-bucket-list {
+  display: grid;
+  margin-top: 0.9rem;
+  border-top: 1px solid rgba(22, 232, 255, 0.15);
+}
+
+.steam-bucket-list div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(22, 232, 255, 0.15);
+}
+
+.steam-bucket-list strong {
+  color: var(--banri-text);
+  font: 800 1rem/1 "Share Tech Mono", monospace;
+}
+
 .modal-game-list {
   columns: 2;
   gap: 2rem;
@@ -3785,6 +3961,22 @@ body.legacy-theme::before {
   color: var(--banri-muted);
   font: 700 0.82rem/1.55 "Share Tech Mono", monospace;
   letter-spacing: 0.03em;
+}
+
+.steam-sync-card {
+  margin-bottom: 1rem;
+}
+
+.steam-sync-card .admin-card-heading strong {
+  color: var(--banri-muted);
+  font: 800 0.72rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.steam-switch {
+  min-height: 42px;
+  align-items: center;
 }
 
 .admin-grid,
@@ -4794,6 +4986,111 @@ body.legacy-theme::before {
   gap: 0.65rem;
 }
 
+.relay-mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.relay-mode-tabs button,
+.relay-dm-list button,
+.relay-presence-row button {
+  border: 1px solid rgba(22, 232, 255, 0.22);
+  color: var(--banri-muted);
+  background: rgba(0, 0, 0, 0.34);
+  font: 800 0.68rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 160ms ease, color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.relay-mode-tabs button {
+  min-height: 42px;
+}
+
+.relay-mode-tabs button.active,
+.relay-mode-tabs button:hover,
+.relay-mode-tabs button:focus,
+.relay-dm-list button.active,
+.relay-dm-list button:hover,
+.relay-dm-list button:focus,
+.relay-presence-row button:hover,
+.relay-presence-row button:focus {
+  border-color: var(--banri-cyan);
+  color: #001013;
+  background: var(--banri-cyan);
+  box-shadow: 0 0 18px rgba(22, 232, 255, 0.18);
+}
+
+.relay-dm-list {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(22, 232, 255, 0.14);
+}
+
+.relay-dm-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  color: var(--banri-cyan);
+  font: 800 0.68rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.relay-dm-heading small {
+  color: var(--banri-muted);
+}
+
+.relay-dm-list button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.25rem 0.6rem;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.55rem 0.65rem;
+  text-align: left;
+}
+
+.relay-dm-list button > span {
+  grid-row: span 2;
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: rgba(154, 188, 198, 0.48);
+}
+
+.relay-dm-list button > span.online {
+  background: #17f287;
+  box-shadow: 0 0 14px rgba(23, 242, 135, 0.65);
+}
+
+.relay-dm-list strong,
+.relay-dm-list small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relay-dm-list small {
+  color: inherit;
+  opacity: 0.72;
+}
+
+.relay-channel-meta {
+  position: relative;
+  z-index: 1;
+  margin: -0.35rem 0 0.8rem;
+  color: var(--banri-muted);
+  font: 700 0.75rem/1.4 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .relay-messages {
   max-height: 58vh;
   min-height: 0;
@@ -4810,7 +5107,8 @@ body.legacy-theme::before {
 }
 
 .relay-presence-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.7rem;
   align-items: center;
   padding: 0.75rem;
@@ -4831,6 +5129,11 @@ body.legacy-theme::before {
 .relay-presence-row strong,
 .relay-presence-row small {
   display: block;
+}
+
+.relay-presence-row button {
+  min-width: 42px;
+  min-height: 30px;
 }
 
 .relay-presence-row strong {
@@ -6865,8 +7168,14 @@ body.legacy-theme::before {
   .admin-activity-row,
   .activity-card,
   .starfield-search-panel,
-  .gallery-admin-row {
+  .gallery-admin-row,
+  .steam-signal-header,
+  .steam-stat-grid {
     grid-template-columns: 1fr;
+  }
+
+  .steam-signal-header {
+    justify-items: start;
   }
 
   .chronicles-command-grid {
@@ -7038,6 +7347,11 @@ body.legacy-theme::before {
 
   .nexus-audio-toggle {
     width: 100%;
+  }
+
+  .steam-progress-meta {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

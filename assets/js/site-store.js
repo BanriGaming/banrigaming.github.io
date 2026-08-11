@@ -14,10 +14,46 @@ import { firebaseConfig } from "./firebase-config.js";
 
 export const MEDAL_WORKER_URL = "https://medalclips.monkguru-guardian.workers.dev/";
 export const ACTIVITY_RECENT_LIMIT = 25;
+export const DEFAULT_STEAM_ID64 = "76561198134543238";
 
 export const STATUS_OPTIONS = ["Active", "Returning Soon", "On Hold", "Completed", "Occasional"];
 export const TONE_OPTIONS = ["green", "amber", "blue", "purple", "cyan", "red", "aqua", "yellow", "white", "orange"];
 export const ICON_OPTIONS = ["gamepad", "play", "image", "pen", "gear"];
+
+export const defaultSteamConfig = {
+  steamId: DEFAULT_STEAM_ID64,
+  proxyUrl: "",
+  countryCode: "us",
+  syncLibrary: true
+};
+
+export const defaultSteamSignal = {
+  profile: {
+    steamId: DEFAULT_STEAM_ID64,
+    personaName: "Banri",
+    profileUrl: "https://steamcommunity.com/id/--Banri--/",
+    avatar: "",
+    avatarFull: "",
+    countryCode: "US",
+    timeCreated: 0,
+    accountAgeYears: 0,
+    level: 0
+  },
+  summary: {
+    totalGames: 0,
+    playedGames: 0,
+    neverPlayedGames: 0,
+    playedPercent: 0,
+    totalHours: 0,
+    averagePlaytime: 0,
+    syncedAt: 0,
+    source: "Steam Web API"
+  },
+  buckets: [],
+  games: [],
+  recentGames: [],
+  libraryMatches: []
+};
 
 export const defaultGamesLibrary = [
   {
@@ -31,6 +67,8 @@ export const defaultGamesLibrary = [
     hours: 128,
     completion: 76,
     art: "/assets/banri-hero.png",
+    steamAppId: "1623730",
+    steamName: "Palworld",
     recentRank: 1
   },
   {
@@ -44,6 +82,8 @@ export const defaultGamesLibrary = [
     hours: 32,
     completion: 24,
     art: "/assets/img/bg.jpg",
+    steamAppId: "962130",
+    steamName: "Grounded",
     recentRank: 2
   },
   {
@@ -57,6 +97,8 @@ export const defaultGamesLibrary = [
     hours: 1250,
     completion: 88,
     art: "/assets/img/Monster-Hunter-World-Banner2.png",
+    steamAppId: "582010",
+    steamName: "Monster Hunter: World",
     recentRank: 3
   },
   {
@@ -70,6 +112,8 @@ export const defaultGamesLibrary = [
     hours: 94,
     completion: 62,
     art: "/assets/img/hero/banri-hero-05.webp",
+    steamAppId: "553850",
+    steamName: "HELLDIVERS 2",
     recentRank: 4
   },
   {
@@ -83,6 +127,8 @@ export const defaultGamesLibrary = [
     hours: 420,
     completion: 69,
     art: "/assets/img/mhr-pointpath1lc.png",
+    steamAppId: "1446780",
+    steamName: "MONSTER HUNTER RISE",
     recentRank: 4
   },
   {
@@ -96,6 +142,8 @@ export const defaultGamesLibrary = [
     hours: 330,
     completion: 40,
     art: "/assets/img/nms/portalbg.jpg",
+    steamAppId: "275850",
+    steamName: "No Man's Sky",
     recentRank: 5
   },
   {
@@ -109,6 +157,8 @@ export const defaultGamesLibrary = [
     hours: 226,
     completion: 58,
     art: "/assets/img/starfield/Starfield-Map.webp",
+    steamAppId: "1716740",
+    steamName: "Starfield",
     recentRank: 6
   },
   {
@@ -122,6 +172,8 @@ export const defaultGamesLibrary = [
     hours: 84,
     completion: 44,
     art: "/assets/banri-hero-noir.png",
+    steamAppId: "2707930",
+    steamName: "Palia",
     recentRank: 7
   },
   {
@@ -135,6 +187,8 @@ export const defaultGamesLibrary = [
     hours: 160,
     completion: 40,
     art: "/assets/banri-hero.png",
+    steamAppId: "892970",
+    steamName: "Valheim",
     recentRank: 8
   },
   {
@@ -148,6 +202,8 @@ export const defaultGamesLibrary = [
     hours: 78,
     completion: 35,
     art: "/assets/banri-hero-noir.png",
+    steamAppId: "2344520",
+    steamName: "Diablo IV",
     recentRank: 9
   },
   {
@@ -161,6 +217,8 @@ export const defaultGamesLibrary = [
     hours: 110,
     completion: 100,
     art: "/assets/img/bg.jpg",
+    steamAppId: "1267910",
+    steamName: "Melvor Idle",
     recentRank: 10
   },
   {
@@ -174,6 +232,8 @@ export const defaultGamesLibrary = [
     hours: 45,
     completion: 31,
     art: "/assets/banri-hero-noir.png",
+    steamAppId: "1604030",
+    steamName: "V Rising",
     recentRank: 11
   },
   {
@@ -187,6 +247,8 @@ export const defaultGamesLibrary = [
     hours: 140,
     completion: 100,
     art: "/assets/img/bg.jpg",
+    steamAppId: "1245620",
+    steamName: "ELDEN RING",
     recentRank: 12
   },
   {
@@ -213,6 +275,8 @@ export const defaultGamesLibrary = [
     hours: 880,
     completion: 72,
     art: "/assets/img/ff14/hero.180492f4.jpg",
+    steamAppId: "39210",
+    steamName: "FINAL FANTASY XIV Online",
     recentRank: 14
   }
 ];
@@ -455,6 +519,121 @@ export function normalizeGame(game, index = 0) {
   };
 }
 
+export function normalizeSteamConfig(config = {}) {
+  const proxyUrl = String(config?.proxyUrl || "").trim();
+  const countryCode = String(config?.countryCode || defaultSteamConfig.countryCode)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z]/g, "")
+    .slice(0, 2) || defaultSteamConfig.countryCode;
+
+  return {
+    steamId: String(config?.steamId || DEFAULT_STEAM_ID64).replace(/\D/g, "") || DEFAULT_STEAM_ID64,
+    proxyUrl,
+    countryCode,
+    syncLibrary: config?.syncLibrary !== false
+  };
+}
+
+function normalizeSteamGame(game = {}) {
+  const playtimeMinutes = Math.max(0, Number(game.playtimeMinutes ?? game.playtime_forever ?? game.minutes ?? 0) || 0);
+  const appId = String(game.appId ?? game.appid ?? game.app_id ?? "").trim();
+  const imgIconUrl = String(game.imgIconUrl || game.img_icon_url || "").trim();
+
+  return {
+    appId,
+    name: String(game.name || game.title || `Steam App ${appId}`).trim(),
+    playtimeMinutes,
+    playtimeHours: Number((playtimeMinutes / 60).toFixed(1)),
+    imgIconUrl,
+    iconUrl: imgIconUrl && appId ? `https://media.steampowered.com/steamcommunity/public/images/apps/${appId}/${imgIconUrl}.jpg` : "",
+    hasCommunityVisibleStats: Boolean(game.hasCommunityVisibleStats ?? game.has_community_visible_stats ?? false)
+  };
+}
+
+function computeSteamBuckets(games = []) {
+  const ranges = [
+    { label: "25 or more hours", min: 25, max: Infinity },
+    { label: "12 to 25 hours", min: 12, max: 25 },
+    { label: "6 to 12 hours", min: 6, max: 12 },
+    { label: "3 to 6 hours", min: 3, max: 6 },
+    { label: "2 to 3 hours", min: 2, max: 3 },
+    { label: "1 to 2 hours", min: 1, max: 2 },
+    { label: "0 to 1 hours", min: 0, max: 1, playedOnly: true },
+    { label: "Never played", min: 0, max: 0, neverPlayed: true }
+  ];
+
+  return ranges.map((range) => {
+    const count = games.filter((game) => {
+      const hours = Number(game.playtimeHours || 0);
+      if (range.neverPlayed) return hours === 0;
+      if (range.playedOnly) return hours > 0 && hours < 1;
+      return hours >= range.min && hours < range.max;
+    }).length;
+    return { label: range.label, count };
+  });
+}
+
+export function normalizeSteamSignal(signal = {}) {
+  const source = signal.steamSignal || signal.signal || signal;
+  const rawProfile = source.profile || {};
+  const rawSummary = source.summary || {};
+  const games = (Array.isArray(source.games) ? source.games : [])
+    .map(normalizeSteamGame)
+    .filter((game) => game.appId || game.name)
+    .sort((a, b) => Number(b.playtimeMinutes || 0) - Number(a.playtimeMinutes || 0));
+  const recentGames = (Array.isArray(source.recentGames) ? source.recentGames : [])
+    .map(normalizeSteamGame)
+    .filter((game) => game.appId || game.name);
+  const totalGames = Number(rawSummary.totalGames ?? source.gameCount ?? games.length) || 0;
+  const playedGames = Number(rawSummary.playedGames ?? games.filter((game) => game.playtimeMinutes > 0).length) || 0;
+  const neverPlayedGames = Number(rawSummary.neverPlayedGames ?? Math.max(0, totalGames - playedGames)) || 0;
+  const totalHours = Number(rawSummary.totalHours ?? games.reduce((sum, game) => sum + game.playtimeMinutes, 0) / 60) || 0;
+  const averagePlaytime = Number(rawSummary.averagePlaytime ?? (playedGames ? totalHours / playedGames : 0)) || 0;
+  const playedPercent = Number(rawSummary.playedPercent ?? (totalGames ? (playedGames / totalGames) * 100 : 0)) || 0;
+  const timeCreated = Number(rawProfile.timeCreated || rawProfile.timecreated || 0) || 0;
+  const accountAgeYears = Number(rawProfile.accountAgeYears || (timeCreated ? (Date.now() - timeCreated * 1000) / 31557600000 : 0)) || 0;
+  const buckets = Array.isArray(source.buckets) && source.buckets.length
+    ? source.buckets.map((bucket) => ({
+      label: String(bucket.label || "").trim(),
+      count: Number(bucket.count || 0)
+    })).filter((bucket) => bucket.label)
+    : computeSteamBuckets(games);
+
+  return {
+    profile: {
+      steamId: String(rawProfile.steamId || rawProfile.steamid || DEFAULT_STEAM_ID64).trim(),
+      personaName: String(rawProfile.personaName || rawProfile.personaname || "Banri").trim(),
+      profileUrl: String(rawProfile.profileUrl || rawProfile.profileurl || "https://steamcommunity.com/id/--Banri--/").trim(),
+      avatar: String(rawProfile.avatar || "").trim(),
+      avatarFull: String(rawProfile.avatarFull || rawProfile.avatarfull || rawProfile.avatarMedium || rawProfile.avatarmedium || "").trim(),
+      countryCode: String(rawProfile.countryCode || rawProfile.loccountrycode || "").trim().toUpperCase(),
+      timeCreated,
+      accountAgeYears: Number(accountAgeYears.toFixed(1)),
+      level: Number(rawProfile.level || source.level || 0) || 0
+    },
+    summary: {
+      totalGames,
+      playedGames,
+      neverPlayedGames,
+      playedPercent: Number(playedPercent.toFixed(1)),
+      totalHours: Number(totalHours.toFixed(1)),
+      averagePlaytime: Number(averagePlaytime.toFixed(1)),
+      syncedAt: Number(rawSummary.syncedAt || source.syncedAt || Date.now()) || Date.now(),
+      source: String(rawSummary.source || source.source || "Steam Web API").trim()
+    },
+    buckets,
+    games,
+    recentGames,
+    libraryMatches: (Array.isArray(source.libraryMatches) ? source.libraryMatches : []).map((match) => ({
+      siteGameId: String(match.siteGameId || "").trim(),
+      appId: String(match.appId || "").trim(),
+      name: String(match.name || "").trim(),
+      playtimeHours: Number(match.playtimeHours || 0)
+    }))
+  };
+}
+
 export function normalizeCurrentGame(game, index = 0) {
   const title = String(game?.title || `Current Game ${index + 1}`).trim();
   const rawUrl = String(game?.url || game?.link || "/games.html").trim();
@@ -659,15 +838,17 @@ export function statusToTone(status) {
 
 export async function loadPublicSiteData() {
   const { database } = getFirebaseServices();
-  const [siteConfigSnapshot, gamesSnapshot, activitySnapshot] = await Promise.all([
+  const [siteConfigSnapshot, gamesSnapshot, activitySnapshot, steamSnapshot] = await Promise.all([
     get(ref(database, "siteConfig")).catch(() => null),
     get(ref(database, "gamesLibrary")).catch(() => null),
-    get(ref(database, "activityFeed")).catch(() => null)
+    get(ref(database, "activityFeed")).catch(() => null),
+    get(ref(database, "steamSignal")).catch(() => null)
   ]);
 
   const siteConfig = siteConfigSnapshot?.exists() ? siteConfigSnapshot.val() : {};
   const remoteGames = gamesSnapshot?.exists() ? toArray(gamesSnapshot.val()).map(normalizeGame) : [];
   const remoteActivity = activitySnapshot?.exists() ? toArray(activitySnapshot.val()) : [];
+  const steamSignal = steamSnapshot?.exists() ? normalizeSteamSignal(steamSnapshot.val()) : structuredClone(defaultSteamSignal);
 
   return {
     currentGames: toArray(siteConfig.currentGames).map(normalizeCurrentGame).slice(0, 4),
@@ -677,6 +858,8 @@ export async function loadPublicSiteData() {
     hero: normalizeHeroCopy(siteConfig.hero),
     heroVisual: normalizeHeroVisual(siteConfig.heroVisual),
     featuredClip: normalizeFeaturedClip(siteConfig.featuredClip),
+    steamConfig: normalizeSteamConfig(siteConfig.steam),
+    steamSignal,
     activityFeed: remoteActivity
       .map(normalizeActivityEntry)
       .filter((item) => item.enabled !== false)
@@ -794,6 +977,32 @@ export async function saveGamesLibrary(games) {
     };
   });
   await set(ref(database, "gamesLibrary"), payload);
+}
+
+export async function fetchSteamSignal(config = {}) {
+  const steamConfig = normalizeSteamConfig(config);
+  if (!steamConfig.proxyUrl) {
+    throw new Error("Add the Steam Worker URL before syncing.");
+  }
+
+  const url = new URL(steamConfig.proxyUrl);
+  url.searchParams.set("steamId", steamConfig.steamId);
+  url.searchParams.set("cc", steamConfig.countryCode);
+  url.searchParams.set("t", Date.now().toString());
+
+  const response = await fetch(url.toString(), { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`Steam Worker returned ${response.status}`);
+  }
+
+  return normalizeSteamSignal(await response.json());
+}
+
+export async function saveSteamSignal(signal) {
+  const { database } = getFirebaseServices();
+  const normalized = normalizeSteamSignal(signal);
+  await set(ref(database, "steamSignal"), normalized);
+  return normalized;
 }
 
 export async function saveGalleryCollection(collection) {
