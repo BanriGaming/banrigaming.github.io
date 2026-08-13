@@ -33,6 +33,35 @@
   letter-spacing: 0.18em;
 }
 
+.clips-toolbar {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.45fr) minmax(260px, 1fr) minmax(180px, 220px);
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.clips-toolbar h2 {
+  margin: 0;
+  color: var(--banri-text);
+  font: 800 1.45rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.clips-search {
+  margin: 0;
+}
+
+.clip-filter-status {
+  margin: -1rem 0 1.4rem;
+  color: var(--banri-muted);
+  font: 800 0.72rem/1.4 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .clip-filter-strip {
   display: flex;
   flex-wrap: wrap;
@@ -250,6 +279,12 @@ body.clip-modal-open {
   font: 700 0.8rem/1 "Share Tech Mono", monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+@media (max-width: 991.98px) {
+  .clips-toolbar {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 575.98px) {

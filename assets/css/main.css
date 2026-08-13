@@ -5657,6 +5657,119 @@ body.legacy-theme::before {
   padding: clamp(1rem, 2vw, 1.5rem);
 }
 
+.tool-hero.dragonwilds-hero {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.94), rgba(0, 12, 15, 0.68), rgba(0, 0, 0, 0.92)),
+    radial-gradient(circle at 72% 28%, rgba(22, 232, 255, 0.2), transparent 24rem),
+    url("../img/hero/banri-hero-02.webp") center / cover no-repeat;
+}
+
+.dragonwilds-ledger label,
+.ledger-result span,
+.ledger-formula strong,
+.ledger-note,
+.ledger-input-panel small {
+  font-family: "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ledger-input-panel {
+  height: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.08), transparent 44%),
+    rgba(0, 0, 0, 0.36);
+}
+
+.dragonwilds-ledger label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--banri-cyan);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.ledger-input-panel small {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--banri-muted);
+  font-size: 0.66rem;
+  line-height: 1.35;
+}
+
+.ledger-result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.ledger-result {
+  min-height: 128px;
+  padding: 1rem;
+  border: 1px solid rgba(22, 232, 255, 0.2);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(22, 232, 255, 0.1), transparent 8rem),
+    rgba(0, 7, 10, 0.62);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.ledger-result span {
+  display: block;
+  color: var(--banri-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.ledger-result strong {
+  display: block;
+  margin-top: 1.4rem;
+  color: var(--banri-text);
+  font: 800 clamp(1.7rem, 4vw, 2.8rem)/0.88 Rajdhani, sans-serif;
+}
+
+.ledger-result.accent strong {
+  color: var(--banri-cyan);
+}
+
+.ledger-result.profit strong {
+  color: #17f287;
+}
+
+.ledger-result.loss strong {
+  color: #ff7065;
+}
+
+.ledger-formula {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  color: #c8dce2;
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.ledger-formula strong {
+  color: var(--banri-cyan);
+  font-size: 0.72rem;
+}
+
+.ledger-formula span {
+  color: var(--banri-muted);
+  line-height: 1.5;
+}
+
+.ledger-formula b {
+  color: var(--banri-text);
+}
+
+.ledger-note {
+  margin: 0.8rem 0 0;
+  color: var(--banri-muted);
+  font-size: 0.68rem;
+}
+
 .filter-buttons,
 .starfield-resource-buttons {
   display: flex;

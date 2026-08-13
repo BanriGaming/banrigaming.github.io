@@ -1,6 +1,15 @@
 (function () {
   const projects = [
     {
+      title: "Dragonwilds Tannery Ledger",
+      type: "Calculator",
+      game: "RuneScape: Dragonwilds",
+      status: "Active",
+      href: "/dragonwilds/tannery-ledger.html",
+      summary: "Garou Chit, Dragonwolf Hide, tannery load, Draconic Leather output, and profit calculator.",
+      image: "/assets/img/hero/banri-hero-02.webp"
+    },
+    {
       title: "Palworld Build Vault",
       type: "Party Tool",
       game: "Palworld",

@@ -1,6 +1,11 @@
 const WORKER_URL = "https://medalclips.monkguru-guardian.workers.dev/";
 
 let allClips = [];
+const clipState = {
+  gameSlug: "all",
+  query: "",
+  sort: "newest"
+};
 
 fetch(`${WORKER_URL}?t=${Date.now()}`, {
   cache: "no-store"
@@ -20,7 +25,7 @@ fetch(`${WORKER_URL}?t=${Date.now()}`, {
     allClips = data.clips;
     updateClipCount(allClips.length);
     createGameNavigation();
-    renderClips(allClips);
+    applyClipFilters();
   })
   .catch((error) => {
     const gallery = document.getElementById("clips-gallery");
@@ -68,8 +73,9 @@ function createGameNavigation() {
   nav.innerHTML = "";
 
   const allButton = createFilterButton(`All (${allClips.length})`, true, () => {
+    clipState.gameSlug = "all";
     setActiveButton(allButton);
-    renderClips(allClips);
+    applyClipFilters();
   });
 
   nav.appendChild(allButton);
@@ -77,8 +83,9 @@ function createGameNavigation() {
   games.forEach((game) => {
     const gameClips = allClips.filter((clip) => clip.gameSlug === game);
     const button = createFilterButton(`${formatGameName(game)} (${gameClips.length})`, false, () => {
+      clipState.gameSlug = game;
       setActiveButton(button);
-      renderClips(gameClips);
+      applyClipFilters();
     });
 
     nav.appendChild(button);
@@ -100,6 +107,53 @@ function setActiveButton(activeButton) {
   });
 
   activeButton.classList.add("active");
+}
+
+function applyClipFilters() {
+  const query = clipState.query.trim().toLowerCase();
+  const filtered = allClips
+    .filter((clip) => clipState.gameSlug === "all" || clip.gameSlug === clipState.gameSlug)
+    .filter((clip) => {
+      if (!query) return true;
+      const haystack = [
+        cleanClipTitle(clip.title),
+        formatGameName(clip.gameSlug),
+        clip.gameSlug,
+        formatClipDate(clip.timestamp)
+      ].join(" ").toLowerCase();
+      return haystack.includes(query);
+    })
+    .sort(sortClips);
+
+  updateFilterStatus(filtered.length);
+  renderClips(filtered);
+}
+
+function sortClips(a, b) {
+  if (clipState.sort === "oldest") {
+    return clipTime(a) - clipTime(b);
+  }
+  if (clipState.sort === "title") {
+    return cleanClipTitle(a.title).localeCompare(cleanClipTitle(b.title));
+  }
+  if (clipState.sort === "game") {
+    return formatGameName(a.gameSlug).localeCompare(formatGameName(b.gameSlug))
+      || cleanClipTitle(a.title).localeCompare(cleanClipTitle(b.title));
+  }
+  return clipTime(b) - clipTime(a);
+}
+
+function clipTime(clip) {
+  const date = new Date(clip.timestamp || 0);
+  return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+}
+
+function updateFilterStatus(count) {
+  const status = document.getElementById("clip-filter-status");
+  if (!status) return;
+  const game = clipState.gameSlug === "all" ? "all games" : formatGameName(clipState.gameSlug);
+  const search = clipState.query ? ` matching "${clipState.query}"` : "";
+  status.textContent = `${count} of ${allClips.length} clips shown / ${game}${search}`;
 }
 
 function renderClips(clips) {
@@ -221,6 +275,16 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+document.getElementById("clipSearch")?.addEventListener("input", (event) => {
+  clipState.query = event.target.value || "";
+  applyClipFilters();
+});
+
+document.getElementById("clipSort")?.addEventListener("change", (event) => {
+  clipState.sort = event.target.value || "newest";
+  applyClipFilters();
+});
 
 document.getElementById("clip-modal-close")?.addEventListener("click", closeClipModal);
 document.querySelector(".clip-modal-backdrop")?.addEventListener("click", closeClipModal);
