@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/main.css?v=20260808a" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260817g" />
     <script src="assets/js/nav.js"></script>
     <script src="assets/js/banri-theme.js?v=20260808a" defer></script>
   </head>
@@ -70,6 +70,7 @@
             <div class="chronicles-tabs" role="tablist" aria-label="Chronicles sections">
               <button class="active" type="button" data-chronicles-view-button="dashboard">Dashboard</button>
               <button type="button" data-chronicles-view-button="worlds">Worlds</button>
+              <button type="button" data-chronicles-view-button="story">Story So Far</button>
               <button type="button" data-chronicles-view-button="characters">Characters</button>
               <a href="/midnight-relay.html">Midnight Relay</a>
               <a id="chroniclesAdminLink" class="d-none" href="/admin.html" data-chronicles-admin-only>Admin Console</a>
@@ -162,6 +163,31 @@
                   <div id="chroniclesCharacterGrid" class="chronicles-character-grid" aria-live="polite"></div>
                 </section>
 
+                <section class="chronicles-view" data-chronicles-view="story" aria-labelledby="chroniclesStoryTitle">
+                  <div class="section-heading">
+                    <p><span>//</span> Continuity</p>
+                    <h2 id="chroniclesStoryTitle">Story So Far</h2>
+                    <div class="d-flex flex-wrap gap-2">
+                      <!-- OpenAI summary refresh is parked until API billing is intentionally enabled. -->
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="post">Create Post</button>
+                    </div>
+                  </div>
+                  <div class="chronicles-story-console panel-frame">
+                    <div class="chronicles-story-toolbar">
+                      <label for="chroniclesStoryWorld">
+                        Story World
+                        <select id="chroniclesStoryWorld" class="form-select" aria-label="Choose story world"></select>
+                      </label>
+                      <div class="chronicles-story-mode" role="group" aria-label="Story display mode">
+                        <button class="active" type="button" data-chronicles-story-mode="full">Full Chronicle</button>
+                        <button type="button" data-chronicles-story-mode="summary">Summary Signal</button>
+                      </div>
+                    </div>
+                    <p id="chroniclesStoryStatus" class="auth-status mb-3" role="status" aria-live="polite"></p>
+                    <div id="chroniclesStoryContent" class="chronicles-story-content" aria-live="polite"></div>
+                  </div>
+                </section>
+
                 <section class="chronicles-view" data-chronicles-view="thread" aria-labelledby="chroniclesThreadViewTitle">
                   <div class="chronicles-thread-header panel-frame">
                     <div>
@@ -202,6 +228,15 @@
               <div class="col-12 col-md-6">
                 <label for="chroniclesWorldGenre">Genre / System</label>
                 <input id="chroniclesWorldGenre" class="form-control" type="text" maxlength="80" placeholder="Star Wars RPG" />
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="chroniclesWorldStatus">World Status</label>
+                <select id="chroniclesWorldStatus" class="form-select">
+                  <option value="Active">Active</option>
+                  <option value="Paused">Paused</option>
+                  <option value="Inactive">Inactive</option>
+                  <option value="Completed">Completed</option>
+                </select>
               </div>
               <div class="col-12">
                 <label for="chroniclesWorldImage">Image URL</label>
@@ -246,6 +281,15 @@
                 <div class="col-12 col-lg-6">
                   <label for="chroniclesLoreGenreInput">Genre / System</label>
                   <input id="chroniclesLoreGenreInput" class="form-control" type="text" maxlength="80" />
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesLoreStatusInput">World Status</label>
+                  <select id="chroniclesLoreStatusInput" class="form-select">
+                    <option value="Active">Active</option>
+                    <option value="Paused">Paused</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Completed">Completed</option>
+                  </select>
                 </div>
                 <div class="col-12">
                   <label for="chroniclesLoreImageInput">Image URL</label>
@@ -365,12 +409,33 @@
                 <select id="chroniclesPostThread" class="form-select" required></select>
               </div>
               <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
+                <label for="chroniclesPostType">Post Classification</label>
+                <select id="chroniclesPostType" class="form-select">
+                  <option value="player">Player Post</option>
+                  <option value="narrator">Narrator Event</option>
+                  <option value="location-description">Location Description</option>
+                </select>
+              </div>
+              <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
                 <label for="chroniclesPostAuthor">Author Override</label>
                 <input id="chroniclesPostAuthor" class="form-control" type="text" maxlength="48" placeholder="Banri, Aelira, Rykard..." />
               </div>
               <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
                 <label for="chroniclesPostOwner">Owner Display</label>
                 <input id="chroniclesPostOwner" class="form-control" type="text" maxlength="48" placeholder="Who this post belongs to" />
+              </div>
+              <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
+                <label>Custodian Voice</label>
+                <button id="chroniclesNarratorButton" class="btn btn-banri-outline w-100" type="button" data-chronicles-narrator>Post As Narrator</button>
+              </div>
+              <div class="col-12">
+                <label class="chronicles-consent-toggle" for="chroniclesAllowCharacterEffects">
+                  <input id="chroniclesAllowCharacterEffects" type="checkbox" />
+                  <span>
+                    <strong>Allow Character Effects</strong>
+                    <small>Other writers may make character-altering calls for my character in this scene.</small>
+                  </span>
+                </label>
               </div>
               <div class="col-12">
                 <label for="chroniclesPostTitle">Post Title</label>
@@ -387,6 +452,8 @@
                   <button type="button" data-chronicles-markdown="code">&lt;/&gt;</button>
                   <button type="button" data-chronicles-markdown="link">Link</button>
                   <button type="button" data-chronicles-markdown="image">Image</button>
+                  <button type="button" data-chronicles-markdown="ooc">OOC</button>
+                  <!-- OpenAI Assist is parked until API billing is intentionally enabled. -->
                   <button type="button" data-chronicles-preview-toggle>Preview</button>
                 </div>
                 <textarea id="chroniclesPostBody" class="form-control" rows="10" required maxlength="12000" placeholder="Write the entry in third-person past tense."></textarea>
@@ -413,6 +480,50 @@
         </form>
       </div>
     </div>
+
+    <!--
+    <div class="modal fade chronicles-modal chronicles-ai-assist-modal" id="chroniclesAiAssistModal" tabindex="-1" aria-labelledby="chroniclesAiAssistTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Nexus Draft Engine</p>
+              <h2 class="modal-title" id="chroniclesAiAssistTitle">AI Assist</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12 col-lg-5">
+                <label for="chroniclesAiMode">Assist Mode</label>
+                <select id="chroniclesAiMode" class="form-select">
+                  <option value="notes">Write From Notes</option>
+                  <option value="polish" selected>Polish My Post</option>
+                  <option value="grammar">Grammar &amp; Punctuation</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <p class="chronicles-ai-hint mb-0">
+                  Uses the text already in the editor. Nothing changes until you replace or insert the result.
+                </p>
+              </div>
+              <div class="col-12">
+                <label for="chroniclesAiAssistPreview">Generated Draft</label>
+                <textarea id="chroniclesAiAssistPreview" class="form-control chronicles-ai-preview" rows="10" readonly placeholder="Generate a signal to preview the assisted version here."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <p id="chroniclesAiAssistStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
+            <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Close</button>
+            <button id="chroniclesAiGenerateButton" class="btn btn-banri-outline" type="button" data-chronicles-ai-generate>Generate</button>
+            <button id="chroniclesAiInsertButton" class="btn btn-banri-outline" type="button" data-chronicles-ai-insert disabled>Insert Below</button>
+            <button id="chroniclesAiReplaceButton" class="btn btn-banri-primary" type="button" data-chronicles-ai-replace disabled>Replace Draft</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
 
     <div class="modal fade chronicles-modal" id="chroniclesCharacterModal" tabindex="-1" aria-labelledby="chroniclesCharacterModalTitle" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -606,6 +717,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@13.0.3/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-    <script type="module" src="assets/js/chronicles.js?v=20260808b"></script>
+    <script type="module" src="assets/js/chronicles.js?v=20260817g"></script>
   </body>
 </html>

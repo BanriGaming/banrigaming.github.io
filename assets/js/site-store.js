@@ -27,6 +27,14 @@ export const defaultSteamConfig = {
   syncLibrary: true
 };
 
+export const defaultChroniclesAiConfig = {
+  workerUrl: "",
+  assistEnabled: false,
+  summaryEnabled: false,
+  autoSummary: false,
+  summaryCooldownMinutes: 5
+};
+
 export const defaultSteamSignal = {
   profile: {
     steamId: DEFAULT_STEAM_ID64,
@@ -535,6 +543,97 @@ export function normalizeSteamConfig(config = {}) {
   };
 }
 
+export function normalizeChroniclesAiConfig(config = {}) {
+  const cooldown = Number(config?.summaryCooldownMinutes ?? defaultChroniclesAiConfig.summaryCooldownMinutes);
+
+  return {
+    workerUrl: String(config?.workerUrl || "").trim(),
+    assistEnabled: config?.assistEnabled === true,
+    summaryEnabled: config?.summaryEnabled === true,
+    autoSummary: config?.autoSummary === true,
+    summaryCooldownMinutes: Math.max(1, Math.min(120, Number.isFinite(cooldown) ? cooldown : defaultChroniclesAiConfig.summaryCooldownMinutes))
+  };
+}
+
+export function getChroniclesAiRequestUrl(workerUrl) {
+  const url = new URL(String(workerUrl || "").trim());
+  if (!["http:", "https:"].includes(url.protocol)) {
+    throw new Error("Chronicles AI Worker URL must start with http:// or https://.");
+  }
+  if (String(url.pathname || "/").replace(/\/+$/, "") === "/health") {
+    url.pathname = "/";
+  }
+  url.search = "";
+  url.hash = "";
+  return url.toString();
+}
+
+export function getChroniclesAiHealthUrl(workerUrl) {
+  const url = new URL(getChroniclesAiRequestUrl(workerUrl));
+  const basePath = String(url.pathname || "/").replace(/\/+$/, "");
+  url.pathname = `${basePath}/health`;
+  url.search = "";
+  url.hash = "";
+  return url.toString();
+}
+
+export function getChroniclesAiProcessUrl(workerUrl, { uid = "", requestId = "", idToken = "" } = {}) {
+  const url = new URL(getChroniclesAiRequestUrl(workerUrl));
+  const basePath = String(url.pathname || "/").replace(/\/+$/, "");
+  url.pathname = `${basePath}/process-ai-request`;
+  url.search = "";
+  url.hash = "";
+  url.searchParams.set("uid", uid);
+  url.searchParams.set("requestId", requestId);
+  url.searchParams.set("idToken", idToken);
+  return url.toString();
+}
+
+export async function runChroniclesAiQueuedRequest({ workerUrl = "", user = null, payload = {}, keepQueueRecord = false } = {}) {
+  if (!user?.uid) throw new Error("Sign in before using Chronicles AI.");
+  if (!workerUrl) throw new Error("Chronicles AI Worker URL is not configured in the admin console.");
+
+  const { database } = getFirebaseServices();
+  const token = await user.getIdToken(true);
+  const requestRef = push(ref(database, `chronicles/aiQueue/${user.uid}`));
+  const requestId = requestRef.key;
+  const queuedPayload = {
+    id: requestId,
+    uid: user.uid,
+    action: String(payload.action || "").trim(),
+    status: "queued",
+    request: payload,
+    createdAt: Date.now()
+  };
+
+  await set(requestRef, queuedPayload);
+
+  let response;
+  try {
+    response = await fetch(getChroniclesAiProcessUrl(workerUrl, {
+      uid: user.uid,
+      requestId,
+      idToken: token
+    }), {
+      method: "GET",
+      cache: "no-store"
+    });
+  } catch (error) {
+    throw new Error(`${error.message || "Failed to fetch"} while processing queued Chronicles AI request.`);
+  }
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || data?.error) {
+    throw new Error(data?.error || `Queued Chronicles AI request returned ${response.status}.`);
+  }
+
+  if (!keepQueueRecord) {
+    remove(requestRef).catch(() => {});
+  }
+
+  return data;
+}
+
 function normalizeSteamGame(game = {}) {
   const playtimeMinutes = Math.max(0, Number(game.playtimeMinutes ?? game.playtime_forever ?? game.minutes ?? 0) || 0);
   const appId = String(game.appId ?? game.appid ?? game.app_id ?? "").trim();
@@ -859,6 +958,7 @@ export async function loadPublicSiteData() {
     heroVisual: normalizeHeroVisual(siteConfig.heroVisual),
     featuredClip: normalizeFeaturedClip(siteConfig.featuredClip),
     steamConfig: normalizeSteamConfig(siteConfig.steam),
+    chroniclesAiConfig: normalizeChroniclesAiConfig(siteConfig.chroniclesAi),
     steamSignal,
     activityFeed: remoteActivity
       .map(normalizeActivityEntry)

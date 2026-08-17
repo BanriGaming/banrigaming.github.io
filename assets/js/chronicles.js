@@ -4,11 +4,21 @@ import {
   push,
   remove,
   ref,
-  set
+  set,
+  update
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-import { getFirebaseServices, isAdminUid, readFileAsDataUrl, slugify } from "./site-store.js";
+import {
+  defaultChroniclesAiConfig,
+  getFirebaseServices,
+  isAdminUid,
+  normalizeChroniclesAiConfig,
+  readFileAsDataUrl,
+  runChroniclesAiQueuedRequest,
+  slugify
+} from "./site-store.js?v=20260817g";
 
 const { auth, database } = getFirebaseServices();
+const CHRONICLES_AI_FEATURE_ENABLED = false;
 
 const ECHOES_LORE = `# Holocron Record VII-C: Echoes After the Forge
 
@@ -282,6 +292,7 @@ const DEFAULT_POSTS = {
         uid: "seed",
         authorName: "Banri",
         ownerDisplayName: "Banri",
+        postType: "location-description",
         title: "Coruscant // Heart of the Republic",
         body: "> The city-world never sleeps; its lights outshine the stars it governs.\n\nWelcome to Coruscant, the core of galactic politics.\n\nAll story posts that take place on Coruscant occur here. Characters on Coruscant may freely interact in-character. Travel between districts should be written out immersively. Arriving from another world should begin with a post at a spaceport or orbital platform. Departing should include a departure sequence before moving to the destination thread.",
         attachments: [],
@@ -294,6 +305,7 @@ const DEFAULT_POSTS = {
         uid: "seed",
         authorName: "Rikstarf",
         ownerDisplayName: "Rikstarf",
+        postType: "player",
         title: "The Butcher of Korriban",
         body: "Rykard Vael lingered among the old training grounds with a crude red blade, a scar across his cheek, and a bounty spreading through the caves behind him. The western ruins remembered every lesson taught in blood.",
         attachments: [],
@@ -308,6 +320,7 @@ const DEFAULT_POSTS = {
         uid: "seed",
         authorName: "Banri",
         ownerDisplayName: "Banri",
+        postType: "narrator",
         title: "Prologue // The Sundertide of Varynth",
         body: "When the world broke, it did not fall apart. It drifted away from itself.\n\nEight centuries later, the Spire of Velara had begun to tremble again. Guild banners filled Caelune's skyline while scholars argued over the hum in their crystals, and far below, the Chasmyr Expanse answered with a rhythm like a buried heart.",
         attachments: [],
@@ -450,6 +463,8 @@ const state = {
   selectedThreadId: "coruscant",
   selectedCharacterId: "",
   selectedLoreWorldId: "",
+  storyWorldId: "echoes-after-the-forge",
+  storyMode: "full",
   editingPost: null,
   editingThread: null,
   editingAttachments: [],
@@ -464,6 +479,9 @@ const state = {
   remoteThreads: {},
   remotePosts: {},
   remoteCharacters: [],
+  aiSummaries: {},
+  chroniclesAiConfig: structuredClone(defaultChroniclesAiConfig),
+  aiAssistResult: "",
   deletedThreads: {},
   deletedPosts: {},
   unsubscribers: [],
@@ -489,6 +507,9 @@ const elements = {
   threadViewPosts: document.getElementById("chroniclesThreadViewPosts"),
   recentPosts: document.getElementById("chroniclesRecentPosts"),
   characterGrid: document.getElementById("chroniclesCharacterGrid"),
+  storyWorld: document.getElementById("chroniclesStoryWorld"),
+  storyStatus: document.getElementById("chroniclesStoryStatus"),
+  storyContent: document.getElementById("chroniclesStoryContent"),
   howItWorks: document.getElementById("chroniclesHowItWorks"),
   notifyButton: document.getElementById("chroniclesNotifyButton"),
   worldForm: document.getElementById("chroniclesWorldForm"),
@@ -501,6 +522,13 @@ const elements = {
   characterStatus: document.getElementById("chroniclesCharacterStatus"),
   postPreview: document.getElementById("chroniclesPostPreview"),
   postAttachments: document.getElementById("chroniclesPostAttachments"),
+  aiAssistModal: document.getElementById("chroniclesAiAssistModal"),
+  aiAssistMode: document.getElementById("chroniclesAiMode"),
+  aiAssistPreview: document.getElementById("chroniclesAiAssistPreview"),
+  aiAssistStatus: document.getElementById("chroniclesAiAssistStatus"),
+  aiAssistGenerate: document.getElementById("chroniclesAiGenerateButton"),
+  aiAssistInsert: document.getElementById("chroniclesAiInsertButton"),
+  aiAssistReplace: document.getElementById("chroniclesAiReplaceButton"),
   loreRead: document.getElementById("chroniclesLoreRead"),
   loreForm: document.getElementById("chroniclesLoreEditForm"),
   loreToggle: document.getElementById("chroniclesLoreEditToggle"),
@@ -592,6 +620,10 @@ function getPostsForThread(worldId, threadId, sortDirection = "asc") {
   return posts.sort((a, b) => sortDirection === "desc" ? toTime(b.createdAt) - toTime(a.createdAt) : toTime(a.createdAt) - toTime(b.createdAt));
 }
 
+function hasDefaultPost(worldId, threadId, postId) {
+  return Boolean(DEFAULT_POSTS[worldId]?.[threadId]?.some((post) => post.id === postId));
+}
+
 function getPosts() {
   const posts = [];
   getWorlds().forEach((world) => {
@@ -602,6 +634,45 @@ function getPosts() {
   return posts.sort((a, b) => toTime(b.createdAt) - toTime(a.createdAt));
 }
 
+function getPostsForWorld(worldId, sortDirection = "asc") {
+  const posts = [];
+  getThreadsForWorld(worldId).forEach((thread) => {
+    posts.push(...getPostsForThread(worldId, thread.id, sortDirection));
+  });
+  return posts.sort((a, b) => sortDirection === "desc" ? toTime(b.createdAt) - toTime(a.createdAt) : toTime(a.createdAt) - toTime(b.createdAt));
+}
+
+function getNarrativePostsForWorld(worldId, sortDirection = "asc") {
+  return getPostsForWorld(worldId, sortDirection).filter(isNarrativePost);
+}
+
+function isNarrativePost(post) {
+  return (post.postType || "player") !== "location-description" && post.excludeFromStory !== true;
+}
+
+function postTypeLabel(post) {
+  const labels = {
+    narrator: "Narrator Event",
+    "location-description": "Location Description",
+    player: "Player Post"
+  };
+  return labels[post?.postType || "player"] || "Player Post";
+}
+
+function renderCharacterEffectsBadge(post) {
+  if ((post?.postType || "player") !== "player") return "";
+  const allowed = post.allowCharacterEffects === true;
+  const label = allowed
+    ? "Character effects allowed: this writer allows other writers to make character-altering calls for their character in this scene."
+    : "Character effects locked: ask this writer before making lasting or character-altering effects to their character.";
+  return `
+    <span class="chronicles-consent-badge ${allowed ? "allowed" : "locked"}" title="${escapeAttr(label)}" aria-label="${escapeAttr(label)}" data-consent-tooltip="${escapeAttr(label)}" tabindex="0">
+      <span aria-hidden="true">${allowed ? "&#10003;" : "&times;"}</span>
+      <small>${allowed ? "Effects allowed" : "Effects locked"}</small>
+    </span>
+  `;
+}
+
 function ensureSelectedWorldAndThread() {
   const world = getWorld(state.selectedWorldId);
   if (!world) return;
@@ -609,6 +680,7 @@ function ensureSelectedWorldAndThread() {
 
   const thread = getThread(world.id, state.selectedThreadId);
   state.selectedThreadId = thread?.id || "";
+  state.storyWorldId = getWorld(state.storyWorldId)?.id || world.id;
 }
 
 function renderAll() {
@@ -624,6 +696,7 @@ function renderAll() {
   renderThreadView();
   renderRecentPosts();
   renderCharacters();
+  renderStorySoFar();
   renderNotificationButton();
   populateSelects();
   showView(state.view);
@@ -677,10 +750,11 @@ function renderWorldCards(target, worlds) {
         <span>${escapeHtml(world.genre || "World")}</span>
         <strong>${escapeHtml(world.title)}</strong>
         <p>${escapeHtml(world.description || "Lore pending.")}</p>
-        <small>${threads.length} threads / ${posts.length} posts</small>
+        <small>${escapeHtml(world.status || "Active")} / ${threads.length} threads / ${posts.length} posts</small>
         <div class="chronicles-world-actions">
           <button type="button" data-chronicles-open-world="${escapeAttr(world.id)}">Open World</button>
           <button type="button" data-chronicles-open-lore="${escapeAttr(world.id)}">Lore</button>
+          <button type="button" data-chronicles-open-story="${escapeAttr(world.id)}">Story So Far</button>
         </div>
       </article>
     `;
@@ -821,7 +895,7 @@ function renderThreadView() {
       <aside class="chronicles-forum-author">
         <strong>${escapeHtml(post.authorName || "Unknown")}</strong>
         <span>${escapeHtml(post.ownerDisplayName || post.authorName || "Chronicle")}</span>
-        <small>${escapeHtml(post.editorMode ? "Editor archived entry" : "Player post")}</small>
+        <small>${escapeHtml(postTypeLabel(post))}${isNarrativePost(post) ? "" : " / Hidden from Story So Far"}</small>
       </aside>
       <div class="chronicles-forum-body">
         <header>
@@ -830,6 +904,7 @@ function renderThreadView() {
             <time datetime="${escapeAttr(toDateTime(post.createdAt))}">${escapeHtml(formatDate(post.createdAt))}${post.updatedAt ? " / edited" : ""}</time>
           </div>
         </header>
+        ${renderCharacterEffectsBadge(post)}
         <div class="chronicles-markdown">${renderMarkdown(post.body)}</div>
         ${renderAttachments(post.attachments)}
         <div class="chronicles-forum-actions">
@@ -862,6 +937,275 @@ function renderRecentPosts() {
       </div>
     </article>
   `).join("") : '<div class="relay-empty">No chronicle posts yet.</div>';
+}
+
+function renderStorySoFar() {
+  if (!elements.storyContent) return;
+  const world = getWorld(state.storyWorldId) || getWorlds()[0];
+  if (!world) {
+    elements.storyContent.innerHTML = '<div class="relay-empty">No worlds registered yet.</div>';
+    return;
+  }
+
+  state.storyWorldId = world.id;
+  renderStoryWorldSelect(world.id);
+  renderStoryModeButtons();
+
+  const posts = getNarrativePostsForWorld(world.id, "asc");
+  elements.storyContent.innerHTML = state.storyMode === "summary"
+    ? renderStorySummary(world, posts)
+    : renderFullStory(world, posts);
+}
+
+function renderStoryWorldSelect(selectedWorldId) {
+  if (!elements.storyWorld) return;
+  const current = elements.storyWorld.value || selectedWorldId;
+  elements.storyWorld.innerHTML = getWorlds()
+    .map((world) => `<option value="${escapeAttr(world.id)}">${escapeHtml(world.title)} / ${escapeHtml(world.status || "Active")}</option>`)
+    .join("");
+  elements.storyWorld.value = getWorld(current) ? current : selectedWorldId;
+}
+
+function renderStoryModeButtons() {
+  document.querySelectorAll("[data-chronicles-story-mode]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.chroniclesStoryMode === state.storyMode);
+  });
+}
+
+function renderFullStory(world, posts) {
+  const firstPost = posts[0];
+  const latestPost = posts[posts.length - 1];
+  const activeThreads = getActiveStoryThreads(world.id);
+  return `
+    <div class="chronicles-story-header">
+      <div>
+        <p class="banri-modal-kicker mb-1">${escapeHtml(world.genre || "World")} / ${escapeHtml(world.status || "Active")}</p>
+        <h3>${escapeHtml(world.title)} Chronicle</h3>
+        <span>${posts.length} narrative post${posts.length === 1 ? "" : "s"} across ${activeThreads.length} active location${activeThreads.length === 1 ? "" : "s"} / location descriptions hidden</span>
+      </div>
+      <small>${firstPost ? escapeHtml(formatDate(firstPost.createdAt)) : "No entries"}${latestPost && latestPost !== firstPost ? ` - ${escapeHtml(formatDate(latestPost.createdAt))}` : ""}</small>
+    </div>
+    <div class="chronicles-story-timeline">
+      ${posts.length ? posts.map((post, index) => renderStoryEntry(post, index)).join("") : '<div class="relay-empty">No narrative posts have been transmitted in this world yet.</div>'}
+    </div>
+  `;
+}
+
+function renderStoryEntry(post, index) {
+  return `
+    <article class="chronicles-story-entry" id="chronicles-story-${escapeAttr(post.id)}">
+      <aside>
+        <strong>${String(index + 1).padStart(2, "0")}</strong>
+        <span>${escapeHtml(post.threadTitle || "Thread")}</span>
+      </aside>
+      <div>
+        <header>
+          <div>
+            <p>${escapeHtml(postTypeLabel(post))} / ${escapeHtml(post.authorName || "Unknown")} / ${escapeHtml(post.ownerDisplayName || post.authorName || "Chronicle")}</p>
+            <h3>${escapeHtml(post.title || post.threadTitle || "Chronicle Entry")}</h3>
+          </div>
+          <time datetime="${escapeAttr(toDateTime(post.createdAt))}">${escapeHtml(formatDate(post.createdAt))}${post.updatedAt ? " / edited" : ""}</time>
+        </header>
+        ${renderCharacterEffectsBadge(post)}
+        <div class="chronicles-markdown">${renderMarkdown(post.body)}</div>
+        ${renderAttachments(post.attachments)}
+        <div class="chronicles-forum-actions">
+          <button type="button" data-chronicles-open-thread-from-post="${escapeAttr(post.worldId)}:${escapeAttr(post.threadId)}:${escapeAttr(post.id)}">Open Original Thread</button>
+          <button type="button" data-chronicles-follow-post="${escapeAttr(post.id)}">Follow Up</button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderStorySummary(world, posts) {
+  const aiSummary = CHRONICLES_AI_FEATURE_ENABLED ? normalizeAiSummary(state.aiSummaries[world.id]) : null;
+  if (aiSummary?.summary) {
+    return renderAiStorySummary(world, posts, aiSummary);
+  }
+
+  const activeThreads = getActiveStoryThreads(world.id);
+  const latestPosts = [...posts].sort((a, b) => toTime(b.createdAt) - toTime(a.createdAt)).slice(0, 8);
+  const authorCounts = countBy(posts, (post) => post.authorName || "Unknown");
+  const topAuthors = [...authorCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 6);
+  const opening = posts[0];
+  const latest = latestPosts[0];
+
+  return `
+    <div class="chronicles-story-header">
+      <div>
+        <p class="banri-modal-kicker mb-1">Summary Signal / ${escapeHtml(world.status || "Active")}</p>
+        <h3>${escapeHtml(world.title)} At A Glance</h3>
+        <span>${posts.length} narrative post${posts.length === 1 ? "" : "s"} indexed from ${activeThreads.length} active location${activeThreads.length === 1 ? "" : "s"}. Location descriptions are ignored.</span>
+      </div>
+      <small>Generated live from current Chronicle posts</small>
+    </div>
+    <div class="chronicles-story-summary-grid">
+      <article>
+        <strong>Current Continuity</strong>
+        <p>${escapeHtml(buildContinuitySummary(world, posts, activeThreads))}</p>
+      </article>
+      <article>
+        <strong>Opening Signal</strong>
+        <p>${opening ? escapeHtml(`${opening.threadTitle}: ${summarizePost(opening, 260)}`) : "No opening entry yet."}</p>
+      </article>
+      <article>
+        <strong>Latest Signal</strong>
+        <p>${latest ? escapeHtml(`${latest.threadTitle}: ${summarizePost(latest, 260)}`) : "No latest entry yet."}</p>
+      </article>
+      <article>
+        <strong>Active Voices</strong>
+        <p>${topAuthors.length ? escapeHtml(topAuthors.map(([author, count]) => `${author} (${count})`).join(" / ")) : "No authors have posted yet."}</p>
+      </article>
+    </div>
+    <div class="chronicles-story-summary-columns">
+      <section>
+        <h3>Latest Events</h3>
+        ${latestPosts.length ? latestPosts.map((post) => `
+          <article class="chronicles-story-digest-item">
+            <span>${escapeHtml(formatDate(post.createdAt))} / ${escapeHtml(post.threadTitle)}</span>
+            <strong>${escapeHtml(post.title || "Untitled Entry")}</strong>
+            <p>${escapeHtml(summarizePost(post, 220))}</p>
+            <button type="button" data-chronicles-open-thread-from-post="${escapeAttr(post.worldId)}:${escapeAttr(post.threadId)}:${escapeAttr(post.id)}">Open Post</button>
+          </article>
+        `).join("") : '<div class="relay-empty">No recent events yet.</div>'}
+      </section>
+      <section>
+        <h3>Location Activity</h3>
+        ${activeThreads.length ? activeThreads.map(({ thread, posts: threadPosts }) => {
+          const last = threadPosts[threadPosts.length - 1];
+          return `
+            <article class="chronicles-story-digest-item">
+              <span>${threadPosts.length} post${threadPosts.length === 1 ? "" : "s"} / ${last ? escapeHtml(formatDate(last.createdAt)) : "No posts"}</span>
+              <strong>${escapeHtml(thread.title)}</strong>
+              <p>${escapeHtml(thread.description || "Location notes pending.")}</p>
+              <button type="button" data-chronicles-open-thread="${escapeAttr(`${world.id}:${thread.id}`)}">Open Location</button>
+            </article>
+          `;
+        }).join("") : '<div class="relay-empty">No active locations have posts yet.</div>'}
+      </section>
+    </div>
+  `;
+}
+
+function normalizeAiSummary(summary = {}) {
+  if (!summary || typeof summary !== "object") return null;
+  const text = String(summary.summary || "").trim();
+  if (!text) return null;
+
+  return {
+    worldId: String(summary.worldId || ""),
+    summary: text,
+    latestEvents: String(summary.latestEvents || "").trim(),
+    characterPositions: String(summary.characterPositions || "").trim(),
+    unresolvedHooks: String(summary.unresolvedHooks || "").trim(),
+    postCount: Number(summary.postCount || 0),
+    lastPostId: String(summary.lastPostId || ""),
+    updatedAt: Number(summary.updatedAt || 0),
+    updatedByName: String(summary.updatedByName || "Nexus AI").trim(),
+    source: String(summary.source || "AI Summary").trim()
+  };
+}
+
+function renderAiStorySummary(world, posts, summary) {
+  const activeThreads = getActiveStoryThreads(world.id);
+  const latestPosts = [...posts].sort((a, b) => toTime(b.createdAt) - toTime(a.createdAt)).slice(0, 6);
+  const freshness = summary.lastPostId && latestPosts[0]?.id && summary.lastPostId !== latestPosts[0].id
+    ? "New posts may be waiting for refresh."
+    : "Current to latest indexed post.";
+
+  return `
+    <div class="chronicles-story-header">
+      <div>
+        <p class="banri-modal-kicker mb-1">AI Summary Signal / ${escapeHtml(world.status || "Active")}</p>
+        <h3>${escapeHtml(world.title)} At A Glance</h3>
+        <span>${posts.length} narrative post${posts.length === 1 ? "" : "s"} across ${activeThreads.length} active location${activeThreads.length === 1 ? "" : "s"}. ${escapeHtml(freshness)}</span>
+      </div>
+      <small>${summary.updatedAt ? `Updated ${escapeHtml(formatDate(summary.updatedAt))}` : "Awaiting refresh"} / ${escapeHtml(summary.updatedByName)}</small>
+    </div>
+    <div class="chronicles-ai-summary">
+      <article class="chronicles-ai-summary-card primary">
+        <span>Continuity</span>
+        <p>${escapeHtml(summary.summary)}</p>
+      </article>
+      <article class="chronicles-ai-summary-card">
+        <span>Latest Events</span>
+        <p>${escapeHtml(summary.latestEvents || "No latest event digest returned yet.")}</p>
+      </article>
+      <article class="chronicles-ai-summary-card">
+        <span>Character Positions</span>
+        <p>${escapeHtml(summary.characterPositions || "No character position digest returned yet.")}</p>
+      </article>
+      <article class="chronicles-ai-summary-card">
+        <span>Unresolved Hooks</span>
+        <p>${escapeHtml(summary.unresolvedHooks || "No unresolved hooks returned yet.")}</p>
+      </article>
+    </div>
+    <div class="chronicles-story-summary-columns mt-3">
+      <section>
+        <h3>Recent Source Posts</h3>
+        ${latestPosts.length ? latestPosts.map((post) => `
+          <article class="chronicles-story-digest-item">
+            <span>${escapeHtml(formatDate(post.createdAt))} / ${escapeHtml(post.threadTitle)}</span>
+            <strong>${escapeHtml(post.title || "Untitled Entry")}</strong>
+            <p>${escapeHtml(summarizePost(post, 180))}</p>
+            <button type="button" data-chronicles-open-thread-from-post="${escapeAttr(post.worldId)}:${escapeAttr(post.threadId)}:${escapeAttr(post.id)}">Open Post</button>
+          </article>
+        `).join("") : '<div class="relay-empty">No source posts yet.</div>'}
+      </section>
+      <section>
+        <h3>Signal Metadata</h3>
+        <article class="chronicles-story-digest-item">
+          <span>${escapeHtml(summary.source)}</span>
+          <strong>${Number(summary.postCount || posts.length).toLocaleString()} Indexed Posts</strong>
+          <p>Location descriptions are excluded from the AI prompt and the public Story So Far digest.</p>
+        </article>
+      </section>
+    </div>
+  `;
+}
+
+function buildContinuitySummary(world, posts, activeThreads) {
+  if (!posts.length) return `${world.title} has no transmitted story entries yet.`;
+  const latest = posts[posts.length - 1];
+  const locations = activeThreads.slice(0, 4).map(({ thread }) => thread.title).join(", ");
+  const authorCounts = countBy(posts, (post) => post.authorName || "Unknown");
+  const authors = [...authorCounts.keys()].slice(0, 5).join(", ");
+  return `${world.title} currently spans ${posts.length} chronicle entries. Activity is centered around ${locations || "the registered locations"}, with recent motion ending in ${latest.threadTitle}. Current voices include ${authors || "the registered writers"}.`;
+}
+
+function getActiveStoryThreads(worldId) {
+  return getThreadsForWorld(worldId)
+    .map((thread) => ({
+      thread,
+      posts: getPostsForThread(worldId, thread.id, "asc").filter(isNarrativePost)
+    }))
+    .filter(({ posts }) => posts.length);
+}
+
+function summarizePost(post, limit = 220) {
+  const text = plainStoryText(post.body);
+  if (text.length <= limit) return text || "No post body available.";
+  return `${text.slice(0, limit).replace(/\s+\S*$/, "")}...`;
+}
+
+function plainStoryText(value) {
+  return String(value || "")
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[`*_>#~]/g, "")
+    .replace(/^-+\s*/gm, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function countBy(items, getter) {
+  const map = new Map();
+  items.forEach((item) => {
+    const key = getter(item);
+    map.set(key, (map.get(key) || 0) + 1);
+  });
+  return map;
 }
 
 function renderCharacters() {
@@ -922,6 +1266,7 @@ function populateSelects() {
 
   populateCategorySelects();
   populateThreadSelect();
+  renderStoryWorldSelect(state.storyWorldId);
 }
 
 function populateCategorySelects(selectedCategoryId = "") {
@@ -989,8 +1334,16 @@ function parseThreadRoute(value) {
 function openWorld(worldId) {
   state.selectedWorldId = worldId;
   state.selectedThreadId = getThreadsForWorld(worldId)[0]?.id || "";
+  state.storyWorldId = worldId;
   state.worldListMode = "selected";
   showView("worlds");
+  renderAll();
+}
+
+function openStory(worldId) {
+  state.storyWorldId = getWorld(worldId)?.id || state.selectedWorldId;
+  state.selectedWorldId = state.storyWorldId;
+  showView("story");
   renderAll();
 }
 
@@ -1078,12 +1431,25 @@ function openPostModal(options = {}) {
   populateThreadSelect(threadId);
   setInputValue("chroniclesPostTitle", options.post?.title || "");
   setInputValue("chroniclesPostBody", options.post?.body || options.prefill || "");
+  setInputValue("chroniclesPostType", options.post?.postType || "player");
+  setCheckboxValue("chroniclesAllowCharacterEffects", options.post?.allowCharacterEffects === true);
   setInputValue("chroniclesPostImageUrl", "");
   if (authorInput) authorInput.value = options.post?.authorName || "";
   if (ownerInput) ownerInput.value = options.post?.ownerDisplayName || options.post?.authorName || "";
   renderPostAttachmentPreview();
   renderPostPreview(false);
   showBootstrapModal("chroniclesPostModal");
+}
+
+function applyNarratorMode() {
+  if (!state.isAdmin) return;
+  setInputValue("chroniclesPostType", "narrator");
+  setInputValue("chroniclesPostAuthor", "Narrator");
+  setInputValue("chroniclesPostOwner", "Chronicle Custodian");
+  if (!readValue("chroniclesPostTitle")) {
+    setInputValue("chroniclesPostTitle", "Narrator Event");
+  }
+  setText(elements.postStatus, "Narrator voice armed.");
 }
 
 function openLoreModal(worldId) {
@@ -1110,6 +1476,7 @@ function renderLoreModal() {
   }
   setInputValue("chroniclesLoreTitleInput", world.title);
   setInputValue("chroniclesLoreGenreInput", world.genre || "");
+  setInputValue("chroniclesLoreStatusInput", world.status || "Active");
   setInputValue("chroniclesLoreImageInput", world.image || "");
   setInputValue("chroniclesLoreDescriptionInput", world.description || "");
   setInputValue("chroniclesLoreBodyInput", world.lore || "");
@@ -1208,13 +1575,14 @@ async function handleWorldSubmit(event) {
       image: readValue("chroniclesWorldImage") || "/assets/img/hero/banri-hero-01.webp",
       description: readValue("chroniclesWorldDescription"),
       lore: readValue("chroniclesWorldLore"),
-      status: "Active",
+      status: readValue("chroniclesWorldStatus") || "Active",
       order: getWorlds().length + 1,
       createdBy: state.user.uid,
       createdAt: Date.now(),
       updatedAt: Date.now()
     });
     state.selectedWorldId = worldId;
+    state.storyWorldId = worldId;
     hideBootstrapModal("chroniclesWorldModal");
   } catch (error) {
     console.error(error);
@@ -1282,6 +1650,178 @@ async function handleCategorySubmit(event) {
   }
 }
 
+function getChroniclesAiConfig() {
+  return normalizeChroniclesAiConfig(state.chroniclesAiConfig);
+}
+
+function assertChroniclesAiReady(kind = "AI") {
+  if (!CHRONICLES_AI_FEATURE_ENABLED) throw new Error("Chronicles AI is parked until API billing is intentionally enabled.");
+  const config = getChroniclesAiConfig();
+  if (!state.user) throw new Error("Sign in before using Chronicles AI.");
+  if (!config.workerUrl) throw new Error("Chronicles AI Worker URL is not configured in the admin console.");
+  if (kind === "assist" && !config.assistEnabled) throw new Error("AI Assist is disabled in the admin console.");
+  if (kind === "summary" && !config.summaryEnabled) throw new Error("AI Summary is disabled in the admin console.");
+  return config;
+}
+
+async function callChroniclesAi(payload, kind = "AI") {
+  const config = assertChroniclesAiReady(kind);
+  return runChroniclesAiQueuedRequest({
+    workerUrl: config.workerUrl,
+    user: state.user,
+    payload
+  }).catch((error) => {
+    throw new Error(`${error.message || "Chronicles AI queue request failed."} Check Admin > Chronicles AI, then run Check Worker.`);
+  });
+}
+
+function buildSummaryPosts(worldId) {
+  return getNarrativePostsForWorld(worldId, "asc").map((post) => ({
+    id: post.id,
+    title: post.title || "",
+    body: post.body || "",
+    authorName: post.authorName || "",
+    threadTitle: post.threadTitle || "",
+    createdAt: post.createdAt || 0,
+    postType: post.postType || "player"
+  }));
+}
+
+function shouldSkipAutoSummary(worldId, posts, config) {
+  if (!config.autoSummary || !posts.length) return true;
+  const existing = normalizeAiSummary(state.aiSummaries[worldId]);
+  const latestPost = posts[posts.length - 1];
+  if (existing?.lastPostId === latestPost?.id) return true;
+
+  const cooldownMs = Number(config.summaryCooldownMinutes || 5) * 60000;
+  return Boolean(existing?.updatedAt && Date.now() - existing.updatedAt < cooldownMs);
+}
+
+async function refreshChroniclesSummary(worldId = state.storyWorldId, options = {}) {
+  const config = assertChroniclesAiReady("summary");
+  const world = getWorld(worldId);
+  if (!world) throw new Error("Choose a world before refreshing the summary.");
+  const posts = buildSummaryPosts(world.id);
+  if (!posts.length) throw new Error("This world has no narrative posts to summarize yet.");
+  if (!options.force && shouldSkipAutoSummary(world.id, posts, config)) return null;
+
+  const latestPost = posts[posts.length - 1];
+  const result = await callChroniclesAi({
+    action: "summarize",
+    worldId: world.id,
+    worldTitle: world.title,
+    worldGenre: world.genre || "",
+    postCount: posts.length,
+    lastPostId: latestPost?.id || "",
+    posts
+  }, "summary");
+
+  const payload = {
+    worldId: world.id,
+    summary: String(result.summary || "").trim(),
+    latestEvents: String(result.latestEvents || "").trim(),
+    characterPositions: String(result.characterPositions || "").trim(),
+    unresolvedHooks: String(result.unresolvedHooks || "").trim(),
+    postCount: posts.length,
+    lastPostId: latestPost?.id || "",
+    updatedAt: Number(result.updatedAt || Date.now()),
+    updatedByUid: state.user.uid,
+    updatedByName: getDisplayName(),
+    source: String(result.source || "OpenAI Summary").trim()
+  };
+
+  if (!payload.summary) throw new Error("AI summary returned empty text.");
+
+  await set(ref(database, `chronicles/summaries/${world.id}`), payload);
+  state.aiSummaries[world.id] = payload;
+  renderStorySoFar();
+  return payload;
+}
+
+function queueAutoSummaryRefresh(worldId) {
+  if (!CHRONICLES_AI_FEATURE_ENABLED) return;
+  const config = getChroniclesAiConfig();
+  if (!config.workerUrl || !config.summaryEnabled || !config.autoSummary) return;
+  refreshChroniclesSummary(worldId, { force: false })
+    .catch((error) => console.warn("Chronicles auto-summary skipped:", error));
+}
+
+function openAiAssistModal() {
+  try {
+    assertChroniclesAiReady("assist");
+  } catch (error) {
+    setText(elements.postStatus, error.message || "AI Assist is not ready.");
+    return;
+  }
+  state.aiAssistResult = "";
+  if (elements.aiAssistPreview) elements.aiAssistPreview.value = "";
+  if (elements.aiAssistMode) elements.aiAssistMode.value = "polish";
+  setText(elements.aiAssistStatus, "");
+  elements.aiAssistInsert?.setAttribute("disabled", "disabled");
+  elements.aiAssistReplace?.setAttribute("disabled", "disabled");
+  showBootstrapModal("chroniclesAiAssistModal");
+}
+
+async function generateAiAssist() {
+  const draft = readValue("chroniclesPostBody");
+  if (!draft) {
+    setText(elements.aiAssistStatus, "Write notes or a draft before using AI Assist.");
+    return;
+  }
+
+  const world = getWorld(readValue("chroniclesPostWorld") || state.selectedWorldId);
+  const thread = world ? getThread(world.id, readValue("chroniclesPostThread") || state.selectedThreadId) : null;
+  const button = elements.aiAssistGenerate;
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Generating...";
+  }
+  setText(elements.aiAssistStatus, "Routing draft through Nexus AI...");
+
+  try {
+    const result = await callChroniclesAi({
+      action: "assist",
+      mode: elements.aiAssistMode?.value || "polish",
+      draft,
+      worldTitle: world?.title || "",
+      threadTitle: thread?.title || "",
+      authorName: getDisplayName()
+    }, "assist");
+
+    state.aiAssistResult = String(result.result || "").trim();
+    if (!state.aiAssistResult) throw new Error("AI Assist returned an empty result.");
+    if (elements.aiAssistPreview) elements.aiAssistPreview.value = state.aiAssistResult;
+    elements.aiAssistInsert?.removeAttribute("disabled");
+    elements.aiAssistReplace?.removeAttribute("disabled");
+    setText(elements.aiAssistStatus, `${result.label || "AI Assist"} complete. Review before using it.`);
+  } catch (error) {
+    setText(elements.aiAssistStatus, error.message || "AI Assist failed.");
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Generate";
+    }
+  }
+}
+
+function useAiAssistResult(mode = "replace") {
+  const textarea = document.getElementById("chroniclesPostBody");
+  const result = state.aiAssistResult || elements.aiAssistPreview?.value || "";
+  if (!textarea || !result.trim()) return;
+
+  if (mode === "insert") {
+    const spacer = textarea.value.trim() ? "\n\n" : "";
+    textarea.value = `${textarea.value}${spacer}${result.trim()}`;
+  } else {
+    textarea.value = result.trim();
+  }
+
+  textarea.focus();
+  if (elements.postPreview && !elements.postPreview.classList.contains("d-none")) renderPostPreview(true);
+  hideBootstrapModal("chroniclesAiAssistModal");
+  setText(elements.postStatus, mode === "insert" ? "AI draft inserted below." : "AI draft replaced the editor text.");
+}
+
 async function handlePostSubmit(event) {
   event.preventDefault();
   if (!state.user) return;
@@ -1297,32 +1837,58 @@ async function handlePostSubmit(event) {
 
   try {
     const attachments = await collectPostAttachments(worldId, threadId);
+    const postType = state.isAdmin ? readValue("chroniclesPostType") || state.editingPost?.postType || "player" : state.editingPost?.postType || "player";
     const override = state.isAdmin ? readValue("chroniclesPostAuthor") : "";
     const ownerOverride = state.isAdmin ? readValue("chroniclesPostOwner") : "";
-    const authorName = override || state.editingPost?.authorName || getDisplayName();
-    const ownerDisplayName = ownerOverride || state.editingPost?.ownerDisplayName || authorName;
+    const systemAuthor = postType === "narrator" ? "Narrator" : postType === "location-description" ? "Location Archive" : "";
+    const authorName = override || systemAuthor || state.editingPost?.authorName || getDisplayName();
+    const ownerDisplayName = ownerOverride || (systemAuthor ? "Chronicle Custodian" : "") || state.editingPost?.ownerDisplayName || authorName;
     const postId = state.editingPost?.id || push(ref(database, `chronicles/posts/${worldId}/${threadId}`)).key;
+    const originalWorldId = state.editingPost?.worldId || "";
+    const originalThreadId = state.editingPost?.threadId || "";
+    const isMovingPost = Boolean(state.editingPost && originalWorldId && originalThreadId && (originalWorldId !== worldId || originalThreadId !== threadId));
     const payload = {
       ...(state.editingPost || {}),
       id: postId,
       uid: state.editingPost?.uid || state.user.uid,
+      worldId,
+      threadId,
       ownerDisplayName,
       authorName,
+      postType,
+      allowCharacterEffects: readCheckbox("chroniclesAllowCharacterEffects"),
       title: readValue("chroniclesPostTitle"),
       body,
       attachments,
-      editorMode: Boolean(override || state.editingPost?.editorMode),
+      editorMode: Boolean(override || systemAuthor || state.editingPost?.editorMode),
+      excludeFromStory: postType === "location-description",
       createdAt: state.editingPost?.createdAt || Date.now(),
       updatedAt: Date.now()
     };
 
-    await set(ref(database, `chronicles/posts/${worldId}/${threadId}/${postId}`), payload);
+    const writes = {
+      [`chronicles/posts/${worldId}/${threadId}/${postId}`]: payload
+    };
+
+    if (isMovingPost) {
+      writes[`chronicles/posts/${originalWorldId}/${originalThreadId}/${postId}`] = null;
+      if (hasDefaultPost(originalWorldId, originalThreadId, postId)) {
+        writes[`chronicles/deletedPosts/${originalWorldId}/${originalThreadId}/${postId}`] = true;
+      }
+    }
+
+    await update(ref(database), writes);
     state.selectedWorldId = worldId;
     state.selectedThreadId = threadId;
+    state.storyWorldId = worldId;
     state.editingPost = null;
     state.editingAttachments = [];
     hideBootstrapModal("chroniclesPostModal");
     showView("thread");
+    queueAutoSummaryRefresh(worldId);
+    if (isMovingPost && originalWorldId && originalWorldId !== worldId) {
+      queueAutoSummaryRefresh(originalWorldId);
+    }
   } catch (error) {
     setText(elements.postStatus, error.message || "Post failed.");
   }
@@ -1381,6 +1947,7 @@ async function handleLoreSave() {
       ...world,
       title: readValue("chroniclesLoreTitleInput"),
       genre: readValue("chroniclesLoreGenreInput"),
+      status: readValue("chroniclesLoreStatusInput") || "Active",
       image: readValue("chroniclesLoreImageInput"),
       description: readValue("chroniclesLoreDescriptionInput"),
       lore: readValue("chroniclesLoreBodyInput"),
@@ -1469,7 +2036,7 @@ async function uploadPostImageAsset({ file, worldId, threadId }) {
   };
 }
 
-function confirmChroniclesAction(message, title = "Confirm Action") {
+function confirmChroniclesAction(message, title = "Confirm Action", confirmLabel = "Confirm") {
   return new Promise((resolve) => {
     let dialog = document.getElementById("chroniclesConfirmDialog");
     if (!dialog) {
@@ -1479,6 +2046,10 @@ function confirmChroniclesAction(message, title = "Confirm Action") {
       document.body.appendChild(dialog);
     }
 
+    if (dialog.open) {
+      dialog.close("cancel");
+    }
+    dialog.returnValue = "";
     dialog.innerHTML = `
       <form method="dialog">
         <div>
@@ -1487,37 +2058,40 @@ function confirmChroniclesAction(message, title = "Confirm Action") {
           <p>${escapeHtml(message)}</p>
         </div>
         <footer>
-          <button class="button" value="cancel">Cancel</button>
-          <button class="button button--danger" type="button" data-chronicles-confirm-accept>Delete</button>
+          <button class="relay-confirm-button relay-confirm-button--ghost" type="submit" value="cancel">Cancel</button>
+          <button class="relay-confirm-button relay-confirm-button--danger" type="submit" value="confirm">${escapeHtml(confirmLabel)}</button>
         </footer>
       </form>
     `;
 
-    const accept = dialog.querySelector("[data-chronicles-confirm-accept]");
-    const cleanup = () => {
-      accept?.removeEventListener("click", acceptHandler);
-      dialog.removeEventListener("close", closeHandler);
-    };
-    const acceptHandler = () => {
-      cleanup();
-      dialog.close("confirm");
-      resolve(true);
-    };
     const closeHandler = () => {
-      cleanup();
+      dialog.removeEventListener("close", closeHandler);
       resolve(dialog.returnValue === "confirm");
     };
 
-    accept?.addEventListener("click", acceptHandler);
     dialog.addEventListener("close", closeHandler, { once: true });
     dialog.showModal();
   });
 }
 
+function hidePostLocally(post) {
+  if (!post?.worldId || !post?.threadId || !post?.id) return;
+  const threadPosts = state.remotePosts?.[post.worldId]?.[post.threadId];
+  if (threadPosts && typeof threadPosts === "object") {
+    delete threadPosts[post.id];
+  }
+  state.deletedPosts[post.worldId] ||= {};
+  state.deletedPosts[post.worldId][post.threadId] ||= {};
+  state.deletedPosts[post.worldId][post.threadId][post.id] = true;
+}
+
 async function deletePost(post) {
   if (!post || !canEditPost(post)) return;
   const label = post.title || trimForQuote(post.body) || "this post";
-  if (!await confirmChroniclesAction(`Delete "${label}" from ${post.threadTitle || "this thread"}?`, "Delete Post")) return;
+  if (!await confirmChroniclesAction(`Delete "${label}" from ${post.threadTitle || "this thread"}?`, "Delete Post", "Delete")) return;
+
+  hidePostLocally(post);
+  renderAll();
 
   try {
     const writes = [remove(ref(database, `chronicles/posts/${post.worldId}/${post.threadId}/${post.id}`))];
@@ -1538,7 +2112,7 @@ async function deleteThread(route) {
   const thread = world ? getThread(world.id, threadId) : null;
   if (!world || !thread) return;
   const posts = getPostsForThread(world.id, thread.id);
-  if (!await confirmChroniclesAction(`Delete "${thread.title}" and ${posts.length} post${posts.length === 1 ? "" : "s"}?`, "Delete Thread")) return;
+  if (!await confirmChroniclesAction(`Delete "${thread.title}" and ${posts.length} post${posts.length === 1 ? "" : "s"}?`, "Delete Thread", "Delete")) return;
 
   try {
     await Promise.all([
@@ -1560,6 +2134,7 @@ function bindEvents() {
     const openButton = event.target.closest("[data-chronicles-open]");
     const viewButton = event.target.closest("[data-chronicles-view-button], [data-chronicles-view-jump]");
     const worldOpen = event.target.closest("[data-chronicles-open-world]");
+    const storyOpen = event.target.closest("[data-chronicles-open-story]");
     const loreOpen = event.target.closest("[data-chronicles-open-lore]");
     const threadOpen = event.target.closest("[data-chronicles-open-thread]");
     const threadPostButton = event.target.closest("[data-chronicles-thread-post]");
@@ -1573,6 +2148,13 @@ function bindEvents() {
     const deleteThreadButton = event.target.closest("[data-chronicles-delete-thread]");
     const viewAllWorldsButton = event.target.closest("[data-chronicles-view-all-worlds]");
     const notifyButton = event.target.closest("[data-chronicles-notifications]");
+    const storyModeButton = event.target.closest("[data-chronicles-story-mode]");
+    const narratorButton = event.target.closest("[data-chronicles-narrator]");
+    const aiOpenButton = event.target.closest("[data-chronicles-ai-open]");
+    const aiSummaryButton = event.target.closest("[data-chronicles-ai-summary]");
+    const aiGenerateButton = event.target.closest("[data-chronicles-ai-generate]");
+    const aiInsertButton = event.target.closest("[data-chronicles-ai-insert]");
+    const aiReplaceButton = event.target.closest("[data-chronicles-ai-replace]");
     const markdownButton = event.target.closest("[data-chronicles-markdown]");
     const previewToggle = event.target.closest("[data-chronicles-preview-toggle]");
     const chronicleRouteLink = event.target.closest("a[href]");
@@ -1590,6 +2172,8 @@ function bindEvents() {
       showView(viewButton.dataset.chroniclesViewButton || viewButton.dataset.chroniclesViewJump);
     } else if (worldOpen) {
       openWorld(worldOpen.dataset.chroniclesOpenWorld);
+    } else if (storyOpen) {
+      openStory(storyOpen.dataset.chroniclesOpenStory);
     } else if (loreOpen) {
       openLoreModal(loreOpen.dataset.chroniclesOpenLore);
     } else if (threadOpen) {
@@ -1637,6 +2221,31 @@ function bindEvents() {
       deleteThread(deleteThreadButton.dataset.chroniclesDeleteThread);
     } else if (notifyButton) {
       toggleNotifications();
+    } else if (storyModeButton) {
+      state.storyMode = storyModeButton.dataset.chroniclesStoryMode || "full";
+      renderStorySoFar();
+    } else if (narratorButton) {
+      applyNarratorMode();
+    } else if (aiOpenButton) {
+      openAiAssistModal();
+    } else if (aiSummaryButton) {
+      const button = aiSummaryButton;
+      button.disabled = true;
+      button.textContent = "Refreshing...";
+      setText(elements.storyStatus, "Refreshing AI summary...");
+      refreshChroniclesSummary(state.storyWorldId, { force: true })
+        .then(() => setText(elements.storyStatus, "Story So Far summary refreshed."))
+        .catch((error) => setText(elements.storyStatus, error.message || "Summary refresh failed."))
+        .finally(() => {
+          button.disabled = false;
+          button.textContent = "Refresh Summary";
+        });
+    } else if (aiGenerateButton) {
+      generateAiAssist();
+    } else if (aiInsertButton) {
+      useAiAssistResult("insert");
+    } else if (aiReplaceButton) {
+      useAiAssistResult("replace");
     } else if (markdownButton) {
       applyMarkdown(markdownButton.dataset.chroniclesMarkdown);
     } else if (previewToggle) {
@@ -1649,6 +2258,20 @@ function bindEvents() {
 
   document.getElementById("chroniclesPostWorld")?.addEventListener("change", () => populateThreadSelect());
   document.getElementById("chroniclesThreadWorld")?.addEventListener("change", () => populateCategorySelects());
+  document.getElementById("chroniclesPostType")?.addEventListener("change", (event) => {
+    if (!state.isAdmin) return;
+    if (event.target.value === "narrator") {
+      applyNarratorMode();
+    } else if (event.target.value === "location-description") {
+      setInputValue("chroniclesPostAuthor", "Location Archive");
+      setInputValue("chroniclesPostOwner", "Chronicle Custodian");
+      setText(elements.postStatus, "Location description will be hidden from Story So Far.");
+    }
+  });
+  elements.storyWorld?.addEventListener("change", (event) => {
+    state.storyWorldId = event.target.value || state.selectedWorldId;
+    renderStorySoFar();
+  });
   elements.threadSearch?.addEventListener("input", (event) => {
     state.threadSearch = event.target.value || "";
     renderThreads();
@@ -1688,7 +2311,9 @@ function subscribeChronicles() {
     }],
     ["deletedThreads", "chronicles/deletedThreads", (value) => { state.deletedThreads = value || {}; }],
     ["deletedPosts", "chronicles/deletedPosts", (value) => { state.deletedPosts = value || {}; }],
-    ["characters", "chronicles/characters", (value) => { state.remoteCharacters = toArray(value); }]
+    ["characters", "chronicles/characters", (value) => { state.remoteCharacters = toArray(value); }],
+    ["summaries", "chronicles/summaries", (value) => { state.aiSummaries = value || {}; }],
+    ["aiConfig", "siteConfig/chroniclesAi", (value) => { state.chroniclesAiConfig = normalizeChroniclesAiConfig(value); }]
   ];
 
   watchedPaths.forEach(([, path, setter]) => {
@@ -1904,17 +2529,65 @@ function renderPostPreview(show) {
 }
 
 function renderMarkdown(value) {
-  const raw = String(value || "");
+  const raw = transformOocMarkup(transformStrictBlockquotes(String(value || "")));
   if (window.marked && window.DOMPurify) {
     window.marked.setOptions({
       breaks: true,
       gfm: true
     });
     return window.DOMPurify.sanitize(window.marked.parse(raw), {
-      ADD_ATTR: ["target", "rel"]
+      ADD_ATTR: ["target", "rel", "class"]
     });
   }
   return renderParagraphs(raw);
+}
+
+function transformStrictBlockquotes(value) {
+  const output = [];
+  const quoteLines = [];
+  let inFence = false;
+
+  const flushQuote = () => {
+    if (!quoteLines.length) return;
+    output.push("");
+    output.push('<blockquote class="chronicles-voice-quote">');
+    output.push(quoteLines.map((line) => escapeHtml(line)).join("<br>"));
+    output.push("</blockquote>");
+    output.push("");
+    quoteLines.length = 0;
+  };
+
+  String(value || "").split(/\r?\n/).forEach((line) => {
+    if (/^\s*```/.test(line)) {
+      flushQuote();
+      inFence = !inFence;
+      output.push(line);
+      return;
+    }
+
+    const quoteMatch = !inFence ? line.match(/^\s*>\s?(.*)$/) : null;
+    if (quoteMatch) {
+      quoteLines.push(quoteMatch[1]);
+      return;
+    }
+
+    flushQuote();
+    output.push(line);
+  });
+
+  flushQuote();
+  return output.join("\n").replace(/\n{3,}/g, "\n\n");
+}
+
+function transformOocMarkup(value) {
+  return String(value || "").replace(/\[OOC:\s*([\s\S]*?)\]/gi, (_, message) => `
+
+<blockquote class="chronicles-ooc-note">
+  <strong>OOC</strong>
+  <span>${escapeHtml(String(message || "").trim() || "Out-of-character note.")}</span>
+</blockquote>
+
+`);
 }
 
 function applyMarkdown(type) {
@@ -1924,6 +2597,7 @@ function applyMarkdown(type) {
   const end = textarea.selectionEnd || 0;
   const selected = textarea.value.slice(start, end);
   const fallback = selected || "text";
+  const oocFallback = selected || "1";
   const wrappers = {
     bold: [`**${fallback}**`, 2, 2],
     italic: [`*${fallback}*`, 1, 1],
@@ -1932,7 +2606,8 @@ function applyMarkdown(type) {
     list: [`- ${fallback}`, 2, 0],
     code: selected.includes("\n") ? [`\`\`\`\n${fallback}\n\`\`\``, 4, 4] : [`\`${fallback}\``, 1, 1],
     link: [`[${fallback}](https://example.com)`, 1, 22],
-    image: [`![${fallback}](https://example.com/image.jpg)`, 2, 31]
+    image: [`![${fallback}](https://example.com/image.jpg)`, 2, 31],
+    ooc: [`[OOC: ${oocFallback}]`, 6, 1]
   };
   const [replacement, cursorStartOffset, cursorEndOffset] = wrappers[type] || [fallback, 0, 0];
   textarea.setRangeText(replacement, start, end, "select");
@@ -1960,9 +2635,18 @@ function readValue(id) {
   return String(document.getElementById(id)?.value || "").trim();
 }
 
+function readCheckbox(id) {
+  return document.getElementById(id)?.checked === true;
+}
+
 function setInputValue(id, value) {
   const input = document.getElementById(id);
   if (input) input.value = value ?? "";
+}
+
+function setCheckboxValue(id, value) {
+  const input = document.getElementById(id);
+  if (input) input.checked = value === true;
 }
 
 function setText(element, value) {

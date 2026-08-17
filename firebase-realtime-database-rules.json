@@ -362,6 +362,95 @@
           }
         }
       },
+      "summaries": {
+        "$worldId": {
+          ".write": "auth != null && newData.child('worldId').val() === $worldId && newData.child('updatedByUid').val() === auth.uid",
+          ".validate": "newData.hasChildren(['worldId', 'summary', 'postCount', 'lastPostId', 'updatedAt', 'updatedByUid', 'updatedByName', 'source'])",
+          "worldId": {
+            ".validate": "newData.isString() && newData.val() === $worldId"
+          },
+          "summary": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 4000"
+          },
+          "latestEvents": {
+            ".validate": "newData.isString() && newData.val().length <= 3000"
+          },
+          "characterPositions": {
+            ".validate": "newData.isString() && newData.val().length <= 3000"
+          },
+          "unresolvedHooks": {
+            ".validate": "newData.isString() && newData.val().length <= 3000"
+          },
+          "postCount": {
+            ".validate": "newData.isNumber()"
+          },
+          "lastPostId": {
+            ".validate": "newData.isString() && newData.val().length <= 120"
+          },
+          "updatedAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "updatedByUid": {
+            ".validate": "newData.isString() && newData.val() === auth.uid"
+          },
+          "updatedByName": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80"
+          },
+          "source": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "aiQueue": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          "$requestId": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.val() === null || (newData.child('id').val() === $requestId && newData.child('uid').val() === $uid && newData.hasChildren(['id', 'uid', 'action', 'status', 'request', 'createdAt']))",
+            "id": {
+              ".validate": "newData.isString() && newData.val() === $requestId"
+            },
+            "uid": {
+              ".validate": "newData.isString() && newData.val() === $uid"
+            },
+            "action": {
+              ".validate": "newData.isString() && (newData.val() === 'auth-check' || newData.val() === 'diagnose' || newData.val() === 'assist' || newData.val() === 'summarize')"
+            },
+            "status": {
+              ".validate": "newData.isString() && (newData.val() === 'queued' || newData.val() === 'processing' || newData.val() === 'complete' || newData.val() === 'error')"
+            },
+            "createdAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "startedAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "processedAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "request": {
+              ".validate": "newData.hasChild('action')",
+              "$other": {
+                ".validate": true
+              }
+            },
+            "response": {
+              "$other": {
+                ".validate": true
+              }
+            },
+            "error": {
+              ".validate": "newData.isString() && newData.val().length <= 1000"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      },
       "characters": {
         "$characterId": {
           ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",

@@ -4,6 +4,7 @@ import {
   STATUS_OPTIONS,
   TONE_OPTIONS,
   defaultActivity,
+  defaultChroniclesAiConfig,
   defaultCurrentGames,
   defaultFeaturedClip,
   defaultGamesLibrary,
@@ -17,10 +18,12 @@ import {
   fetchMedalClips,
   fetchSteamSignal,
   getFirebaseServices,
+  getChroniclesAiHealthUrl,
   isAdminUid,
   loadGalleryData,
   loadPublicSiteData,
   normalizeCurrentGame,
+  normalizeChroniclesAiConfig,
   normalizeFeaturedClip,
   normalizeFeedItem,
   normalizeGame,
@@ -30,6 +33,7 @@ import {
   normalizeSteamConfig,
   normalizeSteamSignal,
   pushActivity,
+  runChroniclesAiQueuedRequest,
   saveGalleryCollection,
   saveGalleryImageMetadata,
   saveGamesLibrary,
@@ -38,7 +42,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260811c";
+} from "./site-store.js?v=20260817g";
 
 const state = {
   user: null,
@@ -52,6 +56,7 @@ const state = {
   featuredClip: structuredClone(defaultFeaturedClip),
   steamConfig: structuredClone(defaultSteamConfig),
   steamSignal: structuredClone(defaultSteamSignal),
+  chroniclesAiConfig: structuredClone(defaultChroniclesAiConfig),
   medalClips: [],
   medalClipsError: "",
   activityFeed: [...defaultActivity],
@@ -73,6 +78,7 @@ const elements = {
   feedEditor: document.getElementById("feedEditor"),
   quotesEditor: document.getElementById("quotesEditor"),
   homepageEditor: document.getElementById("homepageEditor"),
+  chroniclesAiEditor: document.getElementById("chroniclesAiEditor"),
   galleryEditor: document.getElementById("galleryEditor"),
   activityPreview: document.getElementById("activityPreview"),
   librarySearch: document.getElementById("adminLibrarySearch"),
@@ -180,6 +186,139 @@ function renderSteamAdmin() {
     elements.steamSyncSummary.textContent = signal.summary.totalGames
       ? `${signal.summary.playedGames} of ${signal.summary.totalGames} Steam games played / ${signal.summary.totalHours.toLocaleString()}h on record / ${matches} library match${matches === 1 ? "" : "es"} from last sync.`
       : "Uses a private Worker so the Steam API key stays out of the public website.";
+  }
+}
+
+function readChroniclesAiConfig() {
+  return normalizeChroniclesAiConfig({
+    workerUrl: document.getElementById("chroniclesAiWorkerUrl")?.value || "",
+    assistEnabled: document.getElementById("chroniclesAiAssistEnabled")?.checked === true,
+    summaryEnabled: document.getElementById("chroniclesAiSummaryEnabled")?.checked === true,
+    autoSummary: document.getElementById("chroniclesAiAutoSummary")?.checked === true,
+    summaryCooldownMinutes: document.getElementById("chroniclesAiCooldown")?.value || defaultChroniclesAiConfig.summaryCooldownMinutes
+  });
+}
+
+function renderChroniclesAiEditor() {
+  if (!elements.chroniclesAiEditor) return;
+  const config = normalizeChroniclesAiConfig(state.chroniclesAiConfig);
+  elements.chroniclesAiEditor.innerHTML = `
+    <article class="admin-card admin-chronicles-ai-panel">
+      <div class="admin-card-body">
+        <div class="admin-card-heading">
+          <span>Worker Relay</span>
+          <strong>${config.workerUrl ? "Configured" : "Not linked"}</strong>
+        </div>
+        <div class="chronicles-ai-admin-layout">
+          <div class="chronicles-ai-admin-main">
+            <label for="chroniclesAiWorkerUrl">Chronicles AI Worker URL</label>
+            <div class="chronicles-ai-worker-row">
+              <input id="chroniclesAiWorkerUrl" class="form-control" type="url" value="${escapeAttr(config.workerUrl)}" placeholder="https://banri-chronicles-ai.your-account.workers.dev/" />
+              <button id="checkChroniclesAiButton" class="btn btn-banri-outline" type="button">Check Worker</button>
+            </div>
+          </div>
+          <div class="chronicles-ai-toggle-grid">
+            <label class="admin-switch admin-switch-block">
+              <input id="chroniclesAiAssistEnabled" type="checkbox"${config.assistEnabled ? " checked" : ""} />
+              <span>
+                <strong>AI Assist</strong>
+                <small>Draft rewrite tools</small>
+              </span>
+            </label>
+            <label class="admin-switch admin-switch-block">
+              <input id="chroniclesAiSummaryEnabled" type="checkbox"${config.summaryEnabled ? " checked" : ""} />
+              <span>
+                <strong>Summary Signal</strong>
+                <small>Story So Far refresh</small>
+              </span>
+            </label>
+            <label class="admin-switch admin-switch-block">
+              <input id="chroniclesAiAutoSummary" type="checkbox"${config.autoSummary ? " checked" : ""} />
+              <span>
+                <strong>Auto Refresh</strong>
+                <small>After new posts</small>
+              </span>
+            </label>
+            <div class="chronicles-ai-cooldown">
+              <label for="chroniclesAiCooldown">Cooldown</label>
+              <input id="chroniclesAiCooldown" class="form-control" type="number" min="1" max="120" value="${escapeAttr(config.summaryCooldownMinutes)}" />
+              <small>Minutes between auto summaries</small>
+            </div>
+          </div>
+          <div class="chronicles-ai-health">
+            <span>Relay Diagnostic</span>
+            <p id="chroniclesAiHealthStatus">Use Check Worker after saving the Worker URL. This verifies Cloudflare bindings without spending OpenAI tokens.</p>
+          </div>
+        </div>
+        <p class="admin-help mt-3 mb-0">
+          Summary refreshes are shared to Firebase under <code>chronicles/summaries</code>. AI Assist only edits the draft locally until the writer inserts or replaces text.
+        </p>
+      </div>
+    </article>
+  `;
+}
+
+async function checkChroniclesAiWorker() {
+  const config = readChroniclesAiConfig();
+  const output = document.getElementById("chroniclesAiHealthStatus");
+  const button = document.getElementById("checkChroniclesAiButton");
+
+  if (!config.workerUrl) {
+    if (output) output.textContent = "Add the Worker URL first, then check it.";
+    return;
+  }
+
+  button?.setAttribute("disabled", "true");
+  if (button) button.textContent = "Checking...";
+  if (output) output.textContent = "Contacting Worker health endpoint...";
+
+  try {
+    const response = await fetch(getChroniclesAiHealthUrl(config.workerUrl), { cache: "no-store" });
+    const data = await response.json().catch(() => ({}));
+    const status = data.status || {};
+    const firebaseLine = status.firebaseKey
+      ? `Firebase key visible via ${status.firebaseKeyBinding || "configured binding"}`
+      : `Firebase key missing. Checked ${status.checkedFirebaseBindings?.join(", ") || "expected bindings"}`;
+    const openAiLine = status.openAiKey ? "OpenAI key visible" : "OpenAI key missing";
+    const originLine = status.allowedOrigins ? "Origins configured" : "Origins not configured";
+
+    if (!response.ok || data.ok === false) {
+      throw new Error(data.error || `Worker health returned ${response.status}.`);
+    }
+
+    if (!state.user) {
+      setStatus("Worker health passed, but sign in before testing the Firebase queue and AI ping.", "error");
+      return;
+    }
+
+    if (output) output.textContent = `${openAiLine}. ${firebaseLine}. ${originLine}. Testing Firebase AI queue...`;
+    const authCheck = await runChroniclesAiQueuedRequest({
+      workerUrl: config.workerUrl,
+      user: state.user,
+      payload: { action: "auth-check" }
+    });
+    if (authCheck.ok === false) {
+      throw new Error(authCheck.error || "Firebase AI queue auth check failed.");
+    }
+
+    if (output) output.textContent = `${openAiLine}. ${firebaseLine}. ${originLine}. Firebase queue passed. Testing OpenAI ping...`;
+    const aiCheck = await runChroniclesAiQueuedRequest({
+      workerUrl: config.workerUrl,
+      user: state.user,
+      payload: { action: "diagnose" }
+    });
+    if (aiCheck.ok === false) {
+      throw new Error(aiCheck.error || "OpenAI ping failed.");
+    }
+
+    if (output) output.textContent = `${openAiLine}. ${firebaseLine}. ${originLine}. Firebase queue passed. OpenAI ping passed. Model: ${aiCheck.model || status.model || "default"}.`;
+    setStatus("Chronicles AI Worker, Firebase queue, and OpenAI ping passed.", "success");
+  } catch (error) {
+    if (output) output.textContent = error.message || "Worker health check failed.";
+    setStatus(error.message || "Worker health check failed.", "error");
+  } finally {
+    button?.removeAttribute("disabled");
+    if (button) button.textContent = "Check Worker";
   }
 }
 
@@ -781,6 +920,7 @@ function renderAll() {
   renderCurrentEditor();
   renderLibraryEditor();
   renderSteamAdmin();
+  renderChroniclesAiEditor();
   renderFeedEditor();
   renderQuotesEditor();
   renderHomepageEditor();
@@ -799,6 +939,7 @@ async function loadData() {
   state.featuredClip = normalizeFeaturedClip(data.featuredClip);
   state.steamConfig = normalizeSteamConfig(data.steamConfig);
   state.steamSignal = normalizeSteamSignal(data.steamSignal);
+  state.chroniclesAiConfig = normalizeChroniclesAiConfig(data.chroniclesAiConfig);
   state.activityFeed = data.activityFeed.length ? data.activityFeed : [...defaultActivity];
   await loadMedalClipOptions();
   await loadGalleryState();
@@ -1091,6 +1232,12 @@ async function handleDeleteGalleryCollection(collectionId) {
 }
 
 function bindAdminEvents() {
+  document.addEventListener("click", (event) => {
+    if (event.target.closest("#checkChroniclesAiButton")) {
+      checkChroniclesAiWorker();
+    }
+  });
+
   document.getElementById("saveCurrentGamesButton")?.addEventListener("click", async () => {
     state.currentGames = readCurrentGames();
     await saveSiteConfigPatch({ currentGames: state.currentGames });
@@ -1152,6 +1299,7 @@ function bindAdminEvents() {
     state.hero = structuredClone(defaultHeroCopy);
     state.heroVisual = structuredClone(defaultHeroVisual);
     state.featuredClip = structuredClone(defaultFeaturedClip);
+    state.chroniclesAiConfig = structuredClone(defaultChroniclesAiConfig);
     await saveGamesLibrary(state.games);
     await saveSiteConfigPatch({
       currentGames: state.currentGames,
@@ -1159,7 +1307,8 @@ function bindAdminEvents() {
       quotes: state.quotes,
       hero: state.hero,
       heroVisual: state.heroVisual,
-      featuredClip: state.featuredClip
+      featuredClip: state.featuredClip,
+      chroniclesAi: state.chroniclesAiConfig
     });
     await pushActivity(activityMeta({ category: "System", title: "Defaults seeded", message: "Firebase site defaults were initialized." }));
     renderAll();
@@ -1202,6 +1351,18 @@ function bindAdminEvents() {
     await saveSiteConfigPatch({ steam: state.steamConfig });
     renderSteamAdmin();
     setStatus("Steam sync config saved.", "success");
+  });
+
+  document.getElementById("saveChroniclesAiButton")?.addEventListener("click", async () => {
+    state.chroniclesAiConfig = readChroniclesAiConfig();
+    await saveSiteConfigPatch({ chroniclesAi: state.chroniclesAiConfig });
+    await pushActivity(activityMeta({
+      category: "Chronicles",
+      title: "Chronicles AI signal updated",
+      message: state.chroniclesAiConfig.workerUrl ? "AI Assist and Story So Far summary controls were updated." : "Chronicles AI Worker URL was cleared."
+    })).catch(() => {});
+    renderChroniclesAiEditor();
+    setStatus("Chronicles AI settings saved.", "success");
   });
 
   document.getElementById("syncSteamButton")?.addEventListener("click", async (event) => {
