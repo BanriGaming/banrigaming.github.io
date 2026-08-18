@@ -22,7 +22,7 @@ const CHRONICLES_AI_FEATURE_ENABLED = false;
 const CHRONICLES_PORTRAIT_MAX_BYTES = 1024 * 1024;
 const CHRONICLES_PORTRAIT_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const CHRONICLES_AUDIO_TYPES = new Set(["voice", "music", "ambience", "transmission", "sfx", "other"]);
-const CHRONICLES_STORY_PAGE_SIZE = 10;
+const CHRONICLES_STORY_PAGE_SIZE = 3;
 
 const ECHOES_LORE = `# Holocron Record VII-C: Echoes After the Forge
 
@@ -698,14 +698,14 @@ function getLatestCharacterPost(character) {
 function resolveCharacterThread(character) {
   if (!character) return null;
   const stateData = character.currentState || {};
+  const latest = getLatestCharacterPost(character);
+  if (latest) return getThread(latest.worldId, latest.threadId);
+
   const threadId = stateData.locationThreadId || character.locationThreadId || "";
   if (threadId) {
     const thread = getThread(character.worldId, threadId);
     if (thread?.id === threadId) return thread;
   }
-
-  const latest = getLatestCharacterPost(character);
-  if (latest) return getThread(latest.worldId, latest.threadId);
 
   const location = normalizeLookup(stateData.location || character.location);
   if (location) {
@@ -722,7 +722,7 @@ function getCharacterCurrentState(character) {
   const latest = getLatestCharacterPost(character);
   const thread = resolveCharacterThread(character);
   return {
-    location: stateData.location || thread?.title || character?.location || latest?.threadTitle || "Location not set",
+    location: latest?.threadTitle || thread?.title || stateData.location || character?.location || "Location not set",
     arcTitle: stateData.arcTitle || character?.arcTitle || "No active arc set",
     objective: stateData.objective || character?.objective || "Objective not recorded",
     condition: stateData.condition || character?.status || "Active",
@@ -1011,7 +1011,7 @@ function renderThreadView() {
 
 function renderRecentPosts() {
   if (!elements.recentPosts) return;
-  const posts = getPosts().slice(0, 8);
+  const posts = getPosts().slice(0, CHRONICLES_STORY_PAGE_SIZE);
   elements.recentPosts.innerHTML = posts.length ? posts.map((post) => `
     <article class="chronicles-post">
       <header>
@@ -1025,6 +1025,7 @@ function renderRecentPosts() {
       <div class="chronicles-post-body">${renderParagraphs(post.body)}</div>
       <div class="chronicles-forum-actions">
         <button type="button" data-chronicles-open-thread-from-post="${escapeAttr(post.worldId)}:${escapeAttr(post.threadId)}:${escapeAttr(post.id)}">Open Thread</button>
+        <button type="button" data-chronicles-follow-post="${escapeAttr(post.id)}">Follow Up</button>
       </div>
     </article>
   `).join("") : '<div class="relay-empty">No chronicle posts yet.</div>';
@@ -1685,7 +1686,7 @@ function populateSelects() {
   });
 
   populateCategorySelects();
-  populateThreadSelect();
+  populateThreadSelect(document.getElementById("chroniclesPostThread")?.value || "");
   populatePostCharacterSelect(document.getElementById("chroniclesPostCharacter")?.value || "");
   renderStoryWorldSelect(state.storyWorldId);
 }
@@ -1718,13 +1719,14 @@ function populateThreadSelect(selectedThreadId = "") {
   const threadSelect = document.getElementById("chroniclesPostThread");
   if (!worldSelect || !threadSelect) return;
   const threads = getThreadsForWorld(worldSelect.value);
-  threadSelect.innerHTML = threads
-    .map((thread) => `<option value="${escapeAttr(thread.id)}">${escapeHtml(thread.title)}</option>`)
-    .join("");
+  threadSelect.innerHTML = [
+    '<option value="">Select a location...</option>',
+    ...threads.map((thread) => `<option value="${escapeAttr(thread.id)}">${escapeHtml(thread.title)}</option>`)
+  ].join("");
   if (selectedThreadId && threads.some((thread) => thread.id === selectedThreadId)) {
     threadSelect.value = selectedThreadId;
-  } else if (threads.length) {
-    threadSelect.value = threads[0].id;
+  } else {
+    threadSelect.value = "";
   }
 }
 
@@ -1744,11 +1746,23 @@ function populatePostCharacterSelect(selectedCharacterId = "") {
 function applySelectedPostCharacterVoice(force = false) {
   const characterId = readValue("chroniclesPostCharacter");
   const character = getCharacter(characterId);
-  if (!character) return;
   const authorInput = document.getElementById("chroniclesPostAuthor");
   const ownerInput = document.getElementById("chroniclesPostOwner");
+  if (!character) {
+    if (force && !state.editingPost) {
+      if (authorInput) authorInput.value = "";
+      if (ownerInput) ownerInput.value = "";
+    }
+    return;
+  }
   if (authorInput && (force || !authorInput.value.trim())) authorInput.value = character.name || "";
   if (ownerInput && (force || !ownerInput.value.trim())) ownerInput.value = character.ownerDisplayName || "";
+}
+
+function updatePostSubmitState() {
+  const submitButton = document.getElementById("chroniclesPostSubmit");
+  if (!submitButton) return;
+  submitButton.disabled = !readValue("chroniclesPostThread") || !readValue("chroniclesPostBody");
 }
 
 function showView(view) {
@@ -1825,11 +1839,9 @@ function continueAsCharacter(characterId) {
   const current = getCharacterCurrentState(character);
   const latest = current.latest;
   const worldId = character.worldId || latest?.worldId || state.selectedWorldId;
-  const threadId = current.thread?.id || latest?.threadId || getThread(worldId, state.selectedThreadId)?.id || "";
 
   openPostModal({
     worldId,
-    threadId,
     characterId: character.id
   });
 }
@@ -1919,7 +1931,7 @@ function openPostModal(options = {}) {
   if (postModalTitle) postModalTitle.textContent = state.editingPost ? "Edit Post" : "Create Post";
 
   const worldId = options.worldId || options.post?.worldId || state.selectedWorldId;
-  const threadId = options.threadId || options.post?.threadId || state.selectedThreadId;
+  const threadId = options.post?.threadId || "";
   const worldSelect = document.getElementById("chroniclesPostWorld");
   const authorInput = document.getElementById("chroniclesPostAuthor");
   const ownerInput = document.getElementById("chroniclesPostOwner");
@@ -1937,6 +1949,7 @@ function openPostModal(options = {}) {
   if (options.characterId || options.post?.characterId) applySelectedPostCharacterVoice(!options.post);
   renderPostAttachmentPreview();
   renderPostPreview(false);
+  updatePostSubmitState();
   showBootstrapModal("chroniclesPostModal");
 }
 
@@ -2041,6 +2054,7 @@ function renderCharacterDetailModal() {
 }
 
 function setCharacterEditFields(character) {
+  const current = getCharacterCurrentState(character);
   setInputValue("chroniclesCharacterEditWorld", character.worldId || state.selectedWorldId);
   setInputValue("chroniclesCharacterEditName", character.name || "");
   setInputValue("chroniclesCharacterEditOwner", character.ownerDisplayName || "");
@@ -2050,7 +2064,7 @@ function setCharacterEditFields(character) {
   setInputValue("chroniclesCharacterEditRole", character.role || "");
   setInputValue("chroniclesCharacterEditAlignment", character.alignment || "");
   setInputValue("chroniclesCharacterEditAffiliation", character.affiliation || "");
-  setInputValue("chroniclesCharacterEditLocation", character.location || "");
+  setInputValue("chroniclesCharacterEditLocation", current.location || "");
   setInputValue("chroniclesCharacterEditArc", character.currentState?.arcTitle || character.arcTitle || "");
   setInputValue("chroniclesCharacterEditObjective", character.currentState?.objective || character.objective || "");
   setInputValue("chroniclesCharacterEditStatusInput", character.currentState?.condition || character.status || "Active");
@@ -2071,8 +2085,10 @@ function setCharacterEditFields(character) {
   setInputValue("chroniclesCharacterEditOocNotes", character.oocNotes || character.collaborationNotes || "");
   const ownerInput = document.getElementById("chroniclesCharacterEditOwner");
   const ownerUidInput = document.getElementById("chroniclesCharacterEditOwnerUid");
+  const locationInput = document.getElementById("chroniclesCharacterEditLocation");
   if (ownerInput) ownerInput.disabled = !state.isAdmin;
   if (ownerUidInput) ownerUidInput.disabled = !state.isAdmin;
+  if (locationInput) locationInput.disabled = true;
 }
 
 async function handleWorldSubmit(event) {
@@ -2403,7 +2419,7 @@ async function handlePostSubmit(event) {
     state.editingPost = null;
     state.editingAttachments = [];
     hideBootstrapModal("chroniclesPostModal");
-    showView("thread");
+    showView("dashboard");
     queueAutoSummaryRefresh(worldId);
     if (isMovingPost && originalWorldId && originalWorldId !== worldId) {
       queueAutoSummaryRefresh(originalWorldId);
@@ -2517,7 +2533,9 @@ async function handleCharacterDetailSave() {
   setText(elements.characterDetailStatus, "Saving character...");
 
   try {
-    const location = readValue("chroniclesCharacterEditLocation");
+    const current = getCharacterCurrentState(character);
+    const location = current.location;
+    const locationThreadId = current.thread?.id || "";
     const arcTitle = readValue("chroniclesCharacterEditArc");
     const objective = readValue("chroniclesCharacterEditObjective");
     const condition = readValue("chroniclesCharacterEditStatusInput") || character.status || "Active";
@@ -2560,6 +2578,7 @@ async function handleCharacterDetailSave() {
       currentState: {
         ...(character.currentState || {}),
         location,
+        locationThreadId,
         arcTitle,
         objective,
         condition,
@@ -3030,15 +3049,13 @@ function bindEvents() {
     } else if (replyButton) {
       const post = findPostById(replyButton.dataset.chroniclesReplyPost);
       openPostModal({
-        worldId: state.selectedWorldId,
-        threadId: state.selectedThreadId,
+        worldId: post?.worldId || state.selectedWorldId,
         prefill: post ? `> ${post.authorName} wrote:\n> ${trimForQuote(post.body)}\n\n` : ""
       });
     } else if (followButton) {
       const post = findPostById(followButton.dataset.chroniclesFollowPost);
       openPostModal({
-        worldId: state.selectedWorldId,
-        threadId: state.selectedThreadId,
+        worldId: post?.worldId || state.selectedWorldId,
         prefill: buildFollowUpPrefill(post)
       });
     } else if (editPostButton) {
@@ -3096,8 +3113,10 @@ function bindEvents() {
   document.getElementById("chroniclesPostWorld")?.addEventListener("change", () => {
     populateThreadSelect();
     populatePostCharacterSelect();
+    updatePostSubmitState();
   });
-  document.getElementById("chroniclesPostCharacter")?.addEventListener("change", () => applySelectedPostCharacterVoice(false));
+  document.getElementById("chroniclesPostThread")?.addEventListener("change", updatePostSubmitState);
+  document.getElementById("chroniclesPostCharacter")?.addEventListener("change", () => applySelectedPostCharacterVoice(true));
   document.getElementById("chroniclesThreadWorld")?.addEventListener("change", () => populateCategorySelects());
   document.getElementById("chroniclesPostType")?.addEventListener("change", (event) => {
     if (!state.isAdmin) return;
@@ -3133,6 +3152,7 @@ function bindEvents() {
   });
   document.getElementById("chroniclesPostBody")?.addEventListener("input", () => {
     if (elements.postPreview && !elements.postPreview.classList.contains("d-none")) renderPostPreview(true);
+    updatePostSubmitState();
   });
 
   elements.worldForm?.addEventListener("submit", handleWorldSubmit);
@@ -3259,12 +3279,23 @@ function canEditPost(post) {
   return state.isAdmin || post.uid === state.user?.uid;
 }
 
+function isCharacterAssignedToCurrentUser(character) {
+  const uid = state.user?.uid;
+  if (!uid || !character) return false;
+  return [
+    character.uid,
+    character.ownerUid,
+    character.assignedUid,
+    character.createdForUid
+  ].filter(Boolean).includes(uid);
+}
+
 function canEditCharacter(character) {
-  return state.isAdmin || character.uid === state.user?.uid;
+  return state.isAdmin || isCharacterAssignedToCurrentUser(character);
 }
 
 function canUseCharacterVoice(character) {
-  return state.isAdmin || character?.uid === state.user?.uid;
+  return state.isAdmin || isCharacterAssignedToCurrentUser(character);
 }
 
 function findPostById(postId) {

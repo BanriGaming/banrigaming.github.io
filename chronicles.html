@@ -488,7 +488,7 @@
           <div class="modal-footer">
             <p id="chroniclesPostStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
             <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
-            <button class="btn btn-banri-primary" type="submit">Transmit Post</button>
+            <button id="chroniclesPostSubmit" class="btn btn-banri-primary" type="submit">Transmit Post</button>
           </div>
         </form>
       </div>
@@ -731,7 +731,8 @@
                 </div>
                 <div class="col-12 col-lg-4">
                   <label for="chroniclesCharacterEditLocation">Current Location</label>
-                  <input id="chroniclesCharacterEditLocation" class="form-control" type="text" maxlength="120" />
+                  <input id="chroniclesCharacterEditLocation" class="form-control" type="text" maxlength="120" disabled />
+                  <p class="chronicles-field-hint">Derived from this character's latest linked post.</p>
                 </div>
                 <div class="col-12 col-lg-4">
                   <label for="chroniclesCharacterEditArc">Current Arc</label>

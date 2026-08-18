@@ -1482,6 +1482,35 @@ body.banri-theme::before {
   color: rgba(159, 183, 191, 0.74);
 }
 
+.chronicles-page .form-select {
+  border: 1px solid rgba(22, 232, 255, 0.3);
+  border-radius: 0;
+  color: var(--banri-text);
+  background-color: rgba(0, 0, 0, 0.58);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2316e8ff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  box-shadow: none;
+}
+
+.chronicles-page .form-select:focus {
+  border-color: var(--banri-cyan);
+  color: var(--banri-text);
+  background-color: rgba(0, 14, 18, 0.82);
+  box-shadow: 0 0 0 0.18rem rgba(22, 232, 255, 0.12), 0 0 28px rgba(22, 232, 255, 0.14);
+}
+
+.chronicles-page .form-select option {
+  color: #e6f6f8;
+  background: #02090c;
+}
+
+.chronicles-page .form-control:disabled,
+.chronicles-page .form-select:disabled {
+  border-color: rgba(22, 232, 255, 0.18);
+  color: rgba(214, 235, 240, 0.74);
+  background-color: rgba(0, 0, 0, 0.36);
+  opacity: 1;
+}
+
 .chronicles-modal input[type="file"].form-control::file-selector-button {
   margin: -0.45rem 0.75rem -0.45rem -0.75rem;
   min-height: 44px;
@@ -7261,6 +7290,10 @@ body.legacy-theme::before {
   gap: 0.7rem;
 }
 
+.chronicles-dossier-ooc {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
 .chronicles-dossier-ooc-notes {
   grid-column: 1 / -1;
   padding: 1rem;
@@ -7309,6 +7342,8 @@ body.legacy-theme::before {
   display: block;
   color: #e6f6f8;
   font: 700 0.95rem/1.25 Rajdhani, sans-serif;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .chronicles-dossier-actions {
