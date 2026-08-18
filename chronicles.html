@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/main.css?v=20260817g" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260817l" />
     <script src="assets/js/nav.js"></script>
     <script src="assets/js/banri-theme.js?v=20260808a" defer></script>
   </head>
@@ -160,7 +160,16 @@
                     <h2 id="chroniclesCharactersTitle">Characters</h2>
                     <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="character">Create Character</button>
                   </div>
+                  <div class="chronicles-thread-toolbar mb-3">
+                    <label class="search-control" for="chroniclesCharacterSearch">
+                      <input id="chroniclesCharacterSearch" type="search" placeholder="Search characters, owners, roles, or worlds..." autocomplete="off" />
+                    </label>
+                  </div>
                   <div id="chroniclesCharacterGrid" class="chronicles-character-grid" aria-live="polite"></div>
+                </section>
+
+                <section class="chronicles-view" data-chronicles-view="dossier" aria-labelledby="chroniclesDossierTitle">
+                  <div id="chroniclesDossierShell" class="chronicles-dossier-shell" aria-live="polite"></div>
                 </section>
 
                 <section class="chronicles-view" data-chronicles-view="story" aria-labelledby="chroniclesStoryTitle">
@@ -408,6 +417,10 @@
                 <label for="chroniclesPostThread">Thread / Location</label>
                 <select id="chroniclesPostThread" class="form-select" required></select>
               </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesPostCharacter">Character Voice</label>
+                <select id="chroniclesPostCharacter" class="form-select"></select>
+              </div>
               <div class="col-12 col-lg-4 d-none" data-chronicles-admin-only>
                 <label for="chroniclesPostType">Post Classification</label>
                 <select id="chroniclesPostType" class="form-select">
@@ -578,8 +591,46 @@
                 <input id="chroniclesCharacterLocation" class="form-control" type="text" maxlength="120" />
               </div>
               <div class="col-12 col-lg-4">
-                <label for="chroniclesCharacterImage">Portrait URL</label>
-                <input id="chroniclesCharacterImage" class="form-control" type="url" />
+                <label for="chroniclesCharacterArc">Current Arc</label>
+                <input id="chroniclesCharacterArc" class="form-control" type="text" maxlength="120" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterObjective">Active Objective</label>
+                <input id="chroniclesCharacterObjective" class="form-control" type="text" maxlength="160" />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterStatusInput">Condition / Status</label>
+                <input id="chroniclesCharacterStatusInput" class="form-control" type="text" maxlength="80" placeholder="Active, injured, missing..." />
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterImage">Portrait Upload</label>
+                <input id="chroniclesCharacterImage" class="form-control" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
+                <p class="chronicles-field-hint">JPEG, PNG, WebP, or GIF. Stored in RTDB as compact portrait data.</p>
+              </div>
+              <div class="col-12 col-lg-8">
+                <div id="chroniclesCharacterPortraitPreview" class="chronicles-portrait-upload-preview" aria-live="polite">
+                  <span>No portrait selected.</span>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterGalleryUrls">Gallery Image URLs</label>
+                <textarea id="chroniclesCharacterGalleryUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/art.webp | Title | Caption"></textarea>
+                <p class="chronicles-field-hint">One image URL per line. Gallery art is linked only, never uploaded.</p>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterAudioUrls">Audio URLs</label>
+                <textarea id="chroniclesCharacterAudioUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/theme.mp3 | Theme | Caption | music"></textarea>
+                <p class="chronicles-field-hint">One audio URL per line. Audio is linked only and never autoplays.</p>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterConnections">Connections</label>
+                <textarea id="chroniclesCharacterConnections" class="form-control" rows="3" maxlength="4000" placeholder="Aelira Kaen | Ally | Trusted | Shared history or public note"></textarea>
+                <p class="chronicles-field-hint">One connection per line. Use a character name or external name.</p>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label for="chroniclesCharacterArchiveUrls">Archive File URLs</label>
+                <textarea id="chroniclesCharacterArchiveUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/map.pdf | Tomb Map | Recovered record | document"></textarea>
+                <p class="chronicles-field-hint">One URL per line. Archive files are linked only.</p>
               </div>
               <div class="col-12">
                 <label for="chroniclesCharacterOrigin">Origin Tale</label>
@@ -600,6 +651,22 @@
               <div class="col-12 col-lg-6">
                 <label for="chroniclesCharacterHooks">Hooks / Rumors</label>
                 <textarea id="chroniclesCharacterHooks" class="form-control" rows="4" maxlength="2000"></textarea>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterWritingPreference">Writing Preference</label>
+                <textarea id="chroniclesCharacterWritingPreference" class="form-control" rows="3" maxlength="1200" placeholder="Preferred tone, pacing, POV, scene style..."></textarea>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterConsentBoundary">Consent Boundary</label>
+                <textarea id="chroniclesCharacterConsentBoundary" class="form-control" rows="3" maxlength="1200" placeholder="Character-altering effects, combat limits, comfort lines..."></textarea>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesCharacterPostingPace">Posting Pace</label>
+                <input id="chroniclesCharacterPostingPace" class="form-control" type="text" maxlength="120" placeholder="Daily, weekly, async, ask before tagging..." />
+              </div>
+              <div class="col-12">
+                <label for="chroniclesCharacterOocNotes">OOC Notes</label>
+                <textarea id="chroniclesCharacterOocNotes" class="form-control" rows="4" maxlength="2500" placeholder="Public collaborator notes for this character."></textarea>
               </div>
             </div>
           </div>
@@ -666,9 +733,47 @@
                   <label for="chroniclesCharacterEditLocation">Current Location</label>
                   <input id="chroniclesCharacterEditLocation" class="form-control" type="text" maxlength="120" />
                 </div>
-                <div class="col-12">
-                  <label for="chroniclesCharacterEditImage">Portrait URL</label>
-                  <input id="chroniclesCharacterEditImage" class="form-control" type="url" />
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditArc">Current Arc</label>
+                  <input id="chroniclesCharacterEditArc" class="form-control" type="text" maxlength="120" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditObjective">Active Objective</label>
+                  <input id="chroniclesCharacterEditObjective" class="form-control" type="text" maxlength="160" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditStatusInput">Condition / Status</label>
+                  <input id="chroniclesCharacterEditStatusInput" class="form-control" type="text" maxlength="80" />
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditImage">Replace Portrait Upload</label>
+                  <input id="chroniclesCharacterEditImage" class="form-control" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
+                  <p class="chronicles-field-hint">Leave empty to keep the current portrait.</p>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div id="chroniclesCharacterEditPortraitPreview" class="chronicles-portrait-upload-preview" aria-live="polite">
+                    <span>No portrait selected.</span>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditGalleryUrls">Gallery Image URLs</label>
+                  <textarea id="chroniclesCharacterEditGalleryUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/art.webp | Title | Caption"></textarea>
+                  <p class="chronicles-field-hint">One image URL per line. Gallery art is URL-only.</p>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditAudioUrls">Audio URLs</label>
+                  <textarea id="chroniclesCharacterEditAudioUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/theme.mp3 | Theme | Caption | music"></textarea>
+                  <p class="chronicles-field-hint">One audio URL per line. Use the last pipe for voice, music, ambience, transmission, sfx, or other.</p>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditConnections">Connections</label>
+                  <textarea id="chroniclesCharacterEditConnections" class="form-control" rows="3" maxlength="4000" placeholder="Aelira Kaen | Ally | Trusted | Shared history or public note"></textarea>
+                  <p class="chronicles-field-hint">One connection per line. Matching character names become dossier links.</p>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="chroniclesCharacterEditArchiveUrls">Archive File URLs</label>
+                  <textarea id="chroniclesCharacterEditArchiveUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/map.pdf | Tomb Map | Recovered record | document"></textarea>
+                  <p class="chronicles-field-hint">One URL per line. Use the last pipe for document, map, reference, image, or other.</p>
                 </div>
                 <div class="col-12">
                   <label for="chroniclesCharacterEditOrigin">Origin Tale</label>
@@ -690,6 +795,22 @@
                   <label for="chroniclesCharacterEditHooks">Hooks / Rumors</label>
                   <textarea id="chroniclesCharacterEditHooks" class="form-control" rows="4" maxlength="5000"></textarea>
                 </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditWritingPreference">Writing Preference</label>
+                  <textarea id="chroniclesCharacterEditWritingPreference" class="form-control" rows="3" maxlength="1200" placeholder="Preferred tone, pacing, POV, scene style..."></textarea>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditConsentBoundary">Consent Boundary</label>
+                  <textarea id="chroniclesCharacterEditConsentBoundary" class="form-control" rows="3" maxlength="1200" placeholder="Character-altering effects, combat limits, comfort lines..."></textarea>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label for="chroniclesCharacterEditPostingPace">Posting Pace</label>
+                  <input id="chroniclesCharacterEditPostingPace" class="form-control" type="text" maxlength="120" placeholder="Daily, weekly, async, ask before tagging..." />
+                </div>
+                <div class="col-12">
+                  <label for="chroniclesCharacterEditOocNotes">OOC Notes</label>
+                  <textarea id="chroniclesCharacterEditOocNotes" class="form-control" rows="4" maxlength="2500" placeholder="Public collaborator notes for this character."></textarea>
+                </div>
               </div>
             </form>
           </div>
@@ -697,6 +818,33 @@
             <p id="chroniclesCharacterDetailStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
             <button id="chroniclesCharacterEditToggle" class="btn btn-banri-outline d-none" type="button">Edit Character</button>
             <button id="chroniclesCharacterSaveButton" class="btn btn-banri-primary d-none" type="button">Save Character</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade chronicles-modal chronicles-media-modal" id="chroniclesMediaViewerModal" tabindex="-1" aria-labelledby="chroniclesMediaViewerTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Dossier Gallery</p>
+              <h2 class="modal-title" id="chroniclesMediaViewerTitle">Archive Image</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <figure class="chronicles-media-viewer">
+              <img id="chroniclesMediaViewerImage" src="" alt="" referrerpolicy="no-referrer" />
+              <figcaption>
+                <strong id="chroniclesMediaViewerCaptionTitle">Archive Image</strong>
+                <span id="chroniclesMediaViewerCaption">No caption recorded.</span>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="modal-footer">
+            <a id="chroniclesMediaViewerLink" class="btn btn-banri-outline" href="#" target="_blank" rel="noopener">Open Original</a>
+            <button class="btn btn-banri-primary" type="button" data-bs-dismiss="modal">Close Viewer</button>
           </div>
         </div>
       </div>
@@ -717,6 +865,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@13.0.3/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-    <script type="module" src="assets/js/chronicles.js?v=20260817g"></script>
+    <script type="module" src="assets/js/chronicles.js?v=20260817l"></script>
   </body>
 </html>

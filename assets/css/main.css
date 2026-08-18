@@ -1482,6 +1482,25 @@ body.banri-theme::before {
   color: rgba(159, 183, 191, 0.74);
 }
 
+.chronicles-modal input[type="file"].form-control::file-selector-button {
+  margin: -0.45rem 0.75rem -0.45rem -0.75rem;
+  min-height: 44px;
+  border: 0;
+  border-right: 1px solid rgba(22, 232, 255, 0.28);
+  color: #001013;
+  background: var(--banri-cyan);
+  font: 800 0.68rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-field-hint {
+  margin: 0.35rem 0 0;
+  color: var(--banri-muted);
+  font: 700 0.68rem/1.35 "Share Tech Mono", monospace;
+  letter-spacing: 0.05em;
+}
+
 .auth-panel {
   display: grid;
   gap: 0.85rem;
@@ -6687,6 +6706,7 @@ body.legacy-theme::before {
 }
 
 .chronicles-story-mode button,
+.chronicles-story-pager button,
 .chronicles-story-digest-item button {
   min-height: 38px;
   padding: 0.55rem 0.75rem;
@@ -6699,11 +6719,19 @@ body.legacy-theme::before {
 .chronicles-story-mode button.active,
 .chronicles-story-mode button:hover,
 .chronicles-story-mode button:focus,
+.chronicles-story-pager button.active,
+.chronicles-story-pager button:hover:not(:disabled),
+.chronicles-story-pager button:focus:not(:disabled),
 .chronicles-story-digest-item button:hover,
 .chronicles-story-digest-item button:focus {
   color: #001013;
   border-color: var(--banri-cyan);
   background: var(--banri-cyan);
+}
+
+.chronicles-story-pager button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
 }
 
 .chronicles-story-content {
@@ -6741,6 +6769,34 @@ body.legacy-theme::before {
 .chronicles-story-timeline {
   display: grid;
   gap: 1rem;
+}
+
+.chronicles-story-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background:
+    linear-gradient(90deg, rgba(22, 232, 255, 0.06), transparent 52%),
+    rgba(0, 0, 0, 0.28);
+}
+
+.chronicles-story-pager div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.chronicles-story-pager span,
+.chronicles-story-pager small {
+  color: var(--banri-muted);
+  font: 800 0.66rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .chronicles-story-entry {
@@ -7090,6 +7146,10 @@ body.legacy-theme::before {
   text-transform: uppercase;
 }
 
+.chronicles-character-portrait.has-image span {
+  display: none;
+}
+
 .chronicles-character-card h3 {
   margin: 0.15rem 0 0.7rem;
   color: #f0fbfd;
@@ -7121,6 +7181,452 @@ body.legacy-theme::before {
 .chronicles-character-card dd {
   color: #d8e8ec;
   text-transform: none;
+}
+
+.chronicles-dossier {
+  padding: clamp(1rem, 2.4vw, 1.6rem);
+}
+
+.chronicles-dossier-header {
+  display: grid;
+  grid-template-columns: minmax(170px, 230px) 1fr;
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  align-items: stretch;
+}
+
+.chronicles-dossier-portrait {
+  display: grid;
+  min-height: 280px;
+  place-items: center;
+  border: 1px solid rgba(22, 232, 255, 0.38);
+  color: var(--banri-cyan);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.68)),
+    var(--dossier-portrait, radial-gradient(circle at 50% 25%, rgba(22, 232, 255, 0.28), transparent 58%)),
+    rgba(0, 10, 12, 0.86);
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 0 40px rgba(22, 232, 255, 0.08), 0 0 30px rgba(0, 0, 0, 0.45);
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 16px);
+}
+
+.chronicles-dossier-portrait span {
+  display: grid;
+  width: 86px;
+  height: 86px;
+  place-items: center;
+  border: 1px solid rgba(22, 232, 255, 0.42);
+  border-radius: 50%;
+  color: var(--banri-cyan);
+  background: rgba(0, 22, 28, 0.72);
+  font: 800 2.65rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+  box-shadow: 0 0 28px rgba(22, 232, 255, 0.18);
+}
+
+.chronicles-dossier-portrait.has-image span {
+  display: none;
+}
+
+.chronicles-dossier-identity {
+  min-width: 0;
+  padding: clamp(0.85rem, 2vw, 1.25rem);
+  border: 1px solid rgba(22, 232, 255, 0.14);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.07), transparent 38%),
+    rgba(0, 0, 0, 0.24);
+}
+
+.chronicles-dossier-identity h3 {
+  margin: 0;
+  color: #f2fbfd;
+  font: 800 clamp(2rem, 5vw, 4.2rem)/0.95 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-alias {
+  margin: 0.45rem 0 0;
+  color: var(--banri-cyan);
+  font: 700 0.86rem/1.4 "Share Tech Mono", monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-facts,
+.chronicles-dossier-state,
+.chronicles-dossier-ooc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.7rem;
+}
+
+.chronicles-dossier-ooc-notes {
+  grid-column: 1 / -1;
+  padding: 1rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.06), transparent 48%),
+    rgba(0, 0, 0, 0.28);
+}
+
+.chronicles-dossier-ooc-notes > p {
+  margin: 0 0 0.75rem;
+  color: var(--banri-cyan);
+  font: 800 0.72rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-facts {
+  margin-top: 1.1rem;
+}
+
+.chronicles-dossier-state {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.chronicles-dossier-fact {
+  min-width: 0;
+  padding: 0.72rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 18, 22, 0.36);
+}
+
+.chronicles-dossier-fact span {
+  display: block;
+  margin-bottom: 0.32rem;
+  color: var(--banri-cyan);
+  font: 800 0.66rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-fact strong {
+  display: block;
+  color: #e6f6f8;
+  font: 700 0.95rem/1.25 Rajdhani, sans-serif;
+}
+
+.chronicles-dossier-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.2rem;
+}
+
+.chronicles-dossier-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0;
+  border-bottom: 1px solid rgba(22, 232, 255, 0.18);
+}
+
+.chronicles-dossier-tabs button {
+  padding: 0.68rem 0.9rem;
+  border: 1px solid rgba(22, 232, 255, 0.15);
+  border-bottom: 0;
+  color: var(--banri-muted);
+  background: rgba(0, 0, 0, 0.26);
+  font: 800 0.72rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-tabs button.active,
+.chronicles-dossier-tabs button:hover,
+.chronicles-dossier-tabs button:focus {
+  color: #001013;
+  background: var(--banri-cyan);
+}
+
+.chronicles-dossier-content {
+  min-height: 260px;
+}
+
+.chronicles-dossier-readable {
+  display: grid;
+  gap: 1rem;
+}
+
+.chronicles-dossier-readable section,
+.chronicles-dossier-posts article,
+.chronicles-dossier-appearances article,
+.chronicles-dossier-connections article,
+.chronicles-dossier-gallery article,
+.chronicles-dossier-files article {
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.chronicles-dossier-readable section {
+  padding: 1rem;
+}
+
+.chronicles-dossier-chronicle {
+  display: grid;
+  gap: 1rem;
+}
+
+.chronicles-dossier-subhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.7rem;
+}
+
+.chronicles-dossier-subhead p,
+.chronicles-dossier-subhead span {
+  margin: 0;
+  color: var(--banri-cyan);
+  font: 800 0.72rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-subhead span {
+  color: var(--banri-muted);
+}
+
+.chronicles-dossier-posts,
+.chronicles-dossier-appearances,
+.chronicles-dossier-connections,
+.chronicles-dossier-files {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.chronicles-dossier-posts article,
+.chronicles-dossier-appearances article,
+.chronicles-dossier-connections article,
+.chronicles-dossier-files article {
+  padding: 0.9rem;
+}
+
+.chronicles-dossier-posts strong,
+.chronicles-dossier-appearances strong,
+.chronicles-dossier-connections h4,
+.chronicles-dossier-files strong {
+  display: block;
+  margin: 0;
+  color: #f0fbfd;
+  font: 800 1.15rem/1.1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-posts span,
+.chronicles-dossier-appearances span,
+.chronicles-dossier-connections span,
+.chronicles-dossier-files span {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--banri-muted);
+  font-size: 0.78rem;
+}
+
+.chronicles-dossier-posts p {
+  margin: 0.75rem 0;
+  color: #d8e8ec;
+  line-height: 1.55;
+}
+
+.chronicles-dossier-posts button,
+.chronicles-dossier-appearances button,
+.chronicles-dossier-connections button,
+.chronicles-gallery-meta button,
+.chronicles-dossier-files a {
+  display: inline-flex;
+  margin-top: 0.7rem;
+  padding: 0.42rem 0.65rem;
+  border: 1px solid rgba(22, 232, 255, 0.34);
+  color: var(--banri-cyan);
+  background: transparent;
+  font: 800 0.68rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-connections article p,
+.chronicles-dossier-files article p {
+  margin: 0 0 0.35rem;
+  color: var(--banri-cyan);
+  font: 800 0.68rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-audio-card {
+  position: relative;
+  display: grid;
+  gap: 0.7rem;
+  background:
+    linear-gradient(90deg, rgba(22, 232, 255, 0.08), transparent 52%),
+    rgba(0, 12, 15, 0.56) !important;
+}
+
+.chronicles-dossier-audio-card audio {
+  width: 100%;
+  min-height: 38px;
+  accent-color: var(--banri-cyan);
+  filter: saturate(0.85);
+}
+
+.chronicles-portrait-upload-preview {
+  display: flex;
+  min-height: 118px;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  color: var(--banri-muted);
+  background:
+    radial-gradient(circle at 16% 50%, rgba(22, 232, 255, 0.11), transparent 7rem),
+    rgba(0, 0, 0, 0.3);
+}
+
+.chronicles-portrait-upload-preview img {
+  width: 86px;
+  height: 96px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(22, 232, 255, 0.36);
+  object-fit: cover;
+  box-shadow: 0 0 26px rgba(22, 232, 255, 0.12);
+}
+
+.chronicles-portrait-upload-preview span {
+  color: var(--banri-muted);
+  font: 800 0.7rem/1.45 "Share Tech Mono", monospace;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.chronicles-dossier-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+.chronicles-dossier-gallery article {
+  display: grid;
+  grid-template-rows: minmax(260px, auto) 1fr;
+  overflow: hidden;
+}
+
+.chronicles-gallery-media,
+.chronicles-archive-preview {
+  display: grid;
+  width: 100%;
+  min-height: 260px;
+  place-items: center;
+  padding: 0.7rem;
+  border: 0;
+  border-bottom: 1px solid rgba(22, 232, 255, 0.16);
+  color: inherit;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(22, 232, 255, 0.08), transparent 60%),
+    rgba(0, 0, 0, 0.42);
+}
+
+.chronicles-gallery-media:hover,
+.chronicles-gallery-media:focus,
+.chronicles-archive-preview:hover,
+.chronicles-archive-preview:focus {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(22, 232, 255, 0.18), transparent 62%),
+    rgba(0, 8, 10, 0.62);
+  box-shadow: inset 0 0 0 1px rgba(22, 232, 255, 0.34);
+}
+
+.chronicles-dossier-gallery img,
+.chronicles-archive-preview img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+}
+
+.chronicles-archive-preview {
+  min-height: 170px;
+  margin-bottom: 0.8rem;
+  border: 1px solid rgba(22, 232, 255, 0.14);
+}
+
+.chronicles-archive-preview img {
+  max-height: 220px;
+}
+
+.chronicles-gallery-meta {
+  padding: 0.8rem;
+}
+
+.chronicles-gallery-meta span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--banri-cyan);
+  font: 800 0.64rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-gallery strong {
+  display: block;
+  color: #f0fbfd;
+  font: 800 1rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-gallery p {
+  margin: 0.35rem 0 0;
+  color: var(--banri-muted);
+  font-size: 0.78rem;
+}
+
+.chronicles-media-modal .modal-dialog {
+  max-width: min(1400px, calc(100vw - 2rem));
+}
+
+.chronicles-media-viewer {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+
+.chronicles-media-viewer img {
+  width: 100%;
+  max-height: min(72vh, 820px);
+  border: 1px solid rgba(22, 232, 255, 0.22);
+  background: rgba(0, 0, 0, 0.56);
+  object-fit: contain;
+}
+
+.chronicles-media-viewer figcaption {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.chronicles-media-viewer figcaption strong {
+  color: #f0fbfd;
+  font: 800 1.15rem/1.1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-media-viewer figcaption span {
+  color: var(--banri-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
 .chronicles-modal .modal-body {
@@ -7875,6 +8381,7 @@ body.legacy-theme::before {
   }
 
   .chronicles-thread-header,
+  .chronicles-dossier-header,
   .chronicles-forum-post,
   .chronicles-story-entry,
   .chronicles-story-toolbar,
@@ -7889,12 +8396,31 @@ body.legacy-theme::before {
     justify-content: flex-start;
   }
 
+  .chronicles-dossier-portrait {
+    min-height: 240px;
+  }
+
+  .chronicles-dossier-identity h3 {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .chronicles-dossier-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+  }
+
+  .chronicles-dossier-tabs button {
+    white-space: nowrap;
+  }
+
   .chronicles-forum-author {
     border-right: 0;
     border-bottom: 1px solid rgba(22, 232, 255, 0.16);
   }
 
-  .chronicles-story-mode {
+  .chronicles-story-mode,
+  .chronicles-story-pager {
     justify-content: flex-start;
   }
 

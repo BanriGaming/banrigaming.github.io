@@ -19,6 +19,10 @@ import {
 
 const { auth, database } = getFirebaseServices();
 const CHRONICLES_AI_FEATURE_ENABLED = false;
+const CHRONICLES_PORTRAIT_MAX_BYTES = 1024 * 1024;
+const CHRONICLES_PORTRAIT_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+const CHRONICLES_AUDIO_TYPES = new Set(["voice", "music", "ambience", "transmission", "sfx", "other"]);
+const CHRONICLES_STORY_PAGE_SIZE = 10;
 
 const ECHOES_LORE = `# Holocron Record VII-C: Echoes After the Forge
 
@@ -305,6 +309,8 @@ const DEFAULT_POSTS = {
         uid: "seed",
         authorName: "Rikstarf",
         ownerDisplayName: "Rikstarf",
+        characterId: "rykard-vael",
+        characterDisplayName: "Rykard Vael",
         postType: "player",
         title: "The Butcher of Korriban",
         body: "Rykard Vael lingered among the old training grounds with a crude red blade, a scar across his cheek, and a bounty spreading through the caves behind him. The western ruins remembered every lesson taught in blood.",
@@ -462,14 +468,17 @@ const state = {
   selectedWorldId: "echoes-after-the-forge",
   selectedThreadId: "coruscant",
   selectedCharacterId: "",
+  dossierTab: "profile",
   selectedLoreWorldId: "",
   storyWorldId: "echoes-after-the-forge",
   storyMode: "full",
+  storyPage: 1,
   editingPost: null,
   editingThread: null,
   editingAttachments: [],
   loreEditing: false,
   characterEditing: false,
+  characterSearch: "",
   threadSearch: "",
   worldListMode: "selected",
   routeApplied: false,
@@ -506,7 +515,9 @@ const elements = {
   threadViewDescription: document.getElementById("chroniclesThreadViewDescription"),
   threadViewPosts: document.getElementById("chroniclesThreadViewPosts"),
   recentPosts: document.getElementById("chroniclesRecentPosts"),
+  characterSearch: document.getElementById("chroniclesCharacterSearch"),
   characterGrid: document.getElementById("chroniclesCharacterGrid"),
+  dossierShell: document.getElementById("chroniclesDossierShell"),
   storyWorld: document.getElementById("chroniclesStoryWorld"),
   storyStatus: document.getElementById("chroniclesStoryStatus"),
   storyContent: document.getElementById("chroniclesStoryContent"),
@@ -608,6 +619,7 @@ function getPostsForThread(worldId, threadId, sortDirection = "asc") {
   const deleted = state.deletedPosts[worldId]?.[threadId] || {};
   const posts = mergeById(fallbackPosts, remotePosts)
     .filter((post) => deleted[post.id] !== true)
+    .filter((post) => post?.deleted !== true && post?.isDeleted !== true)
     .map((post) => ({
       ...post,
       worldId,
@@ -640,6 +652,84 @@ function getPostsForWorld(worldId, sortDirection = "asc") {
     posts.push(...getPostsForThread(worldId, thread.id, sortDirection));
   });
   return posts.sort((a, b) => sortDirection === "desc" ? toTime(b.createdAt) - toTime(a.createdAt) : toTime(a.createdAt) - toTime(b.createdAt));
+}
+
+function normalizeLookup(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function characterAliases(character) {
+  return [
+    character?.name,
+    character?.alias,
+    character?.title,
+    character?.characterDisplayName
+  ].map(normalizeLookup).filter(Boolean);
+}
+
+function postMatchesCharacter(post, character) {
+  if (!post || !character) return false;
+  if (post.characterId && post.characterId === character.id) return true;
+  if ((post.postType || "player") !== "player") return false;
+
+  const aliases = characterAliases(character);
+  if (!aliases.length) return false;
+  const postNames = [
+    post.characterDisplayName,
+    post.authorName
+  ].map(normalizeLookup).filter(Boolean);
+  return postNames.some((name) => aliases.includes(name));
+}
+
+function getCharacterPosts(character, sortDirection = "desc") {
+  if (!character) return [];
+  return getPostsForWorld(character.worldId, sortDirection)
+    .filter(isNarrativePost)
+    .filter((post) => postMatchesCharacter(post, character));
+}
+
+function getLatestCharacterPost(character) {
+  return getCharacterPosts(character, "desc")[0] || null;
+}
+
+function resolveCharacterThread(character) {
+  if (!character) return null;
+  const stateData = character.currentState || {};
+  const threadId = stateData.locationThreadId || character.locationThreadId || "";
+  if (threadId) {
+    const thread = getThread(character.worldId, threadId);
+    if (thread?.id === threadId) return thread;
+  }
+
+  const latest = getLatestCharacterPost(character);
+  if (latest) return getThread(latest.worldId, latest.threadId);
+
+  const location = normalizeLookup(stateData.location || character.location);
+  if (location) {
+    const match = getThreadsForWorld(character.worldId)
+      .find((thread) => normalizeLookup(thread.title) === location || normalizeLookup(thread.id) === location);
+    if (match) return match;
+  }
+
+  return getThread(character.worldId, state.selectedThreadId);
+}
+
+function getCharacterCurrentState(character) {
+  const stateData = character?.currentState || {};
+  const latest = getLatestCharacterPost(character);
+  const thread = resolveCharacterThread(character);
+  return {
+    location: stateData.location || thread?.title || character?.location || latest?.threadTitle || "Location not set",
+    arcTitle: stateData.arcTitle || character?.arcTitle || "No active arc set",
+    objective: stateData.objective || character?.objective || "Objective not recorded",
+    condition: stateData.condition || character?.status || "Active",
+    affiliation: stateData.affiliation || character?.affiliation || "",
+    latest,
+    thread
+  };
 }
 
 function getNarrativePostsForWorld(worldId, sortDirection = "asc") {
@@ -696,6 +786,7 @@ function renderAll() {
   renderThreadView();
   renderRecentPosts();
   renderCharacters();
+  renderCharacterDossier();
   renderStorySoFar();
   renderNotificationButton();
   populateSelects();
@@ -976,18 +1067,52 @@ function renderFullStory(world, posts) {
   const firstPost = posts[0];
   const latestPost = posts[posts.length - 1];
   const activeThreads = getActiveStoryThreads(world.id);
+  const totalPages = Math.max(1, Math.ceil(posts.length / CHRONICLES_STORY_PAGE_SIZE));
+  const currentPage = clampStoryPage(state.storyPage, totalPages);
+  state.storyPage = currentPage;
+  const startIndex = (currentPage - 1) * CHRONICLES_STORY_PAGE_SIZE;
+  const pagePosts = posts.slice(startIndex, startIndex + CHRONICLES_STORY_PAGE_SIZE);
+  const rangeStart = posts.length ? startIndex + 1 : 0;
+  const rangeEnd = posts.length ? startIndex + pagePosts.length : 0;
   return `
     <div class="chronicles-story-header">
       <div>
         <p class="banri-modal-kicker mb-1">${escapeHtml(world.genre || "World")} / ${escapeHtml(world.status || "Active")}</p>
         <h3>${escapeHtml(world.title)} Chronicle</h3>
-        <span>${posts.length} narrative post${posts.length === 1 ? "" : "s"} across ${activeThreads.length} active location${activeThreads.length === 1 ? "" : "s"} / location descriptions hidden</span>
+        <span>${posts.length} narrative post${posts.length === 1 ? "" : "s"} across ${activeThreads.length} active location${activeThreads.length === 1 ? "" : "s"} / showing ${rangeStart}-${rangeEnd} / location descriptions hidden</span>
       </div>
       <small>${firstPost ? escapeHtml(formatDate(firstPost.createdAt)) : "No entries"}${latestPost && latestPost !== firstPost ? ` - ${escapeHtml(formatDate(latestPost.createdAt))}` : ""}</small>
     </div>
+    ${renderStoryPager(currentPage, totalPages, posts.length)}
     <div class="chronicles-story-timeline">
-      ${posts.length ? posts.map((post, index) => renderStoryEntry(post, index)).join("") : '<div class="relay-empty">No narrative posts have been transmitted in this world yet.</div>'}
+      ${pagePosts.length ? pagePosts.map((post, index) => renderStoryEntry(post, startIndex + index)).join("") : '<div class="relay-empty">No narrative posts have been transmitted in this world yet.</div>'}
     </div>
+    ${renderStoryPager(currentPage, totalPages, posts.length)}
+  `;
+}
+
+function clampStoryPage(page, totalPages) {
+  return Math.min(Math.max(Number(page) || 1, 1), Math.max(Number(totalPages) || 1, 1));
+}
+
+function renderStoryPager(currentPage, totalPages, totalPosts) {
+  if (totalPages <= 1) return "";
+  const pageWindow = new Set([1, totalPages, currentPage, currentPage - 1, currentPage + 1]);
+  const buttons = [...pageWindow]
+    .filter((page) => page >= 1 && page <= totalPages)
+    .sort((a, b) => a - b)
+    .map((page, index, pages) => {
+      const gap = index && page - pages[index - 1] > 1 ? '<span aria-hidden="true">...</span>' : "";
+      return `${gap}<button class="${page === currentPage ? "active" : ""}" type="button" data-chronicles-story-page="${page}" ${page === currentPage ? 'aria-current="page"' : ""}>${page}</button>`;
+    }).join("");
+
+  return `
+    <nav class="chronicles-story-pager" aria-label="Story So Far pagination">
+      <button type="button" data-chronicles-story-page="${currentPage - 1}" ${currentPage <= 1 ? "disabled" : ""}>Previous</button>
+      <div>${buttons}</div>
+      <button type="button" data-chronicles-story-page="${currentPage + 1}" ${currentPage >= totalPages ? "disabled" : ""}>Next</button>
+      <small>Page ${currentPage} of ${totalPages} / ${totalPosts} posts</small>
+    </nav>
   `;
 }
 
@@ -1211,13 +1336,28 @@ function countBy(items, getter) {
 function renderCharacters() {
   if (!elements.characterGrid) return;
   const worlds = getWorlds();
-  const characters = getCharacters();
+  const search = state.characterSearch.trim().toLowerCase();
+  const characters = getCharacters().filter((character) => {
+    if (!search) return true;
+    const world = worlds.find((item) => item.id === character.worldId);
+    return [
+      character.name,
+      character.ownerDisplayName,
+      character.species,
+      character.role,
+      character.alignment,
+      character.affiliation,
+      character.location,
+      character.status,
+      world?.title
+    ].join(" ").toLowerCase().includes(search);
+  });
 
   elements.characterGrid.innerHTML = characters.length ? characters.map((character) => {
     const world = worlds.find((item) => item.id === character.worldId);
     return `
       <article class="chronicles-character-card">
-        <div class="chronicles-character-portrait" style="${character.image ? `--character-image: url('${escapeAttr(character.image)}')` : ""}">
+        <div class="chronicles-character-portrait${character.image ? " has-image" : ""}" style="${character.image ? `--character-image: url('${escapeAttr(character.image)}')` : ""}">
           <span>${escapeHtml((character.name || "?").charAt(0))}</span>
         </div>
         <div>
@@ -1230,12 +1370,292 @@ function renderCharacters() {
           </dl>
           ${character.origin ? `<p>${escapeHtml(character.origin).slice(0, 220)}${character.origin.length > 220 ? "..." : ""}</p>` : ""}
           <div class="chronicles-forum-actions">
-            <button type="button" data-chronicles-open-character="${escapeAttr(character.id)}">Open Record</button>
+            <button type="button" data-chronicles-open-character="${escapeAttr(character.id)}">Open Dossier</button>
           </div>
         </div>
       </article>
     `;
-  }).join("") : '<div class="relay-empty">No characters registered yet.</div>';
+  }).join("") : '<div class="relay-empty">No character records match that signal.</div>';
+}
+
+function renderCharacterDossier() {
+  if (!elements.dossierShell) return;
+  const character = getCharacter(state.selectedCharacterId);
+  if (!character) {
+    elements.dossierShell.innerHTML = `
+      <div class="panel-frame placeholder-panel">
+        <p class="banri-modal-kicker">Character Dossier</p>
+        <h2 id="chroniclesDossierTitle">No dossier selected.</h2>
+        <p>Open a character from the registry to read their dossier.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const world = getWorld(character.worldId);
+  const current = getCharacterCurrentState(character);
+  const latest = current.latest;
+  const canEdit = canEditCharacter(character);
+  const canPostAsCharacter = canUseCharacterVoice(character);
+  const activeTab = ["profile", "chronicle", "connections", "gallery", "archive", "ooc"].includes(state.dossierTab) ? state.dossierTab : "profile";
+  const portraitStyle = character.image ? `--dossier-portrait: url('${escapeAttr(character.image)}')` : "";
+  const initial = (character.name || "?").charAt(0);
+
+  elements.dossierShell.innerHTML = `
+    <div class="section-heading">
+      <p><span>//</span> Character Dossier</p>
+      <h2 id="chroniclesDossierTitle">${escapeHtml(character.name || "Unnamed Character")}</h2>
+      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-view-jump="characters">Back to Registry</button>
+    </div>
+
+    <article class="chronicles-dossier panel-frame">
+      <header class="chronicles-dossier-header">
+        <div class="chronicles-dossier-portrait${character.image ? " has-image" : ""}" style="${portraitStyle}">
+          <span>${escapeHtml(initial)}</span>
+        </div>
+        <div class="chronicles-dossier-identity">
+          <p class="banri-modal-kicker mb-2">${escapeHtml(world?.title || "Unassigned World")} / ${escapeHtml(character.ownerDisplayName || "Unknown")}</p>
+          <h3>${escapeHtml(character.name || "Unnamed Character")}</h3>
+          ${character.alias ? `<p class="chronicles-dossier-alias">${escapeHtml(character.alias)}</p>` : ""}
+          <div class="chronicles-dossier-facts">
+            ${renderDossierFact("Role", character.role || "Unassigned")}
+            ${renderDossierFact("Species / Origin", character.species || "Unknown")}
+            ${renderDossierFact("Cycle of Years", character.age || "Not recorded")}
+            ${renderDossierFact("Affiliation", current.affiliation || "None recorded")}
+            ${renderDossierFact("Alignment", character.alignment || "Unknown")}
+          </div>
+          <div class="chronicles-dossier-actions">
+            ${canPostAsCharacter ? `<button class="btn btn-banri-primary btn-sm" type="button" data-chronicles-continue-character="${escapeAttr(character.id)}">Continue as ${escapeHtml(character.name || "Character")}</button>` : ""}
+            ${current.thread ? `<button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open-thread="${escapeAttr(`${character.worldId}:${current.thread.id}`)}">Open Current Location</button>` : ""}
+            ${canEdit ? `<button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-edit-character="${escapeAttr(character.id)}">Edit Dossier</button>` : ""}
+          </div>
+        </div>
+      </header>
+
+      <section class="chronicles-dossier-state" aria-label="Current character state">
+        ${renderDossierFact("Current Location", current.location)}
+        ${renderDossierFact("Current Arc", current.arcTitle)}
+        ${renderDossierFact("Active Objective", current.objective)}
+        ${renderDossierFact("Condition", current.condition)}
+        ${renderDossierFact("Last Appearance", latest ? `${latest.threadTitle} / ${formatDate(latest.createdAt)}` : "No linked posts yet")}
+      </section>
+
+      <nav class="chronicles-dossier-tabs" aria-label="Dossier sections">
+        ${renderDossierTabButton("profile", "Profile", activeTab)}
+        ${renderDossierTabButton("chronicle", "Chronicle", activeTab)}
+        ${renderDossierTabButton("connections", "Connections", activeTab)}
+        ${renderDossierTabButton("gallery", "Gallery", activeTab)}
+        ${renderDossierTabButton("archive", "Archive Files", activeTab)}
+        ${renderDossierTabButton("ooc", "OOC", activeTab)}
+      </nav>
+
+      <div class="chronicles-dossier-content">
+        ${renderDossierTabContent(character, activeTab)}
+      </div>
+    </article>
+  `;
+}
+
+function renderDossierFact(label, value) {
+  return `
+    <div class="chronicles-dossier-fact">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value || "Not recorded")}</strong>
+    </div>
+  `;
+}
+
+function renderDossierTabButton(tab, label, activeTab) {
+  return `<button class="${tab === activeTab ? "active" : ""}" type="button" data-chronicles-dossier-tab="${escapeAttr(tab)}">${escapeHtml(label)}</button>`;
+}
+
+function renderDossierTabContent(character, tab) {
+  if (tab === "chronicle") return renderDossierChronicle(character);
+  if (tab === "connections") return renderDossierConnections(character);
+  if (tab === "gallery") return renderDossierGallery(character);
+  if (tab === "archive") return renderDossierArchive(character);
+  if (tab === "ooc") return renderDossierOoc(character);
+  return renderDossierProfile(character);
+}
+
+function renderDossierProfile(character) {
+  const sections = [
+    readSection("Origin Tale", character.origin),
+    readSection("Armament / Equipment", character.equipment),
+    readSection("Skills / Aptitudes", character.skills),
+    readSection("Personality Notes", character.personality),
+    readSection("Hooks / Rumors", character.hooks)
+  ].filter(Boolean).join("");
+  return `
+    <div class="chronicles-dossier-profile">
+      <div class="chronicles-dossier-readable">
+        ${sections || '<div class="relay-empty">No profile dossier sections recorded yet.</div>'}
+      </div>
+    </div>
+  `;
+}
+
+function renderDossierChronicle(character) {
+  const posts = getCharacterPosts(character, "desc");
+  const appearances = [...posts.reduce((map, post) => {
+    const key = `${post.worldId}:${post.threadId}`;
+    const existing = map.get(key) || { ...post, count: 0 };
+    existing.count += 1;
+    if (toTime(post.createdAt) > toTime(existing.createdAt)) {
+      existing.createdAt = post.createdAt;
+      existing.id = post.id;
+      existing.title = post.title;
+    }
+    map.set(key, existing);
+    return map;
+  }, new Map()).values()].sort((a, b) => toTime(b.createdAt) - toTime(a.createdAt));
+
+  return `
+    <div class="chronicles-dossier-chronicle">
+      <section>
+        <div class="chronicles-dossier-subhead">
+          <p>// Recent Entries</p>
+          <span>${posts.length} linked post${posts.length === 1 ? "" : "s"}</span>
+        </div>
+        <div class="chronicles-dossier-posts">
+          ${posts.length ? posts.slice(0, 8).map((post) => `
+            <article>
+              <div>
+                <strong>${escapeHtml(post.title || post.threadTitle)}</strong>
+                <span>${escapeHtml(post.worldTitle)} / ${escapeHtml(post.threadTitle)} / ${escapeHtml(formatDate(post.createdAt))}</span>
+              </div>
+              <p>${escapeHtml(summarizePost(post, 180))}</p>
+              <button type="button" data-chronicles-open-thread-from-post="${escapeAttr(post.worldId)}:${escapeAttr(post.threadId)}:${escapeAttr(post.id)}">Open Post</button>
+            </article>
+          `).join("") : '<div class="relay-empty">No character-linked story posts yet. Use Character Voice when posting to build this history.</div>'}
+        </div>
+      </section>
+      <section>
+        <div class="chronicles-dossier-subhead">
+          <p>// Location History</p>
+          <span>${appearances.length} location${appearances.length === 1 ? "" : "s"}</span>
+        </div>
+        <div class="chronicles-dossier-appearances">
+          ${appearances.length ? appearances.map((appearance) => `
+            <article>
+              <strong>${escapeHtml(appearance.threadTitle)}</strong>
+              <span>${escapeHtml(appearance.worldTitle)} / ${appearance.count} post${appearance.count === 1 ? "" : "s"} / ${escapeHtml(formatDate(appearance.createdAt))}</span>
+              <button type="button" data-chronicles-open-thread-from-post="${escapeAttr(appearance.worldId)}:${escapeAttr(appearance.threadId)}:${escapeAttr(appearance.id)}">Jump In</button>
+            </article>
+          `).join("") : '<div class="relay-empty">No location appearances recorded yet.</div>'}
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+function renderDossierConnections(character) {
+  const relationships = normalizeDossierConnections(character.relationships || character.connections);
+  return `
+    <div class="chronicles-dossier-connections">
+      ${relationships.length ? relationships.map((relationship) => {
+        const target = getCharacter(relationship.targetCharacterId);
+        return `
+          <article>
+            <p>${escapeHtml(relationship.type || "Connection")}</p>
+            <h4>${target ? escapeHtml(target.name) : escapeHtml(relationship.externalName || "Unnamed connection")}</h4>
+            <span>${escapeHtml(relationship.status || "Status not recorded")}</span>
+            ${relationship.note ? `<div class="chronicles-markdown">${renderMarkdown(relationship.note)}</div>` : ""}
+            ${target ? `<button type="button" data-chronicles-open-character="${escapeAttr(target.id)}">Open Dossier</button>` : ""}
+          </article>
+        `;
+      }).join("") : '<div class="relay-empty">No structured connections recorded yet.</div>'}
+    </div>
+  `;
+}
+
+function renderDossierGallery(character) {
+  const galleryItems = normalizeDossierMediaItems(character.gallery, "image");
+  const legacyPortrait = character.image ? [{ id: "primary-portrait", title: "Primary Portrait", url: character.image, caption: "Character portrait stored in the dossier record." }] : [];
+  const items = [...legacyPortrait, ...galleryItems].filter((item) => item.url || item.image || item.downloadURL);
+  return `
+    <div class="chronicles-dossier-gallery">
+      ${items.length ? items.map((item) => {
+        const url = item.url || item.image || item.downloadURL;
+        const title = item.title || "Untitled image";
+        const caption = item.caption || "";
+        return `
+          <article>
+            <button class="chronicles-gallery-media" type="button" data-chronicles-open-media data-chronicles-media-url="${escapeAttr(url)}" data-chronicles-media-title="${escapeAttr(title)}" data-chronicles-media-caption="${escapeAttr(caption)}">
+              <img src="${escapeAttr(url)}" alt="${escapeAttr(item.altText || title || `${character.name} gallery image`)}" loading="lazy" referrerpolicy="no-referrer" />
+            </button>
+            <div class="chronicles-gallery-meta">
+              <span>Gallery Image</span>
+              <strong>${escapeHtml(title)}</strong>
+              <p>${caption ? escapeHtml(caption) : "No caption recorded."}</p>
+              <button type="button" data-chronicles-open-media data-chronicles-media-url="${escapeAttr(url)}" data-chronicles-media-title="${escapeAttr(title)}" data-chronicles-media-caption="${escapeAttr(caption)}">Open Full Image</button>
+            </div>
+          </article>
+        `;
+      }).join("") : '<div class="relay-empty">No gallery images curated yet.</div>'}
+    </div>
+  `;
+}
+
+function renderDossierArchive(character) {
+  const files = normalizeDossierMediaItems(character.archiveFiles || character.files, "archive");
+  const audioItems = normalizeDossierMediaItems(character.audio || character.audioFiles, "audio");
+  const hasFiles = files.length || audioItems.length;
+  return `
+    <div class="chronicles-dossier-files">
+      ${hasFiles ? `
+        ${files.map((file) => {
+          const url = file.url || file.downloadURL || file.image;
+          const title = file.title || file.name || "Unnamed file";
+          const caption = file.caption || "";
+          const kind = file.fileType || file.mimeType || "Archive File";
+          const preview = url && isImageUrl(url) ? `
+            <button class="chronicles-archive-preview" type="button" data-chronicles-open-media data-chronicles-media-url="${escapeAttr(url)}" data-chronicles-media-title="${escapeAttr(title)}" data-chronicles-media-caption="${escapeAttr(caption)}">
+              <img src="${escapeAttr(url)}" alt="${escapeAttr(title)}" loading="lazy" referrerpolicy="no-referrer" />
+            </button>
+          ` : "";
+          return `
+            <article>
+              ${preview}
+              <p>${escapeHtml(kind)}</p>
+              <strong>${escapeHtml(title)}</strong>
+              ${caption ? `<span>${escapeHtml(caption)}</span>` : ""}
+              ${url ? `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open File</a>` : ""}
+            </article>
+          `;
+        }).join("")}
+        ${audioItems.map((item) => {
+          const url = item.url || item.downloadURL || item.image;
+          return `
+            <article class="chronicles-dossier-audio-card">
+              <p>${escapeHtml(item.audioType || "audio")} / URL Signal</p>
+              <strong>${escapeHtml(item.title || "Untitled audio")}</strong>
+              ${item.caption ? `<span>${escapeHtml(item.caption)}</span>` : ""}
+              <audio controls preload="none" src="${escapeAttr(url)}"></audio>
+              <a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open Audio</a>
+            </article>
+          `;
+        }).join("")}
+      ` : '<div class="relay-empty">No archive files or audio signals recorded yet.</div>'}
+    </div>
+  `;
+}
+
+function renderDossierOoc(character) {
+  const notes = character.oocNotes || character.collaborationNotes || "";
+  return `
+    <div class="chronicles-dossier-ooc">
+      ${renderDossierFact("Created By", character.ownerDisplayName || "Unknown")}
+      ${renderDossierFact("Character Owner UID", state.isAdmin ? character.uid || "Not recorded" : "Protected")}
+      ${renderDossierFact("Writing Preference", character.writingPreference || "Not recorded")}
+      ${renderDossierFact("Consent Boundary", character.consentBoundary || "Use post-level character-effects badges")}
+      ${renderDossierFact("Posting Pace", character.postingPace || "Not recorded")}
+      <section class="chronicles-dossier-ooc-notes">
+        <p>// Collaborator Notes</p>
+        ${notes ? `<div class="chronicles-markdown">${renderMarkdown(notes)}</div>` : '<div class="relay-empty">No public OOC notes recorded yet.</div>'}
+      </section>
+    </div>
+  `;
 }
 
 function renderAdminVisibility() {
@@ -1266,6 +1686,7 @@ function populateSelects() {
 
   populateCategorySelects();
   populateThreadSelect();
+  populatePostCharacterSelect(document.getElementById("chroniclesPostCharacter")?.value || "");
   renderStoryWorldSelect(state.storyWorldId);
 }
 
@@ -1307,6 +1728,29 @@ function populateThreadSelect(selectedThreadId = "") {
   }
 }
 
+function populatePostCharacterSelect(selectedCharacterId = "") {
+  const worldSelect = document.getElementById("chroniclesPostWorld");
+  const characterSelect = document.getElementById("chroniclesPostCharacter");
+  if (!worldSelect || !characterSelect) return;
+  const worldId = worldSelect.value || state.selectedWorldId;
+  const characters = getCharacters().filter((character) => character.worldId === worldId && canUseCharacterVoice(character));
+  characterSelect.innerHTML = [
+    '<option value="">No linked character</option>',
+    ...characters.map((character) => `<option value="${escapeAttr(character.id)}">${escapeHtml(character.name || "Unnamed Character")} / ${escapeHtml(character.ownerDisplayName || "Unknown")}</option>`)
+  ].join("");
+  characterSelect.value = selectedCharacterId && characters.some((character) => character.id === selectedCharacterId) ? selectedCharacterId : "";
+}
+
+function applySelectedPostCharacterVoice(force = false) {
+  const characterId = readValue("chroniclesPostCharacter");
+  const character = getCharacter(characterId);
+  if (!character) return;
+  const authorInput = document.getElementById("chroniclesPostAuthor");
+  const ownerInput = document.getElementById("chroniclesPostOwner");
+  if (authorInput && (force || !authorInput.value.trim())) authorInput.value = character.name || "";
+  if (ownerInput && (force || !ownerInput.value.trim())) ownerInput.value = character.ownerDisplayName || "";
+}
+
 function showView(view) {
   state.view = view;
   document.querySelectorAll("[data-chronicles-view]").forEach((section) => {
@@ -1343,8 +1787,51 @@ function openWorld(worldId) {
 function openStory(worldId) {
   state.storyWorldId = getWorld(worldId)?.id || state.selectedWorldId;
   state.selectedWorldId = state.storyWorldId;
+  state.storyPage = 1;
   showView("story");
   renderAll();
+}
+
+function openCharacterDossier(characterId, options = {}) {
+  const character = getCharacter(characterId);
+  if (!character) return;
+  state.selectedCharacterId = character.id;
+  state.selectedWorldId = character.worldId || state.selectedWorldId;
+  state.dossierTab = options.tab || state.dossierTab || "profile";
+  state.view = "dossier";
+  state.routeApplied = true;
+
+  if (options.push !== false) {
+    const nextUrl = `${window.location.pathname}?character=${encodeURIComponent(character.id)}`;
+    window.history.pushState(null, "", nextUrl);
+  }
+
+  renderAll();
+}
+
+function openCharacterEditor(characterId) {
+  const character = getCharacter(characterId);
+  if (!character || !canEditCharacter(character)) return;
+  state.selectedCharacterId = character.id;
+  state.characterEditing = true;
+  setText(elements.characterDetailStatus, "");
+  renderCharacterDetailModal();
+  showBootstrapModal("chroniclesCharacterDetailModal");
+}
+
+function continueAsCharacter(characterId) {
+  const character = getCharacter(characterId);
+  if (!character || !canUseCharacterVoice(character)) return;
+  const current = getCharacterCurrentState(character);
+  const latest = current.latest;
+  const worldId = character.worldId || latest?.worldId || state.selectedWorldId;
+  const threadId = current.thread?.id || latest?.threadId || getThread(worldId, state.selectedThreadId)?.id || "";
+
+  openPostModal({
+    worldId,
+    threadId,
+    characterId: character.id
+  });
 }
 
 function openThread(route) {
@@ -1409,6 +1896,16 @@ function openModal(kind, options = {}) {
     if (worldSelect) worldSelect.value = state.selectedWorldId;
     if (ownerInput) ownerInput.value = state.isAdmin ? "" : getDisplayName();
     if (ownerUidInput) ownerUidInput.value = "";
+    clearFileInput("chroniclesCharacterImage");
+    setInputValue("chroniclesCharacterGalleryUrls", "");
+    setInputValue("chroniclesCharacterAudioUrls", "");
+    setInputValue("chroniclesCharacterConnections", "");
+    setInputValue("chroniclesCharacterArchiveUrls", "");
+    setInputValue("chroniclesCharacterWritingPreference", "");
+    setInputValue("chroniclesCharacterConsentBoundary", "");
+    setInputValue("chroniclesCharacterPostingPace", "");
+    setInputValue("chroniclesCharacterOocNotes", "");
+    renderPortraitUploadPreview("chroniclesCharacterImage", "chroniclesCharacterPortraitPreview");
     showBootstrapModal("chroniclesCharacterModal");
   }
 }
@@ -1429,6 +1926,7 @@ function openPostModal(options = {}) {
 
   if (worldSelect) worldSelect.value = worldId;
   populateThreadSelect(threadId);
+  populatePostCharacterSelect(options.characterId || options.post?.characterId || "");
   setInputValue("chroniclesPostTitle", options.post?.title || "");
   setInputValue("chroniclesPostBody", options.post?.body || options.prefill || "");
   setInputValue("chroniclesPostType", options.post?.postType || "player");
@@ -1436,6 +1934,7 @@ function openPostModal(options = {}) {
   setInputValue("chroniclesPostImageUrl", "");
   if (authorInput) authorInput.value = options.post?.authorName || "";
   if (ownerInput) ownerInput.value = options.post?.ownerDisplayName || options.post?.authorName || "";
+  if (options.characterId || options.post?.characterId) applySelectedPostCharacterVoice(!options.post);
   renderPostAttachmentPreview();
   renderPostPreview(false);
   showBootstrapModal("chroniclesPostModal");
@@ -1519,12 +2018,16 @@ function renderCharacterDetailModal() {
         ${detailRow("Affiliation", character.affiliation)}
         ${detailRow("Current Location", character.location)}
         ${detailRow("Status", character.status)}
+        ${detailRow("Writing Preference", character.writingPreference)}
+        ${detailRow("Consent Boundary", character.consentBoundary)}
+        ${detailRow("Posting Pace", character.postingPace)}
       </dl>
       ${readSection("Origin Tale", character.origin)}
       ${readSection("Armament / Equipment", character.equipment)}
       ${readSection("Skills / Aptitudes", character.skills)}
       ${readSection("Personality Notes", character.personality)}
       ${readSection("Hooks / Rumors", character.hooks)}
+      ${readSection("OOC Notes", character.oocNotes || character.collaborationNotes)}
     `;
   }
 
@@ -1548,12 +2051,24 @@ function setCharacterEditFields(character) {
   setInputValue("chroniclesCharacterEditAlignment", character.alignment || "");
   setInputValue("chroniclesCharacterEditAffiliation", character.affiliation || "");
   setInputValue("chroniclesCharacterEditLocation", character.location || "");
-  setInputValue("chroniclesCharacterEditImage", character.image || "");
+  setInputValue("chroniclesCharacterEditArc", character.currentState?.arcTitle || character.arcTitle || "");
+  setInputValue("chroniclesCharacterEditObjective", character.currentState?.objective || character.objective || "");
+  setInputValue("chroniclesCharacterEditStatusInput", character.currentState?.condition || character.status || "Active");
+  clearFileInput("chroniclesCharacterEditImage");
+  renderPortraitUploadPreview("chroniclesCharacterEditImage", "chroniclesCharacterEditPortraitPreview", character.image || "");
+  setInputValue("chroniclesCharacterEditGalleryUrls", serializeDossierUrlItems(character.gallery, "image"));
+  setInputValue("chroniclesCharacterEditAudioUrls", serializeDossierUrlItems(character.audio || character.audioFiles, "audio"));
+  setInputValue("chroniclesCharacterEditConnections", serializeDossierConnections(character.relationships || character.connections));
+  setInputValue("chroniclesCharacterEditArchiveUrls", serializeDossierUrlItems(character.archiveFiles || character.files, "archive"));
   setInputValue("chroniclesCharacterEditOrigin", character.origin || "");
   setInputValue("chroniclesCharacterEditEquipment", character.equipment || "");
   setInputValue("chroniclesCharacterEditSkills", character.skills || "");
   setInputValue("chroniclesCharacterEditPersonality", character.personality || "");
   setInputValue("chroniclesCharacterEditHooks", character.hooks || "");
+  setInputValue("chroniclesCharacterEditWritingPreference", character.writingPreference || "");
+  setInputValue("chroniclesCharacterEditConsentBoundary", character.consentBoundary || "");
+  setInputValue("chroniclesCharacterEditPostingPace", character.postingPace || "");
+  setInputValue("chroniclesCharacterEditOocNotes", character.oocNotes || character.collaborationNotes || "");
   const ownerInput = document.getElementById("chroniclesCharacterEditOwner");
   const ownerUidInput = document.getElementById("chroniclesCharacterEditOwnerUid");
   if (ownerInput) ownerInput.disabled = !state.isAdmin;
@@ -1841,8 +2356,10 @@ async function handlePostSubmit(event) {
     const override = state.isAdmin ? readValue("chroniclesPostAuthor") : "";
     const ownerOverride = state.isAdmin ? readValue("chroniclesPostOwner") : "";
     const systemAuthor = postType === "narrator" ? "Narrator" : postType === "location-description" ? "Location Archive" : "";
-    const authorName = override || systemAuthor || state.editingPost?.authorName || getDisplayName();
-    const ownerDisplayName = ownerOverride || (systemAuthor ? "Chronicle Custodian" : "") || state.editingPost?.ownerDisplayName || authorName;
+    const selectedCharacterRaw = postType === "player" ? getCharacter(readValue("chroniclesPostCharacter")) : null;
+    const selectedCharacter = selectedCharacterRaw && canUseCharacterVoice(selectedCharacterRaw) ? selectedCharacterRaw : null;
+    const authorName = override || systemAuthor || selectedCharacter?.name || state.editingPost?.authorName || getDisplayName();
+    const ownerDisplayName = ownerOverride || (systemAuthor ? "Chronicle Custodian" : "") || selectedCharacter?.ownerDisplayName || state.editingPost?.ownerDisplayName || authorName;
     const postId = state.editingPost?.id || push(ref(database, `chronicles/posts/${worldId}/${threadId}`)).key;
     const originalWorldId = state.editingPost?.worldId || "";
     const originalThreadId = state.editingPost?.threadId || "";
@@ -1855,6 +2372,8 @@ async function handlePostSubmit(event) {
       threadId,
       ownerDisplayName,
       authorName,
+      characterId: selectedCharacter?.id || "",
+      characterDisplayName: selectedCharacter?.name || "",
       postType,
       allowCharacterEffects: readCheckbox("chroniclesAllowCharacterEffects"),
       title: readValue("chroniclesPostTitle"),
@@ -1906,8 +2425,19 @@ async function handleCharacterSubmit(event) {
 
   const ownerDisplayName = state.isAdmin ? readValue("chroniclesCharacterOwner") || getDisplayName() : getDisplayName();
   const ownerUid = state.isAdmin ? readValue("chroniclesCharacterOwnerUid") || state.user.uid : state.user.uid;
+  const location = readValue("chroniclesCharacterLocation");
+  const arcTitle = readValue("chroniclesCharacterArc");
+  const objective = readValue("chroniclesCharacterObjective");
+  const condition = readValue("chroniclesCharacterStatusInput") || "Active";
+  const affiliation = readValue("chroniclesCharacterAffiliation");
   const characterRef = push(ref(database, "chronicles/characters"));
+  setText(elements.characterStatus, "Saving character...");
   try {
+    const portrait = await readPortraitUpload("chroniclesCharacterImage");
+    const gallery = parseDossierUrlItems(readValue("chroniclesCharacterGalleryUrls"), "image");
+    const audio = parseDossierUrlItems(readValue("chroniclesCharacterAudioUrls"), "audio");
+    const relationships = parseDossierConnections(readValue("chroniclesCharacterConnections"));
+    const archiveFiles = parseDossierUrlItems(readValue("chroniclesCharacterArchiveUrls"), "archive");
     await set(characterRef, {
       id: characterRef.key,
       uid: ownerUid,
@@ -1918,15 +2448,33 @@ async function handleCharacterSubmit(event) {
       age: readValue("chroniclesCharacterAge"),
       role: readValue("chroniclesCharacterRole"),
       alignment: readValue("chroniclesCharacterAlignment"),
-      affiliation: readValue("chroniclesCharacterAffiliation"),
-      location: readValue("chroniclesCharacterLocation"),
-      image: readValue("chroniclesCharacterImage"),
+      affiliation,
+      location,
+      arcTitle,
+      objective,
+      image: portrait,
+      gallery,
+      audio,
+      relationships,
+      archiveFiles,
+      files: archiveFiles,
       origin: readValue("chroniclesCharacterOrigin"),
       equipment: readValue("chroniclesCharacterEquipment"),
       skills: readValue("chroniclesCharacterSkills"),
       personality: readValue("chroniclesCharacterPersonality"),
       hooks: readValue("chroniclesCharacterHooks"),
-      status: "Active",
+      writingPreference: readValue("chroniclesCharacterWritingPreference"),
+      consentBoundary: readValue("chroniclesCharacterConsentBoundary"),
+      postingPace: readValue("chroniclesCharacterPostingPace"),
+      oocNotes: readValue("chroniclesCharacterOocNotes"),
+      status: condition,
+      currentState: {
+        location,
+        arcTitle,
+        objective,
+        condition,
+        affiliation
+      },
       createdAt: Date.now(),
       updatedAt: Date.now()
     });
@@ -1969,6 +2517,16 @@ async function handleCharacterDetailSave() {
   setText(elements.characterDetailStatus, "Saving character...");
 
   try {
+    const location = readValue("chroniclesCharacterEditLocation");
+    const arcTitle = readValue("chroniclesCharacterEditArc");
+    const objective = readValue("chroniclesCharacterEditObjective");
+    const condition = readValue("chroniclesCharacterEditStatusInput") || character.status || "Active";
+    const affiliation = readValue("chroniclesCharacterEditAffiliation");
+    const portrait = await readPortraitUpload("chroniclesCharacterEditImage", character.image || "");
+    const gallery = parseDossierUrlItems(readValue("chroniclesCharacterEditGalleryUrls"), "image");
+    const audio = parseDossierUrlItems(readValue("chroniclesCharacterEditAudioUrls"), "audio");
+    const relationships = parseDossierConnections(readValue("chroniclesCharacterEditConnections"));
+    const archiveFiles = parseDossierUrlItems(readValue("chroniclesCharacterEditArchiveUrls"), "archive");
     await set(ref(database, `chronicles/characters/${character.id}`), {
       ...character,
       uid: state.isAdmin ? readValue("chroniclesCharacterEditOwnerUid") || (character.uid === "seed" ? state.user.uid : character.uid) : character.uid,
@@ -1979,15 +2537,34 @@ async function handleCharacterDetailSave() {
       age: readValue("chroniclesCharacterEditAge"),
       role: readValue("chroniclesCharacterEditRole"),
       alignment: readValue("chroniclesCharacterEditAlignment"),
-      affiliation: readValue("chroniclesCharacterEditAffiliation"),
-      location: readValue("chroniclesCharacterEditLocation"),
-      image: readValue("chroniclesCharacterEditImage"),
+      affiliation,
+      location,
+      arcTitle,
+      objective,
+      image: portrait,
+      gallery,
+      audio,
+      relationships,
+      archiveFiles,
+      files: archiveFiles,
       origin: readValue("chroniclesCharacterEditOrigin"),
       equipment: readValue("chroniclesCharacterEditEquipment"),
       skills: readValue("chroniclesCharacterEditSkills"),
       personality: readValue("chroniclesCharacterEditPersonality"),
       hooks: readValue("chroniclesCharacterEditHooks"),
-      status: character.status || "Active",
+      writingPreference: readValue("chroniclesCharacterEditWritingPreference"),
+      consentBoundary: readValue("chroniclesCharacterEditConsentBoundary"),
+      postingPace: readValue("chroniclesCharacterEditPostingPace"),
+      oocNotes: readValue("chroniclesCharacterEditOocNotes"),
+      status: condition,
+      currentState: {
+        ...(character.currentState || {}),
+        location,
+        arcTitle,
+        objective,
+        condition,
+        affiliation
+      },
       createdAt: character.createdAt || Date.now(),
       updatedAt: Date.now()
     });
@@ -2034,6 +2611,246 @@ async function uploadPostImageAsset({ file, worldId, threadId }) {
     threadId,
     type: "image"
   };
+}
+
+function normalizeDossierMediaItems(value, mediaType = "") {
+  const items = Array.isArray(value) ? value : toArray(value);
+  return items
+    .map((item) => {
+      const url = normalizeDossierUrl(item?.url || item?.image || item?.downloadURL);
+      return item && url ? { ...item, url } : item;
+    })
+    .filter((item) => item && item.url)
+    .filter((item) => !mediaType || item.type === mediaType || !item.type)
+    .sort((a, b) => Number(a.order ?? a.sortOrder ?? 0) - Number(b.order ?? b.sortOrder ?? 0));
+}
+
+function normalizeDossierConnections(value) {
+  const items = Array.isArray(value) ? value : toArray(value);
+  return items
+    .filter((item) => item && (item.targetCharacterId || item.externalName || item.name))
+    .sort((a, b) => Number(a.order ?? a.sortOrder ?? 0) - Number(b.order ?? b.sortOrder ?? 0));
+}
+
+function parseDossierConnections(value) {
+  const lines = String(value || "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  return lines.map((line, index) => {
+    const [rawName, rawType, rawStatus, ...noteParts] = line.split("|").map((part) => part.trim());
+    if (!rawName) throw new Error("Connection entries need a character or external name.");
+    const target = findCharacterByReference(rawName);
+    const label = target?.name || rawName;
+    return {
+      id: `connection-${slugify(label) || "signal"}-${index + 1}`,
+      targetCharacterId: target?.id || "",
+      externalName: target ? "" : rawName,
+      type: rawType || "Connection",
+      status: rawStatus || "Status not recorded",
+      note: noteParts.join(" | ").trim(),
+      order: (index + 1) * 10,
+      visibility: "public"
+    };
+  });
+}
+
+function serializeDossierConnections(value) {
+  return normalizeDossierConnections(value).map((connection) => {
+    const target = getCharacter(connection.targetCharacterId);
+    const parts = [
+      target?.name || connection.externalName || connection.name || connection.targetCharacterId || "",
+      connection.type || "",
+      connection.status || "",
+      connection.note || ""
+    ];
+    while (parts.length > 1 && !parts[parts.length - 1]) parts.pop();
+    return parts.join(" | ").trim();
+  }).join("\n");
+}
+
+function findCharacterByReference(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return null;
+  const normalized = normalizeLookup(raw);
+  return getCharacters().find((character) => (
+    character.id === raw
+    || normalizeLookup(character.id) === normalized
+    || characterAliases(character).includes(normalized)
+  )) || null;
+}
+
+function parseDossierUrlItems(value, mediaType) {
+  const lines = String(value || "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  return lines.map((line, index) => {
+    const [rawUrl, rawTitle, rawCaption, rawAudioType] = line.split("|").map((part) => part.trim());
+    const url = normalizeDossierUrl(rawUrl);
+    if (!isHttpUrl(url)) {
+      const label = mediaType === "audio" ? "Audio" : mediaType === "archive" ? "Archive" : "Gallery";
+      throw new Error(`${label} entries must be full http or https URLs.`);
+    }
+    const title = rawTitle || titleFromUrl(url) || (mediaType === "audio" ? "Audio Signal" : "Gallery Image");
+    const item = {
+      id: `${mediaType}-${slugify(title) || "signal"}-${index + 1}`,
+      url,
+      title,
+      caption: rawCaption || "",
+      type: mediaType,
+      order: (index + 1) * 10
+    };
+    if (mediaType === "audio") {
+      item.audioType = normalizeAudioType(rawAudioType);
+    } else if (mediaType === "archive") {
+      item.fileType = normalizeArchiveType(rawAudioType);
+    }
+    return item;
+  });
+}
+
+function serializeDossierUrlItems(value, mediaType) {
+  return normalizeDossierMediaItems(value, mediaType).map((item) => {
+    const parts = [
+      item.url || item.image || item.downloadURL || "",
+      item.title || "",
+      item.caption || ""
+    ];
+    if (mediaType === "audio") parts.push(item.audioType || "other");
+    if (mediaType === "archive") parts.push(item.fileType || item.mimeType || "reference");
+    while (parts.length > 1 && !parts[parts.length - 1]) parts.pop();
+    return parts.join(" | ").trim();
+  }).join("\n");
+}
+
+function normalizeAudioType(value) {
+  const next = String(value || "other").trim().toLowerCase();
+  return CHRONICLES_AUDIO_TYPES.has(next) ? next : "other";
+}
+
+function normalizeArchiveType(value) {
+  const next = String(value || "reference").trim().toLowerCase();
+  return next || "reference";
+}
+
+function normalizeDossierUrl(value) {
+  let url = String(value || "").trim();
+  if (!url) return "";
+  const markdownLink = url.match(/^!?\[[^\]]*]\((https?:\/\/[^)\s]+)\)$/i);
+  if (markdownLink) url = markdownLink[1].trim();
+  const angleLink = url.match(/^<((?:https?:\/\/|data:image\/)[^>]+)>$/i);
+  if (angleLink) url = angleLink[1].trim();
+  return url;
+}
+
+function isImageUrl(value) {
+  const url = normalizeDossierUrl(value);
+  if (url.startsWith("data:image/")) return true;
+  try {
+    const parsed = new URL(url);
+    return /\.(jpe?g|png|webp|gif|avif|svg)$/i.test(parsed.pathname);
+  } catch {
+    return /\.(jpe?g|png|webp|gif|avif|svg)(\?.*)?$/i.test(url);
+  }
+}
+
+function openMediaViewer(trigger) {
+  const url = trigger?.dataset?.chroniclesMediaUrl || "";
+  if (!url) return;
+  const title = trigger.dataset.chroniclesMediaTitle || "Archive Image";
+  const caption = trigger.dataset.chroniclesMediaCaption || "No caption recorded.";
+  const image = document.getElementById("chroniclesMediaViewerImage");
+  const heading = document.getElementById("chroniclesMediaViewerTitle");
+  const captionTitle = document.getElementById("chroniclesMediaViewerCaptionTitle");
+  const captionText = document.getElementById("chroniclesMediaViewerCaption");
+  const link = document.getElementById("chroniclesMediaViewerLink");
+  if (image) {
+    image.referrerPolicy = "no-referrer";
+    image.src = url;
+    image.alt = title;
+  }
+  setText(heading, title);
+  setText(captionTitle, title);
+  setText(captionText, caption);
+  if (link) link.href = url;
+  showBootstrapModal("chroniclesMediaViewerModal");
+}
+
+function titleFromUrl(value) {
+  try {
+    const url = new URL(value);
+    const fileName = decodeURIComponent(url.pathname.split("/").filter(Boolean).pop() || "");
+    return fileName.replace(/\.[a-z0-9]+$/i, "").replace(/[-_]+/g, " ").trim();
+  } catch {
+    return "";
+  }
+}
+
+function isHttpUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function clearFileInput(id) {
+  const input = document.getElementById(id);
+  if (input) input.value = "";
+}
+
+function getFileInputFile(id) {
+  return document.getElementById(id)?.files?.[0] || null;
+}
+
+function isSupportedPortraitFile(file) {
+  return CHRONICLES_PORTRAIT_TYPES.has(file.type) || /\.(jpe?g|png|webp|gif)$/i.test(file.name || "");
+}
+
+async function readPortraitUpload(inputId, existingValue = "") {
+  const file = getFileInputFile(inputId);
+  if (!file) return existingValue;
+  if (!isSupportedPortraitFile(file)) {
+    throw new Error("Portrait uploads must be JPEG, PNG, WebP, or GIF.");
+  }
+  if (file.size > CHRONICLES_PORTRAIT_MAX_BYTES) {
+    throw new Error("Portrait uploads must be 1 MB or smaller for Realtime Database storage.");
+  }
+  return readFileAsDataUrl(file);
+}
+
+function renderPortraitUploadPreview(inputId, previewId, fallbackUrl = "") {
+  const preview = document.getElementById(previewId);
+  if (!preview) return;
+  const file = getFileInputFile(inputId);
+  if (file && !isSupportedPortraitFile(file)) {
+    preview.innerHTML = "<span>Unsupported portrait type. Use JPEG, PNG, WebP, or GIF.</span>";
+    return;
+  }
+  if (file && file.size > CHRONICLES_PORTRAIT_MAX_BYTES) {
+    preview.innerHTML = "<span>Portrait is over 1 MB. Compress it before saving to RTDB.</span>";
+    return;
+  }
+
+  let source = fallbackUrl;
+  let caption = fallbackUrl ? "Current portrait retained." : "No portrait selected.";
+  let objectUrl = "";
+  if (file) {
+    objectUrl = URL.createObjectURL(file);
+    source = objectUrl;
+    caption = `Queued portrait: ${file.name}`;
+  }
+
+  preview.innerHTML = source
+    ? `<img src="${escapeAttr(source)}" alt=""><span>${escapeHtml(caption)}</span>`
+    : `<span>${escapeHtml(caption)}</span>`;
+  if (objectUrl) {
+    preview.querySelector("img")?.addEventListener("load", () => URL.revokeObjectURL(objectUrl), { once: true });
+  }
 }
 
 function confirmChroniclesAction(message, title = "Confirm Action", confirmLabel = "Confirm") {
@@ -2140,6 +2957,10 @@ function bindEvents() {
     const threadPostButton = event.target.closest("[data-chronicles-thread-post]");
     const threadFromPost = event.target.closest("[data-chronicles-open-thread-from-post]");
     const characterOpen = event.target.closest("[data-chronicles-open-character]");
+    const characterEditButton = event.target.closest("[data-chronicles-edit-character]");
+    const characterContinueButton = event.target.closest("[data-chronicles-continue-character]");
+    const dossierTabButton = event.target.closest("[data-chronicles-dossier-tab]");
+    const mediaOpenButton = event.target.closest("[data-chronicles-open-media]");
     const replyButton = event.target.closest("[data-chronicles-reply-post]");
     const followButton = event.target.closest("[data-chronicles-follow-post]");
     const editPostButton = event.target.closest("[data-chronicles-edit-post]");
@@ -2149,6 +2970,7 @@ function bindEvents() {
     const viewAllWorldsButton = event.target.closest("[data-chronicles-view-all-worlds]");
     const notifyButton = event.target.closest("[data-chronicles-notifications]");
     const storyModeButton = event.target.closest("[data-chronicles-story-mode]");
+    const storyPageButton = event.target.closest("[data-chronicles-story-page]");
     const narratorButton = event.target.closest("[data-chronicles-narrator]");
     const aiOpenButton = event.target.closest("[data-chronicles-ai-open]");
     const aiSummaryButton = event.target.closest("[data-chronicles-ai-summary]");
@@ -2194,7 +3016,17 @@ function bindEvents() {
       showView("thread");
       renderAll();
     } else if (characterOpen) {
-      openCharacterDetail(characterOpen.dataset.chroniclesOpenCharacter);
+      openCharacterDossier(characterOpen.dataset.chroniclesOpenCharacter);
+    } else if (characterEditButton) {
+      openCharacterEditor(characterEditButton.dataset.chroniclesEditCharacter);
+    } else if (characterContinueButton) {
+      continueAsCharacter(characterContinueButton.dataset.chroniclesContinueCharacter);
+    } else if (dossierTabButton) {
+      state.dossierTab = dossierTabButton.dataset.chroniclesDossierTab || "profile";
+      renderCharacterDossier();
+    } else if (mediaOpenButton) {
+      event.preventDefault();
+      openMediaViewer(mediaOpenButton);
     } else if (replyButton) {
       const post = findPostById(replyButton.dataset.chroniclesReplyPost);
       openPostModal({
@@ -2221,8 +3053,13 @@ function bindEvents() {
       deleteThread(deleteThreadButton.dataset.chroniclesDeleteThread);
     } else if (notifyButton) {
       toggleNotifications();
+    } else if (storyPageButton) {
+      state.storyPage = Number(storyPageButton.dataset.chroniclesStoryPage) || 1;
+      renderStorySoFar();
+      elements.storyContent?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else if (storyModeButton) {
       state.storyMode = storyModeButton.dataset.chroniclesStoryMode || "full";
+      state.storyPage = 1;
       renderStorySoFar();
     } else if (narratorButton) {
       applyNarratorMode();
@@ -2256,7 +3093,11 @@ function bindEvents() {
     }
   });
 
-  document.getElementById("chroniclesPostWorld")?.addEventListener("change", () => populateThreadSelect());
+  document.getElementById("chroniclesPostWorld")?.addEventListener("change", () => {
+    populateThreadSelect();
+    populatePostCharacterSelect();
+  });
+  document.getElementById("chroniclesPostCharacter")?.addEventListener("change", () => applySelectedPostCharacterVoice(false));
   document.getElementById("chroniclesThreadWorld")?.addEventListener("change", () => populateCategorySelects());
   document.getElementById("chroniclesPostType")?.addEventListener("change", (event) => {
     if (!state.isAdmin) return;
@@ -2270,14 +3111,26 @@ function bindEvents() {
   });
   elements.storyWorld?.addEventListener("change", (event) => {
     state.storyWorldId = event.target.value || state.selectedWorldId;
+    state.storyPage = 1;
     renderStorySoFar();
   });
   elements.threadSearch?.addEventListener("input", (event) => {
     state.threadSearch = event.target.value || "";
     renderThreads();
   });
+  elements.characterSearch?.addEventListener("input", (event) => {
+    state.characterSearch = event.target.value || "";
+    renderCharacters();
+  });
   document.getElementById("chroniclesPostImageFile")?.addEventListener("change", renderPostAttachmentPreview);
   document.getElementById("chroniclesPostImageUrl")?.addEventListener("input", renderPostAttachmentPreview);
+  document.getElementById("chroniclesCharacterImage")?.addEventListener("change", () => {
+    renderPortraitUploadPreview("chroniclesCharacterImage", "chroniclesCharacterPortraitPreview");
+  });
+  document.getElementById("chroniclesCharacterEditImage")?.addEventListener("change", () => {
+    const character = getCharacter(state.selectedCharacterId);
+    renderPortraitUploadPreview("chroniclesCharacterEditImage", "chroniclesCharacterEditPortraitPreview", character?.image || "");
+  });
   document.getElementById("chroniclesPostBody")?.addEventListener("input", () => {
     if (elements.postPreview && !elements.postPreview.classList.contains("d-none")) renderPostPreview(true);
   });
@@ -2410,6 +3263,10 @@ function canEditCharacter(character) {
   return state.isAdmin || character.uid === state.user?.uid;
 }
 
+function canUseCharacterVoice(character) {
+  return state.isAdmin || character?.uid === state.user?.uid;
+}
+
 function findPostById(postId) {
   return getPosts().find((post) => post.id === postId) || null;
 }
@@ -2426,7 +3283,7 @@ function isChronicleRouteLink(link) {
 function applyRouteFromUrl() {
   if (state.routeApplied) return;
   const params = new URLSearchParams(window.location.search);
-  const hasRoute = params.has("world") || params.has("thread") || window.location.hash.startsWith("#chronicle-post-");
+  const hasRoute = params.has("character") || params.has("world") || params.has("thread") || window.location.hash.startsWith("#chronicle-post-");
   if (!hasRoute) {
     state.routeApplied = true;
     return;
@@ -2435,6 +3292,24 @@ function applyRouteFromUrl() {
 }
 
 function navigateChronicleRoute(url, options = {}) {
+  const characterId = url.searchParams.get("character");
+  if (characterId) {
+    const character = getCharacter(characterId);
+    if (!character) return;
+    state.selectedCharacterId = character.id;
+    state.selectedWorldId = character.worldId || state.selectedWorldId;
+    state.view = "dossier";
+    state.routeApplied = true;
+    const nextUrl = `${window.location.pathname}?character=${encodeURIComponent(character.id)}`;
+    if (options.replace) {
+      window.history.replaceState(null, "", nextUrl);
+    } else {
+      window.history.pushState(null, "", nextUrl);
+    }
+    if (options.render !== false) renderAll();
+    return;
+  }
+
   const anchor = decodeURIComponent((url.hash || "").replace(/^#/, ""));
   const postId = anchor.startsWith("chronicle-post-") ? anchor.replace("chronicle-post-", "") : "";
   const linkedPost = postId ? findPostById(postId) : null;
