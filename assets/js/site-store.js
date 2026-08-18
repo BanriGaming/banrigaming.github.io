@@ -13,6 +13,7 @@ import {
 import { firebaseConfig } from "./firebase-config.js";
 
 export const MEDAL_WORKER_URL = "https://medalclips.monkguru-guardian.workers.dev/";
+export const CHRONICLES_AUDIO_RESOLVER_URL = "https://banri-dossier-audio.monkguru-guardian.workers.dev/";
 export const ACTIVITY_RECENT_LIMIT = 25;
 export const DEFAULT_STEAM_ID64 = "76561198134543238";
 

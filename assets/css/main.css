@@ -7290,6 +7290,120 @@ body.legacy-theme::before {
   text-transform: uppercase;
 }
 
+.chronicles-dossier-audio-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(430px, 100%), 1fr));
+  max-width: 900px;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+}
+
+.chronicles-dossier-audio-signal {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  width: 100%;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid rgba(22, 232, 255, 0.22);
+  background:
+    linear-gradient(90deg, rgba(22, 232, 255, 0.1), transparent 62%),
+    rgba(0, 0, 0, 0.36);
+  box-shadow: inset 0 0 26px rgba(22, 232, 255, 0.045);
+}
+
+.chronicles-dossier-audio-signal button {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(22, 232, 255, 0.42);
+  border-radius: 50%;
+  color: var(--banri-cyan);
+  background:
+    radial-gradient(circle, rgba(22, 232, 255, 0.22), rgba(0, 12, 16, 0.88) 68%);
+  box-shadow: 0 0 20px rgba(22, 232, 255, 0.12);
+}
+
+.chronicles-dossier-audio-signal button span {
+  width: 0;
+  height: 0;
+  margin-left: 0.18rem;
+  border-top: 0.38rem solid transparent;
+  border-bottom: 0.38rem solid transparent;
+  border-left: 0.58rem solid currentColor;
+}
+
+.chronicles-dossier-audio-signal.is-playing button span {
+  width: 0.52rem;
+  height: 0.82rem;
+  margin-left: 0;
+  border: 0;
+  border-left: 0.18rem solid currentColor;
+  border-right: 0.18rem solid currentColor;
+}
+
+.chronicles-dossier-audio-signal button:hover,
+.chronicles-dossier-audio-signal button:focus-visible {
+  color: #001013;
+  background: var(--banri-cyan);
+}
+
+.chronicles-dossier-audio-signal button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  filter: grayscale(0.45);
+}
+
+.chronicles-dossier-audio-signal.is-external {
+  border-color: rgba(154, 177, 184, 0.18);
+  background:
+    linear-gradient(90deg, rgba(154, 177, 184, 0.08), transparent 62%),
+    rgba(0, 0, 0, 0.32);
+}
+
+.chronicles-dossier-audio-signal strong,
+.chronicles-dossier-audio-signal small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chronicles-dossier-audio-signal strong {
+  color: #eaf8fb;
+  font: 800 0.78rem/1.15 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-audio-signal small {
+  margin-top: 0.18rem;
+  color: var(--banri-muted);
+  font-size: 0.68rem;
+}
+
+.chronicles-dossier-audio-signal a {
+  color: var(--banri-cyan);
+  font: 800 0.62rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-audio-signal audio {
+  display: none;
+}
+
+.chronicles-audio-note {
+  color: var(--banri-muted);
+  font: 700 0.72rem/1.4 "Share Tech Mono", monospace;
+  letter-spacing: 0.05em;
+}
+
 .chronicles-dossier-facts,
 .chronicles-dossier-state,
 .chronicles-dossier-ooc {
@@ -7484,7 +7598,8 @@ body.legacy-theme::before {
 .chronicles-dossier-appearances button,
 .chronicles-dossier-connections button,
 .chronicles-gallery-meta button,
-.chronicles-dossier-files a {
+.chronicles-dossier-files a,
+.chronicles-dossier-file-actions button {
   display: inline-flex;
   margin-top: 0.7rem;
   padding: 0.42rem 0.65rem;
@@ -7497,6 +7612,18 @@ body.legacy-theme::before {
   text-transform: uppercase;
 }
 
+.chronicles-dossier-file-actions button {
+  cursor: pointer;
+}
+
+.chronicles-dossier-files a:hover,
+.chronicles-dossier-files a:focus-visible,
+.chronicles-dossier-file-actions button:hover,
+.chronicles-dossier-file-actions button:focus-visible {
+  color: #001013;
+  background: var(--banri-cyan);
+}
+
 .chronicles-dossier-connections article p,
 .chronicles-dossier-files article p {
   margin: 0 0 0.35rem;
@@ -7506,20 +7633,69 @@ body.legacy-theme::before {
   text-transform: uppercase;
 }
 
+.chronicles-dossier-audio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 0.75rem;
+}
+
 .chronicles-dossier-audio-card {
   position: relative;
   display: grid;
-  gap: 0.7rem;
+  align-content: start;
+  gap: 0.65rem;
+  min-height: 178px;
   background:
     linear-gradient(90deg, rgba(22, 232, 255, 0.08), transparent 52%),
     rgba(0, 12, 15, 0.56) !important;
 }
 
-.chronicles-dossier-audio-card audio {
-  width: 100%;
-  min-height: 38px;
-  accent-color: var(--banri-cyan);
-  filter: saturate(0.85);
+.chronicles-dossier-audio-card.is-pinned {
+  border-color: rgba(22, 232, 255, 0.62);
+  box-shadow:
+    inset 0 0 34px rgba(22, 232, 255, 0.07),
+    0 0 22px rgba(22, 232, 255, 0.08);
+}
+
+.chronicles-dossier-audio-card.is-pinned::after {
+  content: "Pinned to header";
+  position: absolute;
+  top: 0.65rem;
+  right: 0.7rem;
+  color: var(--banri-cyan);
+  font: 800 0.62rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-audio-card > strong {
+  padding-right: 7.5rem;
+}
+
+.chronicles-dossier-audio-mini {
+  max-width: 460px;
+  min-height: 54px;
+  padding: 0.44rem 0.55rem;
+}
+
+.chronicles-dossier-audio-mini button {
+  width: 34px;
+  height: 34px;
+}
+
+.chronicles-dossier-audio-mini strong {
+  font-size: 0.72rem;
+}
+
+.chronicles-dossier-audio-mini small {
+  font-size: 0.66rem;
+}
+
+.chronicles-dossier-file-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
 }
 
 .chronicles-portrait-upload-preview {

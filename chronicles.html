@@ -72,6 +72,7 @@
               <button type="button" data-chronicles-view-button="worlds">Worlds</button>
               <button type="button" data-chronicles-view-button="story">Story So Far</button>
               <button type="button" data-chronicles-view-button="characters">Characters</button>
+              <button type="button" data-chronicles-view-button="resources">Resources</button>
               <a href="/midnight-relay.html">Midnight Relay</a>
               <a id="chroniclesAdminLink" class="d-none" href="/admin.html" data-chronicles-admin-only>Admin Console</a>
             </div>
@@ -117,12 +118,6 @@
                     <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="post">Create Post</button>
                   </div>
                   <div id="chroniclesRecentPosts" class="chronicles-post-list" aria-live="polite"></div>
-
-                  <div class="section-heading mt-5">
-                    <p><span>//</span> Primer</p>
-                    <h2>How Play By Post Works</h2>
-                  </div>
-                  <div id="chroniclesHowItWorks" class="chronicles-primer-grid" aria-live="polite"></div>
                 </section>
 
                 <section class="chronicles-view" data-chronicles-view="worlds" aria-labelledby="chroniclesWorldsTitle">
@@ -166,6 +161,18 @@
                     </label>
                   </div>
                   <div id="chroniclesCharacterGrid" class="chronicles-character-grid" aria-live="polite"></div>
+                </section>
+
+                <section class="chronicles-view" data-chronicles-view="resources" aria-labelledby="chroniclesResourcesTitle">
+                  <div class="section-heading">
+                    <p><span>//</span> Resources</p>
+                    <h2 id="chroniclesResourcesTitle">Chronicle Codex</h2>
+                  </div>
+                  <div class="section-heading compact-heading">
+                    <p><span>//</span> Primer</p>
+                    <h2>How Play By Post Works</h2>
+                  </div>
+                  <div id="chroniclesHowItWorks" class="chronicles-primer-grid" aria-live="polite"></div>
                 </section>
 
                 <section class="chronicles-view" data-chronicles-view="dossier" aria-labelledby="chroniclesDossierTitle">
@@ -618,9 +625,9 @@
                 <p class="chronicles-field-hint">One image URL per line. Gallery art is linked only, never uploaded.</p>
               </div>
               <div class="col-12 col-lg-6">
-                <label for="chroniclesCharacterAudioUrls">Audio URLs</label>
+                <label for="chroniclesCharacterAudioUrls">Dossier Audio / Theme URLs</label>
                 <textarea id="chroniclesCharacterAudioUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/theme.mp3 | Theme | Caption | music"></textarea>
-                <p class="chronicles-field-hint">One audio URL per line. Audio is linked only and never autoplays.</p>
+                <p class="chronicles-field-hint">Format: source URL | title | caption | type. Suno pages resolve automatically after the audio Worker is deployed. Pin header tracks from Archive Files.</p>
               </div>
               <div class="col-12 col-lg-6">
                 <label for="chroniclesCharacterConnections">Connections</label>
@@ -762,9 +769,9 @@
                   <p class="chronicles-field-hint">One image URL per line. Gallery art is URL-only.</p>
                 </div>
                 <div class="col-12 col-lg-6">
-                  <label for="chroniclesCharacterEditAudioUrls">Audio URLs</label>
+                  <label for="chroniclesCharacterEditAudioUrls">Dossier Audio / Theme URLs</label>
                   <textarea id="chroniclesCharacterEditAudioUrls" class="form-control" rows="3" maxlength="4000" placeholder="https://example.com/theme.mp3 | Theme | Caption | music"></textarea>
-                  <p class="chronicles-field-hint">One audio URL per line. Use the last pipe for voice, music, ambience, transmission, sfx, or other.</p>
+                  <p class="chronicles-field-hint">Format: source URL | title | caption | type. Suno pages resolve automatically after the audio Worker is deployed. Pin header tracks from Archive Files.</p>
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="chroniclesCharacterEditConnections">Connections</label>

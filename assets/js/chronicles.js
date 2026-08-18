@@ -8,6 +8,7 @@ import {
   update
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 import {
+  CHRONICLES_AUDIO_RESOLVER_URL,
   defaultChroniclesAiConfig,
   getFirebaseServices,
   isAdminUid,
@@ -495,6 +496,8 @@ const state = {
   deletedPosts: {},
   unsubscribers: [],
   postIdsKnown: new Set(),
+  audioResolveCache: new Map(),
+  audioResolvePending: new Map(),
   postNotificationsReady: false,
   notificationsEnabled: localStorage.getItem("banriChroniclesNotifications") === "true"
 };
@@ -1339,6 +1342,7 @@ function renderCharacters() {
   const worlds = getWorlds();
   const search = state.characterSearch.trim().toLowerCase();
   const characters = getCharacters().filter((character) => {
+    const current = getCharacterCurrentState(character);
     if (!search) return true;
     const world = worlds.find((item) => item.id === character.worldId);
     return [
@@ -1349,6 +1353,7 @@ function renderCharacters() {
       character.alignment,
       character.affiliation,
       character.location,
+      current.location,
       character.status,
       world?.title
     ].join(" ").toLowerCase().includes(search);
@@ -1356,6 +1361,7 @@ function renderCharacters() {
 
   elements.characterGrid.innerHTML = characters.length ? characters.map((character) => {
     const world = worlds.find((item) => item.id === character.worldId);
+    const current = getCharacterCurrentState(character);
     return `
       <article class="chronicles-character-card">
         <div class="chronicles-character-portrait${character.image ? " has-image" : ""}" style="${character.image ? `--character-image: url('${escapeAttr(character.image)}')` : ""}">
@@ -1367,7 +1373,7 @@ function renderCharacters() {
           <dl>
             <dt>Role</dt><dd>${escapeHtml(character.role || "Unassigned")}</dd>
             <dt>Alignment</dt><dd>${escapeHtml(character.alignment || "Unknown")}</dd>
-            <dt>Location</dt><dd>${escapeHtml(character.location || "Not set")}</dd>
+            <dt>Location</dt><dd>${escapeHtml(current.location || "Not set")}</dd>
           </dl>
           ${character.origin ? `<p>${escapeHtml(character.origin).slice(0, 220)}${character.origin.length > 220 ? "..." : ""}</p>` : ""}
           <div class="chronicles-forum-actions">
@@ -1377,6 +1383,48 @@ function renderCharacters() {
       </article>
     `;
   }).join("") : '<div class="relay-empty">No character records match that signal.</div>';
+}
+
+function getPrimaryDossierAudio(character) {
+  return normalizeDossierMediaItems(character?.audio || character?.audioFiles, "audio")
+    .find((item) => item.url) || null;
+}
+
+function getHeaderDossierAudioItems(character) {
+  const items = normalizeDossierMediaItems(character?.audio || character?.audioFiles, "audio")
+    .filter((item) => item.url);
+  const pinned = items.filter((item) => item.pinned === true);
+  return pinned.slice(0, 2);
+}
+
+function renderDossierAudioControl(character) {
+  const audioItems = getHeaderDossierAudioItems(character);
+  if (!audioItems.length) return "";
+  return `
+    <div class="chronicles-dossier-audio-strip">
+      ${audioItems.map((audio) => renderDossierAudioSignal(character, audio)).join("")}
+    </div>
+  `;
+}
+
+function renderDossierAudioSignal(character, audio) {
+  const title = audio.title || "Theme Signal";
+  const caption = audio.caption || "Dossier audio";
+  const playUrl = getPlayableDossierAudioUrl(audio);
+  const canPlay = Boolean(playUrl);
+  return `
+    <div class="chronicles-dossier-audio-signal${canPlay ? "" : " is-external"}" data-chronicles-audio-source="${escapeAttr(audio.url)}" data-chronicles-audio-id="${escapeAttr(audio.id)}" data-chronicles-character-id="${escapeAttr(character.id)}">
+      <button type="button" data-chronicles-dossier-audio="${escapeAttr(playUrl)}" aria-pressed="false" aria-label="Play ${escapeAttr(title)}" ${canPlay ? "" : "disabled title=\"Resolving direct audio URL...\""}>
+        <span aria-hidden="true"></span>
+      </button>
+      <div>
+        <strong>${escapeHtml(title)}</strong>
+        <small data-chronicles-audio-caption="${escapeAttr(caption)}">${escapeHtml(canPlay ? caption : "Resolving source audio...")}</small>
+      </div>
+      <a href="${escapeAttr(audio.url)}" target="_blank" rel="noopener">Open</a>
+      ${canPlay ? `<audio preload="none" src="${escapeAttr(playUrl)}"></audio>` : ""}
+    </div>
+  `;
 }
 
 function renderCharacterDossier() {
@@ -1401,6 +1449,7 @@ function renderCharacterDossier() {
   const activeTab = ["profile", "chronicle", "connections", "gallery", "archive", "ooc"].includes(state.dossierTab) ? state.dossierTab : "profile";
   const portraitStyle = character.image ? `--dossier-portrait: url('${escapeAttr(character.image)}')` : "";
   const initial = (character.name || "?").charAt(0);
+  const audioControl = renderDossierAudioControl(character);
 
   elements.dossierShell.innerHTML = `
     <div class="section-heading">
@@ -1418,6 +1467,7 @@ function renderCharacterDossier() {
           <p class="banri-modal-kicker mb-2">${escapeHtml(world?.title || "Unassigned World")} / ${escapeHtml(character.ownerDisplayName || "Unknown")}</p>
           <h3>${escapeHtml(character.name || "Unnamed Character")}</h3>
           ${character.alias ? `<p class="chronicles-dossier-alias">${escapeHtml(character.alias)}</p>` : ""}
+          ${audioControl}
           <div class="chronicles-dossier-facts">
             ${renderDossierFact("Role", character.role || "Unassigned")}
             ${renderDossierFact("Species / Origin", character.species || "Unknown")}
@@ -1455,6 +1505,7 @@ function renderCharacterDossier() {
       </div>
     </article>
   `;
+  resolveDossierAudioSignals(character);
 }
 
 function renderDossierFact(label, value) {
@@ -1602,6 +1653,7 @@ function renderDossierArchive(character) {
   const files = normalizeDossierMediaItems(character.archiveFiles || character.files, "archive");
   const audioItems = normalizeDossierMediaItems(character.audio || character.audioFiles, "audio");
   const hasFiles = files.length || audioItems.length;
+  const canManageAudio = canEditCharacter(character);
   return `
     <div class="chronicles-dossier-files">
       ${hasFiles ? `
@@ -1625,18 +1677,36 @@ function renderDossierArchive(character) {
             </article>
           `;
         }).join("")}
-        ${audioItems.map((item) => {
-          const url = item.url || item.downloadURL || item.image;
-          return `
-            <article class="chronicles-dossier-audio-card">
-              <p>${escapeHtml(item.audioType || "audio")} / URL Signal</p>
-              <strong>${escapeHtml(item.title || "Untitled audio")}</strong>
-              ${item.caption ? `<span>${escapeHtml(item.caption)}</span>` : ""}
-              <audio controls preload="none" src="${escapeAttr(url)}"></audio>
-              <a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open Audio</a>
-            </article>
-          `;
-        }).join("")}
+        ${audioItems.length ? `
+          <div class="chronicles-dossier-audio-grid">
+            ${audioItems.map((item) => {
+              const url = item.url || item.downloadURL || item.image;
+              const playUrl = getPlayableDossierAudioUrl(item);
+              const title = item.title || "Untitled audio";
+              const caption = item.caption || "Archive audio signal";
+              return `
+                <article class="chronicles-dossier-audio-card${item.pinned ? " is-pinned" : ""}">
+                  <p>${escapeHtml(item.audioType || "audio")} / URL Signal</p>
+                  <strong>${escapeHtml(title)}</strong>
+                  <div class="chronicles-dossier-audio-signal chronicles-dossier-audio-mini${playUrl ? "" : " is-external"}" data-chronicles-audio-source="${escapeAttr(url)}" data-chronicles-audio-id="${escapeAttr(item.id)}" data-chronicles-character-id="${escapeAttr(character.id)}">
+                    <button type="button" data-chronicles-dossier-audio="${escapeAttr(playUrl)}" aria-pressed="false" aria-label="Play ${escapeAttr(title)}" ${playUrl ? "" : "disabled title=\"Resolving direct audio URL...\""}>
+                      <span aria-hidden="true"></span>
+                    </button>
+                    <div>
+                      <strong>${escapeHtml(title)}</strong>
+                      <small data-chronicles-audio-caption="${escapeAttr(caption)}">${escapeHtml(playUrl ? caption : "Resolving source audio...")}</small>
+                    </div>
+                    ${playUrl ? `<audio preload="none" src="${escapeAttr(playUrl)}"></audio>` : ""}
+                  </div>
+                  <div class="chronicles-dossier-file-actions">
+                    <a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open Audio</a>
+                    ${canManageAudio ? `<button type="button" data-chronicles-pin-audio="${escapeAttr(`${character.id}:${item.id}`)}">${item.pinned ? "Unpin Header" : "Pin Header"}</button>` : ""}
+                  </div>
+                </article>
+              `;
+            }).join("")}
+          </div>
+        ` : ""}
       ` : '<div class="relay-empty">No archive files or audio signals recorded yet.</div>'}
     </div>
   `;
@@ -2707,7 +2777,7 @@ function parseDossierUrlItems(value, mediaType) {
     .filter(Boolean);
 
   return lines.map((line, index) => {
-    const [rawUrl, rawTitle, rawCaption, rawAudioType] = line.split("|").map((part) => part.trim());
+    const [rawUrl, rawTitle, rawCaption, rawAudioType, rawPlayUrl, rawPinned] = line.split("|").map((part) => part.trim());
     const url = normalizeDossierUrl(rawUrl);
     if (!isHttpUrl(url)) {
       const label = mediaType === "audio" ? "Audio" : mediaType === "archive" ? "Archive" : "Gallery";
@@ -2724,6 +2794,14 @@ function parseDossierUrlItems(value, mediaType) {
     };
     if (mediaType === "audio") {
       item.audioType = normalizeAudioType(rawAudioType);
+      const playUrl = normalizeDossierUrl(rawPlayUrl);
+      if (playUrl) {
+        if (!isHttpUrl(playUrl) && !playUrl.startsWith("data:audio/")) {
+          throw new Error("Audio playback URLs must be full http, https, or data audio URLs.");
+        }
+        item.playUrl = playUrl;
+      }
+      item.pinned = /^(true|yes|1|pin|pinned|header)$/i.test(rawPinned || "");
     } else if (mediaType === "archive") {
       item.fileType = normalizeArchiveType(rawAudioType);
     }
@@ -2738,7 +2816,13 @@ function serializeDossierUrlItems(value, mediaType) {
       item.title || "",
       item.caption || ""
     ];
-    if (mediaType === "audio") parts.push(item.audioType || "other");
+    if (mediaType === "audio") {
+      parts.push(item.audioType || "other");
+      const playUrl = item.playUrl || item.streamUrl || item.audioUrl || "";
+      const pinned = item.pinned === true;
+      if (playUrl || pinned) parts.push(playUrl);
+      if (pinned) parts.push("pinned");
+    }
     if (mediaType === "archive") parts.push(item.fileType || item.mimeType || "reference");
     while (parts.length > 1 && !parts[parts.length - 1]) parts.pop();
     return parts.join(" | ").trim();
@@ -2748,6 +2832,218 @@ function serializeDossierUrlItems(value, mediaType) {
 function normalizeAudioType(value) {
   const next = String(value || "other").trim().toLowerCase();
   return CHRONICLES_AUDIO_TYPES.has(next) ? next : "other";
+}
+
+function isPlayableAudioUrl(value) {
+  const url = normalizeDossierUrl(value);
+  if (url.startsWith("data:audio/")) return true;
+  try {
+    const parsed = new URL(url);
+    return /\.(mp3|m4a|aac|wav|ogg|oga|webm)$/i.test(parsed.pathname);
+  } catch {
+    return /\.(mp3|m4a|aac|wav|ogg|oga|webm)(\?.*)?$/i.test(url);
+  }
+}
+
+function getPlayableDossierAudioUrl(item) {
+  const explicit = normalizeDossierUrl(item?.playUrl || item?.streamUrl || item?.audioUrl);
+  if (explicit && isPlayableAudioUrl(explicit)) return explicit;
+  const source = normalizeDossierUrl(item?.url || item?.image || item?.downloadURL);
+  return isPlayableAudioUrl(source) ? source : "";
+}
+
+function getDossierAudioResolverRequestUrl(sourceUrl) {
+  const base = normalizeDossierUrl(CHRONICLES_AUDIO_RESOLVER_URL);
+  if (!base || !isHttpUrl(base)) return "";
+  try {
+    const requestUrl = new URL(base);
+    requestUrl.searchParams.set("url", sourceUrl);
+    return requestUrl.toString();
+  } catch {
+    return "";
+  }
+}
+
+async function resolveDossierAudioUrl(sourceUrl) {
+  const source = normalizeDossierUrl(sourceUrl);
+  if (!source) throw new Error("Missing dossier audio source URL.");
+  if (isPlayableAudioUrl(source)) {
+    return { playUrl: source, title: "", source: "direct" };
+  }
+  if (state.audioResolveCache.has(source)) return state.audioResolveCache.get(source);
+  if (state.audioResolvePending.has(source)) return state.audioResolvePending.get(source);
+
+  const requestUrl = getDossierAudioResolverRequestUrl(source);
+  if (!requestUrl) throw new Error("Dossier audio resolver is not configured.");
+
+  const pending = fetch(requestUrl, { headers: { Accept: "application/json" } })
+    .then(async (response) => {
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok || !payload.playUrl) {
+        throw new Error(payload.error || "Audio resolver could not find a playable file.");
+      }
+      const playUrl = normalizeDossierUrl(payload.playUrl);
+      if (!isPlayableAudioUrl(playUrl)) throw new Error("Resolved audio URL is not a playable audio file.");
+      const resolved = {
+        playUrl,
+        title: payload.title || "",
+        candidates: Array.isArray(payload.candidates) ? payload.candidates : [],
+        source: payload.source || ""
+      };
+      state.audioResolveCache.set(source, resolved);
+      return resolved;
+    })
+    .finally(() => state.audioResolvePending.delete(source));
+
+  state.audioResolvePending.set(source, pending);
+  return pending;
+}
+
+function findDossierAudioItem(character, audioId, sourceUrl) {
+  const source = normalizeDossierUrl(sourceUrl);
+  return normalizeDossierMediaItems(character?.audio || character?.audioFiles, "audio")
+    .find((item) => item.id === audioId || normalizeDossierUrl(item.url || item.image || item.downloadURL) === source) || null;
+}
+
+function applyResolvedDossierAudioElement(container, resolved) {
+  const playUrl = normalizeDossierUrl(resolved?.playUrl);
+  if (!container || !playUrl) return;
+
+  container.dataset.chroniclesAudioResolved = "true";
+  container.classList.remove("is-external");
+
+  const hiddenButton = container.querySelector("[data-chronicles-dossier-audio]");
+  if (hiddenButton) {
+    hiddenButton.dataset.chroniclesDossierAudio = playUrl;
+    hiddenButton.disabled = false;
+    hiddenButton.removeAttribute("title");
+  }
+
+  let player = container.querySelector("audio");
+  if (!player) {
+    player = document.createElement("audio");
+    player.preload = "none";
+    container.appendChild(player);
+  }
+  player.src = playUrl;
+  if (container.classList.contains("chronicles-dossier-audio-card")) player.controls = true;
+
+  const note = container.querySelector(".chronicles-audio-note");
+  if (note) note.replaceWith(player);
+
+  const caption = container.querySelector("[data-chronicles-audio-caption]");
+  if (caption) caption.textContent = caption.dataset.chroniclesAudioCaption || "Dossier audio";
+}
+
+function applyFailedDossierAudioResolution(container, error) {
+  const caption = container?.querySelector("[data-chronicles-audio-caption]");
+  if (caption) caption.textContent = error?.message || "Audio source needs a direct file link.";
+  const note = container?.querySelector(".chronicles-audio-note");
+  if (note) note.textContent = "Audio source could not be resolved. Use Open Audio or add a direct MP3 URL.";
+}
+
+function applyResolvedDossierAudioForSource(characterId, sourceUrl, resolved) {
+  const source = normalizeDossierUrl(sourceUrl);
+  elements.dossierShell?.querySelectorAll("[data-chronicles-audio-source]").forEach((container) => {
+    if (container.dataset.chroniclesCharacterId !== characterId) return;
+    if (normalizeDossierUrl(container.dataset.chroniclesAudioSource) !== source) return;
+    applyResolvedDossierAudioElement(container, resolved);
+  });
+}
+
+async function writeDossierAudioItems(characterId, items) {
+  const next = normalizeDossierMediaItems(items, "audio");
+  await update(ref(database), {
+    [`chronicles/characters/${characterId}/audio`]: next,
+    [`chronicles/characters/${characterId}/audioFiles`]: next,
+    [`chronicles/characters/${characterId}/updatedAt`]: Date.now()
+  });
+}
+
+async function persistDossierAudioPlayUrl(character, audioId, sourceUrl, resolved) {
+  const playUrl = normalizeDossierUrl(resolved?.playUrl);
+  if (!character || !canEditCharacter(character) || !playUrl) return;
+  const source = normalizeDossierUrl(sourceUrl);
+  const items = normalizeDossierMediaItems(character.audio || character.audioFiles, "audio");
+  let changed = false;
+  const next = items.map((item) => {
+    const itemSource = normalizeDossierUrl(item.url || item.image || item.downloadURL);
+    if (item.id !== audioId && itemSource !== source) return item;
+    const nextItem = { ...item, playUrl };
+    if ((!nextItem.title || /^audio signal$/i.test(nextItem.title)) && resolved.title) {
+      nextItem.title = resolved.title.replace(/\s*\|\s*Suno\s*$/i, "").trim() || resolved.title;
+    }
+    changed = changed || nextItem.playUrl !== item.playUrl || nextItem.title !== item.title;
+    return nextItem;
+  });
+  if (changed) await writeDossierAudioItems(character.id, next);
+}
+
+async function resolveDossierAudioSignal(container, character) {
+  const sourceUrl = normalizeDossierUrl(container?.dataset?.chroniclesAudioSource);
+  const audioId = container?.dataset?.chroniclesAudioId || "";
+  if (!sourceUrl || !character) return;
+  const item = findDossierAudioItem(character, audioId, sourceUrl);
+  if (!item || getPlayableDossierAudioUrl(item)) return;
+
+  const caption = container.querySelector("[data-chronicles-audio-caption]");
+  if (caption) caption.textContent = "Resolving source audio...";
+
+  try {
+    const resolved = await resolveDossierAudioUrl(sourceUrl);
+    applyResolvedDossierAudioForSource(character.id, sourceUrl, resolved);
+    await persistDossierAudioPlayUrl(character, audioId, sourceUrl, resolved);
+  } catch (error) {
+    applyFailedDossierAudioResolution(container, error);
+  }
+}
+
+function resolveDossierAudioSignals(character) {
+  if (!character || !elements.dossierShell) return;
+  const targets = [...elements.dossierShell.querySelectorAll("[data-chronicles-audio-source]")]
+    .filter((container) => container.dataset.chroniclesCharacterId === character.id)
+    .filter((container) => !container.dataset.chroniclesAudioResolved);
+  targets.forEach((container) => {
+    resolveDossierAudioSignal(container, character);
+  });
+}
+
+async function toggleDossierAudioPin(route, button) {
+  const [characterId, audioId] = String(route || "").split(":");
+  const character = getCharacter(characterId);
+  if (!character || !audioId || !canEditCharacter(character)) return;
+
+  const items = normalizeDossierMediaItems(character.audio || character.audioFiles, "audio");
+  const target = items.find((item) => item.id === audioId);
+  if (!target) return;
+
+  const shouldPin = target.pinned !== true;
+  let carriedPinned = 0;
+  const next = items.map((item) => {
+    if (item.id === audioId) return { ...item, pinned: shouldPin };
+    if (!shouldPin) return item;
+    if (item.pinned === true && carriedPinned < 1) {
+      carriedPinned += 1;
+      return { ...item, pinned: true };
+    }
+    return { ...item, pinned: false };
+  });
+
+  const originalLabel = button?.textContent || "";
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Saving...";
+  }
+  try {
+    await writeDossierAudioItems(character.id, next);
+    setText(elements.characterDetailStatus, shouldPin ? "Audio pinned to dossier header." : "Audio unpinned from dossier header.");
+  } catch (error) {
+    setText(elements.characterDetailStatus, error.message || "Audio pin update failed.");
+    if (button) {
+      button.disabled = false;
+      button.textContent = originalLabel;
+    }
+  }
 }
 
 function normalizeArchiveType(value) {
@@ -2760,7 +3056,7 @@ function normalizeDossierUrl(value) {
   if (!url) return "";
   const markdownLink = url.match(/^!?\[[^\]]*]\((https?:\/\/[^)\s]+)\)$/i);
   if (markdownLink) url = markdownLink[1].trim();
-  const angleLink = url.match(/^<((?:https?:\/\/|data:image\/)[^>]+)>$/i);
+  const angleLink = url.match(/^<((?:https?:\/\/|data:(?:image|audio)\/)[^>]+)>$/i);
   if (angleLink) url = angleLink[1].trim();
   return url;
 }
@@ -2796,6 +3092,56 @@ function openMediaViewer(trigger) {
   setText(captionText, caption);
   if (link) link.href = url;
   showBootstrapModal("chroniclesMediaViewerModal");
+}
+
+function setDossierAudioButtonState(button, isPlaying) {
+  if (!button) return;
+  const signal = button.closest(".chronicles-dossier-audio-signal");
+  button.setAttribute("aria-pressed", isPlaying ? "true" : "false");
+  signal?.classList.toggle("is-playing", isPlaying);
+}
+
+function setDossierAudioStatus(button, message = "") {
+  const signal = button?.closest(".chronicles-dossier-audio-signal");
+  const caption = signal?.querySelector("[data-chronicles-audio-caption]");
+  if (!caption) return;
+  caption.textContent = message || caption.dataset.chroniclesAudioCaption || "Dossier audio";
+}
+
+function toggleDossierAudio(button) {
+  const signal = button.closest(".chronicles-dossier-audio-signal");
+  const player = signal?.querySelector("audio");
+  if (!player) return;
+  const wasPlaying = !player.paused && !player.ended;
+
+  document.querySelectorAll(".chronicles-dossier-audio-signal audio").forEach((audio) => {
+    if (audio !== player) audio.pause();
+  });
+  document.querySelectorAll("[data-chronicles-dossier-audio]").forEach((item) => {
+    if (item !== button) setDossierAudioButtonState(item, false);
+  });
+
+  if (wasPlaying) {
+    player.pause();
+    setDossierAudioButtonState(button, false);
+    setDossierAudioStatus(button);
+    return;
+  }
+
+  setDossierAudioStatus(button, "Routing audio signal...");
+  player.play()
+    .then(() => {
+      setDossierAudioButtonState(button, true);
+      setDossierAudioStatus(button);
+      player.addEventListener("ended", () => {
+        setDossierAudioButtonState(button, false);
+        setDossierAudioStatus(button);
+      }, { once: true });
+    })
+    .catch(() => {
+      setDossierAudioButtonState(button, false);
+      setDossierAudioStatus(button, "Playback blocked / use Open for source");
+    });
 }
 
 function titleFromUrl(value) {
@@ -2980,6 +3326,8 @@ function bindEvents() {
     const characterContinueButton = event.target.closest("[data-chronicles-continue-character]");
     const dossierTabButton = event.target.closest("[data-chronicles-dossier-tab]");
     const mediaOpenButton = event.target.closest("[data-chronicles-open-media]");
+    const dossierAudioButton = event.target.closest("[data-chronicles-dossier-audio]");
+    const pinAudioButton = event.target.closest("[data-chronicles-pin-audio]");
     const replyButton = event.target.closest("[data-chronicles-reply-post]");
     const followButton = event.target.closest("[data-chronicles-follow-post]");
     const editPostButton = event.target.closest("[data-chronicles-edit-post]");
@@ -3046,6 +3394,12 @@ function bindEvents() {
     } else if (mediaOpenButton) {
       event.preventDefault();
       openMediaViewer(mediaOpenButton);
+    } else if (pinAudioButton) {
+      event.preventDefault();
+      toggleDossierAudioPin(pinAudioButton.dataset.chroniclesPinAudio, pinAudioButton);
+    } else if (dossierAudioButton) {
+      event.preventDefault();
+      toggleDossierAudio(dossierAudioButton);
     } else if (replyButton) {
       const post = findPostById(replyButton.dataset.chroniclesReplyPost);
       openPostModal({
