@@ -498,6 +498,8 @@ const state = {
   postIdsKnown: new Set(),
   audioResolveCache: new Map(),
   audioResolvePending: new Map(),
+  dossierAudioPlayer: null,
+  dossierAudioTrack: null,
   postNotificationsReady: false,
   notificationsEnabled: localStorage.getItem("banriChroniclesNotifications") === "true"
 };
@@ -779,6 +781,7 @@ function ensureSelectedWorldAndThread() {
 function renderAll() {
   if (!elements.app || !state.user) return;
   applyRouteFromUrl();
+  if (state.view !== "dossier") stopDossierAudio();
   ensureSelectedWorldAndThread();
   renderAdminVisibility();
   renderProfile();
@@ -1506,6 +1509,7 @@ function renderCharacterDossier() {
     </article>
   `;
   resolveDossierAudioSignals(character);
+  syncDossierAudioControls();
 }
 
 function renderDossierFact(label, value) {
@@ -1698,6 +1702,11 @@ function renderDossierArchive(character) {
                     </div>
                     ${playUrl ? `<audio preload="none" src="${escapeAttr(playUrl)}"></audio>` : ""}
                   </div>
+                  <div class="chronicles-dossier-audio-seek" data-chronicles-audio-seek-panel>
+                    <span data-chronicles-audio-current>0:00</span>
+                    <input type="range" min="0" max="1000" value="0" step="1" data-chronicles-audio-seek aria-label="Seek ${escapeAttr(title)}" ${playUrl ? "" : "disabled"} />
+                    <span data-chronicles-audio-duration>0:00</span>
+                  </div>
                   <div class="chronicles-dossier-file-actions">
                     <a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open Audio</a>
                     ${canManageAudio ? `<button type="button" data-chronicles-pin-audio="${escapeAttr(`${character.id}:${item.id}`)}">${item.pinned ? "Unpin Header" : "Pin Header"}</button>` : ""}
@@ -1836,6 +1845,7 @@ function updatePostSubmitState() {
 }
 
 function showView(view) {
+  if (state.view === "dossier" && view !== "dossier") stopDossierAudio();
   state.view = view;
   document.querySelectorAll("[data-chronicles-view]").forEach((section) => {
     section.classList.toggle("active", section.dataset.chroniclesView === view);
@@ -1879,6 +1889,7 @@ function openStory(worldId) {
 function openCharacterDossier(characterId, options = {}) {
   const character = getCharacter(characterId);
   if (!character) return;
+  if (state.selectedCharacterId && state.selectedCharacterId !== character.id) stopDossierAudio();
   state.selectedCharacterId = character.id;
   state.selectedWorldId = character.worldId || state.selectedWorldId;
   state.dossierTab = options.tab || state.dossierTab || "profile";
@@ -2931,8 +2942,12 @@ function applyResolvedDossierAudioElement(container, resolved) {
   const note = container.querySelector(".chronicles-audio-note");
   if (note) note.replaceWith(player);
 
+  const seek = container.closest(".chronicles-dossier-audio-card")?.querySelector("[data-chronicles-audio-seek]");
+  if (seek) seek.disabled = false;
+
   const caption = container.querySelector("[data-chronicles-audio-caption]");
   if (caption) caption.textContent = caption.dataset.chroniclesAudioCaption || "Dossier audio";
+  syncDossierAudioControls();
 }
 
 function applyFailedDossierAudioResolution(container, error) {
@@ -3108,39 +3123,143 @@ function setDossierAudioStatus(button, message = "") {
   caption.textContent = message || caption.dataset.chroniclesAudioCaption || "Dossier audio";
 }
 
+function makeDossierAudioKey(characterId, audioId, playUrl) {
+  return [characterId || "", audioId || "", normalizeDossierUrl(playUrl)].join("|");
+}
+
+function getDossierAudioSignalForControl(control) {
+  return control?.closest(".chronicles-dossier-audio-signal")
+    || control?.closest(".chronicles-dossier-audio-card")?.querySelector(".chronicles-dossier-audio-signal")
+    || null;
+}
+
+function getDossierAudioTrackFromSignal(signal) {
+  const button = signal?.querySelector("[data-chronicles-dossier-audio]");
+  const playUrl = normalizeDossierUrl(button?.dataset.chroniclesDossierAudio || signal?.querySelector("audio")?.getAttribute("src") || "");
+  if (!signal || !button || !playUrl) return null;
+  return {
+    characterId: signal.dataset.chroniclesCharacterId || "",
+    audioId: signal.dataset.chroniclesAudioId || "",
+    playUrl,
+    key: makeDossierAudioKey(signal.dataset.chroniclesCharacterId, signal.dataset.chroniclesAudioId, playUrl)
+  };
+}
+
+function ensureDossierAudioPlayer() {
+  if (state.dossierAudioPlayer) return state.dossierAudioPlayer;
+  const player = new Audio();
+  player.preload = "metadata";
+  player.addEventListener("timeupdate", syncDossierAudioControls);
+  player.addEventListener("loadedmetadata", syncDossierAudioControls);
+  player.addEventListener("durationchange", syncDossierAudioControls);
+  player.addEventListener("play", syncDossierAudioControls);
+  player.addEventListener("pause", syncDossierAudioControls);
+  player.addEventListener("ended", syncDossierAudioControls);
+  state.dossierAudioPlayer = player;
+  return player;
+}
+
+function formatDossierAudioTime(seconds) {
+  const safeSeconds = Number.isFinite(seconds) && seconds > 0 ? Math.floor(seconds) : 0;
+  const minutes = Math.floor(safeSeconds / 60);
+  const remainder = safeSeconds % 60;
+  return `${minutes}:${String(remainder).padStart(2, "0")}`;
+}
+
+function syncDossierAudioControls() {
+  const player = state.dossierAudioPlayer;
+  const track = state.dossierAudioTrack;
+  const isPlaying = Boolean(player && track && !player.paused && !player.ended);
+  const duration = player && Number.isFinite(player.duration) ? player.duration : 0;
+  const currentTime = player && Number.isFinite(player.currentTime) ? player.currentTime : 0;
+
+  document.querySelectorAll("[data-chronicles-dossier-audio]").forEach((button) => {
+    const buttonTrack = getDossierAudioTrackFromSignal(button.closest(".chronicles-dossier-audio-signal"));
+    setDossierAudioButtonState(button, Boolean(buttonTrack && track && buttonTrack.key === track.key && isPlaying));
+  });
+
+  document.querySelectorAll("[data-chronicles-audio-seek]").forEach((input) => {
+    const signal = getDossierAudioSignalForControl(input);
+    const inputTrack = getDossierAudioTrackFromSignal(signal);
+    const isCurrent = Boolean(inputTrack && track && inputTrack.key === track.key);
+    const currentLabel = input.closest("[data-chronicles-audio-seek-panel]")?.querySelector("[data-chronicles-audio-current]");
+    const durationLabel = input.closest("[data-chronicles-audio-seek-panel]")?.querySelector("[data-chronicles-audio-duration]");
+
+    input.disabled = !inputTrack?.playUrl;
+    input.max = duration ? String(Math.round(duration * 1000)) : "1000";
+    input.value = isCurrent && duration ? String(Math.round(currentTime * 1000)) : "0";
+    if (currentLabel) currentLabel.textContent = isCurrent ? formatDossierAudioTime(currentTime) : "0:00";
+    if (durationLabel) durationLabel.textContent = isCurrent ? formatDossierAudioTime(duration) : "0:00";
+  });
+}
+
+function stopDossierAudio() {
+  const player = state.dossierAudioPlayer;
+  if (player) {
+    player.pause();
+    player.removeAttribute("src");
+    player.load();
+  }
+  state.dossierAudioTrack = null;
+  syncDossierAudioControls();
+}
+
+function seekDossierAudio(input) {
+  const signal = getDossierAudioSignalForControl(input);
+  const track = getDossierAudioTrackFromSignal(signal);
+  if (!track) return;
+  const player = ensureDossierAudioPlayer();
+  const wasPlaying = state.dossierAudioTrack?.key === track.key && !player.paused && !player.ended;
+  if (state.dossierAudioTrack?.key !== track.key) {
+    player.pause();
+    player.src = track.playUrl;
+    state.dossierAudioTrack = track;
+    player.load();
+  }
+  const nextTime = Math.max(0, Number(input.value || 0) / 1000);
+  const applySeek = () => {
+    const duration = Number.isFinite(player.duration) ? player.duration : nextTime;
+    player.currentTime = Math.min(nextTime, duration || nextTime);
+    syncDossierAudioControls();
+    if (wasPlaying) player.play().catch(() => syncDossierAudioControls());
+  };
+  if (player.readyState >= 1) {
+    applySeek();
+  } else {
+    player.addEventListener("loadedmetadata", applySeek, { once: true });
+  }
+}
+
 function toggleDossierAudio(button) {
   const signal = button.closest(".chronicles-dossier-audio-signal");
-  const player = signal?.querySelector("audio");
-  if (!player) return;
-  const wasPlaying = !player.paused && !player.ended;
-
-  document.querySelectorAll(".chronicles-dossier-audio-signal audio").forEach((audio) => {
-    if (audio !== player) audio.pause();
-  });
-  document.querySelectorAll("[data-chronicles-dossier-audio]").forEach((item) => {
-    if (item !== button) setDossierAudioButtonState(item, false);
-  });
+  const track = getDossierAudioTrackFromSignal(signal);
+  if (!track) return;
+  const player = ensureDossierAudioPlayer();
+  const isCurrentTrack = state.dossierAudioTrack?.key === track.key;
+  const wasPlaying = isCurrentTrack && !player.paused && !player.ended;
 
   if (wasPlaying) {
     player.pause();
-    setDossierAudioButtonState(button, false);
     setDossierAudioStatus(button);
+    syncDossierAudioControls();
     return;
+  }
+
+  if (!isCurrentTrack) {
+    player.pause();
+    player.src = track.playUrl;
+    state.dossierAudioTrack = track;
   }
 
   setDossierAudioStatus(button, "Routing audio signal...");
   player.play()
     .then(() => {
-      setDossierAudioButtonState(button, true);
       setDossierAudioStatus(button);
-      player.addEventListener("ended", () => {
-        setDossierAudioButtonState(button, false);
-        setDossierAudioStatus(button);
-      }, { once: true });
+      syncDossierAudioControls();
     })
     .catch(() => {
-      setDossierAudioButtonState(button, false);
       setDossierAudioStatus(button, "Playback blocked / use Open for source");
+      syncDossierAudioControls();
     });
 }
 
@@ -3464,6 +3583,11 @@ function bindEvents() {
     }
   });
 
+  document.addEventListener("input", (event) => {
+    const audioSeek = event.target.closest("[data-chronicles-audio-seek]");
+    if (audioSeek) seekDossierAudio(audioSeek);
+  });
+
   document.getElementById("chroniclesPostWorld")?.addEventListener("change", () => {
     populateThreadSelect();
     populatePostCharacterSelect();
@@ -3611,6 +3735,7 @@ async function toggleNotifications() {
 }
 
 function renderSignedOut() {
+  stopDossierAudio();
   cleanupSubscriptions();
   state.user = null;
   state.isAdmin = false;
@@ -3681,6 +3806,7 @@ function navigateChronicleRoute(url, options = {}) {
   if (characterId) {
     const character = getCharacter(characterId);
     if (!character) return;
+    if (state.selectedCharacterId && state.selectedCharacterId !== character.id) stopDossierAudio();
     state.selectedCharacterId = character.id;
     state.selectedWorldId = character.worldId || state.selectedWorldId;
     state.view = "dossier";
@@ -3705,6 +3831,7 @@ function navigateChronicleRoute(url, options = {}) {
 
   if (!world || !thread) return;
 
+  stopDossierAudio();
   state.selectedWorldId = world.id;
   state.selectedThreadId = thread.id;
   state.view = "thread";

@@ -7635,7 +7635,7 @@ body.legacy-theme::before {
 
 .chronicles-dossier-audio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr));
   gap: 0.75rem;
 }
 
@@ -7673,7 +7673,7 @@ body.legacy-theme::before {
 }
 
 .chronicles-dossier-audio-mini {
-  max-width: 460px;
+  max-width: 520px;
   min-height: 54px;
   padding: 0.44rem 0.55rem;
 }
@@ -7689,6 +7689,37 @@ body.legacy-theme::before {
 
 .chronicles-dossier-audio-mini small {
   font-size: 0.66rem;
+}
+
+.chronicles-dossier-audio-seek {
+  display: grid;
+  grid-template-columns: auto minmax(150px, 1fr) auto;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: 520px;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background:
+    linear-gradient(90deg, rgba(22, 232, 255, 0.06), transparent 68%),
+    rgba(0, 0, 0, 0.28);
+}
+
+.chronicles-dossier-audio-seek span {
+  color: var(--banri-muted);
+  font: 800 0.66rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.06em;
+}
+
+.chronicles-dossier-audio-seek input[type="range"] {
+  width: 100%;
+  height: 0.28rem;
+  accent-color: var(--banri-cyan);
+  background: transparent;
+}
+
+.chronicles-dossier-audio-seek input[type="range"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
 }
 
 .chronicles-dossier-file-actions {
