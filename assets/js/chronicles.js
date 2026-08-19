@@ -182,30 +182,307 @@ It is an age of soaring airships, magic, war, fortune, bleeding forests, crystal
 
 Does the Sundertide stir again? Varynth waits for those bold or desperate enough to decide whether it will heal or break anew.`;
 
-const HOW_IT_WORKS = [
+const RESOURCE_GUIDES = [
   {
-    title: "Play-by-Post Roleplay",
-    text: "Players write detailed narrative posts like mini-chapters, describing character actions, dialogue, thoughts, and consequences inside a shared world."
+    id: "overview",
+    title: "System Overview",
+    text: "What Chronicles is, how play-by-post works, and how the major systems fit together.",
+    body: `## What Chronicles Is
+
+Chronicles is a private play-by-post writing system built around worlds, location threads, characters, and narrative posts.
+
+Players write detailed entries like mini-chapters. Each post describes a character's actions, dialogue, thoughts, and consequences inside a shared world.
+
+## Core Flow
+
+- Create or open a world.
+- Pick a location thread.
+- Create a character dossier.
+- Write posts in third-person past tense.
+- Use follow-ups to connect your post to another writer's post.
+- Use Story So Far when you want to read the whole timeline in order.
+
+## Important Rule
+
+Collaboration matters more than winning. Control your own character, respect other people's agency, and ask before making permanent changes to another character unless their post explicitly allows character effects.`
   },
   {
-    title: "Forum Threads",
-    text: "Each thread is a location: a city, tavern, forest, ship, planet, or battlefield. Characters move between threads by writing departures and arrivals."
+    id: "dashboard",
+    title: "Dashboard",
+    text: "How to use Recent Posts, quick actions, and the fastest route back into active writing.",
+    body: `## Dashboard
+
+The Dashboard is the command center for active writing.
+
+## Recent Posts
+
+Recent Posts shows the newest narrative entries across the active Chronicles system. It is the fastest way to see what changed since your last visit.
+
+Use Open Post to jump directly to the original location thread.
+
+Use Follow Up when you want to answer that post from another location or continue the scene.
+
+## Quick Actions
+
+- Create Post opens the transmission editor.
+- Create Character opens the character registry form.
+- Create Echo opens the side-story editor.
+- New Thread and New World appear only for admins.`
   },
   {
-    title: "Narrative Format",
-    text: "Write in third-person past tense. Each post should add motion, atmosphere, dialogue, or a useful hook for another player to answer."
+    id: "worlds",
+    title: "Worlds And Threads",
+    text: "How worlds, categories, provinces, sectors, and location threads are organized.",
+    body: `## Worlds
+
+Worlds are the top-level campaigns or writing settings, such as Echoes After the Forge or Sundertide of Varynth.
+
+Each world contains location threads. These threads behave like old forum boards: a planet, city, tavern, ship, ruin, battlefield, or province.
+
+## Categories
+
+Admins can group location threads into categories. In Star Wars, this might be Galactic Core, Mid Rim, Outer Rim, or Shadow Worlds. In fantasy, this might be provinces, kingdoms, regions, or cities.
+
+## Threads
+
+Each thread is a place. Characters should write arrivals and departures when moving between locations so the timeline stays readable.
+
+Use the thread search bar when a world has too many locations to scan manually.`
   },
   {
-    title: "Custodians",
-    text: "One or two custodians act like narrators. They can move time forward, resolve disputes, add world consequences, and preserve lore consistency."
+    id: "posts",
+    title: "Posts And Follow-Ups",
+    text: "How to transmit a narrative post, write narrator events, and link follow-up responses.",
+    body: `## Create Post
+
+The post editor is where normal story entries are written.
+
+Required fields:
+
+- World
+- Thread / Location
+- Narrative Post
+
+Recommended fields:
+
+- Character Voice
+- Post Title
+- Character Effects preference
+
+## Character Voice
+
+Selecting a character fills the author fields so the post is linked to that dossier. This is what updates the dossier's location history and latest appearance.
+
+## Follow-Ups
+
+Use Follow Up on a post when your entry is answering another writer. The editor inserts a link back to the source post so readers can follow the chain.
+
+## Narrator Posts
+
+Admins can post as Narrator for world events, environmental consequences, or custodian timeline movement.
+
+## Location Descriptions
+
+Admins can mark a post as Location Description. These are useful as first posts in a thread, but they are excluded from Story So Far so the timeline stays focused on actual story events.`
   },
   {
-    title: "Character Sheets",
-    text: "A character record should include name, species or origin, age, role, alignment, affiliation, origin tale, current location, equipment, skills, personality, hooks, and status."
+    id: "story",
+    title: "Story So Far",
+    text: "How to read the full chronological story or the compact summary signal.",
+    body: `## Story So Far
+
+Story So Far is the reader-friendly continuity view.
+
+Pick a world, then choose:
+
+- Full Chronicle to read every narrative post in chronological order.
+- Summary Signal to read a compact live digest built from current post data.
+
+## Pagination
+
+Full Chronicle shows a small number of posts per page so long campaigns stay readable. Moving pages scrolls the reader back to the timeline.
+
+## What Is Excluded
+
+Location Description posts are hidden from Story So Far. Deleted posts are also removed from the count and timeline.
+
+Use this tab when someone wants to catch up without jumping thread-to-thread.`
   },
   {
-    title: "Etiquette",
-    text: "No god-modding. Control your own character only. Respect lore, collaborate over competition, and use OOC notes sparingly when coordination is needed."
+    id: "dossier",
+    title: "Character Dossiers",
+    text: "How dossiers work, what each section means, and how character ownership is handled.",
+    body: `## Dossiers
+
+A dossier is a public character record. It stores profile lore, status, linked posts, gallery art, audio, relationships, archive files, OOC preferences, Codex entries, and Echoes.
+
+## Main Fields
+
+- Name: the character name.
+- Species / Origin: species and homeworld or origin.
+- Cycle of Years: age.
+- Vocation / Role: job, class, faction role, or archetype.
+- Alignment: moral or faction alignment.
+- Affiliation: group, faction, order, guild, or independent status.
+- Current Location: derived from the character's latest linked post.
+- Active Objective: what the character is trying to do now.
+
+## Ownership
+
+Admins can edit all dossiers. Normal users can edit dossiers assigned to their UID or created by them.
+
+## Continue As
+
+Continue As opens a new post with that character selected. This is the cleanest way to keep the dossier history accurate.`
+  },
+  {
+    id: "codex",
+    title: "Codex Entries",
+    text: "How to use Codex records for character lore, abilities, science, rules, and field notes.",
+    body: `## Codex
+
+Codex entries are character-linked lore records.
+
+Use Codex for:
+
+- Ability explanations.
+- Relic notes.
+- Doctrine, philosophy, or personal rules.
+- Science or metaphysics behind a power.
+- Research logs.
+- Limits and consequences.
+
+## Input Format
+
+- Character: the dossier this record belongs to.
+- Entry Title: the readable title.
+- Classification: ability, doctrine, field note, relic, research, or anything useful.
+- Short Summary: one-line scan text.
+- Tags: comma-separated labels such as force, dread aura, Korriban.
+- Codex Record: markdown body text.
+
+Codex records appear inside the character dossier and can be edited by the character owner or an admin.`
+  },
+  {
+    id: "echoes",
+    title: "Echoes",
+    text: "How personal side-stories work and how they differ from main thread posts.",
+    body: `## Echoes
+
+Echoes are public personal side chronicles tied to a character dossier.
+
+Use Echoes for:
+
+- Character memories.
+- Solo scenes.
+- Side journeys.
+- Private lore revealed publicly.
+- Small substories that support the main campaign.
+
+## Difference From Posts
+
+Posts happen in location threads and affect the active campaign timeline.
+
+Echoes are linked to a character and live in the Echoes tab and dossier. They are readable by everyone, but they do not automatically enter Story So Far.
+
+## Input Format
+
+- Character: the character this Echo belongs to.
+- Visibility: Public, Draft, or Archived.
+- Continuity: Canon, Soft Canon, Rumor, or Draft.
+- Timeline: when it happens relative to the main story.
+- Location: where it happens.
+- Cover Image URL: optional linked art.
+- Reader Summary: short context.
+- Echo Text: the full side-story in markdown.`
+  },
+  {
+    id: "formatting",
+    title: "Formatting And OOC",
+    text: "Markdown, quote lines, OOC notes, images, and character-effects badges.",
+    body: `## Markdown Tools
+
+The editor buttons insert common markdown:
+
+- B for bold.
+- I for italic.
+- H for heading.
+- > for a quote line.
+- List for bullet lists.
+- Link for a hyperlink.
+- Image for an image URL.
+- OOC for an out-of-character note.
+
+## Quote Lines
+
+Use the quote button for a single quoted line. If you want multiple separate quote boxes, put normal text or a blank line between quoted lines.
+
+## OOC Notes
+
+OOC inserts this format:
+
+[OOC: your note here]
+
+When posted, it renders as a special out-of-character note.
+
+## Images
+
+For thread posts, you can attach image URLs or small uploaded images. Larger artwork is better as URL links.
+
+## Character Effects
+
+The character-effects checkbox marks whether other writers may make character-altering calls in that scene. Locked means they should ask first.`
+  },
+  {
+    id: "admin",
+    title: "Admin And Custodian Tools",
+    text: "What admins can create, edit, and maintain inside Chronicles.",
+    body: `## Admin Role
+
+Admins act as custodians and editors.
+
+Admins can:
+
+- Create worlds.
+- Create categories.
+- Create and edit location threads.
+- Edit all character dossiers.
+- Post as Narrator.
+- Create Location Description posts.
+- Rebuild older Discord or forum posts under the correct author name.
+- Delete threads and posts when needed.
+
+## Editor Mode
+
+Author Override and Owner Display are admin tools for rebuilding old posts. Use them when importing history from Discord or another writing archive.
+
+## Firebase Rules
+
+Chronicles uses Realtime Database paths for worlds, threads, categories, posts, characters, Codex, Echoes, summaries, and deleted-post markers. After this feature, paste the updated rules file into Firebase before testing saves live.`
+  },
+  {
+    id: "etiquette",
+    title: "Writing Etiquette",
+    text: "Tone, pacing, agency, god-modding, and collaboration expectations.",
+    body: `## Narrative Expectations
+
+Write in third-person past tense. Each post should add motion, atmosphere, dialogue, consequence, or a hook another player can answer.
+
+## Agency
+
+Control your own character. Do not decide another character's injury, death, emotions, or permanent consequences without permission.
+
+## Collaboration
+
+There are no win conditions. The goal is shared drama, growth, atmosphere, and memorable scenes.
+
+## Conflict
+
+If a conflict is unclear, pause and ask the other writer or a custodian before continuing.
+
+## OOC
+
+Use OOC notes sparingly. Keep them useful, short, and respectful.`
   }
 ];
 
@@ -480,6 +757,7 @@ const state = {
   loreEditing: false,
   characterEditing: false,
   characterSearch: "",
+  echoSearch: "",
   threadSearch: "",
   worldListMode: "selected",
   routeApplied: false,
@@ -489,9 +767,13 @@ const state = {
   remoteThreads: {},
   remotePosts: {},
   remoteCharacters: [],
+  remoteCodex: [],
+  remoteEchoes: [],
   aiSummaries: {},
   chroniclesAiConfig: structuredClone(defaultChroniclesAiConfig),
   aiAssistResult: "",
+  editingCodex: null,
+  editingEcho: null,
   deletedThreads: {},
   deletedPosts: {},
   unsubscribers: [],
@@ -522,11 +804,14 @@ const elements = {
   recentPosts: document.getElementById("chroniclesRecentPosts"),
   characterSearch: document.getElementById("chroniclesCharacterSearch"),
   characterGrid: document.getElementById("chroniclesCharacterGrid"),
+  echoSearch: document.getElementById("chroniclesEchoSearch"),
+  echoGrid: document.getElementById("chroniclesEchoGrid"),
   dossierShell: document.getElementById("chroniclesDossierShell"),
   storyWorld: document.getElementById("chroniclesStoryWorld"),
   storyStatus: document.getElementById("chroniclesStoryStatus"),
   storyContent: document.getElementById("chroniclesStoryContent"),
   howItWorks: document.getElementById("chroniclesHowItWorks"),
+  resourceModals: document.getElementById("chroniclesResourceModals"),
   notifyButton: document.getElementById("chroniclesNotifyButton"),
   worldForm: document.getElementById("chroniclesWorldForm"),
   categoryForm: document.getElementById("chroniclesCategoryForm"),
@@ -534,8 +819,12 @@ const elements = {
   threadForm: document.getElementById("chroniclesThreadForm"),
   postForm: document.getElementById("chroniclesPostForm"),
   characterForm: document.getElementById("chroniclesCharacterForm"),
+  codexForm: document.getElementById("chroniclesCodexForm"),
+  echoForm: document.getElementById("chroniclesEchoForm"),
   postStatus: document.getElementById("chroniclesPostStatus"),
   characterStatus: document.getElementById("chroniclesCharacterStatus"),
+  codexStatus: document.getElementById("chroniclesCodexStatus"),
+  echoStatus: document.getElementById("chroniclesEchoStatus"),
   postPreview: document.getElementById("chroniclesPostPreview"),
   postAttachments: document.getElementById("chroniclesPostAttachments"),
   aiAssistModal: document.getElementById("chroniclesAiAssistModal"),
@@ -616,6 +905,28 @@ function getCharacters() {
 
 function getCharacter(characterId) {
   return getCharacters().find((character) => character.id === characterId) || null;
+}
+
+function getCodexEntries(characterId = "") {
+  return toArray(state.remoteCodex)
+    .filter((entry) => !characterId || entry.characterId === characterId)
+    .filter(isRecordVisible)
+    .sort((a, b) => toTime(b.updatedAt || b.createdAt) - toTime(a.updatedAt || a.createdAt));
+}
+
+function getCodexEntry(entryId) {
+  return getCodexEntries().find((entry) => entry.id === entryId) || null;
+}
+
+function getEchoes(characterId = "") {
+  return toArray(state.remoteEchoes)
+    .filter((entry) => !characterId || entry.characterId === characterId)
+    .filter(isRecordVisible)
+    .sort((a, b) => toTime(b.updatedAt || b.createdAt) - toTime(a.updatedAt || a.createdAt));
+}
+
+function getEcho(echoId) {
+  return getEchoes().find((entry) => entry.id === echoId) || null;
 }
 
 function getPostsForThread(worldId, threadId, sortDirection = "asc") {
@@ -786,12 +1097,13 @@ function renderAll() {
   renderAdminVisibility();
   renderProfile();
   renderStats();
-  renderHowItWorks();
+  renderResourceGuides();
   renderWorldCards(elements.worldGrid, getWorlds());
   renderThreads();
   renderThreadView();
   renderRecentPosts();
   renderCharacters();
+  renderEchoes();
   renderCharacterDossier();
   renderStorySoFar();
   renderNotificationButton();
@@ -826,14 +1138,42 @@ function renderStats() {
   `).join("");
 }
 
-function renderHowItWorks() {
+function renderResourceGuides() {
   if (!elements.howItWorks) return;
-  elements.howItWorks.innerHTML = HOW_IT_WORKS.map((item) => `
-    <article class="chronicles-primer-card">
+  elements.howItWorks.innerHTML = RESOURCE_GUIDES.map((item, index) => `
+    <article class="chronicles-primer-card chronicles-guide-card">
+      <span>${String(index + 1).padStart(2, "0")}</span>
       <strong>${escapeHtml(item.title)}</strong>
       <p>${escapeHtml(item.text)}</p>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#chroniclesGuideModal-${escapeAttr(item.id)}">Open Guide</button>
     </article>
   `).join("");
+
+  if (!elements.resourceModals || elements.resourceModals.dataset.rendered === "true") return;
+  elements.resourceModals.innerHTML = RESOURCE_GUIDES.map((item) => `
+    <div class="modal fade chronicles-modal chronicles-guide-modal" id="chroniclesGuideModal-${escapeAttr(item.id)}" tabindex="-1" aria-labelledby="chroniclesGuideTitle-${escapeAttr(item.id)}" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Chronicles Manual</p>
+              <h2 class="modal-title" id="chroniclesGuideTitle-${escapeAttr(item.id)}">${escapeHtml(item.title)}</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="chronicles-guide-body chronicles-markdown">
+              ${renderMarkdown(item.body)}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-banri-primary" type="button" data-bs-dismiss="modal">Close Guide</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+  elements.resourceModals.dataset.rendered = "true";
 }
 
 function renderWorldCards(target, worlds) {
@@ -1340,6 +1680,18 @@ function countBy(items, getter) {
   return map;
 }
 
+function parseTags(value) {
+  return normalizeTagList(String(value || "").split(","));
+}
+
+function normalizeTagList(value) {
+  const items = Array.isArray(value) ? value : String(value || "").split(",");
+  return [...new Set(items
+    .map((tag) => String(tag || "").trim())
+    .filter(Boolean)
+    .slice(0, 12))];
+}
+
 function renderCharacters() {
   if (!elements.characterGrid) return;
   const worlds = getWorlds();
@@ -1386,6 +1738,72 @@ function renderCharacters() {
       </article>
     `;
   }).join("") : '<div class="relay-empty">No character records match that signal.</div>';
+}
+
+function renderEchoes() {
+  if (!elements.echoGrid) return;
+  const search = state.echoSearch.trim().toLowerCase();
+  const echoes = getEchoes().filter((echo) => {
+    if (!search) return true;
+    const character = getCharacter(echo.characterId);
+    const world = getWorld(echo.worldId || character?.worldId);
+    return [
+      echo.title,
+      echo.summary,
+      echo.body,
+      echo.timeline,
+      echo.location,
+      echo.status,
+      echo.canonStatus,
+      echo.tags?.join?.(" "),
+      character?.name,
+      character?.ownerDisplayName,
+      world?.title
+    ].join(" ").toLowerCase().includes(search);
+  });
+
+  elements.echoGrid.innerHTML = echoes.length ? echoes.map((echo) => renderEchoCard(echo, { showCharacter: true })).join("") : `
+    <div class="relay-empty">
+      No Echoes have been recorded yet. Create one from a character dossier or the Echoes tab.
+    </div>
+  `;
+}
+
+function renderEchoCard(echo, options = {}) {
+  const character = getCharacter(echo.characterId);
+  const world = getWorld(echo.worldId || character?.worldId);
+  const canEdit = canEditChronicleRecord(echo);
+  const cover = normalizeDossierUrl(echo.coverImage || echo.image || "");
+  const tags = normalizeTagList(echo.tags);
+  return `
+    <article class="chronicles-record-card chronicles-echo-card${cover ? " has-cover" : ""}">
+      ${cover ? `
+        <button class="chronicles-record-cover" type="button" data-chronicles-open-media data-chronicles-media-url="${escapeAttr(cover)}" data-chronicles-media-title="${escapeAttr(echo.title || "Echo cover")}" data-chronicles-media-caption="${escapeAttr(echo.summary || "")}">
+          <img src="${escapeAttr(cover)}" alt="${escapeAttr(echo.title || "Echo cover")}" loading="lazy" referrerpolicy="no-referrer" />
+        </button>
+      ` : ""}
+      <div class="chronicles-record-body">
+        <p class="chronicles-record-kicker">${escapeHtml(world?.title || "World")} / ${options.showCharacter ? escapeHtml(character?.name || "Unlinked Character") : "Personal Echo"}</p>
+        <h3>${escapeHtml(echo.title || "Untitled Echo")}</h3>
+        <dl class="chronicles-record-meta">
+          <dt>Status</dt><dd>${escapeHtml(toTitle(echo.status || "public"))}</dd>
+          <dt>Continuity</dt><dd>${escapeHtml(toTitle(echo.canonStatus || "canon"))}</dd>
+          <dt>Timeline</dt><dd>${escapeHtml(echo.timeline || "Not recorded")}</dd>
+          <dt>Location</dt><dd>${escapeHtml(echo.location || "Unspecified")}</dd>
+        </dl>
+        ${echo.summary ? `<p>${escapeHtml(echo.summary)}</p>` : ""}
+        <div class="chronicles-markdown chronicles-record-markdown">
+          ${renderMarkdown(echo.body || "No echo text recorded yet.")}
+        </div>
+        ${tags.length ? `<div class="chronicles-record-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>` : ""}
+        <div class="chronicles-forum-actions">
+          ${character ? `<button type="button" data-chronicles-open-character="${escapeAttr(character.id)}">Open Dossier</button>` : ""}
+          ${canEdit ? `<button type="button" data-chronicles-edit-echo="${escapeAttr(echo.id)}">Edit Echo</button>` : ""}
+          ${canEdit ? `<button type="button" data-chronicles-delete-echo="${escapeAttr(echo.id)}">Delete</button>` : ""}
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function getPrimaryDossierAudio(character) {
@@ -1449,7 +1867,7 @@ function renderCharacterDossier() {
   const latest = current.latest;
   const canEdit = canEditCharacter(character);
   const canPostAsCharacter = canUseCharacterVoice(character);
-  const activeTab = ["profile", "chronicle", "connections", "gallery", "archive", "ooc"].includes(state.dossierTab) ? state.dossierTab : "profile";
+  const activeTab = ["profile", "chronicle", "codex", "echoes", "connections", "gallery", "archive", "ooc"].includes(state.dossierTab) ? state.dossierTab : "profile";
   const portraitStyle = character.image ? `--dossier-portrait: url('${escapeAttr(character.image)}')` : "";
   const initial = (character.name || "?").charAt(0);
   const audioControl = renderDossierAudioControl(character);
@@ -1496,7 +1914,9 @@ function renderCharacterDossier() {
 
       <nav class="chronicles-dossier-tabs" aria-label="Dossier sections">
         ${renderDossierTabButton("profile", "Profile", activeTab)}
-        ${renderDossierTabButton("chronicle", "Chronicle", activeTab)}
+        ${renderDossierTabButton("chronicle", "Appearances", activeTab)}
+        ${renderDossierTabButton("codex", "Codex", activeTab)}
+        ${renderDossierTabButton("echoes", "Echoes", activeTab)}
         ${renderDossierTabButton("connections", "Connections", activeTab)}
         ${renderDossierTabButton("gallery", "Gallery", activeTab)}
         ${renderDossierTabButton("archive", "Archive Files", activeTab)}
@@ -1527,6 +1947,8 @@ function renderDossierTabButton(tab, label, activeTab) {
 
 function renderDossierTabContent(character, tab) {
   if (tab === "chronicle") return renderDossierChronicle(character);
+  if (tab === "codex") return renderDossierCodex(character);
+  if (tab === "echoes") return renderDossierEchoes(character);
   if (tab === "connections") return renderDossierConnections(character);
   if (tab === "gallery") return renderDossierGallery(character);
   if (tab === "archive") return renderDossierArchive(character);
@@ -1546,6 +1968,69 @@ function renderDossierProfile(character) {
     <div class="chronicles-dossier-profile">
       <div class="chronicles-dossier-readable">
         ${sections || '<div class="relay-empty">No profile dossier sections recorded yet.</div>'}
+      </div>
+    </div>
+  `;
+}
+
+function renderDossierCodex(character) {
+  const entries = getCodexEntries(character.id);
+  const canManage = canEditCharacter(character);
+  return `
+    <div class="chronicles-dossier-records">
+      <div class="chronicles-dossier-subhead">
+        <p>// Codex</p>
+        <span>${entries.length} record${entries.length === 1 ? "" : "s"}</span>
+        ${canManage ? `<button type="button" data-chronicles-open="codex">New Codex Entry</button>` : ""}
+      </div>
+      <div class="chronicles-record-grid compact">
+        ${entries.length ? entries.map(renderCodexCard).join("") : '<div class="relay-empty">No codex entries recorded yet. Use this space for abilities, doctrines, private lore, research notes, and character-specific mechanics.</div>'}
+      </div>
+    </div>
+  `;
+}
+
+function renderCodexCard(entry) {
+  const character = getCharacter(entry.characterId);
+  const world = getWorld(entry.worldId || character?.worldId);
+  const canEdit = canEditChronicleRecord(entry);
+  const tags = normalizeTagList(entry.tags);
+  return `
+    <article class="chronicles-record-card chronicles-codex-card">
+      <div class="chronicles-record-body">
+        <p class="chronicles-record-kicker">${escapeHtml(entry.category || "Field Note")} / ${escapeHtml(world?.title || "World")}</p>
+        <h3>${escapeHtml(entry.title || "Untitled Codex Entry")}</h3>
+        ${entry.summary ? `<p>${escapeHtml(entry.summary)}</p>` : ""}
+        <div class="chronicles-markdown chronicles-record-markdown">
+          ${renderMarkdown(entry.body || "No codex text recorded yet.")}
+        </div>
+        ${tags.length ? `<div class="chronicles-record-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>` : ""}
+        <div class="chronicles-record-stamp">
+          ${escapeHtml(character?.name || "Unlinked Character")} / Updated ${escapeHtml(formatDate(entry.updatedAt || entry.createdAt))}
+        </div>
+        ${canEdit ? `
+          <div class="chronicles-forum-actions">
+            <button type="button" data-chronicles-edit-codex="${escapeAttr(entry.id)}">Edit Codex</button>
+            <button type="button" data-chronicles-delete-codex="${escapeAttr(entry.id)}">Delete</button>
+          </div>
+        ` : ""}
+      </div>
+    </article>
+  `;
+}
+
+function renderDossierEchoes(character) {
+  const echoes = getEchoes(character.id);
+  const canManage = canEditCharacter(character);
+  return `
+    <div class="chronicles-dossier-records">
+      <div class="chronicles-dossier-subhead">
+        <p>// Echoes</p>
+        <span>${echoes.length} side chronicle${echoes.length === 1 ? "" : "s"}</span>
+        ${canManage ? `<button type="button" data-chronicles-open="echo">Create Echo</button>` : ""}
+      </div>
+      <div class="chronicles-record-grid">
+        ${echoes.length ? echoes.map((echo) => renderEchoCard(echo, { showCharacter: false })).join("") : '<div class="relay-empty">No personal echoes recorded yet. Use Echoes for character substories, memories, quiet scenes, and public side chapters that support the main chronicle.</div>'}
       </div>
     </div>
   `;
@@ -1767,7 +2252,26 @@ function populateSelects() {
   populateCategorySelects();
   populateThreadSelect(document.getElementById("chroniclesPostThread")?.value || "");
   populatePostCharacterSelect(document.getElementById("chroniclesPostCharacter")?.value || "");
+  populateRecordCharacterSelect("chroniclesCodexCharacter", document.getElementById("chroniclesCodexCharacter")?.value || state.selectedCharacterId);
+  populateRecordCharacterSelect("chroniclesEchoCharacter", document.getElementById("chroniclesEchoCharacter")?.value || state.selectedCharacterId);
   renderStoryWorldSelect(state.storyWorldId);
+}
+
+function getWritableCharacters() {
+  const characters = getCharacters();
+  return state.isAdmin ? characters : characters.filter(canEditCharacter);
+}
+
+function populateRecordCharacterSelect(selectId, selectedCharacterId = "") {
+  const select = document.getElementById(selectId);
+  if (!select) return;
+  const characters = getWritableCharacters();
+  select.innerHTML = characters.length ? characters.map((character) => {
+    const world = getWorld(character.worldId);
+    return `<option value="${escapeAttr(character.id)}">${escapeHtml(character.name || "Unnamed Character")} / ${escapeHtml(world?.title || "World")}</option>`;
+  }).join("") : '<option value="">No editable characters</option>';
+  const preferred = characters.some((character) => character.id === selectedCharacterId) ? selectedCharacterId : characters[0]?.id || "";
+  select.value = preferred;
 }
 
 function populateCategorySelects(selectedCategoryId = "") {
@@ -1927,6 +2431,58 @@ function continueAsCharacter(characterId) {
   });
 }
 
+function getDefaultWritableCharacterId() {
+  const selected = getCharacter(state.selectedCharacterId);
+  if (selected && canEditCharacter(selected)) return selected.id;
+  return getWritableCharacters()[0]?.id || "";
+}
+
+function openCodexModal(entry = null) {
+  const characterId = entry?.characterId || getDefaultWritableCharacterId();
+  const character = getCharacter(characterId);
+  if (!character || !canEditCharacter(character)) {
+    setText(elements.codexStatus, "Create or open one of your characters before adding a codex record.");
+    return;
+  }
+
+  state.editingCodex = entry;
+  elements.codexForm?.reset();
+  setText(elements.codexStatus, "");
+  setText(document.getElementById("chroniclesCodexModalTitle"), entry ? "Edit Codex Entry" : "Create Codex Entry");
+  populateRecordCharacterSelect("chroniclesCodexCharacter", character.id);
+  setInputValue("chroniclesCodexTitle", entry?.title || "");
+  setInputValue("chroniclesCodexCategory", entry?.category || "");
+  setInputValue("chroniclesCodexSummary", entry?.summary || "");
+  setInputValue("chroniclesCodexTags", normalizeTagList(entry?.tags).join(", "));
+  setInputValue("chroniclesCodexBody", entry?.body || "");
+  showBootstrapModal("chroniclesCodexModal");
+}
+
+function openEchoModal(entry = null) {
+  const characterId = entry?.characterId || getDefaultWritableCharacterId();
+  const character = getCharacter(characterId);
+  if (!character || !canEditCharacter(character)) {
+    setText(elements.echoStatus, "Create or open one of your characters before adding an Echo.");
+    return;
+  }
+
+  const current = getCharacterCurrentState(character);
+  state.editingEcho = entry;
+  elements.echoForm?.reset();
+  setText(elements.echoStatus, "");
+  setText(document.getElementById("chroniclesEchoModalTitle"), entry ? "Edit Echo" : "Create Echo");
+  populateRecordCharacterSelect("chroniclesEchoCharacter", character.id);
+  setInputValue("chroniclesEchoTitle", entry?.title || "");
+  setInputValue("chroniclesEchoStatusInput", entry?.status || "public");
+  setInputValue("chroniclesEchoCanonStatus", entry?.canonStatus || "canon");
+  setInputValue("chroniclesEchoTimeline", entry?.timeline || "");
+  setInputValue("chroniclesEchoLocation", entry?.location || current.location || "");
+  setInputValue("chroniclesEchoCover", entry?.coverImage || "");
+  setInputValue("chroniclesEchoSummary", entry?.summary || "");
+  setInputValue("chroniclesEchoBody", entry?.body || "");
+  showBootstrapModal("chroniclesEchoModal");
+}
+
 function openThread(route) {
   const { worldId, threadId } = parseThreadRoute(route);
   state.selectedWorldId = worldId;
@@ -1980,6 +2536,10 @@ function openModal(kind, options = {}) {
     showBootstrapModal("chroniclesCategoryModal");
   } else if (kind === "post") {
     openPostModal(options);
+  } else if (kind === "codex") {
+    openCodexModal();
+  } else if (kind === "echo") {
+    openEchoModal();
   } else if (kind === "character") {
     elements.characterForm?.reset();
     setText(elements.characterStatus, "");
@@ -2507,6 +3067,106 @@ async function handlePostSubmit(event) {
     }
   } catch (error) {
     setText(elements.postStatus, error.message || "Post failed.");
+  }
+}
+
+async function handleCodexSubmit(event) {
+  event.preventDefault();
+  if (!state.user) return;
+  const character = getCharacter(readValue("chroniclesCodexCharacter"));
+  const title = readValue("chroniclesCodexTitle");
+  const body = readValue("chroniclesCodexBody");
+  if (!character || !title || !body) {
+    setText(elements.codexStatus, "Character, title, and codex text are required.");
+    return;
+  }
+  if (!canEditCharacter(character) || (state.editingCodex && !canEditChronicleRecord(state.editingCodex))) {
+    setText(elements.codexStatus, "You do not have clearance to edit this codex record.");
+    return;
+  }
+
+  const recordId = state.editingCodex?.id || push(ref(database, "chronicles/codex")).key;
+  const ownerUid = state.editingCodex?.characterId === character.id
+    ? state.editingCodex.uid || (character.uid && character.uid !== "seed" ? character.uid : state.user.uid)
+    : (character.uid && character.uid !== "seed" ? character.uid : state.user.uid);
+  const payload = {
+    ...(state.editingCodex || {}),
+    id: recordId,
+    characterId: character.id,
+    worldId: character.worldId || state.selectedWorldId,
+    uid: ownerUid,
+    ownerDisplayName: character.ownerDisplayName || getDisplayName(),
+    title,
+    category: readValue("chroniclesCodexCategory") || "Field Note",
+    summary: readValue("chroniclesCodexSummary"),
+    tags: parseTags(readValue("chroniclesCodexTags")),
+    body,
+    visibility: "public",
+    createdAt: state.editingCodex?.createdAt || Date.now(),
+    updatedAt: Date.now()
+  };
+
+  setText(elements.codexStatus, "Saving codex record...");
+  try {
+    await set(ref(database, `chronicles/codex/${recordId}`), payload);
+    state.selectedCharacterId = character.id;
+    state.dossierTab = "codex";
+    state.editingCodex = null;
+    hideBootstrapModal("chroniclesCodexModal");
+    renderAll();
+  } catch (error) {
+    setText(elements.codexStatus, error.message || "Codex save failed.");
+  }
+}
+
+async function handleEchoSubmit(event) {
+  event.preventDefault();
+  if (!state.user) return;
+  const character = getCharacter(readValue("chroniclesEchoCharacter"));
+  const title = readValue("chroniclesEchoTitle");
+  const body = readValue("chroniclesEchoBody");
+  if (!character || !title || !body) {
+    setText(elements.echoStatus, "Character, title, and Echo text are required.");
+    return;
+  }
+  if (!canEditCharacter(character) || (state.editingEcho && !canEditChronicleRecord(state.editingEcho))) {
+    setText(elements.echoStatus, "You do not have clearance to edit this Echo.");
+    return;
+  }
+
+  const recordId = state.editingEcho?.id || push(ref(database, "chronicles/echoes")).key;
+  const ownerUid = state.editingEcho?.characterId === character.id
+    ? state.editingEcho.uid || (character.uid && character.uid !== "seed" ? character.uid : state.user.uid)
+    : (character.uid && character.uid !== "seed" ? character.uid : state.user.uid);
+  const payload = {
+    ...(state.editingEcho || {}),
+    id: recordId,
+    characterId: character.id,
+    worldId: character.worldId || state.selectedWorldId,
+    uid: ownerUid,
+    ownerDisplayName: character.ownerDisplayName || getDisplayName(),
+    title,
+    status: readValue("chroniclesEchoStatusInput") || "public",
+    canonStatus: readValue("chroniclesEchoCanonStatus") || "canon",
+    timeline: readValue("chroniclesEchoTimeline"),
+    location: readValue("chroniclesEchoLocation"),
+    coverImage: normalizeDossierUrl(readValue("chroniclesEchoCover")),
+    summary: readValue("chroniclesEchoSummary"),
+    body,
+    createdAt: state.editingEcho?.createdAt || Date.now(),
+    updatedAt: Date.now()
+  };
+
+  setText(elements.echoStatus, "Saving Echo...");
+  try {
+    await set(ref(database, `chronicles/echoes/${recordId}`), payload);
+    state.selectedCharacterId = character.id;
+    state.dossierTab = "echoes";
+    state.editingEcho = null;
+    hideBootstrapModal("chroniclesEchoModal");
+    renderAll();
+  } catch (error) {
+    setText(elements.echoStatus, error.message || "Echo save failed.");
   }
 }
 
@@ -3430,6 +4090,34 @@ async function deleteThread(route) {
   }
 }
 
+async function deleteCodexEntry(entryId) {
+  const entry = getCodexEntry(entryId);
+  if (!entry || !canEditChronicleRecord(entry)) return;
+  if (!await confirmChroniclesAction(`Delete codex record "${entry.title || "Untitled"}"?`, "Delete Codex", "Delete")) return;
+
+  try {
+    await remove(ref(database, `chronicles/codex/${entry.id}`));
+    if (state.editingCodex?.id === entry.id) state.editingCodex = null;
+    renderAll();
+  } catch (error) {
+    setText(elements.codexStatus, error.message || "Codex delete failed.");
+  }
+}
+
+async function deleteEcho(entryId) {
+  const entry = getEcho(entryId);
+  if (!entry || !canEditChronicleRecord(entry)) return;
+  if (!await confirmChroniclesAction(`Delete Echo "${entry.title || "Untitled"}"?`, "Delete Echo", "Delete")) return;
+
+  try {
+    await remove(ref(database, `chronicles/echoes/${entry.id}`));
+    if (state.editingEcho?.id === entry.id) state.editingEcho = null;
+    renderAll();
+  } catch (error) {
+    setText(elements.echoStatus, error.message || "Echo delete failed.");
+  }
+}
+
 function bindEvents() {
   document.addEventListener("click", (event) => {
     const openButton = event.target.closest("[data-chronicles-open]");
@@ -3444,6 +4132,10 @@ function bindEvents() {
     const characterEditButton = event.target.closest("[data-chronicles-edit-character]");
     const characterContinueButton = event.target.closest("[data-chronicles-continue-character]");
     const dossierTabButton = event.target.closest("[data-chronicles-dossier-tab]");
+    const editCodexButton = event.target.closest("[data-chronicles-edit-codex]");
+    const deleteCodexButton = event.target.closest("[data-chronicles-delete-codex]");
+    const editEchoButton = event.target.closest("[data-chronicles-edit-echo]");
+    const deleteEchoButton = event.target.closest("[data-chronicles-delete-echo]");
     const mediaOpenButton = event.target.closest("[data-chronicles-open-media]");
     const dossierAudioButton = event.target.closest("[data-chronicles-dossier-audio]");
     const pinAudioButton = event.target.closest("[data-chronicles-pin-audio]");
@@ -3510,6 +4202,16 @@ function bindEvents() {
     } else if (dossierTabButton) {
       state.dossierTab = dossierTabButton.dataset.chroniclesDossierTab || "profile";
       renderCharacterDossier();
+    } else if (editCodexButton) {
+      const entry = getCodexEntry(editCodexButton.dataset.chroniclesEditCodex);
+      if (entry && canEditChronicleRecord(entry)) openCodexModal(entry);
+    } else if (deleteCodexButton) {
+      deleteCodexEntry(deleteCodexButton.dataset.chroniclesDeleteCodex);
+    } else if (editEchoButton) {
+      const entry = getEcho(editEchoButton.dataset.chroniclesEditEcho);
+      if (entry && canEditChronicleRecord(entry)) openEchoModal(entry);
+    } else if (deleteEchoButton) {
+      deleteEcho(deleteEchoButton.dataset.chroniclesDeleteEcho);
     } else if (mediaOpenButton) {
       event.preventDefault();
       openMediaViewer(mediaOpenButton);
@@ -3574,7 +4276,7 @@ function bindEvents() {
     } else if (aiReplaceButton) {
       useAiAssistResult("replace");
     } else if (markdownButton) {
-      applyMarkdown(markdownButton.dataset.chroniclesMarkdown);
+      applyMarkdown(markdownButton.dataset.chroniclesMarkdown, markdownButton.dataset.chroniclesMarkdownTarget);
     } else if (previewToggle) {
       renderPostPreview(!elements.postPreview || elements.postPreview.classList.contains("d-none"));
     } else if (chronicleRouteLink && isChronicleRouteLink(chronicleRouteLink)) {
@@ -3619,6 +4321,10 @@ function bindEvents() {
     state.characterSearch = event.target.value || "";
     renderCharacters();
   });
+  elements.echoSearch?.addEventListener("input", (event) => {
+    state.echoSearch = event.target.value || "";
+    renderEchoes();
+  });
   document.getElementById("chroniclesPostImageFile")?.addEventListener("change", renderPostAttachmentPreview);
   document.getElementById("chroniclesPostImageUrl")?.addEventListener("input", renderPostAttachmentPreview);
   document.getElementById("chroniclesCharacterImage")?.addEventListener("change", () => {
@@ -3638,6 +4344,8 @@ function bindEvents() {
   elements.categoryForm?.addEventListener("submit", handleCategorySubmit);
   elements.postForm?.addEventListener("submit", handlePostSubmit);
   elements.characterForm?.addEventListener("submit", handleCharacterSubmit);
+  elements.codexForm?.addEventListener("submit", handleCodexSubmit);
+  elements.echoForm?.addEventListener("submit", handleEchoSubmit);
   elements.loreToggle?.addEventListener("click", () => {
     state.loreEditing = !state.loreEditing;
     renderLoreModal();
@@ -3663,6 +4371,8 @@ function subscribeChronicles() {
     ["deletedThreads", "chronicles/deletedThreads", (value) => { state.deletedThreads = value || {}; }],
     ["deletedPosts", "chronicles/deletedPosts", (value) => { state.deletedPosts = value || {}; }],
     ["characters", "chronicles/characters", (value) => { state.remoteCharacters = toArray(value); }],
+    ["codex", "chronicles/codex", (value) => { state.remoteCodex = toArray(value); }],
+    ["echoes", "chronicles/echoes", (value) => { state.remoteEchoes = toArray(value); }],
     ["summaries", "chronicles/summaries", (value) => { state.aiSummaries = value || {}; }],
     ["aiConfig", "siteConfig/chroniclesAi", (value) => { state.chroniclesAiConfig = normalizeChroniclesAiConfig(value); }]
   ];
@@ -3775,6 +4485,19 @@ function canEditCharacter(character) {
 
 function canUseCharacterVoice(character) {
   return state.isAdmin || isCharacterAssignedToCurrentUser(character);
+}
+
+function isRecordVisible(record) {
+  if (!record) return false;
+  if (state.isAdmin || record.uid === state.user?.uid) return true;
+  const status = String(record.status || record.visibility || "public").toLowerCase();
+  return status !== "draft" && status !== "private";
+}
+
+function canEditChronicleRecord(record) {
+  if (!record) return false;
+  if (state.isAdmin || record.uid === state.user?.uid) return true;
+  return canEditCharacter(getCharacter(record.characterId));
 }
 
 function findPostById(postId) {
@@ -3977,8 +4700,8 @@ function transformOocMarkup(value) {
 `);
 }
 
-function applyMarkdown(type) {
-  const textarea = document.getElementById("chroniclesPostBody");
+function applyMarkdown(type, targetId = "chroniclesPostBody") {
+  const textarea = document.getElementById(targetId || "chroniclesPostBody");
   if (!textarea) return;
   const start = textarea.selectionStart || 0;
   const end = textarea.selectionEnd || 0;
@@ -4001,7 +4724,7 @@ function applyMarkdown(type) {
   textarea.selectionStart = start + cursorStartOffset;
   textarea.selectionEnd = start + replacement.length - cursorEndOffset;
   textarea.focus();
-  if (elements.postPreview && !elements.postPreview.classList.contains("d-none")) renderPostPreview(true);
+  if (textarea.id === "chroniclesPostBody" && elements.postPreview && !elements.postPreview.classList.contains("d-none")) renderPostPreview(true);
 }
 
 function detailRow(label, value) {

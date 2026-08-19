@@ -99,8 +99,10 @@ chronicles/worlds
 chronicles/threads/{worldId}
 chronicles/posts/{worldId}/{threadId}
 chronicles/characters
+chronicles/codex
+chronicles/echoes
 ```
 
-Only signed-in users can read Chronicles data. Worlds and location threads are admin-only to write. Signed-in users can create and manage their own posts and character records. Admins can write any Chronicle entry, which is what enables editor mode for rebuilding older Discord/forum posts under the correct author name.
+Only signed-in users can read Chronicles data. Worlds and location threads are admin-only to write. Signed-in users can create and manage their own posts, character records, dossier Codex notes, and public/personal Echo side chronicles. Admins can write any Chronicle entry, which is what enables editor mode for rebuilding older Discord/forum posts under the correct author name.
 
 The `Notify New Posts` button uses the browser Notifications API. It can alert you to new Chronicle posts while the page is open, and the on/off preference is saved in local storage for that browser.

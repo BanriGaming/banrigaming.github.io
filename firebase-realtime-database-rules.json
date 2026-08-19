@@ -362,6 +362,66 @@
           }
         }
       },
+      "codex": {
+        "$recordId": {
+          ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",
+          ".validate": "newData.val() === null || newData.hasChildren(['id', 'uid', 'characterId', 'worldId', 'title', 'body', 'createdAt'])",
+          "id": {
+            ".validate": "newData.val() === $recordId"
+          },
+          "uid": {
+            ".validate": "newData.isString() && newData.val().length >= 1"
+          },
+          "characterId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+          },
+          "worldId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 90"
+          },
+          "title": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+          },
+          "summary": {
+            ".validate": "newData.isString() && newData.val().length <= 240"
+          },
+          "body": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 12000"
+          },
+          "$other": {
+            ".validate": true
+          }
+        }
+      },
+      "echoes": {
+        "$echoId": {
+          ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",
+          ".validate": "newData.val() === null || newData.hasChildren(['id', 'uid', 'characterId', 'worldId', 'title', 'body', 'createdAt'])",
+          "id": {
+            ".validate": "newData.val() === $echoId"
+          },
+          "uid": {
+            ".validate": "newData.isString() && newData.val().length >= 1"
+          },
+          "characterId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+          },
+          "worldId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 90"
+          },
+          "title": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 140"
+          },
+          "summary": {
+            ".validate": "newData.isString() && newData.val().length <= 800"
+          },
+          "body": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 18000"
+          },
+          "$other": {
+            ".validate": true
+          }
+        }
+      },
       "summaries": {
         "$worldId": {
           ".write": "auth != null && newData.child('worldId').val() === $worldId && newData.child('updatedByUid').val() === auth.uid",

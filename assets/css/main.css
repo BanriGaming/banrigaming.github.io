@@ -7551,12 +7551,174 @@ body.legacy-theme::before {
   color: var(--banri-muted);
 }
 
+.chronicles-dossier-subhead button {
+  display: inline-flex;
+  padding: 0.45rem 0.72rem;
+  border: 1px solid rgba(22, 232, 255, 0.34);
+  color: var(--banri-cyan);
+  background: rgba(0, 0, 0, 0.34);
+  font: 800 0.66rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.chronicles-dossier-subhead button:hover,
+.chronicles-dossier-subhead button:focus-visible {
+  color: #001013;
+  background: var(--banri-cyan);
+}
+
 .chronicles-dossier-posts,
 .chronicles-dossier-appearances,
 .chronicles-dossier-connections,
 .chronicles-dossier-files {
   display: grid;
   gap: 0.75rem;
+}
+
+.chronicles-dossier-records {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.chronicles-record-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+  gap: 0.9rem;
+}
+
+.chronicles-record-grid.compact {
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+
+.chronicles-record-card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.065), transparent 44%),
+    radial-gradient(circle at 92% 12%, rgba(22, 232, 255, 0.1), transparent 10rem),
+    rgba(0, 5, 8, 0.72);
+  box-shadow: inset 0 0 32px rgba(22, 232, 255, 0.04);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.chronicles-record-card.has-cover {
+  grid-template-columns: minmax(160px, 0.42fr) 1fr;
+}
+
+.chronicles-record-cover {
+  min-height: 230px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-right: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 0, 0, 0.34);
+}
+
+.chronicles-record-cover img {
+  width: 100%;
+  height: 100%;
+  min-height: 230px;
+  object-fit: cover;
+  filter: saturate(0.86) contrast(1.06);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.chronicles-record-cover:hover img,
+.chronicles-record-cover:focus-visible img {
+  transform: scale(1.025);
+  filter: saturate(1) contrast(1.1);
+}
+
+.chronicles-record-body {
+  min-width: 0;
+  padding: 1rem;
+}
+
+.chronicles-record-kicker,
+.chronicles-record-meta,
+.chronicles-record-stamp,
+.chronicles-record-tags span {
+  font-family: "Share Tech Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.chronicles-record-kicker {
+  margin: 0 0 0.55rem;
+  color: var(--banri-cyan);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.chronicles-record-card h3 {
+  margin: 0 0 0.75rem;
+  color: #f0fbfd;
+  font: 800 clamp(1.4rem, 3vw, 2rem)/0.98 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-record-card p {
+  color: #c9dce1;
+  line-height: 1.55;
+}
+
+.chronicles-record-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem 0.8rem;
+  margin: 0 0 0.8rem;
+  padding: 0.7rem;
+  border: 1px solid rgba(22, 232, 255, 0.12);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.chronicles-record-meta dt,
+.chronicles-record-meta dd {
+  margin: 0;
+  font-size: 0.64rem;
+  line-height: 1.35;
+}
+
+.chronicles-record-meta dt {
+  color: var(--banri-cyan);
+}
+
+.chronicles-record-meta dd {
+  color: #d9e8ed;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.chronicles-record-markdown {
+  max-height: 460px;
+  overflow: auto;
+  padding: 0.85rem;
+  border: 1px solid rgba(22, 232, 255, 0.12);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.chronicles-record-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.8rem;
+}
+
+.chronicles-record-tags span {
+  padding: 0.28rem 0.45rem;
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  color: var(--banri-cyan);
+  background: rgba(22, 232, 255, 0.055);
+  font-size: 0.58rem;
+}
+
+.chronicles-record-stamp {
+  margin-top: 0.8rem;
+  color: var(--banri-muted);
+  font-size: 0.62rem;
 }
 
 .chronicles-dossier-posts article,
@@ -7909,6 +8071,24 @@ body.legacy-theme::before {
   padding: 1rem;
 }
 
+.chronicles-guide-card {
+  display: grid;
+  align-content: start;
+  gap: 0.65rem;
+  min-height: 210px;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.08), transparent 46%),
+    rgba(0, 5, 8, 0.62);
+}
+
+.chronicles-guide-card span {
+  color: var(--banri-cyan);
+  font: 800 0.74rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .chronicles-primer-card strong {
   display: block;
   margin-bottom: 0.45rem;
@@ -7922,6 +8102,38 @@ body.legacy-theme::before {
   margin: 0;
   color: var(--banri-muted);
   line-height: 1.55;
+}
+
+.chronicles-guide-card p {
+  margin-bottom: 0.35rem;
+}
+
+.chronicles-guide-card button {
+  align-self: end;
+  justify-self: start;
+  margin-top: auto;
+  padding: 0.48rem 0.72rem;
+  border: 1px solid rgba(22, 232, 255, 0.34);
+  color: var(--banri-cyan);
+  background: transparent;
+  font: 800 0.68rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.chronicles-guide-card button:hover,
+.chronicles-guide-card button:focus-visible {
+  color: #001013;
+  background: var(--banri-cyan);
+}
+
+.chronicles-guide-body {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.chronicles-guide-body h2 {
+  margin-top: 0;
 }
 
 .chronicles-world-card {
@@ -8638,7 +8850,8 @@ body.legacy-theme::before {
   .chronicles-story-summary-grid,
   .chronicles-ai-summary,
   .chronicles-story-summary-columns,
-  .chronicles-ai-toggle-grid {
+  .chronicles-ai-toggle-grid,
+  .chronicles-record-card.has-cover {
     grid-template-columns: 1fr;
   }
 
@@ -8675,6 +8888,11 @@ body.legacy-theme::before {
   }
 
   .chronicles-story-entry aside {
+    border-right: 0;
+    border-bottom: 1px solid rgba(22, 232, 255, 0.16);
+  }
+
+  .chronicles-record-cover {
     border-right: 0;
     border-bottom: 1px solid rgba(22, 232, 255, 0.16);
   }
