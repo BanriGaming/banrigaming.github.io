@@ -184,70 +184,54 @@ Does the Sundertide stir again? Varynth waits for those bold or desperate enough
 
 const RESOURCE_GUIDES = [
   {
-    id: "overview",
-    title: "System Overview",
-    text: "What Chronicles is, how play-by-post works, and how the major systems fit together.",
+    id: "ui-overview",
+    title: "Chronicles UI Overview",
+    text: "Dashboard, worlds, threads, resources, and Story So Far in one operating map.",
     body: `## What Chronicles Is
 
 Chronicles is a private play-by-post writing system built around worlds, location threads, characters, and narrative posts.
 
-Players write detailed entries like mini-chapters. Each post describes a character's actions, dialogue, thoughts, and consequences inside a shared world.
+Players write entries like mini-chapters. Each post describes a character's actions, dialogue, thoughts, and consequences inside a shared world.
 
-## Core Flow
+## Dashboard
 
-- Create or open a world.
-- Pick a location thread.
-- Create a character dossier.
-- Write posts in third-person past tense.
-- Use follow-ups to connect your post to another writer's post.
-- Use Story So Far when you want to read the whole timeline in order.
+The Dashboard is the active writing command center.
 
-## Important Rule
-
-Collaboration matters more than winning. Control your own character, respect other people's agency, and ask before making permanent changes to another character unless their post explicitly allows character effects.`
-  },
-  {
-    id: "dashboard",
-    title: "Dashboard",
-    text: "How to use Recent Posts, quick actions, and the fastest route back into active writing.",
-    body: `## Dashboard
-
-The Dashboard is the command center for active writing.
-
-## Recent Posts
-
-Recent Posts shows the newest narrative entries across the active Chronicles system. It is the fastest way to see what changed since your last visit.
-
-Use Open Post to jump directly to the original location thread.
-
-Use Follow Up when you want to answer that post from another location or continue the scene.
-
-## Quick Actions
-
+- Recent Posts shows the newest narrative entries across all active worlds.
+- Open Post jumps directly to the original location thread.
+- Follow Up answers that post while preserving a link back to the source entry.
 - Create Post opens the transmission editor.
-- Create Character opens the character registry form.
-- Create Echo opens the side-story editor.
-- New Thread and New World appear only for admins.`
-  },
-  {
-    id: "worlds",
-    title: "Worlds And Threads",
-    text: "How worlds, categories, provinces, sectors, and location threads are organized.",
-    body: `## Worlds
+- Create Character opens the dossier intake form.
+- Create Echo starts a personal character side chronicle.
+- New Thread and New World appear only for admins.
 
-Worlds are the top-level campaigns or writing settings, such as Echoes After the Forge or Sundertide of Varynth.
+## Worlds And Threads
 
-Each world contains location threads. These threads behave like old forum boards: a planet, city, tavern, ship, ruin, battlefield, or province.
+Worlds are the top-level campaigns or settings, such as Echoes After the Forge or Sundertide of Varynth.
 
-## Categories
+Threads are locations inside a world. A thread can be a planet, city, tavern, starship, battlefield, ruin, province, sector, or any place where characters can write scenes.
 
-Admins can group location threads into categories. In Star Wars, this might be Galactic Core, Mid Rim, Outer Rim, or Shadow Worlds. In fantasy, this might be provinces, kingdoms, regions, or cities.
+Admins can group threads into categories. For example:
 
-## Threads
+- Star Wars: Galactic Core, Mid Rim, Outer Rim, Shadow Worlds.
+- Fantasy: provinces, kingdoms, regions, cities, wilderness zones.
 
-Each thread is a place. Characters should write arrivals and departures when moving between locations so the timeline stays readable.
+Use thread search when a world has too many locations to scan. Characters should write arrivals and departures when moving between locations so the timeline stays readable.
 
-Use the thread search bar when a world has too many locations to scan manually.`
+## Story So Far
+
+Story So Far is the catch-up view.
+
+- Full Chronicle shows narrative posts in chronological order.
+- Summary Signal is reserved for compact digests later.
+- Location Description posts are excluded from Story So Far.
+- Deleted posts are removed from the timeline and counts.
+
+Use Story So Far when someone wants to read the campaign without jumping thread-to-thread.
+
+## Resources
+
+Resources is the operating manual. It explains how each tool works, how fields should be formatted, and how to keep the archive clean.`
   },
   {
     id: "posts",
@@ -286,32 +270,9 @@ Admins can post as Narrator for world events, environmental consequences, or cus
 Admins can mark a post as Location Description. These are useful as first posts in a thread, but they are excluded from Story So Far so the timeline stays focused on actual story events.`
   },
   {
-    id: "story",
-    title: "Story So Far",
-    text: "How to read the full chronological story or the compact summary signal.",
-    body: `## Story So Far
-
-Story So Far is the reader-friendly continuity view.
-
-Pick a world, then choose:
-
-- Full Chronicle to read every narrative post in chronological order.
-- Summary Signal to read a compact live digest built from current post data.
-
-## Pagination
-
-Full Chronicle shows a small number of posts per page so long campaigns stay readable. Moving pages scrolls the reader back to the timeline.
-
-## What Is Excluded
-
-Location Description posts are hidden from Story So Far. Deleted posts are also removed from the count and timeline.
-
-Use this tab when someone wants to catch up without jumping thread-to-thread.`
-  },
-  {
     id: "dossier",
     title: "Character Dossiers",
-    text: "How dossiers work, what each section means, and how character ownership is handled.",
+    text: "Every dossier field, tab, URL format, connection format, archive format, and Codex detail.",
     body: `## Dossiers
 
 A dossier is a public character record. It stores profile lore, status, linked posts, gallery art, audio, relationships, archive files, OOC preferences, Codex entries, and Echoes.
@@ -325,7 +286,100 @@ A dossier is a public character record. It stores profile lore, status, linked p
 - Alignment: moral or faction alignment.
 - Affiliation: group, faction, order, guild, or independent status.
 - Current Location: derived from the character's latest linked post.
+- Current Arc: the active story arc, chapter, or campaign phase.
 - Active Objective: what the character is trying to do now.
+- Condition / Status: health, state, condition, or narrative status.
+- Portrait Upload: JPEG, PNG, WebP, or GIF. This is stored in Realtime Database as compact portrait data.
+- Origin Tale: character history, opening lore, or biography.
+- Armament / Equipment: weapons, tools, armor, ships, relics, or carried items.
+- Skills / Aptitudes: talents, Force abilities, magic, professions, combat style, languages, or technical abilities.
+- Personality Notes: temperament, motives, flaws, habits, or social behavior.
+- Hooks / Rumors: public hooks, leads, mysteries, reputation, or rumors others can use.
+- Writing Preference: how the writer prefers scenes to be handled.
+- Consent Boundary: what requires permission before other writers affect this character.
+- Posting Pace: how often the writer expects to respond.
+- OOC Notes: public collaborator notes attached to the character.
+
+## Gallery Images
+
+Gallery art is URL-only. Use Imgur direct image links, Discord CDN image links, personal CDN links, or any host that gives a real image URL ending in a useful file type such as .png, .jpg, .jpeg, .webp, or .gif.
+
+Format one image per line:
+
+\`\`\`
+URL | Title | Caption
+https://i.imgur.com/example.png | Karniss | Ancient Deshade of the First Empire
+\`\`\`
+
+If an Imgur album link does not load, open the image directly and use the direct image URL, usually like:
+
+\`\`\`
+https://i.imgur.com/fileId.png
+\`\`\`
+
+## Dossier Audio
+
+Audio records can be direct MP3/audio URLs or Suno share links. Suno pages are compatible when the audio resolver Worker is deployed; the system resolves the playable audio behind the scenes.
+
+Format one audio signal per line:
+
+\`\`\`
+Source URL | Title | Caption | Type | Optional direct playback URL | Optional pinned
+https://suno.com/s/songId | Rhun's Doctrine | Character theme | music | | pinned
+https://example.com/theme.mp3 | Battle Motif | Boss theme | music
+\`\`\`
+
+The Source URL is what Open Audio opens. The direct playback URL is optional and only needed when you already have a playable MP3/CDN URL. Pinning can also be managed from the Archive Files tab. A maximum of two pinned audio signals display in the dossier header.
+
+## Connections
+
+Connections are public relationship records. Use them for allies, rivals, enemies, family, patrons, factions, mentors, ships, or important NPC links. If the name matches an existing dossier, it becomes a dossier link.
+
+Format one connection per line:
+
+\`\`\`
+Name | Relationship Type | Status | Public Note
+Aelira Kaen | Ally | Trusted | Shared history after the Forge
+Karniss | Guardian | Unstable | Bound to the tomb archive
+\`\`\`
+
+## Archive File URLs
+
+Archive files are linked references, not Firebase uploads. Use them for maps, PDFs, documents, art references, external lore pages, recovered records, playlists, or supporting files.
+
+Format one archive file per line:
+
+\`\`\`
+URL | Title | Caption | Type
+https://example.com/map.pdf | Tomb Map | Recovered record | document
+https://example.com/reference.png | Armor Study | Visual reference | image
+\`\`\`
+
+Suggested types: document, map, reference, image, music, audio, relic, report, or other.
+
+## Dossier Tabs
+
+- Profile shows the core public biography.
+- Appearances lists posts linked to that character.
+- Codex stores lore notes, ability rules, doctrine, science, research, limits, and field notes.
+- Echoes shows personal side chronicles tied to the character.
+- Connections shows public relationship records.
+- Gallery shows URL-linked character art.
+- Archive Files shows audio and external reference files. This is where header audio can be pinned or unpinned.
+- OOC shows collaborator notes, writing preference, consent boundary, and posting pace.
+
+## Codex Entries
+
+Codex is part of the dossier system. Use it for ability explanations, relic notes, doctrine, metaphysics, research logs, combat limits, consequences, or any reference that should stay attached to the character.
+
+Codex input format:
+
+- Character: the dossier this record belongs to.
+- Entry Title: readable title.
+- Classification: ability, doctrine, field note, relic, research, or another useful label.
+- Short Summary: one-line scan text.
+- Tags: comma-separated labels such as force, dread aura, Korriban.
+- Codex Record: markdown body text.
 
 ## Ownership
 
@@ -334,34 +388,6 @@ Admins can edit all dossiers. Normal users can edit dossiers assigned to their U
 ## Continue As
 
 Continue As opens a new post with that character selected. This is the cleanest way to keep the dossier history accurate.`
-  },
-  {
-    id: "codex",
-    title: "Codex Entries",
-    text: "How to use Codex records for character lore, abilities, science, rules, and field notes.",
-    body: `## Codex
-
-Codex entries are character-linked lore records.
-
-Use Codex for:
-
-- Ability explanations.
-- Relic notes.
-- Doctrine, philosophy, or personal rules.
-- Science or metaphysics behind a power.
-- Research logs.
-- Limits and consequences.
-
-## Input Format
-
-- Character: the dossier this record belongs to.
-- Entry Title: the readable title.
-- Classification: ability, doctrine, field note, relic, research, or anything useful.
-- Short Summary: one-line scan text.
-- Tags: comma-separated labels such as force, dread aura, Korriban.
-- Codex Record: markdown body text.
-
-Codex records appear inside the character dossier and can be edited by the character owner or an admin.`
   },
   {
     id: "echoes",

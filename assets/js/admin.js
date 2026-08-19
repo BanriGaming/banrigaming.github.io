@@ -1,4 +1,5 @@
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { onValue, ref } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 import {
   ICON_OPTIONS,
   STATUS_OPTIONS,
@@ -64,6 +65,10 @@ const state = {
   galleryImagesByCollection: {},
   galleryFile: null,
   librarySearch: "",
+  memberProfiles: {},
+  memberPresence: {},
+  memberSearch: "",
+  memberUnsubscribers: [],
   editingGameIndex: -1
 };
 
@@ -80,6 +85,8 @@ const elements = {
   homepageEditor: document.getElementById("homepageEditor"),
   chroniclesAiEditor: document.getElementById("chroniclesAiEditor"),
   galleryEditor: document.getElementById("galleryEditor"),
+  membersEditor: document.getElementById("membersEditor"),
+  membersSearch: document.getElementById("adminMembersSearch"),
   activityPreview: document.getElementById("activityPreview"),
   librarySearch: document.getElementById("adminLibrarySearch"),
   steamProfileId: document.getElementById("steamProfileId"),
@@ -855,6 +862,187 @@ function renderGalleryEditor() {
   `;
 }
 
+function cleanupMemberRoster() {
+  state.memberUnsubscribers.forEach((unsubscribe) => unsubscribe());
+  state.memberUnsubscribers = [];
+}
+
+function subscribeMemberRoster() {
+  if (!elements.membersEditor) return;
+  cleanupMemberRoster();
+  const { database } = getFirebaseServices();
+  [
+    ["publicProfiles", (value) => { state.memberProfiles = value || {}; }],
+    ["presence", (value) => { state.memberPresence = value || {}; }]
+  ].forEach(([path, setter]) => {
+    const unsubscribe = onValue(ref(database, path), (snapshot) => {
+      setter(snapshot.val());
+      renderMembersEditor();
+    }, (error) => {
+      console.warn(`Admin member roster read failed at ${path}:`, error);
+      renderMembersEditor();
+    });
+    state.memberUnsubscribers.push(unsubscribe);
+  });
+}
+
+function getAdminMembers() {
+  const ids = new Set([
+    ...Object.keys(state.memberProfiles || {}),
+    ...Object.keys(state.memberPresence || {})
+  ]);
+  if (state.user?.uid) ids.add(state.user.uid);
+
+  return [...ids].map((uid) => {
+    const profile = state.memberProfiles?.[uid] || {};
+    const signal = state.memberPresence?.[uid] || {};
+    return {
+      uid,
+      displayName: profile.displayName || signal.displayName || (uid === state.user?.uid ? state.user.displayName || state.user.email : "") || "Nexus User",
+      bio: profile.bio || "",
+      status: profile.status || "",
+      favoriteGames: profile.favoriteGames || "",
+      platforms: normalizeMemberPlatforms(profile.platforms),
+      photoURL: profile.photoURL || "",
+      online: signal.online === true || uid === state.user?.uid,
+      lastSeen: Number(signal.lastSeen || profile.updatedAt || (uid === state.user?.uid ? Date.now() : 0))
+    };
+  }).sort((a, b) => Number(b.online) - Number(a.online) || b.lastSeen - a.lastSeen || a.displayName.localeCompare(b.displayName));
+}
+
+function filterAdminMembers(members) {
+  const query = state.memberSearch.trim().toLowerCase();
+  if (!query) return members;
+  return members.filter((member) => [
+    member.uid,
+    member.displayName,
+    member.bio,
+    member.status,
+    member.favoriteGames,
+    ...Object.values(member.platforms || {})
+  ].join(" ").toLowerCase().includes(query));
+}
+
+function normalizeMemberPlatforms(platforms = {}) {
+  return Object.fromEntries(Object.entries(platforms || {})
+    .map(([key, value]) => [key, String(value || "").trim()])
+    .filter(([, value]) => value));
+}
+
+function renderMembersEditor() {
+  if (!elements.membersEditor) return;
+  const members = getAdminMembers();
+  const filtered = filterAdminMembers(members);
+  const onlineCount = members.filter((member) => member.online).length;
+
+  elements.membersEditor.innerHTML = `
+    <article class="admin-card admin-member-summary">
+      <div class="admin-card-body">
+        <div>
+          <span>Roster</span>
+          <strong>${members.length} member${members.length === 1 ? "" : "s"}</strong>
+        </div>
+        <div>
+          <span>Online</span>
+          <strong>${onlineCount}</strong>
+        </div>
+        <div>
+          <span>Filtered</span>
+          <strong>${filtered.length}</strong>
+        </div>
+      </div>
+    </article>
+    ${filtered.length ? filtered.map(renderAdminMemberCard).join("") : '<p class="admin-empty">No member signals match that search.</p>'}
+  `;
+}
+
+function renderAdminMemberCard(member) {
+  const signal = member.bio || "No public signal set.";
+  const status = member.status || (member.online ? "Connected to the Nexus" : "Signal dormant");
+  const favorites = member.favoriteGames || "No favorite games listed.";
+  return `
+    <article class="admin-card admin-member-card" data-member-uid="${escapeAttr(member.uid)}">
+      <div class="admin-member-avatar${member.photoURL ? " has-photo" : ""}">
+        ${member.photoURL ? `<img src="${escapeAttr(member.photoURL)}" alt="" loading="lazy" referrerpolicy="no-referrer" />` : ""}
+        <span>${escapeHtml(member.displayName.charAt(0).toUpperCase())}</span>
+      </div>
+      <div class="admin-member-body">
+        <div class="admin-card-heading">
+          <span>${member.online ? "Online" : `Last seen ${formatAdminMemberDate(member.lastSeen)}`}</span>
+          <button class="btn btn-banri-outline btn-sm" type="button" data-copy-member-uid>Copy UID</button>
+        </div>
+        <h3>${escapeHtml(member.displayName)}</h3>
+        <p class="admin-member-uid">${escapeHtml(member.uid)}</p>
+        <div class="admin-member-details">
+          <section>
+            <span>Signal</span>
+            <p>${escapeHtml(signal)}</p>
+          </section>
+          <section>
+            <span>Status</span>
+            <p>${escapeHtml(status)}</p>
+          </section>
+          <section>
+            <span>Favorite Games</span>
+            <p>${escapeHtml(favorites)}</p>
+          </section>
+        </div>
+        ${renderAdminMemberPlatforms(member.platforms)}
+      </div>
+    </article>
+  `;
+}
+
+function renderAdminMemberPlatforms(platforms = {}) {
+  const entries = Object.entries(platforms || {}).filter(([, value]) => value);
+  if (!entries.length) return '<p class="admin-member-platforms empty">No platform links listed.</p>';
+  return `
+    <div class="admin-member-platforms">
+      ${entries.map(([key, value]) => `<span title="${escapeAttr(value)}">${escapeHtml(platformLabel(key))}</span>`).join("")}
+    </div>
+  `;
+}
+
+function platformLabel(key) {
+  return {
+    youtube: "YouTube",
+    twitch: "Twitch",
+    steam: "Steam",
+    discord: "Discord",
+    website: "Website"
+  }[key] || key;
+}
+
+function formatAdminMemberDate(value) {
+  const date = new Date(Number(value || 0));
+  if (Number.isNaN(date.getTime()) || !Number(value)) return "unknown";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(date);
+}
+
+async function copyTextToClipboard(value) {
+  const text = String(value || "");
+  if (!text) return;
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
 function renderActivityPreview() {
   elements.activityPreview.innerHTML = state.activityFeed
     .slice(0, 5)
@@ -925,6 +1113,7 @@ function renderAll() {
   renderQuotesEditor();
   renderHomepageEditor();
   renderGalleryEditor();
+  renderMembersEditor();
   renderActivityPreview();
 }
 
@@ -1508,6 +1697,21 @@ function bindAdminEvents() {
     renderLibraryEditor();
   });
 
+  elements.membersSearch?.addEventListener("input", (event) => {
+    state.memberSearch = event.target.value || "";
+    renderMembersEditor();
+  });
+
+  elements.membersEditor?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-copy-member-uid]");
+    if (!button) return;
+    const card = button.closest("[data-member-uid]");
+    const uid = card?.dataset.memberUid || "";
+    copyTextToClipboard(uid)
+      .then(() => setStatus(`Copied UID: ${uid}`, "success"))
+      .catch(() => setStatus("Could not copy that UID from this browser.", "error"));
+  });
+
   elements.libraryEditor?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-edit-game]");
     if (!button) return;
@@ -1595,6 +1799,7 @@ async function handleAuth(user) {
   state.user = user;
 
   if (!user) {
+    cleanupMemberRoster();
     if (elements.uidText) elements.uidText.textContent = "Not signed in.";
     showLocked("Sign in with the Login button to check Nexus admin access.", "Signed Out");
     return;
@@ -1604,6 +1809,7 @@ async function handleAuth(user) {
   state.isAdmin = await isAdminUid(user.uid);
 
   if (!state.isAdmin) {
+    cleanupMemberRoster();
     showLocked(`Signed in as ${user.email || user.uid}, but this UID is not listed under admins/{uid}: true.`, "Denied");
     return;
   }
@@ -1611,6 +1817,7 @@ async function handleAuth(user) {
   showConsole();
   setStatus("Admin channel authenticated.", "success");
   setupDateDefault();
+  subscribeMemberRoster();
   await loadData();
 }
 

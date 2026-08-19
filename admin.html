@@ -86,6 +86,9 @@
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="gallery-admin-tab" data-bs-toggle="pill" data-bs-target="#galleryPane" type="button" role="tab">Gallery</button>
               </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="members-tab" data-bs-toggle="pill" data-bs-target="#membersPane" type="button" role="tab">Members</button>
+              </li>
               <li class="nav-item d-none" role="presentation">
                 <button class="nav-link" id="chronicles-ai-tab" data-bs-toggle="pill" data-bs-target="#chroniclesAiPane" type="button" role="tab">Chronicles AI</button>
               </li>
@@ -198,6 +201,22 @@
                   Collections are based on existing game-library records. Small images save as Realtime Database data URLs; larger screenshots can use image URLs.
                 </div>
                 <div id="galleryEditor" class="admin-grid"></div>
+              </section>
+
+              <section class="tab-pane fade" id="membersPane" role="tabpanel" aria-labelledby="members-tab">
+                <div class="section-heading compact-heading">
+                  <p><span>//</span> 07</p>
+                  <h2>Member Signals</h2>
+                  <a class="btn btn-banri-outline" href="/members.html">Open Members Page</a>
+                </div>
+                <div class="admin-note panel-frame">
+                  Read-only roster pulled from public profiles and presence. Use the copy button when you need a Firebase UID for admin ownership or dossier assignment.
+                </div>
+                <label class="search-control admin-library-search" for="adminMembersSearch">
+                  <input id="adminMembersSearch" type="search" placeholder="Search members by name, UID, signal, status, favorite games, or platform..." />
+                  <span aria-hidden="true"></span>
+                </label>
+                <div id="membersEditor" class="admin-list"></div>
               </section>
 
               <section class="tab-pane fade d-none" id="chroniclesAiPane" role="tabpanel" aria-labelledby="chronicles-ai-tab">
@@ -356,6 +375,6 @@
       includeHTML();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="assets/js/admin.js?v=20260817g"></script>
+    <script type="module" src="assets/js/admin.js?v=20260818a"></script>
   </body>
 </html>

@@ -4156,6 +4156,133 @@ body.legacy-theme::before {
   white-space: nowrap;
 }
 
+.admin-member-summary .admin-card-body {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.admin-member-summary .admin-card-body > div,
+.admin-member-details section {
+  padding: 0.85rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.06), transparent 50%),
+    rgba(0, 0, 0, 0.28);
+}
+
+.admin-member-summary span,
+.admin-member-details span,
+.admin-member-platforms span,
+.admin-member-uid {
+  color: var(--banri-cyan);
+  font: 800 0.68rem/1.2 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.admin-member-summary strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: #f0fbfd;
+  font: 800 1.7rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-member-card {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.admin-member-avatar {
+  position: relative;
+  display: grid;
+  width: 112px;
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(22, 232, 255, 0.34);
+  color: var(--banri-cyan);
+  background:
+    radial-gradient(circle, rgba(22, 232, 255, 0.22), transparent 64%),
+    rgba(0, 10, 13, 0.86);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  font: 800 2.1rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.admin-member-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-member-avatar.has-photo span {
+  position: relative;
+  opacity: 0;
+}
+
+.admin-member-body {
+  min-width: 0;
+}
+
+.admin-member-body h3 {
+  margin: 0 0 0.3rem;
+  color: #f0fbfd;
+  font: 800 1.75rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.admin-member-uid {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 0.85rem;
+  padding: 0.35rem 0.5rem;
+  overflow-wrap: anywhere;
+  background: rgba(22, 232, 255, 0.07);
+}
+
+.admin-member-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-member-details p {
+  margin: 0.35rem 0 0;
+  color: var(--banri-muted);
+  line-height: 1.45;
+}
+
+.admin-member-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.admin-member-platforms span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(22, 232, 255, 0.22);
+  background: rgba(0, 0, 0, 0.34);
+}
+
+.admin-member-platforms.empty {
+  display: block;
+  color: var(--banri-muted);
+  font-size: 0.75rem;
+}
+
 .admin-card-body {
   padding: 1rem;
 }
@@ -8825,6 +8952,9 @@ body.legacy-theme::before {
   .homepage-editor-row,
   .homepage-editor-row--media,
   .admin-library-row,
+  .admin-member-card,
+  .admin-member-summary .admin-card-body,
+  .admin-member-details,
   .admin-activity-row,
   .activity-card,
   .starfield-search-panel,
