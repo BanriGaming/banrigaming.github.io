@@ -329,7 +329,7 @@
                 ".validate": "newData.isString() && newData.val().length <= 120"
               },
               "body": {
-                ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 12000"
+                ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 25000"
               },
               "createdAt": {
                 ".validate": "newData.isNumber()"
@@ -385,7 +385,7 @@
             ".validate": "newData.isString() && newData.val().length <= 240"
           },
           "body": {
-            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 12000"
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 25000"
           },
           "$other": {
             ".validate": true
@@ -415,7 +415,7 @@
             ".validate": "newData.isString() && newData.val().length <= 800"
           },
           "body": {
-            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 18000"
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 25000"
           },
           "$other": {
             ".validate": true

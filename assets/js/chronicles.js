@@ -869,7 +869,11 @@ const elements = {
   characterEditForm: document.getElementById("chroniclesCharacterEditForm"),
   characterEditToggle: document.getElementById("chroniclesCharacterEditToggle"),
   characterSave: document.getElementById("chroniclesCharacterSaveButton"),
-  characterDetailStatus: document.getElementById("chroniclesCharacterDetailStatus")
+  characterDetailStatus: document.getElementById("chroniclesCharacterDetailStatus"),
+  recordReadKicker: document.getElementById("chroniclesRecordReadKicker"),
+  recordReadTitle: document.getElementById("chroniclesRecordReadTitle"),
+  recordReadMeta: document.getElementById("chroniclesRecordReadMeta"),
+  recordReadBody: document.getElementById("chroniclesRecordReadBody")
 };
 
 function toArray(value) {
@@ -1818,11 +1822,10 @@ function renderEchoCard(echo, options = {}) {
           <dt>Location</dt><dd>${escapeHtml(echo.location || "Unspecified")}</dd>
         </dl>
         ${echo.summary ? `<p>${escapeHtml(echo.summary)}</p>` : ""}
-        <div class="chronicles-markdown chronicles-record-markdown">
-          ${renderMarkdown(echo.body || "No echo text recorded yet.")}
-        </div>
+        <p class="chronicles-record-length">${escapeHtml(formatRecordLength(echo.body))}</p>
         ${tags.length ? `<div class="chronicles-record-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>` : ""}
         <div class="chronicles-forum-actions">
+          <button type="button" data-chronicles-read-echo="${escapeAttr(echo.id)}">Read</button>
           ${character ? `<button type="button" data-chronicles-open-character="${escapeAttr(character.id)}">Open Dossier</button>` : ""}
           ${canEdit ? `<button type="button" data-chronicles-edit-echo="${escapeAttr(echo.id)}">Edit Echo</button>` : ""}
           ${canEdit ? `<button type="button" data-chronicles-delete-echo="${escapeAttr(echo.id)}">Delete</button>` : ""}
@@ -2027,22 +2030,89 @@ function renderCodexCard(entry) {
         <p class="chronicles-record-kicker">${escapeHtml(entry.category || "Field Note")} / ${escapeHtml(world?.title || "World")}</p>
         <h3>${escapeHtml(entry.title || "Untitled Codex Entry")}</h3>
         ${entry.summary ? `<p>${escapeHtml(entry.summary)}</p>` : ""}
-        <div class="chronicles-markdown chronicles-record-markdown">
-          ${renderMarkdown(entry.body || "No codex text recorded yet.")}
-        </div>
+        <p class="chronicles-record-length">${escapeHtml(formatRecordLength(entry.body))}</p>
         ${tags.length ? `<div class="chronicles-record-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>` : ""}
         <div class="chronicles-record-stamp">
           ${escapeHtml(character?.name || "Unlinked Character")} / Updated ${escapeHtml(formatDate(entry.updatedAt || entry.createdAt))}
         </div>
-        ${canEdit ? `
-          <div class="chronicles-forum-actions">
-            <button type="button" data-chronicles-edit-codex="${escapeAttr(entry.id)}">Edit Codex</button>
-            <button type="button" data-chronicles-delete-codex="${escapeAttr(entry.id)}">Delete</button>
-          </div>
-        ` : ""}
+        <div class="chronicles-forum-actions">
+          <button type="button" data-chronicles-read-codex="${escapeAttr(entry.id)}">Read</button>
+          ${canEdit ? `<button type="button" data-chronicles-edit-codex="${escapeAttr(entry.id)}">Edit Codex</button>` : ""}
+          ${canEdit ? `<button type="button" data-chronicles-delete-codex="${escapeAttr(entry.id)}">Delete</button>` : ""}
+        </div>
       </div>
     </article>
   `;
+}
+
+function formatRecordLength(value) {
+  const count = String(value || "").trim().length;
+  const minutes = count ? Math.max(1, Math.ceil(count / 1250)) : 0;
+  return count ? `${count.toLocaleString()} characters / about ${minutes} min read` : "No long-form text recorded yet.";
+}
+
+function openCodexReader(entryId) {
+  const entry = getCodexEntry(entryId);
+  if (!entry) return;
+  const character = getCharacter(entry.characterId);
+  const world = getWorld(entry.worldId || character?.worldId);
+  openRecordReader({
+    kicker: `${entry.category || "Codex"} / ${world?.title || "World"}`,
+    title: entry.title || "Untitled Codex Entry",
+    meta: [
+      ["Character", character?.name || "Unlinked Character"],
+      ["Updated", formatDate(entry.updatedAt || entry.createdAt)],
+      ["Length", formatRecordLength(entry.body)],
+      ["Tags", normalizeTagList(entry.tags).join(", ") || "None recorded"]
+    ],
+    body: entry.body,
+    empty: "No codex text recorded yet."
+  });
+}
+
+function openEchoReader(entryId) {
+  const echo = getEcho(entryId);
+  if (!echo) return;
+  const character = getCharacter(echo.characterId);
+  const world = getWorld(echo.worldId || character?.worldId);
+  openRecordReader({
+    kicker: `Echo / ${world?.title || "World"}`,
+    title: echo.title || "Untitled Echo",
+    meta: [
+      ["Character", character?.name || "Unlinked Character"],
+      ["Status", toTitle(echo.status || "public")],
+      ["Continuity", toTitle(echo.canonStatus || "canon")],
+      ["Timeline", echo.timeline || "Not recorded"],
+      ["Location", echo.location || "Unspecified"],
+      ["Updated", formatDate(echo.updatedAt || echo.createdAt)],
+      ["Length", formatRecordLength(echo.body)]
+    ],
+    body: echo.body,
+    empty: "No echo text recorded yet."
+  });
+}
+
+function openRecordReader({ kicker, title, meta = [], body, empty }) {
+  setText(elements.recordReadKicker, kicker || "Chronicle Record");
+  setText(elements.recordReadTitle, title || "Record");
+  if (elements.recordReadMeta) {
+    elements.recordReadMeta.innerHTML = meta
+      .filter(([, value]) => value)
+      .map(([label, value]) => `
+        <div>
+          <span>${escapeHtml(label)}</span>
+          <strong>${escapeHtml(value)}</strong>
+        </div>
+      `).join("");
+  }
+  if (elements.recordReadBody) {
+    elements.recordReadBody.innerHTML = `
+      <div class="chronicles-markdown chronicles-longform-reader">
+        ${renderMarkdown(body || empty || "No text recorded yet.")}
+      </div>
+    `;
+  }
+  showBootstrapModal("chroniclesRecordReadModal");
 }
 
 function renderDossierEchoes(character) {
@@ -4158,8 +4228,10 @@ function bindEvents() {
     const characterEditButton = event.target.closest("[data-chronicles-edit-character]");
     const characterContinueButton = event.target.closest("[data-chronicles-continue-character]");
     const dossierTabButton = event.target.closest("[data-chronicles-dossier-tab]");
+    const readCodexButton = event.target.closest("[data-chronicles-read-codex]");
     const editCodexButton = event.target.closest("[data-chronicles-edit-codex]");
     const deleteCodexButton = event.target.closest("[data-chronicles-delete-codex]");
+    const readEchoButton = event.target.closest("[data-chronicles-read-echo]");
     const editEchoButton = event.target.closest("[data-chronicles-edit-echo]");
     const deleteEchoButton = event.target.closest("[data-chronicles-delete-echo]");
     const mediaOpenButton = event.target.closest("[data-chronicles-open-media]");
@@ -4228,11 +4300,15 @@ function bindEvents() {
     } else if (dossierTabButton) {
       state.dossierTab = dossierTabButton.dataset.chroniclesDossierTab || "profile";
       renderCharacterDossier();
+    } else if (readCodexButton) {
+      openCodexReader(readCodexButton.dataset.chroniclesReadCodex);
     } else if (editCodexButton) {
       const entry = getCodexEntry(editCodexButton.dataset.chroniclesEditCodex);
       if (entry && canEditChronicleRecord(entry)) openCodexModal(entry);
     } else if (deleteCodexButton) {
       deleteCodexEntry(deleteCodexButton.dataset.chroniclesDeleteCodex);
+    } else if (readEchoButton) {
+      openEchoReader(readEchoButton.dataset.chroniclesReadEcho);
     } else if (editEchoButton) {
       const entry = getEcho(editEchoButton.dataset.chroniclesEditEcho);
       if (entry && canEditChronicleRecord(entry)) openEchoModal(entry);
@@ -4671,11 +4747,37 @@ function renderMarkdown(value) {
       breaks: true,
       gfm: true
     });
-    return window.DOMPurify.sanitize(window.marked.parse(raw), {
+    const clean = window.DOMPurify.sanitize(window.marked.parse(raw), {
       ADD_ATTR: ["target", "rel", "class"]
     });
+    return enhanceMarkdownImages(clean);
   }
-  return renderParagraphs(raw);
+  return enhanceMarkdownImages(renderParagraphs(raw));
+}
+
+function enhanceMarkdownImages(html) {
+  if (typeof document === "undefined") return html;
+  const template = document.createElement("template");
+  template.innerHTML = String(html || "");
+  template.content.querySelectorAll("img").forEach((image) => {
+    const src = image.getAttribute("src") || "";
+    if (!src) return;
+    image.setAttribute("loading", "lazy");
+    image.setAttribute("referrerpolicy", "no-referrer");
+    image.classList.add("chronicles-inline-image");
+    if (image.closest("a, button")) return;
+    const title = image.getAttribute("alt") || "Chronicle image";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "chronicles-inline-image-button";
+    button.setAttribute("data-chronicles-open-media", "");
+    button.setAttribute("data-chronicles-media-url", src);
+    button.setAttribute("data-chronicles-media-title", title);
+    button.setAttribute("data-chronicles-media-caption", "Inline Chronicle image");
+    image.replaceWith(button);
+    button.append(image);
+  });
+  return template.innerHTML;
 }
 
 function transformStrictBlockquotes(value) {

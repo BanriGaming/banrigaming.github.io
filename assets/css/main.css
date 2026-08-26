@@ -7827,6 +7827,19 @@ body.legacy-theme::before {
   background: rgba(0, 0, 0, 0.24);
 }
 
+.chronicles-record-length {
+  display: inline-grid;
+  width: fit-content;
+  margin: 0.15rem 0 0;
+  padding: 0.42rem 0.62rem;
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  color: var(--banri-cyan) !important;
+  background: rgba(22, 232, 255, 0.045);
+  font: 800 0.62rem/1.25 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .chronicles-record-tags {
   display: flex;
   flex-wrap: wrap;
@@ -8131,6 +8144,59 @@ body.legacy-theme::before {
 
 .chronicles-media-modal .modal-dialog {
   max-width: min(1400px, calc(100vw - 2rem));
+}
+
+.chronicles-record-reader-modal .modal-dialog {
+  max-width: min(1280px, calc(100vw - 2rem));
+}
+
+.chronicles-record-reader-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.chronicles-record-reader-meta div {
+  min-width: 0;
+  padding: 0.72rem 0.82rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 0, 0, 0.34);
+}
+
+.chronicles-record-reader-meta span,
+.chronicles-record-reader-meta strong {
+  display: block;
+  font-family: "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+}
+
+.chronicles-record-reader-meta span {
+  color: var(--banri-cyan);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.chronicles-record-reader-meta strong {
+  margin-top: 0.25rem;
+  color: #e8f5f8;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.chronicles-record-reader-body {
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.055), transparent 42%),
+    rgba(0, 0, 0, 0.48);
+}
+
+.chronicles-longform-reader {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(1.15rem, 3vw, 2rem);
+  font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+  line-height: 1.78;
 }
 
 .chronicles-media-viewer {
@@ -8495,11 +8561,33 @@ body.legacy-theme::before {
 .chronicles-markdown img,
 .chronicles-readable img,
 .chronicles-character-readable img {
-  max-width: 120px;
-  max-height: 120px;
+  max-width: min(220px, 100%);
+  max-height: 180px;
   margin: 0.35rem;
   border: 1px solid rgba(22, 232, 255, 0.34);
   object-fit: cover;
+}
+
+.chronicles-inline-image-button {
+  display: inline-grid;
+  margin: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  vertical-align: top;
+  cursor: zoom-in;
+}
+
+.chronicles-inline-image-button img {
+  margin: 0;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.chronicles-inline-image-button:hover img,
+.chronicles-inline-image-button:focus-visible img {
+  border-color: var(--banri-cyan);
+  box-shadow: 0 0 22px rgba(22, 232, 255, 0.2);
+  transform: translateY(-1px);
 }
 
 .chronicles-editor-toolbar {
