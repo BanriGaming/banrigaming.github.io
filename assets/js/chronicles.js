@@ -24,6 +24,8 @@ const CHRONICLES_PORTRAIT_MAX_BYTES = 1024 * 1024;
 const CHRONICLES_PORTRAIT_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const CHRONICLES_AUDIO_TYPES = new Set(["voice", "music", "ambience", "transmission", "sfx", "other"]);
 const CHRONICLES_STORY_PAGE_SIZE = 3;
+const LIVE_SCENE_ACTIVE_STATUSES = new Set(["inviting", "active", "paused", "awaiting_finalization"]);
+const LIVE_SCENE_MESSAGE_MODES = new Set(["dialogue", "action", "ooc"]);
 
 const ECHOES_LORE = `# Holocron Record VII-C: Echoes After the Forge
 
@@ -795,6 +797,9 @@ const state = {
   remoteCharacters: [],
   remoteCodex: [],
   remoteEchoes: [],
+  remoteInteractions: [],
+  publicProfiles: {},
+  presence: {},
   aiSummaries: {},
   chroniclesAiConfig: structuredClone(defaultChroniclesAiConfig),
   aiAssistResult: "",
@@ -804,11 +809,17 @@ const state = {
   deletedPosts: {},
   unsubscribers: [],
   postIdsKnown: new Set(),
+  interactionIdsKnown: new Set(),
   audioResolveCache: new Map(),
   audioResolvePending: new Map(),
   dossierAudioPlayer: null,
   dossierAudioTrack: null,
+  activeInteractionId: "",
+  interactionMode: "dialogue",
+  interactionMinimized: true,
+  interactionPreviewOpen: false,
   postNotificationsReady: false,
+  interactionNotificationsReady: false,
   notificationsEnabled: localStorage.getItem("banriChroniclesNotifications") === "true"
 };
 
@@ -873,7 +884,22 @@ const elements = {
   recordReadKicker: document.getElementById("chroniclesRecordReadKicker"),
   recordReadTitle: document.getElementById("chroniclesRecordReadTitle"),
   recordReadMeta: document.getElementById("chroniclesRecordReadMeta"),
-  recordReadBody: document.getElementById("chroniclesRecordReadBody")
+  recordReadBody: document.getElementById("chroniclesRecordReadBody"),
+  interactionForm: document.getElementById("chroniclesInteractionForm"),
+  interactionMembers: document.getElementById("chroniclesInteractionMembers"),
+  interactionStatus: document.getElementById("chroniclesInteractionStatus"),
+  liveSceneOverlay: document.getElementById("chroniclesLiveSceneOverlay"),
+  liveSceneDock: document.getElementById("chroniclesLiveSceneDock"),
+  liveSceneKicker: document.getElementById("chroniclesLiveSceneKicker"),
+  liveSceneTitle: document.getElementById("chroniclesLiveSceneTitle"),
+  liveSceneMeta: document.getElementById("chroniclesLiveSceneMeta"),
+  liveSceneParticipants: document.getElementById("chroniclesLiveSceneParticipants"),
+  liveSceneFeed: document.getElementById("chroniclesLiveSceneFeed"),
+  liveScenePreview: document.getElementById("chroniclesLiveScenePreview"),
+  liveSceneComposer: document.getElementById("chroniclesLiveSceneComposer"),
+  liveSceneCharacter: document.getElementById("chroniclesLiveSceneCharacter"),
+  liveSceneText: document.getElementById("chroniclesLiveSceneText"),
+  liveSceneStatus: document.getElementById("chroniclesLiveSceneStatus")
 };
 
 function toArray(value) {
@@ -992,6 +1018,75 @@ function getPosts() {
   return posts.sort((a, b) => toTime(b.createdAt) - toTime(a.createdAt));
 }
 
+function getPublicMembers() {
+  const memberIds = new Set([
+    ...Object.keys(state.publicProfiles || {}),
+    ...Object.keys(state.presence || {})
+  ]);
+  if (state.user?.uid) memberIds.add(state.user.uid);
+
+  const members = [...memberIds].map((uid) => {
+    const profile = state.publicProfiles?.[uid] || {};
+    const signal = state.presence?.[uid] || {};
+    const isCurrentUser = uid === state.user?.uid;
+    return {
+      uid,
+      displayName: profile?.displayName || signal?.displayName || (isCurrentUser ? getDisplayName() : "") || "Nexus Member",
+      photoURL: profile?.photoURL || "",
+      status: profile?.status || "",
+      online: signal.online === true || isCurrentUser,
+      lastSeen: Number(signal.lastSeen || profile.updatedAt || (isCurrentUser ? Date.now() : 0)),
+      updatedAt: Number(profile?.updatedAt || signal.lastSeen || 0)
+    };
+  });
+
+  return members.sort((a, b) => Number(b.online) - Number(a.online) || b.lastSeen - a.lastSeen || a.displayName.localeCompare(b.displayName));
+}
+
+function getMemberProfile(uid) {
+  return getPublicMembers().find((member) => member.uid === uid)
+    || { uid, displayName: uid === state.user?.uid ? getDisplayName() : "Nexus Member" };
+}
+
+function getInteractions() {
+  return toArray(state.remoteInteractions)
+    .map((interaction) => ({
+      ...interaction,
+      participants: interaction.participants || {},
+      messages: interaction.messages || {}
+    }))
+    .sort((a, b) => toTime(b.updatedAt || b.createdAt) - toTime(a.updatedAt || a.createdAt));
+}
+
+function getInteraction(interactionId) {
+  return getInteractions().find((interaction) => interaction.id === interactionId) || null;
+}
+
+function isInteractionParticipant(interaction, uid = state.user?.uid) {
+  if (!interaction || !uid) return false;
+  return interaction.starterUid === uid || Boolean(interaction.participants?.[uid]);
+}
+
+function canViewInteraction(interaction) {
+  return state.isAdmin || isInteractionParticipant(interaction);
+}
+
+function canControlInteraction(interaction) {
+  return Boolean(interaction && interaction.starterUid === state.user?.uid);
+}
+
+function getVisibleInteractions() {
+  return getInteractions().filter((interaction) => {
+    if (!canViewInteraction(interaction)) return false;
+    return LIVE_SCENE_ACTIVE_STATUSES.has(String(interaction.status || "inviting"));
+  });
+}
+
+function getInteractionMessages(interaction) {
+  return toArray(interaction?.messages)
+    .sort((a, b) => toTime(a.createdAt) - toTime(b.createdAt));
+}
+
 function getPostsForWorld(worldId, sortDirection = "asc") {
   const posts = [];
   getThreadsForWorld(worldId).forEach((thread) => {
@@ -1089,10 +1184,20 @@ function isNarrativePost(post) {
 function postTypeLabel(post) {
   const labels = {
     narrator: "Narrator Event",
+    "live-interaction": "Live Interaction",
     "location-description": "Location Description",
     player: "Player Post"
   };
   return labels[post?.postType || "player"] || "Player Post";
+}
+
+function renderPostTypeBadge(post) {
+  if ((post?.postType || "") !== "live-interaction") return "";
+  return `
+    <span class="chronicles-live-interaction-badge" title="Archived from a real-time Live Scene.">
+      Live Interaction
+    </span>
+  `;
 }
 
 function renderCharacterEffectsBadge(post) {
@@ -1137,6 +1242,8 @@ function renderAll() {
   renderCharacterDossier();
   renderStorySoFar();
   renderNotificationButton();
+  renderLiveSceneDock();
+  renderLiveSceneOverlay();
   populateSelects();
   showView(state.view);
   scrollToPendingPost();
@@ -1336,6 +1443,7 @@ function renderThreadRow(worldId, thread) {
         ${state.isAdmin ? `<button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-delete-thread="${escapeAttr(`${worldId}:${thread.id}`)}">Delete</button>` : ""}
         <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open-thread="${escapeAttr(`${worldId}:${thread.id}`)}">Open Thread</button>
         <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-thread-post="${escapeAttr(`${worldId}:${thread.id}`)}">Post Here</button>
+        <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-interact-route="${escapeAttr(`${worldId}:${thread.id}`)}">Interact</button>
       </div>
     </article>
   `;
@@ -1363,6 +1471,7 @@ function renderThreadView() {
         <strong>${escapeHtml(post.authorName || "Unknown")}</strong>
         <span>${escapeHtml(post.ownerDisplayName || post.authorName || "Chronicle")}</span>
         <small>${escapeHtml(postTypeLabel(post))}${isNarrativePost(post) ? "" : " / Hidden from Story So Far"}</small>
+        ${renderPostTypeBadge(post)}
       </aside>
       <div class="chronicles-forum-body">
         <header>
@@ -1371,12 +1480,14 @@ function renderThreadView() {
             <time datetime="${escapeAttr(toDateTime(post.createdAt))}">${escapeHtml(formatDate(post.createdAt))}${post.updatedAt ? " / edited" : ""}</time>
           </div>
         </header>
+        ${renderPostTypeBadge(post)}
         ${renderCharacterEffectsBadge(post)}
         <div class="chronicles-markdown">${renderMarkdown(post.body)}</div>
         ${renderAttachments(post.attachments)}
         <div class="chronicles-forum-actions">
           <button type="button" data-chronicles-reply-post="${escapeAttr(post.id)}">Reply</button>
           <button type="button" data-chronicles-follow-post="${escapeAttr(post.id)}">Follow Up</button>
+          <button type="button" data-chronicles-interact-route="${escapeAttr(`${world.id}:${thread.id}`)}">Interact</button>
           ${canEditPost(post) ? `<button type="button" data-chronicles-edit-post="${escapeAttr(post.id)}">Edit</button>` : ""}
           ${canEditPost(post) ? `<button type="button" data-chronicles-delete-post="${escapeAttr(post.id)}">Delete</button>` : ""}
         </div>
@@ -1397,11 +1508,13 @@ function renderRecentPosts() {
         </div>
         <time datetime="${escapeAttr(toDateTime(post.createdAt))}">${escapeHtml(formatDate(post.createdAt))}</time>
       </header>
+      ${renderPostTypeBadge(post)}
       ${post.title ? `<h3>${escapeHtml(post.title)}</h3>` : ""}
       <div class="chronicles-post-body">${renderParagraphs(post.body)}</div>
       <div class="chronicles-forum-actions">
         <button type="button" data-chronicles-open-thread-from-post="${escapeAttr(post.worldId)}:${escapeAttr(post.threadId)}:${escapeAttr(post.id)}">Open Thread</button>
         <button type="button" data-chronicles-follow-post="${escapeAttr(post.id)}">Follow Up</button>
+        <button type="button" data-chronicles-interact-route="${escapeAttr(`${post.worldId}:${post.threadId}`)}">Interact</button>
       </div>
     </article>
   `).join("") : '<div class="relay-empty">No chronicle posts yet.</div>';
@@ -1508,6 +1621,7 @@ function renderStoryEntry(post, index) {
           </div>
           <time datetime="${escapeAttr(toDateTime(post.createdAt))}">${escapeHtml(formatDate(post.createdAt))}${post.updatedAt ? " / edited" : ""}</time>
         </header>
+        ${renderPostTypeBadge(post)}
         ${renderCharacterEffectsBadge(post)}
         <div class="chronicles-markdown">${renderMarkdown(post.body)}</div>
         ${renderAttachments(post.attachments)}
@@ -2332,6 +2446,252 @@ function renderNotificationButton() {
   elements.notifyButton.textContent = supported && state.notificationsEnabled ? "Notifications On" : "Notify New Posts";
 }
 
+function renderLiveSceneDock() {
+  if (!elements.liveSceneDock || !state.user) return;
+  const interactions = getVisibleInteractions();
+  const pendingInvites = interactions.filter((interaction) => {
+    const participant = interaction.participants?.[state.user.uid];
+    return participant && !participant.accepted && !participant.declined;
+  });
+  const activeSignals = interactions.filter((interaction) => !pendingInvites.some((invite) => invite.id === interaction.id));
+
+  if (!interactions.length) {
+    elements.liveSceneDock.classList.add("d-none");
+    elements.liveSceneDock.innerHTML = "";
+    return;
+  }
+
+  elements.liveSceneDock.classList.remove("d-none");
+  elements.liveSceneDock.innerHTML = `
+    ${pendingInvites.map((interaction) => `
+      <div class="chronicles-live-dock-card is-invite">
+        <p>// Handshake Request</p>
+        <h3>${escapeHtml(interaction.title || "Live Scene")}</h3>
+        <small>${escapeHtml(interaction.starterDisplayName || "A writer")} invited you to ${escapeHtml(getThread(interaction.worldId, interaction.threadId)?.title || "a location")}.</small>
+        <div class="chronicles-live-dock-actions">
+          <button type="button" data-chronicles-accept-interaction="${escapeAttr(interaction.id)}">Accept</button>
+          <button type="button" data-chronicles-decline-interaction="${escapeAttr(interaction.id)}">Decline</button>
+          <button type="button" data-chronicles-open-interaction="${escapeAttr(interaction.id)}">Open</button>
+        </div>
+      </div>
+    `).join("")}
+    ${activeSignals.length ? `
+      <div class="chronicles-live-dock-card">
+        <p>// Live Scene</p>
+        <h3>${activeSignals.length} Active Signal${activeSignals.length === 1 ? "" : "s"}</h3>
+        <div>
+          ${activeSignals.slice(0, 4).map((interaction) => {
+            const participant = interaction.participants?.[state.user.uid];
+            const status = participant?.accepted ? interaction.status : participant?.declined ? "declined" : state.isAdmin ? "observer" : "invite pending";
+            return `
+              <button type="button" data-chronicles-open-interaction="${escapeAttr(interaction.id)}">
+                <span>${escapeHtml(interaction.title || "Live Scene")}</span>
+                <small>${escapeHtml(toTitle(status))} / ${escapeHtml(getThread(interaction.worldId, interaction.threadId)?.title || "Location")}</small>
+              </button>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    ` : ""}
+  `;
+}
+
+function renderLiveSceneOverlay() {
+  const interaction = getInteraction(state.activeInteractionId);
+  if (!elements.liveSceneOverlay || !interaction || !canViewInteraction(interaction) || state.interactionMinimized) {
+    elements.liveSceneOverlay?.classList.add("d-none");
+    return;
+  }
+
+  const world = getWorld(interaction.worldId);
+  const thread = getThread(interaction.worldId, interaction.threadId);
+  const participant = interaction.participants?.[state.user.uid] || null;
+  const canControl = canControlInteraction(interaction);
+  const canSend = participant?.accepted === true && ["active", "awaiting_finalization"].includes(String(interaction.status || "inviting"));
+  const isPaused = interaction.status === "paused";
+  const isInviting = interaction.status === "inviting";
+  const canFinalize = canFinalizeInteraction(interaction);
+
+  elements.liveSceneOverlay.classList.remove("d-none");
+  setText(elements.liveSceneKicker, `${postTypeLabel({ postType: "live-interaction" })} / ${toTitle(interaction.status || "inviting")}`);
+  setText(elements.liveSceneTitle, interaction.title || "Live Scene");
+  setText(elements.liveSceneMeta, `${world?.title || "World"} / ${thread?.title || "Location"} / ${interaction.concludeRule === "all" ? "All Must Agree" : "Starter Finalizes"}`);
+
+  renderLiveSceneParticipants(interaction);
+  renderLiveSceneFeed(interaction);
+  renderLiveSceneCharacterSelect(interaction);
+  renderLiveScenePreview(interaction);
+  renderLiveSceneModeButtons();
+
+  setText(elements.liveSceneStatus, getLiveSceneStatusText(interaction, participant));
+  if (elements.liveSceneText) {
+    elements.liveSceneText.disabled = !canSend || isPaused || isInviting;
+    elements.liveSceneText.placeholder = isInviting
+      ? "Waiting for invited members to accept the handshake..."
+      : isPaused
+        ? "Scene paused. Resume before transmitting."
+        : state.interactionMode === "dialogue"
+          ? "Type spoken text. Quotes are added automatically."
+          : state.interactionMode === "action"
+            ? "Type a character action. Italics are added automatically."
+            : "Type an OOC note.";
+  }
+  if (elements.liveSceneCharacter) elements.liveSceneCharacter.disabled = !canSend || state.interactionMode === "ooc";
+
+  toggleLiveButton("[data-chronicles-interaction-accept]", Boolean(participant && !participant.accepted && !participant.declined));
+  toggleLiveButton("[data-chronicles-interaction-decline]", Boolean(participant && !participant.accepted && !participant.declined));
+  toggleLiveButton("[data-chronicles-interaction-ready]", Boolean(participant?.accepted && interaction.status !== "finalized"));
+  toggleLiveButton("[data-chronicles-interaction-pause]", canControl && !["paused", "finalized", "cancelled"].includes(interaction.status));
+  toggleLiveButton("[data-chronicles-interaction-resume]", canControl && interaction.status === "paused");
+  toggleLiveButton("[data-chronicles-interaction-preview]", canControl);
+  toggleLiveButton("[data-chronicles-interaction-finalize]", canControl && state.interactionPreviewOpen && canFinalize);
+}
+
+function toggleLiveButton(selector, visible) {
+  document.querySelectorAll(selector).forEach((button) => {
+    button.classList.toggle("d-none", !visible);
+  });
+}
+
+function renderLiveSceneParticipants(interaction) {
+  if (!elements.liveSceneParticipants) return;
+  const participants = Object.values(interaction.participants || {});
+  elements.liveSceneParticipants.innerHTML = participants.map((participant) => {
+    const profile = getMemberProfile(participant.uid);
+    const presence = state.presence?.[participant.uid] || {};
+    const online = presence.online === true;
+    const label = participant.declined
+      ? "Declined"
+      : participant.accepted
+        ? online ? "Online" : "Absent"
+        : "Invited";
+    return `
+      <article class="${online ? "online" : ""}">
+        <span>${escapeHtml(profile.displayName || participant.displayName || "Nexus Member")}</span>
+        <strong>${escapeHtml(label)}</strong>
+        <small>${participant.readyToConclude ? "Ready to conclude" : participant.accepted ? "Scene active" : "Handshake pending"}</small>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderLiveSceneFeed(interaction) {
+  if (!elements.liveSceneFeed) return;
+  const messages = getInteractionMessages(interaction);
+  elements.liveSceneFeed.innerHTML = messages.length ? messages.map((message) => `
+    <article class="chronicles-live-line ${escapeAttr(message.mode || "dialogue")}">
+      <header>
+        <strong>${escapeHtml(message.characterName || message.displayName || "Scene Voice")}</strong>
+        <time datetime="${escapeAttr(toDateTime(message.createdAt))}">${escapeHtml(formatShortTime(message.createdAt))}</time>
+      </header>
+      <div class="chronicles-markdown">${renderMarkdown(message.body || "")}</div>
+    </article>
+  `).join("") : '<div class="relay-empty">No live scene lines transmitted yet.</div>';
+  elements.liveSceneFeed.scrollTop = elements.liveSceneFeed.scrollHeight;
+}
+
+function renderLiveSceneCharacterSelect(interaction) {
+  if (!elements.liveSceneCharacter) return;
+  const characters = getInteractionVoiceCharacters(interaction.worldId);
+  const current = elements.liveSceneCharacter.value;
+  elements.liveSceneCharacter.innerHTML = characters.length
+    ? characters.map((character) => `<option value="${escapeAttr(character.id)}">${escapeHtml(character.name || "Unnamed Character")}</option>`).join("")
+    : '<option value="">No assigned characters</option>';
+  elements.liveSceneCharacter.value = characters.some((character) => character.id === current) ? current : characters[0]?.id || "";
+}
+
+function renderLiveSceneModeButtons() {
+  document.querySelectorAll("[data-chronicles-interaction-mode]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.chroniclesInteractionMode === state.interactionMode);
+  });
+}
+
+function renderLiveScenePreview(interaction) {
+  if (!elements.liveScenePreview) return;
+  elements.liveScenePreview.classList.toggle("d-none", !state.interactionPreviewOpen);
+  if (!state.interactionPreviewOpen) {
+    elements.liveScenePreview.innerHTML = "";
+    return;
+  }
+  elements.liveScenePreview.innerHTML = `
+    <div class="section-heading compact-heading">
+      <p><span>//</span> Preview</p>
+      <h2>Final Chronicle Post</h2>
+    </div>
+    <div class="chronicles-markdown">${renderMarkdown(buildLiveInteractionPostBody(interaction))}</div>
+    ${!canFinalizeInteraction(interaction) ? '<p class="auth-status">Waiting for all accepted participants to mark ready before finalization.</p>' : ""}
+  `;
+}
+
+function getLiveSceneStatusText(interaction, participant) {
+  if (!participant && state.isAdmin) return "Admin observer channel open.";
+  if (!participant) return "You are not a participant in this Live Scene.";
+  if (participant.declined) return "You declined this Live Scene.";
+  if (!participant.accepted) return "Handshake pending. Accept to enter the Live Scene.";
+  if (interaction.status === "paused") return "Scene paused. It is saved and can resume later.";
+  if (interaction.status === "inviting") return "Waiting for invited participants to answer the handshake.";
+  return "Scene relay connected.";
+}
+
+function getInteractionVoiceCharacters(worldId) {
+  const characters = getCharacters().filter((character) => character.worldId === worldId);
+  return characters.filter((character) => isCharacterAssignedToCurrentUser(character));
+}
+
+function canFinalizeInteraction(interaction) {
+  if (!canControlInteraction(interaction) || !interaction || !getInteractionMessages(interaction).length) return false;
+  if (interaction.concludeRule !== "all") return true;
+  return Object.values(interaction.participants || {})
+    .filter((participant) => participant.accepted && !participant.declined)
+    .every((participant) => participant.readyToConclude === true);
+}
+
+function populateInteractionSetup(options = {}) {
+  const worldSelect = document.getElementById("chroniclesInteractionWorld");
+  const threadSelect = document.getElementById("chroniclesInteractionThread");
+  if (worldSelect) {
+    const selectedWorldId = options.worldId || state.selectedWorldId;
+    worldSelect.innerHTML = getWorlds().map((world) => `<option value="${escapeAttr(world.id)}">${escapeHtml(world.title)}</option>`).join("");
+    worldSelect.value = getWorld(selectedWorldId)?.id || state.selectedWorldId;
+  }
+  populateInteractionThreadSelect(options.threadId || "");
+  if (threadSelect && options.threadId) threadSelect.value = options.threadId;
+  setInputValue("chroniclesInteractionTitle", options.title || "");
+  setInputValue("chroniclesInteractionRule", "starter");
+  renderInteractionMemberChoices();
+}
+
+function populateInteractionThreadSelect(selectedThreadId = "") {
+  const worldSelect = document.getElementById("chroniclesInteractionWorld");
+  const threadSelect = document.getElementById("chroniclesInteractionThread");
+  if (!worldSelect || !threadSelect) return;
+  const threads = getThreadsForWorld(worldSelect.value || state.selectedWorldId);
+  threadSelect.innerHTML = [
+    '<option value="">Select a location...</option>',
+    ...threads.map((thread) => `<option value="${escapeAttr(thread.id)}">${escapeHtml(thread.title)}</option>`)
+  ].join("");
+  threadSelect.value = threads.some((thread) => thread.id === selectedThreadId) ? selectedThreadId : "";
+}
+
+function renderInteractionMemberChoices() {
+  if (!elements.interactionMembers) return;
+  const members = getPublicMembers().filter((member) => member.uid !== state.user?.uid);
+  elements.interactionMembers.innerHTML = members.length ? members.map((member) => {
+    const presence = state.presence?.[member.uid] || {};
+    const online = member.online || presence.online === true;
+    const lastSeen = member.lastSeen || presence.lastSeen || member.updatedAt;
+    return `
+      <label>
+        <input type="checkbox" value="${escapeAttr(member.uid)}" data-chronicles-interaction-member />
+        <span>
+          <strong>${escapeHtml(member.displayName || "Nexus Member")}</strong>
+          <small>${online ? "Online now" : lastSeen ? `Last seen ${escapeHtml(formatDate(lastSeen))}` : "Registered member"}</small>
+        </span>
+      </label>
+    `;
+  }).join("") : '<div class="relay-empty">No other registered members found yet. The Live Scene can still be created and resumed later.</div>';
+}
+
 function populateSelects() {
   const worldOptions = getWorlds()
     .map((world) => `<option value="${escapeAttr(world.id)}">${escapeHtml(world.title)}</option>`)
@@ -2350,6 +2710,7 @@ function populateSelects() {
   populatePostCharacterSelect(document.getElementById("chroniclesPostCharacter")?.value || "");
   populateRecordCharacterSelect("chroniclesCodexCharacter", document.getElementById("chroniclesCodexCharacter")?.value || state.selectedCharacterId);
   populateRecordCharacterSelect("chroniclesEchoCharacter", document.getElementById("chroniclesEchoCharacter")?.value || state.selectedCharacterId);
+  if (document.getElementById("chroniclesInteractionWorld")) renderInteractionMemberChoices();
   renderStoryWorldSelect(state.storyWorldId);
 }
 
@@ -2632,6 +2993,8 @@ function openModal(kind, options = {}) {
     showBootstrapModal("chroniclesCategoryModal");
   } else if (kind === "post") {
     openPostModal(options);
+  } else if (kind === "interaction") {
+    openInteractionSetup(options);
   } else if (kind === "codex") {
     openCodexModal();
   } else if (kind === "echo") {
@@ -3163,6 +3526,390 @@ async function handlePostSubmit(event) {
     }
   } catch (error) {
     setText(elements.postStatus, error.message || "Post failed.");
+  }
+}
+
+function openInteractionSetup(options = {}) {
+  if (!state.user) {
+    openLoginModal();
+    return;
+  }
+
+  populateSelects();
+  populateInteractionSetup(options);
+  setText(elements.interactionStatus, "");
+  showBootstrapModal("chroniclesInteractionSetupModal");
+}
+
+function getSelectedInteractionInviteUids() {
+  return [...document.querySelectorAll("[data-chronicles-interaction-member]:checked")]
+    .map((input) => input.value)
+    .filter(Boolean)
+    .filter((uid) => uid !== state.user?.uid);
+}
+
+function createInteractionParticipants(invitedUids = []) {
+  const now = Date.now();
+  const currentProfile = getMemberProfile(state.user.uid);
+  const participants = {
+    [state.user.uid]: {
+      uid: state.user.uid,
+      displayName: currentProfile.displayName || getDisplayName(),
+      accepted: true,
+      declined: false,
+      readyToConclude: false,
+      invitedAt: now,
+      acceptedAt: now,
+      lastSeenAt: now
+    }
+  };
+
+  invitedUids.forEach((uid) => {
+    const profile = getMemberProfile(uid);
+    participants[uid] = {
+      uid,
+      displayName: profile.displayName || "Nexus Member",
+      accepted: false,
+      declined: false,
+      readyToConclude: false,
+      invitedAt: now,
+      acceptedAt: 0,
+      declinedAt: 0,
+      lastSeenAt: state.presence?.[uid]?.lastSeen || profile.updatedAt || 0
+    };
+  });
+
+  return participants;
+}
+
+function getInteractionPendingParticipants(interaction) {
+  return Object.values(interaction?.participants || {})
+    .filter((participant) => !participant.accepted && !participant.declined);
+}
+
+function getInteractionAcceptedParticipants(interaction) {
+  return Object.values(interaction?.participants || {})
+    .filter((participant) => participant.accepted && !participant.declined);
+}
+
+function getNextInteractionStatus(interaction) {
+  if (["cancelled", "finalized"].includes(String(interaction?.status || ""))) return interaction.status;
+  if (getInteractionPendingParticipants(interaction).length) return "inviting";
+  return "active";
+}
+
+async function handleInteractionCreate(event) {
+  event.preventDefault();
+  if (!state.user) return;
+
+  const worldId = readValue("chroniclesInteractionWorld");
+  const threadId = readValue("chroniclesInteractionThread");
+  const title = readValue("chroniclesInteractionTitle");
+  const concludeRule = readValue("chroniclesInteractionRule") === "all" ? "all" : "starter";
+  if (!worldId || !threadId || !title) {
+    setText(elements.interactionStatus, "World, location, and scene title are required.");
+    return;
+  }
+
+  const interactionId = push(ref(database, "chronicles/interactions")).key;
+  const invitedUids = getSelectedInteractionInviteUids();
+  const now = Date.now();
+  const payload = {
+    id: interactionId,
+    worldId,
+    threadId,
+    title,
+    concludeRule,
+    starterUid: state.user.uid,
+    starterDisplayName: getDisplayName(),
+    status: invitedUids.length ? "inviting" : "active",
+    participants: createInteractionParticipants(invitedUids),
+    messages: {},
+    createdAt: now,
+    updatedAt: now
+  };
+
+  setText(elements.interactionStatus, "Opening Live Scene relay...");
+  try {
+    await set(ref(database, `chronicles/interactions/${interactionId}`), payload);
+    state.activeInteractionId = interactionId;
+    state.interactionMinimized = false;
+    state.interactionPreviewOpen = false;
+    hideBootstrapModal("chroniclesInteractionSetupModal");
+    renderAll();
+  } catch (error) {
+    setText(elements.interactionStatus, error.message || "Live Scene could not be created.");
+  }
+}
+
+async function writeInteractionPatch(interactionId, patch) {
+  if (!interactionId || !state.user) return;
+  await update(ref(database), {
+    ...patch,
+    [`chronicles/interactions/${interactionId}/updatedAt`]: Date.now()
+  });
+}
+
+function openInteraction(interactionId) {
+  const interaction = getInteraction(interactionId);
+  if (!interaction || !canViewInteraction(interaction)) return;
+  state.activeInteractionId = interaction.id;
+  state.interactionMinimized = false;
+  state.interactionPreviewOpen = false;
+  renderAll();
+}
+
+function minimizeInteraction() {
+  state.interactionMinimized = true;
+  state.interactionPreviewOpen = false;
+  renderAll();
+}
+
+async function acceptInteraction(interactionId = state.activeInteractionId) {
+  const interaction = getInteraction(interactionId);
+  const participant = interaction?.participants?.[state.user?.uid];
+  if (!interaction || !participant || participant.accepted || participant.declined) return;
+  const now = Date.now();
+  const nextInteraction = {
+    ...interaction,
+    participants: {
+      ...(interaction.participants || {}),
+      [state.user.uid]: {
+        ...participant,
+        accepted: true,
+        declined: false,
+        acceptedAt: now,
+        lastSeenAt: now
+      }
+    }
+  };
+  await writeInteractionPatch(interaction.id, {
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/accepted`]: true,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/declined`]: false,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/acceptedAt`]: now,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/lastSeenAt`]: now,
+    [`chronicles/interactions/${interaction.id}/status`]: getNextInteractionStatus(nextInteraction)
+  });
+  state.activeInteractionId = interaction.id;
+  state.interactionMinimized = false;
+  state.interactionPreviewOpen = false;
+}
+
+async function declineInteraction(interactionId = state.activeInteractionId) {
+  const interaction = getInteraction(interactionId);
+  const participant = interaction?.participants?.[state.user?.uid];
+  if (!interaction || !participant || participant.declined) return;
+  const now = Date.now();
+  const nextInteraction = {
+    ...interaction,
+    participants: {
+      ...(interaction.participants || {}),
+      [state.user.uid]: {
+        ...participant,
+        accepted: false,
+        declined: true,
+        readyToConclude: false,
+        declinedAt: now,
+        lastSeenAt: now
+      }
+    }
+  };
+  await writeInteractionPatch(interaction.id, {
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/accepted`]: false,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/declined`]: true,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/readyToConclude`]: false,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/declinedAt`]: now,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/lastSeenAt`]: now,
+    [`chronicles/interactions/${interaction.id}/status`]: getNextInteractionStatus(nextInteraction)
+  });
+  if (state.activeInteractionId === interaction.id) {
+    state.activeInteractionId = "";
+    state.interactionMinimized = true;
+    state.interactionPreviewOpen = false;
+  }
+}
+
+async function pauseInteraction() {
+  const interaction = getInteraction(state.activeInteractionId);
+  if (!interaction || !canControlInteraction(interaction)) return;
+  await writeInteractionPatch(interaction.id, {
+    [`chronicles/interactions/${interaction.id}/status`]: "paused"
+  });
+}
+
+async function resumeInteraction() {
+  const interaction = getInteraction(state.activeInteractionId);
+  if (!interaction || !canControlInteraction(interaction)) return;
+  await writeInteractionPatch(interaction.id, {
+    [`chronicles/interactions/${interaction.id}/status`]: getNextInteractionStatus(interaction)
+  });
+}
+
+async function markInteractionReady() {
+  const interaction = getInteraction(state.activeInteractionId);
+  const participant = interaction?.participants?.[state.user?.uid];
+  if (!interaction || !participant?.accepted || participant.declined) return;
+  await writeInteractionPatch(interaction.id, {
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/readyToConclude`]: participant.readyToConclude !== true,
+    [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/lastSeenAt`]: Date.now()
+  });
+}
+
+function setInteractionMode(mode) {
+  state.interactionMode = LIVE_SCENE_MESSAGE_MODES.has(mode) ? mode : "dialogue";
+  renderAll();
+  elements.liveSceneText?.focus();
+}
+
+function normalizeLiveSceneText(mode, value) {
+  let text = String(value || "").trim();
+  if (mode === "dialogue") return text.replace(/^["']+|["']+$/g, "").trim();
+  if (mode === "action") return text.replace(/^\*+|\*+$/g, "").trim();
+  if (mode === "ooc") {
+    text = text.replace(/^\[?OOC:\s*/i, "").replace(/]$/g, "").trim();
+  }
+  return text;
+}
+
+function formatLiveSceneLine(mode, raw, character) {
+  const text = normalizeLiveSceneText(mode, raw);
+  if (!text) return "";
+  if (mode === "dialogue") return `"${text}"`;
+  if (mode === "action") return `*${text}*`;
+  return `[OOC: ${text}]`;
+}
+
+async function sendLiveSceneLine(event) {
+  event.preventDefault();
+  const interaction = getInteraction(state.activeInteractionId);
+  const participant = interaction?.participants?.[state.user?.uid];
+  if (!interaction || !participant?.accepted || participant.declined) return;
+  if (!["active", "awaiting_finalization"].includes(String(interaction.status || ""))) {
+    setText(elements.liveSceneStatus, "The scene must be active before transmitting.");
+    return;
+  }
+
+  const mode = LIVE_SCENE_MESSAGE_MODES.has(state.interactionMode) ? state.interactionMode : "dialogue";
+  const character = mode === "ooc" ? null : getCharacter(elements.liveSceneCharacter?.value || "");
+  if (mode !== "ooc" && (!character || !isCharacterAssignedToCurrentUser(character))) {
+    setText(elements.liveSceneStatus, "Select one of your assigned character voices.");
+    return;
+  }
+
+  const rawText = readValue("chroniclesLiveSceneText");
+  const body = formatLiveSceneLine(mode, rawText, character);
+  if (!body) {
+    setText(elements.liveSceneStatus, "Write a line before transmitting.");
+    return;
+  }
+
+  const messageId = push(ref(database, `chronicles/interactions/${interaction.id}/messages`)).key;
+  const now = Date.now();
+  const payload = {
+    id: messageId,
+    uid: state.user.uid,
+    displayName: getDisplayName(),
+    characterId: character?.id || "",
+    characterName: character?.name || getDisplayName(),
+    mode,
+    rawText: normalizeLiveSceneText(mode, rawText),
+    body,
+    createdAt: now
+  };
+
+  try {
+    await writeInteractionPatch(interaction.id, {
+      [`chronicles/interactions/${interaction.id}/messages/${messageId}`]: payload,
+      [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/lastSeenAt`]: now,
+      [`chronicles/interactions/${interaction.id}/participants/${state.user.uid}/readyToConclude`]: false,
+      [`chronicles/interactions/${interaction.id}/status`]: "active"
+    });
+    if (elements.liveSceneText) elements.liveSceneText.value = "";
+    state.interactionPreviewOpen = false;
+    renderAll();
+  } catch (error) {
+    setText(elements.liveSceneStatus, error.message || "Line transmission failed.");
+  }
+}
+
+function buildLiveInteractionPostBody(interaction) {
+  const world = getWorld(interaction?.worldId);
+  const thread = getThread(interaction?.worldId, interaction?.threadId);
+  const messages = getInteractionMessages(interaction);
+  const participants = getInteractionAcceptedParticipants(interaction)
+    .map((participant) => participant.displayName || getMemberProfile(participant.uid).displayName || "Nexus Member")
+    .join(", ");
+
+  const lines = messages.map((message) => {
+    const label = message.mode === "ooc"
+      ? `OOC / ${message.displayName || "Writer"}`
+      : message.characterName || message.displayName || "Scene Voice";
+    return `**${label}:** ${message.body || ""}`;
+  });
+
+  return [
+    `# ${interaction?.title || "Live Interaction"}`,
+    "",
+    `*Live Interaction archived from ${world?.title || "Chronicles"} / ${thread?.title || "Location"}.*`,
+    participants ? `*Participants: ${participants}.*` : "",
+    "",
+    ...lines
+  ].filter((line, index, list) => line || list[index - 1]).join("\n");
+}
+
+function previewInteractionFinalPost() {
+  const interaction = getInteraction(state.activeInteractionId);
+  if (!interaction || !canControlInteraction(interaction)) return;
+  state.interactionPreviewOpen = !state.interactionPreviewOpen;
+  renderAll();
+}
+
+async function finalizeInteraction() {
+  const interaction = getInteraction(state.activeInteractionId);
+  if (!interaction || !canFinalizeInteraction(interaction)) return;
+
+  const postId = push(ref(database, `chronicles/posts/${interaction.worldId}/${interaction.threadId}`)).key;
+  const now = Date.now();
+  const postPayload = {
+    id: postId,
+    uid: state.user.uid,
+    worldId: interaction.worldId,
+    threadId: interaction.threadId,
+    ownerDisplayName: "Scene Relay",
+    authorName: "Narrator",
+    characterId: "",
+    characterDisplayName: "",
+    postType: "live-interaction",
+    allowCharacterEffects: false,
+    title: interaction.title || "Live Interaction",
+    body: buildLiveInteractionPostBody(interaction),
+    attachments: [],
+    editorMode: true,
+    excludeFromStory: false,
+    createdAt: now,
+    updatedAt: now,
+    liveInteractionId: interaction.id
+  };
+
+  try {
+    await update(ref(database), {
+      [`chronicles/posts/${interaction.worldId}/${interaction.threadId}/${postId}`]: postPayload,
+      [`chronicles/interactions/${interaction.id}/status`]: "finalized",
+      [`chronicles/interactions/${interaction.id}/finalPostId`]: postId,
+      [`chronicles/interactions/${interaction.id}/finalizedAt`]: now,
+      [`chronicles/interactions/${interaction.id}/updatedAt`]: now
+    });
+    state.selectedWorldId = interaction.worldId;
+    state.selectedThreadId = interaction.threadId;
+    state.storyWorldId = interaction.worldId;
+    state.activeInteractionId = "";
+    state.interactionMinimized = true;
+    state.interactionPreviewOpen = false;
+    showView("dashboard");
+    queueAutoSummaryRefresh(interaction.worldId);
+    renderAll();
+  } catch (error) {
+    setText(elements.liveSceneStatus, error.message || "Final Chronicle post failed.");
   }
 }
 
@@ -4223,6 +4970,8 @@ function bindEvents() {
     const loreOpen = event.target.closest("[data-chronicles-open-lore]");
     const threadOpen = event.target.closest("[data-chronicles-open-thread]");
     const threadPostButton = event.target.closest("[data-chronicles-thread-post]");
+    const threadInteractButton = event.target.closest("[data-chronicles-thread-interact]");
+    const interactionRouteButton = event.target.closest("[data-chronicles-interact-route]");
     const threadFromPost = event.target.closest("[data-chronicles-open-thread-from-post]");
     const characterOpen = event.target.closest("[data-chronicles-open-character]");
     const characterEditButton = event.target.closest("[data-chronicles-edit-character]");
@@ -4255,6 +5004,18 @@ function bindEvents() {
     const aiReplaceButton = event.target.closest("[data-chronicles-ai-replace]");
     const markdownButton = event.target.closest("[data-chronicles-markdown]");
     const previewToggle = event.target.closest("[data-chronicles-preview-toggle]");
+    const openInteractionButton = event.target.closest("[data-chronicles-open-interaction]");
+    const acceptDockInteractionButton = event.target.closest("[data-chronicles-accept-interaction]");
+    const declineDockInteractionButton = event.target.closest("[data-chronicles-decline-interaction]");
+    const interactionModeButton = event.target.closest("[data-chronicles-interaction-mode]");
+    const interactionAcceptButton = event.target.closest("[data-chronicles-interaction-accept]");
+    const interactionDeclineButton = event.target.closest("[data-chronicles-interaction-decline]");
+    const interactionReadyButton = event.target.closest("[data-chronicles-interaction-ready]");
+    const interactionPauseButton = event.target.closest("[data-chronicles-interaction-pause]");
+    const interactionResumeButton = event.target.closest("[data-chronicles-interaction-resume]");
+    const interactionPreviewButton = event.target.closest("[data-chronicles-interaction-preview]");
+    const interactionFinalizeButton = event.target.closest("[data-chronicles-interaction-finalize]");
+    const interactionMinimizeButton = event.target.closest("[data-chronicles-interaction-minimize]");
     const chronicleRouteLink = event.target.closest("a[href]");
 
     if (openButton) {
@@ -4281,6 +5042,19 @@ function bindEvents() {
       openPostModal({
         worldId,
         threadId
+      });
+    } else if (threadInteractButton) {
+      openInteractionSetup({
+        worldId: state.selectedWorldId,
+        threadId: state.selectedThreadId,
+        title: getThread(state.selectedWorldId, state.selectedThreadId)?.title || ""
+      });
+    } else if (interactionRouteButton) {
+      const { worldId, threadId } = parseThreadRoute(interactionRouteButton.dataset.chroniclesInteractRoute);
+      openInteractionSetup({
+        worldId,
+        threadId,
+        title: getThread(worldId, threadId)?.title || ""
       });
     } else if (threadFromPost) {
       const [worldId, threadId, postId] = threadFromPost.dataset.chroniclesOpenThreadFromPost.split(":");
@@ -4381,6 +5155,32 @@ function bindEvents() {
       applyMarkdown(markdownButton.dataset.chroniclesMarkdown, markdownButton.dataset.chroniclesMarkdownTarget);
     } else if (previewToggle) {
       renderPostPreview(!elements.postPreview || elements.postPreview.classList.contains("d-none"));
+    } else if (openInteractionButton) {
+      openInteraction(openInteractionButton.dataset.chroniclesOpenInteraction);
+    } else if (acceptDockInteractionButton) {
+      acceptInteraction(acceptDockInteractionButton.dataset.chroniclesAcceptInteraction)
+        .catch((error) => setText(elements.liveSceneStatus, error.message || "Handshake failed."));
+    } else if (declineDockInteractionButton) {
+      declineInteraction(declineDockInteractionButton.dataset.chroniclesDeclineInteraction)
+        .catch((error) => setText(elements.liveSceneStatus, error.message || "Decline failed."));
+    } else if (interactionModeButton) {
+      setInteractionMode(interactionModeButton.dataset.chroniclesInteractionMode);
+    } else if (interactionAcceptButton) {
+      acceptInteraction().catch((error) => setText(elements.liveSceneStatus, error.message || "Handshake failed."));
+    } else if (interactionDeclineButton) {
+      declineInteraction().catch((error) => setText(elements.liveSceneStatus, error.message || "Decline failed."));
+    } else if (interactionReadyButton) {
+      markInteractionReady().catch((error) => setText(elements.liveSceneStatus, error.message || "Ready signal failed."));
+    } else if (interactionPauseButton) {
+      pauseInteraction().catch((error) => setText(elements.liveSceneStatus, error.message || "Pause failed."));
+    } else if (interactionResumeButton) {
+      resumeInteraction().catch((error) => setText(elements.liveSceneStatus, error.message || "Resume failed."));
+    } else if (interactionPreviewButton) {
+      previewInteractionFinalPost();
+    } else if (interactionFinalizeButton) {
+      finalizeInteraction().catch((error) => setText(elements.liveSceneStatus, error.message || "Finalization failed."));
+    } else if (interactionMinimizeButton) {
+      minimizeInteraction();
     } else if (chronicleRouteLink && isChronicleRouteLink(chronicleRouteLink)) {
       event.preventDefault();
       navigateChronicleRoute(new URL(chronicleRouteLink.href, window.location.href));
@@ -4397,6 +5197,7 @@ function bindEvents() {
     populatePostCharacterSelect();
     updatePostSubmitState();
   });
+  document.getElementById("chroniclesInteractionWorld")?.addEventListener("change", () => populateInteractionThreadSelect());
   document.getElementById("chroniclesPostThread")?.addEventListener("change", updatePostSubmitState);
   document.getElementById("chroniclesPostCharacter")?.addEventListener("change", () => applySelectedPostCharacterVoice(true));
   document.getElementById("chroniclesThreadWorld")?.addEventListener("change", () => populateCategorySelects());
@@ -4445,6 +5246,13 @@ function bindEvents() {
   elements.threadForm?.addEventListener("submit", handleThreadSubmit);
   elements.categoryForm?.addEventListener("submit", handleCategorySubmit);
   elements.postForm?.addEventListener("submit", handlePostSubmit);
+  elements.interactionForm?.addEventListener("submit", handleInteractionCreate);
+  elements.liveSceneComposer?.addEventListener("submit", sendLiveSceneLine);
+  elements.liveSceneText?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" || event.shiftKey) return;
+    event.preventDefault();
+    elements.liveSceneComposer?.requestSubmit();
+  });
   elements.characterForm?.addEventListener("submit", handleCharacterSubmit);
   elements.codexForm?.addEventListener("submit", handleCodexSubmit);
   elements.echoForm?.addEventListener("submit", handleEchoSubmit);
@@ -4475,6 +5283,12 @@ function subscribeChronicles() {
     ["characters", "chronicles/characters", (value) => { state.remoteCharacters = toArray(value); }],
     ["codex", "chronicles/codex", (value) => { state.remoteCodex = toArray(value); }],
     ["echoes", "chronicles/echoes", (value) => { state.remoteEchoes = toArray(value); }],
+    ["interactions", "chronicles/interactions", (value) => {
+      state.remoteInteractions = toArray(value);
+      detectNewInteractionInvites();
+    }],
+    ["publicProfiles", "publicProfiles", (value) => { state.publicProfiles = value || {}; }],
+    ["presence", "presence", (value) => { state.presence = value || {}; }],
     ["summaries", "chronicles/summaries", (value) => { state.aiSummaries = value || {}; }],
     ["aiConfig", "siteConfig/chroniclesAi", (value) => { state.chroniclesAiConfig = normalizeChroniclesAiConfig(value); }]
   ];
@@ -4518,6 +5332,31 @@ function detectNewPosts() {
     });
 }
 
+function detectNewInteractionInvites() {
+  const interactions = getInteractions();
+  const incoming = interactions.filter((interaction) => !state.interactionIdsKnown.has(interaction.id));
+  interactions.forEach((interaction) => state.interactionIdsKnown.add(interaction.id));
+
+  if (!state.interactionNotificationsReady) {
+    state.interactionNotificationsReady = true;
+    return;
+  }
+
+  if (!state.notificationsEnabled || !("Notification" in window) || Notification.permission !== "granted") return;
+  incoming
+    .filter((interaction) => {
+      const participant = interaction.participants?.[state.user?.uid];
+      return participant && !participant.accepted && !participant.declined && interaction.starterUid !== state.user?.uid;
+    })
+    .slice(-3)
+    .forEach((interaction) => {
+      new Notification(`Live Scene invite: ${interaction.title || "Interaction"}`, {
+        body: `${interaction.starterDisplayName || "A writer"} opened a scene in ${getThread(interaction.worldId, interaction.threadId)?.title || "Chronicles"}.`,
+        tag: `chronicles-interaction-${interaction.id}`
+      });
+    });
+}
+
 function flattenRemotePosts() {
   const posts = [];
   Object.entries(state.remotePosts || {}).forEach(([worldId, threads]) => {
@@ -4552,7 +5391,17 @@ function renderSignedOut() {
   state.user = null;
   state.isAdmin = false;
   state.postIdsKnown = new Set();
+  state.interactionIdsKnown = new Set();
   state.postNotificationsReady = false;
+  state.interactionNotificationsReady = false;
+  state.remoteInteractions = [];
+  state.publicProfiles = {};
+  state.presence = {};
+  state.activeInteractionId = "";
+  state.interactionMinimized = true;
+  state.interactionPreviewOpen = false;
+  elements.liveSceneOverlay?.classList.add("d-none");
+  elements.liveSceneDock?.classList.add("d-none");
   elements.locked?.classList.remove("d-none");
   elements.app?.classList.add("d-none");
 }
@@ -4937,6 +5786,15 @@ function formatDate(value) {
     month: "short",
     day: "numeric",
     year: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(new Date(time));
+}
+
+function formatShortTime(value) {
+  const time = toTime(value);
+  if (!time) return "Pending";
+  return new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "2-digit"
   }).format(new Date(time));

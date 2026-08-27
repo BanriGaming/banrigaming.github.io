@@ -6828,6 +6828,409 @@ body.legacy-theme::before {
   margin-bottom: 0;
 }
 
+.chronicles-live-interaction-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0.24rem 0.5rem;
+  border: 1px solid rgba(22, 232, 255, 0.38);
+  color: var(--banri-cyan);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.18), transparent 54%),
+    rgba(0, 16, 20, 0.74);
+  font: 800 0.62rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chronicles-live-scene-member-panel,
+.chronicles-live-scene-panel,
+.chronicles-live-dock-card {
+  border: 1px solid rgba(22, 232, 255, 0.24);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.08), transparent 42%),
+    rgba(0, 8, 10, 0.82);
+  box-shadow: inset 0 0 42px rgba(22, 232, 255, 0.035);
+}
+
+.chronicles-live-scene-member-panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.chronicles-live-scene-member-panel h3 {
+  margin: 0;
+  color: #f1fbfd;
+  font: 800 1.35rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-live-scene-member-panel small {
+  color: var(--banri-muted);
+}
+
+.chronicles-live-member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.65rem;
+}
+
+.chronicles-live-member-grid label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  min-height: 64px;
+  padding: 0.75rem;
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  background: rgba(0, 0, 0, 0.26);
+}
+
+.chronicles-live-member-grid strong,
+.chronicles-live-member-grid small,
+.chronicles-live-scene-header small,
+.chronicles-live-participants span,
+.chronicles-live-participants strong,
+.chronicles-live-participants small,
+.chronicles-live-line header,
+.chronicles-live-mode button,
+.chronicles-live-dock-card p,
+.chronicles-live-dock-card small {
+  font-family: "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-live-member-grid strong {
+  display: block;
+  color: var(--banri-cyan);
+  font-size: 0.78rem;
+}
+
+.chronicles-live-member-grid small {
+  color: var(--banri-muted);
+  font-size: 0.66rem;
+}
+
+.chronicles-live-scene-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1090;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(22, 232, 255, 0.12), transparent 26rem),
+    rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(9px);
+}
+
+.chronicles-live-scene-panel {
+  width: min(1380px, 100%);
+  max-height: min(880px, calc(100vh - 2rem));
+  overflow: hidden;
+  clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+}
+
+.chronicles-live-scene-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.1rem 1.2rem;
+  border-bottom: 1px solid rgba(22, 232, 255, 0.22);
+  background:
+    linear-gradient(90deg, rgba(22, 232, 255, 0.11), transparent),
+    rgba(0, 18, 22, 0.76);
+}
+
+.chronicles-live-scene-header h2 {
+  margin: 0;
+  color: #f4fbfd;
+  font: 800 clamp(2rem, 4vw, 4rem)/0.92 Rajdhani, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.chronicles-live-scene-header small {
+  color: var(--banri-muted);
+  font-size: 0.68rem;
+}
+
+.chronicles-live-scene-controls,
+.chronicles-live-composer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+}
+
+.chronicles-live-scene-controls button,
+.chronicles-live-mode button,
+.chronicles-live-dock-card button {
+  min-height: 38px;
+  border: 1px solid rgba(22, 232, 255, 0.32);
+  color: var(--banri-text);
+  background: rgba(0, 0, 0, 0.32);
+  font: 800 0.68rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-live-scene-controls button,
+.chronicles-live-mode button {
+  padding: 0.65rem 0.8rem;
+}
+
+.chronicles-live-scene-controls button:hover,
+.chronicles-live-scene-controls button:focus-visible,
+.chronicles-live-mode button:hover,
+.chronicles-live-mode button:focus-visible,
+.chronicles-live-mode button.active,
+.chronicles-live-dock-card button:hover,
+.chronicles-live-dock-card button:focus-visible {
+  border-color: var(--banri-cyan);
+  color: #001013;
+  background: var(--banri-cyan);
+}
+
+.chronicles-live-scene-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+  min-height: 0;
+}
+
+.chronicles-live-scene-roster,
+.chronicles-live-scene-main {
+  min-height: 0;
+  padding: 1rem;
+}
+
+.chronicles-live-scene-roster {
+  border-right: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 12, 15, 0.48);
+}
+
+.chronicles-live-participants {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.chronicles-live-participants article {
+  padding: 0.75rem;
+  border: 1px solid rgba(22, 232, 255, 0.14);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.chronicles-live-participants article.online {
+  border-color: rgba(50, 255, 157, 0.38);
+}
+
+.chronicles-live-participants span {
+  display: block;
+  color: #f4fbfd;
+  font-size: 0.75rem;
+}
+
+.chronicles-live-participants strong {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--banri-cyan);
+  font-size: 0.66rem;
+}
+
+.chronicles-live-participants small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--banri-muted);
+  font-size: 0.62rem;
+}
+
+.chronicles-live-scene-main {
+  display: grid;
+  grid-template-rows: minmax(220px, 1fr) auto auto;
+  gap: 0.9rem;
+}
+
+.chronicles-live-feed,
+.chronicles-live-preview,
+.chronicles-live-composer {
+  border: 1px solid rgba(22, 232, 255, 0.18);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.chronicles-live-feed {
+  display: grid;
+  align-content: start;
+  gap: 0.65rem;
+  max-height: min(42vh, 420px);
+  overflow: auto;
+  padding: 0.9rem;
+}
+
+.chronicles-live-line {
+  padding: 0.75rem;
+  border-left: 3px solid rgba(22, 232, 255, 0.45);
+  background: linear-gradient(90deg, rgba(22, 232, 255, 0.08), transparent);
+}
+
+.chronicles-live-line.action {
+  border-left-color: rgba(255, 205, 94, 0.72);
+}
+
+.chronicles-live-line.ooc {
+  border-left-color: rgba(160, 185, 195, 0.68);
+  opacity: 0.88;
+}
+
+.chronicles-live-line header {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
+  color: var(--banri-cyan);
+  font-size: 0.68rem;
+}
+
+.chronicles-live-line time {
+  color: var(--banri-muted);
+}
+
+.chronicles-live-preview {
+  max-height: 230px;
+  overflow: auto;
+  padding: 0.9rem;
+}
+
+.chronicles-live-composer {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.9rem;
+}
+
+.chronicles-live-composer-top {
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) 1fr;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.chronicles-live-composer label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--banri-cyan);
+  font: 800 0.7rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.chronicles-live-mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: flex-end;
+}
+
+.chronicles-live-composer textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.chronicles-live-composer-actions {
+  align-items: center;
+}
+
+.chronicles-live-composer-actions .auth-status {
+  flex: 1 1 260px;
+  margin: 0;
+}
+
+.chronicles-live-scene-dock {
+  position: fixed;
+  left: 1.2rem;
+  bottom: 5.3rem;
+  z-index: 1030;
+  width: min(360px, calc(100vw - 2rem));
+  display: grid;
+  gap: 0.65rem;
+}
+
+.chronicles-live-dock-card {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.9rem;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+.chronicles-live-dock-card.is-invite {
+  border-color: rgba(22, 232, 255, 0.5);
+  box-shadow:
+    0 0 26px rgba(22, 232, 255, 0.1),
+    inset 0 0 42px rgba(22, 232, 255, 0.055);
+}
+
+.chronicles-live-dock-card p {
+  margin: 0;
+  color: var(--banri-cyan);
+  font-size: 0.68rem;
+}
+
+.chronicles-live-dock-card h3 {
+  margin: 0;
+  color: #f4fbfd;
+  font: 800 1.25rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicles-live-dock-card div {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.chronicles-live-dock-card button {
+  display: grid;
+  gap: 0.2rem;
+  width: 100%;
+  min-height: 54px;
+  padding: 0.65rem 0.7rem;
+  text-align: left;
+}
+
+.chronicles-live-dock-actions {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.chronicles-live-dock-actions button {
+  justify-items: center;
+  min-height: 40px;
+  padding: 0.55rem 0.45rem;
+  text-align: center;
+}
+
+.chronicles-live-dock-card span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chronicles-live-dock-card small {
+  overflow: hidden;
+  color: var(--banri-muted);
+  font-size: 0.6rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chronicles-live-dock-card > small {
+  line-height: 1.35;
+  white-space: normal;
+}
+
 .chronicles-story-console {
   padding: 1rem;
 }
@@ -9137,6 +9540,22 @@ body.legacy-theme::before {
     grid-template-columns: 1fr;
   }
 
+  .chronicles-live-scene-layout,
+  .chronicles-live-composer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .chronicles-live-scene-roster {
+    border-right: 0;
+    border-bottom: 1px solid rgba(22, 232, 255, 0.16);
+  }
+
+  .chronicles-live-mode,
+  .chronicles-live-scene-controls,
+  .chronicles-live-composer-actions {
+    justify-content: flex-start;
+  }
+
 }
 
 @media (max-width: 767.98px) {
@@ -9195,6 +9614,32 @@ body.legacy-theme::before {
   .btn-banri-outline {
     width: 100%;
     min-width: 0;
+  }
+
+  .chronicles-live-scene-overlay {
+    align-items: stretch;
+    padding: 0.6rem;
+  }
+
+  .chronicles-live-scene-panel {
+    max-height: calc(100svh - 1.2rem);
+    overflow: auto;
+  }
+
+  .chronicles-live-scene-header,
+  .chronicles-live-composer-actions {
+    display: grid;
+    justify-content: stretch;
+  }
+
+  .chronicles-live-feed {
+    max-height: 36vh;
+  }
+
+  .chronicles-live-scene-dock {
+    left: 0.75rem;
+    bottom: 4.6rem;
+    width: calc(100vw - 1.5rem);
   }
 
   .section-heading {

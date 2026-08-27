@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/main.css?v=20260826a" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260826d" />
     <script src="assets/js/nav.js"></script>
     <script src="assets/js/banri-theme.js?v=20260808a" defer></script>
   </head>
@@ -104,6 +104,7 @@
                       <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="post">Create Post</button>
                       <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="character">Create Character</button>
                       <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="echo">Create Echo</button>
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="interaction">Start Interaction</button>
                       <button class="btn btn-banri-outline btn-sm d-none" type="button" data-chronicles-open="thread" data-chronicles-admin-only>New Thread</button>
                       <button class="btn btn-banri-outline btn-sm d-none" type="button" data-chronicles-open="world" data-chronicles-admin-only>New World</button>
                       <button id="chroniclesNotifyButton" class="btn btn-banri-outline btn-sm" type="button" data-chronicles-notifications>Notify New Posts</button>
@@ -117,7 +118,10 @@
                   <div class="section-heading">
                     <p><span>//</span> Dashboard</p>
                     <h2 id="chroniclesDashboardTitle">Recent Posts</h2>
-                    <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="post">Create Post</button>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-open="post">Create Post</button>
+                      <button class="btn btn-banri-primary btn-sm" type="button" data-chronicles-open="interaction">Start Interaction</button>
+                    </div>
                   </div>
                   <div id="chroniclesRecentPosts" class="chronicles-post-list" aria-live="polite"></div>
                 </section>
@@ -230,6 +234,7 @@
                     </div>
                     <div class="chronicles-thread-actions">
                       <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-view-jump="worlds">Back to Worlds</button>
+                      <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-thread-interact>Interact</button>
                       <button class="btn btn-banri-primary btn-sm" type="button" data-chronicles-open="post">Create Post</button>
                     </div>
                   </div>
@@ -1004,6 +1009,114 @@
       </div>
     </div>
 
+    <div class="modal fade chronicles-modal" id="chroniclesInteractionSetupModal" tabindex="-1" aria-labelledby="chroniclesInteractionSetupTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="chroniclesInteractionForm">
+          <div class="modal-header">
+            <div>
+              <p class="banri-modal-kicker mb-1">Live Scene Relay</p>
+              <h2 class="modal-title" id="chroniclesInteractionSetupTitle">Start Interaction</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesInteractionWorld">World</label>
+                <select id="chroniclesInteractionWorld" class="form-select" required></select>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesInteractionThread">Thread / Location</label>
+                <select id="chroniclesInteractionThread" class="form-select" required></select>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label for="chroniclesInteractionRule">Conclusion Rule</label>
+                <select id="chroniclesInteractionRule" class="form-select">
+                  <option value="starter">Starter Finalizes</option>
+                  <option value="all">All Must Agree</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="chroniclesInteractionTitle">Scene Title</label>
+                <input id="chroniclesInteractionTitle" class="form-control" type="text" maxlength="120" placeholder="Cantina Exchange" required />
+              </div>
+              <div class="col-12">
+                <div class="chronicles-live-scene-member-panel">
+                  <div>
+                    <p class="banri-modal-kicker mb-1">Handshake</p>
+                    <h3>Invite Members</h3>
+                    <small>Registered members can accept when they return to Chronicles. Online status is not required for an invite.</small>
+                  </div>
+                  <div id="chroniclesInteractionMembers" class="chronicles-live-member-grid" aria-live="polite"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <p id="chroniclesInteractionStatus" class="auth-status me-auto" role="status" aria-live="polite"></p>
+            <button class="btn btn-banri-outline" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-banri-primary" type="submit">Open Live Scene</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="chroniclesLiveSceneOverlay" class="chronicles-live-scene-overlay d-none" role="dialog" aria-modal="true" aria-labelledby="chroniclesLiveSceneTitle">
+      <div class="chronicles-live-scene-panel">
+        <header class="chronicles-live-scene-header">
+          <div>
+            <p id="chroniclesLiveSceneKicker" class="banri-modal-kicker mb-1">Live Scene</p>
+            <h2 id="chroniclesLiveSceneTitle">Interaction</h2>
+            <small id="chroniclesLiveSceneMeta">Awaiting relay.</small>
+          </div>
+          <div class="chronicles-live-scene-controls">
+            <button type="button" data-chronicles-interaction-minimize>Minimize</button>
+            <button type="button" data-chronicles-interaction-pause>Pause Scene</button>
+            <button type="button" data-chronicles-interaction-resume>Resume Scene</button>
+            <button type="button" data-chronicles-interaction-preview>Preview Final Post</button>
+          </div>
+        </header>
+        <div class="chronicles-live-scene-layout">
+          <aside class="chronicles-live-scene-roster">
+            <div class="section-heading compact-heading">
+              <p><span>//</span> Participants</p>
+              <h2>Handshake</h2>
+            </div>
+            <div id="chroniclesLiveSceneParticipants" class="chronicles-live-participants"></div>
+          </aside>
+          <section class="chronicles-live-scene-main">
+            <div id="chroniclesLiveSceneFeed" class="chronicles-live-feed" aria-live="polite"></div>
+            <div id="chroniclesLiveScenePreview" class="chronicles-live-preview d-none"></div>
+            <form id="chroniclesLiveSceneComposer" class="chronicles-live-composer">
+              <div class="chronicles-live-composer-top">
+                <label>
+                  Character Voice
+                  <select id="chroniclesLiveSceneCharacter" class="form-select"></select>
+                </label>
+                <div class="chronicles-live-mode" role="group" aria-label="Live Scene message mode">
+                  <button class="active" type="button" data-chronicles-interaction-mode="dialogue">Dialogue</button>
+                  <button type="button" data-chronicles-interaction-mode="action">Action</button>
+                  <button type="button" data-chronicles-interaction-mode="ooc">OOC</button>
+                </div>
+              </div>
+              <label for="chroniclesLiveSceneText">Scene Text</label>
+              <textarea id="chroniclesLiveSceneText" class="form-control" rows="3" maxlength="2000" placeholder="Write the next line..."></textarea>
+              <div class="chronicles-live-composer-actions">
+                <p id="chroniclesLiveSceneStatus" class="auth-status" role="status" aria-live="polite"></p>
+                <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-interaction-accept>Accept Invite</button>
+                <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-interaction-decline>Decline</button>
+                <button class="btn btn-banri-outline btn-sm" type="button" data-chronicles-interaction-ready>Ready To Conclude</button>
+                <button class="btn btn-banri-primary btn-sm" type="submit">Send Line</button>
+                <button class="btn btn-banri-primary btn-sm d-none" type="button" data-chronicles-interaction-finalize>Finalize To Thread</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div id="chroniclesLiveSceneDock" class="chronicles-live-scene-dock d-none" aria-live="polite"></div>
+
     <div class="modal fade chronicles-modal chronicles-media-modal" id="chroniclesMediaViewerModal" tabindex="-1" aria-labelledby="chroniclesMediaViewerTitle" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
@@ -1046,6 +1159,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@13.0.3/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-    <script type="module" src="assets/js/chronicles.js?v=20260826a"></script>
+    <script type="module" src="assets/js/chronicles.js?v=20260826d"></script>
   </body>
 </html>

@@ -362,6 +362,39 @@
           }
         }
       },
+      "interactions": {
+        "$interactionId": {
+          ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('starterUid').val() === auth.uid) || data.child('starterUid').val() === auth.uid || data.child('participants').child(auth.uid).exists())",
+          ".validate": "newData.val() === null || newData.hasChildren(['id', 'starterUid', 'worldId', 'threadId', 'title', 'status', 'createdAt'])",
+          "id": {
+            ".validate": "newData.val() === $interactionId"
+          },
+          "starterUid": {
+            ".validate": "newData.isString() && newData.val().length >= 1"
+          },
+          "worldId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 90"
+          },
+          "threadId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+          },
+          "title": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 120"
+          },
+          "status": {
+            ".validate": "newData.val() === 'inviting' || newData.val() === 'active' || newData.val() === 'paused' || newData.val() === 'awaiting_finalization' || newData.val() === 'finalized' || newData.val() === 'cancelled'"
+          },
+          "createdAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "updatedAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "$other": {
+            ".validate": true
+          }
+        }
+      },
       "codex": {
         "$recordId": {
           ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid))",
