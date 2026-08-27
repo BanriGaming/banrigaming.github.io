@@ -67,7 +67,7 @@ The `admins/{uid}` value controls whether the hidden Nexus admin entry appears a
 
 `gamesLibrary` entries can also store optional `steamAppId` and `steamName` fields. A real Steam hours sync should run through a private worker or backend so your Steam Web API key is not exposed in browser code.
 
-`worldServers` stores the member-only hosted server registry used by `/worlds.html`. Admins can add V Rising, Palworld, or other hosted worlds from Admin > World Servers. Signed-in members can read Steam/IP launch details; guests only see a login-required state.
+`worldServers` stores the member-only hosted server registry used by `/worlds.html`. Admins can add V Rising, Palworld, or other hosted worlds from Admin > World Servers. Signed-in members can read Steam/IP launch details and optional server passwords; guests only see a login-required state.
 
 ## Image Storage
 

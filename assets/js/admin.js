@@ -47,7 +47,10 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260827a";
+} from "./site-store.js?v=20260827b";
+
+const SERVER_STATUS_OPTIONS = ["Online", "Offline"];
+const DEFAULT_WORLD_SERVER_IMAGE = "/assets/img/worlds/noir-server-vault.webp";
 
 const state = {
   user: null,
@@ -102,6 +105,10 @@ const elements = {
   steamLastSynced: document.getElementById("steamLastSynced"),
   steamSyncSummary: document.getElementById("steamSyncSummary"),
   editGameModal: document.getElementById("adminEditGameModal"),
+  worldServerModal: document.getElementById("adminWorldServerModal"),
+  saveToast: document.getElementById("adminSaveToast"),
+  saveToastTitle: document.getElementById("adminSaveToastTitle"),
+  saveToastMessage: document.getElementById("adminSaveToastMessage"),
   status: document.getElementById("adminStatus")
 };
 
@@ -109,6 +116,19 @@ function setStatus(message, tone = "info") {
   if (!elements.status) return;
   elements.status.textContent = message || "";
   elements.status.dataset.tone = tone;
+}
+
+let saveToastTimer;
+
+function showAdminSaveToast(title, message) {
+  if (!elements.saveToast) return;
+  if (elements.saveToastTitle) elements.saveToastTitle.textContent = title || "Saved";
+  if (elements.saveToastMessage) elements.saveToastMessage.textContent = message || "Firebase relay updated.";
+  elements.saveToast.classList.remove("d-none");
+  window.clearTimeout(saveToastTimer);
+  saveToastTimer = window.setTimeout(() => {
+    elements.saveToast?.classList.add("d-none");
+  }, 3600);
 }
 
 function showLocked(message, access = "Locked") {
@@ -825,7 +845,9 @@ function renderWorldServersEditor() {
           </div>
           <div class="col-12 col-md-4">
             <label>Status</label>
-            <input class="form-control" data-server-field="status" value="${escapeAttr(server.status)}" placeholder="Online" />
+            <select class="form-select" data-server-field="status">
+              ${optionList(SERVER_STATUS_OPTIONS, server.status || "Online")}
+            </select>
           </div>
           <div class="col-12 col-md-4">
             <label>Host</label>
@@ -852,6 +874,10 @@ function renderWorldServersEditor() {
             <input class="form-control" data-server-field="joinUrl" value="${escapeAttr(server.joinUrl)}" placeholder="steam://connect/ip:port" />
           </div>
           <div class="col-12 col-lg-6">
+            <label>Server Password</label>
+            <input class="form-control" data-server-field="password" type="password" autocomplete="new-password" value="${escapeAttr(server.password)}" placeholder="Optional member-only password" />
+          </div>
+          <div class="col-12">
             <label>Image URL</label>
             <input class="form-control" data-server-field="image" value="${escapeAttr(server.image)}" />
           </div>
@@ -1350,6 +1376,7 @@ function readWorldServers() {
         steamAddress: getField("steamAddress")?.value,
         steamP2P: getField("steamP2P")?.value,
         joinUrl: getField("joinUrl")?.value,
+        password: getField("password")?.value,
         image: getField("image")?.value,
         rules,
         notes: getField("notes")?.value,
@@ -1460,6 +1487,89 @@ function setupNewGameModal() {
 
   document.getElementById("newGameCreatePage")?.addEventListener("change", syncPageLinkState);
   document.getElementById("adminAddGameModal")?.addEventListener("show.bs.modal", resetNewGameModal);
+}
+
+function setupWorldServerModal() {
+  const modal = elements.worldServerModal;
+  const title = document.getElementById("newServerTitle");
+  const slug = document.getElementById("newServerSlug");
+  const game = document.getElementById("newServerGame");
+  const status = document.getElementById("newServerStatus");
+  const image = document.getElementById("newServerImage");
+  let slugTouched = false;
+
+  const setValue = (id, value) => {
+    const input = document.getElementById(id);
+    if (input) input.value = value;
+  };
+
+  const resetWorldServerModal = () => {
+    const nextOrder = readWorldServers().length + 1;
+    setValue("newServerTitle", "");
+    setValue("newServerSlug", "");
+    setValue("newServerGame", "");
+    setValue("newServerHost", "");
+    setValue("newServerRegion", "");
+    setValue("newServerDescription", "");
+    setValue("newServerSteamAddress", "");
+    setValue("newServerSteamP2P", "");
+    setValue("newServerJoinUrl", "");
+    setValue("newServerPassword", "");
+    setValue("newServerImage", DEFAULT_WORLD_SERVER_IMAGE);
+    setValue("newServerRules", "");
+    setValue("newServerNotes", "");
+    if (status) status.value = "Online";
+    const visibility = document.getElementById("newServerVisibility");
+    if (visibility) visibility.value = "members";
+    const enabled = document.getElementById("newServerEnabled");
+    if (enabled) enabled.checked = true;
+    slugTouched = false;
+    modal?.setAttribute("data-next-order", String(nextOrder));
+  };
+
+  const syncSlug = () => {
+    if (!slug || slugTouched) return;
+    slug.value = slugify(title?.value || game?.value || "hosted-world");
+  };
+
+  slug?.addEventListener("input", () => {
+    slugTouched = true;
+  });
+  title?.addEventListener("input", syncSlug);
+  game?.addEventListener("input", syncSlug);
+  modal?.addEventListener("show.bs.modal", resetWorldServerModal);
+
+  document.getElementById("submitWorldServerButton")?.addEventListener("click", () => {
+    const serverTitle = title?.value.trim() || "New Hosted World";
+    const rules = String(document.getElementById("newServerRules")?.value || "")
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+    state.worldServers = readWorldServers();
+    state.worldServers.push(normalizeWorldServer({
+      id: slug?.value || serverTitle,
+      title: serverTitle,
+      game: game?.value || "Hosted Server",
+      host: document.getElementById("newServerHost")?.value || "",
+      status: status?.value || "Online",
+      region: document.getElementById("newServerRegion")?.value || "",
+      description: document.getElementById("newServerDescription")?.value || "Hosted world details pending.",
+      steamAddress: document.getElementById("newServerSteamAddress")?.value || "",
+      steamP2P: document.getElementById("newServerSteamP2P")?.value || "",
+      joinUrl: document.getElementById("newServerJoinUrl")?.value || "",
+      password: document.getElementById("newServerPassword")?.value || "",
+      image: image?.value || DEFAULT_WORLD_SERVER_IMAGE,
+      rules,
+      notes: document.getElementById("newServerNotes")?.value || "",
+      visibility: document.getElementById("newServerVisibility")?.value || "members",
+      enabled: document.getElementById("newServerEnabled")?.checked !== false,
+      order: Number(modal?.dataset.nextOrder || state.worldServers.length + 1)
+    }, state.worldServers.length));
+    renderWorldServersEditor();
+    bootstrap.Modal.getInstance(modal)?.hide();
+    showAdminSaveToast("Server Staged", "Review the record, then Save Servers to publish it to Firebase.");
+    setStatus(`${serverTitle} staged locally. Save Servers to publish it.`, "info");
+  });
 }
 
 function setGalleryFile(file) {
@@ -1630,33 +1740,18 @@ function bindAdminEvents() {
     setStatus("Defaults seeded to Firebase.", "success");
   });
 
-  document.getElementById("addWorldServerButton")?.addEventListener("click", () => {
-    state.worldServers = readWorldServers();
-    state.worldServers.push(normalizeWorldServer({
-      title: "New Hosted World",
-      game: "Hosted Server",
-      host: "Dathost",
-      status: "Online",
-      region: "US Central",
-      description: "New hosted server waiting for details.",
-      steamAddress: "",
-      joinUrl: "",
-      image: "/assets/img/hero/banri-hero-05.webp",
-      rules: ["Server rules pending."],
-      notes: "",
-      order: state.worldServers.length + 1,
-      enabled: true
-    }, state.worldServers.length));
-    renderWorldServersEditor();
-    setStatus("Server added locally. Save Servers to publish it.", "info");
-  });
-
   document.getElementById("saveWorldServersButton")?.addEventListener("click", async () => {
-    state.worldServers = readWorldServers();
-    await saveWorldServers(state.worldServers);
-    await pushActivity(activityMeta({ category: "Worlds", title: "Hosted worlds updated", message: "World server access records were updated." })).catch(() => {});
-    renderWorldServersEditor();
-    setStatus("World servers saved.", "success");
+    try {
+      state.worldServers = readWorldServers();
+      await saveWorldServers(state.worldServers);
+      state.worldServers = await loadAdminWorldServers();
+      await pushActivity(activityMeta({ category: "Worlds", title: "Hosted worlds updated", message: "World server access records were updated." })).catch(() => {});
+      renderWorldServersEditor();
+      showAdminSaveToast("Servers Published", "Hosted world records saved to Firebase.");
+      setStatus("World servers saved to Firebase.", "success");
+    } catch (error) {
+      setStatus(error.message || "World servers could not be saved to Firebase.", "error");
+    }
   });
 
   document.getElementById("submitNewGameButton")?.addEventListener("click", async () => {
@@ -2009,6 +2104,7 @@ function escapeAttr(value) {
 
 bindAdminEvents();
 setupNewGameModal();
+setupWorldServerModal();
 setupDateDefault();
 
 const { auth } = getFirebaseServices();

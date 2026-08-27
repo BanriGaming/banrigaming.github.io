@@ -440,7 +440,8 @@ export const defaultWorldServers = [
     steamAddress: "73.111.246.38:9876",
     steamP2P: "90291675017036813",
     joinUrl: "steam://connect/73.111.246.38:9876",
-    image: "/assets/img/hero/banri-hero-05.webp",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
     description: "A brutal private V Rising world tuned for harsher hunts, stronger V Bloods, and a proper late-night raid signal.",
     rules: [
       "Difficulty: Brutal",
@@ -897,7 +898,7 @@ export function normalizeWorldServer(server = {}, index = 0) {
     title,
     game: String(server.game || "Hosted Server").trim(),
     host: String(server.host || "").trim(),
-    status: String(server.status || "Online").trim(),
+    status: /^offline$/i.test(String(server.status || "")) ? "Offline" : "Online",
     region: String(server.region || "").trim(),
     visibility: server.visibility === "public" ? "public" : "members",
     enabled: server.enabled !== false,
@@ -905,7 +906,8 @@ export function normalizeWorldServer(server = {}, index = 0) {
     steamAddress: String(server.steamAddress || server.address || "").replace(/^steamIPV4:\/\//i, "").trim(),
     steamP2P: String(server.steamP2P || server.p2p || "").replace(/^SteamP2P:\/\//i, "").trim(),
     joinUrl: buildWorldServerJoinUrl(server),
-    image: String(server.image || server.art || "/assets/img/hero/banri-hero-05.webp").trim(),
+    image: String(server.image || server.art || "/assets/img/worlds/noir-server-vault.webp").trim(),
+    password: String(server.password || "").trim(),
     description: String(server.description || "Hosted world details pending.").trim(),
     rules,
     notes: String(server.notes || "").trim(),
@@ -1177,15 +1179,31 @@ export async function loadAdminWorldServers() {
 
 export async function saveWorldServers(servers) {
   const { database } = getFirebaseServices();
-  const payload = {};
-  servers.map(normalizeWorldServer).forEach((server, index) => {
-    payload[server.id] = {
+  const snapshot = await get(ref(database, "worldServers")).catch(() => null);
+  const existingValue = snapshot?.exists() && typeof snapshot.val() === "object" && snapshot.val()
+    ? snapshot.val()
+    : {};
+  const normalized = servers.map(normalizeWorldServer);
+  const nextIds = new Set(normalized.map((server) => server.id));
+  const updates = {};
+
+  Object.keys(existingValue).forEach((id) => {
+    if (!nextIds.has(id)) {
+      updates[`worldServers/${id}`] = null;
+    }
+  });
+
+  normalized.forEach((server, index) => {
+    updates[`worldServers/${server.id}`] = {
       ...server,
       order: Number(server.order || index + 1),
       updatedAt: Date.now()
     };
   });
-  await set(ref(database, "worldServers"), payload);
+
+  if (Object.keys(updates).length) {
+    await update(ref(database), updates);
+  }
 }
 
 export async function fetchSteamSignal(config = {}) {
