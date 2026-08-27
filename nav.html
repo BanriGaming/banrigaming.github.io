@@ -48,16 +48,16 @@
           </li>
 
           <li class="nav-item dropdown banri-mega-dropdown">
-            <a class="nav-link dropdown-toggle" href="/games.html" id="banriWorldsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-nav-key="worlds">Worlds</a>
+            <a class="nav-link dropdown-toggle" href="/worlds.html" id="banriWorldsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-nav-key="worlds">Worlds</a>
             <div class="dropdown-menu banri-mega-panel" aria-labelledby="banriWorldsMenu">
               <div class="row g-4">
                 <section class="col-12 col-lg-4">
-                  <p class="mega-kicker">Rotation</p>
-                  <h2>Active Rotation</h2>
-                  <a href="/landing-pages/grounded.html">Grounded</a>
-                  <a href="/landing-pages/palworld.html">Palworld</a>
-                  <a href="/landing-pages/helldivers-2.html">Helldivers 2</a>
-                  <a href="/landing-pages/starfield.html">Starfield</a>
+                  <p class="mega-kicker">Servers</p>
+                  <h2>Hosted Worlds</h2>
+                  <a href="/worlds.html">Server Registry</a>
+                  <a href="/landing-pages/palworld.html">Palworld Hub</a>
+                  <a href="/worlds.html#banloant-lodge">V Rising Server</a>
+                  <span class="mega-disabled">Members only launch routes</span>
                 </section>
                 <section class="col-12 col-lg-4">
                   <p class="mega-kicker">Explore</p>
@@ -323,10 +323,10 @@
               <a href="/nms/galaxies.html">NMS Galaxy List</a>
             </div>
           </div>
-          <button class="nexus-node node-worlds nexus-disabled" type="button" disabled>
+          <a id="banriWorldsNode" class="nexus-node node-worlds nexus-auth-locked" href="/worlds.html" aria-disabled="true">
             <strong>Worlds</strong>
-            <span>Reserved signal / coming later</span>
-          </button>
+            <span id="banriWorldsNodeSubtext">Login to Access</span>
+          </a>
           <a id="banriChroniclesNode" class="nexus-node node-chronicles d-none" href="/chronicles.html" aria-hidden="true">
             <strong>Chronicles</strong>
             <span>Play-by-post / private writing corner</span>

@@ -3816,6 +3816,14 @@ body.legacy-theme::before {
   cursor: not-allowed;
 }
 
+.nexus-auth-locked {
+  opacity: 0.66;
+}
+
+.nexus-auth-locked span {
+  color: rgba(255, 214, 116, 0.82);
+}
+
 .banri-back-top {
   position: fixed;
   right: clamp(1rem, 2.5vw, 2rem);
@@ -6914,12 +6922,256 @@ body.legacy-theme::before {
   font-size: 0.66rem;
 }
 
+.worlds-page .worlds-hero {
+  min-height: 430px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.36) 48%, rgba(0, 0, 0, 0.76)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.9)),
+    url("/assets/img/hero/banri-hero-05.webp") center / cover no-repeat;
+}
+
+.worlds-lock-panel {
+  max-width: 760px;
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.worlds-lock-panel h2 {
+  margin-bottom: 0.6rem;
+  color: #f4fbfd;
+  font: 800 clamp(2rem, 4vw, 4rem)/0.9 Rajdhani, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.worlds-shell {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.worlds-command-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.worlds-command-grid article {
+  min-height: 118px;
+  padding: 1rem;
+  border: 1px solid rgba(22, 232, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.09), transparent 58%),
+    rgba(0, 12, 15, 0.62);
+}
+
+.worlds-command-grid span,
+.world-server-card-head p,
+.server-meta-grid span,
+.worlds-connection-line span {
+  color: var(--banri-cyan);
+  font: 800 0.72rem/1.1 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.worlds-command-grid strong {
+  display: block;
+  margin-top: 0.55rem;
+  color: #f4fbfd;
+  font: 800 clamp(2.2rem, 5vw, 4.25rem)/0.85 Rajdhani, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.worlds-server-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr));
+  gap: 1rem;
+}
+
+.world-server-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(180px, 32%) minmax(0, 1fr);
+  min-height: 560px;
+  overflow: hidden;
+  border: 1px solid rgba(22, 232, 255, 0.28);
+  background:
+    linear-gradient(135deg, rgba(22, 232, 255, 0.1), transparent 52%),
+    rgba(0, 8, 10, 0.9);
+  clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+}
+
+.world-server-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(22, 232, 255, 0.12), transparent 1px),
+    linear-gradient(180deg, rgba(22, 232, 255, 0.08), transparent 1px);
+  background-size: 84px 84px;
+  opacity: 0.22;
+}
+
+.world-server-card-media {
+  position: relative;
+  min-height: 100%;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.78)),
+    var(--server-image) center / cover no-repeat;
+}
+
+.world-server-card-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: clamp(1rem, 2.2vw, 1.6rem);
+}
+
+.world-server-card-head strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: #f4fbfd;
+  font: 800 clamp(2rem, 3vw, 3.8rem)/0.9 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.world-server-card-head p {
+  margin: 0;
+}
+
+.world-server-card-head p span {
+  margin-right: 0.6rem;
+}
+
+.server-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.server-meta-grid span {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.8rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.server-meta-grid strong {
+  color: #f4fbfd;
+  font: 700 1rem/1.15 Rajdhani, sans-serif;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.world-server-description,
+.world-server-notes {
+  max-width: 70ch;
+  margin: 0;
+  color: rgba(218, 238, 242, 0.88);
+  font-size: 1.03rem;
+  line-height: 1.55;
+}
+
+.world-server-notes {
+  color: var(--banri-muted);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.server-rule-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.45rem 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.server-rule-list li {
+  padding: 0.55rem 0.65rem;
+  border-left: 2px solid rgba(22, 232, 255, 0.48);
+  color: rgba(230, 244, 247, 0.9);
+  background: rgba(22, 232, 255, 0.045);
+}
+
+.worlds-connection-stack {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.worlds-connection-line {
+  display: grid;
+  grid-template-columns: minmax(100px, 140px) minmax(0, 1fr) auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.6rem;
+  border: 1px solid rgba(22, 232, 255, 0.16);
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.worlds-connection-line code {
+  overflow: hidden;
+  color: #d8edf1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.worlds-connection-line button {
+  border: 1px solid rgba(22, 232, 255, 0.35);
+  color: var(--banri-cyan);
+  background: transparent;
+  font: 800 0.66rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.server-join-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.admin-world-server-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+}
+
+@media (max-width: 991.98px) {
+  .world-server-card,
+  .admin-world-server-card {
+    grid-template-columns: 1fr;
+  }
+
+  .world-server-card-media,
+  .admin-world-server-card .admin-card-preview {
+    min-height: 240px;
+  }
+
+  .worlds-command-grid,
+  .server-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .worlds-connection-line {
+    grid-template-columns: 1fr;
+  }
+}
+
 .chronicles-live-scene-overlay {
   position: fixed;
   inset: 0;
   z-index: 1090;
   display: grid;
-  place-items: center;
+  align-items: start;
+  justify-items: center;
+  overflow-y: auto;
   padding: clamp(1rem, 3vw, 2rem);
   background:
     radial-gradient(circle at 50% 18%, rgba(22, 232, 255, 0.12), transparent 26rem),
@@ -6930,7 +7182,8 @@ body.legacy-theme::before {
 .chronicles-live-scene-panel {
   width: min(1380px, 100%);
   max-height: min(880px, calc(100vh - 2rem));
-  overflow: hidden;
+  overflow: auto;
+  overscroll-behavior: contain;
   clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
 }
 
@@ -7013,6 +7266,18 @@ body.legacy-theme::before {
   background: rgba(0, 12, 15, 0.48);
 }
 
+.chronicles-live-roster-heading {
+  display: grid;
+  gap: 0.25rem;
+  align-items: start;
+}
+
+.chronicles-live-roster-heading h2 {
+  line-height: 1;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  letter-spacing: 0.18em;
+}
+
 .chronicles-live-participants {
   display: grid;
   gap: 0.65rem;
@@ -7081,12 +7346,17 @@ body.legacy-theme::before {
 }
 
 .chronicles-live-line.ooc {
-  border-left-color: rgba(160, 185, 195, 0.68);
-  opacity: 0.88;
+  border-left-color: rgba(127, 220, 226, 0.58);
+  background: linear-gradient(90deg, rgba(127, 220, 226, 0.07), transparent);
+}
+
+.chronicles-live-line.scene {
+  border-left-color: rgba(215, 236, 241, 0.48);
 }
 
 .chronicles-live-line header {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.7rem;
   align-items: baseline;
   margin-bottom: 0.35rem;
@@ -7096,6 +7366,28 @@ body.legacy-theme::before {
 
 .chronicles-live-line time {
   color: var(--banri-muted);
+}
+
+.chronicles-live-line-mode {
+  color: rgba(215, 236, 241, 0.76);
+}
+
+.chronicles-live-line.action .chronicles-markdown,
+.chronicles-live-line.action .chronicles-markdown p {
+  color: rgba(156, 177, 184, 0.95);
+  font-style: italic;
+}
+
+.chronicles-live-line.ooc .chronicles-markdown,
+.chronicles-live-line.ooc .chronicles-markdown p {
+  color: rgba(127, 220, 226, 0.86);
+}
+
+.chronicles-live-line.ooc blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .chronicles-live-preview {
@@ -7135,7 +7427,45 @@ body.legacy-theme::before {
 
 .chronicles-live-composer textarea {
   min-height: 96px;
+  max-height: min(320px, 34vh);
   resize: vertical;
+}
+
+.chronicles-live-composer textarea.form-control {
+  border: 1px solid rgba(22, 232, 255, 0.3);
+  color: #e8f7fa;
+  background:
+    linear-gradient(180deg, rgba(22, 232, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.58);
+  box-shadow: inset 0 0 24px rgba(22, 232, 255, 0.04);
+}
+
+.chronicles-live-composer textarea.form-control:focus {
+  border-color: rgba(22, 232, 255, 0.76);
+  color: #f4fbfd;
+  background:
+    linear-gradient(180deg, rgba(22, 232, 255, 0.06), transparent),
+    rgba(0, 0, 0, 0.68);
+  box-shadow:
+    0 0 0 0.12rem rgba(22, 232, 255, 0.12),
+    inset 0 0 28px rgba(22, 232, 255, 0.055);
+}
+
+.chronicles-live-composer textarea.form-control::placeholder {
+  color: rgba(196, 220, 226, 0.68);
+  opacity: 1;
+}
+
+.chronicles-live-composer textarea.form-control:disabled {
+  color: rgba(214, 234, 238, 0.78);
+  background:
+    linear-gradient(180deg, rgba(22, 232, 255, 0.025), transparent),
+    rgba(0, 0, 0, 0.46);
+  opacity: 1;
+}
+
+.chronicles-live-composer textarea.form-control:disabled::placeholder {
+  color: rgba(218, 238, 242, 0.58);
 }
 
 .chronicles-live-composer-actions {
@@ -7145,6 +7475,7 @@ body.legacy-theme::before {
 .chronicles-live-composer-actions .auth-status {
   flex: 1 1 260px;
   margin: 0;
+  color: rgba(216, 238, 242, 0.86);
 }
 
 .chronicles-live-scene-dock {

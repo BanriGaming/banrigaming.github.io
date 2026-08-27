@@ -15,12 +15,14 @@ import {
   defaultSteamConfig,
   defaultSteamSignal,
   defaultTacticalFeed,
+  defaultWorldServers,
   deleteGalleryCollection,
   fetchMedalClips,
   fetchSteamSignal,
   getFirebaseServices,
   getChroniclesAiHealthUrl,
   isAdminUid,
+  loadAdminWorldServers,
   loadGalleryData,
   loadPublicSiteData,
   normalizeCurrentGame,
@@ -33,6 +35,7 @@ import {
   normalizeQuotes,
   normalizeSteamConfig,
   normalizeSteamSignal,
+  normalizeWorldServer,
   pushActivity,
   runChroniclesAiQueuedRequest,
   saveGalleryCollection,
@@ -40,10 +43,11 @@ import {
   saveGamesLibrary,
   saveSiteConfigPatch,
   saveSteamSignal,
+  saveWorldServers,
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260817g";
+} from "./site-store.js?v=20260827a";
 
 const state = {
   user: null,
@@ -55,6 +59,7 @@ const state = {
   hero: structuredClone(defaultHeroCopy),
   heroVisual: structuredClone(defaultHeroVisual),
   featuredClip: structuredClone(defaultFeaturedClip),
+  worldServers: [...defaultWorldServers],
   steamConfig: structuredClone(defaultSteamConfig),
   steamSignal: structuredClone(defaultSteamSignal),
   chroniclesAiConfig: structuredClone(defaultChroniclesAiConfig),
@@ -83,6 +88,7 @@ const elements = {
   feedEditor: document.getElementById("feedEditor"),
   quotesEditor: document.getElementById("quotesEditor"),
   homepageEditor: document.getElementById("homepageEditor"),
+  worldsEditor: document.getElementById("worldsEditor"),
   chroniclesAiEditor: document.getElementById("chroniclesAiEditor"),
   galleryEditor: document.getElementById("galleryEditor"),
   membersEditor: document.getElementById("membersEditor"),
@@ -789,6 +795,93 @@ function renderHomepageEditor() {
   `;
 }
 
+function renderWorldServersEditor() {
+  if (!elements.worldsEditor) return;
+  const servers = state.worldServers.length ? state.worldServers : defaultWorldServers.map(normalizeWorldServer);
+  elements.worldsEditor.innerHTML = servers.map((server, index) => `
+    <article class="admin-card admin-world-server-card" data-world-server-index="${index}">
+      <div class="admin-card-preview" style="--preview-image: url('${escapeAttr(server.image)}')"></div>
+      <div class="admin-card-body">
+        <div class="admin-card-heading">
+          <span>${escapeHtml(server.game || "Hosted Server")}</span>
+          <button class="btn btn-banri-outline btn-sm" type="button" data-delete-world-server>Delete</button>
+        </div>
+        <div class="row g-3">
+          <div class="col-12 col-lg-4">
+            <label>Server Title</label>
+            <input class="form-control" data-server-field="title" value="${escapeAttr(server.title)}" />
+          </div>
+          <div class="col-12 col-lg-3">
+            <label>ID / Slug</label>
+            <input class="form-control" data-server-field="id" value="${escapeAttr(server.id)}" />
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <label>Game</label>
+            <input class="form-control" data-server-field="game" value="${escapeAttr(server.game)}" />
+          </div>
+          <div class="col-12 col-md-6 col-lg-2">
+            <label>Order</label>
+            <input class="form-control" type="number" min="1" data-server-field="order" value="${escapeAttr(server.order)}" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label>Status</label>
+            <input class="form-control" data-server-field="status" value="${escapeAttr(server.status)}" placeholder="Online" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label>Host</label>
+            <input class="form-control" data-server-field="host" value="${escapeAttr(server.host)}" placeholder="Blackbox / Dathost" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label>Region</label>
+            <input class="form-control" data-server-field="region" value="${escapeAttr(server.region)}" placeholder="US Central" />
+          </div>
+          <div class="col-12">
+            <label>Description</label>
+            <textarea class="form-control" rows="3" data-server-field="description">${escapeHtml(server.description)}</textarea>
+          </div>
+          <div class="col-12 col-lg-6">
+            <label>Steam IP / Port</label>
+            <input class="form-control" data-server-field="steamAddress" value="${escapeAttr(server.steamAddress)}" placeholder="73.111.246.38:9876" />
+          </div>
+          <div class="col-12 col-lg-6">
+            <label>Steam P2P ID</label>
+            <input class="form-control" data-server-field="steamP2P" value="${escapeAttr(server.steamP2P)}" placeholder="90291675017036813" />
+          </div>
+          <div class="col-12 col-lg-6">
+            <label>Launch URL Override</label>
+            <input class="form-control" data-server-field="joinUrl" value="${escapeAttr(server.joinUrl)}" placeholder="steam://connect/ip:port" />
+          </div>
+          <div class="col-12 col-lg-6">
+            <label>Image URL</label>
+            <input class="form-control" data-server-field="image" value="${escapeAttr(server.image)}" />
+          </div>
+          <div class="col-12">
+            <label>Rules / Server Notes</label>
+            <textarea class="form-control" rows="5" data-server-field="rules">${escapeHtml((server.rules || []).join("\n"))}</textarea>
+          </div>
+          <div class="col-12 col-lg-8">
+            <label>Footer Note</label>
+            <input class="form-control" data-server-field="notes" value="${escapeAttr(server.notes)}" />
+          </div>
+          <div class="col-6 col-lg-2">
+            <label>Visibility</label>
+            <select class="form-select" data-server-field="visibility">
+              <option value="members"${server.visibility !== "public" ? " selected" : ""}>Members</option>
+              <option value="public"${server.visibility === "public" ? " selected" : ""}>Public</option>
+            </select>
+          </div>
+          <div class="col-6 col-lg-2 d-flex align-items-end">
+            <label class="admin-switch w-100">
+              <input type="checkbox" data-server-field="enabled" ${server.enabled !== false ? "checked" : ""} />
+              Enabled
+            </label>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
 function renderGalleryEditor() {
   if (!elements.galleryEditor) return;
   const selectedCollection = state.galleryCollections[0]?.id || "";
@@ -1112,6 +1205,7 @@ function renderAll() {
   renderFeedEditor();
   renderQuotesEditor();
   renderHomepageEditor();
+  renderWorldServersEditor();
   renderGalleryEditor();
   renderMembersEditor();
   renderActivityPreview();
@@ -1130,6 +1224,7 @@ async function loadData() {
   state.steamSignal = normalizeSteamSignal(data.steamSignal);
   state.chroniclesAiConfig = normalizeChroniclesAiConfig(data.chroniclesAiConfig);
   state.activityFeed = data.activityFeed.length ? data.activityFeed : [...defaultActivity];
+  state.worldServers = await loadAdminWorldServers();
   await loadMedalClipOptions();
   await loadGalleryState();
   renderAll();
@@ -1234,6 +1329,35 @@ function readFeaturedClip() {
   const selectedKey = document.querySelector("[data-featured-clip-select]")?.value || "";
   const selected = state.medalClips.find((clip) => clip.id === selectedKey || clip.url === selectedKey);
   return normalizeFeaturedClip(selected || state.featuredClip);
+}
+
+function readWorldServers() {
+  return [...document.querySelectorAll("[data-world-server-index]")]
+    .map((row, index) => {
+      const getField = (field) => row.querySelector(`[data-server-field="${field}"]`);
+      const rules = String(getField("rules")?.value || "")
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+      return normalizeWorldServer({
+        id: getField("id")?.value || getField("title")?.value,
+        title: getField("title")?.value,
+        game: getField("game")?.value,
+        host: getField("host")?.value,
+        status: getField("status")?.value,
+        region: getField("region")?.value,
+        description: getField("description")?.value,
+        steamAddress: getField("steamAddress")?.value,
+        steamP2P: getField("steamP2P")?.value,
+        joinUrl: getField("joinUrl")?.value,
+        image: getField("image")?.value,
+        rules,
+        notes: getField("notes")?.value,
+        visibility: getField("visibility")?.value,
+        enabled: getField("enabled")?.checked !== false,
+        order: Number(getField("order")?.value || index + 1)
+      }, index);
+    });
 }
 
 function updateFeaturedClipPreview() {
@@ -1488,8 +1612,10 @@ function bindAdminEvents() {
     state.hero = structuredClone(defaultHeroCopy);
     state.heroVisual = structuredClone(defaultHeroVisual);
     state.featuredClip = structuredClone(defaultFeaturedClip);
+    state.worldServers = [...defaultWorldServers];
     state.chroniclesAiConfig = structuredClone(defaultChroniclesAiConfig);
     await saveGamesLibrary(state.games);
+    await saveWorldServers(state.worldServers);
     await saveSiteConfigPatch({
       currentGames: state.currentGames,
       tacticalFeed: state.tacticalFeed,
@@ -1502,6 +1628,35 @@ function bindAdminEvents() {
     await pushActivity(activityMeta({ category: "System", title: "Defaults seeded", message: "Firebase site defaults were initialized." }));
     renderAll();
     setStatus("Defaults seeded to Firebase.", "success");
+  });
+
+  document.getElementById("addWorldServerButton")?.addEventListener("click", () => {
+    state.worldServers = readWorldServers();
+    state.worldServers.push(normalizeWorldServer({
+      title: "New Hosted World",
+      game: "Hosted Server",
+      host: "Dathost",
+      status: "Online",
+      region: "US Central",
+      description: "New hosted server waiting for details.",
+      steamAddress: "",
+      joinUrl: "",
+      image: "/assets/img/hero/banri-hero-05.webp",
+      rules: ["Server rules pending."],
+      notes: "",
+      order: state.worldServers.length + 1,
+      enabled: true
+    }, state.worldServers.length));
+    renderWorldServersEditor();
+    setStatus("Server added locally. Save Servers to publish it.", "info");
+  });
+
+  document.getElementById("saveWorldServersButton")?.addEventListener("click", async () => {
+    state.worldServers = readWorldServers();
+    await saveWorldServers(state.worldServers);
+    await pushActivity(activityMeta({ category: "Worlds", title: "Hosted worlds updated", message: "World server access records were updated." })).catch(() => {});
+    renderWorldServersEditor();
+    setStatus("World servers saved.", "success");
   });
 
   document.getElementById("submitNewGameButton")?.addEventListener("click", async () => {
@@ -1690,6 +1845,24 @@ function bindAdminEvents() {
     if (!event.target.closest("#galleryDropzone")) return;
     event.preventDefault();
     setGalleryFile(event.dataTransfer.files?.[0]);
+  });
+
+  elements.worldsEditor?.addEventListener("click", (event) => {
+    const deleteButton = event.target.closest("[data-delete-world-server]");
+    if (!deleteButton) return;
+    const row = deleteButton.closest("[data-world-server-index]");
+    const index = Number(row?.dataset.worldServerIndex);
+    if (!Number.isFinite(index)) return;
+    state.worldServers = readWorldServers().filter((_, itemIndex) => itemIndex !== index);
+    renderWorldServersEditor();
+    setStatus("Server removed locally. Save Servers to publish the deletion.", "info");
+  });
+
+  elements.worldsEditor?.addEventListener("input", (event) => {
+    const imageInput = event.target.closest('[data-server-field="image"]');
+    if (!imageInput) return;
+    const row = imageInput.closest("[data-world-server-index]");
+    row?.querySelector(".admin-card-preview")?.style.setProperty("--preview-image", `url('${imageInput.value}')`);
   });
 
   elements.librarySearch?.addEventListener("input", (event) => {

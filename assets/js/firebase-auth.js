@@ -35,6 +35,8 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
       navButton: document.getElementById("banriAuthNavButton"),
       adminNode: document.getElementById("banriAdminNode"),
       membersNode: document.getElementById("banriMembersNode"),
+      worldsNode: document.getElementById("banriWorldsNode"),
+      worldsNodeSubtext: document.getElementById("banriWorldsNodeSubtext"),
       chroniclesNode: document.getElementById("banriChroniclesNode"),
       relayNode: document.getElementById("banriRelayNode"),
       signedOut: document.getElementById("banriAuthSignedOut"),
@@ -114,6 +116,21 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     const modal = document.getElementById("banriLoginModal");
     if (!modal || !window.bootstrap) return;
     window.bootstrap.Modal.getInstance(modal)?.hide();
+  }
+
+  function showLoginModal() {
+    const modal = document.getElementById("banriLoginModal");
+    if (!modal || !window.bootstrap) return;
+    window.bootstrap.Modal.getOrCreateInstance(modal).show();
+  }
+
+  function renderWorldsAccess(isSignedIn) {
+    const elements = getElements();
+    elements.worldsNode?.classList.toggle("nexus-auth-locked", !isSignedIn);
+    elements.worldsNode?.setAttribute("aria-disabled", isSignedIn ? "false" : "true");
+    if (elements.worldsNodeSubtext) {
+      elements.worldsNodeSubtext.textContent = isSignedIn ? "Hosted game servers" : "Login to Access";
+    }
   }
 
   function normalizeCipherKey(value) {
@@ -286,6 +303,7 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     elements.chroniclesNode?.setAttribute("aria-hidden", "true");
     elements.relayNode?.classList.add("d-none");
     elements.relayNode?.setAttribute("aria-hidden", "true");
+    renderWorldsAccess(false);
     if (elements.navButton) elements.navButton.textContent = "Login";
     if (elements.password) elements.password.value = "";
     if (elements.registerPassword) elements.registerPassword.value = "";
@@ -360,6 +378,7 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     elements.chroniclesNode?.setAttribute("aria-hidden", "false");
     elements.relayNode?.classList.remove("d-none");
     elements.relayNode?.setAttribute("aria-hidden", "false");
+    renderWorldsAccess(true);
     if (elements.navButton) elements.navButton.textContent = "Profile";
 
     try {
@@ -547,6 +566,13 @@ import { isAdminUid, readFileAsDataUrl } from "./site-store.js";
     elements.submitRegister?.addEventListener("click", handleCreateAccount);
     elements.save?.addEventListener("click", handleSaveProfile);
     elements.signOut?.addEventListener("click", handleSignOut);
+    elements.worldsNode?.addEventListener("click", (event) => {
+      if (currentUser) return;
+      event.preventDefault();
+      setAuthView("login");
+      setStatus("Login to access hosted world routes.");
+      showLoginModal();
+    });
 
     [elements.email, elements.password].forEach((input) => {
       input?.addEventListener("keydown", (event) => {

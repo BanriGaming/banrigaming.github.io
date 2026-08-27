@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worlds | BANRI Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css?v=20260827a" />
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/banri-theme.js?v=20260807h" defer></script>
+  </head>
+  <body class="banri-theme worlds-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="banri-noise" aria-hidden="true"></div>
+    <div w3-include-html="nav.html"></div>
+
+    <main id="main-content">
+      <section class="subpage-hero worlds-hero">
+        <div class="container-fluid px-3 px-lg-5">
+          <p class="eyebrow-line">Hosted Game Servers</p>
+          <h1 class="subpage-title">
+            Worlds
+            <span>Server Access</span>
+          </h1>
+          <p class="subpage-copy">
+            Private routes, launch signals, and hosted worlds for logged-in Nexus members.
+          </p>
+        </div>
+      </section>
+
+      <section class="banri-section pt-0">
+        <div class="container-fluid px-3 px-lg-5">
+          <div id="worldsLocked" class="panel-frame worlds-lock-panel">
+            <p class="banri-modal-kicker">Login Required</p>
+            <h2>Nexus clearance required.</h2>
+            <p>Server routes are visible only to signed-in members. Open the Nexus login to access hosted worlds.</p>
+            <button class="btn btn-banri-primary" type="button" data-bs-toggle="modal" data-bs-target="#banriLoginModal">Login to Access</button>
+          </div>
+
+          <div id="worldsApp" class="worlds-shell d-none">
+            <div class="section-heading">
+              <p><span>//</span> Server Registry</p>
+              <h2>Hosted Worlds</h2>
+              <span id="worldsSummary" class="members-summary">Syncing Firebase...</span>
+            </div>
+
+            <div class="worlds-command-grid" aria-label="World server overview">
+              <article>
+                <span>Accessible Worlds</span>
+                <strong id="worldsTotalCount">0</strong>
+              </article>
+              <article>
+                <span>Online Signals</span>
+                <strong id="worldsOnlineCount">0</strong>
+              </article>
+              <article>
+                <span>Steam Launches</span>
+                <strong id="worldsSteamCount">0</strong>
+              </article>
+            </div>
+
+            <div id="worldsGrid" class="worlds-server-grid" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="banri-footer compact-footer">
+      <div class="container-fluid px-3 px-lg-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+          <p class="footer-kicker mb-0">Nexus / Worlds / Hosted Servers</p>
+          <small>&copy; 2026 Banri Gaming. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/firebase-auth.js?v=20260827a"></script>
+    <script type="module" src="assets/js/worlds.js?v=20260827a"></script>
+    <script>
+      includeHTML();
+    </script>
+  </body>
+</html>

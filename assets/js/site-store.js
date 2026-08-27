@@ -426,6 +426,37 @@ export const defaultHeroVisual = {
   images: [...defaultHeroImages]
 };
 
+export const defaultWorldServers = [
+  {
+    id: "banloant-lodge",
+    title: "Banloant Lodge",
+    game: "V Rising",
+    host: "Blackbox",
+    status: "Online",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "steam",
+    steamAddress: "73.111.246.38:9876",
+    steamP2P: "90291675017036813",
+    joinUrl: "steam://connect/73.111.246.38:9876",
+    image: "/assets/img/hero/banri-hero-05.webp",
+    description: "A brutal private V Rising world tuned for harsher hunts, stronger V Bloods, and a proper late-night raid signal.",
+    rules: [
+      "Difficulty: Brutal",
+      "-25% Blood drain rate",
+      "+20% loot multiplier",
+      "-75% durability loss multiplier",
+      "+25% V Blood health multiplier",
+      "+70% V Blood damage multiplier",
+      "+3 increased unit level",
+      "V Bloods have attack modifications and additional abilities"
+    ],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    order: 1
+  }
+];
+
 export const defaultFeaturedClip = {
   id: "",
   title: "Featured Clip",
@@ -840,6 +871,49 @@ export function normalizeHeroVisual(visual = {}) {
   };
 }
 
+export function buildWorldServerJoinUrl(server = {}) {
+  const explicit = String(server.joinUrl || "").trim();
+  if (explicit) return explicit;
+
+  const steamAddress = String(server.steamAddress || server.address || "")
+    .replace(/^steamIPV4:\/\//i, "")
+    .trim();
+  if (steamAddress) return `steam://connect/${steamAddress}`;
+
+  return "";
+}
+
+export function normalizeWorldServer(server = {}, index = 0) {
+  const title = String(server.title || server.name || `Hosted World ${index + 1}`).trim();
+  const rules = Array.isArray(server.rules)
+    ? server.rules
+    : String(server.rules || "")
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+  return {
+    id: slugify(server.id || title),
+    title,
+    game: String(server.game || "Hosted Server").trim(),
+    host: String(server.host || "").trim(),
+    status: String(server.status || "Online").trim(),
+    region: String(server.region || "").trim(),
+    visibility: server.visibility === "public" ? "public" : "members",
+    enabled: server.enabled !== false,
+    connectionType: String(server.connectionType || "steam").trim(),
+    steamAddress: String(server.steamAddress || server.address || "").replace(/^steamIPV4:\/\//i, "").trim(),
+    steamP2P: String(server.steamP2P || server.p2p || "").replace(/^SteamP2P:\/\//i, "").trim(),
+    joinUrl: buildWorldServerJoinUrl(server),
+    image: String(server.image || server.art || "/assets/img/hero/banri-hero-05.webp").trim(),
+    description: String(server.description || "Hosted world details pending.").trim(),
+    rules,
+    notes: String(server.notes || "").trim(),
+    order: Number(server.order || index + 1),
+    updatedAt: Number(server.updatedAt || 0)
+  };
+}
+
 export function formatMedalGameName(slug) {
   if (!slug) return "Medal Clip";
 
@@ -1078,6 +1152,40 @@ export async function saveGamesLibrary(games) {
     };
   });
   await set(ref(database, "gamesLibrary"), payload);
+}
+
+export async function loadWorldServers() {
+  const { database } = getFirebaseServices();
+  const snapshot = await get(ref(database, "worldServers")).catch(() => null);
+  const remoteServers = snapshot?.exists()
+    ? toArray(snapshot.val()).map(normalizeWorldServer)
+    : [];
+  return (remoteServers.length ? remoteServers : defaultWorldServers.map(normalizeWorldServer))
+    .filter((server) => server.enabled !== false)
+    .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.title.localeCompare(b.title));
+}
+
+export async function loadAdminWorldServers() {
+  const { database } = getFirebaseServices();
+  const snapshot = await get(ref(database, "worldServers")).catch(() => null);
+  const remoteServers = snapshot?.exists()
+    ? toArray(snapshot.val()).map(normalizeWorldServer)
+    : [];
+  return (remoteServers.length ? remoteServers : defaultWorldServers.map(normalizeWorldServer))
+    .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.title.localeCompare(b.title));
+}
+
+export async function saveWorldServers(servers) {
+  const { database } = getFirebaseServices();
+  const payload = {};
+  servers.map(normalizeWorldServer).forEach((server, index) => {
+    payload[server.id] = {
+      ...server,
+      order: Number(server.order || index + 1),
+      updatedAt: Date.now()
+    };
+  });
+  await set(ref(database, "worldServers"), payload);
 }
 
 export async function fetchSteamSignal(config = {}) {
