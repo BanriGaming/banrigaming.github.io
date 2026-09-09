@@ -1253,6 +1253,12 @@ function parseAddressParts(value = "") {
   };
 }
 
+function normalizeQueryPortByType(queryType = "", port = 0) {
+  const queryPort = clampNumber(port, 0, 0, 65535);
+  if (String(queryType || "").trim().toLowerCase() === "valheim" && queryPort === 2456) return 2457;
+  return queryPort;
+}
+
 export function normalizeControllerServer(server = {}, index = 0) {
   const id = slugify(server.id || server.controllerServerId || server.label || server.game || server.container || `server-${index + 1}`);
   const defaultMatch = defaultControllerServers.find((item) => item.id === id);
@@ -1267,7 +1273,7 @@ export function normalizeControllerServer(server = {}, index = 0) {
   const queryTypeMismatch = Boolean(defaultQueryType && rawQueryType && rawQueryType !== defaultQueryType);
   const queryType = defaultQueryType || rawQueryType;
   const queryHost = String((queryTypeMismatch ? defaultMatch?.queryHost : mergedServer.queryHost) || inferredQuery.host || defaultMatch?.queryHost || "").trim();
-  const queryPort = clampNumber(queryTypeMismatch ? defaultMatch?.queryPort : (mergedServer.queryPort ?? inferredQuery.port ?? defaultMatch?.queryPort), 0, 0, 65535);
+  const queryPort = normalizeQueryPortByType(queryType, queryTypeMismatch ? defaultMatch?.queryPort : (mergedServer.queryPort ?? inferredQuery.port ?? defaultMatch?.queryPort));
 
   return {
     id,
@@ -1310,7 +1316,7 @@ export function normalizeWorldServer(server = {}, index = 0) {
   const queryTypeMismatch = Boolean(defaultQueryType && rawQueryType && rawQueryType !== defaultQueryType);
   const queryType = defaultQueryType || rawQueryType;
   const queryHost = String((queryTypeMismatch ? controllerMatch?.queryHost : mergedServer.queryHost) || inferredQuery.host || controllerMatch?.queryHost || "").trim();
-  const queryPort = clampNumber(queryTypeMismatch ? controllerMatch?.queryPort : (mergedServer.queryPort ?? inferredQuery.port ?? controllerMatch?.queryPort), 0, 0, 65535);
+  const queryPort = normalizeQueryPortByType(queryType, queryTypeMismatch ? controllerMatch?.queryPort : (mergedServer.queryPort ?? inferredQuery.port ?? controllerMatch?.queryPort));
 
   return {
     id: slugify(server.id || title),

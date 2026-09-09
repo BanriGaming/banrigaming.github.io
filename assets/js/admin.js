@@ -53,7 +53,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260909a";
+} from "./site-store.js?v=20260909b";
 
 const SERVER_STATUS_OPTIONS = ["Online", "Offline"];
 const SERVER_STATUS_SOURCE_OPTIONS = ["manual", "blackbox"];
@@ -212,6 +212,13 @@ function inferQueryType(value = "") {
     barotrauma: "barotrauma"
   };
   return map[slug] || "";
+}
+
+function normalizeQueryPortDefault(queryType = "", port = "") {
+  const cleanType = String(queryType || "").trim().toLowerCase();
+  const cleanPort = String(port || "").trim();
+  if (cleanType === "valheim" && cleanPort === "2456") return "2457";
+  return cleanPort;
 }
 
 function controllerServerOptionList(selected = "") {
@@ -1911,7 +1918,9 @@ function setupWorldServerModal() {
     const address = parseServerAddress(steamAddress?.value || "");
     if (queryType && !queryTypeTouched) queryType.value = inferQueryType(game?.value || controllerId?.value || title?.value || "");
     if (queryHost && !queryHostTouched && address.host) queryHost.value = address.host;
-    if (queryPort && !queryPortTouched && address.port) queryPort.value = address.port;
+    if (queryPort && !queryPortTouched && address.port) {
+      queryPort.value = normalizeQueryPortDefault(queryType?.value || "", address.port);
+    }
   };
 
   function syncControllerFields() {

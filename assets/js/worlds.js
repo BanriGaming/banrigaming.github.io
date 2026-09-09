@@ -6,7 +6,7 @@ import {
   loadWorldServers,
   normalizeServerControllerConfig,
   normalizeWorldServer
-} from "./site-store.js?v=20260909a";
+} from "./site-store.js?v=20260909b";
 
 const { auth } = getFirebaseServices();
 let currentUser = null;
