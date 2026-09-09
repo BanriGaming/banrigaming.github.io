@@ -12,6 +12,8 @@ import {
   defaultHeroCopy,
   defaultHeroVisual,
   defaultQuotes,
+  defaultControllerServers,
+  defaultServerControllerConfig,
   defaultSteamConfig,
   defaultSteamSignal,
   defaultTacticalFeed,
@@ -25,6 +27,7 @@ import {
   loadAdminWorldServers,
   loadGalleryData,
   loadPublicSiteData,
+  loadServerControllerConfig,
   normalizeCurrentGame,
   normalizeChroniclesAiConfig,
   normalizeFeaturedClip,
@@ -33,6 +36,8 @@ import {
   normalizeHeroCopy,
   normalizeHeroVisual,
   normalizeQuotes,
+  normalizeControllerServer,
+  normalizeServerControllerConfig,
   normalizeSteamConfig,
   normalizeSteamSignal,
   normalizeWorldServer,
@@ -41,15 +46,19 @@ import {
   saveGalleryCollection,
   saveGalleryImageMetadata,
   saveGamesLibrary,
+  saveServerControllerConfig,
   saveSiteConfigPatch,
   saveSteamSignal,
   saveWorldServers,
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260827b";
+} from "./site-store.js?v=20260909a";
 
 const SERVER_STATUS_OPTIONS = ["Online", "Offline"];
+const SERVER_STATUS_SOURCE_OPTIONS = ["manual", "blackbox"];
+const SERVER_QUERY_TYPE_OPTIONS = ["soulmask", "vrising", "valheim", "terraria", "enshrouded", "palworld", "corekeeper", "barotrauma"];
+const SERVER_REGION_OPTIONS = ["US West", "US East", "US Central"];
 const DEFAULT_WORLD_SERVER_IMAGE = "/assets/img/worlds/noir-server-vault.webp";
 
 const state = {
@@ -63,6 +72,7 @@ const state = {
   heroVisual: structuredClone(defaultHeroVisual),
   featuredClip: structuredClone(defaultFeaturedClip),
   worldServers: [...defaultWorldServers],
+  serverControllerConfig: structuredClone(defaultServerControllerConfig),
   steamConfig: structuredClone(defaultSteamConfig),
   steamSignal: structuredClone(defaultSteamSignal),
   chroniclesAiConfig: structuredClone(defaultChroniclesAiConfig),
@@ -77,8 +87,12 @@ const state = {
   memberPresence: {},
   memberSearch: "",
   memberUnsubscribers: [],
-  editingGameIndex: -1
+  editingGameIndex: -1,
+  editingWorldServerIndex: -1,
+  worldServerSearch: ""
 };
+
+let openWorldServerEditor = () => {};
 
 const elements = {
   accessState: document.getElementById("adminAccessState"),
@@ -92,6 +106,7 @@ const elements = {
   quotesEditor: document.getElementById("quotesEditor"),
   homepageEditor: document.getElementById("homepageEditor"),
   worldsEditor: document.getElementById("worldsEditor"),
+  serverControllerEditor: document.getElementById("serverControllerEditor"),
   chroniclesAiEditor: document.getElementById("chroniclesAiEditor"),
   galleryEditor: document.getElementById("galleryEditor"),
   membersEditor: document.getElementById("membersEditor"),
@@ -148,6 +163,76 @@ function optionList(options, selected) {
   return options
     .map((option) => `<option value="${escapeHtml(option)}"${option === selected ? " selected" : ""}>${escapeHtml(option)}</option>`)
     .join("");
+}
+
+function statusSourceOptionList(selected = "manual") {
+  const labels = {
+    manual: "Manual / External Host",
+    blackbox: "Blackbox Controller"
+  };
+  return SERVER_STATUS_SOURCE_OPTIONS
+    .map((option) => `<option value="${escapeAttr(option)}"${option === selected ? " selected" : ""}>${escapeHtml(labels[option] || option)}</option>`)
+    .join("");
+}
+
+function regionOptionList(selected = "US Central") {
+  const cleanSelected = String(selected || "US Central").trim();
+  const options = SERVER_REGION_OPTIONS.includes(cleanSelected)
+    ? SERVER_REGION_OPTIONS
+    : [cleanSelected, ...SERVER_REGION_OPTIONS].filter(Boolean);
+  return options
+    .map((option) => `<option value="${escapeAttr(option)}"${option === cleanSelected ? " selected" : ""}>${escapeHtml(option)}</option>`)
+    .join("");
+}
+
+function parseServerAddress(value = "") {
+  const clean = String(value || "")
+    .replace(/^steamIPV4:\/\//i, "")
+    .replace(/^steam:\/\/connect\//i, "")
+    .trim();
+  const match = clean.match(/^([^:/\s]+)(?::(\d{1,5}))?$/);
+  return {
+    host: match?.[1] || "",
+    port: match?.[2] || ""
+  };
+}
+
+function inferQueryType(value = "") {
+  const slug = slugify(value || "");
+  const map = {
+    vrising: "vrising",
+    "v-rising": "vrising",
+    valheim: "valheim",
+    terraria: "terraria",
+    soulmask: "soulmask",
+    enshrouded: "enshrouded",
+    palworld: "palworld",
+    corekeeper: "corekeeper",
+    "core-keeper": "corekeeper",
+    barotrauma: "barotrauma"
+  };
+  return map[slug] || "";
+}
+
+function controllerServerOptionList(selected = "") {
+  const config = normalizeServerControllerConfig(state.serverControllerConfig);
+  const seen = new Set();
+  const servers = [
+    ...Object.values(config.servers || {}),
+    ...defaultControllerServers
+  ]
+    .map(normalizeControllerServer)
+    .filter((server) => {
+      if (seen.has(server.id)) return false;
+      seen.add(server.id);
+      return true;
+    })
+    .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.label.localeCompare(b.label));
+
+  return [
+    '<option value="">No controller link</option>',
+    ...servers.map((server) => `<option value="${escapeAttr(server.id)}"${server.id === selected ? " selected" : ""}>${escapeHtml(server.label)} / ${escapeHtml(server.container)}</option>`)
+  ].join("");
 }
 
 function getLibraryCategories() {
@@ -817,95 +902,247 @@ function renderHomepageEditor() {
 
 function renderWorldServersEditor() {
   if (!elements.worldsEditor) return;
-  const servers = state.worldServers.length ? state.worldServers : defaultWorldServers.map(normalizeWorldServer);
-  elements.worldsEditor.innerHTML = servers.map((server, index) => `
-    <article class="admin-card admin-world-server-card" data-world-server-index="${index}">
-      <div class="admin-card-preview" style="--preview-image: url('${escapeAttr(server.image)}')"></div>
+  const search = state.worldServerSearch.trim().toLowerCase();
+  const servers = readWorldServers();
+  const matches = servers
+    .map((server, index) => ({ server, index }))
+    .filter(({ server }) => {
+      if (!search) return true;
+      return [
+        server.title,
+        server.id,
+        server.game,
+        server.host,
+        server.controllerServerId,
+        server.controllerContainer,
+        server.region
+      ].some((value) => String(value || "").toLowerCase().includes(search));
+    });
+
+  elements.worldsEditor.innerHTML = `
+    <div class="admin-world-server-toolbar panel-frame">
+      <div>
+        <p class="banri-modal-kicker mb-1">Registry Records</p>
+        <strong>${matches.length} of ${servers.length} server${servers.length === 1 ? "" : "s"}</strong>
+      </div>
+      <label class="admin-world-server-search">
+        <span>Search Servers</span>
+        <input class="form-control" data-world-server-search value="${escapeAttr(state.worldServerSearch)}" placeholder="Search by name, game, host, container..." />
+      </label>
+    </div>
+    ${matches.length ? `
+      <div class="admin-world-server-grid">
+        ${matches.map(({ server, index }) => `
+          <article class="admin-world-server-tile${index === 0 ? " is-pinned" : ""}${server.enabled === false ? " is-disabled" : ""}" data-world-server-index="${index}">
+            <div>
+              <p>${escapeHtml(server.game || "Hosted Server")}</p>
+              <h3>${escapeHtml(server.title)}</h3>
+              <small>${escapeHtml(server.id)}</small>
+            </div>
+            <dl>
+              <div><dt>Source</dt><dd>${server.statusSource === "blackbox" ? "Blackbox" : "Manual"}</dd></div>
+              <div><dt>Region</dt><dd>${escapeHtml(server.region || "US Central")}</dd></div>
+              <div><dt>Container</dt><dd>${escapeHtml(server.controllerContainer || "Not linked")}</dd></div>
+            </dl>
+            <div class="admin-world-server-actions">
+              <button class="btn btn-banri-outline btn-sm" type="button" data-edit-world-server>Edit</button>
+              <button class="btn btn-banri-outline btn-sm" type="button" data-delete-world-server>Delete</button>
+              <button class="btn btn-banri-primary btn-sm" type="button" data-pin-world-server ${index === 0 ? "disabled" : ""}>${index === 0 ? "Pinned" : "Pin"}</button>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    ` : '<div class="panel-frame placeholder-panel"><p class="banri-modal-kicker">No Matches</p><h2>No server records match that search.</h2></div>'}
+  `;
+}
+
+function renderServerControllerEditor() {
+  if (!elements.serverControllerEditor) return;
+  const config = normalizeServerControllerConfig(state.serverControllerConfig);
+  const allowedUids = Object.keys(config.allowedUids || {}).sort((a, b) => getControllerMemberLabel(a).localeCompare(getControllerMemberLabel(b)));
+  const controllerServers = Object.values(config.servers || {})
+    .map(normalizeControllerServer)
+    .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.label.localeCompare(b.label));
+  const memberOptions = getAdminMembers()
+    .filter((member) => !config.allowedUids?.[member.uid])
+    .map((member) => `<option value="${escapeAttr(member.uid)}">${escapeHtml(member.displayName)} / ${escapeHtml(member.uid)}</option>`)
+    .join("");
+
+  elements.serverControllerEditor.innerHTML = `
+    <article class="admin-card admin-controller-card">
       <div class="admin-card-body">
         <div class="admin-card-heading">
-          <span>${escapeHtml(server.game || "Hosted Server")}</span>
-          <button class="btn btn-banri-outline btn-sm" type="button" data-delete-world-server>Delete</button>
+          <span>Relay Endpoint</span>
+          <strong>${config.enabled ? "Enabled" : "Disabled"}</strong>
         </div>
-        <div class="row g-3">
-          <div class="col-12 col-lg-4">
-            <label>Server Title</label>
-            <input class="form-control" data-server-field="title" value="${escapeAttr(server.title)}" />
+        <div class="row g-3 align-items-end">
+          <div class="col-12 col-xl-7">
+            <label for="serverControllerApiUrl">Controller API URL</label>
+            <input id="serverControllerApiUrl" class="form-control" type="url" value="${escapeAttr(config.apiUrl)}" placeholder="https://servers-api.yourdomain.com" />
           </div>
-          <div class="col-12 col-lg-3">
-            <label>ID / Slug</label>
-            <input class="form-control" data-server-field="id" value="${escapeAttr(server.id)}" />
+          <div class="col-6 col-xl-2">
+            <label for="serverControllerPollSeconds">Poll Seconds</label>
+            <input id="serverControllerPollSeconds" class="form-control" type="number" min="5" max="60" value="${escapeAttr(config.pollSeconds)}" />
           </div>
-          <div class="col-12 col-md-6 col-lg-3">
-            <label>Game</label>
-            <input class="form-control" data-server-field="game" value="${escapeAttr(server.game)}" />
-          </div>
-          <div class="col-12 col-md-6 col-lg-2">
-            <label>Order</label>
-            <input class="form-control" type="number" min="1" data-server-field="order" value="${escapeAttr(server.order)}" />
-          </div>
-          <div class="col-12 col-md-4">
-            <label>Status</label>
-            <select class="form-select" data-server-field="status">
-              ${optionList(SERVER_STATUS_OPTIONS, server.status || "Online")}
-            </select>
-          </div>
-          <div class="col-12 col-md-4">
-            <label>Host</label>
-            <input class="form-control" data-server-field="host" value="${escapeAttr(server.host)}" placeholder="Blackbox / Dathost" />
-          </div>
-          <div class="col-12 col-md-4">
-            <label>Region</label>
-            <input class="form-control" data-server-field="region" value="${escapeAttr(server.region)}" placeholder="US Central" />
-          </div>
-          <div class="col-12">
-            <label>Description</label>
-            <textarea class="form-control" rows="3" data-server-field="description">${escapeHtml(server.description)}</textarea>
-          </div>
-          <div class="col-12 col-lg-6">
-            <label>Steam IP / Port</label>
-            <input class="form-control" data-server-field="steamAddress" value="${escapeAttr(server.steamAddress)}" placeholder="73.111.246.38:9876" />
-          </div>
-          <div class="col-12 col-lg-6">
-            <label>Steam P2P ID</label>
-            <input class="form-control" data-server-field="steamP2P" value="${escapeAttr(server.steamP2P)}" placeholder="90291675017036813" />
-          </div>
-          <div class="col-12 col-lg-6">
-            <label>Launch URL Override</label>
-            <input class="form-control" data-server-field="joinUrl" value="${escapeAttr(server.joinUrl)}" placeholder="steam://connect/ip:port" />
-          </div>
-          <div class="col-12 col-lg-6">
-            <label>Server Password</label>
-            <input class="form-control" data-server-field="password" type="password" autocomplete="new-password" value="${escapeAttr(server.password)}" placeholder="Optional member-only password" />
-          </div>
-          <div class="col-12">
-            <label>Image URL</label>
-            <input class="form-control" data-server-field="image" value="${escapeAttr(server.image)}" />
-          </div>
-          <div class="col-12">
-            <label>Rules / Server Notes</label>
-            <textarea class="form-control" rows="5" data-server-field="rules">${escapeHtml((server.rules || []).join("\n"))}</textarea>
-          </div>
-          <div class="col-12 col-lg-8">
-            <label>Footer Note</label>
-            <input class="form-control" data-server-field="notes" value="${escapeAttr(server.notes)}" />
-          </div>
-          <div class="col-6 col-lg-2">
-            <label>Visibility</label>
-            <select class="form-select" data-server-field="visibility">
-              <option value="members"${server.visibility !== "public" ? " selected" : ""}>Members</option>
-              <option value="public"${server.visibility === "public" ? " selected" : ""}>Public</option>
-            </select>
-          </div>
-          <div class="col-6 col-lg-2 d-flex align-items-end">
-            <label class="admin-switch w-100">
-              <input type="checkbox" data-server-field="enabled" ${server.enabled !== false ? "checked" : ""} />
-              Enabled
+          <div class="col-6 col-xl-3">
+            <label class="admin-switch admin-switch-block mb-0">
+              <input id="serverControllerEnabled" type="checkbox" ${config.enabled ? "checked" : ""} />
+              <span>Controller Enabled<small>Show Worlds control tab</small></span>
             </label>
           </div>
         </div>
+        <p class="admin-help mt-3 mb-0">
+          The API still verifies Firebase ID tokens and checks this UID allowlist before any Docker action.
+        </p>
       </div>
     </article>
-  `).join("");
+
+    <article class="admin-card admin-controller-card admin-controller-access-card">
+      <div class="admin-card-body">
+        <div class="admin-card-heading">
+          <span>Controller Operators</span>
+          <strong>${allowedUids.length} UID${allowedUids.length === 1 ? "" : "s"}</strong>
+        </div>
+        <div class="controller-access-tools">
+          <div>
+            <label for="serverControllerMemberSelect">Add From Members</label>
+            <select id="serverControllerMemberSelect" class="form-select"${memberOptions ? "" : " disabled"}>
+              ${memberOptions || '<option value="">No additional members available</option>'}
+            </select>
+          </div>
+          <button id="addControllerMemberButton" class="btn btn-banri-outline" type="button"${memberOptions ? "" : " disabled"}>Add Member</button>
+          <div>
+            <label for="serverControllerManualUid">Manual Firebase UID</label>
+            <input id="serverControllerManualUid" class="form-control" placeholder="Paste UID..." />
+          </div>
+          <button id="addControllerUidButton" class="btn btn-banri-outline" type="button">Add UID</button>
+        </div>
+        <div class="controller-uid-list">
+          ${allowedUids.length ? allowedUids.map((uid) => renderControllerUidRow(uid)).join("") : '<p class="admin-empty">No controller operators allowed yet. Add your UID before exposing the controller tab.</p>'}
+        </div>
+      </div>
+    </article>
+
+    <article class="admin-card admin-controller-card admin-controller-server-card">
+      <div class="admin-card-body">
+        <div class="admin-card-heading">
+          <span>Approved Blackbox Servers</span>
+          <strong>${controllerServers.length} container${controllerServers.length === 1 ? "" : "s"}</strong>
+        </div>
+        <p class="admin-help">
+          These are the only Docker containers the public website can ask Blackbox to start, stop, or restart. Add future servers from World Servers by choosing Blackbox Controller.
+        </p>
+        <div class="controller-server-list">
+          ${controllerServers.length ? controllerServers.map(renderControllerServerRow).join("") : '<p class="admin-empty">No controller-backed servers are registered yet.</p>'}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderControllerUidRow(uid) {
+  const label = getControllerMemberLabel(uid);
+  const presence = state.memberPresence?.[uid];
+  const online = presence?.online === true || uid === state.user?.uid;
+  return `
+    <div class="controller-uid-row" data-controller-uid="${escapeAttr(uid)}">
+      <div>
+        <span>${online ? "Online" : "Stored UID"}</span>
+        <strong>${escapeHtml(label)}</strong>
+        <small>${escapeHtml(uid)}</small>
+      </div>
+      <button class="btn btn-banri-outline btn-sm" type="button" data-copy-controller-uid>Copy UID</button>
+      <button class="btn btn-banri-outline btn-sm" type="button" data-remove-controller-uid>Remove</button>
+    </div>
+  `;
+}
+
+function renderControllerServerRow(server) {
+  return `
+    <div class="controller-server-row" data-controller-server="${escapeAttr(server.id)}">
+      <label>
+        <span>Enabled</span>
+        <input type="checkbox" data-controller-server-field="enabled" ${server.enabled !== false ? "checked" : ""} />
+      </label>
+      <div>
+        <span>Route ID</span>
+        <input class="form-control" data-controller-server-field="id" value="${escapeAttr(server.id)}" />
+      </div>
+      <div>
+        <span>Label</span>
+        <input class="form-control" data-controller-server-field="label" value="${escapeAttr(server.label)}" />
+      </div>
+      <div>
+        <span>Container</span>
+        <input class="form-control" data-controller-server-field="container" value="${escapeAttr(server.container)}" />
+      </div>
+      <div>
+        <span>Query Type</span>
+        <input class="form-control" list="serverQueryTypeOptions" data-controller-server-field="queryType" value="${escapeAttr(server.queryType || "")}" placeholder="optional" />
+      </div>
+      <div>
+        <span>Query Host</span>
+        <input class="form-control" data-controller-server-field="queryHost" value="${escapeAttr(server.queryHost || "")}" placeholder="optional" />
+      </div>
+      <div>
+        <span>Query Port</span>
+        <input class="form-control" type="number" min="0" max="65535" data-controller-server-field="queryPort" value="${escapeAttr(server.queryPort || "")}" />
+      </div>
+      <div>
+        <span>Max Slots</span>
+        <input class="form-control" type="number" min="0" max="9999" data-controller-server-field="playersMax" value="${escapeAttr(server.playersMax || "")}" />
+      </div>
+      <div>
+        <span>Order</span>
+        <input class="form-control" type="number" min="1" data-controller-server-field="order" value="${escapeAttr(server.order)}" />
+      </div>
+      <label>
+        <span>Query</span>
+        <input type="checkbox" data-controller-server-field="queryEnabled" ${server.queryEnabled !== false ? "checked" : ""} />
+      </label>
+      <button class="btn btn-banri-outline btn-sm" type="button" data-remove-controller-server>Remove</button>
+    </div>
+  `;
+}
+
+function getControllerMemberLabel(uid) {
+  const profile = state.memberProfiles?.[uid] || {};
+  const presence = state.memberPresence?.[uid] || {};
+  if (uid === state.user?.uid) return state.user.displayName || state.user.email || profile.displayName || "Current Admin";
+  return profile.displayName || presence.displayName || "Unknown Member";
+}
+
+function getControllerServerLabel(serverId) {
+  const config = normalizeServerControllerConfig(state.serverControllerConfig);
+  const server = config.servers?.[serverId] || defaultControllerServers.find((item) => item.id === serverId);
+  return server ? `${server.label} / ${server.container}` : "No controller link";
+}
+
+function syncControllerConfigFromWorldServers(config = state.serverControllerConfig, servers = state.worldServers) {
+  const normalized = normalizeServerControllerConfig(config);
+  const controllerServers = {};
+
+  servers.map(normalizeWorldServer).forEach((server, index) => {
+    if (server.statusSource !== "blackbox" || !server.controllerServerId || !server.controllerContainer) return;
+    controllerServers[server.controllerServerId] = normalizeControllerServer({
+      id: server.controllerServerId,
+      label: server.game || server.title,
+      game: server.game,
+      container: server.controllerContainer,
+      queryEnabled: server.queryEnabled === true,
+      queryType: server.queryType,
+      queryHost: server.queryHost,
+      queryPort: server.queryPort,
+      playersMax: server.playersMax,
+      enabled: server.enabled !== false,
+      order: Number(server.order || index + 1)
+    }, index);
+  });
+
+  return normalizeServerControllerConfig({
+    ...normalized,
+    servers: controllerServers
+  });
 }
 
 function renderGalleryEditor() {
@@ -997,9 +1234,11 @@ function subscribeMemberRoster() {
     const unsubscribe = onValue(ref(database, path), (snapshot) => {
       setter(snapshot.val());
       renderMembersEditor();
+      renderServerControllerEditor();
     }, (error) => {
       console.warn(`Admin member roster read failed at ${path}:`, error);
       renderMembersEditor();
+      renderServerControllerEditor();
     });
     state.memberUnsubscribers.push(unsubscribe);
   });
@@ -1232,6 +1471,7 @@ function renderAll() {
   renderQuotesEditor();
   renderHomepageEditor();
   renderWorldServersEditor();
+  renderServerControllerEditor();
   renderGalleryEditor();
   renderMembersEditor();
   renderActivityPreview();
@@ -1249,8 +1489,10 @@ async function loadData() {
   state.steamConfig = normalizeSteamConfig(data.steamConfig);
   state.steamSignal = normalizeSteamSignal(data.steamSignal);
   state.chroniclesAiConfig = normalizeChroniclesAiConfig(data.chroniclesAiConfig);
+  state.serverControllerConfig = normalizeServerControllerConfig(data.serverControllerConfig);
   state.activityFeed = data.activityFeed.length ? data.activityFeed : [...defaultActivity];
   state.worldServers = await loadAdminWorldServers();
+  state.serverControllerConfig = await loadServerControllerConfig();
   await loadMedalClipOptions();
   await loadGalleryState();
   renderAll();
@@ -1358,33 +1600,53 @@ function readFeaturedClip() {
 }
 
 function readWorldServers() {
-  return [...document.querySelectorAll("[data-world-server-index]")]
-    .map((row, index) => {
-      const getField = (field) => row.querySelector(`[data-server-field="${field}"]`);
-      const rules = String(getField("rules")?.value || "")
-        .split(/\r?\n/)
-        .map((line) => line.trim())
-        .filter(Boolean);
-      return normalizeWorldServer({
-        id: getField("id")?.value || getField("title")?.value,
-        title: getField("title")?.value,
-        game: getField("game")?.value,
-        host: getField("host")?.value,
-        status: getField("status")?.value,
-        region: getField("region")?.value,
-        description: getField("description")?.value,
-        steamAddress: getField("steamAddress")?.value,
-        steamP2P: getField("steamP2P")?.value,
-        joinUrl: getField("joinUrl")?.value,
-        password: getField("password")?.value,
-        image: getField("image")?.value,
-        rules,
-        notes: getField("notes")?.value,
-        visibility: getField("visibility")?.value,
-        enabled: getField("enabled")?.checked !== false,
-        order: Number(getField("order")?.value || index + 1)
-      }, index);
-    });
+  return state.worldServers
+    .map((server, index) => normalizeWorldServer({
+      ...server,
+      order: Number(server.order || index + 1)
+    }, index))
+    .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.title.localeCompare(b.title))
+    .map((server, index) => normalizeWorldServer({
+      ...server,
+      order: index + 1
+    }, index));
+}
+
+function readServerControllerConfig() {
+  const allowedUids = {};
+  document.querySelectorAll("[data-controller-uid]").forEach((row) => {
+    const uid = String(row.dataset.controllerUid || "").trim();
+    if (uid) allowedUids[uid] = true;
+  });
+
+  const serverRows = [...document.querySelectorAll("[data-controller-server]")];
+  const servers = serverRows.length ? {} : state.serverControllerConfig.servers;
+  serverRows.forEach((row, index) => {
+    const getField = (field) => row.querySelector(`[data-controller-server-field="${field}"]`);
+    const server = normalizeControllerServer({
+      id: getField("id")?.value || row.dataset.controllerServer,
+      label: getField("label")?.value,
+      container: getField("container")?.value,
+      queryEnabled: getField("queryEnabled")?.checked === true,
+      queryType: getField("queryType")?.value,
+      queryHost: getField("queryHost")?.value,
+      queryPort: Number(getField("queryPort")?.value || 0),
+      playersMax: Number(getField("playersMax")?.value || 0),
+      enabled: getField("enabled")?.checked !== false,
+      order: Number(getField("order")?.value || index + 1)
+    }, index);
+    if (server.id && server.container) servers[server.id] = server;
+  });
+
+  return normalizeServerControllerConfig({
+    apiUrl: document.getElementById("serverControllerApiUrl")?.value || "",
+    enabled: document.getElementById("serverControllerEnabled")?.checked === true,
+    pollSeconds: Number(document.getElementById("serverControllerPollSeconds")?.value || defaultServerControllerConfig.pollSeconds),
+    allowedUids,
+    servers,
+    updatedAt: state.serverControllerConfig.updatedAt,
+    updatedByUid: state.serverControllerConfig.updatedByUid
+  });
 }
 
 function updateFeaturedClipPreview() {
@@ -1491,40 +1753,147 @@ function setupNewGameModal() {
 
 function setupWorldServerModal() {
   const modal = elements.worldServerModal;
+  const modalTitle = document.getElementById("adminWorldServerTitle");
   const title = document.getElementById("newServerTitle");
   const slug = document.getElementById("newServerSlug");
   const game = document.getElementById("newServerGame");
   const status = document.getElementById("newServerStatus");
+  const statusSource = document.getElementById("newServerStatusSource");
+  const controllerId = document.getElementById("newServerControllerId");
+  const controllerContainer = document.getElementById("newServerControllerContainer");
+  const steamAddress = document.getElementById("newServerSteamAddress");
+  const queryEnabled = document.getElementById("newServerQueryEnabled");
+  const queryType = document.getElementById("newServerQueryType");
+  const queryHost = document.getElementById("newServerQueryHost");
+  const queryPort = document.getElementById("newServerQueryPort");
+  const playersMax = document.getElementById("newServerPlayersMax");
   const image = document.getElementById("newServerImage");
+  const submitButton = document.getElementById("submitWorldServerButton");
   let slugTouched = false;
+  let controllerIdTouched = false;
+  let containerTouched = false;
+  let queryTypeTouched = false;
+  let queryHostTouched = false;
+  let queryPortTouched = false;
 
   const setValue = (id, value) => {
     const input = document.getElementById(id);
     if (input) input.value = value;
   };
 
+  const setChecked = (id, value) => {
+    const input = document.getElementById(id);
+    if (input) input.checked = value === true;
+  };
+
+  const getValue = (id) => document.getElementById(id)?.value || "";
+
+  const getRulesFromModal = () => String(getValue("newServerRules"))
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const normalizeModalServerOrder = (servers) => servers
+    .map((server, index) => normalizeWorldServer(server, index))
+    .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.title.localeCompare(b.title))
+    .map((server, index) => normalizeWorldServer({ ...server, order: index + 1 }, index));
+
+  const stageWorldServerRecords = (servers) => {
+    state.worldServers = normalizeModalServerOrder(servers);
+    state.serverControllerConfig = syncControllerConfigFromWorldServers(state.serverControllerConfig, state.worldServers);
+    renderWorldServersEditor();
+    renderServerControllerEditor();
+  };
+
+  const setModalCopy = (mode) => {
+    if (modalTitle) modalTitle.textContent = mode === "edit" ? "Edit Hosted World" : "Add Hosted World";
+    if (submitButton) submitButton.textContent = mode === "edit" ? "Update Server" : "Add Server";
+  };
+
   const resetWorldServerModal = () => {
     const nextOrder = readWorldServers().length + 1;
+    if (modal) {
+      modal.dataset.mode = "add";
+      delete modal.dataset.editIndex;
+      modal.dataset.nextOrder = String(nextOrder);
+    }
+    state.editingWorldServerIndex = -1;
+    setModalCopy("add");
     setValue("newServerTitle", "");
     setValue("newServerSlug", "");
     setValue("newServerGame", "");
+    setValue("newServerOrder", String(nextOrder));
+    setValue("newServerControllerId", "");
+    setValue("newServerControllerContainer", "");
     setValue("newServerHost", "");
-    setValue("newServerRegion", "");
+    setValue("newServerRegion", "US Central");
     setValue("newServerDescription", "");
+    setValue("newServerTags", "");
     setValue("newServerSteamAddress", "");
-    setValue("newServerSteamP2P", "");
-    setValue("newServerJoinUrl", "");
+    setValue("newServerQueryType", "");
+    setValue("newServerQueryHost", "");
+    setValue("newServerQueryPort", "");
+    setValue("newServerPlayersMax", "");
     setValue("newServerPassword", "");
     setValue("newServerImage", DEFAULT_WORLD_SERVER_IMAGE);
     setValue("newServerRules", "");
     setValue("newServerNotes", "");
     if (status) status.value = "Online";
+    if (statusSource) statusSource.value = "manual";
     const visibility = document.getElementById("newServerVisibility");
     if (visibility) visibility.value = "members";
-    const enabled = document.getElementById("newServerEnabled");
-    if (enabled) enabled.checked = true;
+    setChecked("newServerEnabled", true);
+    setChecked("newServerQueryEnabled", true);
     slugTouched = false;
-    modal?.setAttribute("data-next-order", String(nextOrder));
+    controllerIdTouched = false;
+    containerTouched = false;
+    queryTypeTouched = false;
+    queryHostTouched = false;
+    queryPortTouched = false;
+    syncControllerFields();
+  };
+
+  const fillWorldServerModal = (server, index) => {
+    const normalized = normalizeWorldServer(server, index);
+    if (modal) {
+      modal.dataset.mode = "edit";
+      modal.dataset.editIndex = String(index);
+      modal.dataset.nextOrder = String(normalized.order || index + 1);
+    }
+    state.editingWorldServerIndex = index;
+    setModalCopy("edit");
+    setValue("newServerTitle", normalized.title);
+    setValue("newServerSlug", normalized.id);
+    setValue("newServerGame", normalized.game);
+    setValue("newServerOrder", String(normalized.order || index + 1));
+    setValue("newServerControllerId", normalized.controllerServerId);
+    setValue("newServerControllerContainer", normalized.controllerContainer);
+    setValue("newServerHost", normalized.host);
+    setValue("newServerRegion", normalized.region || "US Central");
+    setValue("newServerDescription", normalized.description);
+    setValue("newServerTags", normalized.tags.join(", "));
+    setValue("newServerSteamAddress", normalized.steamAddress);
+    setValue("newServerQueryType", normalized.queryType);
+    setValue("newServerQueryHost", normalized.queryHost);
+    setValue("newServerQueryPort", normalized.queryPort ? String(normalized.queryPort) : "");
+    setValue("newServerPlayersMax", normalized.playersMax ? String(normalized.playersMax) : "");
+    setValue("newServerPassword", normalized.password);
+    setValue("newServerImage", normalized.image || DEFAULT_WORLD_SERVER_IMAGE);
+    setValue("newServerRules", normalized.rules.join("\n"));
+    setValue("newServerNotes", normalized.notes);
+    if (status) status.value = normalized.status;
+    if (statusSource) statusSource.value = normalized.statusSource;
+    const visibility = document.getElementById("newServerVisibility");
+    if (visibility) visibility.value = normalized.visibility;
+    setChecked("newServerEnabled", normalized.enabled !== false);
+    setChecked("newServerQueryEnabled", normalized.queryEnabled === true);
+    slugTouched = true;
+    controllerIdTouched = true;
+    containerTouched = true;
+    queryTypeTouched = true;
+    queryHostTouched = true;
+    queryPortTouched = true;
+    syncControllerFields();
   };
 
   const syncSlug = () => {
@@ -1532,43 +1901,149 @@ function setupWorldServerModal() {
     slug.value = slugify(title?.value || game?.value || "hosted-world");
   };
 
-  slug?.addEventListener("input", () => {
-    slugTouched = true;
-  });
-  title?.addEventListener("input", syncSlug);
-  game?.addEventListener("input", syncSlug);
-  modal?.addEventListener("show.bs.modal", resetWorldServerModal);
+  const syncControllerDefaults = () => {
+    const sourceSlug = slugify(game?.value || title?.value || slug?.value || "hosted-world");
+    if (controllerId && !controllerIdTouched) controllerId.value = sourceSlug;
+    if (controllerContainer && !containerTouched) controllerContainer.value = `${controllerId?.value || sourceSlug}-server`;
+  };
 
-  document.getElementById("submitWorldServerButton")?.addEventListener("click", () => {
+  const syncQueryDefaults = () => {
+    const address = parseServerAddress(steamAddress?.value || "");
+    if (queryType && !queryTypeTouched) queryType.value = inferQueryType(game?.value || controllerId?.value || title?.value || "");
+    if (queryHost && !queryHostTouched && address.host) queryHost.value = address.host;
+    if (queryPort && !queryPortTouched && address.port) queryPort.value = address.port;
+  };
+
+  function syncControllerFields() {
+    const blackbox = statusSource?.value === "blackbox";
+    if (status) {
+      status.disabled = blackbox;
+      if (blackbox) status.value = "Online";
+    }
+    document.querySelectorAll("[data-new-server-controller-field]").forEach((field) => {
+      field.classList.toggle("d-none", !blackbox);
+      field.querySelectorAll("input").forEach((input) => {
+        input.disabled = !blackbox;
+      });
+    });
+    [queryEnabled, queryType, queryHost, queryPort, playersMax].forEach((input) => {
+      if (input) input.disabled = !blackbox;
+    });
+    if (blackbox) {
+      syncControllerDefaults();
+      syncQueryDefaults();
+    }
+  }
+
+  function readWorldServerModal() {
     const serverTitle = title?.value.trim() || "New Hosted World";
-    const rules = String(document.getElementById("newServerRules")?.value || "")
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .filter(Boolean);
-    state.worldServers = readWorldServers();
-    state.worldServers.push(normalizeWorldServer({
+    const source = statusSource?.value || "manual";
+    const nextControllerId = source === "blackbox" ? slugify(controllerId?.value || game?.value || serverTitle) : "";
+    const nextContainer = source === "blackbox" ? String(controllerContainer?.value || `${nextControllerId}-server`).trim() : "";
+    return normalizeWorldServer({
       id: slug?.value || serverTitle,
       title: serverTitle,
       game: game?.value || "Hosted Server",
-      host: document.getElementById("newServerHost")?.value || "",
+      host: getValue("newServerHost"),
       status: status?.value || "Online",
-      region: document.getElementById("newServerRegion")?.value || "",
-      description: document.getElementById("newServerDescription")?.value || "Hosted world details pending.",
-      steamAddress: document.getElementById("newServerSteamAddress")?.value || "",
-      steamP2P: document.getElementById("newServerSteamP2P")?.value || "",
-      joinUrl: document.getElementById("newServerJoinUrl")?.value || "",
-      password: document.getElementById("newServerPassword")?.value || "",
+      statusSource: source,
+      controllerServerId: nextControllerId,
+      controllerContainer: nextContainer,
+      region: getValue("newServerRegion") || "US Central",
+      description: getValue("newServerDescription") || "Hosted world details pending.",
+      tags: getValue("newServerTags"),
+      queryEnabled: source === "blackbox" && queryEnabled?.checked === true,
+      queryType: source === "blackbox" ? getValue("newServerQueryType") : "",
+      queryHost: source === "blackbox" ? getValue("newServerQueryHost") : "",
+      queryPort: source === "blackbox" ? Number(getValue("newServerQueryPort") || 0) : 0,
+      playersOnline: 0,
+      playersMax: source === "blackbox" ? Number(getValue("newServerPlayersMax") || 0) : 0,
+      activityLevel: 0,
+      steamAddress: getValue("newServerSteamAddress"),
+      password: getValue("newServerPassword"),
       image: image?.value || DEFAULT_WORLD_SERVER_IMAGE,
-      rules,
-      notes: document.getElementById("newServerNotes")?.value || "",
-      visibility: document.getElementById("newServerVisibility")?.value || "members",
+      rules: getRulesFromModal(),
+      notes: getValue("newServerNotes"),
+      visibility: getValue("newServerVisibility") || "members",
       enabled: document.getElementById("newServerEnabled")?.checked !== false,
-      order: Number(modal?.dataset.nextOrder || state.worldServers.length + 1)
-    }, state.worldServers.length));
-    renderWorldServersEditor();
+      order: Number(getValue("newServerOrder") || modal?.dataset.nextOrder || readWorldServers().length + 1)
+    }, Number(modal?.dataset.editIndex || state.worldServers.length));
+  }
+
+  slug?.addEventListener("input", () => {
+    slugTouched = true;
+  });
+  controllerId?.addEventListener("input", () => {
+    controllerIdTouched = true;
+    if (controllerContainer && !containerTouched) controllerContainer.value = `${slugify(controllerId.value)}-server`;
+  });
+  controllerContainer?.addEventListener("input", () => {
+    containerTouched = true;
+  });
+  queryType?.addEventListener("input", () => {
+    queryTypeTouched = true;
+  });
+  queryHost?.addEventListener("input", () => {
+    queryHostTouched = true;
+  });
+  queryPort?.addEventListener("input", () => {
+    queryPortTouched = true;
+  });
+  title?.addEventListener("input", () => {
+    syncSlug();
+    syncControllerDefaults();
+    syncQueryDefaults();
+  });
+  game?.addEventListener("input", () => {
+    syncSlug();
+    syncControllerDefaults();
+    syncQueryDefaults();
+  });
+  steamAddress?.addEventListener("input", syncQueryDefaults);
+  statusSource?.addEventListener("change", syncControllerFields);
+  document.getElementById("addWorldServerButton")?.addEventListener("click", resetWorldServerModal);
+  modal?.addEventListener("show.bs.modal", () => {
+    if (modal.dataset.mode === "edit") {
+      syncControllerFields();
+      return;
+    }
+    resetWorldServerModal();
+  });
+  modal?.addEventListener("hidden.bs.modal", () => {
+    if (modal.dataset.mode === "edit") {
+      modal.dataset.mode = "add";
+      delete modal.dataset.editIndex;
+      state.editingWorldServerIndex = -1;
+      setModalCopy("add");
+    }
+  });
+
+  openWorldServerEditor = (index) => {
+    const servers = readWorldServers();
+    const server = servers[index];
+    if (!server || !modal) return;
+    fillWorldServerModal(server, index);
+    bootstrap.Modal.getOrCreateInstance(modal).show();
+  };
+
+  submitButton?.addEventListener("click", () => {
+    const servers = readWorldServers();
+    const editIndex = modal?.dataset.mode === "edit" ? Number(modal.dataset.editIndex) : -1;
+    const nextServer = readWorldServerModal();
+    const duplicate = servers.some((server, index) => index !== editIndex && server.id === nextServer.id);
+    if (duplicate) {
+      setStatus(`A server with the slug ${nextServer.id} already exists.`, "error");
+      return;
+    }
+    if (Number.isInteger(editIndex) && editIndex >= 0 && editIndex < servers.length) {
+      servers[editIndex] = nextServer;
+    } else {
+      servers.push(nextServer);
+    }
+    stageWorldServerRecords(servers);
     bootstrap.Modal.getInstance(modal)?.hide();
     showAdminSaveToast("Server Staged", "Review the record, then Save Servers to publish it to Firebase.");
-    setStatus(`${serverTitle} staged locally. Save Servers to publish it.`, "info");
+    setStatus(`${nextServer.title} staged locally. Save Servers to publish it.`, "info");
   });
 }
 
@@ -1743,14 +2218,35 @@ function bindAdminEvents() {
   document.getElementById("saveWorldServersButton")?.addEventListener("click", async () => {
     try {
       state.worldServers = readWorldServers();
+      state.serverControllerConfig = syncControllerConfigFromWorldServers(readServerControllerConfig(), state.worldServers);
       await saveWorldServers(state.worldServers);
+      state.serverControllerConfig = await saveServerControllerConfig(state.serverControllerConfig, state.user);
       state.worldServers = await loadAdminWorldServers();
+      state.serverControllerConfig = await loadServerControllerConfig();
       await pushActivity(activityMeta({ category: "Worlds", title: "Hosted worlds updated", message: "World server access records were updated." })).catch(() => {});
       renderWorldServersEditor();
+      renderServerControllerEditor();
       showAdminSaveToast("Servers Published", "Hosted world records saved to Firebase.");
       setStatus("World servers saved to Firebase.", "success");
     } catch (error) {
       setStatus(error.message || "World servers could not be saved to Firebase.", "error");
+    }
+  });
+
+  document.getElementById("saveServerControllerButton")?.addEventListener("click", async () => {
+    try {
+      state.serverControllerConfig = readServerControllerConfig();
+      state.serverControllerConfig = await saveServerControllerConfig(state.serverControllerConfig, state.user);
+      await pushActivity(activityMeta({
+        category: "Worlds",
+        title: "Blackbox controller access updated",
+        message: "Server controller URL, polling, or UID access list was changed."
+      })).catch(() => {});
+      renderServerControllerEditor();
+      showAdminSaveToast("Controller Saved", "Blackbox controller settings saved to Firebase.");
+      setStatus("Controller access saved to Firebase.", "success");
+    } catch (error) {
+      setStatus(error.message || "Controller access could not be saved.", "error");
     }
   });
 
@@ -1943,21 +2439,138 @@ function bindAdminEvents() {
   });
 
   elements.worldsEditor?.addEventListener("click", (event) => {
+    const editButton = event.target.closest("[data-edit-world-server]");
     const deleteButton = event.target.closest("[data-delete-world-server]");
-    if (!deleteButton) return;
-    const row = deleteButton.closest("[data-world-server-index]");
+    const pinButton = event.target.closest("[data-pin-world-server]");
+    if (!editButton && !deleteButton && !pinButton) return;
+    const row = event.target.closest("[data-world-server-index]");
     const index = Number(row?.dataset.worldServerIndex);
     if (!Number.isFinite(index)) return;
-    state.worldServers = readWorldServers().filter((_, itemIndex) => itemIndex !== index);
+
+    if (editButton) {
+      openWorldServerEditor(index);
+      return;
+    }
+
+    const servers = readWorldServers();
+
+    if (pinButton) {
+      const [pinnedServer] = servers.splice(index, 1);
+      if (!pinnedServer) return;
+      servers.unshift(pinnedServer);
+      state.worldServers = servers.map((server, itemIndex) => normalizeWorldServer({ ...server, order: itemIndex + 1 }, itemIndex));
+      state.serverControllerConfig = syncControllerConfigFromWorldServers(state.serverControllerConfig, state.worldServers);
+      renderWorldServersEditor();
+      renderServerControllerEditor();
+      setStatus(`${pinnedServer.title} pinned locally. Save Servers to publish the order.`, "info");
+      return;
+    }
+
+    state.worldServers = servers.filter((_, itemIndex) => itemIndex !== index)
+      .map((server, itemIndex) => normalizeWorldServer({ ...server, order: itemIndex + 1 }, itemIndex));
+    state.serverControllerConfig = syncControllerConfigFromWorldServers(state.serverControllerConfig, state.worldServers);
     renderWorldServersEditor();
+    renderServerControllerEditor();
     setStatus("Server removed locally. Save Servers to publish the deletion.", "info");
   });
 
   elements.worldsEditor?.addEventListener("input", (event) => {
+    const searchInput = event.target.closest("[data-world-server-search]");
+    if (searchInput) {
+      const cursor = searchInput.selectionStart || 0;
+      state.worldServerSearch = searchInput.value || "";
+      renderWorldServersEditor();
+      const nextInput = elements.worldsEditor.querySelector("[data-world-server-search]");
+      nextInput?.focus();
+      nextInput?.setSelectionRange(cursor, cursor);
+      return;
+    }
+
     const imageInput = event.target.closest('[data-server-field="image"]');
     if (!imageInput) return;
     const row = imageInput.closest("[data-world-server-index]");
     row?.querySelector(".admin-card-preview")?.style.setProperty("--preview-image", `url('${imageInput.value}')`);
+  });
+
+  elements.worldsEditor?.addEventListener("change", (event) => {
+    if (!event.target.matches('[data-server-field="statusSource"], [data-server-field="controllerServerId"]')) return;
+    state.worldServers = readWorldServers();
+    state.serverControllerConfig = syncControllerConfigFromWorldServers(readServerControllerConfig(), state.worldServers);
+    renderWorldServersEditor();
+    renderServerControllerEditor();
+    setStatus("Server control source updated locally. Save Servers to publish it.", "info");
+  });
+
+  elements.serverControllerEditor?.addEventListener("click", (event) => {
+    const addMemberButton = event.target.closest("#addControllerMemberButton");
+    const addUidButton = event.target.closest("#addControllerUidButton");
+    const removeButton = event.target.closest("[data-remove-controller-uid]");
+    const copyButton = event.target.closest("[data-copy-controller-uid]");
+    const removeServerButton = event.target.closest("[data-remove-controller-server]");
+
+    if (addMemberButton) {
+      const uid = document.getElementById("serverControllerMemberSelect")?.value || "";
+      if (!uid) return;
+      state.serverControllerConfig = readServerControllerConfig();
+      state.serverControllerConfig.allowedUids[uid] = true;
+      renderServerControllerEditor();
+      setStatus("Controller UID added locally. Save Controller to publish it.", "info");
+      return;
+    }
+
+    if (addUidButton) {
+      const input = document.getElementById("serverControllerManualUid");
+      const uid = String(input?.value || "").trim();
+      if (!uid) {
+        setStatus("Paste a Firebase UID before adding it.", "error");
+        return;
+      }
+      state.serverControllerConfig = readServerControllerConfig();
+      state.serverControllerConfig.allowedUids[uid] = true;
+      if (input) input.value = "";
+      renderServerControllerEditor();
+      setStatus("Manual controller UID added locally. Save Controller to publish it.", "info");
+      return;
+    }
+
+    if (removeButton) {
+      const row = removeButton.closest("[data-controller-uid]");
+      const uid = row?.dataset.controllerUid || "";
+      state.serverControllerConfig = readServerControllerConfig();
+      delete state.serverControllerConfig.allowedUids[uid];
+      renderServerControllerEditor();
+      setStatus("Controller UID removed locally. Save Controller to publish it.", "info");
+      return;
+    }
+
+    if (removeServerButton) {
+      const row = removeServerButton.closest("[data-controller-server]");
+      const id = row?.dataset.controllerServer || "";
+      state.serverControllerConfig = readServerControllerConfig();
+      delete state.serverControllerConfig.servers[id];
+      renderServerControllerEditor();
+      setStatus("Controller server removed locally. Save Controller to publish it.", "info");
+      return;
+    }
+
+    if (copyButton) {
+      const row = copyButton.closest("[data-controller-uid]");
+      const uid = row?.dataset.controllerUid || "";
+      copyTextToClipboard(uid)
+        .then(() => {
+          copyButton.textContent = "Copied";
+          setTimeout(() => {
+            if (copyButton.isConnected) copyButton.textContent = "Copy UID";
+          }, 1200);
+        })
+        .catch(() => setStatus("Could not copy that UID from this browser.", "error"));
+    }
+  });
+
+  elements.serverControllerEditor?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" || event.target.id !== "serverControllerManualUid") return;
+    event.preventDefault();
+    document.getElementById("addControllerUidButton")?.click();
   });
 
   elements.librarySearch?.addEventListener("input", (event) => {

@@ -16,6 +16,7 @@ export const MEDAL_WORKER_URL = "https://medalclips.monkguru-guardian.workers.de
 export const CHRONICLES_AUDIO_RESOLVER_URL = "https://banri-dossier-audio.monkguru-guardian.workers.dev/";
 export const ACTIVITY_RECENT_LIMIT = 25;
 export const DEFAULT_STEAM_ID64 = "76561198134543238";
+const WORLD_SERVERS_META_KEY = "__registryMeta";
 
 export const STATUS_OPTIONS = ["Active", "Returning Soon", "On Hold", "Completed", "Occasional"];
 export const TONE_OPTIONS = ["green", "amber", "blue", "purple", "cyan", "red", "aqua", "yellow", "white", "orange"];
@@ -426,20 +427,95 @@ export const defaultHeroVisual = {
   images: [...defaultHeroImages]
 };
 
+export const defaultControllerServers = [
+  { id: "dragonwilds", label: "RuneScape: Dragonwilds", game: "RuneScape: Dragonwilds", container: "dragonwilds-server", enabled: true, order: 1 },
+  { id: "soulmask", label: "Soulmask", game: "Soulmask", container: "soulmask-server", queryEnabled: true, queryType: "soulmask", queryHost: "73.111.246.38", queryPort: 27017, playersMax: 8, enabled: true, order: 2 },
+  { id: "vrising", label: "V Rising", game: "V Rising", container: "vrising-server", queryEnabled: true, queryType: "vrising", queryHost: "73.111.246.38", queryPort: 9876, playersMax: 10, enabled: true, order: 3 },
+  { id: "enshrouded", label: "Enshrouded", game: "Enshrouded", container: "enshrouded-server", queryEnabled: true, queryType: "enshrouded", queryHost: "73.111.246.38", queryPort: 15637, playersMax: 0, enabled: true, order: 4 },
+  { id: "valheim", label: "Valheim", game: "Valheim", container: "valheim-server", queryEnabled: true, queryType: "valheim", queryHost: "73.111.246.38", queryPort: 2457, playersMax: 10, enabled: true, order: 5 },
+  { id: "terraria", label: "Terraria", game: "Terraria", container: "terraria-server", queryEnabled: true, queryType: "terraria", queryHost: "73.111.246.38", queryPort: 7777, playersMax: 0, enabled: true, order: 6 },
+  { id: "corekeeper", label: "Core Keeper", game: "Core Keeper", container: "corekeeper-server", queryEnabled: true, queryType: "corekeeper", queryHost: "73.111.246.38", queryPort: 27015, playersMax: 0, enabled: true, order: 7 },
+  { id: "barotrauma", label: "Barotrauma", game: "Barotrauma", container: "barotrauma-server", queryEnabled: true, queryType: "barotrauma", queryHost: "73.111.246.38", queryPort: 27015, playersMax: 0, enabled: true, order: 8 },
+  { id: "romestead", label: "Romestead", game: "Romestead", container: "romestead-server", enabled: true, order: 9 },
+  { id: "ats", label: "American Truck Simulator", game: "American Truck Simulator", container: "ats-server", enabled: true, order: 10 }
+];
+
 export const defaultWorldServers = [
   {
+    id: "banloant-blackbox-gielinor",
+    title: "Banloant Blackbox | Gielinor",
+    game: "RuneScape: Dragonwilds",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "dragonwilds",
+    controllerContainer: "dragonwilds-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Dragonwilds server for raids, crafting, and late-night survival routes.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Blackbox | Blackbox",
+    tags: ["Co-op", "Survival", "Private"],
+    queryEnabled: false,
+    queryType: "",
+    queryHost: "",
+    queryPort: 0,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 1
+  },
+  {
+    id: "banloant-blackbox-soulmask",
+    title: "Banloant Blackbox | Soulmask",
+    game: "Soulmask",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "soulmask",
+    controllerContainer: "soulmask-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Soulmask world for tribe progression, exploration, and group survival.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Blackbox | Blackbox",
+    tags: ["Co-op", "Survival", "Private"],
+    queryEnabled: true,
+    queryType: "soulmask",
+    queryHost: "73.111.246.38",
+    queryPort: 27017,
+    playersOnline: 0,
+    playersMax: 8,
+    activityLevel: 0,
+    order: 2
+  },
+  {
     id: "banloant-lodge",
-    title: "Banloant Lodge",
+    title: "Banloant Lodge | V Rising",
     game: "V Rising",
     host: "Blackbox",
     status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "vrising",
+    controllerContainer: "vrising-server",
     region: "US Central",
     visibility: "members",
     enabled: true,
     connectionType: "steam",
     steamAddress: "73.111.246.38:9876",
     steamP2P: "90291675017036813",
-    joinUrl: "steam://connect/73.111.246.38:9876",
     image: "/assets/img/worlds/noir-server-vault.webp",
     password: "",
     description: "A brutal private V Rising world tuned for harsher hunts, stronger V Bloods, and a proper late-night raid signal.",
@@ -454,9 +530,237 @@ export const defaultWorldServers = [
       "V Bloods have attack modifications and additional abilities"
     ],
     notes: "Connected to: Banloant Lodge | Blackbox",
-    order: 1
+    tags: ["Brutal", "Survival", "Private"],
+    queryEnabled: true,
+    queryType: "vrising",
+    queryHost: "73.111.246.38",
+    queryPort: 9876,
+    playersOnline: 0,
+    playersMax: 10,
+    activityLevel: 0,
+    order: 3
+  },
+  {
+    id: "banloant-lodge-enshrouded",
+    title: "Banloant Lodge | Enshrouded",
+    game: "Enshrouded",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "enshrouded",
+    controllerContainer: "enshrouded-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Enshrouded server for friends, family, building, and adventuring.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    tags: ["Co-op", "Survival", "Private"],
+    queryEnabled: true,
+    queryType: "enshrouded",
+    queryHost: "73.111.246.38",
+    queryPort: 15637,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 4
+  },
+  {
+    id: "banloant-lodge-valheim",
+    title: "Banloant Lodge | Valheim",
+    game: "Valheim",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "valheim",
+    controllerContainer: "valheim-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Valheim world for co-op progression, building, and boss runs.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    tags: ["Co-op", "Survival", "Private"],
+    queryEnabled: true,
+    queryType: "valheim",
+    queryHost: "73.111.246.38",
+    queryPort: 2457,
+    playersOnline: 0,
+    playersMax: 10,
+    activityLevel: 0,
+    order: 5
+  },
+  {
+    id: "banloant-lodge-terraria",
+    title: "Banloant Lodge | Terraria",
+    game: "Terraria",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "terraria",
+    controllerContainer: "terraria-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Terraria world for progression nights, builds, and boss routes.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    tags: ["Co-op", "Adventure", "Private"],
+    queryEnabled: true,
+    queryType: "terraria",
+    queryHost: "73.111.246.38",
+    queryPort: 7777,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 6
+  },
+  {
+    id: "banloant-lodge-corekeeper",
+    title: "Banloant Lodge | Core Keeper",
+    game: "Core Keeper",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "corekeeper",
+    controllerContainer: "corekeeper-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Core Keeper world for base building, exploration, and boss farming.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    tags: ["Co-op", "Survival", "Private"],
+    queryEnabled: true,
+    queryType: "corekeeper",
+    queryHost: "73.111.246.38",
+    queryPort: 27015,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 7
+  },
+  {
+    id: "banloant-lodge-barotrauma",
+    title: "Banloant Lodge | Barotrauma",
+    game: "Barotrauma",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "barotrauma",
+    controllerContainer: "barotrauma-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Barotrauma relay for deep runs, crew nights, and emergency repairs.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    tags: ["Co-op", "Survival", "Private"],
+    queryEnabled: true,
+    queryType: "barotrauma",
+    queryHost: "73.111.246.38",
+    queryPort: 27015,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 8
+  },
+  {
+    id: "banloant-lodge-romestead",
+    title: "Banloant Lodge | Romestead",
+    game: "Romestead",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "romestead",
+    controllerContainer: "romestead-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Romestead world reserved for future hosted sessions.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    tags: ["Co-op", "Private"],
+    queryEnabled: false,
+    queryType: "",
+    queryHost: "",
+    queryPort: 0,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 9
+  },
+  {
+    id: "banloant-lodge-ats",
+    title: "Banloant Lodge | American Truck Simulator",
+    game: "American Truck Simulator",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "ats",
+    controllerContainer: "ats-server",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private trucking server route for convoy nights and chill logistics.",
+    rules: ["Hosted world details pending."],
+    notes: "Connected to: Banloant Lodge | Blackbox",
+    tags: ["Convoy", "Simulation", "Private"],
+    queryEnabled: false,
+    queryType: "",
+    queryHost: "",
+    queryPort: 0,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 10
   }
 ];
+
+export const defaultServerControllerConfig = {
+  apiUrl: "",
+  enabled: false,
+  pollSeconds: 8,
+  allowedUids: {},
+  servers: Object.fromEntries(defaultControllerServers.map((server) => [server.id, server])),
+  updatedAt: 0,
+  updatedByUid: ""
+};
 
 export const defaultFeaturedClip = {
   id: "",
@@ -804,7 +1108,7 @@ export function normalizeActivityEntry(entry = {}, index = 0) {
     id: String(entry.id || `activity-${createdAt}-${index}`),
     category: String(entry.category || "System").trim(),
     title: String(entry.title || "Site updated").trim(),
-    message: String(entry.message || "Banri Gaming received an admin update.").trim(),
+    message: String(entry.message || "Bancy Waypoint received an admin update.").trim(),
     date,
     time,
     actorName: String(entry.actorName || entry.updatedByName || entry.author || "Banri").trim(),
@@ -872,16 +1176,112 @@ export function normalizeHeroVisual(visual = {}) {
   };
 }
 
-export function buildWorldServerJoinUrl(server = {}) {
-  const explicit = String(server.joinUrl || "").trim();
-  if (explicit) return explicit;
+function toTagArray(value) {
+  if (Array.isArray(value)) return value.map((item) => String(item || "").trim()).filter(Boolean);
+  return String(value || "")
+    .split(/[\n,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
 
-  const steamAddress = String(server.steamAddress || server.address || "")
-    .replace(/^steamIPV4:\/\//i, "")
-    .trim();
-  if (steamAddress) return `steam://connect/${steamAddress}`;
+function clampNumber(value, fallback = 0, min = 0, max = 999999) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return fallback;
+  return Math.max(min, Math.min(max, number));
+}
 
+function inferControllerServerId(server = {}) {
+  const candidates = [
+    server.controllerServerId,
+    server.controllerId,
+    server.id,
+    server.game,
+    server.title,
+    server.name
+  ].map((value) => slugify(value || ""));
+
+  const match = defaultControllerServers.find((controllerServer) => {
+    const serverId = slugify(controllerServer.id);
+    const label = slugify(controllerServer.label);
+    const game = slugify(controllerServer.game);
+    return candidates.includes(serverId) || candidates.includes(label) || candidates.includes(game);
+  });
+
+  return match?.id || "";
+}
+
+function inferServerQueryType(server = {}) {
+  const candidates = [
+    server.queryType,
+    server.controllerServerId,
+    server.controllerId,
+    server.id,
+    server.game,
+    server.title,
+    server.name
+  ].map((value) => slugify(value || ""));
+
+  const typeMap = {
+    vrising: "vrising",
+    "v-rising": "vrising",
+    valheim: "valheim",
+    terraria: "terraria",
+    soulmask: "soulmask",
+    enshrouded: "enshrouded",
+    palworld: "palworld",
+    corekeeper: "corekeeper",
+    "core-keeper": "corekeeper",
+    barotrauma: "barotrauma"
+  };
+
+  for (const candidate of candidates) {
+    if (typeMap[candidate]) return typeMap[candidate];
+  }
   return "";
+}
+
+function parseAddressParts(value = "") {
+  const clean = String(value || "")
+    .replace(/^steamIPV4:\/\//i, "")
+    .replace(/^steam:\/\/connect\//i, "")
+    .trim();
+  const match = clean.match(/^([^:/\s]+)(?::(\d{1,5}))?$/);
+  if (!match) return { host: "", port: 0 };
+  return {
+    host: match[1],
+    port: clampNumber(match[2], 0, 0, 65535)
+  };
+}
+
+export function normalizeControllerServer(server = {}, index = 0) {
+  const id = slugify(server.id || server.controllerServerId || server.label || server.game || server.container || `server-${index + 1}`);
+  const defaultMatch = defaultControllerServers.find((item) => item.id === id);
+  const mergedServer = defaultMatch ? { ...defaultMatch, ...server } : server;
+  const container = String(mergedServer.container || mergedServer.controllerContainer || `${id}-server`)
+    .trim()
+    .replace(/[^a-zA-Z0-9_.-]/g, "");
+  const label = String(mergedServer.label || mergedServer.title || mergedServer.game || id).trim();
+  const inferredQuery = parseAddressParts(mergedServer.steamAddress || mergedServer.queryAddress || mergedServer.address || "");
+  const rawQueryType = String(mergedServer.queryType || inferServerQueryType({ ...mergedServer, id })).trim().toLowerCase();
+  const defaultQueryType = String(defaultMatch?.queryType || "").trim().toLowerCase();
+  const queryTypeMismatch = Boolean(defaultQueryType && rawQueryType && rawQueryType !== defaultQueryType);
+  const queryType = defaultQueryType || rawQueryType;
+  const queryHost = String((queryTypeMismatch ? defaultMatch?.queryHost : mergedServer.queryHost) || inferredQuery.host || defaultMatch?.queryHost || "").trim();
+  const queryPort = clampNumber(queryTypeMismatch ? defaultMatch?.queryPort : (mergedServer.queryPort ?? inferredQuery.port ?? defaultMatch?.queryPort), 0, 0, 65535);
+
+  return {
+    id,
+    label: label || id,
+    game: String(mergedServer.game || label || "Hosted Server").trim(),
+    container,
+    queryEnabled: server.queryEnabled === true || Boolean(queryType && queryHost),
+    queryType,
+    queryHost,
+    queryPort,
+    playersMax: clampNumber(mergedServer.playersMax ?? mergedServer.maxPlayers ?? 0, 0, 0, 9999),
+    enabled: mergedServer.enabled !== false,
+    order: clampNumber(mergedServer.order, index + 1, 1, 9999)
+  };
 }
 
 export function normalizeWorldServer(server = {}, index = 0) {
@@ -892,27 +1292,88 @@ export function normalizeWorldServer(server = {}, index = 0) {
       .split(/\r?\n/)
       .map((line) => line.trim())
       .filter(Boolean);
+  const rawStatusSource = String(server.statusSource || server.controlSource || "").trim().toLowerCase();
+  const explicitManual = rawStatusSource === "manual";
+  const explicitBlackbox = rawStatusSource === "blackbox" || rawStatusSource === "controller";
+  const rawControllerServerId = slugify(server.controllerServerId || server.controllerId || "");
+  const controllerServerId = explicitManual ? "" : rawControllerServerId || inferControllerServerId(server);
+  const controllerMatch = defaultControllerServers.find((item) => item.id === controllerServerId);
+  const mergedServer = controllerMatch ? { ...controllerMatch, ...server } : server;
+  const statusSource = !explicitManual && (explicitBlackbox || controllerServerId)
+    ? "blackbox"
+    : "manual";
+  const manualStatus = /^offline|stopped|missing$/i.test(String(mergedServer.status || "")) ? "Offline" : "Online";
+  const cleanedSteamAddress = String(mergedServer.steamAddress || mergedServer.address || "").replace(/^steamIPV4:\/\//i, "").trim();
+  const inferredQuery = parseAddressParts(mergedServer.queryAddress || cleanedSteamAddress);
+  const rawQueryType = String(mergedServer.queryType || inferServerQueryType({ ...mergedServer, controllerServerId })).trim().toLowerCase();
+  const defaultQueryType = String(controllerMatch?.queryType || "").trim().toLowerCase();
+  const queryTypeMismatch = Boolean(defaultQueryType && rawQueryType && rawQueryType !== defaultQueryType);
+  const queryType = defaultQueryType || rawQueryType;
+  const queryHost = String((queryTypeMismatch ? controllerMatch?.queryHost : mergedServer.queryHost) || inferredQuery.host || controllerMatch?.queryHost || "").trim();
+  const queryPort = clampNumber(queryTypeMismatch ? controllerMatch?.queryPort : (mergedServer.queryPort ?? inferredQuery.port ?? controllerMatch?.queryPort), 0, 0, 65535);
 
   return {
     id: slugify(server.id || title),
     title,
     game: String(server.game || "Hosted Server").trim(),
     host: String(server.host || "").trim(),
-    status: /^offline$/i.test(String(server.status || "")) ? "Offline" : "Online",
+    status: manualStatus,
+    statusSource,
+    controllerServerId,
+    controllerContainer: statusSource === "blackbox"
+      ? String(server.controllerContainer || server.container || controllerMatch?.container || (controllerServerId ? `${controllerServerId}-server` : "")).trim()
+      : "",
     region: String(server.region || "").trim(),
     visibility: server.visibility === "public" ? "public" : "members",
     enabled: server.enabled !== false,
     connectionType: String(server.connectionType || "steam").trim(),
-    steamAddress: String(server.steamAddress || server.address || "").replace(/^steamIPV4:\/\//i, "").trim(),
+    steamAddress: cleanedSteamAddress,
     steamP2P: String(server.steamP2P || server.p2p || "").replace(/^SteamP2P:\/\//i, "").trim(),
-    joinUrl: buildWorldServerJoinUrl(server),
+    joinUrl: String(server.joinUrl || "").trim(),
     image: String(server.image || server.art || "/assets/img/worlds/noir-server-vault.webp").trim(),
     password: String(server.password || "").trim(),
     description: String(server.description || "Hosted world details pending.").trim(),
     rules,
     notes: String(server.notes || "").trim(),
+    tags: toTagArray(server.tags),
+    queryEnabled: server.queryEnabled === true || (statusSource === "blackbox" && Boolean(queryType && queryHost)),
+    queryType,
+    queryHost,
+    queryPort,
+    playersOnline: clampNumber(server.playersOnline ?? server.players ?? 0, 0, 0, 9999),
+    playersMax: clampNumber(mergedServer.playersMax ?? mergedServer.maxPlayers ?? 0, 0, 0, 9999),
+    playerNames: Array.isArray(server.playerNames) ? server.playerNames.map((name) => String(name || "").trim()).filter(Boolean).slice(0, 8) : [],
+    activityLevel: clampNumber(server.activityLevel ?? server.activity ?? 0, 0, 0, 100),
     order: Number(server.order || index + 1),
     updatedAt: Number(server.updatedAt || 0)
+  };
+}
+
+export function normalizeServerControllerConfig(config = {}) {
+  const allowedUids = {};
+  Object.entries(config?.allowedUids || {}).forEach(([uid, enabled]) => {
+    const cleanUid = String(uid || "").trim();
+    if (cleanUid && enabled === true) allowedUids[cleanUid] = true;
+  });
+
+  const servers = {};
+  const hasConfiguredServers = config?.servers && typeof config.servers === "object";
+  const configuredServers = hasConfiguredServers
+    ? toArray(config.servers)
+    : [];
+  const sourceServers = hasConfiguredServers ? configuredServers : defaultControllerServers;
+  sourceServers.map(normalizeControllerServer).forEach((server) => {
+    if (server.id && server.container) servers[server.id] = server;
+  });
+
+  return {
+    apiUrl: String(config?.apiUrl || "").trim().replace(/\/+$/, ""),
+    enabled: config?.enabled === true,
+    pollSeconds: Math.max(5, Math.min(60, Number(config?.pollSeconds || defaultServerControllerConfig.pollSeconds))),
+    allowedUids,
+    servers,
+    updatedAt: Number(config?.updatedAt || 0),
+    updatedByUid: String(config?.updatedByUid || "").trim()
   };
 }
 
@@ -1014,11 +1475,12 @@ export function statusToTone(status) {
 
 export async function loadPublicSiteData() {
   const { database } = getFirebaseServices();
-  const [siteConfigSnapshot, gamesSnapshot, activitySnapshot, steamSnapshot] = await Promise.all([
+  const [siteConfigSnapshot, gamesSnapshot, activitySnapshot, steamSnapshot, serverControllerSnapshot] = await Promise.all([
     get(ref(database, "siteConfig")).catch(() => null),
     get(ref(database, "gamesLibrary")).catch(() => null),
     get(ref(database, "activityFeed")).catch(() => null),
-    get(ref(database, "steamSignal")).catch(() => null)
+    get(ref(database, "steamSignal")).catch(() => null),
+    get(ref(database, "serverController")).catch(() => null)
   ]);
 
   const siteConfig = siteConfigSnapshot?.exists() ? siteConfigSnapshot.val() : {};
@@ -1035,6 +1497,7 @@ export async function loadPublicSiteData() {
     heroVisual: normalizeHeroVisual(siteConfig.heroVisual),
     featuredClip: normalizeFeaturedClip(siteConfig.featuredClip),
     steamConfig: normalizeSteamConfig(siteConfig.steam),
+    serverControllerConfig: normalizeServerControllerConfig(serverControllerSnapshot?.exists() ? serverControllerSnapshot.val() : defaultServerControllerConfig),
     chroniclesAiConfig: normalizeChroniclesAiConfig(siteConfig.chroniclesAi),
     steamSignal,
     activityFeed: remoteActivity
@@ -1156,13 +1619,34 @@ export async function saveGamesLibrary(games) {
   await set(ref(database, "gamesLibrary"), payload);
 }
 
+function mergeDefaultWorldServers(remoteServers = []) {
+  const merged = new Map();
+  defaultWorldServers.forEach((server, index) => {
+    const normalized = normalizeWorldServer(server, index);
+    merged.set(normalized.id, normalized);
+  });
+  remoteServers.forEach((server, index) => {
+    const normalized = normalizeWorldServer(server, index);
+    merged.set(normalized.id, normalized);
+  });
+  return [...merged.values()];
+}
+
+function getSavedWorldServerRecords(value) {
+  if (!value || typeof value !== "object") return [];
+  return Object.entries(value)
+    .filter(([id]) => id !== WORLD_SERVERS_META_KEY && !String(id).startsWith("__"))
+    .map(([id, server], index) => normalizeWorldServer({ id, ...server }, index));
+}
+
 export async function loadWorldServers() {
   const { database } = getFirebaseServices();
   const snapshot = await get(ref(database, "worldServers")).catch(() => null);
   const remoteServers = snapshot?.exists()
-    ? toArray(snapshot.val()).map(normalizeWorldServer)
-    : [];
-  return (remoteServers.length ? remoteServers : defaultWorldServers.map(normalizeWorldServer))
+    ? getSavedWorldServerRecords(snapshot.val())
+    : mergeDefaultWorldServers([])
+      .map(normalizeWorldServer);
+  return remoteServers
     .filter((server) => server.enabled !== false)
     .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.title.localeCompare(b.title));
 }
@@ -1171,39 +1655,49 @@ export async function loadAdminWorldServers() {
   const { database } = getFirebaseServices();
   const snapshot = await get(ref(database, "worldServers")).catch(() => null);
   const remoteServers = snapshot?.exists()
-    ? toArray(snapshot.val()).map(normalizeWorldServer)
-    : [];
-  return (remoteServers.length ? remoteServers : defaultWorldServers.map(normalizeWorldServer))
+    ? getSavedWorldServerRecords(snapshot.val())
+    : mergeDefaultWorldServers([])
+      .map(normalizeWorldServer);
+  return remoteServers
     .sort((a, b) => Number(a.order || 0) - Number(b.order || 0) || a.title.localeCompare(b.title));
 }
 
 export async function saveWorldServers(servers) {
   const { database } = getFirebaseServices();
-  const snapshot = await get(ref(database, "worldServers")).catch(() => null);
-  const existingValue = snapshot?.exists() && typeof snapshot.val() === "object" && snapshot.val()
-    ? snapshot.val()
-    : {};
   const normalized = servers.map(normalizeWorldServer);
-  const nextIds = new Set(normalized.map((server) => server.id));
-  const updates = {};
-
-  Object.keys(existingValue).forEach((id) => {
-    if (!nextIds.has(id)) {
-      updates[`worldServers/${id}`] = null;
+  const payload = {
+    [WORLD_SERVERS_META_KEY]: {
+      initialized: true,
+      updatedAt: Date.now()
     }
-  });
-
+  };
   normalized.forEach((server, index) => {
-    updates[`worldServers/${server.id}`] = {
+    payload[server.id] = {
       ...server,
       order: Number(server.order || index + 1),
       updatedAt: Date.now()
     };
   });
 
-  if (Object.keys(updates).length) {
-    await update(ref(database), updates);
-  }
+  await set(ref(database, "worldServers"), payload);
+}
+
+export async function loadServerControllerConfig() {
+  const { database } = getFirebaseServices();
+  const snapshot = await get(ref(database, "serverController")).catch(() => null);
+  return normalizeServerControllerConfig(snapshot?.exists() ? snapshot.val() : defaultServerControllerConfig);
+}
+
+export async function saveServerControllerConfig(config, user = {}) {
+  const { database } = getFirebaseServices();
+  const normalized = normalizeServerControllerConfig(config);
+  const payload = {
+    ...normalized,
+    updatedAt: Date.now(),
+    updatedByUid: String(user?.uid || normalized.updatedByUid || "").trim()
+  };
+  await set(ref(database, "serverController"), payload);
+  return payload;
 }
 
 export async function fetchSteamSignal(config = {}) {

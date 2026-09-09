@@ -362,7 +362,7 @@ function bindHeroPagination() {
 
 async function loadRemoteSiteData() {
   try {
-    const { loadPublicSiteData } = await import("/assets/js/site-store.js?v=20260811c");
+    const { loadPublicSiteData } = await import("/assets/js/site-store.js?v=20260909a");
     const data = await loadPublicSiteData();
 
     if (data.currentGames.length) {
