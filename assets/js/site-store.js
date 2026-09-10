@@ -392,6 +392,23 @@ export const defaultHeroCopy = {
   ]
 };
 
+export const defaultWorldTicker = {
+  enabled: true,
+  label: "Live Activity",
+  items: [
+    "Valheim",
+    "Soulmask",
+    "RuneScape: Dragonwilds",
+    "V Rising",
+    "Enshrouded",
+    "Palworld",
+    "Terraria",
+    "Core Keeper",
+    "Barotrauma",
+    "American Truck Simulator"
+  ]
+};
+
 export const defaultHeroImages = [
   {
     id: "01",
@@ -1355,6 +1372,23 @@ export function normalizeWorldServer(server = {}, index = 0) {
   };
 }
 
+export function normalizeWorldTicker(ticker = {}) {
+  const rawItems = Array.isArray(ticker?.items)
+    ? ticker.items
+    : String(ticker?.items || "")
+      .split(/\r?\n|,/);
+  const items = rawItems
+    .map((item) => String(item || "").trim())
+    .filter(Boolean)
+    .slice(0, 24);
+
+  return {
+    enabled: ticker?.enabled !== false,
+    label: String(ticker?.label || defaultWorldTicker.label).trim() || defaultWorldTicker.label,
+    items: items.length ? items : [...defaultWorldTicker.items]
+  };
+}
+
 export function normalizeServerControllerConfig(config = {}) {
   const allowedUids = {};
   Object.entries(config?.allowedUids || {}).forEach(([uid, enabled]) => {
@@ -1502,6 +1536,7 @@ export async function loadPublicSiteData() {
     hero: normalizeHeroCopy(siteConfig.hero),
     heroVisual: normalizeHeroVisual(siteConfig.heroVisual),
     featuredClip: normalizeFeaturedClip(siteConfig.featuredClip),
+    worldTicker: normalizeWorldTicker(siteConfig.worldTicker),
     steamConfig: normalizeSteamConfig(siteConfig.steam),
     serverControllerConfig: normalizeServerControllerConfig(serverControllerSnapshot?.exists() ? serverControllerSnapshot.val() : defaultServerControllerConfig),
     chroniclesAiConfig: normalizeChroniclesAiConfig(siteConfig.chroniclesAi),
@@ -1511,6 +1546,12 @@ export async function loadPublicSiteData() {
       .filter((item) => item.enabled !== false)
       .sort((a, b) => Number(b.createdAt || Date.parse(b.date) || 0) - Number(a.createdAt || Date.parse(a.date) || 0))
   };
+}
+
+export async function loadWorldTickerConfig() {
+  const { database } = getFirebaseServices();
+  const snapshot = await get(ref(database, "siteConfig/worldTicker")).catch(() => null);
+  return normalizeWorldTicker(snapshot?.exists() ? snapshot.val() : defaultWorldTicker);
 }
 
 export async function loadActivityData() {

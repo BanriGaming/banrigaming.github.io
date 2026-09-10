@@ -14158,3 +14158,955 @@ body.legacy-theme::before {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Bancy hosted worlds and controller polish - 2026-09-10a */
+.worlds-page .worlds-activity-marquee {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 1.15rem;
+  border: 1px solid rgba(22, 232, 255, 0.22);
+  color: #061115;
+  background: linear-gradient(90deg, #18d9ee, #61f4ff);
+  white-space: nowrap;
+}
+
+.worlds-page .worlds-activity-marquee::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: 1;
+  width: 92px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #61f4ff 58%);
+}
+
+.worlds-page .worlds-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: bancy-worlds-marquee 72s linear infinite;
+  will-change: transform;
+}
+
+.worlds-page .worlds-activity-marquee.is-paused .worlds-marquee-track {
+  animation-play-state: paused;
+}
+
+.worlds-page .worlds-marquee-set {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 0.64rem 0;
+}
+
+.worlds-page .worlds-marquee-label {
+  margin: 0 1.6rem 0 1.1rem;
+  padding: 0.32rem 0.58rem;
+  border: 1px solid rgba(22, 232, 255, 0.38);
+  color: var(--banri-cyan);
+  background: #050708;
+  font: 800 0.55rem/1.1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.worlds-page .worlds-marquee-game {
+  display: inline-flex;
+  align-items: center;
+  color: #041013;
+  font: 800 0.92rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.worlds-page .worlds-marquee-game i {
+  margin: 0 1.45rem;
+  color: rgba(0, 0, 0, 0.72);
+  font-style: normal;
+}
+
+.worlds-page .worlds-marquee-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.52rem;
+  z-index: 2;
+  min-width: 58px;
+  min-height: 30px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(22, 232, 255, 0.45);
+  color: var(--banri-cyan);
+  background: #050708;
+  font: 800 0.52rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@keyframes bancy-worlds-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.worlds-page .worlds-server-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.45rem 0.62rem;
+  align-items: stretch;
+  grid-auto-flow: dense;
+}
+
+.worlds-page .world-server-card,
+.worlds-page .world-server-card:nth-child(n) {
+  isolation: isolate;
+  grid-column: span 4;
+  display: grid;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 1fr !important;
+  min-width: 0;
+  min-height: 238px;
+  max-height: none;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(22, 232, 255, 0.38);
+  border-radius: 0;
+  background: linear-gradient(120deg, rgba(0, 18, 23, 0.97), rgba(0, 0, 0, 0.98));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.48), inset 0 0 42px rgba(22, 232, 255, 0.035);
+  container-type: inline-size;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.75, 0.2, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.worlds-page .world-server-card:nth-child(-n + 2) {
+  grid-column: span 6;
+  min-height: 260px;
+}
+
+.worlds-page .world-server-card:nth-child(n + 6) {
+  grid-column: span 3;
+}
+
+.worlds-page .world-server-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 2;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--banri-cyan), rgba(255, 255, 255, 0.18) 44%, transparent 82%);
+}
+
+.worlds-page .world-server-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.035), transparent 24%),
+    repeating-linear-gradient(90deg, transparent 0 78px, rgba(255, 255, 255, 0.025) 79px);
+}
+
+.worlds-page .world-server-card:hover,
+.worlds-page .world-server-card:focus-within {
+  z-index: 3;
+  transform: translateY(-8px);
+  border-color: rgba(22, 232, 255, 0.72);
+  background: linear-gradient(120deg, rgba(0, 26, 32, 0.98), rgba(0, 0, 0, 0.94));
+  box-shadow: 0 30px 66px rgba(0, 0, 0, 0.8), 0 0 42px rgba(22, 232, 255, 0.15);
+}
+
+.worlds-page .world-server-card-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: auto;
+  min-height: 0;
+  pointer-events: none;
+  background: #020607;
+}
+
+.worlds-page .world-server-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% center;
+  opacity: 0.74;
+  filter: saturate(0.82) contrast(1.06) brightness(0.82);
+  transform: translate3d(0, 0, 0) scale(1.012);
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease,
+    transform 0.65s cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.worlds-page .world-server-card:hover .world-server-card-media img,
+.worlds-page .world-server-card:focus-within .world-server-card-media img {
+  opacity: 0.92;
+  filter: saturate(1.08) contrast(1.08) brightness(1);
+  transform: translate3d(-2%, 0, 0) scale(1.08);
+}
+
+.worlds-page .world-server-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 7, 8, 0.99) 0%, rgba(0, 7, 8, 0.92) 30%, rgba(0, 7, 8, 0.68) 56%, rgba(0, 7, 8, 0.26) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.72));
+  transition: background 0.35s ease;
+}
+
+.worlds-page .world-server-card:hover .world-server-card-media::after,
+.worlds-page .world-server-card:focus-within .world-server-card-media::after {
+  background:
+    linear-gradient(90deg, rgba(0, 7, 8, 0.98) 0%, rgba(0, 7, 8, 0.86) 30%, rgba(0, 7, 8, 0.48) 58%, rgba(0, 7, 8, 0.1) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.5));
+}
+
+.worlds-page .world-server-card-body,
+.worlds-page .world-server-card-featured .world-server-card-body {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(164px, 0.78fr);
+  gap: 0;
+  height: 100%;
+  min-height: inherit;
+  padding: 0;
+}
+
+.worlds-page .world-server-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1rem 1.08rem 0.88rem;
+}
+
+.worlds-page .world-server-rank {
+  display: grid;
+  gap: 0.18rem;
+  color: rgba(202, 222, 226, 0.72);
+  text-transform: uppercase;
+}
+
+.worlds-page .world-server-rank span,
+.worlds-page .world-server-card-head p,
+.worlds-page .world-server-live-panel p,
+.worlds-page .world-server-live-footer small,
+.worlds-page .world-server-activity span,
+.worlds-page .world-server-activity strong {
+  font: 800 0.52rem/1.18 "Share Tech Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.worlds-page .world-server-rank strong {
+  color: #f3fbfd;
+  font: 800 1rem/0.9 Rajdhani, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.worlds-page .world-server-card-head {
+  margin: 0.58rem 0 0.48rem;
+}
+
+.worlds-page .world-server-card-head p {
+  margin: 0 0 0.36rem;
+  color: var(--banri-cyan);
+}
+
+.worlds-page .world-server-card-head p span {
+  color: #f3fbfd;
+}
+
+.worlds-page .world-server-card-head strong,
+.worlds-page .world-server-card-featured .world-server-card-head strong {
+  display: block;
+  max-width: 16.5ch;
+  margin: 0;
+  color: #f7fcfd;
+  font: 800 clamp(1.42rem, 2.05vw, 2.28rem)/0.9 Rajdhani, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.52);
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.worlds-page .world-server-card:nth-child(n + 6) .world-server-card-head strong {
+  font-size: clamp(1.24rem, 1.85vw, 1.9rem);
+}
+
+.worlds-page .world-server-card-head small {
+  display: grid;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0.48rem;
+  padding-left: 0.58rem;
+  border-left: 2px solid var(--banri-cyan);
+  color: rgba(245, 252, 255, 0.86);
+  font: 800 0.58rem/1.15 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.worlds-page .world-server-description {
+  display: -webkit-box;
+  max-width: 52ch;
+  margin: 0 0 0.72rem;
+  overflow: hidden;
+  color: rgba(221, 239, 243, 0.88);
+  font: 700 0.84rem/1.42 Rajdhani, sans-serif;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.worlds-page .world-server-card:nth-child(n + 3) .world-server-description {
+  -webkit-line-clamp: 3;
+}
+
+.worlds-page .world-server-tags {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.32rem;
+  margin-top: auto;
+}
+
+.worlds-page .world-server-tags span {
+  min-height: 24px;
+  padding: 0.34rem 0.46rem;
+  border: 1px solid rgba(223, 249, 255, 0.18);
+  color: rgba(231, 248, 251, 0.84);
+  background: rgba(255, 255, 255, 0.035);
+  font: 800 0.5rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.worlds-page .world-server-card:hover .world-server-tags span,
+.worlds-page .world-server-card:focus-within .world-server-tags span {
+  border-color: rgba(22, 232, 255, 0.42);
+  color: #f4fcfd;
+}
+
+.worlds-page .world-server-live-panel {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: auto;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.74rem;
+  border: 1px solid rgba(22, 232, 255, 0.34);
+  background: linear-gradient(145deg, rgba(0, 12, 15, 0.84), rgba(0, 0, 0, 0.66));
+  box-shadow: inset 0 0 42px rgba(22, 232, 255, 0.04), 0 10px 32px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(3px);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.worlds-page .world-server-card:hover .world-server-live-panel,
+.worlds-page .world-server-card:focus-within .world-server-live-panel {
+  border-color: rgba(22, 232, 255, 0.62);
+  background: linear-gradient(145deg, rgba(0, 12, 15, 0.56), rgba(0, 0, 0, 0.42));
+  backdrop-filter: blur(1.5px);
+}
+
+.worlds-page .world-server-live-panel p {
+  display: flex;
+  align-items: center;
+  gap: 0.48rem;
+  min-height: 0;
+  margin: 0;
+  padding-bottom: 0.52rem;
+  border-bottom: 1px solid rgba(22, 232, 255, 0.22);
+  color: var(--banri-cyan);
+}
+
+.worlds-page .world-server-live-counts {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  min-height: 70px;
+  margin: 0.62rem 0 0.18rem;
+}
+
+.worlds-page .world-server-live-counts span {
+  display: grid;
+  justify-items: center;
+  padding: 0;
+}
+
+.worlds-page .world-server-live-counts strong {
+  color: #f7fcfd;
+  font: 800 clamp(2rem, 3.2vw, 3rem)/0.88 Rajdhani, sans-serif;
+}
+
+.worlds-page .world-server-live-counts em {
+  margin-top: 0.28rem;
+  color: var(--banri-cyan);
+  font: 800 0.55rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.worlds-page .world-server-player-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  min-height: 25px;
+  margin: 0.12rem 0 0;
+}
+
+.worlds-page .world-server-player-list span {
+  max-width: 100%;
+  padding: 0.22rem 0.35rem;
+  overflow: hidden;
+  border: 1px solid rgba(22, 232, 255, 0.14);
+  color: rgba(207, 227, 231, 0.72);
+  background: rgba(0, 0, 0, 0.2);
+  font: 800 0.47rem/1.1 "Share Tech Mono", monospace;
+  letter-spacing: 0.06em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.worlds-page .world-server-live-panel .world-server-activity {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: auto;
+}
+
+.worlds-page .world-server-live-panel .world-server-activity div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.worlds-page .world-server-activity span {
+  color: var(--banri-cyan);
+}
+
+.worlds-page .world-server-activity strong {
+  color: rgba(238, 251, 254, 0.82);
+}
+
+.worlds-page .world-server-signal-bars {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.25rem;
+}
+
+.worlds-page .world-server-signal-bars i {
+  display: block;
+  height: 5px;
+  background: rgba(222, 249, 255, 0.14);
+}
+
+.worlds-page .world-server-signal-bars i.is-active {
+  background: linear-gradient(90deg, #23ff9a, var(--banri-cyan));
+  box-shadow: 0 0 10px rgba(22, 232, 255, 0.24);
+}
+
+.worlds-page .world-server-live-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.82rem;
+  padding-top: 0.42rem;
+}
+
+.worlds-page .world-server-live-footer small {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(198, 219, 224, 0.72);
+}
+
+.worlds-page .world-server-live-footer small::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--banri-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(22, 232, 255, 0.28);
+}
+
+.worlds-page .world-server-live-footer .btn {
+  min-width: 78px;
+  min-height: 32px;
+  padding: 0.42rem 0.58rem;
+  font-size: 0.52rem;
+}
+
+.worlds-page .world-server-live-panel.has-query-error {
+  border-color: rgba(255, 105, 105, 0.54);
+  box-shadow: inset 0 0 24px rgba(255, 105, 105, 0.05);
+}
+
+.worlds-page .world-server-live-panel.has-query-error p,
+.worlds-page .world-server-live-panel.has-query-error .world-server-activity strong {
+  color: #ff8585;
+}
+
+.worlds-page .server-controller-shell {
+  display: grid;
+  grid-template-columns: minmax(178px, 218px) minmax(0, 1fr);
+  min-height: 650px;
+  border-color: rgba(22, 232, 255, 0.42);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(22, 232, 255, 0.13), transparent 24%),
+    radial-gradient(circle at 82% 10%, rgba(22, 232, 255, 0.08), transparent 28%),
+    linear-gradient(90deg, rgba(0, 22, 29, 0.94), rgba(0, 3, 6, 0.82) 18%, rgba(0, 10, 15, 0.96)),
+    rgba(0, 0, 0, 0.97);
+}
+
+.worlds-page .server-controller-stage {
+  padding: clamp(1rem, 1.5vw, 1.45rem);
+}
+
+.worlds-page .server-controller-status-strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 82px;
+  padding: 0.68rem;
+  border-color: rgba(22, 232, 255, 0.3);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 70px, rgba(255, 255, 255, 0.025) 71px),
+    rgba(0, 12, 17, 0.62);
+}
+
+.worlds-page .server-controller-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 238px), 1fr));
+  gap: 0.78rem;
+  align-items: stretch;
+}
+
+.worlds-page .server-control-card,
+.worlds-page .server-control-card.is-running {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 230px;
+  padding: 0.9rem;
+  overflow: hidden;
+  border-color: rgba(22, 232, 255, 0.36);
+  background:
+    radial-gradient(circle at 82% 12%, rgba(22, 232, 255, 0.14), transparent 20%),
+    linear-gradient(145deg, rgba(0, 25, 32, 0.88), rgba(0, 0, 0, 0.88) 66%),
+    rgba(0, 8, 10, 0.96);
+}
+
+.worlds-page .server-control-card.is-running {
+  grid-column: span 2;
+  min-height: 272px;
+  border-color: rgba(35, 255, 154, 0.86);
+  box-shadow: 0 0 30px rgba(22, 232, 255, 0.14), inset 0 0 46px rgba(35, 255, 154, 0.06);
+}
+
+.worlds-page .server-control-active-tag {
+  position: absolute;
+  top: -1px;
+  left: 0.9rem;
+  z-index: 3;
+  min-width: 126px;
+  padding: 0.36rem 0.72rem;
+  color: #011112;
+  background: linear-gradient(90deg, #23ff9a, var(--banri-cyan));
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 13px) 100%, 0 100%, 0 10px);
+  font: 900 0.52rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.worlds-page .server-control-sigil {
+  top: 0.72rem;
+  right: 0.72rem;
+  width: 38px;
+  height: 38px;
+  opacity: 0.9;
+}
+
+.worlds-page .server-control-sigil span {
+  width: 18px;
+  height: 18px;
+}
+
+.worlds-page .server-control-main,
+.worlds-page .server-control-card.is-running .server-control-main {
+  min-width: 0;
+  padding-top: 0.2rem;
+  padding-right: 3rem;
+}
+
+.worlds-page .server-control-card.is-running .server-control-main {
+  padding-top: 0.64rem;
+}
+
+.worlds-page .server-control-main h3,
+.worlds-page .server-control-card.is-running .server-control-main h3 {
+  max-width: 13.5ch;
+  margin: 0.28rem 0 0.5rem;
+  color: #f5fbfd;
+  font: 800 clamp(1.16rem, 1.18vw, 1.5rem)/0.96 Rajdhani, sans-serif;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+
+.worlds-page .server-control-card.is-running .server-control-main h3 {
+  font-size: clamp(1.35rem, 1.48vw, 1.85rem);
+}
+
+.worlds-page .server-control-container {
+  max-width: min(100%, 15rem);
+  min-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.worlds-page .server-control-command {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 0.66rem;
+  border-top: 1px solid rgba(22, 232, 255, 0.22);
+}
+
+.worlds-page .server-control-status {
+  justify-self: start;
+  max-width: 100%;
+  min-height: 25px;
+  color: var(--banri-cyan);
+  border-color: rgba(22, 232, 255, 0.28);
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.worlds-page .server-control-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.42rem;
+  width: 100%;
+}
+
+.worlds-page .server-control-actions .btn,
+.worlds-page .server-control-actions .btn-banri-danger {
+  min-width: 0;
+  min-height: 31px;
+  padding: 0.36rem 0.4rem;
+  font-size: 0.48rem;
+}
+
+.worlds-page .server-control-lock {
+  display: block;
+  color: #ff8585;
+  font: 800 0.52rem/1.25 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.worlds-page .server-control-button:disabled {
+  color: rgba(201, 224, 229, 0.36);
+  border-color: rgba(137, 171, 178, 0.22);
+  background: rgba(0, 0, 0, 0.32);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.admin-world-ticker-card {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.8fr) minmax(160px, 0.55fr) minmax(240px, 1.3fr) minmax(150px, 0.45fr);
+  gap: 0.72rem;
+  align-items: end;
+  margin-bottom: 0.88rem;
+  padding: 0.78rem;
+}
+
+.admin-world-ticker-card > div {
+  display: grid;
+  gap: 0.22rem;
+}
+
+.admin-world-ticker-card strong {
+  color: #f1fbfd;
+  font: 800 0.98rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.admin-world-ticker-card small,
+.admin-world-ticker-card span {
+  color: rgba(205, 226, 230, 0.66);
+  font: 800 0.52rem/1.2 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-world-ticker-card label {
+  margin: 0;
+}
+
+.admin-world-ticker-card .form-control {
+  min-height: 32px;
+  padding: 0.34rem 0.5rem;
+  font-size: 0.78rem;
+}
+
+.admin-world-ticker-card textarea.form-control {
+  min-height: 58px;
+}
+
+#serverControllerEditor.admin-grid {
+  grid-template-columns: minmax(280px, 0.8fr) minmax(360px, 1.2fr);
+  gap: 0.78rem;
+  align-items: start;
+}
+
+#serverControllerEditor .admin-controller-server-card {
+  grid-column: 1 / -1;
+}
+
+#serverControllerEditor .admin-card-body {
+  padding: 0.78rem;
+}
+
+#serverControllerEditor .admin-card-heading {
+  margin-bottom: 0.68rem;
+}
+
+#serverControllerEditor .admin-card-heading span {
+  font-size: 0.58rem;
+}
+
+#serverControllerEditor .admin-card-heading strong {
+  font-size: 0.58rem;
+}
+
+#serverControllerEditor .admin-card label {
+  margin-bottom: 0.22rem;
+  font-size: 0.52rem;
+}
+
+#serverControllerEditor .form-control,
+#serverControllerEditor .form-select {
+  min-height: 32px;
+  padding: 0.34rem 0.5rem;
+  font-size: 0.78rem;
+}
+
+#serverControllerEditor .admin-switch-block {
+  min-height: 56px;
+  padding: 0.55rem;
+}
+
+#serverControllerEditor .admin-help {
+  margin: 0.45rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+#serverControllerEditor .controller-access-tools {
+  grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr) auto;
+  gap: 0.52rem;
+}
+
+#serverControllerEditor .controller-access-tools .btn,
+#serverControllerEditor .controller-uid-row .btn,
+#serverControllerEditor .controller-server-row .btn {
+  min-height: 32px;
+  padding: 0.34rem 0.55rem;
+  font-size: 0.5rem;
+}
+
+#serverControllerEditor .controller-uid-list {
+  gap: 0.52rem;
+  margin-top: 0.66rem;
+}
+
+#serverControllerEditor .controller-uid-row {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.52rem;
+  padding: 0.58rem;
+}
+
+#serverControllerEditor .controller-uid-row strong {
+  font-size: 0.9rem;
+}
+
+#serverControllerEditor .controller-uid-row span,
+#serverControllerEditor .controller-uid-row small {
+  font-size: 0.5rem;
+}
+
+#serverControllerEditor .controller-server-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 0.58rem;
+  max-height: min(58vh, 660px);
+  overflow: auto;
+  padding-right: 0.2rem;
+}
+
+#serverControllerEditor .controller-server-row {
+  display: grid;
+  gap: 0.54rem;
+  padding: 0.62rem;
+  border: 1px solid rgba(22, 232, 255, 0.2);
+  background:
+    linear-gradient(145deg, rgba(22, 232, 255, 0.055), transparent 58%),
+    rgba(0, 0, 0, 0.34);
+}
+
+#serverControllerEditor .controller-server-row-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.58rem;
+  align-items: center;
+}
+
+#serverControllerEditor .controller-server-row-head strong,
+#serverControllerEditor .controller-server-row-head small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#serverControllerEditor .controller-server-row-head strong {
+  color: #f2fbfd;
+  font: 800 0.86rem/1 Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#serverControllerEditor .controller-server-row-head small {
+  margin-top: 0.18rem;
+  color: rgba(207, 226, 230, 0.62);
+  font: 800 0.5rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#serverControllerEditor .controller-server-row-fields {
+  display: grid;
+  grid-template-columns: 0.82fr 1fr 1fr 0.72fr 1fr 0.62fr 0.62fr 0.5fr auto;
+  gap: 0.42rem;
+  align-items: end;
+}
+
+#serverControllerEditor .controller-server-row-fields label {
+  min-width: 0;
+  margin: 0;
+}
+
+#serverControllerEditor .controller-server-row-fields span,
+#serverControllerEditor .controller-server-enabled span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--banri-cyan);
+  font: 800 0.46rem/1 "Share Tech Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#serverControllerEditor .controller-server-enabled {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+}
+
+#serverControllerEditor .controller-server-enabled span {
+  margin: 0;
+}
+
+@media (max-width: 1500px) {
+  .worlds-page .worlds-server-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .worlds-page .world-server-card,
+  .worlds-page .world-server-card:nth-child(n),
+  .worlds-page .world-server-card:nth-child(-n + 2),
+  .worlds-page .world-server-card:nth-child(n + 6) {
+    grid-column: span 1;
+  }
+
+  #serverControllerEditor .controller-server-row-fields {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .worlds-page .worlds-server-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .worlds-page .world-server-card,
+  .worlds-page .world-server-card:nth-child(n) {
+    grid-column: 1 / -1;
+  }
+
+  .worlds-page .server-controller-shell,
+  #serverControllerEditor.admin-grid,
+  .admin-world-ticker-card {
+    grid-template-columns: 1fr;
+  }
+
+  .worlds-page .server-controller-rail {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .worlds-page .world-server-card-body,
+  .worlds-page .world-server-card-featured .world-server-card-body {
+    grid-template-columns: 1fr;
+  }
+
+  .worlds-page .world-server-live-panel {
+    margin: 0 0.86rem 0.86rem;
+  }
+
+  .worlds-page .world-server-card-head strong,
+  .worlds-page .world-server-card-featured .world-server-card-head strong {
+    font-size: clamp(1.65rem, 10vw, 2.35rem);
+  }
+
+  .worlds-page .server-controller-status-strip,
+  .worlds-page .server-controller-cards,
+  #serverControllerEditor .controller-access-tools,
+  #serverControllerEditor .controller-uid-row,
+  #serverControllerEditor .controller-server-row-head,
+  #serverControllerEditor .controller-server-row-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .worlds-page .server-control-card.is-running {
+    grid-column: span 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .worlds-page .worlds-marquee-track {
+    animation: none;
+  }
+
+  .worlds-page .world-server-card:hover,
+  .worlds-page .world-server-card:focus-within,
+  .worlds-page .world-server-card:hover .world-server-card-media img,
+  .worlds-page .world-server-card:focus-within .world-server-card-media img {
+    transform: none;
+  }
+}

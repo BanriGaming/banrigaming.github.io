@@ -11,6 +11,7 @@ import {
   defaultGamesLibrary,
   defaultHeroCopy,
   defaultHeroVisual,
+  defaultWorldTicker,
   defaultQuotes,
   defaultControllerServers,
   defaultServerControllerConfig,
@@ -35,6 +36,7 @@ import {
   normalizeGame,
   normalizeHeroCopy,
   normalizeHeroVisual,
+  normalizeWorldTicker,
   normalizeQuotes,
   normalizeControllerServer,
   normalizeServerControllerConfig,
@@ -53,7 +55,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260909b";
+} from "./site-store.js?v=20260910a";
 
 const SERVER_STATUS_OPTIONS = ["Online", "Offline"];
 const SERVER_STATUS_SOURCE_OPTIONS = ["manual", "blackbox"];
@@ -70,6 +72,7 @@ const state = {
   quotes: structuredClone(defaultQuotes),
   hero: structuredClone(defaultHeroCopy),
   heroVisual: structuredClone(defaultHeroVisual),
+  worldTicker: structuredClone(defaultWorldTicker),
   featuredClip: structuredClone(defaultFeaturedClip),
   worldServers: [...defaultWorldServers],
   serverControllerConfig: structuredClone(defaultServerControllerConfig),
@@ -911,6 +914,7 @@ function renderWorldServersEditor() {
   if (!elements.worldsEditor) return;
   const search = state.worldServerSearch.trim().toLowerCase();
   const servers = readWorldServers();
+  const ticker = normalizeWorldTicker(state.worldTicker);
   const matches = servers
     .map((server, index) => ({ server, index }))
     .filter(({ server }) => {
@@ -927,6 +931,26 @@ function renderWorldServersEditor() {
     });
 
   elements.worldsEditor.innerHTML = `
+    <article class="admin-world-ticker-card panel-frame">
+      <div>
+        <p class="banri-modal-kicker mb-1">Live Activity Bar</p>
+        <strong>Worlds ticker</strong>
+        <small>Shown above the hosted world cards. Save Servers publishes this with the registry.</small>
+      </div>
+      <label>
+        <span>Ticker Label</span>
+        <input class="form-control" data-world-ticker-label value="${escapeAttr(ticker.label)}" />
+      </label>
+      <label>
+        <span>Ticker Items</span>
+        <textarea class="form-control" data-world-ticker-items rows="2" placeholder="One item per line">${escapeHtml(ticker.items.join("\n"))}</textarea>
+      </label>
+      <label class="admin-switch admin-switch-block mb-0">
+        <input type="checkbox" data-world-ticker-enabled ${ticker.enabled ? "checked" : ""} />
+        <span>Enabled<small>Shows the scrolling activity strip.</small></span>
+      </label>
+    </article>
+
     <div class="admin-world-server-toolbar panel-frame">
       <div>
         <p class="banri-modal-kicker mb-1">Registry Records</p>
@@ -1066,49 +1090,57 @@ function renderControllerUidRow(uid) {
 
 function renderControllerServerRow(server) {
   return `
-    <div class="controller-server-row" data-controller-server="${escapeAttr(server.id)}">
-      <label>
-        <span>Enabled</span>
-        <input type="checkbox" data-controller-server-field="enabled" ${server.enabled !== false ? "checked" : ""} />
-      </label>
-      <div>
-        <span>Route ID</span>
-        <input class="form-control" data-controller-server-field="id" value="${escapeAttr(server.id)}" />
+    <article class="controller-server-row" data-controller-server="${escapeAttr(server.id)}">
+      <div class="controller-server-row-head">
+        <label class="controller-server-enabled">
+          <input type="checkbox" data-controller-server-field="enabled" ${server.enabled !== false ? "checked" : ""} />
+          <span>Enabled</span>
+        </label>
+        <div>
+          <strong>${escapeHtml(server.label)}</strong>
+          <small>${escapeHtml(server.container)}</small>
+        </div>
+        <button class="btn btn-banri-outline btn-sm" type="button" data-remove-controller-server>Remove</button>
       </div>
-      <div>
-        <span>Label</span>
-        <input class="form-control" data-controller-server-field="label" value="${escapeAttr(server.label)}" />
+      <div class="controller-server-row-fields">
+        <label>
+          <span>Route ID</span>
+          <input class="form-control" data-controller-server-field="id" value="${escapeAttr(server.id)}" />
+        </label>
+        <label>
+          <span>Label</span>
+          <input class="form-control" data-controller-server-field="label" value="${escapeAttr(server.label)}" />
+        </label>
+        <label>
+          <span>Container</span>
+          <input class="form-control" data-controller-server-field="container" value="${escapeAttr(server.container)}" />
+        </label>
+        <label>
+          <span>Query Type</span>
+          <input class="form-control" list="serverQueryTypeOptions" data-controller-server-field="queryType" value="${escapeAttr(server.queryType || "")}" placeholder="optional" />
+        </label>
+        <label>
+          <span>Query Host</span>
+          <input class="form-control" data-controller-server-field="queryHost" value="${escapeAttr(server.queryHost || "")}" placeholder="optional" />
+        </label>
+        <label>
+          <span>Query Port</span>
+          <input class="form-control" type="number" min="0" max="65535" data-controller-server-field="queryPort" value="${escapeAttr(server.queryPort || "")}" />
+        </label>
+        <label>
+          <span>Max Slots</span>
+          <input class="form-control" type="number" min="0" max="9999" data-controller-server-field="playersMax" value="${escapeAttr(server.playersMax || "")}" />
+        </label>
+        <label>
+          <span>Order</span>
+          <input class="form-control" type="number" min="1" data-controller-server-field="order" value="${escapeAttr(server.order)}" />
+        </label>
+        <label class="controller-server-enabled">
+          <input type="checkbox" data-controller-server-field="queryEnabled" ${server.queryEnabled !== false ? "checked" : ""} />
+          <span>Query</span>
+        </label>
       </div>
-      <div>
-        <span>Container</span>
-        <input class="form-control" data-controller-server-field="container" value="${escapeAttr(server.container)}" />
-      </div>
-      <div>
-        <span>Query Type</span>
-        <input class="form-control" list="serverQueryTypeOptions" data-controller-server-field="queryType" value="${escapeAttr(server.queryType || "")}" placeholder="optional" />
-      </div>
-      <div>
-        <span>Query Host</span>
-        <input class="form-control" data-controller-server-field="queryHost" value="${escapeAttr(server.queryHost || "")}" placeholder="optional" />
-      </div>
-      <div>
-        <span>Query Port</span>
-        <input class="form-control" type="number" min="0" max="65535" data-controller-server-field="queryPort" value="${escapeAttr(server.queryPort || "")}" />
-      </div>
-      <div>
-        <span>Max Slots</span>
-        <input class="form-control" type="number" min="0" max="9999" data-controller-server-field="playersMax" value="${escapeAttr(server.playersMax || "")}" />
-      </div>
-      <div>
-        <span>Order</span>
-        <input class="form-control" type="number" min="1" data-controller-server-field="order" value="${escapeAttr(server.order)}" />
-      </div>
-      <label>
-        <span>Query</span>
-        <input type="checkbox" data-controller-server-field="queryEnabled" ${server.queryEnabled !== false ? "checked" : ""} />
-      </label>
-      <button class="btn btn-banri-outline btn-sm" type="button" data-remove-controller-server>Remove</button>
-    </div>
+    </article>
   `;
 }
 
@@ -1492,6 +1524,7 @@ async function loadData() {
   state.quotes = normalizeQuotes(data.quotes);
   state.hero = normalizeHeroCopy(data.hero);
   state.heroVisual = normalizeHeroVisual(data.heroVisual);
+  state.worldTicker = normalizeWorldTicker(data.worldTicker);
   state.featuredClip = normalizeFeaturedClip(data.featuredClip);
   state.steamConfig = normalizeSteamConfig(data.steamConfig);
   state.steamSignal = normalizeSteamSignal(data.steamSignal);
@@ -1617,6 +1650,14 @@ function readWorldServers() {
       ...server,
       order: index + 1
     }, index));
+}
+
+function readWorldTicker() {
+  return normalizeWorldTicker({
+    enabled: elements.worldsEditor?.querySelector("[data-world-ticker-enabled]")?.checked !== false,
+    label: elements.worldsEditor?.querySelector("[data-world-ticker-label]")?.value || defaultWorldTicker.label,
+    items: elements.worldsEditor?.querySelector("[data-world-ticker-items]")?.value || ""
+  });
 }
 
 function readServerControllerConfig() {
@@ -2205,6 +2246,7 @@ function bindAdminEvents() {
     state.quotes = structuredClone(defaultQuotes);
     state.hero = structuredClone(defaultHeroCopy);
     state.heroVisual = structuredClone(defaultHeroVisual);
+    state.worldTicker = structuredClone(defaultWorldTicker);
     state.featuredClip = structuredClone(defaultFeaturedClip);
     state.worldServers = [...defaultWorldServers];
     state.chroniclesAiConfig = structuredClone(defaultChroniclesAiConfig);
@@ -2216,6 +2258,7 @@ function bindAdminEvents() {
       quotes: state.quotes,
       hero: state.hero,
       heroVisual: state.heroVisual,
+      worldTicker: state.worldTicker,
       featuredClip: state.featuredClip,
       chroniclesAi: state.chroniclesAiConfig
     });
@@ -2227,8 +2270,10 @@ function bindAdminEvents() {
   document.getElementById("saveWorldServersButton")?.addEventListener("click", async () => {
     try {
       state.worldServers = readWorldServers();
+      state.worldTicker = readWorldTicker();
       state.serverControllerConfig = syncControllerConfigFromWorldServers(readServerControllerConfig(), state.worldServers);
       await saveWorldServers(state.worldServers);
+      await saveSiteConfigPatch({ worldTicker: state.worldTicker });
       state.serverControllerConfig = await saveServerControllerConfig(state.serverControllerConfig, state.user);
       state.worldServers = await loadAdminWorldServers();
       state.serverControllerConfig = await loadServerControllerConfig();

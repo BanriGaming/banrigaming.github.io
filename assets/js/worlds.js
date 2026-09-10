@@ -3,14 +3,18 @@ import {
   getFirebaseServices,
   isAdminUid,
   loadServerControllerConfig,
+  loadWorldTickerConfig,
   loadWorldServers,
+  normalizeWorldTicker,
   normalizeServerControllerConfig,
-  normalizeWorldServer
-} from "./site-store.js?v=20260909b";
+  normalizeWorldServer,
+  slugify
+} from "./site-store.js?v=20260910a";
 
 const { auth } = getFirebaseServices();
 let currentUser = null;
 let currentServers = [];
+let worldTicker = normalizeWorldTicker();
 let controllerConfig = normalizeServerControllerConfig();
 let controllerSnapshot = null;
 let controllerPollTimer = 0;
@@ -37,9 +41,26 @@ const elements = {
   panels: document.querySelectorAll("[data-worlds-panel]"),
   controllerTab: document.getElementById("worldsControllerTab"),
   controllerPanel: document.getElementById("worldsControllerPanel"),
+  ticker: document.getElementById("worldsActivityTicker"),
   controllerSummary: document.getElementById("worldsControllerSummary"),
   controllerRefresh: document.getElementById("worldsControllerRefresh"),
   controllerGrid: document.getElementById("worldsControllerGrid")
+};
+
+const DEFAULT_WORLD_ART = "/assets/img/worlds/noir-server-vault.webp";
+const STEAM_WORLD_ART = {
+  ats: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/270880/header.jpg",
+  barotrauma: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/602960/header.jpg",
+  corekeeper: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1621690/header.jpg",
+  "core-keeper": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1621690/header.jpg",
+  dragonwilds: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1374490/6f6bba2ddccb49f3a0abb831684ca085e453c721/header_alt_assets_3.jpg?t=1788340069",
+  enshrouded: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1203620/header.jpg",
+  palworld: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1623730/header.jpg",
+  soulmask: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2646460/header.jpg",
+  terraria: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/105600/header.jpg",
+  valheim: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/892970/header.jpg",
+  vrising: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1604030/header.jpg",
+  "v-rising": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1604030/header.jpg"
 };
 
 function escapeHtml(value) {
@@ -155,11 +176,32 @@ function renderActivitySegments(level = 0) {
   return Array.from({ length: 5 }, (_, segment) => `<i class="${segment < activeSegments ? "is-active" : ""}"></i>`).join("");
 }
 
+function getActivityScore(server = {}) {
+  const playersOnline = clampLiveNumber(server.playersOnline);
+  const activityLevel = clampLiveNumber(server.activityLevel, 0, 100);
+  return (playersOnline * 1000) + activityLevel;
+}
+
 function sortWorldServers(a, b) {
   const rank = { Online: 0, Offline: 1, Missing: 2 };
+  const activityRank = getActivityScore(b) - getActivityScore(a);
+  if (activityRank) return activityRank;
   const statusRank = (rank[a.displayStatus] ?? 3) - (rank[b.displayStatus] ?? 3);
   if (statusRank) return statusRank;
   return Number(a.order || 0) - Number(b.order || 0) || a.title.localeCompare(b.title);
+}
+
+function getServerArt(server = {}) {
+  const configured = String(server.image || "").trim();
+  if (configured && configured !== DEFAULT_WORLD_ART) return configured;
+  const keys = [
+    server.controllerServerId,
+    server.queryType,
+    server.game,
+    server.title
+  ].map((value) => slugify(value || "")).filter(Boolean);
+  const match = keys.find((key) => STEAM_WORLD_ART[key]);
+  return match ? STEAM_WORLD_ART[match] : configured || DEFAULT_WORLD_ART;
 }
 
 function decorateServer(server) {
@@ -188,7 +230,8 @@ function decorateServer(server) {
     playerQueryStatus: controllerServer?.playerQueryStatus || normalized.playerQueryStatus || "",
     playerQueryError: controllerServer?.playerQueryError || normalized.playerQueryError || "",
     playerQueryUpdatedAt: controllerServer?.playerQueryUpdatedAt || normalized.playerQueryUpdatedAt || 0,
-    activityLevel
+    activityLevel,
+    image: getServerArt(normalized)
   };
 }
 
@@ -233,6 +276,42 @@ function renderServerGrid() {
     : '<div class="panel-frame placeholder-panel"><p class="banri-modal-kicker">No Signals</p><h2>No hosted worlds are published yet.</h2></div>';
 }
 
+function getTickerItems() {
+  const configured = normalizeWorldTicker(worldTicker);
+  if (configured.items.length) return configured.items;
+  return currentServers
+    .map((server) => server.game || server.title)
+    .filter(Boolean)
+    .slice(0, 16);
+}
+
+function renderWorldTicker() {
+  if (!elements.ticker) return;
+  const ticker = normalizeWorldTicker(worldTicker);
+  const items = getTickerItems();
+  elements.ticker.classList.toggle("d-none", !ticker.enabled || !items.length);
+  if (!ticker.enabled || !items.length) {
+    elements.ticker.innerHTML = "";
+    return;
+  }
+  const itemMarkup = items
+    .map((item) => `<span class="worlds-marquee-game">${escapeHtml(item)}<i aria-hidden="true">+</i></span>`)
+    .join("");
+  elements.ticker.innerHTML = `
+    <div class="worlds-marquee-track">
+      <div class="worlds-marquee-set">
+        <span class="worlds-marquee-label">${escapeHtml(ticker.label)}</span>
+        ${itemMarkup}
+      </div>
+      <div class="worlds-marquee-set" aria-hidden="true">
+        <span class="worlds-marquee-label">${escapeHtml(ticker.label)}</span>
+        ${itemMarkup}
+      </div>
+    </div>
+    <button class="worlds-marquee-toggle" type="button" data-worlds-ticker-toggle>Pause</button>
+  `;
+}
+
 function renderServerCard(server, index, isFeatured = false) {
   const tags = (server.tags || []).slice(0, 5);
   const playersOnline = Math.max(0, Number(server.playersOnline || 0));
@@ -240,7 +319,7 @@ function renderServerCard(server, index, isFeatured = false) {
   const queryFailed = server.playerQueryStatus === "query_failed";
   const activityLabel = queryFailed ? "Query issue" : getActivityLabel(server.activityLevel, server.displayStatus);
   const hasMemberSignal = playersOnline > 0;
-  const rankLabel = hasMemberSignal ? `#${String(index + 1).padStart(2, "0")}` : "Not Ranked";
+  const rankLabel = getActivityScore(server) > 0 ? `#${String(index + 1).padStart(2, "0")}` : "Not Ranked";
   const updated = server.playerQueryUpdatedAt
     ? formatControllerTime(server.playerQueryUpdatedAt)
     : server.updatedAt ? formatControllerTime(server.updatedAt) : "Firebase";
@@ -249,10 +328,11 @@ function renderServerCard(server, index, isFeatured = false) {
   const host = server.host || "Private";
   const signalLabel = queryFailed ? "Player Query Needs Attention" : hasMemberSignal ? "Members Playing Now" : "No Current Member Activity";
   const playerNames = Array.isArray(server.playerNames) ? server.playerNames.slice(0, 5) : [];
+  const worldKey = slugify(server.game || server.controllerServerId || server.id);
 
   return `
-    <article id="${escapeAttr(server.id)}" class="world-server-card ${isFeatured ? "world-server-card-featured" : "world-server-card-compact"} is-${escapeAttr(statusTone)}" style="--server-image: url('${escapeAttr(server.image)}')">
-      <div class="world-server-card-media" aria-hidden="true"></div>
+    <article id="${escapeAttr(server.id)}" class="world-server-card ${isFeatured ? "world-server-card-featured" : "world-server-card-compact"} is-${escapeAttr(statusTone)}" data-world="${escapeAttr(worldKey)}" style="--server-image: url('${escapeAttr(server.image)}')">
+      <div class="world-server-card-media" aria-hidden="true"><img src="${escapeAttr(server.image)}" alt="" loading="lazy" /></div>
       <div class="world-server-card-body">
         <section class="world-server-copy">
           <div class="world-server-rank">
@@ -375,7 +455,12 @@ async function renderWorlds() {
   setText(elements.summary, "Loading hosted worlds...");
 
   try {
-    currentServers = (await loadWorldServers())
+    const [servers, tickerConfig] = await Promise.all([
+      loadWorldServers(),
+      loadWorldTickerConfig()
+    ]);
+    worldTicker = normalizeWorldTicker(tickerConfig);
+    currentServers = servers
       .map(normalizeWorldServer)
       .filter((server) => server.enabled !== false)
       .map(decorateServer)
@@ -383,6 +468,7 @@ async function renderWorlds() {
 
     updateWorldMetrics();
     renderServerGrid();
+    renderWorldTicker();
   } catch (error) {
     setText(elements.summary, "World sync failed");
     if (elements.grid) {
@@ -444,6 +530,7 @@ async function refreshControllerStatus({ silent = false } = {}) {
     currentServers.sort(sortWorldServers);
     updateWorldMetrics();
     renderServerGrid();
+    renderWorldTicker();
   }
 }
 
@@ -540,6 +627,9 @@ function renderControllerCard(server) {
   const isMissing = server.status === "missing";
   const busy = controllerBusy === server.id;
   const activeServer = controllerSnapshot?.activeServer || "";
+  const activeControllerServer = controllerSnapshot?.servers?.find((item) => item.status === "running" && item.id !== server.id);
+  const activePlayers = clampLiveNumber(activeControllerServer?.playersOnline ?? activeControllerServer?.numplayers);
+  const switchLocked = Boolean(activeControllerServer && activePlayers > 0);
   const startLabel = activeServer && activeServer !== server.id ? "Switch" : "Start";
   const statusTone = isRunning ? "online" : isMissing ? "missing" : "offline";
   return `
@@ -554,10 +644,11 @@ function renderControllerCard(server) {
       <div class="server-control-command">
         <strong class="server-control-status"><i class="server-status-dot ${statusTone}"></i>${escapeHtml(formatControllerStatus(server.status))}</strong>
         <div class="server-control-actions">
-          <button class="btn btn-banri-primary btn-sm server-control-button" type="button" data-controller-action="start" data-controller-server="${escapeAttr(server.id)}" ${busy || isRunning || isMissing ? "disabled" : ""}>${busy ? "Working" : startLabel}</button>
+          <button class="btn btn-banri-primary btn-sm server-control-button" type="button" data-controller-action="start" data-controller-server="${escapeAttr(server.id)}" ${busy || isRunning || isMissing || switchLocked ? "disabled" : ""} ${switchLocked ? `title="Switch locked while ${escapeAttr(activeControllerServer.label)} has ${activePlayers} player${activePlayers === 1 ? "" : "s"} online."` : ""}>${busy ? "Working" : startLabel}</button>
           <button class="btn btn-banri-outline btn-sm server-control-button" type="button" data-controller-action="restart" data-controller-server="${escapeAttr(server.id)}" ${busy || isMissing ? "disabled" : ""}>Restart</button>
           <button class="btn btn-banri-danger btn-sm server-control-button" type="button" data-controller-action="stop" data-controller-server="${escapeAttr(server.id)}" ${busy || !isRunning || isMissing ? "disabled" : ""}>Stop</button>
         </div>
+        ${switchLocked ? `<small class="server-control-lock">Switch locked: ${activePlayers} player${activePlayers === 1 ? "" : "s"} on ${escapeHtml(activeControllerServer.label)}.</small>` : ""}
       </div>
     </article>
   `;
@@ -809,6 +900,12 @@ async function runControllerAction(action, serverId) {
 
   if (action === "start") {
     const activeServer = controllerSnapshot?.servers?.find((item) => item.status === "running" && item.id !== serverId);
+    const activePlayers = clampLiveNumber(activeServer?.playersOnline ?? activeServer?.numplayers);
+    if (activeServer && activePlayers > 0) {
+      controllerMessage = `Switch locked while ${activeServer.label} has ${activePlayers} player${activePlayers === 1 ? "" : "s"} online.`;
+      renderControllerPanel();
+      return;
+    }
     if (activeServer && !(await confirmServerSwitch(activeServer, server))) {
       return;
     }
@@ -832,6 +929,7 @@ async function runControllerAction(action, serverId) {
     currentServers = currentServers.map(decorateServer).sort(sortWorldServers);
     updateWorldMetrics();
     renderServerGrid();
+    renderWorldTicker();
   }
 }
 
@@ -844,6 +942,13 @@ function actionLabel(action) {
 }
 
 document.addEventListener("click", (event) => {
+  const tickerToggle = event.target.closest("[data-worlds-ticker-toggle]");
+  if (tickerToggle) {
+    elements.ticker?.classList.toggle("is-paused");
+    tickerToggle.textContent = elements.ticker?.classList.contains("is-paused") ? "Play" : "Pause";
+    return;
+  }
+
   const viewButton = event.target.closest("[data-worlds-view]");
   if (viewButton) {
     setWorldsView(viewButton.dataset.worldsView);

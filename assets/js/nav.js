@@ -4,6 +4,41 @@ const BANRI_SHARED_SCRIPTS = [
   { src: "/assets/js/music-player.js?v=20260808b" }
 ];
 
+function getCleanHtmlPath(pathname) {
+  if (!pathname || pathname === "/") return pathname;
+  if (/\/index\.html$/i.test(pathname)) return pathname.replace(/index\.html$/i, "");
+  if (/\.html$/i.test(pathname)) return pathname.replace(/\.html$/i, "");
+  return pathname;
+}
+
+function applyCleanHtmlUrl() {
+  if (!window.history?.replaceState || !/^https?:$/i.test(window.location.protocol)) return;
+  const cleanPath = getCleanHtmlPath(window.location.pathname);
+  if (cleanPath === window.location.pathname) return;
+  window.history.replaceState(window.history.state, document.title, `${cleanPath}${window.location.search}${window.location.hash}`);
+}
+
+function getCleanHref(value) {
+  if (!value || /^(?:#|mailto:|tel:|javascript:)/i.test(value)) return value;
+  try {
+    const url = new URL(value, window.location.href);
+    if (url.origin !== window.location.origin) return value;
+    const cleanPath = getCleanHtmlPath(url.pathname);
+    if (cleanPath === url.pathname) return value;
+    return `${cleanPath}${url.search}${url.hash}`;
+  } catch (error) {
+    return value;
+  }
+}
+
+function rewriteCleanHtmlLinks(root = document) {
+  root.querySelectorAll?.("a[href]").forEach((link) => {
+    const original = link.getAttribute("href");
+    const clean = getCleanHref(original);
+    if (clean && clean !== original) link.setAttribute("href", clean);
+  });
+}
+
 function ensureBanriFavicon() {
   const existing = document.querySelector("link[rel~='icon']");
   if (existing) return;
@@ -38,6 +73,7 @@ function loadBanriSharedScripts() {
       .then(() => {
         if (window.BanriTheme && typeof window.BanriTheme.init === "function") {
           window.BanriTheme.init();
+          rewriteCleanHtmlLinks(document);
         }
       })
       .catch((error) => {
@@ -47,6 +83,7 @@ function loadBanriSharedScripts() {
 }
 
 function includeHTML() {
+  applyCleanHtmlUrl();
   ensureBanriFavicon();
   var z, i, elmnt, file, xhttp;
   /* Loop through a collection of all HTML elements: */
@@ -75,8 +112,15 @@ function includeHTML() {
   }
 
   document.dispatchEvent(new CustomEvent("banri:includes-ready"));
+  rewriteCleanHtmlLinks(document);
   loadBanriSharedScripts();
   if (window.BanriTheme && typeof window.BanriTheme.init === "function") {
     window.BanriTheme.init();
+    rewriteCleanHtmlLinks(document);
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  applyCleanHtmlUrl();
+  rewriteCleanHtmlLinks(document);
+});

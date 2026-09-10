@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finding Route | Bancy Waypoint</title>
+    <link rel="stylesheet" href="/assets/css/main.css?v=20260910a" />
+    <script>
+      (async function routeCleanUrl() {
+        const path = window.location.pathname;
+        const hasFileExtension = /\/[^/]+\.[^/]+$/.test(path);
+        if (hasFileExtension) return;
+
+        const cleanPath = path.replace(/\/+$/, "");
+        const candidates = cleanPath
+          ? [`${cleanPath}.html`, `${cleanPath}/index.html`]
+          : ["/index.html"];
+
+        for (const candidate of candidates) {
+          try {
+            const response = await fetch(candidate, { method: "HEAD", cache: "no-store" });
+            if (response.ok) {
+              window.location.replace(`${candidate}${window.location.search}${window.location.hash}`);
+              return;
+            }
+          } catch (error) {
+            // Let the static fallback render below if probing is blocked.
+          }
+        }
+
+        document.documentElement.classList.add("route-missing");
+      })();
+    </script>
+  </head>
+  <body class="banri-theme">
+    <main class="banri-section min-vh-100 d-flex align-items-center">
+      <div class="container px-3">
+        <section class="panel-frame placeholder-panel">
+          <p class="banri-modal-kicker">Waypoint Router</p>
+          <h1>Route not found.</h1>
+          <p>This page may have moved, or the clean URL fallback could not resolve the matching file.</p>
+          <a class="btn btn-banri-primary" href="/">Return Home</a>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
