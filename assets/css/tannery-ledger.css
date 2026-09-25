@@ -286,6 +286,10 @@
   border: 1px solid var(--dw-line);
 }
 
+.dw-segmented.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .dw-segmented button {
   min-height: 42px;
   padding: 8px 14px;
@@ -592,6 +596,18 @@
 .dw-toggle input:checked + span::after {
   transform: translateX(18px);
   background: var(--dw-green);
+}
+
+.dw-bank-heading-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.dw-admin-mode-toggle {
+  color: var(--dw-cyan);
 }
 
 .dw-production-controls {
@@ -1826,6 +1842,15 @@
   .dw-replenishment-grid,
   .dw-admin-storage {
     grid-template-columns: 1fr;
+  }
+
+  .dw-segmented.three {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-segmented button + button {
+    border-top: 1px solid var(--dw-line);
+    border-left: 0;
   }
 
   .dw-bank-capacity-copy {

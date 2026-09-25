@@ -165,6 +165,7 @@ const state = {
   order: new Map(),
   user: null,
   isAdmin: false,
+  adminControlsVisible: false,
   bank: {
     balance: { amount: 0 },
     storage: { chestCount: DEFAULT_BANK_CHESTS },
@@ -262,13 +263,18 @@ function showToast(message) {
 function calculateRoute(methodKey, input, mode) {
   const method = METHODS[methodKey];
   const safeInput = Math.max(0, Math.floor(Number(input) || 0));
-  const units = mode === "investment" ? Math.floor(safeInput / method.unitCost) : safeInput;
+  const profitPerUnit = (method.unitOutput * method.sellValue) - method.unitCost;
+  const units = mode === "investment"
+    ? Math.floor(safeInput / method.unitCost)
+    : mode === "goal"
+      ? Math.ceil(safeInput / profitPerUnit)
+      : safeInput;
   const spend = units * method.unitCost;
   const output = units * method.unitOutput;
   const gross = output * method.sellValue;
   const profit = gross - spend;
   const roi = spend ? (profit / spend) * 100 : 0;
-  const leftover = mode === "investment" ? safeInput - spend : 0;
+  const leftover = mode === "investment" ? safeInput - spend : mode === "goal" ? profit - safeInput : 0;
   const materialSlots = Math.ceil(units / MATERIAL_STACK);
   const outputSlots = Math.ceil(output / MATERIAL_STACK);
   const chitSlots = Math.ceil(spend / CHIT_STACK);
@@ -313,10 +319,10 @@ function setMethod(methodKey) {
 }
 
 function setProfitMode(mode) {
-  state.profitMode = mode === "investment" ? "investment" : "quantity";
+  state.profitMode = ["quantity", "investment", "goal"].includes(mode) ? mode : "quantity";
   $$('[data-profit-mode]').forEach((button) => button.classList.toggle("is-active", button.dataset.profitMode === state.profitMode));
   $("#profitInput").value = "";
-  $("#profitInput").placeholder = state.profitMode === "investment" ? "e.g. 50,000" : "e.g. 500";
+  $("#profitInput").placeholder = state.profitMode === "quantity" ? "e.g. 500" : state.profitMode === "goal" ? "e.g. 158,751" : "e.g. 50,000";
   state.profitInput = 0;
   renderProfit();
 }
@@ -325,12 +331,15 @@ function renderProfit() {
   const method = METHODS[state.method];
   const result = calculateRoute(state.method, state.profitInput, state.profitMode);
   const isInvestment = state.profitMode === "investment";
+  const isGoal = state.profitMode === "goal";
 
-  $("#profitInputLabel").textContent = isInvestment ? "Garou Chit Investment" : method.inputLabel;
-  $("#profitInputSuffix").textContent = isInvestment ? "chit" : method.inputUnit;
-  $("#profitInputHelp").textContent = isInvestment
-    ? `The ledger purchases the maximum whole ${method.inputUnit} the investment can cover.`
-    : `Enter the number of ${method.inputUnit} you plan to buy and process.`;
+  $("#profitInputLabel").textContent = isGoal ? "Net Profit Goal" : isInvestment ? "Garou Chit Investment" : method.inputLabel;
+  $("#profitInputSuffix").textContent = isInvestment || isGoal ? "chit" : method.inputUnit;
+  $("#profitInputHelp").textContent = isGoal
+    ? `The ledger calculates enough whole ${method.inputUnit} to meet or exceed this profit target.`
+    : isInvestment
+      ? `The ledger purchases the maximum whole ${method.inputUnit} the investment can cover.`
+      : `Enter the number of ${method.inputUnit} you plan to buy and process.`;
 
   $("#fixedDataStrip").innerHTML = method.fixedData.map(([label, value]) => `
     <div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>
@@ -343,26 +352,49 @@ function renderProfit() {
   $("#profitRoi").textContent = `${percentFormat.format(result.roi)}%`;
   $("#profitOutput").textContent = `${formatNumber(result.output)} ${method.outputLabel}`;
   $("#profitLeftover").textContent = `${formatNumber(result.leftover)} Chit`;
+  $("#profitRemainderLabel").textContent = isGoal ? "Goal Surplus" : "Chit Leftover";
   $("#profitTripFootprint").textContent = `${result.peakSlots} of ${inventorySlots()} slots required`;
 
-  const formula = state.method === "dragonwolf"
+  const routeFormula = state.method === "dragonwolf"
     ? `${formatNumber(result.units)} hides x 45 Chit = ${formatNumber(result.spend)} invested. ${formatNumber(result.output)} leather x 60 Chit = ${formatNumber(result.gross)} returned. Net profit: ${formatNumber(result.profit)} Chit.`
     : `${formatNumber(result.units)} logs x 3 Chit = ${formatNumber(result.spend)} invested. ${formatNumber(result.units)} logs produce ${formatNumber(result.output)} charcoal x 3 Chit = ${formatNumber(result.gross)} returned. Net profit: ${formatNumber(result.profit)} Chit.`;
+  const formula = isGoal
+    ? `Target: ${formatNumber(result.input)} Chit. ${routeFormula} Goal surplus: ${formatNumber(result.leftover)} Chit.`
+    : routeFormula;
   $("#formulaTrace").innerHTML = `<strong>Formula Trace</strong><span>${escapeHtml(formula)}</span>`;
 
-  const comparisonInvestment = state.profitMode === "investment" ? result.input : result.spend;
-  const dragonwolf = calculateRoute("dragonwolf", comparisonInvestment, "investment");
-  const ash = calculateRoute("ash", comparisonInvestment, "investment");
-  $("#compareDragonwolf").innerHTML = `
-    <span>Dragonwolf Hide</span>
-    <strong>${formatNumber(dragonwolf.profit)} Chit profit</strong>
-    <small>${formatNumber(dragonwolf.units)} hides / ${percentFormat.format(dragonwolf.roi)}% return</small>
-  `;
-  $("#compareAsh").innerHTML = `
-    <span>Ash Log Cycle</span>
-    <strong>${formatNumber(ash.profit)} Chit profit</strong>
-    <small>${formatNumber(ash.units)} logs / ${percentFormat.format(ash.roi)}% return</small>
-  `;
+  if (isGoal) {
+    const dragonwolf = calculateRoute("dragonwolf", result.input, "goal");
+    const ash = calculateRoute("ash", result.input, "goal");
+    $("#comparisonBasis").textContent = "Same Profit Goal";
+    $("#comparisonDescription").textContent = "Both methods calculate the whole units and starting investment needed to meet the target.";
+    $("#compareDragonwolf").innerHTML = `
+      <span>Dragonwolf Hide</span>
+      <strong>${formatNumber(dragonwolf.units)} hides required</strong>
+      <small>${formatNumber(dragonwolf.spend)} Chit invested / ${formatNumber(dragonwolf.profit)} profit</small>
+    `;
+    $("#compareAsh").innerHTML = `
+      <span>Ash Log Cycle</span>
+      <strong>${formatNumber(ash.units)} logs required</strong>
+      <small>${formatNumber(ash.spend)} Chit invested / ${formatNumber(ash.profit)} profit</small>
+    `;
+  } else {
+    const comparisonInvestment = isInvestment ? result.input : result.spend;
+    const dragonwolf = calculateRoute("dragonwolf", comparisonInvestment, "investment");
+    const ash = calculateRoute("ash", comparisonInvestment, "investment");
+    $("#comparisonBasis").textContent = "Same Investment";
+    $("#comparisonDescription").textContent = "Both methods use the current investment value so the return is directly comparable.";
+    $("#compareDragonwolf").innerHTML = `
+      <span>Dragonwolf Hide</span>
+      <strong>${formatNumber(dragonwolf.profit)} Chit profit</strong>
+      <small>${formatNumber(dragonwolf.units)} hides / ${percentFormat.format(dragonwolf.roi)}% return</small>
+    `;
+    $("#compareAsh").innerHTML = `
+      <span>Ash Log Cycle</span>
+      <strong>${formatNumber(ash.profit)} Chit profit</strong>
+      <small>${formatNumber(ash.units)} logs / ${percentFormat.format(ash.roi)}% return</small>
+    `;
+  }
 
   renderProduction();
 }
@@ -639,7 +671,8 @@ function normalizeEntries(value) {
 function renderBank() {
   const requests = normalizeEntries(state.bank.requests).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
   const ledger = normalizeEntries(state.bank.ledger).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
-  const visibleRequests = state.isAdmin ? requests : requests.filter((request) => request.uid === state.user?.uid);
+  const adminMode = state.isAdmin && state.adminControlsVisible;
+  const visibleRequests = adminMode ? requests : requests.filter((request) => request.uid === state.user?.uid);
   const pending = visibleRequests.filter((request) => request.status === "pending");
   const bankAmount = Number(state.bank.balance?.amount || 0);
   const chestCount = normalizedChestCount(state.bank.storage?.chestCount);
@@ -658,10 +691,10 @@ function renderBank() {
     : "Sign in to view physical storage usage.";
   $("#bankPendingCount").textContent = formatNumber(pending.length);
   $("#bankLedgerCount").textContent = formatNumber(ledger.length);
-  $("#bankAccessLabel").textContent = state.isAdmin ? "Administrator" : state.user ? "Member" : "Guest";
+  $("#bankAccessLabel").textContent = state.isAdmin ? adminMode ? "Admin Controls" : "Member View" : state.user ? "Member" : "Guest";
   $("#pendingTabBadge").hidden = !pending.length;
   $("#pendingTabBadge").textContent = formatNumber(pending.length);
-  $("#requestQueueHint").textContent = state.isAdmin ? "All member requests" : "Your requests";
+  $("#requestQueueHint").textContent = adminMode ? "All member requests" : "Your requests";
 
   const connection = $("#bankConnectionState");
   connection.classList.toggle("is-online", Boolean(state.user && state.bankLoaded));
@@ -669,8 +702,10 @@ function renderBank() {
 
   $("#bankSignedOutGate").hidden = Boolean(state.user);
   $("#bankMemberWorkspace").hidden = !state.user;
-  $("#adminBankPanel").hidden = !state.isAdmin;
-  if (state.isAdmin && document.activeElement !== $("#adminChestCount")) {
+  $("#adminModeToggleWrap").hidden = !state.isAdmin;
+  $("#adminModeToggle").checked = adminMode;
+  $("#adminBankPanel").hidden = !adminMode;
+  if (adminMode && document.activeElement !== $("#adminChestCount")) {
     $("#adminChestCount").value = chestCount;
     renderStoragePreview();
   }
@@ -690,7 +725,7 @@ function bankRequestMarkup(request) {
         <small>${escapeHtml(request.displayName || "Member")} / ${escapeHtml(formatDate(request.createdAt))}</small>
       </div>
       <div class="dw-bank-entry-value"><strong>${formatNumber(request.amount)} Chit</strong></div>
-      ${state.isAdmin && isPending ? `
+      ${state.isAdmin && state.adminControlsVisible && isPending ? `
         <div class="dw-entry-actions">
           <button type="button" data-action="approve" data-request-id="${escapeHtml(request.id)}">Approve</button>
           <button type="button" data-action="reject" data-request-id="${escapeHtml(request.id)}">Reject</button>
@@ -891,6 +926,11 @@ function bindEvents() {
     renderProfit();
   });
 
+  $("#adminModeToggle").addEventListener("change", (event) => {
+    state.adminControlsVisible = state.isAdmin && event.target.checked;
+    renderBank();
+  });
+
   $("#sendToProduction").addEventListener("click", () => {
     const result = calculateRoute(state.method, state.profitInput, state.profitMode);
     $("#productionMethod").value = state.method;
@@ -1035,6 +1075,7 @@ refreshIcons();
 onAuthStateChanged(auth, async (user) => {
   state.user = user || null;
   state.isAdmin = user ? await isAdminUid(user.uid).catch(() => false) : false;
+  state.adminControlsVisible = false;
   updateAuthUi();
   subscribeToBank();
 });
