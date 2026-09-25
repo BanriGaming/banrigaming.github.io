@@ -14162,6 +14162,9 @@ body.legacy-theme::before {
 /* Bancy hosted worlds and controller polish - 2026-09-10a */
 .worlds-page .worlds-activity-marquee {
   position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
   overflow: hidden;
   margin: 0 0 1.15rem;
   border: 1px solid rgba(22, 232, 255, 0.22);
@@ -14173,17 +14176,24 @@ body.legacy-theme::before {
 .worlds-page .worlds-activity-marquee::after {
   content: "";
   position: absolute;
-  inset: 0 0 0 auto;
+  inset: 0 4.6rem 0 auto;
   z-index: 1;
   width: 92px;
   pointer-events: none;
   background: linear-gradient(90deg, transparent, #61f4ff 58%);
 }
 
+.worlds-page .worlds-marquee-viewport {
+  position: relative;
+  z-index: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
 .worlds-page .worlds-marquee-track {
   display: flex;
   width: max-content;
-  animation: bancy-worlds-marquee 72s linear infinite;
+  animation: bancy-worlds-marquee var(--worlds-marquee-duration, 72s) linear infinite;
   will-change: transform;
 }
 
@@ -14195,11 +14205,13 @@ body.legacy-theme::before {
   display: flex;
   flex: none;
   align-items: center;
-  padding: 0.64rem 0;
+  padding: 0.64rem 0 0.64rem 1.15rem;
 }
 
 .worlds-page .worlds-marquee-label {
-  margin: 0 1.6rem 0 1.1rem;
+  position: relative;
+  z-index: 2;
+  margin: 0 0.78rem 0 0.64rem;
   padding: 0.32rem 0.58rem;
   border: 1px solid rgba(22, 232, 255, 0.38);
   color: var(--banri-cyan);
@@ -14225,13 +14237,11 @@ body.legacy-theme::before {
 }
 
 .worlds-page .worlds-marquee-toggle {
-  position: absolute;
-  top: 50%;
-  right: 0.52rem;
+  position: relative;
   z-index: 2;
   min-width: 58px;
   min-height: 30px;
-  transform: translateY(-50%);
+  margin-right: 0.52rem;
   border: 1px solid rgba(22, 232, 255, 0.45);
   color: var(--banri-cyan);
   background: #050708;
@@ -14241,8 +14251,8 @@ body.legacy-theme::before {
 }
 
 @keyframes bancy-worlds-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(var(--worlds-marquee-offset, -50%), 0, 0); }
 }
 
 .worlds-page .worlds-server-grid {
@@ -14923,7 +14933,9 @@ body.legacy-theme::before {
 #serverControllerEditor .controller-access-tools .btn,
 #serverControllerEditor .controller-uid-row .btn,
 #serverControllerEditor .controller-server-row .btn {
+  min-width: 88px;
   min-height: 32px;
+  width: auto;
   padding: 0.34rem 0.55rem;
   font-size: 0.5rem;
 }
@@ -14950,17 +14962,82 @@ body.legacy-theme::before {
 
 #serverControllerEditor .controller-server-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: 0.58rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr));
+  gap: 0.72rem;
   max-height: min(58vh, 660px);
   overflow: auto;
   padding-right: 0.2rem;
 }
 
+#serverControllerEditor .admin-controller-maintenance-card {
+  grid-column: 1 / -1;
+}
+
+#serverControllerEditor .controller-maintenance-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(170px, 1.15fr)
+    minmax(116px, 0.64fr)
+    minmax(180px, 1fr)
+    minmax(160px, 0.9fr)
+    minmax(180px, 1fr)
+    minmax(128px, 0.7fr)
+    minmax(180px, 1fr)
+    minmax(156px, 0.9fr);
+  gap: 0.58rem;
+  align-items: end;
+}
+
+#serverControllerEditor .controller-maintenance-grid > label {
+  min-width: 0;
+  margin: 0;
+}
+
+#serverControllerEditor .controller-maintenance-grid > label > span:first-child,
+#serverControllerEditor .admin-input-suffix + span {
+  display: block;
+  margin-bottom: 0.24rem;
+}
+
+#serverControllerEditor .controller-maintenance-toggle {
+  min-height: 38px;
+  margin: 0;
+}
+
+#serverControllerEditor .admin-input-suffix {
+  position: relative;
+}
+
+#serverControllerEditor .admin-input-suffix input {
+  padding-right: 3.5rem;
+}
+
+#serverControllerEditor .admin-input-suffix small {
+  position: absolute;
+  top: 50%;
+  right: 0.62rem;
+  color: rgba(207, 226, 230, 0.56);
+  font: 700 0.52rem/1 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#serverControllerEditor .controller-maintenance-grid input:disabled,
+#serverControllerEditor .controller-maintenance-grid select:disabled {
+  color: rgba(207, 226, 230, 0.46);
+  border-color: rgba(207, 226, 230, 0.12);
+  background: rgba(207, 226, 230, 0.035);
+  opacity: 1;
+}
+
 #serverControllerEditor .controller-server-row {
   display: grid;
-  gap: 0.54rem;
-  padding: 0.62rem;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.58rem;
+  min-width: 0;
+  padding: 0.68rem;
   border: 1px solid rgba(22, 232, 255, 0.2);
   background:
     linear-gradient(145deg, rgba(22, 232, 255, 0.055), transparent 58%),
@@ -14970,12 +15047,14 @@ body.legacy-theme::before {
 #serverControllerEditor .controller-server-row-head {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 0.58rem;
+  gap: 0.62rem;
   align-items: center;
+  min-width: 0;
 }
 
-#serverControllerEditor .controller-server-row-head strong,
-#serverControllerEditor .controller-server-row-head small {
+#serverControllerEditor .controller-server-title,
+#serverControllerEditor .controller-server-title strong,
+#serverControllerEditor .controller-server-title small {
   display: block;
   min-width: 0;
   overflow: hidden;
@@ -14983,14 +15062,14 @@ body.legacy-theme::before {
   white-space: nowrap;
 }
 
-#serverControllerEditor .controller-server-row-head strong {
+#serverControllerEditor .controller-server-title strong {
   color: #f2fbfd;
   font: 800 0.86rem/1 Rajdhani, sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-#serverControllerEditor .controller-server-row-head small {
+#serverControllerEditor .controller-server-title small {
   margin-top: 0.18rem;
   color: rgba(207, 226, 230, 0.62);
   font: 800 0.5rem/1 "Share Tech Mono", monospace;
@@ -14998,19 +15077,36 @@ body.legacy-theme::before {
   text-transform: uppercase;
 }
 
-#serverControllerEditor .controller-server-row-fields {
+#serverControllerEditor .controller-server-main-fields,
+#serverControllerEditor .controller-server-query-fields {
   display: grid;
-  grid-template-columns: 0.82fr 1fr 1fr 0.72fr 1fr 0.62fr 0.62fr 0.5fr auto;
   gap: 0.42rem;
   align-items: end;
+  min-width: 0;
 }
 
-#serverControllerEditor .controller-server-row-fields label {
+#serverControllerEditor .controller-server-main-fields {
+  grid-template-columns: minmax(150px, 1.1fr) minmax(112px, 0.72fr) minmax(142px, 1fr);
+}
+
+#serverControllerEditor .controller-server-query-fields {
+  grid-template-columns:
+    minmax(92px, 0.82fr)
+    minmax(132px, 1.1fr)
+    minmax(82px, 0.62fr)
+    minmax(82px, 0.62fr)
+    minmax(68px, 0.48fr)
+    minmax(78px, auto);
+}
+
+#serverControllerEditor .controller-server-main-fields label,
+#serverControllerEditor .controller-server-query-fields label {
   min-width: 0;
   margin: 0;
 }
 
-#serverControllerEditor .controller-server-row-fields span,
+#serverControllerEditor .controller-server-main-fields span,
+#serverControllerEditor .controller-server-query-fields span,
 #serverControllerEditor .controller-server-enabled span {
   display: block;
   margin-bottom: 0.2rem;
@@ -15025,10 +15121,24 @@ body.legacy-theme::before {
   align-items: center;
   gap: 0.35rem;
   margin: 0;
+  white-space: nowrap;
 }
 
 #serverControllerEditor .controller-server-enabled span {
   margin: 0;
+}
+
+#serverControllerEditor .controller-server-enabled-primary {
+  min-width: 74px;
+}
+
+#serverControllerEditor .controller-server-query-toggle {
+  min-height: 34px;
+  align-self: end;
+  justify-content: center;
+  padding: 0 0.5rem;
+  border: 1px solid rgba(22, 232, 255, 0.14);
+  background: rgba(22, 232, 255, 0.035);
 }
 
 @media (max-width: 1500px) {
@@ -15043,7 +15153,15 @@ body.legacy-theme::before {
     grid-column: span 1;
   }
 
-  #serverControllerEditor .controller-server-row-fields {
+  #serverControllerEditor .controller-server-main-fields {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #serverControllerEditor .controller-server-query-fields {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #serverControllerEditor .controller-maintenance-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
@@ -15089,7 +15207,12 @@ body.legacy-theme::before {
   #serverControllerEditor .controller-access-tools,
   #serverControllerEditor .controller-uid-row,
   #serverControllerEditor .controller-server-row-head,
-  #serverControllerEditor .controller-server-row-fields {
+  #serverControllerEditor .controller-server-main-fields,
+  #serverControllerEditor .controller-server-query-fields {
+    grid-template-columns: 1fr;
+  }
+
+  #serverControllerEditor .controller-maintenance-grid {
     grid-template-columns: 1fr;
   }
 

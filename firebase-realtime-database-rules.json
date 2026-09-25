@@ -113,6 +113,46 @@
           ".validate": "newData.val() === null || newData.val() === true"
         }
       },
+      "maintenance": {
+        ".validate": "newData.val() === null || newData.hasChildren(['enabled', 'time', 'timezone', 'target', 'playerPolicy', 'maxDelayMinutes', 'warningSeconds', 'discordEnabled', 'notificationChannelId'])",
+        "enabled": {
+          ".validate": "newData.isBoolean()"
+        },
+        "time": {
+          ".validate": "newData.isString() && newData.val().matches(/^([01][0-9]|2[0-3]):[0-5][0-9]$/)"
+        },
+        "timezone": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80"
+        },
+        "days": {
+          "$day": {
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 6"
+          }
+        },
+        "target": {
+          ".validate": "newData.val() === 'active'"
+        },
+        "playerPolicy": {
+          ".validate": "newData.val() === 'restart_always' || newData.val() === 'warn_then_restart' || newData.val() === 'delay_until_empty' || newData.val() === 'skip_if_players'"
+        },
+        "maxDelayMinutes": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 180"
+        },
+        "warningSeconds": {
+          "$warning": {
+            ".validate": "newData.isNumber() && newData.val() >= 10 && newData.val() <= 3600"
+          }
+        },
+        "discordEnabled": {
+          ".validate": "newData.isBoolean()"
+        },
+        "notificationChannelId": {
+          ".validate": "newData.isString() && newData.val().matches(/^[0-9]{17,20}$/)"
+        },
+        "$other": {
+          ".validate": false
+        }
+      },
       "servers": {
         "$serverId": {
           ".validate": "newData.val() === null || newData.hasChildren(['id', 'label', 'container', 'enabled', 'order'])",

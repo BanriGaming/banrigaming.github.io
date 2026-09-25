@@ -15,6 +15,7 @@ import {
   defaultQuotes,
   defaultControllerServers,
   defaultServerControllerConfig,
+  defaultServerMaintenanceConfig,
   defaultSteamConfig,
   defaultSteamSignal,
   defaultTacticalFeed,
@@ -40,6 +41,7 @@ import {
   normalizeQuotes,
   normalizeControllerServer,
   normalizeServerControllerConfig,
+  normalizeServerMaintenanceConfig,
   normalizeSteamConfig,
   normalizeSteamSignal,
   normalizeWorldServer,
@@ -55,7 +57,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260910a";
+} from "./site-store.js?v=20260925a";
 
 const SERVER_STATUS_OPTIONS = ["Online", "Offline"];
 const SERVER_STATUS_SOURCE_OPTIONS = ["manual", "blackbox"];
@@ -990,6 +992,7 @@ function renderWorldServersEditor() {
 function renderServerControllerEditor() {
   if (!elements.serverControllerEditor) return;
   const config = normalizeServerControllerConfig(state.serverControllerConfig);
+  const maintenance = normalizeServerMaintenanceConfig(config.maintenance);
   const allowedUids = Object.keys(config.allowedUids || {}).sort((a, b) => getControllerMemberLabel(a).localeCompare(getControllerMemberLabel(b)));
   const controllerServers = Object.values(config.servers || {})
     .map(normalizeControllerServer)
@@ -1024,6 +1027,64 @@ function renderServerControllerEditor() {
         </div>
         <p class="admin-help mt-3 mb-0">
           The API still verifies Firebase ID tokens and checks this UID allowlist before any Docker action.
+        </p>
+      </div>
+    </article>
+
+    <article class="admin-card admin-controller-card admin-controller-maintenance-card">
+      <div class="admin-card-body">
+        <div class="admin-card-heading">
+          <span>Scheduled Maintenance</span>
+          <strong>${maintenance.enabled ? "Daily" : "Disabled"}</strong>
+        </div>
+        <div class="controller-maintenance-grid">
+          <label class="admin-switch admin-switch-block controller-maintenance-toggle">
+            <input id="serverMaintenanceEnabled" type="checkbox" ${maintenance.enabled ? "checked" : ""} />
+            <span>Automatic Restart<small>Controller-owned schedule</small></span>
+          </label>
+          <label>
+            <span>Restart Time</span>
+            <input id="serverMaintenanceTime" class="form-control" type="time" value="${escapeAttr(maintenance.time)}" />
+          </label>
+          <label>
+            <span>Timezone</span>
+            <select id="serverMaintenanceTimezone" class="form-select">
+              ${["America/Chicago", "America/New_York", "America/Denver", "America/Los_Angeles", "UTC"]
+                .map((timezone) => `<option value="${escapeAttr(timezone)}"${timezone === maintenance.timezone ? " selected" : ""}>${escapeHtml(timezone)}</option>`)
+                .join("")}
+            </select>
+          </label>
+          <label>
+            <span>Target</span>
+            <input class="form-control" value="Current active server" disabled />
+          </label>
+          <label>
+            <span>Player Policy</span>
+            <select id="serverMaintenancePlayerPolicy" class="form-select">
+              <option value="warn_then_restart"${maintenance.playerPolicy === "warn_then_restart" ? " selected" : ""}>Warn, then restart</option>
+              <option value="delay_until_empty"${maintenance.playerPolicy === "delay_until_empty" ? " selected" : ""}>Delay until empty</option>
+              <option value="skip_if_players"${maintenance.playerPolicy === "skip_if_players" ? " selected" : ""}>Skip if occupied</option>
+              <option value="restart_always"${maintenance.playerPolicy === "restart_always" ? " selected" : ""}>Restart without player gate</option>
+            </select>
+          </label>
+          <label>
+            <span>Maximum Delay</span>
+            <div class="admin-input-suffix">
+              <input id="serverMaintenanceMaxDelay" class="form-control" type="number" min="0" max="180" value="${escapeAttr(maintenance.maxDelayMinutes)}" ${maintenance.playerPolicy === "delay_until_empty" ? "" : "disabled"} />
+              <small>minutes</small>
+            </div>
+          </label>
+          <label>
+            <span>Discord Channel</span>
+            <input id="serverMaintenanceChannelId" class="form-control" inputmode="numeric" value="${escapeAttr(maintenance.notificationChannelId)}" />
+          </label>
+          <label class="admin-switch admin-switch-block controller-maintenance-toggle">
+            <input id="serverMaintenanceDiscordEnabled" type="checkbox" ${maintenance.discordEnabled ? "checked" : ""} />
+            <span>Lydia Notices<small>10m, 5m, 1m, 30s</small></span>
+          </label>
+        </div>
+        <p class="admin-help mt-3 mb-0">
+          Runs every day. Lydia warns connected players in Discord, the controller restarts the active Blackbox server, then confirms when the game query returns online.
         </p>
       </div>
     </article>
@@ -1092,29 +1153,31 @@ function renderControllerServerRow(server) {
   return `
     <article class="controller-server-row" data-controller-server="${escapeAttr(server.id)}">
       <div class="controller-server-row-head">
-        <label class="controller-server-enabled">
+        <label class="controller-server-enabled controller-server-enabled-primary">
           <input type="checkbox" data-controller-server-field="enabled" ${server.enabled !== false ? "checked" : ""} />
           <span>Enabled</span>
         </label>
-        <div>
+        <div class="controller-server-title">
           <strong>${escapeHtml(server.label)}</strong>
           <small>${escapeHtml(server.container)}</small>
         </div>
         <button class="btn btn-banri-outline btn-sm" type="button" data-remove-controller-server>Remove</button>
       </div>
-      <div class="controller-server-row-fields">
-        <label>
-          <span>Route ID</span>
-          <input class="form-control" data-controller-server-field="id" value="${escapeAttr(server.id)}" />
-        </label>
+      <div class="controller-server-main-fields">
         <label>
           <span>Label</span>
           <input class="form-control" data-controller-server-field="label" value="${escapeAttr(server.label)}" />
         </label>
         <label>
+          <span>Route ID</span>
+          <input class="form-control" data-controller-server-field="id" value="${escapeAttr(server.id)}" />
+        </label>
+        <label>
           <span>Container</span>
           <input class="form-control" data-controller-server-field="container" value="${escapeAttr(server.container)}" />
         </label>
+      </div>
+      <div class="controller-server-query-fields">
         <label>
           <span>Query Type</span>
           <input class="form-control" list="serverQueryTypeOptions" data-controller-server-field="queryType" value="${escapeAttr(server.queryType || "")}" placeholder="optional" />
@@ -1135,7 +1198,7 @@ function renderControllerServerRow(server) {
           <span>Order</span>
           <input class="form-control" type="number" min="1" data-controller-server-field="order" value="${escapeAttr(server.order)}" />
         </label>
-        <label class="controller-server-enabled">
+        <label class="controller-server-enabled controller-server-query-toggle">
           <input type="checkbox" data-controller-server-field="queryEnabled" ${server.queryEnabled !== false ? "checked" : ""} />
           <span>Query</span>
         </label>
@@ -1686,12 +1749,27 @@ function readServerControllerConfig() {
     if (server.id && server.container) servers[server.id] = server;
   });
 
+  const previousMaintenance = normalizeServerMaintenanceConfig(state.serverControllerConfig.maintenance);
+  const maintenance = normalizeServerMaintenanceConfig({
+    ...previousMaintenance,
+    enabled: document.getElementById("serverMaintenanceEnabled")?.checked !== false,
+    time: document.getElementById("serverMaintenanceTime")?.value || defaultServerMaintenanceConfig.time,
+    timezone: document.getElementById("serverMaintenanceTimezone")?.value || defaultServerMaintenanceConfig.timezone,
+    target: "active",
+    playerPolicy: document.getElementById("serverMaintenancePlayerPolicy")?.value || defaultServerMaintenanceConfig.playerPolicy,
+    maxDelayMinutes: Number(document.getElementById("serverMaintenanceMaxDelay")?.value || defaultServerMaintenanceConfig.maxDelayMinutes),
+    warningSeconds: [600, 300, 60, 30],
+    discordEnabled: document.getElementById("serverMaintenanceDiscordEnabled")?.checked !== false,
+    notificationChannelId: document.getElementById("serverMaintenanceChannelId")?.value || defaultServerMaintenanceConfig.notificationChannelId
+  });
+
   return normalizeServerControllerConfig({
     apiUrl: document.getElementById("serverControllerApiUrl")?.value || "",
     enabled: document.getElementById("serverControllerEnabled")?.checked === true,
     pollSeconds: Number(document.getElementById("serverControllerPollSeconds")?.value || defaultServerControllerConfig.pollSeconds),
     allowedUids,
     servers,
+    maintenance,
     updatedAt: state.serverControllerConfig.updatedAt,
     updatedByUid: state.serverControllerConfig.updatedByUid
   });
@@ -2625,6 +2703,12 @@ function bindAdminEvents() {
     if (event.key !== "Enter" || event.target.id !== "serverControllerManualUid") return;
     event.preventDefault();
     document.getElementById("addControllerUidButton")?.click();
+  });
+
+  elements.serverControllerEditor?.addEventListener("change", (event) => {
+    if (event.target.id !== "serverMaintenancePlayerPolicy") return;
+    const delayInput = document.getElementById("serverMaintenanceMaxDelay");
+    if (delayInput) delayInput.disabled = event.target.value !== "delay_until_empty";
   });
 
   elements.librarySearch?.addEventListener("input", (event) => {

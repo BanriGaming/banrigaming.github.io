@@ -769,12 +769,26 @@ export const defaultWorldServers = [
   }
 ];
 
+export const defaultServerMaintenanceConfig = {
+  enabled: true,
+  time: "05:00",
+  timezone: "America/Chicago",
+  days: [0, 1, 2, 3, 4, 5, 6],
+  target: "active",
+  playerPolicy: "warn_then_restart",
+  maxDelayMinutes: 30,
+  warningSeconds: [600, 300, 60, 30],
+  discordEnabled: true,
+  notificationChannelId: "1553076055110193212"
+};
+
 export const defaultServerControllerConfig = {
   apiUrl: "",
   enabled: false,
   pollSeconds: 8,
   allowedUids: {},
   servers: Object.fromEntries(defaultControllerServers.map((server) => [server.id, server])),
+  maintenance: structuredClone(defaultServerMaintenanceConfig),
   updatedAt: 0,
   updatedByUid: ""
 };
@@ -1412,8 +1426,46 @@ export function normalizeServerControllerConfig(config = {}) {
     pollSeconds: Math.max(5, Math.min(60, Number(config?.pollSeconds || defaultServerControllerConfig.pollSeconds))),
     allowedUids,
     servers,
+    maintenance: normalizeServerMaintenanceConfig(config?.maintenance),
     updatedAt: Number(config?.updatedAt || 0),
     updatedByUid: String(config?.updatedByUid || "").trim()
+  };
+}
+
+export function normalizeServerMaintenanceConfig(config = {}) {
+  const rawTime = String(config?.time || defaultServerMaintenanceConfig.time).trim();
+  const time = /^([01]\d|2[0-3]):[0-5]\d$/.test(rawTime) ? rawTime : defaultServerMaintenanceConfig.time;
+  const timezone = ["America/Chicago", "America/New_York", "America/Denver", "America/Los_Angeles", "UTC"].includes(config?.timezone)
+    ? config.timezone
+    : defaultServerMaintenanceConfig.timezone;
+  const rawDays = Array.isArray(config?.days) ? config.days : Object.values(config?.days || {});
+  const days = [...new Set(rawDays.map(Number).filter((day) => Number.isInteger(day) && day >= 0 && day <= 6))];
+  const playerPolicy = ["restart_always", "warn_then_restart", "delay_until_empty", "skip_if_players"].includes(config?.playerPolicy)
+    ? config.playerPolicy
+    : defaultServerMaintenanceConfig.playerPolicy;
+  const rawWarnings = Array.isArray(config?.warningSeconds)
+    ? config.warningSeconds
+    : Object.values(config?.warningSeconds || {});
+  const warningSeconds = [...new Set(rawWarnings
+    .map(Number)
+    .filter((seconds) => Number.isFinite(seconds) && seconds >= 10 && seconds <= 3600)
+    .map(Math.round))]
+    .sort((a, b) => b - a);
+  const notificationChannelId = String(config?.notificationChannelId || defaultServerMaintenanceConfig.notificationChannelId).trim();
+
+  return {
+    enabled: config?.enabled !== false,
+    time,
+    timezone,
+    days: days.length ? days : [...defaultServerMaintenanceConfig.days],
+    target: "active",
+    playerPolicy,
+    maxDelayMinutes: Math.max(0, Math.min(180, Number(config?.maxDelayMinutes ?? defaultServerMaintenanceConfig.maxDelayMinutes))),
+    warningSeconds: warningSeconds.length ? warningSeconds : [...defaultServerMaintenanceConfig.warningSeconds],
+    discordEnabled: config?.discordEnabled !== false,
+    notificationChannelId: /^\d{17,20}$/.test(notificationChannelId)
+      ? notificationChannelId
+      : defaultServerMaintenanceConfig.notificationChannelId
   };
 }
 
