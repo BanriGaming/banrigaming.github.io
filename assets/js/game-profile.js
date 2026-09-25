@@ -20,7 +20,7 @@ function renderProfile(game) {
   const meta = document.getElementById("gameProfileMeta");
   const categories = document.getElementById("gameProfileCategories");
 
-  document.title = `${game.title} | BANRI Gaming`;
+  document.title = `${game.title} | Bancy Waypoint`;
   hero?.style.setProperty("--subpage-image", `url('${game.art}')`);
   if (title) {
     title.innerHTML = `${escapeHtml(game.title)} <span>${escapeHtml(game.status)}</span>`;

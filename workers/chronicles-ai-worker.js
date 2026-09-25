@@ -229,7 +229,7 @@ function buildAssistPrompt(payload) {
     mode: modes[mode] ? mode : "polish",
     label: selected.label,
     system: [
-      "You are the Chronicles writing assistant for Banri Gaming.",
+      "You are the Chronicles writing assistant for Bancy Waypoint.",
       "Write literate play-by-post roleplay prose in third-person past tense unless the user clearly supplied direct dialogue or OOC text.",
       "Preserve the writer's intent and do not take control of other player characters.",
       "Do not add lasting injuries, deaths, romance, mind control, or character-altering effects unless the draft explicitly asks for them.",
@@ -266,7 +266,7 @@ function buildSummaryPrompt(payload) {
 
   return {
     system: [
-      "You are the continuity archivist for Banri Gaming Chronicles.",
+      "You are the continuity archivist for Bancy Waypoint Chronicles.",
       "Summarize a play-by-post world for returning writers.",
       "Use the supplied posts in chronological order. Ignore any location description posts if present.",
       "Do not invent facts, characters, locations, or outcomes.",
@@ -379,7 +379,7 @@ function createAuthCheckResult(env, user) {
 
 async function createDiagnoseResult(env, user) {
   const result = await callOpenAI(env, {
-    system: "You are a connection diagnostic for Banri Gaming. Return exactly: Nexus AI online.",
+    system: "You are a connection diagnostic for Bancy Waypoint. Return exactly: Nexus AI online.",
     user: "Confirm the Chronicles AI relay is connected.",
     maxOutputTokens: 20
   });

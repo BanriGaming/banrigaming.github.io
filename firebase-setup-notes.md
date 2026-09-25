@@ -1,4 +1,4 @@
-# BANRI Gaming Firebase Setup
+# Bancy Waypoint Firebase Setup
 
 Use `firebase-realtime-database-rules.json` as the Realtime Database Rules payload.
 

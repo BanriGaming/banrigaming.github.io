@@ -27,6 +27,8 @@ const SERVER_WARMUP_CLOSE_MS = 1400;
 let serverWarmupTimer = 0;
 let serverWarmupCloseTimer = 0;
 let serverWarmupState = null;
+let tickerRenderSignature = "";
+let tickerResizeTimer = 0;
 const revealedPasswords = new Set();
 
 const elements = {
@@ -285,31 +287,73 @@ function getTickerItems() {
     .slice(0, 16);
 }
 
+function getTickerCycleItems(items) {
+  const cleanItems = items.map((item) => String(item || "").trim()).filter(Boolean);
+  if (!cleanItems.length) return [];
+  const repeatCount = Math.max(2, Math.ceil(16 / cleanItems.length));
+  return Array.from({ length: repeatCount }, () => cleanItems).flat();
+}
+
+function calibrateWorldTicker() {
+  if (!elements.ticker || elements.ticker.classList.contains("d-none")) return;
+  const set = elements.ticker.querySelector(".worlds-marquee-set");
+  const track = elements.ticker.querySelector(".worlds-marquee-track");
+  if (!set || !track) return;
+  const distance = Math.ceil(set.scrollWidth);
+  if (!distance) return;
+  const duration = Math.max(42, Math.min(140, Math.round(distance / 28)));
+  track.style.setProperty("--worlds-marquee-distance", `${distance}px`);
+  track.style.setProperty("--worlds-marquee-offset", `-${distance}px`);
+  track.style.setProperty("--worlds-marquee-duration", `${duration}s`);
+}
+
+function scheduleWorldTickerCalibration() {
+  window.requestAnimationFrame(() => {
+    calibrateWorldTicker();
+    window.setTimeout(calibrateWorldTicker, 160);
+  });
+}
+
 function renderWorldTicker() {
   if (!elements.ticker) return;
   const ticker = normalizeWorldTicker(worldTicker);
   const items = getTickerItems();
   elements.ticker.classList.toggle("d-none", !ticker.enabled || !items.length);
   if (!ticker.enabled || !items.length) {
+    tickerRenderSignature = "";
     elements.ticker.innerHTML = "";
     return;
   }
-  const itemMarkup = items
+  const signature = JSON.stringify({ label: ticker.label, items });
+  if (tickerRenderSignature === signature && elements.ticker.querySelector(".worlds-marquee-track")) {
+    scheduleWorldTickerCalibration();
+    return;
+  }
+
+  const wasPaused = elements.ticker.classList.contains("is-paused");
+  const cycleItems = getTickerCycleItems(items);
+  const itemMarkup = cycleItems
     .map((item) => `<span class="worlds-marquee-game">${escapeHtml(item)}<i aria-hidden="true">+</i></span>`)
     .join("");
   elements.ticker.innerHTML = `
-    <div class="worlds-marquee-track">
-      <div class="worlds-marquee-set">
-        <span class="worlds-marquee-label">${escapeHtml(ticker.label)}</span>
-        ${itemMarkup}
-      </div>
-      <div class="worlds-marquee-set" aria-hidden="true">
-        <span class="worlds-marquee-label">${escapeHtml(ticker.label)}</span>
-        ${itemMarkup}
+    <span class="worlds-marquee-label">${escapeHtml(ticker.label)}</span>
+    <div class="worlds-marquee-viewport">
+      <div class="worlds-marquee-track">
+        <div class="worlds-marquee-set">
+          ${itemMarkup}
+        </div>
+        <div class="worlds-marquee-set" aria-hidden="true">
+          ${itemMarkup}
+        </div>
       </div>
     </div>
     <button class="worlds-marquee-toggle" type="button" data-worlds-ticker-toggle>Pause</button>
   `;
+  tickerRenderSignature = signature;
+  elements.ticker.classList.toggle("is-paused", wasPaused);
+  const toggle = elements.ticker.querySelector("[data-worlds-ticker-toggle]");
+  if (toggle) toggle.textContent = wasPaused ? "Play" : "Pause";
+  scheduleWorldTickerCalibration();
 }
 
 function renderServerCard(server, index, isFeatured = false) {
@@ -1003,6 +1047,18 @@ window.addEventListener("hashchange", () => {
     setWorldsView("controller");
   }
 });
+
+window.addEventListener("resize", () => {
+  if (tickerResizeTimer) window.clearTimeout(tickerResizeTimer);
+  tickerResizeTimer = window.setTimeout(() => {
+    tickerResizeTimer = 0;
+    calibrateWorldTicker();
+  }, 140);
+});
+
+if (document.fonts?.ready) {
+  document.fonts.ready.then(calibrateWorldTicker).catch(() => {});
+}
 
 onAuthStateChanged(auth, async (user) => {
   currentUser = user;

@@ -1,10 +1,10 @@
-# Banri Gaming Chronicles: Full System Brief For Sarge
+# Bancy Waypoint Chronicles: Full System Brief For Sarge
 
-This document explains how the Banri Gaming Chronicles feature currently works, what it is for, how the data is organized, and what decisions still need strategy. It is written so it can be copied into ChatGPT / Sarge for planning.
+This document explains how the Bancy Waypoint Chronicles feature currently works, what it is for, how the data is organized, and what decisions still need strategy. It is written so it can be copied into ChatGPT / Sarge for planning.
 
 ## High-Level Purpose
 
-Chronicles is a logged-in play-by-post roleplay and collaborative storytelling area inside the Banri Gaming website. It is meant to replace or supplement Discord/forum-style roleplay threads with a more organized, premium, noir-themed interface.
+Chronicles is a logged-in play-by-post roleplay and collaborative storytelling area inside the Bancy Waypoint website. It is meant to replace or supplement Discord/forum-style roleplay threads with a more organized, premium, noir-themed interface.
 
 The core idea:
 
