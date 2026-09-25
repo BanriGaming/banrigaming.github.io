@@ -158,6 +158,105 @@
         ".validate": false
       }
     },
+    "dragonwildsLedger": {
+      ".read": "auth != null",
+      ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+      "balance": {
+        ".validate": "newData.hasChildren(['amount', 'updatedAt', 'updatedByUid'])",
+        "amount": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 999999999"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "updatedByUid": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 128"
+        },
+        "$other": {
+          ".validate": false
+        }
+      },
+      "requests": {
+        "$requestId": {
+          ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('id').val() === $requestId && newData.child('uid').val() === auth.uid && newData.child('status').val() === 'pending'))",
+          ".validate": "newData.val() === null || newData.hasChildren(['id', 'uid', 'displayName', 'type', 'amount', 'note', 'status', 'createdAt'])",
+          "id": {
+            ".validate": "newData.val() === $requestId"
+          },
+          "uid": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 128"
+          },
+          "displayName": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 64"
+          },
+          "type": {
+            ".validate": "newData.val() === 'deposit' || newData.val() === 'withdrawal' || newData.val() === 'purchase'"
+          },
+          "amount": {
+            ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 999999999"
+          },
+          "note": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 160"
+          },
+          "status": {
+            ".validate": "newData.val() === 'pending' || newData.val() === 'approved' || newData.val() === 'rejected'"
+          },
+          "createdAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "resolvedAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "resolvedByUid": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 128"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "ledger": {
+        "$entryId": {
+          ".validate": "newData.val() === null || newData.hasChildren(['id', 'uid', 'displayName', 'type', 'amount', 'note', 'balanceAfter', 'createdAt', 'approvedByUid'])",
+          "id": {
+            ".validate": "newData.val() === $entryId"
+          },
+          "requestId": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 128"
+          },
+          "uid": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 128"
+          },
+          "displayName": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 64"
+          },
+          "type": {
+            ".validate": "newData.val() === 'deposit' || newData.val() === 'withdrawal' || newData.val() === 'purchase' || newData.val() === 'adjustment'"
+          },
+          "amount": {
+            ".validate": "newData.isNumber() && newData.val() !== 0 && newData.val() >= -999999999 && newData.val() <= 999999999"
+          },
+          "note": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 160"
+          },
+          "balanceAfter": {
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 999999999"
+          },
+          "createdAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "approvedByUid": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 128"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "$other": {
+        ".validate": false
+      }
+    },
     "activityFeed": {
       ".read": true,
       "$activityId": {

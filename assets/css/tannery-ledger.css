@@ -1,0 +1,1761 @@
+:root {
+  --dw-cyan: #19d7e8;
+  --dw-cyan-soft: #8ce9f1;
+  --dw-green: #38e6a5;
+  --dw-gold: #e6ba58;
+  --dw-red: #ff6d72;
+  --dw-ink: #02080a;
+  --dw-panel: #061115;
+  --dw-panel-strong: #081820;
+  --dw-line: rgba(25, 215, 232, 0.28);
+  --dw-line-bright: rgba(25, 215, 232, 0.62);
+  --dw-text: #eaf7f8;
+  --dw-muted: #91a8ad;
+}
+
+.dragonwilds-tool-page {
+  background:
+    linear-gradient(rgba(25, 215, 232, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 215, 232, 0.035) 1px, transparent 1px),
+    #010607;
+  background-size: 96px 96px;
+}
+
+.dw-ledger-shell {
+  width: min(1720px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 22px 0 64px;
+  color: var(--dw-text);
+}
+
+.dw-ledger-shell *,
+.dw-ledger-shell *::before,
+.dw-ledger-shell *::after {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+.dw-ledger-shell button,
+.dw-ledger-shell input,
+.dw-ledger-shell select {
+  font: inherit;
+}
+
+.dw-ledger-shell button {
+  cursor: pointer;
+}
+
+.dw-ledger-shell button:focus-visible,
+.dw-ledger-shell input:focus-visible,
+.dw-ledger-shell select:focus-visible {
+  outline: 2px solid var(--dw-cyan);
+  outline-offset: 2px;
+}
+
+.dw-command-deck {
+  min-height: 164px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 36px;
+  padding: 28px 32px;
+  border: 1px solid var(--dw-line);
+  background:
+    linear-gradient(90deg, rgba(1, 7, 9, 0.98) 0%, rgba(3, 16, 20, 0.9) 54%, rgba(1, 8, 10, 0.88) 100%),
+    url("../img/hero/banri-hero-02.webp") center 44% / cover no-repeat;
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.dw-kicker {
+  margin: 0 0 7px;
+  color: var(--dw-cyan-soft);
+  font: 700 0.75rem/1.2 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-kicker span {
+  color: var(--dw-cyan);
+}
+
+.dw-command-copy h1,
+.dw-section-heading h2,
+.dw-command-copy p,
+.dw-comparison-intro h3,
+.dw-selected-item h3,
+.dw-panel-heading h3,
+.dw-bank-gate h3,
+.dw-bank-request h3,
+.dw-admin-bank h3 {
+  margin: 0;
+}
+
+.dw-command-copy h1 {
+  font: 800 3rem/0.94 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-command-copy > p:last-child {
+  max-width: 740px;
+  margin: 12px 0 0;
+  color: #bad0d5;
+  font-size: 1rem;
+}
+
+.dw-command-status {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(130px, 1fr));
+  border: 1px solid var(--dw-line);
+  background: rgba(0, 5, 7, 0.78);
+}
+
+.dw-command-status > div {
+  min-height: 72px;
+  padding: 14px 18px;
+  border-right: 1px solid rgba(25, 215, 232, 0.16);
+}
+
+.dw-command-status > div:last-child {
+  border-right: 0;
+}
+
+.dw-command-status span,
+.dw-field-label,
+.dw-input-row label,
+.dw-production-controls label > span,
+.dw-selected-item label > span,
+.dw-bank-request label > span,
+.dw-admin-bank label > span,
+.dw-result-matrix span,
+.dw-order-math span,
+.dw-order-totals span,
+.dw-reference-row span,
+.dw-bank-summary span,
+.dw-station span,
+.dw-bank-balance small {
+  display: block;
+  color: var(--dw-muted);
+  font: 700 0.68rem/1.2 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-command-status strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--dw-text);
+  font: 700 0.92rem/1.1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 1px;
+  margin-top: 14px;
+  overflow-x: auto;
+  border: 1px solid var(--dw-line);
+  background: rgba(25, 215, 232, 0.12);
+}
+
+.dw-tab {
+  position: relative;
+  flex: 1 0 190px;
+  min-width: 190px;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border: 0;
+  color: #9fb3b8;
+  background: #030b0e;
+  font: 700 0.82rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dw-tab:hover,
+.dw-tab.is-active {
+  color: #001012;
+  background: var(--dw-cyan);
+}
+
+.dw-tab svg {
+  width: 17px;
+  height: 17px;
+}
+
+.dw-tab-badge {
+  min-width: 19px;
+  height: 19px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 5px;
+  border-radius: 50%;
+  color: #190305;
+  background: var(--dw-red);
+  font-size: 0.7rem;
+}
+
+.dw-panel {
+  margin-top: 14px;
+  padding: 28px;
+  border: 1px solid var(--dw-line);
+  background:
+    linear-gradient(135deg, rgba(25, 215, 232, 0.045), transparent 34%),
+    rgba(1, 8, 10, 0.95);
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+.dw-section-heading,
+.dw-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.dw-section-heading {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(25, 215, 232, 0.18);
+}
+
+.dw-section-heading h2 {
+  font: 800 1.8rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-icon-button {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--dw-line-bright);
+  color: var(--dw-cyan);
+  background: transparent;
+}
+
+.dw-icon-button:hover {
+  color: #001012;
+  background: var(--dw-cyan);
+}
+
+.dw-icon-button svg {
+  width: 18px;
+}
+
+.dw-profit-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.88fr) minmax(520px, 1.32fr);
+  gap: 18px;
+}
+
+.dw-workbench,
+.dw-result-board,
+.dw-timeline-panel,
+.dw-recommendation,
+.dw-selected-item,
+.dw-order-cart,
+.dw-bank-request,
+.dw-admin-bank,
+.dw-request-queue,
+.dw-history-log {
+  border: 1px solid rgba(25, 215, 232, 0.2);
+  background: rgba(2, 11, 14, 0.82);
+}
+
+.dw-workbench {
+  padding: 20px;
+}
+
+.dw-control-group + .dw-control-group,
+.dw-control-group + .dw-input-row {
+  margin-top: 18px;
+}
+
+.dw-field-label,
+.dw-input-row label {
+  margin-bottom: 8px;
+  color: var(--dw-cyan-soft);
+}
+
+.dw-segmented {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--dw-line);
+}
+
+.dw-segmented button {
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 0;
+  color: var(--dw-muted);
+  background: #030b0e;
+  font: 700 0.78rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-segmented button + button {
+  border-left: 1px solid var(--dw-line);
+}
+
+.dw-segmented button.is-active {
+  color: #001012;
+  background: var(--dw-cyan);
+}
+
+.dw-input-row {
+  margin-top: 20px;
+}
+
+.dw-input-row small {
+  display: block;
+  margin-top: 7px;
+  color: var(--dw-muted);
+  font-size: 0.78rem;
+}
+
+.dw-number-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  border: 1px solid var(--dw-line-bright);
+  background: #010709;
+}
+
+.dw-number-field input,
+.dw-production-controls input,
+.dw-production-controls select,
+.dw-station input,
+.dw-catalog-toolbar input,
+.dw-catalog-toolbar select,
+.dw-selected-item input,
+.dw-bank-request input,
+.dw-bank-request select,
+.dw-admin-bank input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--dw-line);
+  border-radius: 0;
+  color: var(--dw-text);
+  background: #010709;
+}
+
+.dw-number-field input {
+  min-width: 0;
+  min-height: 52px;
+  padding: 8px 14px;
+  border: 0;
+  font: 800 1.6rem/1 Rajdhani, sans-serif;
+}
+
+.dw-number-field > span {
+  display: grid;
+  place-items: center;
+  min-width: 84px;
+  padding: 0 14px;
+  border-left: 1px solid var(--dw-line);
+  color: var(--dw-cyan);
+  font: 700 0.72rem/1 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-number-field.compact input {
+  min-height: 44px;
+  font-size: 1rem;
+}
+
+.dw-fixed-data {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 20px;
+  border: 1px solid rgba(25, 215, 232, 0.16);
+  background: rgba(25, 215, 232, 0.16);
+}
+
+.dw-fixed-data > div {
+  min-height: 68px;
+  padding: 12px;
+  background: #041014;
+}
+
+.dw-fixed-data span {
+  display: block;
+  color: var(--dw-muted);
+  font: 700 0.64rem/1.2 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-fixed-data strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--dw-text);
+  font: 700 1rem/1 Rajdhani, sans-serif;
+}
+
+.dw-loadout-callout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(25, 215, 232, 0.16);
+}
+
+.dw-loadout-callout > svg {
+  width: 24px;
+  color: var(--dw-gold);
+}
+
+.dw-loadout-callout span {
+  display: block;
+  color: var(--dw-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.dw-loadout-callout strong {
+  display: block;
+  color: var(--dw-text);
+  font-size: 0.9rem;
+}
+
+.dw-loadout-callout button,
+.dw-text-button {
+  border: 0;
+  color: var(--dw-cyan);
+  background: transparent;
+  font: 700 0.72rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-loadout-callout button:hover,
+.dw-text-button:hover {
+  color: var(--dw-text);
+}
+
+.dw-result-board {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+}
+
+.dw-primary-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 286px;
+  padding: 24px;
+  border-right: 1px solid rgba(25, 215, 232, 0.2);
+  background:
+    linear-gradient(145deg, rgba(56, 230, 165, 0.13), transparent 58%),
+    #041014;
+}
+
+.dw-primary-result span {
+  color: var(--dw-green);
+  font: 700 0.75rem/1.2 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-primary-result strong {
+  margin-top: 20px;
+  color: var(--dw-text);
+  font: 800 3.7rem/0.9 Rajdhani, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.dw-primary-result small {
+  margin-top: 8px;
+  color: var(--dw-muted);
+  text-transform: uppercase;
+}
+
+.dw-result-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(25, 215, 232, 0.16);
+}
+
+.dw-result-matrix > div {
+  min-height: 94px;
+  padding: 16px;
+  background: #030c0f;
+}
+
+.dw-result-matrix strong {
+  display: block;
+  margin-top: 13px;
+  color: var(--dw-text);
+  font: 800 1.45rem/1 Rajdhani, sans-serif;
+}
+
+.dw-formula-trace {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--dw-cyan);
+  color: #bfd2d6;
+  background: rgba(25, 215, 232, 0.06);
+  font: 500 0.82rem/1.55 "Share Tech Mono", monospace;
+}
+
+.dw-formula-trace strong {
+  color: var(--dw-cyan);
+  text-transform: uppercase;
+}
+
+.dw-comparison-band {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) repeat(2, minmax(260px, 1fr));
+  gap: 1px;
+  margin-top: 18px;
+  border: 1px solid rgba(230, 186, 88, 0.28);
+  background: rgba(230, 186, 88, 0.18);
+}
+
+.dw-comparison-intro,
+.dw-comparison-route {
+  min-height: 138px;
+  padding: 18px;
+  background: #050e10;
+}
+
+.dw-comparison-intro h3 {
+  font: 800 1.35rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-comparison-intro > p:last-child {
+  margin: 10px 0 0;
+  color: var(--dw-muted);
+  font-size: 0.82rem;
+}
+
+.dw-comparison-route span,
+.dw-comparison-route small {
+  display: block;
+  color: var(--dw-muted);
+}
+
+.dw-comparison-route span {
+  font: 700 0.7rem/1 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-comparison-route strong {
+  display: block;
+  margin: 14px 0 7px;
+  color: var(--dw-gold);
+  font: 800 2rem/0.9 Rajdhani, sans-serif;
+}
+
+.dw-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--dw-muted);
+  font: 700 0.76rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.dw-toggle input {
+  position: absolute;
+  opacity: 0;
+}
+
+.dw-toggle > span {
+  position: relative;
+  width: 38px;
+  height: 20px;
+  border: 1px solid var(--dw-line-bright);
+  background: #02090b;
+}
+
+.dw-toggle > span::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background: var(--dw-muted);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.dw-toggle input:checked + span::after {
+  transform: translateX(18px);
+  background: var(--dw-green);
+}
+
+.dw-production-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.dw-production-controls label > span,
+.dw-selected-item label > span,
+.dw-bank-request label > span,
+.dw-admin-bank label > span {
+  margin-bottom: 7px;
+  color: var(--dw-cyan-soft);
+}
+
+.dw-production-controls input,
+.dw-production-controls select,
+.dw-station input,
+.dw-catalog-toolbar input,
+.dw-catalog-toolbar select,
+.dw-selected-item input,
+.dw-bank-request input,
+.dw-bank-request select,
+.dw-admin-bank input {
+  padding: 8px 12px;
+}
+
+.dw-production-controls select,
+.dw-catalog-toolbar select,
+.dw-bank-request select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--dw-cyan) 50%),
+    linear-gradient(135deg, var(--dw-cyan) 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) 19px,
+    calc(100% - 11px) 19px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.dw-station-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.dw-station {
+  min-height: 96px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 82px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--dw-line);
+  background: rgba(3, 14, 18, 0.82);
+}
+
+.dw-station.is-muted {
+  opacity: 0.4;
+}
+
+.dw-station-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--dw-line-bright);
+  color: var(--dw-cyan);
+}
+
+.dw-station-icon svg {
+  width: 20px;
+}
+
+.dw-station strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.86rem;
+}
+
+.dw-station input {
+  min-width: 0;
+  font: 800 1.25rem/1 Rajdhani, sans-serif;
+  text-align: center;
+}
+
+.dw-production-output {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.7fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.dw-timeline-panel,
+.dw-recommendation {
+  padding: 20px;
+}
+
+.dw-panel-heading > div > span,
+.dw-panel-heading > span {
+  color: var(--dw-muted);
+  font: 700 0.66rem/1.2 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-panel-heading h3 {
+  margin-top: 4px;
+  font: 800 1.3rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-status-chip {
+  padding: 7px 10px;
+  border: 1px solid rgba(56, 230, 165, 0.42);
+  color: var(--dw-green) !important;
+}
+
+.dw-status-chip.is-warning {
+  border-color: rgba(230, 186, 88, 0.48);
+  color: var(--dw-gold) !important;
+}
+
+.dw-process-track {
+  display: grid;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.dw-process-step {
+  display: grid;
+  grid-template-columns: 138px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.dw-process-step span,
+.dw-process-step strong {
+  font-size: 0.78rem;
+}
+
+.dw-process-step span {
+  color: #b9ced2;
+}
+
+.dw-process-step strong {
+  min-width: 74px;
+  color: var(--dw-cyan);
+  text-align: right;
+}
+
+.dw-process-line,
+.dw-meter {
+  height: 7px;
+  overflow: hidden;
+  background: #142328;
+}
+
+.dw-process-line i,
+.dw-meter span {
+  display: block;
+  height: 100%;
+  background: var(--dw-cyan);
+}
+
+.dw-timeline-panel > p,
+.dw-recommendation > p:not(.dw-kicker) {
+  margin: 22px 0 0;
+  color: var(--dw-muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.dw-recommendation > strong {
+  display: block;
+  margin-top: 18px;
+  color: var(--dw-green);
+  font: 800 1.8rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-capacity-meter {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(25, 215, 232, 0.16);
+}
+
+.dw-capacity-meter > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: var(--dw-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.dw-capacity-meter strong {
+  color: var(--dw-text);
+}
+
+.dw-reference-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 18px;
+  border: 1px solid rgba(25, 215, 232, 0.16);
+  background: rgba(25, 215, 232, 0.16);
+}
+
+.dw-reference-row > div {
+  min-height: 72px;
+  padding: 14px;
+  background: #030c0f;
+}
+
+.dw-reference-row strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--dw-text);
+  font: 700 1rem/1 Rajdhani, sans-serif;
+}
+
+.dw-catalog-count {
+  min-width: 110px;
+  text-align: right;
+}
+
+.dw-catalog-count strong {
+  display: block;
+  color: var(--dw-cyan);
+  font: 800 1.8rem/0.9 Rajdhani, sans-serif;
+}
+
+.dw-catalog-count span {
+  color: var(--dw-muted);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.dw-catalog-toolbar {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 210px 180px;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dw-search-field {
+  position: relative;
+}
+
+.dw-search-field svg {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  width: 18px;
+  color: var(--dw-cyan);
+}
+
+.dw-search-field input {
+  padding-left: 42px;
+}
+
+.dw-catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 14px;
+  align-items: start;
+}
+
+.dw-catalog-table-wrap {
+  min-width: 0;
+  max-height: 690px;
+  overflow: auto;
+  border: 1px solid rgba(25, 215, 232, 0.2);
+}
+
+.dw-catalog-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--dw-text);
+}
+
+.dw-catalog-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #07171b;
+}
+
+.dw-catalog-table th,
+.dw-catalog-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(25, 215, 232, 0.13);
+  text-align: left;
+}
+
+.dw-catalog-table th {
+  color: var(--dw-cyan-soft);
+  font: 700 0.66rem/1 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-catalog-table td {
+  color: #c8dadd;
+  font-size: 0.86rem;
+}
+
+.dw-catalog-table tbody tr {
+  background: rgba(2, 10, 13, 0.84);
+}
+
+.dw-catalog-table tbody tr:hover,
+.dw-catalog-table tbody tr.is-selected {
+  background: rgba(25, 215, 232, 0.09);
+}
+
+.dw-catalog-table tbody tr.is-selected td:first-child {
+  box-shadow: inset 3px 0 var(--dw-cyan);
+}
+
+.dw-catalog-table strong {
+  color: var(--dw-text);
+}
+
+.dw-stock-tag {
+  display: inline-block;
+  padding: 4px 7px;
+  border: 1px solid rgba(25, 215, 232, 0.25);
+  color: var(--dw-muted);
+  font: 700 0.62rem/1 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-stock-tag.blueprint {
+  border-color: rgba(230, 186, 88, 0.42);
+  color: var(--dw-gold);
+}
+
+.dw-select-stock {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--dw-line);
+  color: var(--dw-cyan);
+  background: transparent;
+}
+
+.dw-select-stock:hover {
+  color: #001012;
+  background: var(--dw-cyan);
+}
+
+.dw-select-stock svg {
+  width: 15px;
+}
+
+.dw-order-desk {
+  position: sticky;
+  top: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.dw-selected-item,
+.dw-order-cart {
+  padding: 18px;
+}
+
+.dw-selected-item h3 {
+  font: 800 1.65rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-selected-item > p:not(.dw-kicker) {
+  margin: 7px 0 18px;
+  color: var(--dw-muted);
+  font-size: 0.8rem;
+}
+
+.dw-order-math,
+.dw-order-totals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 12px;
+  background: rgba(25, 215, 232, 0.15);
+}
+
+.dw-order-math > div,
+.dw-order-totals > div {
+  padding: 11px;
+  background: #020a0d;
+}
+
+.dw-order-math strong,
+.dw-order-totals strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--dw-text);
+  font: 800 1.08rem/1 Rajdhani, sans-serif;
+}
+
+.dw-primary-button,
+.dw-secondary-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 9px 16px;
+  font: 800 0.75rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-primary-button {
+  border: 1px solid var(--dw-cyan);
+  color: #001012;
+  background: var(--dw-cyan);
+}
+
+.dw-secondary-button {
+  border: 1px solid var(--dw-line-bright);
+  color: var(--dw-cyan);
+  background: transparent;
+}
+
+.dw-primary-button:hover,
+.dw-secondary-button:hover {
+  border-color: var(--dw-text);
+  color: #001012;
+  background: var(--dw-text);
+}
+
+.dw-primary-button:disabled,
+.dw-secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.dw-primary-button svg,
+.dw-secondary-button svg {
+  width: 16px;
+}
+
+.dw-selected-item .dw-primary-button,
+.dw-order-cart .dw-secondary-button {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.dw-order-lines {
+  display: grid;
+  gap: 7px;
+  max-height: 184px;
+  margin-top: 14px;
+  overflow: auto;
+}
+
+.dw-order-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(25, 215, 232, 0.12);
+}
+
+.dw-order-line strong,
+.dw-order-line small {
+  display: block;
+}
+
+.dw-order-line strong {
+  color: var(--dw-text);
+  font-size: 0.82rem;
+}
+
+.dw-order-line small {
+  color: var(--dw-muted);
+  font-size: 0.7rem;
+}
+
+.dw-order-line > span {
+  color: var(--dw-gold);
+  font: 700 0.78rem/1 "Share Tech Mono", monospace;
+}
+
+.dw-order-line button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: var(--dw-red);
+  background: transparent;
+}
+
+.dw-order-line button svg {
+  width: 14px;
+}
+
+.dw-order-totals {
+  margin-top: 14px;
+}
+
+.dw-fit-status,
+.dw-empty-state,
+.dw-form-status {
+  margin: 12px 0 0;
+  color: var(--dw-muted);
+  font-size: 0.78rem;
+}
+
+.dw-fit-status.is-good,
+.dw-form-status.is-good {
+  color: var(--dw-green);
+}
+
+.dw-fit-status.is-warning,
+.dw-form-status.is-error {
+  color: var(--dw-red);
+}
+
+.dw-empty-state {
+  padding: 28px;
+  text-align: center;
+}
+
+.dw-bank-summary {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.5fr) repeat(3, minmax(150px, 0.65fr));
+  gap: 1px;
+  border: 1px solid rgba(25, 215, 232, 0.2);
+  background: rgba(25, 215, 232, 0.16);
+}
+
+.dw-bank-summary > div {
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px;
+  background: #030d10;
+}
+
+.dw-bank-summary strong {
+  display: block;
+  margin-top: 11px;
+  color: var(--dw-text);
+  font: 800 1.7rem/0.9 Rajdhani, sans-serif;
+}
+
+.dw-bank-balance strong {
+  color: var(--dw-green);
+  font-size: 2.5rem;
+}
+
+.dw-bank-balance small {
+  margin-top: 6px;
+}
+
+.dw-connection-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--dw-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.dw-connection-state i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--dw-muted);
+}
+
+.dw-connection-state.is-online {
+  color: var(--dw-green);
+}
+
+.dw-connection-state.is-online i {
+  background: var(--dw-green);
+  box-shadow: 0 0 12px rgba(56, 230, 165, 0.8);
+}
+
+.dw-bank-gate {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 16px;
+  border: 1px dashed rgba(25, 215, 232, 0.24);
+  color: var(--dw-muted);
+  text-align: left;
+}
+
+.dw-bank-gate > svg {
+  width: 32px;
+  color: var(--dw-cyan);
+}
+
+.dw-bank-gate h3 {
+  color: var(--dw-text);
+  font: 800 1.35rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-bank-gate p {
+  max-width: 600px;
+  margin: 8px 0 0;
+}
+
+.dw-bank-workspace,
+.dw-ledger-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.dw-bank-request,
+.dw-admin-bank,
+.dw-request-queue,
+.dw-history-log {
+  padding: 20px;
+}
+
+.dw-bank-request h3,
+.dw-admin-bank h3 {
+  font: 800 1.35rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-bank-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.dw-bank-request > label,
+.dw-admin-bank > label {
+  display: block;
+  margin-top: 10px;
+}
+
+.dw-bank-request .dw-primary-button,
+.dw-admin-bank .dw-secondary-button {
+  margin-top: 14px;
+}
+
+.dw-bank-list {
+  display: grid;
+  gap: 8px;
+  max-height: 430px;
+  margin-top: 16px;
+  overflow: auto;
+}
+
+.dw-bank-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(25, 215, 232, 0.14);
+  background: #020a0d;
+}
+
+.dw-bank-entry h4 {
+  margin: 0;
+  color: var(--dw-text);
+  font: 700 0.95rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-bank-entry p,
+.dw-bank-entry small {
+  margin: 5px 0 0;
+  color: var(--dw-muted);
+  font-size: 0.73rem;
+}
+
+.dw-bank-entry-value {
+  text-align: right;
+}
+
+.dw-bank-entry-value strong {
+  color: var(--dw-gold);
+  font: 800 1rem/1 Rajdhani, sans-serif;
+}
+
+.dw-bank-entry-value strong.is-positive {
+  color: var(--dw-green);
+}
+
+.dw-bank-entry-value strong.is-negative {
+  color: var(--dw-red);
+}
+
+.dw-entry-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(25, 215, 232, 0.12);
+}
+
+.dw-entry-actions button {
+  min-height: 30px;
+  padding: 5px 10px;
+  border: 1px solid var(--dw-line);
+  color: var(--dw-cyan);
+  background: transparent;
+  font: 700 0.66rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-entry-actions button[data-action="reject"] {
+  color: var(--dw-red);
+}
+
+.dw-entry-actions button:hover {
+  color: #001012;
+  background: var(--dw-cyan);
+}
+
+.dw-toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 10000;
+  max-width: min(380px, calc(100% - 32px));
+  padding: 13px 16px;
+  border: 1px solid var(--dw-line-bright);
+  color: var(--dw-text);
+  background: #041317;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.48);
+  font-size: 0.84rem;
+}
+
+.dw-guide-version {
+  padding: 7px 10px;
+  border: 1px solid rgba(230, 186, 88, 0.42);
+  color: var(--dw-gold);
+  font: 700 0.7rem/1 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-help-intro {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 20px;
+  border: 1px solid rgba(25, 215, 232, 0.22);
+  background: rgba(25, 215, 232, 0.055);
+}
+
+.dw-help-intro > svg {
+  width: 28px;
+  color: var(--dw-cyan);
+}
+
+.dw-help-intro h3,
+.dw-guide-copy h3 {
+  margin: 0;
+  font: 800 1.35rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-help-intro p {
+  max-width: 960px;
+  margin: 9px 0 0;
+  color: #b8cbd0;
+  line-height: 1.55;
+}
+
+.dw-guide-nav {
+  display: flex;
+  gap: 1px;
+  margin-top: 12px;
+  overflow-x: auto;
+  border: 1px solid rgba(25, 215, 232, 0.16);
+  background: rgba(25, 215, 232, 0.14);
+}
+
+.dw-guide-nav a {
+  flex: 1 0 150px;
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 8px 12px;
+  color: var(--dw-muted);
+  background: #030b0e;
+  font: 700 0.72rem/1 Rajdhani, sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.dw-guide-nav a:hover {
+  color: #001012;
+  background: var(--dw-cyan);
+}
+
+.dw-guide-sections {
+  margin-top: 18px;
+  border-top: 1px solid rgba(25, 215, 232, 0.2);
+}
+
+.dw-guide-section {
+  scroll-margin-top: 20px;
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(25, 215, 232, 0.16);
+}
+
+.dw-guide-number {
+  color: rgba(25, 215, 232, 0.3);
+  font: 800 2.5rem/0.9 Rajdhani, sans-serif;
+}
+
+.dw-guide-copy > ol {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding-left: 22px;
+  color: #b7cbd0;
+}
+
+.dw-guide-copy li {
+  padding-left: 5px;
+  line-height: 1.5;
+}
+
+.dw-guide-copy li::marker {
+  color: var(--dw-cyan);
+  font-weight: 700;
+}
+
+.dw-guide-copy strong {
+  color: var(--dw-text);
+}
+
+.dw-guide-example,
+.dw-guide-callout,
+.dw-guide-note,
+.dw-guide-warning {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  border-left: 3px solid var(--dw-cyan);
+  color: #b9cdd1;
+  background: rgba(25, 215, 232, 0.05);
+}
+
+.dw-guide-example span {
+  display: block;
+  color: var(--dw-cyan);
+  font: 700 0.68rem/1 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-guide-example p,
+.dw-guide-callout p,
+.dw-guide-note,
+.dw-guide-warning {
+  line-height: 1.5;
+}
+
+.dw-guide-example p,
+.dw-guide-callout p {
+  margin: 6px 0 0;
+}
+
+.dw-guide-callout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+}
+
+.dw-guide-callout > svg {
+  width: 20px;
+  color: var(--dw-gold);
+}
+
+.dw-guide-callout p {
+  margin-top: 0;
+}
+
+.dw-guide-warning {
+  border-left-color: var(--dw-gold);
+  background: rgba(230, 186, 88, 0.07);
+}
+
+.dw-role-grid,
+.dw-guide-reference {
+  display: grid;
+  gap: 1px;
+  margin-top: 18px;
+  border: 1px solid rgba(25, 215, 232, 0.16);
+  background: rgba(25, 215, 232, 0.15);
+}
+
+.dw-role-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dw-role-grid > div,
+.dw-guide-reference > div {
+  padding: 15px;
+  background: #030c0f;
+}
+
+.dw-role-grid strong {
+  color: var(--dw-cyan);
+  font: 800 1rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-role-grid p {
+  margin: 8px 0 0;
+  color: var(--dw-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.dw-guide-reference {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.dw-guide-reference span {
+  display: block;
+  color: var(--dw-muted);
+  font: 700 0.65rem/1.2 "Share Tech Mono", monospace;
+  text-transform: uppercase;
+}
+
+.dw-guide-reference strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--dw-text);
+  font: 800 1.05rem/1 Rajdhani, sans-serif;
+}
+
+@media (max-width: 1180px) {
+  .dw-command-deck,
+  .dw-profit-layout,
+  .dw-catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-command-deck {
+    align-items: start;
+  }
+
+  .dw-command-status {
+    width: 100%;
+  }
+
+  .dw-order-desk {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dw-reference-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .dw-ledger-shell {
+    width: min(100% - 20px, 1720px);
+    padding-top: 12px;
+  }
+
+  .dw-command-deck,
+  .dw-panel {
+    padding: 20px;
+  }
+
+  .dw-command-copy h1 {
+    font-size: 2.25rem;
+  }
+
+  .dw-command-status,
+  .dw-production-controls,
+  .dw-station-grid,
+  .dw-production-output,
+  .dw-comparison-band,
+  .dw-bank-summary,
+  .dw-bank-workspace,
+  .dw-ledger-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-guide-reference {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dw-command-status > div {
+    min-height: 58px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(25, 215, 232, 0.16);
+  }
+
+  .dw-command-status > div:last-child {
+    border-bottom: 0;
+  }
+
+  .dw-result-board {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-primary-result {
+    min-height: 190px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(25, 215, 232, 0.2);
+  }
+
+  .dw-reference-row,
+  .dw-order-desk {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dw-catalog-toolbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dw-search-field {
+    grid-column: 1 / -1;
+  }
+
+  .dw-catalog-table-wrap {
+    max-height: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .dw-command-deck,
+  .dw-panel {
+    padding: 16px;
+  }
+
+  .dw-tabs {
+    scroll-snap-type: x mandatory;
+  }
+
+  .dw-tab {
+    flex-basis: 220px;
+    min-width: 220px;
+    scroll-snap-align: start;
+  }
+
+  .dw-section-heading {
+    align-items: flex-start;
+  }
+
+  .dw-section-heading h2 {
+    font-size: 1.42rem;
+  }
+
+  .dw-segmented,
+  .dw-result-matrix,
+  .dw-fixed-data,
+  .dw-reference-row,
+  .dw-order-desk,
+  .dw-catalog-toolbar,
+  .dw-bank-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-catalog-toolbar .dw-search-field {
+    grid-column: auto;
+  }
+
+  .dw-loadout-callout {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .dw-loadout-callout button {
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding-left: 0;
+  }
+
+  .dw-formula-trace {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-process-step {
+    grid-template-columns: 1fr auto;
+  }
+
+  .dw-process-line {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .dw-station {
+    grid-template-columns: auto minmax(0, 1fr) 68px;
+  }
+
+  .dw-catalog-table thead {
+    display: none;
+  }
+
+  .dw-catalog-table,
+  .dw-catalog-table tbody,
+  .dw-catalog-table tr,
+  .dw-catalog-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .dw-catalog-table tr {
+    position: relative;
+    padding: 12px 52px 12px 12px;
+    border-bottom: 1px solid rgba(25, 215, 232, 0.16);
+  }
+
+  .dw-catalog-table td {
+    padding: 3px 0;
+    border: 0;
+  }
+
+  .dw-catalog-table td:nth-child(1),
+  .dw-catalog-table td:nth-child(3),
+  .dw-catalog-table td:nth-child(5) {
+    display: inline-block;
+    width: auto;
+    margin-right: 8px;
+    color: var(--dw-muted);
+    font-size: 0.72rem;
+  }
+
+  .dw-catalog-table td:last-child {
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    width: 32px;
+  }
+
+  .dw-bank-gate {
+    padding: 24px;
+  }
+
+  .dw-help-intro,
+  .dw-guide-section {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-guide-number {
+    font-size: 1.5rem;
+  }
+
+  .dw-role-grid,
+  .dw-guide-reference {
+    grid-template-columns: 1fr;
+  }
+}

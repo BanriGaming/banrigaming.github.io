@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dragonwilds Tannery Ledger | BANRI Gaming</title>
+    <title>Dragonwilds Production Ledger | Bancy Waypoint</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/main.css?v=20260813a" />
+    <link rel="stylesheet" href="../assets/css/tannery-ledger.css?v=20260925a" />
     <script src="../assets/js/nav.js"></script>
     <script src="../assets/js/banri-theme.js?v=20260808a" defer></script>
   </head>
@@ -17,182 +18,565 @@
     <div class="banri-noise" aria-hidden="true"></div>
     <div w3-include-html="../nav.html"></div>
 
-    <main id="main-content" class="tool-page-shell">
-      <section class="jumbotron jumbotron-fluid tool-hero dragonwilds-hero">
-        <p class="eyebrow-line">Dragonwilds Ledger</p>
-        <h1 class="display-4">Tannery Ledger</h1>
-        <p class="lead">Calculate Garou Chit cost, full stacks, tannery loads, Draconic Leather output, sell value, and profit.</p>
-      </section>
+    <main id="main-content" class="dw-ledger-shell">
+      <header class="dw-command-deck">
+        <div class="dw-command-copy">
+          <p class="dw-kicker"><span>//</span> Dragonwilds Operations</p>
+          <h1>Production Ledger</h1>
+          <p>Plan profit runs, size processing lines, assemble merchant orders, and manage the shared Garou Chit bank.</p>
+        </div>
+        <div class="dw-command-status" aria-label="Ledger status">
+          <div>
+            <span>Game Data</span>
+            <strong>1.0 Field Values</strong>
+          </div>
+          <div>
+            <span>Inventory</span>
+            <strong id="headerInventory">24 Slots</strong>
+          </div>
+          <div>
+            <span>Access</span>
+            <strong id="authRoleLabel">Public Tools</strong>
+          </div>
+        </div>
+      </header>
 
-      <section class="tool-console panel-frame dragonwilds-ledger">
-        <div class="section-heading compact-heading">
-          <p><span>//</span> Chit Math</p>
-          <h2>Leather Conversion</h2>
-          <button id="ledgerReset" class="btn btn-banri-outline" type="button">Reset Defaults</button>
+      <nav class="dw-tabs" role="tablist" aria-label="Production ledger sections">
+        <button class="dw-tab is-active" id="tab-profit" type="button" role="tab" aria-selected="true" aria-controls="panel-profit" data-ledger-tab="profit">
+          <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+          Profit Workshop
+        </button>
+        <button class="dw-tab" id="tab-production" type="button" role="tab" aria-selected="false" aria-controls="panel-production" data-ledger-tab="production">
+          <i data-lucide="factory" aria-hidden="true"></i>
+          Production Planner
+        </button>
+        <button class="dw-tab" id="tab-catalog" type="button" role="tab" aria-selected="false" aria-controls="panel-catalog" data-ledger-tab="catalog">
+          <i data-lucide="store" aria-hidden="true"></i>
+          Merchant Catalog
+        </button>
+        <button class="dw-tab" id="tab-bank" type="button" role="tab" aria-selected="false" aria-controls="panel-bank" data-ledger-tab="bank">
+          <i data-lucide="landmark" aria-hidden="true"></i>
+          Server Bank
+          <span id="pendingTabBadge" class="dw-tab-badge" hidden>0</span>
+        </button>
+        <button class="dw-tab" id="tab-help" type="button" role="tab" aria-selected="false" aria-controls="panel-help" data-ledger-tab="help">
+          <i data-lucide="circle-help" aria-hidden="true"></i>
+          Help
+        </button>
+      </nav>
+
+      <section class="dw-panel is-active" id="panel-profit" role="tabpanel" aria-labelledby="tab-profit">
+        <div class="dw-section-heading">
+          <div>
+            <p class="dw-kicker"><span>01</span> Conversion Desk</p>
+            <h2>Choose the route. See the return.</h2>
+          </div>
+          <button class="dw-icon-button" id="resetProfit" type="button" title="Reset profit inputs" aria-label="Reset profit inputs">
+            <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+          </button>
         </div>
 
-        <div class="row g-4">
-          <div class="col-12 col-xl-5">
-            <article class="ledger-input-panel">
-              <div class="row g-3">
-                <div class="col-12 col-md-6">
-                  <label for="hides">Dragonwolf Hide / Leather Bought</label>
-                  <input id="hides" class="form-control" type="number" min="0" step="1" value="1188" inputmode="numeric" />
-                  <small>Example: 12 stacks x 99 = 1188</small>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="tanneries">Tanneries</label>
-                  <input id="tanneries" class="form-control" type="number" min="1" step="1" value="12" inputmode="numeric" />
-                  <small>Used to show full tannery loads.</small>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="costPerHide">Garou Chit Cost Per Hide</label>
-                  <input id="costPerHide" class="form-control" type="number" min="0" step="1" value="45" inputmode="numeric" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="stackSize">Max Stack Size</label>
-                  <input id="stackSize" class="form-control" type="number" min="1" step="1" value="99" inputmode="numeric" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="sellValue">Draconic Leather Sell Value Each</label>
-                  <input id="sellValue" class="form-control" type="number" min="0" step="1" value="240" inputmode="numeric" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="yieldRate">Leather Yield Per Hide</label>
-                  <input id="yieldRate" class="form-control" type="number" min="0" step="0.01" value="1" inputmode="decimal" />
-                  <small>Leave as 1 if one hide makes one leather.</small>
-                </div>
+        <div class="dw-profit-layout">
+          <div class="dw-workbench">
+            <div class="dw-control-group">
+              <span class="dw-field-label">Production Method</span>
+              <div class="dw-segmented" role="group" aria-label="Production method">
+                <button class="is-active" type="button" data-method="dragonwolf">Dragonwolf Hide</button>
+                <button type="button" data-method="ash">Ash Log Cycle</button>
               </div>
-            </article>
+            </div>
+
+            <div class="dw-control-group">
+              <span class="dw-field-label">Calculate From</span>
+              <div class="dw-segmented" role="group" aria-label="Calculation input">
+                <button class="is-active" type="button" data-profit-mode="quantity">Material Quantity</button>
+                <button type="button" data-profit-mode="investment">Chit Investment</button>
+              </div>
+            </div>
+
+            <div class="dw-input-row">
+              <label id="profitInputLabel" for="profitInput">Dragonwolf Hides</label>
+              <div class="dw-number-field">
+                <input id="profitInput" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 500" />
+                <span id="profitInputSuffix">hides</span>
+              </div>
+              <small id="profitInputHelp">Enter the number of hides you plan to buy and process.</small>
+            </div>
+
+            <div class="dw-fixed-data" id="fixedDataStrip" aria-label="Fixed game values"></div>
+
+            <div class="dw-loadout-callout">
+              <i data-lucide="briefcase-business" aria-hidden="true"></i>
+              <div>
+                <span>Trip footprint</span>
+                <strong id="profitTripFootprint">0 slots required</strong>
+              </div>
+              <button type="button" id="sendToProduction">Plan this batch</button>
+            </div>
           </div>
 
-          <div class="col-12 col-xl-7">
-            <div class="ledger-result-grid" aria-live="polite">
-              <article class="ledger-result accent">
-                <span>Cost Per Full Stack</span>
-                <strong id="stackCost">0</strong>
-              </article>
-              <article class="ledger-result accent">
-                <span>Stacks Needed</span>
-                <strong id="stacksNeeded">0</strong>
-              </article>
-              <article class="ledger-result">
-                <span>Full Tannery Loads</span>
-                <strong id="fullLoads">0</strong>
-              </article>
-              <article class="ledger-result">
-                <span>Leftover After Full Loads</span>
-                <strong id="leftover">0</strong>
-              </article>
-              <article class="ledger-result">
-                <span>Total Garou Chit Spent</span>
-                <strong id="totalCost">0</strong>
-              </article>
-              <article class="ledger-result">
-                <span>Draconic Leather Made</span>
-                <strong id="leatherMade">0</strong>
-              </article>
-              <article class="ledger-result">
-                <span>Total Sell Value</span>
-                <strong id="totalSell">0</strong>
-              </article>
-              <article id="profitBox" class="ledger-result profit">
-                <span>Profit</span>
-                <strong id="profit">0</strong>
-              </article>
+          <div class="dw-result-board" aria-live="polite">
+            <article class="dw-primary-result">
+              <span>Projected Profit</span>
+              <strong id="profitNet">0</strong>
+              <small>Garou Chits</small>
+            </article>
+            <div class="dw-result-matrix">
+              <div><span>Units Purchased</span><strong id="profitUnits">0</strong></div>
+              <div><span>Investment</span><strong id="profitSpend">0</strong></div>
+              <div><span>Gross Return</span><strong id="profitGross">0</strong></div>
+              <div><span>Return on Cost</span><strong id="profitRoi">0%</strong></div>
+              <div><span>Output</span><strong id="profitOutput">0</strong></div>
+              <div><span>Chit Leftover</span><strong id="profitLeftover">0</strong></div>
             </div>
           </div>
         </div>
 
-        <article id="formulaBox" class="ledger-formula mt-4"></article>
-        <p class="ledger-note">Reference check: 99 x 45 = 4,455 / 12 x 4,455 = 53,460 / 1,188 x 240 = 285,120.</p>
+        <div class="dw-formula-trace" id="formulaTrace"></div>
+
+        <div class="dw-comparison-band">
+          <div class="dw-comparison-intro">
+            <p class="dw-kicker"><span>Compare</span> Same Investment</p>
+            <h3>Profit Route Check</h3>
+            <p>Both methods use the current investment value so the return is directly comparable.</p>
+          </div>
+          <div class="dw-comparison-route" id="compareDragonwolf"></div>
+          <div class="dw-comparison-route" id="compareAsh"></div>
+        </div>
+      </section>
+
+      <section class="dw-panel" id="panel-production" role="tabpanel" aria-labelledby="tab-production" hidden>
+        <div class="dw-section-heading">
+          <div>
+            <p class="dw-kicker"><span>02</span> Capacity Model</p>
+            <h2>Size the floor before loading it.</h2>
+          </div>
+          <label class="dw-toggle">
+            <input id="hotbarToggle" type="checkbox" />
+            <span aria-hidden="true"></span>
+            Include 8-slot hotbar
+          </label>
+        </div>
+
+        <div class="dw-production-controls">
+          <label>
+            <span>Batch Method</span>
+            <select id="productionMethod">
+              <option value="dragonwolf">Dragonwolf Hide</option>
+              <option value="ash">Ash Log Cycle</option>
+            </select>
+          </label>
+          <label>
+            <span id="productionBatchLabel">Hides to Process</span>
+              <input id="productionBatch" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 500" />
+          </label>
+          <label>
+            <span>Target Completion</span>
+            <div class="dw-number-field compact">
+              <input id="targetMinutes" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 30" />
+              <span>minutes</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="dw-station-grid">
+          <article class="dw-station" data-station="tannery">
+            <div class="dw-station-icon"><i data-lucide="panels-top-left" aria-hidden="true"></i></div>
+            <div>
+              <span>Tanneries Owned</span>
+              <strong>Leather line</strong>
+            </div>
+            <input id="tanneryCount" type="number" min="1" step="1" inputmode="numeric" placeholder="30" aria-label="Tanneries owned" />
+          </article>
+          <article class="dw-station" data-station="sawmill">
+            <div class="dw-station-icon"><i data-lucide="construction" aria-hidden="true"></i></div>
+            <div>
+              <span>Sawmills Owned</span>
+              <strong>Log to plank</strong>
+            </div>
+            <input id="sawmillCount" type="number" min="1" step="1" inputmode="numeric" placeholder="1" aria-label="Sawmills owned" />
+          </article>
+          <article class="dw-station" data-station="kiln">
+            <div class="dw-station-icon"><i data-lucide="flame" aria-hidden="true"></i></div>
+            <div>
+              <span>Kilns Owned</span>
+              <strong>Plank to charcoal</strong>
+            </div>
+            <input id="kilnCount" type="number" min="1" step="1" inputmode="numeric" placeholder="2" aria-label="Kilns owned" />
+          </article>
+        </div>
+
+        <div class="dw-production-output">
+          <div class="dw-timeline-panel">
+            <div class="dw-panel-heading">
+              <div>
+                <span>Estimated Run</span>
+                <h3 id="productionDuration">0 minutes</h3>
+              </div>
+              <span class="dw-status-chip" id="productionBalance">Ready</span>
+            </div>
+            <div class="dw-process-track" id="processTrack"></div>
+            <p id="productionSummary"></p>
+          </div>
+
+          <aside class="dw-recommendation">
+            <p class="dw-kicker"><span>Recommended</span> Station Plan</p>
+            <strong id="recommendedStations">0 stations</strong>
+            <p id="recommendationCopy"></p>
+            <div class="dw-capacity-meter">
+              <div>
+                <span>Inventory Load</span>
+                <strong id="inventoryUsageLabel">0 / 24 slots</strong>
+              </div>
+              <div class="dw-meter"><span id="inventoryUsageBar"></span></div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="dw-reference-row">
+          <div><span>Material Stack</span><strong>99</strong></div>
+          <div><span>Chit Stack</span><strong>9,999</strong></div>
+          <div><span>Standard Carry</span><strong>2,376 items</strong></div>
+          <div><span>Ultra Carry</span><strong>3,168 items</strong></div>
+          <div><span>Balanced Ash Line</span><strong>1 mill : 2 kilns</strong></div>
+        </div>
+      </section>
+
+      <section class="dw-panel" id="panel-catalog" role="tabpanel" aria-labelledby="tab-catalog" hidden>
+        <div class="dw-section-heading">
+          <div>
+            <p class="dw-kicker"><span>03</span> Umbral Sands Procurement</p>
+            <h2>Build an exact merchant order.</h2>
+          </div>
+          <div class="dw-catalog-count"><strong id="catalogCount">69</strong><span>listed items</span></div>
+        </div>
+
+        <div class="dw-catalog-toolbar">
+          <label class="dw-search-field">
+            <i data-lucide="search" aria-hidden="true"></i>
+            <input id="catalogSearch" type="search" placeholder="Search materials or blueprints" autocomplete="off" />
+          </label>
+          <label>
+            <span class="visually-hidden">Merchant</span>
+            <select id="merchantFilter">
+              <option value="all">All merchants</option>
+              <option value="Iasadair">Iasadair</option>
+              <option value="Domri">Domri</option>
+              <option value="Beartach">Beartach</option>
+            </select>
+          </label>
+          <label>
+            <span class="visually-hidden">Item type</span>
+            <select id="catalogTypeFilter">
+              <option value="all">All stock</option>
+              <option value="material">Materials</option>
+              <option value="blueprint">Blueprints</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="dw-catalog-layout">
+          <div class="dw-catalog-table-wrap">
+            <table class="dw-catalog-table">
+              <thead>
+                <tr>
+                  <th>Merchant</th>
+                  <th>Item</th>
+                  <th>Type</th>
+                  <th>Unit Cost</th>
+                  <th>Stack</th>
+                  <th><span class="visually-hidden">Select</span></th>
+                </tr>
+              </thead>
+              <tbody id="catalogRows"></tbody>
+            </table>
+            <p class="dw-empty-state" id="catalogEmpty" hidden>No merchant stock matches that search.</p>
+          </div>
+
+          <aside class="dw-order-desk">
+            <div class="dw-selected-item">
+              <p class="dw-kicker"><span>Selected</span> Purchase Planner</p>
+              <h3 id="selectedItemName">Dragonwolf Hide</h3>
+              <p id="selectedItemMeta">Iasadair / Material</p>
+              <label>
+                <span>Quantity</span>
+                <input id="selectedItemQuantity" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 99" />
+              </label>
+              <div class="dw-order-math">
+                <div><span>Total Cost</span><strong id="selectedItemCost">0</strong></div>
+                <div><span>Item Slots</span><strong id="selectedItemSlots">0</strong></div>
+              </div>
+              <button class="dw-primary-button" id="addOrderItem" type="button">
+                <i data-lucide="plus" aria-hidden="true"></i>
+                Add to requisition
+              </button>
+            </div>
+
+            <div class="dw-order-cart">
+              <div class="dw-panel-heading">
+                <div><span>Requisition</span><h3 id="orderItemCount">No items</h3></div>
+                <button class="dw-text-button" id="clearOrder" type="button">Clear</button>
+              </div>
+              <div id="orderLines" class="dw-order-lines"></div>
+              <div class="dw-order-totals">
+                <div><span>Order Cost</span><strong id="orderTotalCost">0</strong></div>
+                <div><span>Item Slots</span><strong id="orderItemSlots">0</strong></div>
+                <div><span>Chit Slots</span><strong id="orderChitSlots">0</strong></div>
+                <div><span>Peak Carry</span><strong id="orderPeakSlots">0 / 24</strong></div>
+              </div>
+              <p class="dw-fit-status" id="orderFitStatus">Add stock to begin an order.</p>
+              <button class="dw-secondary-button" id="requestOrderFunds" type="button" disabled>
+                <i data-lucide="send" aria-hidden="true"></i>
+                Request bank purchase
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="dw-panel" id="panel-bank" role="tabpanel" aria-labelledby="tab-bank" hidden>
+        <div class="dw-section-heading">
+          <div>
+            <p class="dw-kicker"><span>04</span> Shared Treasury</p>
+            <h2>Every Chit has a trail.</h2>
+          </div>
+          <span class="dw-connection-state" id="bankConnectionState"><i></i> Sign in required</span>
+        </div>
+
+        <div class="dw-bank-summary">
+          <div class="dw-bank-balance">
+            <span>Available Bank Balance</span>
+            <strong id="bankBalance">--</strong>
+            <small>Garou Chits</small>
+          </div>
+          <div><span>Pending Requests</span><strong id="bankPendingCount">0</strong></div>
+          <div><span>Recorded Activity</span><strong id="bankLedgerCount">0</strong></div>
+          <div><span>Your Access</span><strong id="bankAccessLabel">Guest</strong></div>
+        </div>
+
+        <div class="dw-bank-gate" id="bankSignedOutGate">
+          <i data-lucide="lock-keyhole" aria-hidden="true"></i>
+          <div>
+            <h3>Member sign-in required</h3>
+            <p>The production tools remain public. Bank balances and transaction requests are available to signed-in Bancy members.</p>
+          </div>
+        </div>
+
+        <div id="bankMemberWorkspace" hidden>
+          <div class="dw-bank-workspace">
+            <form class="dw-bank-request" id="bankRequestForm">
+              <p class="dw-kicker"><span>Member</span> New Request</p>
+              <h3>Record a bank movement</h3>
+              <div class="dw-bank-form-grid">
+                <label>
+                  <span>Request Type</span>
+                  <select id="bankRequestType">
+                    <option value="deposit">Deposit Chits</option>
+                    <option value="withdrawal">Withdraw Chits</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Amount</span>
+                  <input id="bankRequestAmount" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 5,000" required />
+                </label>
+              </div>
+              <label>
+                <span>Reason / Reference</span>
+                <input id="bankRequestNote" type="text" maxlength="160" placeholder="What is this transaction for?" required />
+              </label>
+              <button class="dw-primary-button" type="submit">
+                <i data-lucide="clipboard-check" aria-hidden="true"></i>
+                Submit request
+              </button>
+              <p class="dw-form-status" id="bankRequestStatus" aria-live="polite"></p>
+            </form>
+
+            <section class="dw-admin-bank" id="adminBankPanel" hidden>
+              <p class="dw-kicker"><span>Admin</span> Treasury Controls</p>
+              <h3>Adjust the verified balance</h3>
+              <div class="dw-bank-form-grid">
+                <label>
+                  <span>Adjustment</span>
+                  <input id="adminAdjustmentAmount" type="number" step="1" inputmode="numeric" placeholder="Use - to subtract" />
+                </label>
+                <label>
+                  <span>Reason</span>
+                  <input id="adminAdjustmentNote" type="text" maxlength="160" placeholder="Reconciliation note" />
+                </label>
+              </div>
+              <button class="dw-secondary-button" id="applyAdminAdjustment" type="button">
+                <i data-lucide="scale" aria-hidden="true"></i>
+                Apply adjustment
+              </button>
+              <p class="dw-form-status" id="adminAdjustmentStatus" aria-live="polite"></p>
+            </section>
+          </div>
+
+          <div class="dw-ledger-columns">
+            <section class="dw-request-queue">
+              <div class="dw-panel-heading">
+                <div><span>Queue</span><h3>Transaction Requests</h3></div>
+                <span id="requestQueueHint">Your requests</span>
+              </div>
+              <div id="bankRequestList" class="dw-bank-list"></div>
+            </section>
+
+            <section class="dw-history-log">
+              <div class="dw-panel-heading">
+                <div><span>Ledger</span><h3>Recent Activity</h3></div>
+                <span>Newest first</span>
+              </div>
+              <div id="bankLedgerList" class="dw-bank-list"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="dw-panel" id="panel-help" role="tabpanel" aria-labelledby="tab-help" hidden>
+        <div class="dw-section-heading">
+          <div>
+            <p class="dw-kicker"><span>05</span> Field Manual</p>
+            <h2>How to use the Production Ledger.</h2>
+          </div>
+          <span class="dw-guide-version">Dragonwilds 1.0</span>
+        </div>
+
+        <div class="dw-help-intro">
+          <i data-lucide="book-open-check" aria-hidden="true"></i>
+          <div>
+            <h3>Start with the job you are trying to solve.</h3>
+            <p>Use Profit Workshop to test a money-making run, Production Planner to size the processing floor, Merchant Catalog to assemble a purchase, and Server Bank to record shared funds. Every field begins blank so the ledger only calculates from values you enter.</p>
+          </div>
+        </div>
+
+        <div class="dw-guide-nav" aria-label="Guide contents">
+          <a href="#guide-profit">Profit Workshop</a>
+          <a href="#guide-production">Production Planner</a>
+          <a href="#guide-catalog">Merchant Catalog</a>
+          <a href="#guide-bank">Server Bank</a>
+          <a href="#guide-reference">Reference</a>
+        </div>
+
+        <div class="dw-guide-sections">
+          <article class="dw-guide-section" id="guide-profit">
+            <div class="dw-guide-number">01</div>
+            <div class="dw-guide-copy">
+              <p class="dw-kicker"><span>Profit Workshop</span> Test the return</p>
+              <h3>Calculate from materials or from a Chit budget.</h3>
+              <ol>
+                <li>Choose <strong>Dragonwolf Hide</strong> or <strong>Ash Log Cycle</strong>.</li>
+                <li>Select <strong>Material Quantity</strong> when you know how many hides or logs you will buy. Select <strong>Chit Investment</strong> when you know how much currency you want to spend.</li>
+                <li>Enter the amount. The result board calculates whole purchasable units, actual spend, gross return, profit, ROI, output, and unspent Chits.</li>
+                <li>Review the trip footprint. It compares currency, purchased-material, and finished-output stacks against the active inventory size.</li>
+                <li>Choose <strong>Plan this batch</strong> to send the calculated material quantity into Production Planner.</li>
+              </ol>
+              <div class="dw-guide-example">
+                <span>Dragonwolf example</span>
+                <p>500 hides cost 22,500 Chits. They produce 500 Draconic Leather worth 30,000 Chits, leaving 7,500 Chits profit.</p>
+              </div>
+              <div class="dw-guide-example">
+                <span>Ash example</span>
+                <p>A 10,000-Chit budget buys 3,333 logs for 9,999 Chits. Those become 6,666 charcoal worth 19,998 Chits, leaving 9,999 profit and one unspent Chit.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="dw-guide-section" id="guide-production">
+            <div class="dw-guide-number">02</div>
+            <div class="dw-guide-copy">
+              <p class="dw-kicker"><span>Production Planner</span> Size the floor</p>
+              <h3>Estimate processing time and station requirements.</h3>
+              <ol>
+                <li>Choose the batch method and enter the number of hides or logs being processed.</li>
+                <li>Enter an optional target completion time in minutes.</li>
+                <li>For leather, enter your tannery count. For Ash production, enter both sawmill and kiln counts.</li>
+                <li>Enable the hotbar toggle only when all eight hotbar slots are available for the run.</li>
+                <li>Compare the current run estimate with the recommended station plan and inventory meter.</li>
+              </ol>
+              <div class="dw-guide-callout">
+                <i data-lucide="factory" aria-hidden="true"></i>
+                <p><strong>Balanced Ash line:</strong> one sawmill produces two planks per log, so each sawmill should be paired with two kilns. Processing estimates use 10 seconds per item at each stage and exclude manual transfer time.</p>
+              </div>
+              <div class="dw-guide-callout">
+                <i data-lucide="panels-top-left" aria-hidden="true"></i>
+                <p><strong>Tannery benchmark:</strong> one tannery holds a 99-hide stack. Twenty-four tanneries take one standard inventory in a single unattended load; 32 take a full inventory plus hotbar.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="dw-guide-section" id="guide-catalog">
+            <div class="dw-guide-number">03</div>
+            <div class="dw-guide-copy">
+              <p class="dw-kicker"><span>Merchant Catalog</span> Build a requisition</p>
+              <h3>Price one item or prepare a multi-merchant order.</h3>
+              <ol>
+                <li>Search by item name or filter the list by Iasadair, Domri, Beartach, materials, or blueprints.</li>
+                <li>Select the arrow beside an item, enter the desired quantity, and review its total cost and required item slots.</li>
+                <li>Add the item to the requisition. Repeat for every item needed.</li>
+                <li>Use Peak Carry to determine whether the exact Chit amount and purchased goods fit within one trip. The calculation assumes spent Chit slots become available for incoming stock.</li>
+                <li>Signed-in members can submit the complete order as a Server Bank purchase request.</li>
+              </ol>
+              <p class="dw-guide-note">Blueprints are one-time unlocks, so the planner limits each blueprint line to one. Merchant prices reflect the current values read directly from the in-game menus.</p>
+            </div>
+          </article>
+
+          <article class="dw-guide-section" id="guide-bank">
+            <div class="dw-guide-number">04</div>
+            <div class="dw-guide-copy">
+              <p class="dw-kicker"><span>Server Bank</span> Keep a shared trail</p>
+              <h3>Request, approve, and reconcile communal Chits.</h3>
+              <div class="dw-role-grid">
+                <div><strong>Guest</strong><p>Can use every public calculator and browse the merchant catalog. Bank data remains hidden.</p></div>
+                <div><strong>Member</strong><p>Can view the shared balance, submit deposits or withdrawals, request catalog purchases, and see personal requests.</p></div>
+                <div><strong>Administrator</strong><p>Can see the full request queue, approve or reject requests, and post documented balance adjustments.</p></div>
+              </div>
+              <ol>
+                <li>Members choose Deposit or Withdrawal, enter the amount and reason, then submit the request.</li>
+                <li>Catalog purchase requests are generated automatically from the active requisition.</li>
+                <li>An administrator verifies the in-game movement and approves the request. Approval updates the balance and creates a permanent ledger entry.</li>
+                <li>Administrative adjustments require a reconciliation note so corrections remain auditable.</li>
+              </ol>
+              <p class="dw-guide-warning"><strong>Important:</strong> this bank is a shared bookkeeping ledger. It cannot automatically move Chits inside Dragonwilds; members and administrators must still complete and verify the physical in-game exchange.</p>
+            </div>
+          </article>
+
+          <article class="dw-guide-section" id="guide-reference">
+            <div class="dw-guide-number">05</div>
+            <div class="dw-guide-copy">
+              <p class="dw-kicker"><span>Reference</span> Fixed values</p>
+              <h3>The constants used throughout the ledger.</h3>
+              <div class="dw-guide-reference">
+                <div><span>Material stack</span><strong>99</strong></div>
+                <div><span>Garou Chit stack</span><strong>9,999</strong></div>
+                <div><span>Main inventory</span><strong>24 slots</strong></div>
+                <div><span>Hotbar expansion</span><strong>8 slots</strong></div>
+                <div><span>Dragonwolf Hide</span><strong>45 Chit</strong></div>
+                <div><span>Draconic Leather</span><strong>60 Chit</strong></div>
+                <div><span>Ash Log</span><strong>3 Chit</strong></div>
+                <div><span>Charcoal sale</span><strong>3 Chit</strong></div>
+                <div><span>Processing time</span><strong>10 sec / item</strong></div>
+                <div><span>Ash station ratio</span><strong>1 : 2</strong></div>
+              </div>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
 
     <footer class="banri-footer compact-footer">
       <div class="container-fluid px-3 px-lg-5">
         <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
-          <p class="footer-kicker mb-0">Dragonwilds / Calculator / Chit Ledger</p>
-          <small>&copy; 2026 Banri Gaming. All rights reserved.</small>
+          <p class="footer-kicker mb-0">Dragonwilds / Production / Shared Ledger</p>
+          <small>&copy; 2026 Bancy Waypoint. All rights reserved.</small>
         </div>
       </div>
     </footer>
 
-    <script>
-      includeHTML();
+    <div class="dw-toast" id="ledgerToast" role="status" aria-live="polite" hidden></div>
 
-      const ledgerIds = ["hides", "tanneries", "costPerHide", "stackSize", "sellValue", "yieldRate"];
-      const ledgerFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
-
-      function readLedgerNumber(id) {
-        const value = parseFloat(document.getElementById(id).value);
-        return Number.isFinite(value) ? value : 0;
-      }
-
-      function setLedgerText(id, value) {
-        const target = document.getElementById(id);
-        if (target) target.textContent = value;
-      }
-
-      function calculateLedger() {
-        const hides = Math.max(0, readLedgerNumber("hides"));
-        const tanneries = Math.max(1, readLedgerNumber("tanneries"));
-        const costPerHide = Math.max(0, readLedgerNumber("costPerHide"));
-        const stackSize = Math.max(1, readLedgerNumber("stackSize"));
-        const sellValue = Math.max(0, readLedgerNumber("sellValue"));
-        const yieldRate = Math.max(0, readLedgerNumber("yieldRate"));
-
-        const stackCost = stackSize * costPerHide;
-        const stacksNeeded = Math.ceil(hides / stackSize);
-        const fullLoads = Math.floor(hides / (tanneries * stackSize));
-        const leftover = hides % (tanneries * stackSize);
-        const totalCost = hides * costPerHide;
-        const leatherMade = hides * yieldRate;
-        const totalSell = leatherMade * sellValue;
-        const profit = totalSell - totalCost;
-
-        setLedgerText("stackCost", `${ledgerFormat.format(stackCost)} Chit`);
-        setLedgerText("stacksNeeded", `${ledgerFormat.format(stacksNeeded)} stack${stacksNeeded === 1 ? "" : "s"}`);
-        setLedgerText("fullLoads", ledgerFormat.format(fullLoads));
-        setLedgerText("leftover", `${ledgerFormat.format(leftover)} hide${leftover === 1 ? "" : "s"}`);
-        setLedgerText("totalCost", `${ledgerFormat.format(totalCost)} Chit`);
-        setLedgerText("leatherMade", ledgerFormat.format(leatherMade));
-        setLedgerText("totalSell", ledgerFormat.format(totalSell));
-        setLedgerText("profit", ledgerFormat.format(profit));
-
-        const profitBox = document.getElementById("profitBox");
-        profitBox?.classList.toggle("profit", profit >= 0);
-        profitBox?.classList.toggle("loss", profit < 0);
-
-        document.getElementById("formulaBox").innerHTML = `
-          <strong>Formula Trace</strong>
-          <span>${ledgerFormat.format(stackSize)} stack size x ${ledgerFormat.format(costPerHide)} chit = <b>${ledgerFormat.format(stackCost)} chit per full stack</b></span>
-          <span>${ledgerFormat.format(hides)} hides x ${ledgerFormat.format(costPerHide)} chit = <b>${ledgerFormat.format(totalCost)} chit spent</b></span>
-          <span>${ledgerFormat.format(hides)} hides x ${ledgerFormat.format(yieldRate)} yield = <b>${ledgerFormat.format(leatherMade)} Draconic Leather</b></span>
-          <span>${ledgerFormat.format(leatherMade)} leather x ${ledgerFormat.format(sellValue)} sell value = <b>${ledgerFormat.format(totalSell)} total sell value</b></span>
-          <span>${ledgerFormat.format(totalSell)} - ${ledgerFormat.format(totalCost)} = <b>${ledgerFormat.format(profit)} profit</b></span>
-        `;
-      }
-
-      function resetLedgerDefaults() {
-        const defaults = {
-          hides: 1188,
-          tanneries: 12,
-          costPerHide: 45,
-          stackSize: 99,
-          sellValue: 240,
-          yieldRate: 1
-        };
-        Object.entries(defaults).forEach(([id, value]) => {
-          document.getElementById(id).value = value;
-        });
-        calculateLedger();
-      }
-
-      ledgerIds.forEach((id) => document.getElementById(id).addEventListener("input", calculateLedger));
-      document.getElementById("ledgerReset").addEventListener("click", resetLedgerDefaults);
-      calculateLedger();
-    </script>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="../assets/js/tannery-ledger.js?v=20260925a"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>includeHTML();</script>
   </body>
 </html>
