@@ -176,6 +176,21 @@
           ".validate": false
         }
       },
+      "storage": {
+        ".validate": "newData.hasChildren(['chestCount', 'updatedAt', 'updatedByUid'])",
+        "chestCount": {
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 100 && newData.val() % 1 === 0"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "updatedByUid": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 128"
+        },
+        "$other": {
+          ".validate": false
+        }
+      },
       "requests": {
         "$requestId": {
           ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || (!data.exists() && newData.child('id').val() === $requestId && newData.child('uid').val() === auth.uid && newData.child('status').val() === 'pending'))",

@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/main.css?v=20260813a" />
-    <link rel="stylesheet" href="../assets/css/tannery-ledger.css?v=20260925a" />
+    <link rel="stylesheet" href="../assets/css/tannery-ledger.css?v=20260925b" />
     <script src="../assets/js/nav.js"></script>
     <script src="../assets/js/banri-theme.js?v=20260808a" defer></script>
   </head>
@@ -171,7 +171,7 @@
               <input id="productionBatch" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 500" />
           </label>
           <label>
-            <span>Target Completion</span>
+            <span>Target Completion (Optional)</span>
             <div class="dw-number-field compact">
               <input id="targetMinutes" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 30" />
               <span>minutes</span>
@@ -324,6 +324,21 @@
                 <div><span>Chit Slots</span><strong id="orderChitSlots">0</strong></div>
                 <div><span>Peak Carry</span><strong id="orderPeakSlots">0 / 24</strong></div>
               </div>
+              <section class="dw-replenishment" id="orderReplenishment" hidden>
+                <div class="dw-panel-heading">
+                  <div><span>Bank Recovery</span><h3>Dragonwolf Replenishment</h3></div>
+                  <i data-lucide="refresh-cw" aria-hidden="true"></i>
+                </div>
+                <p>Recover this purchase through the 15-Chit net return from each processed hide.</p>
+                <div class="dw-replenishment-grid">
+                  <div><span>Hides Required</span><strong id="replenishmentHides">0</strong></div>
+                  <div><span>Working Capital</span><strong id="replenishmentCapital">0</strong></div>
+                  <div><span>Leather Return</span><strong id="replenishmentGross">0</strong></div>
+                  <div><span>Net Recovery</span><strong id="replenishmentNet">0</strong></div>
+                </div>
+                <p class="dw-replenishment-note" id="replenishmentNote"></p>
+                <button class="dw-text-button" id="planReplenishment" type="button">Plan recovery batch</button>
+              </section>
               <p class="dw-fit-status" id="orderFitStatus">Add stock to begin an order.</p>
               <button class="dw-secondary-button" id="requestOrderFunds" type="button" disabled>
                 <i data-lucide="send" aria-hidden="true"></i>
@@ -346,13 +361,30 @@
         <div class="dw-bank-summary">
           <div class="dw-bank-balance">
             <span>Available Bank Balance</span>
-            <strong id="bankBalance">--</strong>
+            <div class="dw-bank-balance-value"><strong id="bankBalance">--</strong><span>/ <b id="bankCapacity">--</b></span></div>
             <small>Garou Chits</small>
           </div>
           <div><span>Pending Requests</span><strong id="bankPendingCount">0</strong></div>
           <div><span>Recorded Activity</span><strong id="bankLedgerCount">0</strong></div>
           <div><span>Your Access</span><strong id="bankAccessLabel">Guest</strong></div>
         </div>
+
+        <section class="dw-bank-capacity" aria-labelledby="bankCapacityHeading">
+          <div class="dw-bank-capacity-copy">
+            <div>
+              <span id="bankCapacityHeading">Physical Bank Capacity</span>
+              <strong id="bankCapacityLabel">1 Iron Chest / 64 slots</strong>
+            </div>
+            <div class="dw-bank-capacity-remaining">
+              <span>Remaining Space</span>
+              <strong id="bankRemainingCapacity">--</strong>
+            </div>
+          </div>
+          <div class="dw-bank-capacity-meter" role="progressbar" aria-label="Bank capacity used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bankCapacityMeter">
+            <span id="bankCapacityBar"></span>
+          </div>
+          <p id="bankCapacityStatus">Sign in to view physical storage usage.</p>
+        </section>
 
         <div class="dw-bank-gate" id="bankSignedOutGate">
           <i data-lucide="lock-keyhole" aria-hidden="true"></i>
@@ -393,6 +425,20 @@
 
             <section class="dw-admin-bank" id="adminBankPanel" hidden>
               <p class="dw-kicker"><span>Admin</span> Treasury Controls</p>
+              <h3>Storage and balance controls</h3>
+              <div class="dw-admin-storage">
+                <label>
+                  <span>Iron Chests Allocated</span>
+                  <input id="adminChestCount" type="number" min="1" max="100" step="1" inputmode="numeric" placeholder="1" />
+                </label>
+                <button class="dw-secondary-button" id="saveBankStorage" type="button">
+                  <i data-lucide="archive" aria-hidden="true"></i>
+                  Save capacity
+                </button>
+              </div>
+              <p class="dw-storage-preview" id="adminStoragePreview">1 chest provides 64 slots and stores up to 639,936 Chits.</p>
+              <p class="dw-form-status" id="adminStorageStatus" aria-live="polite"></p>
+              <div class="dw-admin-divider"></div>
               <h3>Adjust the verified balance</h3>
               <div class="dw-bank-form-grid">
                 <label>
@@ -514,6 +560,7 @@
                 <li>Select the arrow beside an item, enter the desired quantity, and review its total cost and required item slots.</li>
                 <li>Add the item to the requisition. Repeat for every item needed.</li>
                 <li>Use Peak Carry to determine whether the exact Chit amount and purchased goods fit within one trip. The calculation assumes spent Chit slots become available for incoming stock.</li>
+                <li>Review Dragonwolf Replenishment to see how many hides, how much working capital, and how much processing time would recover the full purchase cost.</li>
                 <li>Signed-in members can submit the complete order as a Server Bank purchase request.</li>
               </ol>
               <p class="dw-guide-note">Blueprints are one-time unlocks, so the planner limits each blueprint line to one. Merchant prices reflect the current values read directly from the in-game menus.</p>
@@ -534,9 +581,10 @@
                 <li>Members choose Deposit or Withdrawal, enter the amount and reason, then submit the request.</li>
                 <li>Catalog purchase requests are generated automatically from the active requisition.</li>
                 <li>An administrator verifies the in-game movement and approves the request. Approval updates the balance and creates a permanent ledger entry.</li>
+                <li>Administrators set the number of Iron Chests allocated to the bank. Each chest adds 64 slots, and each slot holds one 9,999-Chit stack.</li>
                 <li>Administrative adjustments require a reconciliation note so corrections remain auditable.</li>
               </ol>
-              <p class="dw-guide-warning"><strong>Important:</strong> this bank is a shared bookkeeping ledger. It cannot automatically move Chits inside Dragonwilds; members and administrators must still complete and verify the physical in-game exchange.</p>
+              <p class="dw-guide-warning"><strong>Important:</strong> approvals and positive adjustments cannot exceed the configured physical chest capacity. This bank is still a shared bookkeeping ledger; it cannot automatically move Chits inside Dragonwilds.</p>
             </div>
           </article>
 
@@ -548,6 +596,8 @@
               <div class="dw-guide-reference">
                 <div><span>Material stack</span><strong>99</strong></div>
                 <div><span>Garou Chit stack</span><strong>9,999</strong></div>
+                <div><span>Iron Chest</span><strong>64 slots</strong></div>
+                <div><span>One-chest capacity</span><strong>639,936 Chit</strong></div>
                 <div><span>Main inventory</span><strong>24 slots</strong></div>
                 <div><span>Hotbar expansion</span><strong>8 slots</strong></div>
                 <div><span>Dragonwolf Hide</span><strong>45 Chit</strong></div>
@@ -575,7 +625,7 @@
     <div class="dw-toast" id="ledgerToast" role="status" aria-live="polite" hidden></div>
 
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-    <script type="module" src="../assets/js/tannery-ledger.js?v=20260925a"></script>
+    <script type="module" src="../assets/js/tannery-ledger.js?v=20260925b"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>includeHTML();</script>
   </body>

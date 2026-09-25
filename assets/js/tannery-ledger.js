@@ -17,6 +17,10 @@ const CHIT_STACK = 9999;
 const BASE_INVENTORY_SLOTS = 24;
 const HOTBAR_SLOTS = 8;
 const PROCESS_SECONDS = 10;
+const IRON_CHEST_SLOTS = 64;
+const DEFAULT_BANK_CHESTS = 1;
+const MAX_BANK_CHESTS = 100;
+const DRAGONWOLF_NET_PROFIT = 15;
 
 const METHODS = {
   dragonwolf: {
@@ -163,6 +167,7 @@ const state = {
   isAdmin: false,
   bank: {
     balance: { amount: 0 },
+    storage: { chestCount: DEFAULT_BANK_CHESTS },
     requests: {},
     ledger: {}
   },
@@ -230,6 +235,14 @@ function formatDate(timestamp) {
 
 function inventorySlots() {
   return BASE_INVENTORY_SLOTS + (state.hotbar ? HOTBAR_SLOTS : 0);
+}
+
+function normalizedChestCount(value) {
+  return Math.min(MAX_BANK_CHESTS, Math.max(1, integerValue(value, DEFAULT_BANK_CHESTS)));
+}
+
+function bankCapacity(chestCount = DEFAULT_BANK_CHESTS) {
+  return normalizedChestCount(chestCount) * IRON_CHEST_SLOTS * CHIT_STACK;
 }
 
 function refreshIcons() {
@@ -528,8 +541,22 @@ function orderSummary() {
   };
 }
 
+function replenishmentSummary(totalCost) {
+  const cost = Math.max(0, Number(totalCost) || 0);
+  const hides = Math.ceil(cost / DRAGONWOLF_NET_PROFIT);
+  const workingCapital = hides * METHODS.dragonwolf.unitCost;
+  const grossReturn = hides * METHODS.dragonwolf.sellValue;
+  const netRecovery = grossReturn - workingCapital;
+  const stacks = Math.ceil(hides / MATERIAL_STACK);
+  const tanneries = Math.max(0, integerValue($("#tanneryCount")?.value, 0));
+  const seconds = hides && tanneries ? Math.ceil(hides / tanneries) * PROCESS_SECONDS : hides * PROCESS_SECONDS;
+  const waves = hides && tanneries ? Math.ceil(hides / (tanneries * MATERIAL_STACK)) : stacks;
+  return { hides, workingCapital, grossReturn, netRecovery, stacks, tanneries, seconds, waves };
+}
+
 function renderOrder() {
   const order = orderSummary();
+  const recovery = replenishmentSummary(order.totalCost);
   const slots = inventorySlots();
   $("#orderItemCount").textContent = order.lines.length ? `${order.lines.length} item type${order.lines.length === 1 ? "" : "s"}` : "No items";
   $("#orderLines").innerHTML = order.lines.length ? order.lines.map(({ item, quantity }) => `
@@ -545,6 +572,15 @@ function renderOrder() {
   $("#orderItemSlots").textContent = formatNumber(order.itemSlots);
   $("#orderChitSlots").textContent = formatNumber(order.chitSlots);
   $("#orderPeakSlots").textContent = `${order.peakSlots} / ${slots}`;
+
+  $("#orderReplenishment").hidden = !order.lines.length;
+  $("#replenishmentHides").textContent = formatNumber(recovery.hides);
+  $("#replenishmentCapital").textContent = `${formatNumber(recovery.workingCapital)} Chit`;
+  $("#replenishmentGross").textContent = `${formatNumber(recovery.grossReturn)} Chit`;
+  $("#replenishmentNet").textContent = `${formatNumber(recovery.netRecovery)} Chit`;
+  $("#replenishmentNote").textContent = order.lines.length
+    ? `${recovery.stacks} hide stack${recovery.stacks === 1 ? "" : "s"}. ${recovery.tanneries ? `${recovery.tanneries} tanneries finish in about ${formatDuration(recovery.seconds)} across ${recovery.waves} load wave${recovery.waves === 1 ? "" : "s"}.` : `One tannery takes about ${formatDuration(recovery.seconds)}; enter your tannery count in Production Planner for a parallel estimate.`} The run recovers the ${formatNumber(order.totalCost)}-Chit order with ${formatNumber(recovery.netRecovery - order.totalCost)} Chit to spare.`
+    : "";
 
   const fit = order.lines.length > 0 && order.peakSlots <= slots;
   const fitStatus = $("#orderFitStatus");
@@ -606,8 +642,20 @@ function renderBank() {
   const visibleRequests = state.isAdmin ? requests : requests.filter((request) => request.uid === state.user?.uid);
   const pending = visibleRequests.filter((request) => request.status === "pending");
   const bankAmount = Number(state.bank.balance?.amount || 0);
+  const chestCount = normalizedChestCount(state.bank.storage?.chestCount);
+  const capacity = bankCapacity(chestCount);
+  const remaining = Math.max(0, capacity - bankAmount);
+  const usedPercent = capacity ? Math.min(100, Math.max(0, (bankAmount / capacity) * 100)) : 0;
 
   $("#bankBalance").textContent = state.user && state.bankLoaded ? formatNumber(bankAmount) : "--";
+  $("#bankCapacity").textContent = state.user && state.bankLoaded ? formatNumber(capacity) : "--";
+  $("#bankCapacityLabel").textContent = `${chestCount} Iron Chest${chestCount === 1 ? "" : "s"} / ${formatNumber(chestCount * IRON_CHEST_SLOTS)} slots`;
+  $("#bankRemainingCapacity").textContent = state.user && state.bankLoaded ? `${formatNumber(remaining)} Chit` : "--";
+  $("#bankCapacityBar").style.width = state.user && state.bankLoaded ? `${usedPercent}%` : "0%";
+  $("#bankCapacityMeter").setAttribute("aria-valuenow", state.user && state.bankLoaded ? String(Math.round(usedPercent)) : "0");
+  $("#bankCapacityStatus").textContent = state.user && state.bankLoaded
+    ? `${percentFormat.format(usedPercent)}% used / ${formatNumber(remaining)} Chits remain before another chest is required.`
+    : "Sign in to view physical storage usage.";
   $("#bankPendingCount").textContent = formatNumber(pending.length);
   $("#bankLedgerCount").textContent = formatNumber(ledger.length);
   $("#bankAccessLabel").textContent = state.isAdmin ? "Administrator" : state.user ? "Member" : "Guest";
@@ -622,6 +670,10 @@ function renderBank() {
   $("#bankSignedOutGate").hidden = Boolean(state.user);
   $("#bankMemberWorkspace").hidden = !state.user;
   $("#adminBankPanel").hidden = !state.isAdmin;
+  if (state.isAdmin && document.activeElement !== $("#adminChestCount")) {
+    $("#adminChestCount").value = chestCount;
+    renderStoragePreview();
+  }
 
   $("#bankRequestList").innerHTML = visibleRequests.length ? visibleRequests.map((request) => bankRequestMarkup(request)).join("") : '<p class="dw-empty-state">No transaction requests yet.</p>';
   $("#bankLedgerList").innerHTML = ledger.length ? ledger.slice(0, 40).map((entry) => bankLedgerMarkup(entry)).join("") : '<p class="dw-empty-state">No approved activity yet.</p>';
@@ -673,7 +725,7 @@ function subscribeToBank() {
   }
   state.bankLoaded = false;
   if (!state.user) {
-    state.bank = { balance: { amount: 0 }, requests: {}, ledger: {} };
+    state.bank = { balance: { amount: 0 }, storage: { chestCount: DEFAULT_BANK_CHESTS }, requests: {}, ledger: {} };
     renderBank();
     return;
   }
@@ -682,6 +734,7 @@ function subscribeToBank() {
     const value = snapshot.val() || {};
     state.bank = {
       balance: value.balance || { amount: 0 },
+      storage: value.storage || { chestCount: DEFAULT_BANK_CHESTS },
       requests: value.requests || {},
       ledger: value.ledger || {}
     };
@@ -714,7 +767,8 @@ async function resolveBankRequest(requestId, decision) {
     const direction = request.type === "deposit" ? 1 : -1;
     const delta = direction * Number(request.amount || 0);
     const nextBalance = currentBalance + delta;
-    if (nextBalance < 0) return;
+    const capacity = bankCapacity(data.storage?.chestCount);
+    if (nextBalance < 0 || nextBalance > capacity) return;
 
     data.balance = {
       amount: nextBalance,
@@ -744,7 +798,7 @@ async function resolveBankRequest(requestId, decision) {
     return data;
   });
 
-  if (!result.committed) throw new Error("The request changed or the bank does not have enough Chits.");
+  if (!result.committed) throw new Error("The request changed, lacks available funds, or exceeds physical bank capacity.");
   showToast("Bank request approved and posted.");
 }
 
@@ -758,7 +812,8 @@ async function applyAdminAdjustment() {
     const data = current || {};
     const currentBalance = Number(data.balance?.amount || 0);
     const nextBalance = currentBalance + amount;
-    if (nextBalance < 0) return;
+    const capacity = bankCapacity(data.storage?.chestCount);
+    if (nextBalance < 0 || nextBalance > capacity) return;
     data.balance = {
       amount: nextBalance,
       updatedAt: Date.now(),
@@ -778,10 +833,35 @@ async function applyAdminAdjustment() {
     };
     return data;
   });
-  if (!result.committed) throw new Error("That adjustment would make the balance negative.");
+  if (!result.committed) throw new Error("That adjustment would make the balance negative or exceed physical capacity.");
   $("#adminAdjustmentAmount").value = "";
   $("#adminAdjustmentNote").value = "";
   showToast("Bank balance adjusted.");
+}
+
+function renderStoragePreview() {
+  const input = $("#adminChestCount");
+  const chestCount = normalizedChestCount(input?.value);
+  const slots = chestCount * IRON_CHEST_SLOTS;
+  $("#adminStoragePreview").textContent = `${chestCount} chest${chestCount === 1 ? "" : "s"} provide ${formatNumber(slots)} slots and store up to ${formatNumber(bankCapacity(chestCount))} Chits.`;
+}
+
+async function saveBankStorage() {
+  if (!state.isAdmin) return;
+  const chestCount = normalizedChestCount($("#adminChestCount").value);
+  const result = await runTransaction(ref(database, "dragonwildsLedger"), (current) => {
+    const data = current || {};
+    const currentBalance = Number(data.balance?.amount || 0);
+    if (currentBalance > bankCapacity(chestCount)) return;
+    data.storage = {
+      chestCount,
+      updatedAt: Date.now(),
+      updatedByUid: state.user.uid
+    };
+    return data;
+  });
+  if (!result.committed) throw new Error("The current balance will not fit in that many chests.");
+  showToast("Physical bank capacity updated.");
 }
 
 function updateAuthUi() {
@@ -848,6 +928,15 @@ function bindEvents() {
   $("#clearOrder").addEventListener("click", () => {
     state.order.clear();
     renderOrder();
+  });
+  $("#planReplenishment").addEventListener("click", () => {
+    const recovery = replenishmentSummary(orderSummary().totalCost);
+    if (!recovery.hides) return;
+    $("#productionMethod").value = "dragonwolf";
+    $("#productionBatch").value = recovery.hides;
+    renderProduction();
+    setActiveTab("production");
+    showToast("Recovery batch sent to Production Planner.");
   });
   $("#orderLines").addEventListener("click", (event) => {
     const button = event.target.closest("[data-remove-order]");
@@ -917,6 +1006,21 @@ function bindEvents() {
     } catch (error) {
       status.classList.add("is-error");
       status.textContent = error.message || "Adjustment failed.";
+    }
+  });
+
+  $("#adminChestCount").addEventListener("input", renderStoragePreview);
+  $("#saveBankStorage").addEventListener("click", async () => {
+    const status = $("#adminStorageStatus");
+    status.className = "dw-form-status";
+    status.textContent = "Saving...";
+    try {
+      await saveBankStorage();
+      status.classList.add("is-good");
+      status.textContent = "Chest allocation saved to the shared ledger.";
+    } catch (error) {
+      status.classList.add("is-error");
+      status.textContent = error.message || "Capacity update failed.";
     }
   });
 }

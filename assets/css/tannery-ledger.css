@@ -1101,6 +1101,59 @@
   margin-top: 14px;
 }
 
+.dw-replenishment {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid rgba(218, 176, 79, 0.34);
+  background: rgba(218, 176, 79, 0.055);
+}
+
+.dw-replenishment .dw-panel-heading > i {
+  width: 18px;
+  color: var(--dw-gold);
+}
+
+.dw-replenishment > p {
+  margin: 9px 0 0;
+  color: var(--dw-muted);
+  font-size: 0.76rem;
+}
+
+.dw-replenishment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 12px;
+  background: rgba(218, 176, 79, 0.15);
+}
+
+.dw-replenishment-grid > div {
+  padding: 10px;
+  background: #030d10;
+}
+
+.dw-replenishment-grid span,
+.dw-bank-capacity span,
+.dw-admin-storage label > span,
+.dw-storage-preview {
+  color: var(--dw-muted);
+  font: 700 0.62rem/1.2 "Share Tech Mono", monospace;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.dw-replenishment-grid strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--dw-text);
+  font: 800 1rem/1 Rajdhani, sans-serif;
+}
+
+.dw-replenishment .dw-text-button {
+  margin-top: 10px;
+  color: var(--dw-gold);
+}
+
 .dw-fit-status,
 .dw-empty-state,
 .dw-form-status {
@@ -1153,8 +1206,78 @@
   font-size: 2.5rem;
 }
 
+.dw-bank-balance-value {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dw-bank-balance-value > span {
+  color: var(--dw-muted);
+  font: 700 0.76rem/1 "Share Tech Mono", monospace;
+}
+
+.dw-bank-balance-value b {
+  color: var(--dw-text-soft);
+  font-weight: 700;
+}
+
 .dw-bank-balance small {
   margin-top: 6px;
+}
+
+.dw-bank-capacity {
+  margin-top: 10px;
+  padding: 14px 16px;
+  border: 1px solid rgba(25, 215, 232, 0.2);
+  background: #030d10;
+}
+
+.dw-bank-capacity-copy {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.dw-bank-capacity-copy strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--dw-text);
+  font: 800 1rem/1 Rajdhani, sans-serif;
+  text-transform: uppercase;
+}
+
+.dw-bank-capacity-remaining {
+  text-align: right;
+}
+
+.dw-bank-capacity-remaining strong {
+  color: var(--dw-green);
+}
+
+.dw-bank-capacity-meter {
+  height: 8px;
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(25, 215, 232, 0.22);
+  background: #010609;
+}
+
+.dw-bank-capacity-meter > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--dw-green), var(--dw-cyan));
+  box-shadow: 0 0 14px rgba(56, 230, 165, 0.35);
+  transition: width 300ms ease;
+}
+
+.dw-bank-capacity > p {
+  margin: 8px 0 0;
+  color: var(--dw-muted);
+  font-size: 0.72rem;
 }
 
 .dw-connection-state {
@@ -1247,6 +1370,39 @@
 .dw-bank-request .dw-primary-button,
 .dw-admin-bank .dw-secondary-button {
   margin-top: 14px;
+}
+
+.dw-admin-storage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.dw-admin-storage label {
+  display: block;
+}
+
+.dw-admin-storage input {
+  width: 100%;
+  margin-top: 7px;
+}
+
+.dw-admin-storage .dw-secondary-button {
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+.dw-storage-preview {
+  margin: 10px 0 0;
+  text-transform: none;
+}
+
+.dw-admin-divider {
+  height: 1px;
+  margin: 18px 0;
+  background: rgba(25, 215, 232, 0.16);
 }
 
 .dw-bank-list {
@@ -1666,8 +1822,19 @@
   .dw-reference-row,
   .dw-order-desk,
   .dw-catalog-toolbar,
-  .dw-bank-form-grid {
+  .dw-bank-form-grid,
+  .dw-replenishment-grid,
+  .dw-admin-storage {
     grid-template-columns: 1fr;
+  }
+
+  .dw-bank-capacity-copy {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dw-bank-capacity-remaining {
+    text-align: left;
   }
 
   .dw-catalog-toolbar .dw-search-field {
