@@ -14,6 +14,7 @@ import {
 
 const MATERIAL_STACK = 99;
 const CHIT_STACK = 9999;
+const MERCHANT_PURCHASE_LIMIT = 999;
 const BASE_INVENTORY_SLOTS = 24;
 const HOTBAR_SLOTS = 8;
 const PROCESS_SECONDS = 10;
@@ -166,6 +167,7 @@ const state = {
   user: null,
   isAdmin: false,
   adminControlsVisible: false,
+  bankAmountMode: "direct",
   bank: {
     balance: { amount: 0 },
     storage: { chestCount: DEFAULT_BANK_CHESTS },
@@ -244,6 +246,40 @@ function normalizedChestCount(value) {
 
 function bankCapacity(chestCount = DEFAULT_BANK_CHESTS) {
   return normalizedChestCount(chestCount) * IRON_CHEST_SLOTS * CHIT_STACK;
+}
+
+function splitStacks(value, stackSize = MATERIAL_STACK) {
+  const total = Math.max(0, Math.floor(Number(value) || 0));
+  const safeStackSize = Math.max(1, Math.floor(Number(stackSize) || 1));
+  return {
+    total,
+    fullStacks: Math.floor(total / safeStackSize),
+    loose: total % safeStackSize,
+    stackSize: safeStackSize
+  };
+}
+
+function formatStackBreakdown(value, stackSize = MATERIAL_STACK, label = "stack") {
+  const split = splitStacks(value, stackSize);
+  if (!split.total) return `0 ${label}s`;
+  const stackText = split.fullStacks
+    ? `${formatNumber(split.fullStacks)} ${label}${split.fullStacks === 1 ? "" : "s"}`
+    : "";
+  const looseText = split.loose ? `${formatNumber(split.loose)} loose` : "";
+  return [stackText, looseText].filter(Boolean).join(" + ");
+}
+
+function formatMerchantPurchases(value) {
+  const split = splitStacks(value, MERCHANT_PURCHASE_LIMIT);
+  if (!split.total) return "0 purchase batches";
+  const batchCount = split.fullStacks + (split.loose ? 1 : 0);
+  if (split.fullStacks && split.loose) {
+    return `${batchCount} purchases (${split.fullStacks} x ${formatNumber(MERCHANT_PURCHASE_LIMIT)} + ${formatNumber(split.loose)})`;
+  }
+  if (split.fullStacks) {
+    return `${batchCount} purchase${batchCount === 1 ? "" : "s"} (${split.fullStacks} x ${formatNumber(MERCHANT_PURCHASE_LIMIT)})`;
+  }
+  return `1 purchase (${formatNumber(split.loose)})`;
 }
 
 function refreshIcons() {
@@ -347,10 +383,12 @@ function renderProfit() {
 
   $("#profitNet").textContent = formatNumber(result.profit);
   $("#profitUnits").textContent = formatNumber(result.units);
+  $("#profitUnitsStacks").textContent = `${formatStackBreakdown(result.units)} / ${formatMerchantPurchases(result.units)}`;
   $("#profitSpend").textContent = `${formatNumber(result.spend)} Chit`;
   $("#profitGross").textContent = `${formatNumber(result.gross)} Chit`;
   $("#profitRoi").textContent = `${percentFormat.format(result.roi)}%`;
   $("#profitOutput").textContent = `${formatNumber(result.output)} ${method.outputLabel}`;
+  $("#profitOutputStacks").textContent = formatStackBreakdown(result.output);
   $("#profitLeftover").textContent = `${formatNumber(result.leftover)} Chit`;
   $("#profitRemainderLabel").textContent = isGoal ? "Goal Surplus" : "Chit Leftover";
   $("#profitTripFootprint").textContent = `${result.peakSlots} of ${inventorySlots()} slots required`;
@@ -358,9 +396,10 @@ function renderProfit() {
   const routeFormula = state.method === "dragonwolf"
     ? `${formatNumber(result.units)} hides x 45 Chit = ${formatNumber(result.spend)} invested. ${formatNumber(result.output)} leather x 60 Chit = ${formatNumber(result.gross)} returned. Net profit: ${formatNumber(result.profit)} Chit.`
     : `${formatNumber(result.units)} logs x 3 Chit = ${formatNumber(result.spend)} invested. ${formatNumber(result.units)} logs produce ${formatNumber(result.output)} charcoal x 3 Chit = ${formatNumber(result.gross)} returned. Net profit: ${formatNumber(result.profit)} Chit.`;
+  const loadFormula = `Load plan: ${formatStackBreakdown(result.units)} input across ${formatMerchantPurchases(result.units)}; ${formatStackBreakdown(result.output)} output.`;
   const formula = isGoal
-    ? `Target: ${formatNumber(result.input)} Chit. ${routeFormula} Goal surplus: ${formatNumber(result.leftover)} Chit.`
-    : routeFormula;
+    ? `Target: ${formatNumber(result.input)} Chit. ${routeFormula} Goal surplus: ${formatNumber(result.leftover)} Chit. ${loadFormula}`
+    : `${routeFormula} ${loadFormula}`;
   $("#formulaTrace").innerHTML = `<strong>Formula Trace</strong><span>${escapeHtml(formula)}</span>`;
 
   if (isGoal) {
@@ -409,6 +448,7 @@ function renderProduction() {
   const kilns = Math.max(0, integerValue($("#kilnCount")?.value, 0));
   const slots = inventorySlots();
   const materialSlots = Math.ceil(batch / MATERIAL_STACK);
+  const outputUnits = methodKey === "dragonwolf" ? batch : batch * METHODS.ash.unitOutput;
   const usagePercent = Math.min(100, slots ? (materialSlots / slots) * 100 : 0);
 
   $("#headerInventory").textContent = `${slots} Slots`;
@@ -416,6 +456,10 @@ function renderProduction() {
   $("#inventoryUsageLabel").textContent = `${materialSlots} / ${slots} slots`;
   $("#inventoryUsageBar").style.width = `${usagePercent}%`;
   $("#inventoryUsageBar").style.background = materialSlots > slots ? "var(--dw-red)" : "var(--dw-cyan)";
+  $("#productionInputStacks").textContent = formatStackBreakdown(batch);
+  $("#productionPurchaseBatches").textContent = formatMerchantPurchases(batch);
+  $("#productionOutputStacks").textContent = formatStackBreakdown(outputUnits);
+  $("#productionOutputUnits").textContent = `${formatNumber(outputUnits)} ${methodKey === "dragonwolf" ? "leather" : "charcoal"}`;
 
   $$('[data-station]').forEach((station) => {
     const relevant = methodKey === "dragonwolf" ? station.dataset.station === "tannery" : station.dataset.station !== "tannery";
@@ -668,6 +712,63 @@ function normalizeEntries(value) {
   return Object.entries(value).map(([id, entry]) => ({ id, ...entry }));
 }
 
+function bankRequestAmountDetails() {
+  if (state.bankAmountMode === "stacks") {
+    const stacks = Math.max(0, integerValue($("#bankRequestStacks")?.value, 0));
+    const loose = Math.max(0, integerValue($("#bankRequestLoose")?.value, 0));
+    const total = (stacks * CHIT_STACK) + loose;
+    return {
+      total,
+      summary: total
+        ? `${formatNumber(total)} Chit / ${formatStackBreakdown(total, CHIT_STACK, "Chit stack")}`
+        : "Enter full Chit stacks and any loose remainder."
+    };
+  }
+
+  if (state.bankAmountMode === "profit") {
+    const investment = Math.max(0, integerValue($("#bankProfitInvestment")?.value, 0));
+    const gross = Math.max(0, integerValue($("#bankProfitGross")?.value, 0));
+    const total = Math.max(0, gross - investment);
+    return {
+      total,
+      investment,
+      gross,
+      summary: investment || gross
+        ? `${formatNumber(gross)} return - ${formatNumber(investment)} invested = ${formatNumber(total)} Chit profit deposit.`
+        : "Enter the invested Chit and gross return to calculate the profit deposit."
+    };
+  }
+
+  const total = Math.max(0, integerValue($("#bankRequestAmount")?.value, 0));
+  return {
+    total,
+    summary: total
+      ? `${formatNumber(total)} Chit / ${formatStackBreakdown(total, CHIT_STACK, "Chit stack")}`
+      : "Enter a direct Chit amount."
+  };
+}
+
+function renderBankAmountMode() {
+  $$('[data-bank-amount-mode]').forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.bankAmountMode === state.bankAmountMode);
+  });
+  $$('[data-bank-amount-panel]').forEach((panel) => {
+    panel.hidden = panel.dataset.bankAmountPanel !== state.bankAmountMode;
+  });
+  const requestType = $("#bankRequestType");
+  if (requestType) {
+    if (state.bankAmountMode === "profit") requestType.value = "deposit";
+    requestType.disabled = state.bankAmountMode === "profit";
+  }
+  const details = bankRequestAmountDetails();
+  $("#bankRequestAmountPreview").textContent = details.summary;
+}
+
+function setBankAmountMode(mode) {
+  state.bankAmountMode = ["direct", "stacks", "profit"].includes(mode) ? mode : "direct";
+  renderBankAmountMode();
+}
+
 function renderBank() {
   const requests = normalizeEntries(state.bank.requests).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
   const ledger = normalizeEntries(state.bank.ledger).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
@@ -687,7 +788,7 @@ function renderBank() {
   $("#bankCapacityBar").style.width = state.user && state.bankLoaded ? `${usedPercent}%` : "0%";
   $("#bankCapacityMeter").setAttribute("aria-valuenow", state.user && state.bankLoaded ? String(Math.round(usedPercent)) : "0");
   $("#bankCapacityStatus").textContent = state.user && state.bankLoaded
-    ? `${percentFormat.format(usedPercent)}% used / ${formatNumber(remaining)} Chits remain before another chest is required.`
+    ? `${percentFormat.format(usedPercent)}% used / ${formatStackBreakdown(bankAmount, CHIT_STACK, "Chit stack")} stored / ${formatNumber(remaining)} Chits remain before another chest is required.`
     : "Sign in to view physical storage usage.";
   $("#bankPendingCount").textContent = formatNumber(pending.length);
   $("#bankLedgerCount").textContent = formatNumber(ledger.length);
@@ -909,6 +1010,7 @@ function bindEvents() {
   $$("[data-ledger-tab]").forEach((button) => button.addEventListener("click", () => setActiveTab(button.dataset.ledgerTab)));
   $$('[data-method]').forEach((button) => button.addEventListener("click", () => setMethod(button.dataset.method)));
   $$('[data-profit-mode]').forEach((button) => button.addEventListener("click", () => setProfitMode(button.dataset.profitMode)));
+  $$('[data-bank-amount-mode]').forEach((button) => button.addEventListener("click", () => setBankAmountMode(button.dataset.bankAmountMode)));
 
   $("#profitInput").addEventListener("input", (event) => {
     state.profitInput = Math.max(0, integerValue(event.target.value, 0));
@@ -1009,18 +1111,27 @@ function bindEvents() {
     status.className = "dw-form-status";
     status.textContent = "Submitting...";
     try {
+      const amountDetails = bankRequestAmountDetails();
+      if (state.bankAmountMode === "profit" && amountDetails.gross <= amountDetails.investment) {
+        throw new Error("Gross return must be greater than the Chit investment.");
+      }
       await submitBankRequest(
         $("#bankRequestType").value,
-        $("#bankRequestAmount").value,
+        amountDetails.total,
         $("#bankRequestNote").value
       );
       event.target.reset();
+      setBankAmountMode("direct");
       status.classList.add("is-good");
       status.textContent = "Request added to the ledger queue.";
     } catch (error) {
       status.classList.add("is-error");
       status.textContent = error.message || "Request failed.";
     }
+  });
+
+  ["bankRequestAmount", "bankRequestStacks", "bankRequestLoose", "bankProfitInvestment", "bankProfitGross"].forEach((id) => {
+    $("#" + id).addEventListener("input", renderBankAmountMode);
   });
 
   $("#bankRequestList").addEventListener("click", async (event) => {
@@ -1070,6 +1181,7 @@ renderProfit();
 renderCatalog();
 renderOrder();
 renderBank();
+renderBankAmountMode();
 refreshIcons();
 
 onAuthStateChanged(auth, async (user) => {

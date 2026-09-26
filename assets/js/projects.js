@@ -1,12 +1,12 @@
 (function () {
   const projects = [
     {
-      title: "Dragonwilds Tannery Ledger",
-      type: "Calculator",
+      title: "Dragonwilds Production Ledger",
+      type: "Production Tool",
       game: "RuneScape: Dragonwilds",
       status: "Active",
-      href: "/dragonwilds/tannery-ledger.html",
-      summary: "Garou Chit, Dragonwolf Hide, tannery load, Draconic Leather output, and profit calculator.",
+      href: "/dragonwilds/tannery-ledger",
+      summary: "Compare leather and charcoal profits, plan station capacity, build merchant orders, and manage the shared Chit bank.",
       image: "/assets/img/hero/banri-hero-02.webp"
     },
     {
