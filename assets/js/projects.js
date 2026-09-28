@@ -1,6 +1,11 @@
 (function () {
   const projects = [
     {
+      title: "BancyCraft", type: "Windows App", game: "Multi-game", status: "Active",
+      href: "/bancycraft/", summary: "Download the free Windows installer. Browse items, plan crafts, use the Dragonwilds ledger, and share live shopping lists with friends.",
+      image: "/assets/img/hero/banri-hero-02.webp"
+    },
+    {
       title: "Dragonwilds Production Ledger",
       type: "Production Tool",
       game: "RuneScape: Dragonwilds",
