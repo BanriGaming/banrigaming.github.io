@@ -37,4 +37,23 @@ data.rules.bancycraftLists={'$listId':{
     byUid:str(128,1),at:number(9999999999999),amount:number(1000000000000),'$other':{'.validate':false}
   }},'$other':{'.validate':false}
 }};
+
+const content=data.rules.bancycraftLists.$listId.content;
+content.owned={'$key':number(1000000000000)};
+content.assignments={'$key':{'.validate':"newData.isString() && (newData.val() === '' || newData.parent().parent().parent().child('members').child(newData.val()).val() === true)"}};
+const target=content.targets.$target;
+target['.validate'] += " && ((!newData.hasChild('fromLevel') && !newData.hasChild('toLevel')) || (newData.hasChildren(['fromLevel','toLevel']) && newData.parent().parent().child('game').val() === 'valheim' && newData.child('fromLevel').val() < newData.child('toLevel').val()))";
+target.fromLevel=number(9);target.toLevel={'.validate':'newData.isNumber() && newData.val() >= 1 && newData.val() <= 10 && newData.val() % 1 === 0'};
+const gameValidation="newData.val() === 'dragonwilds' || newData.val() === 'valheim' || newData.val() === 'enshrouded' || newData.val() === 'grounded2' || newData.val() === 'vrising'";
+data.rules.bancycraftBuilds={'.read':"auth != null && query.orderByChild === 'game' && query.limitToFirst != null && query.limitToFirst <= 200",'.indexOn':['game'],'$buildId':{
+ '.read':'auth != null',
+ '.write':"auth != null && (data.exists() ? data.child('owner').child('uid').val() === auth.uid : newData.child('owner').child('uid').val() === auth.uid)",
+ '.validate':"$buildId.matches(/^[a-f0-9-]{36}$/) && newData.hasChildren(['id','name','game','description','skills','updatedAt','owner','creator'])",
+ id:{'.validate':'newData.val() === $buildId'},name:str(140,1),game:{'.validate':"("+gameValidation+") && (!data.exists() || data.val() === newData.val())"},description:str(6000),skills:str(6000),updatedAt:str(40,1),
+ owner:{'.validate':"newData.hasChildren(['uid','displayName']) && newData.child('uid').val() === auth.uid",uid:str(128,1),displayName:{'.validate':"newData.isString() && newData.val() === root.child('publicProfiles').child(auth.uid).child('displayName').val() && newData.val().length <= 32"},'$other':{'.validate':false}},
+ creator:{'.validate':"newData.hasChildren(['uid','displayName']) && (data.exists() ? (newData.child('uid').val() === data.child('uid').val() && newData.child('displayName').val() === data.child('displayName').val()) : (newData.child('uid').val() === auth.uid || newData.child('uid').val() === root.child('bancycraftBuilds').child(newData.parent().child('sourceId').val()).child('creator').child('uid').val()))",uid:str(128,1),displayName:str(32,1),'$other':{'.validate':false}},
+ tags:{'$tag':{'.validate':"$tag.matches(/^([0-9]|1[01])$/) && newData.isString() && newData.val().length <= 40"}},
+ items:{'$slot':{'.validate':"$slot.matches(/^([0-9]|[1-7][0-9])$/) && newData.hasChildren(['slot','itemId','name','quantity'])",slot:str(60),itemId:str(160,1),name:str(200,1),quantity:{'.validate':'newData.isNumber() && newData.val() >= 1 && newData.val() <= 999999 && newData.val() % 1 === 0'},'$other':{'.validate':false}}},
+ sourceId:str(80,1),sourceUpdatedAt:str(40,1),'$other':{'.validate':false}
+}};
 fs.writeFileSync(file,JSON.stringify(data,null,2)+'\n');console.log('BancyCraft branches generated; existing website branches preserved.');
