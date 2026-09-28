@@ -3,7 +3,7 @@
     {
       title: "BancyCraft", type: "Windows App", game: "Multi-game", status: "Active",
       href: "/bancycraft/", summary: "Download the free Windows installer. Browse items, plan crafts, use the Dragonwilds ledger, and share live shopping lists with friends.",
-      image: "/assets/img/bancycraft/app-home.webp"
+      image: "/assets/img/bancycraft/app-home.webp?v=060"
     },
     {
       title: "Dragonwilds Production Ledger",

@@ -1100,7 +1100,7 @@
             ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 140"
           },
           "game": {
-            ".validate": "newData.isString() && (newData.val() === 'dragonwilds' || newData.val() === 'valheim' || newData.val() === 'enshrouded' || newData.val() === 'grounded2') && (!data.exists() || newData.val() === data.val())"
+            ".validate": "newData.isString() && (newData.val() === 'dragonwilds' || newData.val() === 'valheim' || newData.val() === 'enshrouded' || newData.val() === 'grounded2' || newData.val() === 'vrising') && (!data.exists() || newData.val() === data.val())"
           },
           "targets": {
             "$target": {
