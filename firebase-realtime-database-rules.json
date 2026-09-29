@@ -1264,6 +1264,53 @@
             }
           }
         },
+        "variants": {
+          ".validate": "newData.hasChildren()",
+          "$variant": {
+            ".validate": "$variant.matches(/^([0-9]|1[0-9])$/) && newData.hasChildren(['id','name','skills','extraSlotCount'])",
+            "id": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80"
+            },
+            "name": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80"
+            },
+            "skills": {
+              ".validate": "newData.isString() && newData.val().length >= 0 && newData.val().length <= 6000"
+            },
+            "extraSlotCount": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 24 && newData.val() % 1 === 0"
+            },
+            "items": {
+              "$slot": {
+                ".validate": "$slot.matches(/^([0-9]|[1-7][0-9])$/) && newData.hasChildren(['slot','itemId','name','quantity'])",
+                "slot": {
+                  ".validate": "newData.isString() && newData.val().length >= 0 && newData.val().length <= 60"
+                },
+                "itemId": {
+                  ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 160"
+                },
+                "name": {
+                  ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 200"
+                },
+                "quantity": {
+                  ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 999999 && newData.val() % 1 === 0"
+                },
+                "$other": {
+                  ".validate": false
+                }
+              }
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "activeVariantId": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80"
+        },
+        "imageType": {
+          ".validate": "newData.val() === 'warrior' || newData.val() === 'mage' || newData.val() === 'range' || newData.val() === 'exploration' || newData.val() === 'gathering'"
+        },
         "sourceId": {
           ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80"
         },

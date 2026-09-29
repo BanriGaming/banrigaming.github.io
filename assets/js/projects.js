@@ -2,7 +2,7 @@
   const projects = [
     {
       title: "BancyCraft", type: "Windows App", game: "Multi-game", status: "Active",
-      href: "/bancycraft/", summary: "Download the free Windows installer. Browse items, plan crafts, use the Dragonwilds ledger, and share live shopping lists with friends.",
+      href: "/bancycraft/", summary: "Download the free Windows installer. Browse six game catalogs, craft recipes and build variants; share live shopping lists and use the Dragonwilds ledger.",
       image: "/assets/img/bancycraft/app-home.webp?v=060"
     },
     {
