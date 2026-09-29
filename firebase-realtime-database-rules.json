@@ -1100,7 +1100,7 @@
             ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 140"
           },
           "game": {
-            ".validate": "newData.isString() && (newData.val() === 'dragonwilds' || newData.val() === 'valheim' || newData.val() === 'enshrouded' || newData.val() === 'grounded2' || newData.val() === 'vrising') && (!data.exists() || newData.val() === data.val())"
+            ".validate": "newData.isString() && (newData.val() === 'dragonwilds' || newData.val() === 'valheim' || newData.val() === 'enshrouded' || newData.val() === 'grounded2' || newData.val() === 'vrising' || newData.val() === 'duneawakening') && (!data.exists() || newData.val() === data.val())"
           },
           "targets": {
             "$target": {
@@ -1204,7 +1204,7 @@
           ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 140"
         },
         "game": {
-          ".validate": "(newData.val() === 'dragonwilds' || newData.val() === 'valheim' || newData.val() === 'enshrouded' || newData.val() === 'grounded2' || newData.val() === 'vrising') && (!data.exists() || data.val() === newData.val())"
+          ".validate": "(newData.val() === 'dragonwilds' || newData.val() === 'valheim' || newData.val() === 'enshrouded' || newData.val() === 'grounded2' || newData.val() === 'vrising' || newData.val() === 'duneawakening') && (!data.exists() || data.val() === newData.val())"
         },
         "description": {
           ".validate": "newData.isString() && newData.val().length >= 0 && newData.val().length <= 6000"
