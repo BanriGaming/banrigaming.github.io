@@ -1280,6 +1280,9 @@
             "extraSlotCount": {
               ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 24 && newData.val() % 1 === 0"
             },
+            "imageType": {
+              ".validate": "newData.val() === 'warrior' || newData.val() === 'mage' || newData.val() === 'range' || newData.val() === 'exploration' || newData.val() === 'gathering'"
+            },
             "items": {
               "$slot": {
                 ".validate": "$slot.matches(/^([0-9]|[1-7][0-9])$/) && newData.hasChildren(['slot','itemId','name','quantity'])",
