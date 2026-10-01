@@ -9,7 +9,7 @@ import {
   normalizeServerControllerConfig,
   normalizeWorldServer,
   slugify
-} from "./site-store.js?v=20260910a";
+} from "./site-store.js?v=20261001b";
 
 const { auth } = getFirebaseServices();
 let currentUser = null;
@@ -24,8 +24,12 @@ let controllerAllowed = false;
 let controllerStatusAvailable = false;
 const SERVER_WARMUP_MS = 180000;
 const DUNE_WARMUP_MS = 300000;
+const SERVER_STOP_MS = 30000;
 function serverWarmupDuration(serverId) {
   return ["dune", "duneawakening"].includes(String(serverId || "").toLowerCase()) ? DUNE_WARMUP_MS : SERVER_WARMUP_MS;
+}
+function serverActionDuration(state) {
+  return state?.action === "stop" ? SERVER_STOP_MS : serverWarmupDuration(state?.serverId);
 }
 const SERVER_WARMUP_CLOSE_MS = 1400;
 let serverWarmupTimer = 0;
@@ -830,15 +834,15 @@ function formatWarmupCountdown(ms) {
 function getWarmupProgress() {
   if (!serverWarmupState) return 0;
   const elapsed = Date.now() - serverWarmupState.startedAt;
-  return Math.max(0, Math.min(100, Math.round((elapsed / serverWarmupDuration(serverWarmupState.serverId)) * 100)));
+  return Math.max(0, Math.min(95, Math.round((elapsed / serverActionDuration(serverWarmupState)) * 100)));
 }
 
 function updateServerWarmupModal() {
   if (!serverWarmupState) return;
   const modal = ensureServerWarmupModal();
   const progress = getWarmupProgress();
-  const remaining = Math.max(0, serverWarmupDuration(serverWarmupState.serverId) - (Date.now() - serverWarmupState.startedAt));
-  const actionVerb = serverWarmupState.action === "restart" ? "Restarting" : "Starting";
+  const remaining = Math.max(0, serverActionDuration(serverWarmupState) - (Date.now() - serverWarmupState.startedAt));
+  const actionVerb = serverWarmupState.action === "restart" ? "Restarting" : serverWarmupState.action === "stop" ? "Stopping" : "Starting";
   const waitingForCommand = !serverWarmupState.commandSettled;
   const title = modal.querySelector("[data-warmup-title]");
   const copy = modal.querySelector("[data-warmup-copy]");
@@ -848,14 +852,14 @@ function updateServerWarmupModal() {
   const status = modal.querySelector("[data-warmup-status]");
 
   if (title) title.textContent = `${actionVerb} ${serverWarmupState.label}`;
-  if (copy) copy.textContent = waitingForCommand ? "Sending the command to Blackbox." : "Blackbox accepted the command. Waiting for the world to come online.";
+  if (copy) copy.textContent = waitingForCommand ? "Sending the command to Blackbox." : serverWarmupState.action === "stop" ? "Blackbox accepted the command. Waiting for shutdown." : "Blackbox accepted the command. Waiting for the world to come online.";
   if (countdown) countdown.textContent = formatWarmupCountdown(remaining);
   if (bar) bar.setAttribute("aria-valuenow", String(progress));
   if (fill) fill.style.width = `${progress}%`;
   if (status) {
-    status.textContent = progress >= 100 && waitingForCommand
-      ? "Warmup estimate complete. Waiting for Blackbox acknowledgement..."
-      : `${progress}% warmup complete`;
+    status.textContent = remaining === 0
+      ? `Estimate complete. Waiting for Blackbox to confirm ${serverWarmupState.action === "stop" ? "shutdown" : "startup"}...`
+      : `${progress}% of the ${serverWarmupState.action === "stop" ? "shutdown" : "warmup"} estimate`;
   }
 }
 
@@ -888,9 +892,23 @@ function markServerWarmupAccepted() {
   maybeCompleteServerWarmup();
 }
 
-function maybeCompleteServerWarmup() {
-  if (!serverWarmupState || serverWarmupCloseTimer || getWarmupProgress() < 100 || !serverWarmupState.commandSettled) return;
-  finishServerWarmup(true);
+async function maybeCompleteServerWarmup() {
+  const state = serverWarmupState;
+  if (!state || serverWarmupCloseTimer || !state.commandSettled || state.checkingStatus || Date.now() - state.startedAt < serverActionDuration(state) || Date.now() - (state.lastCheckAt || 0) < 5000) return;
+  state.checkingStatus = true;
+  state.lastCheckAt = Date.now();
+  try {
+    const snapshot = await controllerRequest("/api/servers");
+    if (serverWarmupState !== state) return;
+    controllerSnapshot = snapshot;
+    const status = snapshot.servers?.find((server) => server.id === state.serverId)?.status;
+    if (status === (state.action === "stop" ? "stopped" : "running")) finishServerWarmup(true);
+    else if (status === "error") finishServerWarmup(false, "Blackbox reported a controller error. Refresh status before trying again.");
+  } catch {
+    // Keep the estimate visible and retry; a transient status failure is not completion.
+  } finally {
+    state.checkingStatus = false;
+  }
 }
 
 function finishServerWarmup(success, message = "") {
@@ -908,12 +926,13 @@ function finishServerWarmup(success, message = "") {
   const progress = success ? 100 : getWarmupProgress();
 
   modal.classList.toggle("is-error", !success);
-  if (title) title.textContent = success ? `${serverWarmupState.label} is online` : "Command Failed";
-  if (copy) copy.textContent = success ? "Server is online." : (message || "Blackbox could not complete that command.");
-  if (countdown) countdown.textContent = success ? "Online" : "Check relay";
+  const stopped = serverWarmupState.action === "stop";
+  if (title) title.textContent = success ? `${serverWarmupState.label} is ${stopped ? "stopped" : "online"}` : "Command Failed";
+  if (copy) copy.textContent = success ? `Server is ${stopped ? "stopped" : "online"}.` : (message || "Blackbox could not complete that command.");
+  if (countdown) countdown.textContent = success ? stopped ? "Stopped" : "Online" : "Check relay";
   if (bar) bar.setAttribute("aria-valuenow", String(progress));
   if (fill) fill.style.width = `${progress}%`;
-  if (status) status.textContent = success ? "100% warmup complete" : "Startup sequence stopped";
+  if (status) status.textContent = success ? `100% ${stopped ? "shutdown" : "warmup"} complete` : "Controller command failed";
 
   serverWarmupCloseTimer = window.setTimeout(() => {
     if (window.bootstrap?.Modal) {
@@ -944,7 +963,7 @@ async function runControllerAction(action, serverId) {
   if (!controllerAllowed || controllerBusy) return;
   const server = controllerSnapshot?.servers?.find((item) => item.id === serverId);
   if (!server) return;
-  const useWarmupModal = action === "start" || action === "restart";
+  const useWarmupModal = ["start", "restart", "stop"].includes(action);
 
   if (action === "start") {
     const activeServer = controllerSnapshot?.servers?.find((item) => item.status === "running" && item.id !== serverId);
@@ -966,7 +985,7 @@ async function runControllerAction(action, serverId) {
 
   try {
     controllerSnapshot = await controllerRequest(`/api/servers/${encodeURIComponent(serverId)}/${action}`, { method: "POST", body: "{}" });
-    controllerMessage = `${server.label} ${action === "start" ? "started" : action === "stop" ? "stopped" : "restarted"} ${formatControllerTime(controllerSnapshot.updatedAt)}.`;
+    controllerMessage = `${actionLabel(action)} ${server.label} requested ${formatControllerTime(controllerSnapshot.updatedAt)}.`;
     if (useWarmupModal) markServerWarmupAccepted();
   } catch (error) {
     controllerMessage = error.message || "Controller command failed.";

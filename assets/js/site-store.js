@@ -405,6 +405,7 @@ export const defaultWorldTicker = {
     "Terraria",
     "Core Keeper",
     "Barotrauma",
+    "Dune: Awakening",
     "American Truck Simulator"
   ]
 };
@@ -455,7 +456,7 @@ export const defaultControllerServers = [
   { id: "barotrauma", label: "Barotrauma", game: "Barotrauma", container: "barotrauma-server", queryEnabled: true, queryType: "barotrauma", queryHost: "73.111.246.38", queryPort: 27015, playersMax: 0, enabled: true, order: 8 },
   { id: "romestead", label: "Romestead", game: "Romestead", container: "romestead-server", enabled: true, order: 9 },
   { id: "ats", label: "American Truck Simulator", game: "American Truck Simulator", container: "ats-server", enabled: true, order: 10 },
-  { id: "dune", label: "Dune: Awakening", game: "Dune: Awakening", container: "dune-server-survival-1", enabled: true, order: 11 }
+  { id: "dune", label: "Bancyrakis", game: "Dune: Awakening", container: "dune-server-survival-1", enabled: true, order: 11 }
 ];
 
 export const defaultWorldServers = [
@@ -770,7 +771,7 @@ export const defaultWorldServers = [
   },
   {
     id: "banlonant-blackbox-bancyrakis",
-    title: "Banlonant Blackbox | Bancyrakis",
+    title: "Bancyrakis",
     game: "Dune: Awakening",
     host: "Blackbox",
     status: "Online",

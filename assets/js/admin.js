@@ -57,7 +57,7 @@ import {
   slugify,
   statusToTone,
   uploadGalleryImageAsset
-} from "./site-store.js?v=20260925a";
+} from "./site-store.js?v=20261001b";
 
 const SERVER_STATUS_OPTIONS = ["Online", "Offline"];
 const SERVER_STATUS_SOURCE_OPTIONS = ["manual", "blackbox"];
