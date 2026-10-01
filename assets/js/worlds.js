@@ -23,6 +23,10 @@ let controllerMessage = "";
 let controllerAllowed = false;
 let controllerStatusAvailable = false;
 const SERVER_WARMUP_MS = 180000;
+const DUNE_WARMUP_MS = 300000;
+function serverWarmupDuration(serverId) {
+  return ["dune", "duneawakening"].includes(String(serverId || "").toLowerCase()) ? DUNE_WARMUP_MS : SERVER_WARMUP_MS;
+}
 const SERVER_WARMUP_CLOSE_MS = 1400;
 let serverWarmupTimer = 0;
 let serverWarmupCloseTimer = 0;
@@ -826,14 +830,14 @@ function formatWarmupCountdown(ms) {
 function getWarmupProgress() {
   if (!serverWarmupState) return 0;
   const elapsed = Date.now() - serverWarmupState.startedAt;
-  return Math.max(0, Math.min(100, Math.round((elapsed / SERVER_WARMUP_MS) * 100)));
+  return Math.max(0, Math.min(100, Math.round((elapsed / serverWarmupDuration(serverWarmupState.serverId)) * 100)));
 }
 
 function updateServerWarmupModal() {
   if (!serverWarmupState) return;
   const modal = ensureServerWarmupModal();
   const progress = getWarmupProgress();
-  const remaining = Math.max(0, SERVER_WARMUP_MS - (Date.now() - serverWarmupState.startedAt));
+  const remaining = Math.max(0, serverWarmupDuration(serverWarmupState.serverId) - (Date.now() - serverWarmupState.startedAt));
   const actionVerb = serverWarmupState.action === "restart" ? "Restarting" : "Starting";
   const waitingForCommand = !serverWarmupState.commandSettled;
   const title = modal.querySelector("[data-warmup-title]");

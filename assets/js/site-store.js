@@ -454,7 +454,8 @@ export const defaultControllerServers = [
   { id: "corekeeper", label: "Core Keeper", game: "Core Keeper", container: "corekeeper-server", queryEnabled: true, queryType: "corekeeper", queryHost: "73.111.246.38", queryPort: 27015, playersMax: 0, enabled: true, order: 7 },
   { id: "barotrauma", label: "Barotrauma", game: "Barotrauma", container: "barotrauma-server", queryEnabled: true, queryType: "barotrauma", queryHost: "73.111.246.38", queryPort: 27015, playersMax: 0, enabled: true, order: 8 },
   { id: "romestead", label: "Romestead", game: "Romestead", container: "romestead-server", enabled: true, order: 9 },
-  { id: "ats", label: "American Truck Simulator", game: "American Truck Simulator", container: "ats-server", enabled: true, order: 10 }
+  { id: "ats", label: "American Truck Simulator", game: "American Truck Simulator", container: "ats-server", enabled: true, order: 10 },
+  { id: "dune", label: "Dune: Awakening", game: "Dune: Awakening", container: "dune-server-survival-1", enabled: true, order: 11 }
 ];
 
 export const defaultWorldServers = [
@@ -766,6 +767,36 @@ export const defaultWorldServers = [
     playersMax: 0,
     activityLevel: 0,
     order: 10
+  },
+  {
+    id: "banlonant-blackbox-bancyrakis",
+    title: "Banlonant Blackbox | Bancyrakis",
+    game: "Dune: Awakening",
+    host: "Blackbox",
+    status: "Online",
+    statusSource: "blackbox",
+    controllerServerId: "dune",
+    controllerContainer: "dune-server-survival-1",
+    region: "US Central",
+    visibility: "members",
+    enabled: true,
+    connectionType: "server",
+    steamAddress: "",
+    steamP2P: "",
+    image: "/assets/img/worlds/noir-server-vault.webp",
+    password: "",
+    description: "A private Dune: Awakening world running on Blackbox. Find Bancyrakis in the in-game server browser.",
+    rules: [],
+    notes: "The world uses a dynamic map pool; the Blackbox controller manages the full Dune stack.",
+    tags: ["Survival", "Private", "Dune"],
+    queryEnabled: false,
+    queryType: "",
+    queryHost: "",
+    queryPort: 0,
+    playersOnline: 0,
+    playersMax: 0,
+    activityLevel: 0,
+    order: 11
   }
 ];
 
